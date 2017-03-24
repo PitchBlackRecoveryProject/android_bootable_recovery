@@ -2858,13 +2858,15 @@ TWPartitionManager::usb_storage_enable (void)
 	  if (Mount2 && Mount2->Mount_Point != Mount1->Mount_Point)
 	    {
 	      Open_Lun_File (Mount2->Mount_Point, lun_file);
+  	      // Mimic single lun code: Mount CurrentStoragePath if it's not /data
+	      } else if (TWFunc::Get_Root_Path(DataManager::GetCurrentStoragePath()) != "/data") {
+	      Open_Lun_File(DataManager::GetCurrentStoragePath(), lun_file);
 	    }
-	}
-      else
-	{
-	  gui_err ("unable_locate_storage=Unable to locate storage device.");
-	  goto error_handle;
-	}
+	  // Mimic single lun code: Mount CurrentStoragePath if it's not /data
+	  } else if (TWFunc::Get_Root_Path(DataManager::GetCurrentStoragePath()) != "/data" && !Open_Lun_File(DataManager::GetCurrentStoragePath(), lun_file)) {
+	      gui_err ("unable_locate_storage=Unable to locate storage device.");
+	      goto error_handle;
+	    }
     }
   property_set ("sys.storage.ums_enabled", "1");
   property_set ("sys.usb.config", "mass_storage,adb");
