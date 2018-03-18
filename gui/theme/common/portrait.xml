@@ -1,8 +1,17 @@
 <?xml version="1.0"?>
 <recovery>
 	<styles>
+	
+		<style name="text_exl">
+			<font resource="font_exl" color="%text_color%"/>
+		</style>
+	
 		<style name="text_l">
 			<font resource="font_l" color="%text_color%"/>
+		</style>
+		
+		<style name="text_about">
+			<font resource="font_about" color="%text_color%"/>
 		</style>
 
 		<style name="text_m">
@@ -10,7 +19,7 @@
 		</style>
 
 		<style name="text_m_accent">
-			<font resource="font_m" color="%accent_color%"/>
+			<font resource="font_about" color="#1763a9"/>
 		</style>
 
 		<style name="text_m_fail">
@@ -37,7 +46,13 @@
 			<font resource="font_l" color="%text_button_color%"/>
 			<image resource="main_button"/>
 		</style>
-
+		
+		<style name="pbabout_button">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_l" color="%text_button_color%"/>
+			<image resource="pbabout_button"/>
+		</style>
+		
 		<style name="main_button_half_height">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_m" color="%text_button_color%"/>
@@ -75,13 +90,13 @@
 		</style>
 
 		<style name="console">
-			<fastscroll rectcolor="%accent_color%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<fastscroll rectcolor="%accent_color2%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<color foreground="%text_color%" background="%background_color%" scroll="%background_color%"/>
 			<font resource="fixed"/>
 		</style>
 
 		<style name="terminal">
-			<fastscroll linecolor="%transparent%" rectcolor="%accent_color%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<fastscroll linecolor="%transparent%" rectcolor="%accent_color2%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<background color="%background_color%"/>
 			<font resource="fixed" spacing="3" color="%text_color%"/>
 		</style>
@@ -89,7 +104,7 @@
 		<style name="fileselector">
 			<highlight color="%fileselector_highlight_color%"/>
 			<header background="%background_color%" textcolor="%accent_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
-			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
 			<sort name="tw_gui_sort_order"/>
 			<icon folder="folder" file="file"/>
@@ -100,7 +115,7 @@
 		<style name="listbox">
 			<highlight color="%fileselector_highlight_color%"/>
 			<header background="%background_color%" textcolor="%accent_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
-			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
 			<icon selected="radio_true" unselected="radio_false"/>
 			<background color="%background_color%"/>
@@ -110,13 +125,13 @@
 		<style name="scrolllist">
 			<background color="%background_color%"/>
 			<font resource="font_m" spacing="%fileselector_spacing%" color="%text_color%"/>
-			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 		</style>
 
 		<style name="partitionlist">
 			<highlight color="%fileselector_highlight_color%"/>
 			<header background="%background_color%" textcolor="%accent_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
-			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<dimensions lineh="%slidervalue_lineh%" linepadding="%slidervalue_padding%" sliderw="%slidervalue_sliderw%" sliderh="%slidervalue_sliderh%"/>
 			<icon selected="checkbox_true" unselected="checkbox_false"/>
 			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
@@ -128,7 +143,7 @@
 			<highlight color="%fileselector_highlight_color%"/>
 			<placement x="%col1_x_left%" y="%row5_y%" w="%content_overlay_width%" h="%partitionlist_storage_height%"/>
 			<header background="%background_color%" textcolor="%accent_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
-			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<dimensions lineh="%slidervalue_lineh%" linepadding="%slidervalue_padding%" sliderw="%slidervalue_sliderw%" sliderh="%slidervalue_sliderh%"/>
 			<icon selected="radio_true" unselected="radio_false"/>
 			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
@@ -175,7 +190,7 @@
 			<text style="text_m">
 				<condition var1="tw_no_cpu_temp" var2="0"/>
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
-				<text>%tw_version%</text>
+				<text>%tw_version% PitchBlack</text>
 			</text>
 
 			<button style="main_button">
@@ -2755,7 +2770,7 @@
 			<template name="page"/>
 
 			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
 				<text>{@reboot_hdr=Reboot}</text>
 			</text>
 
@@ -3405,7 +3420,7 @@
 			<template name="page"/>
 
 			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
 				<text>{@copying_log=Copy Logs to SD Card}</text>
 			</text>
 
@@ -3443,7 +3458,7 @@
 			<template name="page"/>
 
 			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
 				<text>{@advanced_hdr=Advanced}</text>
 			</text>
 
@@ -3484,14 +3499,20 @@
 
 			<button style="main_button">
 				<placement x="%center_x%" y="%row13a_y%"/>
+				<text>{@adb_sideload_btn=ADB Sideload}</text>
+				<action function="page">sideload</action>
+			</button>			
+					
+			<button style="main_button">
+				<placement x="%indent%" y="%row19_y%"/>
 				<text>{@reload_theme_btn=Reload Theme}</text>
 				<action function="reload"/>
 			</button>
 
 			<button style="main_button">
-				<placement x="%indent%" y="%row19_y%"/>
-				<text>{@adb_sideload_btn=ADB Sideload}</text>
-				<action function="page">sideload</action>
+				<placement x="%center_x%" y="%row19_y%"/>
+				<text>{@about=About}</text>
+				<action function="page">about</action>
 			</button>
 
 			<button style="main_button">
@@ -3526,12 +3547,76 @@
 				<action function="page">main</action>
 			</action>
 		</page>
+		
+		<page name="about">
+		<template name="pbaboutpage2"/>
+		   
+		  	<button style="pbabout_button">
+				<placement x="%pbxa2%" y="%row18_y%"/>
+				<text>{@about_pbtwrp=About PBTWRP}</text>
+				<action function="page">about_pbtwrp</action>
+			</button>
+			
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
 
+			<action>
+				<touch key="back"/>
+				<action function="page">advanced</action>
+			</action>
+			</page>
+			
+	    <page name="about_pbtwrp">
+		<template name="pbaboutpage2"/>
+		
+			<text style="text_exl">
+			    <placement x="540" y="1290" placement="5"/>
+				<text>PitchBlack TWRP</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1365" placement="5"/>
+				<text>Based On TWRP %tw_version%</text>
+			</text>
+			
+			<text style="text_l">
+			    <placement x="540" y="1440" placement="5"/>
+				<text>Developed by Reza Adi</text>
+			</text>
+			
+			<text style="text_l">
+			    <placement x="540" y="1515" placement="5"/>
+				<text>Themed by Firewolf</text>
+			</text>
+			
+			<text style="text_l">
+			    <placement x="540" y="1590" placement="5"/>
+				<text>Sources Maintained By Manjot Sidhu & Arbaz Khan</text>
+			</text>
+			
+			<text style="text_l">
+			    <placement x="540" y="1665" placement="5"/>
+				<text>Telegram Chat : @twrppb</text>
+			</text>
+				
+		    <action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">about</action>
+			</action>
+		</page>
+		
 		<page name="partsdcardsel">
 			<template name="page"/>
 
 			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
 				<text>{@advanced_hdr=Advanced}</text>
 			</text>
 

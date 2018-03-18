@@ -490,7 +490,7 @@
 
 		<!-- Various console messages - these consist of user displayed messages, oftentimes errors -->
 		<string name="no_kernel_selinux">Kernel does not have support for reading SELinux contexts.</string>
-		<string name="full_selinux">Full SELinux support is present.</string>
+		<string name="full_selinux">PitchBlack TWRP *_*</string>
 		<string name="no_selinux">No SELinux support (no libselinux).</string>
 		<string name="mtp_enabled">MTP Enabled</string>
 		<string name="mtp_crash">MTP Crashed, not starting MTP on boot.</string>
@@ -694,5 +694,10 @@
 		<string name="include_kernel_log">Include Kernel Log</string>
 		<string name="sha2_chk">Use SHA2 for hashing</string>
 		<string name="unable_set_boot_slot">Error changing bootloader boot slot to {1}</string>
+		
+		<!--PBTWRP about-->
+		<string name="about">About</string>
+		<string name="about_hdr">About</string>
+		<string name="about_pbtwrp">About PBTWRP</string>
 	</resources>
 </language>
