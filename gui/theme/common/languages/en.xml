@@ -695,6 +695,25 @@
 		<string name="sha2_chk">Use SHA2 for hashing</string>
 		<string name="unable_set_boot_slot">Error changing bootloader boot slot to {1}</string>
 		
+		<!--PBTWRP Themes-->
+		<string name="pbthemes">Themes</string>
+	        <string name="pbthemes_hdr">Themes</string>
+		<string name="theme0_btn">PBTWRP Default Black</string>
+		<string name="theme0_text">This will restore PBTWRP Default Black theme</string>		
+		<string name="theme0_confirm">Sure?</string>
+		<string name="themexy_btn">PBTWRP Just Black</string>
+		<string name="themexy_text">Just Black PBTWRP theme will be installed</string>		
+		<string name="themexy_confirm">Sure?</string>
+		<string name="theme1_btn">Neon Red</string>
+		<string name="theme1_text">Neon Red PBTWRP theme will be installed</string>		
+		<string name="theme1_confirm">Sure?</string>
+		<string name="theme2_btn">Neon Green</string>
+		<string name="theme2_text">Neon Green PBTWRP theme will be installed</string>		
+		<string name="theme2_confirm">Sure?</string>		
+		<string name="theme3_btn">Neon Blue</string>
+		<string name="theme3_text">Neon Blue PBTWRP theme will be installed</string>			
+		<string name="theme3_confirm">Sure?</string>
+		
 		<!--PBTWRP about-->
 		<string name="about">About</string>
 		<string name="about_hdr">About</string>

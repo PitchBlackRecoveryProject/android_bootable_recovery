@@ -53,6 +53,12 @@
 			<image resource="pbabout_button"/>
 		</style>
 		
+		<style name="pbtools_button">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_l" color="%text_button_color%"/>
+			<image resource="pbtools_button"/>
+		</style>
+		
 		<style name="main_button_half_height">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_m" color="%text_button_color%"/>
@@ -3463,21 +3469,21 @@
 			</text>
 
 			<button style="main_button">
-				<placement x="%indent%" y="%row2a_y%"/>
+				<placement x="%indent%" y="%row2_y%"/>
 				<text>{@copy_log_btn=Copy Log}</text>
 				<action function="page">copylog</action>
 			</button>
 
 			<button style="main_button">
 				<condition var1="tw_has_data_media" var2="1"/>
-				<placement x="%center_x%" y="%row2a_y%"/>
+				<placement x="%center_x%" y="%row2_y%"/>
 				<text>{@fix_context_btn=Fix Contexts}</text>
 				<action function="page">fixcontexts</action>
 			</button>
 
 			<button style="main_button">
 				<condition var1="tw_allow_partition_sdcard" var2="1"/>
-				<placement x="%indent%" y="%row8_y%"/>
+				<placement x="%indent%" y="%row6_y%"/>
 				<text>{@part_sd_btn=Partition SD Card}</text>
 				<actions>
 					<action function="set">partitionlisterror=0</action>
@@ -3486,31 +3492,37 @@
 			</button>
 
 			<button style="main_button">
-				<placement x="%center_x%" y="%row8_y%"/>
+				<placement x="%center_x%" y="%row6_y%"/>
 				<text>{@file_manager_btn=File Manager}</text>
 				<action function="page">filemanagerlist</action>
 			</button>
 
 			<button style="main_button">
-				<placement x="%indent%" y="%row13a_y%"/>
+				<placement x="%indent%" y="%row10_y%"/>
 				<text>{@terminal_btn=Terminal}</text>
 				<action function="page">terminalcommand</action>
 			</button>
 
 			<button style="main_button">
-				<placement x="%center_x%" y="%row13a_y%"/>
+				<placement x="%center_x%" y="%row10_y%"/>
 				<text>{@adb_sideload_btn=ADB Sideload}</text>
 				<action function="page">sideload</action>
-			</button>			
+			</button>	
+
+            <button style="main_button">
+				<placement x="%indent%" y="%row14_y%"/>
+				<text>{@pbthemes=Themes}</text>
+				<action function="page">pbthemes</action>
+			</button>					
 					
 			<button style="main_button">
-				<placement x="%indent%" y="%row19_y%"/>
+				<placement x="%center_x%" y="%row14_y%"/>
 				<text>{@reload_theme_btn=Reload Theme}</text>
 				<action function="reload"/>
 			</button>
 
 			<button style="main_button">
-				<placement x="%center_x%" y="%row19_y%"/>
+				<placement x="%center_x%" y="%row18_y%"/>
 				<text>{@about=About}</text>
 				<action function="page">about</action>
 			</button>
@@ -3548,6 +3560,110 @@
 			</action>
 		</page>
 		
+		        <page name="pbthemes">
+		   <template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
+				<text>{@pbthemes_hdr=Themes}</text>
+			</text>
+			
+			<button style="pbtools_button">
+				<placement x="%row1a_y%" y="%pby6%"/>
+				<text>{@theme0_btn=PBTWRP Default Black}</text>
+				<actions>
+					<action function="set">tw_back=pbthemes</action>
+					<action function="set">tw_filename=/twres/themes/removethemes.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@theme0_text=This will restore PBTWRP Default Black theme}</action>
+					<action function="set">tw_text2={@theme0_confirm=Sure?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>	
+
+			<button style="pbtools_button">
+				<placement x="%row1a_y%" y="%pby5%"/>
+				<text>{@themexy_btn=Just Black}</text>
+				<actions>
+					<action function="set">tw_back=pbthemes</action>
+					<action function="set">tw_filename=/twres/themes/justblack.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@themexy_text=Just Black PBTWRP theme will be installed}</action>
+					<action function="set">tw_text2={@themexy_confirm=Sure?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="pbtools_button">
+				<placement x="%row1a_y%" y="%pby2%"/>
+				<text>{@theme1_btn=Neon Red}</text>
+				<actions>
+					<action function="set">tw_back=pbthemes</action>
+					<action function="set">tw_filename=/twres/themes/nred.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@theme1_text=Neon Red PBTWRP theme will be installed.}</action>
+					<action function="set">tw_text2={@theme1_confirm=Sure?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%row1a_y%" y="%pby3%"/>
+				<text>{@theme2_btn=Neon Green}</text>
+				<actions>
+					<action function="set">tw_back=pbthemes</action>
+					<action function="set">tw_filename=/twres/themes/ngreen.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@theme2_text=Neon Green PBTWRP theme will be installed.}</action>
+					<action function="set">tw_text2={@theme2_confirm=Sure?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%row1a_y%" y="%pby4%"/>
+				<text>{@theme3_btn=Neon Blue}</text>
+				<actions>
+					<action function="set">tw_back=pbthemes</action>
+					<action function="set">tw_filename=/twres/themes/nblue.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@theme3_text=Neon Blue PBTWRP theme will be installed.}</action>
+					<action function="set">tw_text2={@theme3_confirm=Sure?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">advanced</action>
+			</action>
+		</page>
+		
 		<page name="about">
 		<template name="pbaboutpage2"/>
 		   
@@ -3572,32 +3688,32 @@
 		<template name="pbaboutpage2"/>
 		
 			<text style="text_exl">
-			    <placement x="540" y="1290" placement="5"/>
+			    <placement x="540" y="1260" placement="5"/>
 				<text>PitchBlack TWRP</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1365" placement="5"/>
+			    <placement x="540" y="1340" placement="5"/>
 				<text>Based On TWRP %tw_version%</text>
 			</text>
 			
 			<text style="text_l">
-			    <placement x="540" y="1440" placement="5"/>
+			    <placement x="540" y="1390" placement="5"/>
 				<text>Developed by Reza Adi</text>
 			</text>
 			
 			<text style="text_l">
-			    <placement x="540" y="1515" placement="5"/>
+			    <placement x="540" y="1440" placement="5"/>
 				<text>Themed by Firewolf</text>
 			</text>
 			
 			<text style="text_l">
-			    <placement x="540" y="1590" placement="5"/>
+			    <placement x="540" y="1490" placement="5"/>
 				<text>Sources Maintained By Manjot Sidhu & Arbaz Khan</text>
 			</text>
 			
 			<text style="text_l">
-			    <placement x="540" y="1665" placement="5"/>
+			    <placement x="540" y="1540" placement="5"/>
 				<text>Telegram Chat : @twrppb</text>
 			</text>
 				

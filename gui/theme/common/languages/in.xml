@@ -676,6 +676,25 @@
 		<string name="twrp_adbbu_option">Opsi --twrp dibutuhkan untuk mengaktifkan cadangan adb twrp</string>
 		<string name="partition_not_found">lokasi: {1} tidak ditemukan dalam daftar partisi</string>
 		
+		<!--PBTWRP Themes-->
+		<string name="pbthemes">Tema</string>
+	        <string name="pbthemes_hdr">Tema</string>
+		<string name="theme0_btn">PBTWRP Default Black</string>
+		<string name="theme0_text">Ini akan memulihkan PBTWRP ke standart tema hitam</string>		
+		<string name="theme0_confirm">Yakin?</string>
+		<string name="themexy_btn">PBTWRP Just Black</string>
+		<string name="themexy_text">Just Black PBTWRP tema akan di pasang</string>		
+		<string name="themexy_confirm">Yakin?</string>
+		<string name="theme1_btn">Neon Red</string>
+		<string name="theme1_text">Neon Red PBTWRP tema akan di pasang</string>		
+		<string name="theme1_confirm">Yakin?</string>
+		<string name="theme2_btn">Neon Green</string>
+		<string name="theme2_text">Neon Green PBTWRP tema akan di pasang</string>		
+		<string name="theme2_confirm">Yakin?</string>		
+		<string name="theme3_btn">Neon Blue</string>
+		<string name="theme3_text">Neon Blue PBTWRP tema akan di pasang</string>			
+		<string name="theme3_confirm">Yakin?</string>
+		
 		<!--PBTWRP about-->
 		<string name="about">Tentang</string>
 		<string name="about_hdr">Tentang</string>
