@@ -29,6 +29,7 @@
 		<image name="splashlogo" filename="splashlogo" retainaspect="1"/>
 		<image name="splashteamwin" filename="splashteamwin" retainaspect="1"/>
 		<image name="main_button" filename="main_button"/>
+		<image name="pbtools_button" filename="pbtools_button"/>
 		<image name="pbabout_button" filename="pbabout_button"/>
 		<image name="main_button_half_height" filename="main_button_half_height"/>
 		<image name="main_button_half_height_full_width" filename="main_button_half_height_full_width"/>
