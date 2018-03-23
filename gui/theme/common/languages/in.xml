@@ -478,7 +478,7 @@
 
 		<!-- Various console messages - these consist of user displayed messages, oftentimes errors -->
 		<string name="no_kernel_selinux">Kernel tidak mempunyai dukungan untuk membaca konten SELinux.</string>
-		<string name="full_selinux">PitchBlack TWRP *_*</string>
+		<string name="full_selinux">Dukungan SELinux penuh hadir.</string>
 		<string name="no_selinux">Tidak ada dukungan SELinux (tidak ada libselinux).</string>
 		<string name="mtp_enabled">MTP Diaktifkan</string>
 		<string name="mtp_crash">MTP Macet, tidak dapat memulai MTP saat boot.</string>
