@@ -675,43 +675,6 @@
 		<string name="adbbackup_control_error">Tidak dapat menulis ke saluran kontrol adb</string>
 		<string name="twrp_adbbu_option">Opsi --twrp dibutuhkan untuk mengaktifkan cadangan adb twrp</string>
 		<string name="partition_not_found">lokasi: {1} tidak ditemukan dalam daftar partisi</string>
-
-		<!--mod tools-->
-		<string name="tools_hdr">Tools</string>
-		<string name="tools">Tools</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">SuperSU akan di pasang.</string>
-		<string name="SuperSU_confirm">Coba untuk memasang?</string>
-		<string name="Unroot_SuperSU_btn">Unroot SuperSU</string>
-		<string name="Unroot_SuperSU_text">Unroot SuperSU will akan di pasang.</string>
-		<string name="Unroot_SuperSU_confirm">Coba untuk memasang?</string>
-		<string name="Magisk_btn">Magisk</string>
-		<string name="Magisk_text">Magisk akan di pasang.</string>
-		<string name="Magisk_confirm">Coba untuk memasang?</string>
-		<string name="Unroot_Magisk_btn">Unroot Magisk</string>
-		<string name="Unroot_Magisk_text">Unroot Magisk akan di pasang.</string>
-		<string name="Unroot_Magisk_confirm">Coba untuk memasang?</string>
-		<string name="Aroma_FM_btn">Aroma FM</string>
-		<string name="Aroma_FM_text">Aroma FM akan di pasang.</string>
-		<string name="Aroma_FM_confirm">Coba untuk memasang?</string>
-		<string name="FP_Scanner_btn">FP Scanner</string>
-		<string name="FP_Scanner_text">FP scanner akan di pasang.</string>
-		<string name="FP_Scanner_confirm">Coba untuk memasang?</string>
-		<string name="Password_Remover_btn">Password_Remover</string>
-		<string name="Password_Remover_text">Password_Remover akan di pasang.</string>
-		<string name="Password_Remover_confirm">Coba untuk memasang?</string>
-		<string name="RM_Subs_Overlays_btn">RM Subs Overlays</string>
-		<string name="RM_Subs_Overlays_text">RM Subs Overlays akan di pasang.</string>
-		<string name="RM_Subs_Overlays_confirm">Coba untuk memasang?</string>
-		<string name="RM_All_Subs_Overlays_btn">RM All Subs Overlays</string>
-		<string name="RM_All_Subs_Overlays_text">RM All Subs Overlays akan di pasang.</string>
-		<string name="RM_All_Subs_Overlays_confirm">Coba untuk memasang?</string>
-		<string name="Bloatware_Remover_btn">Bloatware Remover</string>
-		<string name="Bloatware_Remover_text">Bloatware Remover akan di pasang.</string>
-		<string name="Bloatware_Remover_confirm">Coba untuk memasang?</string>
-		<string name="MTP_Fix_btn">MTP Fix</string>
-		<string name="MTP_Fix_text">MTP Fix akan di pasang.</string>
-		<string name="MTP_Fix_confirm">Coba untuk memasang?</string>
 		
 		<!--PBTWRP Themes-->
 		<string name="pbthemes">Tema</string>
@@ -736,7 +699,5 @@
 		<string name="about">Tentang</string>
 		<string name="about_hdr">Tentang</string>
 		<string name="about_pbtwrp">Tentang PBTWRP</string>
-		<string name="thanksto">Terimakasih Untuk</string>
-		<string name="toolscr">Tools Credit</string>
 	</resources>
 </language>

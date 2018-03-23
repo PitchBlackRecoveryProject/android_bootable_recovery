@@ -695,43 +695,6 @@
 		<string name="sha2_chk">Use SHA2 for hashing</string>
 		<string name="unable_set_boot_slot">Error changing bootloader boot slot to {1}</string>
 		
-		<!--mod tools-->
-		<string name="tools_hdr">Tools</string>
-		<string name="tools">Tools</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">SuperSU will be installed.</string>
-		<string name="SuperSU_confirm">Try to install it?</string>
-		<string name="Unroot_SuperSU_btn">Unroot SuperSU</string>
-		<string name="Unroot_SuperSU_text">Unroot SuperSU will be installed.</string>
-		<string name="Unroot_SuperSU_confirm">Try to install it?</string>
-		<string name="Magisk_btn">Magisk</string>
-		<string name="Magisk_text">Magisk will be installed.</string>
-		<string name="Magisk_confirm">Try to install it?</string>
-		<string name="Unroot_Magisk_btn">Unroot Magisk</string>
-		<string name="Unroot_Magisk_text">Unroot Magisk will be installed.</string>
-		<string name="Unroot_Magisk_confirm">Try to install it?</string>
-		<string name="Aroma_FM_btn">Aroma FM</string>
-		<string name="Aroma_FM_text">Aroma FM will be installed.</string>
-		<string name="Aroma_FM_confirm">Try to install it?</string>
-		<string name="FP_Scanner_btn">FP Scanner</string>
-		<string name="FP_Scanner_text">FP scanner will be installed.</string>
-		<string name="FP_Scanner_confirm">Try to install it?</string>
-		<string name="Password_Remover_btn">Password Remover</string>
-		<string name="Password_Remover_text">Password Remover will be installed.</string>
-		<string name="Password_Remover_confirm">Try to install it?</string>
-		<string name="RM_Subs_Overlays_btn">RM Subs Overlays</string>
-		<string name="RM_Subs_Overlays_text">RM Subs Overlays will be installed.</string>
-		<string name="RM_Subs_Overlays_confirm">Try to install it?</string>
-		<string name="RM_All_Subs_Overlays_btn">RM All Subs Overlays</string>
-		<string name="RM_All_Subs_Overlays_text">RM All Subs Overlays will be installed.</string>
-		<string name="RM_All_Subs_Overlays_confirm">Try to install it?</string>
-		<string name="Bloatware_Remover_btn">Bloatware Remover</string>
-		<string name="Bloatware_Remover_text">Bloatware Remover will be installed.</string>
-		<string name="Bloatware_Remover_confirm">Try to install it?</string>
-		<string name="MTP_Fix_btn">MTP Fix</string>
-		<string name="MTP_Fix_text">MTP Fix will be installed.</string>
-		<string name="MTP_Fix_confirm">Try to install it?</string>
-		
 		<!--PBTWRP Themes-->
 		<string name="pbthemes">Themes</string>
 	        <string name="pbthemes_hdr">Themes</string>
@@ -755,7 +718,5 @@
 		<string name="about">About</string>
 		<string name="about_hdr">About</string>
 		<string name="about_pbtwrp">About PBTWRP</string>
-		<string name="thanksto">Thanks to</string>
-		<string name="toolscr">Tools Credit</string>
 	</resources>
 </language>
