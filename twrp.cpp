@@ -167,8 +167,8 @@ int main(int argc, char **argv) {
 	}
 
         gui_print("**************************");
-        gui_msg("PitchBlack TWRP: Welcome! ^_^");
-	gui_msg("Developed By Reza Adi");
+        gui_print("PitchBlack TWRP: Welcome! ^_^");
+	gui_print("Developed By Reza Adi");
 	gui_print("**************************");
 	PartitionManager.Mount_By_Path("/cache", false);
 
