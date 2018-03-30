@@ -3570,7 +3570,7 @@
 			
 			<button style="pbtools_button">
 				<placement x="%row1a_y%" y="%pby6%"/>
-				<text>{@theme0_btn=PBTWRP Default Black}</text>
+				<text>{@theme0_btn=PBTWRP Def. Black}</text>
 				<actions>
 					<action function="set">tw_back=pbthemes</action>
 					<action function="set">tw_filename=/twres/themes/removethemes.zip</action>
@@ -3648,6 +3648,23 @@
 					<action function="set">tw_action2_param=flash_zip</action>
 					<action function="set">tw_text1={@theme3_text=Neon Blue PBTWRP theme will be installed.}</action>
 					<action function="set">tw_text2={@theme3_confirm=Sure?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="pbtools_button">
+				<placement x="%row1a_y%" y="%pby6%"/>
+				<text>{@theme4_btn=Neon Yellow}</text>
+				<actions>
+					<action function="set">tw_back=pbthemes</action>
+					<action function="set">tw_filename=/twres/themes/nyellow.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@theme4_text=Neon Yellow PBTWRP theme will be installed}</action>
+					<action function="set">tw_text2={@theme4_confirm=Sure?}</action>
 					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
 					<action function="page">confirm_action</action>
 				</actions>

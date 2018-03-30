@@ -713,6 +713,8 @@
 		<string name="theme3_btn">Neon Blue</string>
 		<string name="theme3_text">Neon Blue PBTWRP theme will be installed</string>			
 		<string name="theme3_confirm">Sure?</string>
+                <string name="theme3_text">Neon Yellow PBTWRP theme will be installed</string>
+                <string name="theme3_confirm">Sure?</string>
 		
 		<!--PBTWRP about-->
 		<string name="about">About</string>
