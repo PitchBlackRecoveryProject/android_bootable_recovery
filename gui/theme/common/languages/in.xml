@@ -478,7 +478,7 @@
 
 		<!-- Various console messages - these consist of user displayed messages, oftentimes errors -->
 		<string name="no_kernel_selinux">Kernel tidak mempunyai dukungan untuk membaca konten SELinux.</string>
-		<string name="full_selinux">Dukungan SELinux penuh hadir.</string>
+		<string name="full_selinux">Dukungan penuh SELinux tersedia.</string>
 		<string name="no_selinux">Tidak ada dukungan SELinux (tidak ada libselinux).</string>
 		<string name="mtp_enabled">MTP Diaktifkan</string>
 		<string name="mtp_crash">MTP Macet, tidak dapat memulai MTP saat boot.</string>
@@ -675,11 +675,54 @@
 		<string name="adbbackup_control_error">Tidak dapat menulis ke saluran kontrol adb</string>
 		<string name="twrp_adbbu_option">Opsi --twrp dibutuhkan untuk mengaktifkan cadangan adb twrp</string>
 		<string name="partition_not_found">lokasi: {1} tidak ditemukan dalam daftar partisi</string>
+
+		<!--mod tools-->
+		<string name="tools_hdr">Tools</string>
+		<string name="tools">Tools</string>
+		<string name="SuperSU_btn">SuperSU</string>
+		<string name="SuperSU_text">SuperSU akan di pasang.</string>
+		<string name="SuperSU_confirm">Coba untuk memasang?</string>
+		<string name="Lazy_Flasher_btn">Lazy Flasher</string>
+		<string name="Lazy_Flasher_text">Lazy Flasher akan di pasang.</string>
+		<string name="Lazy_Flasher_confirm">Coba untuk memasang?</string>
+		<string name="Unroot_SuperSU_btn">Unroot SuperSU</string>
+		<string name="Unroot_SuperSU_text">Unroot SuperSU will akan di pasang.</string>
+		<string name="Unroot_SuperSU_confirm">Coba untuk memasang?</string>
+		<string name="Magisk_btn">Magisk</string>
+		<string name="Magisk_text">Magisk akan di pasang.</string>
+		<string name="Magisk_confirm">Coba untuk memasang?</string>
+		<string name="Unroot_Magisk_btn">Unroot Magisk</string>
+		<string name="Unroot_Magisk_text">Unroot Magisk akan di pasang.</string>
+		<string name="Unroot_Magisk_confirm">Coba untuk memasang?</string>
+		<string name="Aroma_FM_btn">Aroma FM</string>
+		<string name="Aroma_FM_text">Aroma FM akan di pasang.</string>
+		<string name="Aroma_FM_confirm">Coba untuk memasang?</string>
+		<string name="FP_Scanner_btn">FP Scanner</string>
+		<string name="FP_Scanner_text">FP scanner akan di pasang.</string>
+		<string name="FP_Scanner_confirm">Coba untuk memasang?</string>
+		<string name="Pin/Pass_Remover_btn">Pin/Pass Remover</string>
+		<string name="Pin/Pass_Remover_text">Pin/Pass Remover akan di pasang.</string>
+		<string name="Pin/Pass_Remover_confirm">Coba untuk memasang?</string>
+		<string name="RM_Subs_Overlays_btn">RM Subs Overlays</string>
+		<string name="RM_Subs_Overlays_text">RM Subs Overlays akan di pasang.</string>
+		<string name="RM_Subs_Overlays_confirm">Coba untuk memasang?</string>
+		<string name="RM_All_Subs_Overlays_btn">RM All Subs Overlays</string>
+		<string name="RM_All_Subs_Overlays_text">RM All Subs Overlays akan di pasang.</string>
+		<string name="RM_All_Subs_Overlays_confirm">Coba untuk memasang?</string>
+		<string name="Enable_HAL3_btn">Enable HAL3</string>
+		<string name="Enable_HAL3_text">Enable HAL3 akan di pasang.</string>
+		<string name="Enable_HAL3_confirm">Coba untuk memasang?</string>
+		<string name="App_Delete_btn">App Delete</string>
+		<string name="App_Delete_text">App Delete akan di pasang.</string>
+		<string name="App_Delete_confirm">Coba untuk memasang?</string>
+		<string name="MTP_Fix_btn">MTP Fix</string>
+		<string name="MTP_Fix_text">MTP Fix akan di pasang.</string>
+		<string name="MTP_Fix_confirm">Coba untuk memasang?</string>
 		
 		<!--PBTWRP Themes-->
 		<string name="pbthemes">Tema</string>
-	        <string name="pbthemes_hdr">Tema</string>
-		<string name="theme0_btn">PBTWRP Default Black</string>
+	    <string name="pbthemes_hdr">Tema</string>
+		<string name="theme0_btn">PBTWRP Def. Black</string>
 		<string name="theme0_text">Ini akan memulihkan PBTWRP ke standart tema hitam</string>		
 		<string name="theme0_confirm">Yakin?</string>
 		<string name="themexy_btn">PBTWRP Just Black</string>
@@ -694,12 +737,16 @@
 		<string name="theme3_btn">Neon Blue</string>
 		<string name="theme3_text">Neon Blue PBTWRP tema akan di pasang</string>			
 		<string name="theme3_confirm">Yakin?</string>
-                <string name="theme3_text">Neon Yellow PBTWRP tema akan di pasang</string>
-                <string name="theme3_confirm">Yakin?</string>
+		<string name="theme4_btn">Neon Yellow</string>
+		<string name="theme4_text">Neon Yellow PBTWRP tema akan di pasang</string>			
+		<string name="theme4_confirm">Yakin?</string>
 		
 		<!--PBTWRP about-->
 		<string name="about">Tentang</string>
 		<string name="about_hdr">Tentang</string>
 		<string name="about_pbtwrp">Tentang PBTWRP</string>
+		<string name="thanksto">Terimakasih Untuk</string>
+		<string name="toolscr">Tools Credit</string>
 	</resources>
 </language>
+

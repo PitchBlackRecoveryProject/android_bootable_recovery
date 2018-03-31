@@ -695,10 +695,53 @@
 		<string name="sha2_chk">Use SHA2 for hashing</string>
 		<string name="unable_set_boot_slot">Error changing bootloader boot slot to {1}</string>
 		
+		<!--mod tools-->
+		<string name="tools_hdr">Tools</string>
+		<string name="tools">Tools</string>
+		<string name="SuperSU_btn">SuperSU</string>
+		<string name="SuperSU_text">SuperSU will be installed.</string>
+		<string name="SuperSU_confirm">Try to install it?</string>
+		<string name="Lazy_Flasher_btn">Lazy Flasher</string>
+		<string name="Lazy_Flasher_text">Lazy Flasher will be installed.</string>
+		<string name="Lazy_Flasher_confirm">Try to install it?</string>
+		<string name="Unroot_SuperSU_btn">Unroot SuperSU</string>
+		<string name="Unroot_SuperSU_text">Unroot SuperSU will be installed.</string>
+		<string name="Unroot_SuperSU_confirm">Try to install it?</string>
+		<string name="Magisk_btn">Magisk</string>
+		<string name="Magisk_text">Magisk will be installed.</string>
+		<string name="Magisk_confirm">Try to install it?</string>
+		<string name="Unroot_Magisk_btn">Unroot Magisk</string>
+		<string name="Unroot_Magisk_text">Unroot Magisk will be installed.</string>
+		<string name="Unroot_Magisk_confirm">Try to install it?</string>
+		<string name="Aroma_FM_btn">Aroma FM</string>
+		<string name="Aroma_FM_text">Aroma FM will be installed.</string>
+		<string name="Aroma_FM_confirm">Try to install it?</string>
+		<string name="FP_Scanner_btn">FP Scanner</string>
+		<string name="FP_Scanner_text">FP scanner will be installed.</string>
+		<string name="FP_Scanner_confirm">Try to install it?</string>
+		<string name="Pin/Pass_Remover_btn">Pin/Pass Remover</string>
+		<string name="Pin/Pass_Remover_text">Pin/Pass Remover will be installed.</string>
+		<string name="Pin/Pass_Remover_confirm">Try to install it?</string>
+		<string name="RM_Subs_Overlays_btn">RM Subs Overlays</string>
+		<string name="RM_Subs_Overlays_text">RM Subs Overlays will be installed.</string>
+		<string name="RM_Subs_Overlays_confirm">Try to install it?</string>
+		<string name="RM_All_Subs_Overlays_btn">RM All Subs Overlays</string>
+		<string name="RM_All_Subs_Overlays_text">RM All Subs Overlays will be installed.</string>
+		<string name="RM_All_Subs_Overlays_confirm">Try to install it?</string>
+		<string name="Enable_HAL3_btn">Enable HAL3</string>
+		<string name="Enable_HAL3_text">Enable HAL3 will be installed.</string>
+		<string name="Enable_HAL3_confirm">Try to install it?</string>
+		<string name="App_Delete_btn">App Delete</string>
+		<string name="App_Delete_text">App Delete will be installed.</string>
+		<string name="App_Delete_confirm">Try to install it?</string>
+		<string name="MTP_Fix_btn">MTP Fix</string>
+		<string name="MTP_Fix_text">MTP Fix will be installed.</string>
+		<string name="MTP_Fix_confirm">Try to install it?</string>
+		
 		<!--PBTWRP Themes-->
 		<string name="pbthemes">Themes</string>
-	        <string name="pbthemes_hdr">Themes</string>
-		<string name="theme0_btn">PBTWRP Default Black</string>
+	    <string name="pbthemes_hdr">Themes</string>
+		<string name="theme0_btn">PBTWRP Def. Black</string>
 		<string name="theme0_text">This will restore PBTWRP Default Black theme</string>		
 		<string name="theme0_confirm">Sure?</string>
 		<string name="themexy_btn">PBTWRP Just Black</string>
@@ -713,12 +756,16 @@
 		<string name="theme3_btn">Neon Blue</string>
 		<string name="theme3_text">Neon Blue PBTWRP theme will be installed</string>			
 		<string name="theme3_confirm">Sure?</string>
-                <string name="theme3_text">Neon Yellow PBTWRP theme will be installed</string>
-                <string name="theme3_confirm">Sure?</string>
+		<string name="theme4_btn">Neon Yellow</string>
+		<string name="theme4_text">Neon Yellow PBTWRP theme will be installed</string>			
+		<string name="theme4_confirm">Sure?</string>
 		
 		<!--PBTWRP about-->
 		<string name="about">About</string>
 		<string name="about_hdr">About</string>
 		<string name="about_pbtwrp">About PBTWRP</string>
+		<string name="thanksto">Thanks to</string>
+		<string name="toolscr">Tools Credit</string>
 	</resources>
 </language>
+
