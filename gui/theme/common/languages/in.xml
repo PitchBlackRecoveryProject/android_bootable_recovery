@@ -694,6 +694,8 @@
 		<string name="theme3_btn">Neon Blue</string>
 		<string name="theme3_text">Neon Blue PBTWRP tema akan di pasang</string>			
 		<string name="theme3_confirm">Yakin?</string>
+                <string name="theme3_text">Neon Yellow PBTWRP tema akan di pasang</string>
+                <string name="theme3_confirm">Yakin?</string>
 		
 		<!--PBTWRP about-->
 		<string name="about">Tentang</string>
