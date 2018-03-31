@@ -58,7 +58,7 @@
 			<font resource="font_l" color="%text_button_color%"/>
 			<image resource="pbtools_button"/>
 		</style>
-		
+
 		<style name="main_button_half_height">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_m" color="%text_button_color%"/>
@@ -3502,18 +3502,18 @@
 				<text>{@terminal_btn=Terminal}</text>
 				<action function="page">terminalcommand</action>
 			</button>
-
+			
 			<button style="main_button">
 				<placement x="%center_x%" y="%row10_y%"/>
 				<text>{@adb_sideload_btn=ADB Sideload}</text>
 				<action function="page">sideload</action>
-			</button>	
-
-            <button style="main_button">
+			</button>			
+			
+			<button style="main_button">
 				<placement x="%indent%" y="%row14_y%"/>
 				<text>{@pbthemes=Themes}</text>
 				<action function="page">pbthemes</action>
-			</button>					
+			</button>			
 					
 			<button style="main_button">
 				<placement x="%center_x%" y="%row14_y%"/>
@@ -3522,11 +3522,17 @@
 			</button>
 
 			<button style="main_button">
+				<placement x="%indent%" y="%row18_y%"/>
+				<text>{@tools=Tools}</text>
+				<action function="page">tools</action>
+			</button>
+			
+			<button style="main_button">
 				<placement x="%center_x%" y="%row18_y%"/>
 				<text>{@about=About}</text>
 				<action function="page">about</action>
 			</button>
-
+			
 			<button style="main_button">
 				<condition var1="tw_show_dumlock" var2="1"/>
 				<placement x="%center_x%" y="%row19_y%"/>
@@ -3559,8 +3565,248 @@
 				<action function="page">main</action>
 			</action>
 		</page>
-		
-		        <page name="pbthemes">
+
+        <page name="tools">
+		<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
+				<text>{@tools_hdr=Tools}</text>
+			</text>
+
+			<button style="pbtools_button">
+				<placement x="%indent%" y="%row2_y%"/>
+				<text>{@SuperSU_btn=SuperSU}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/supersu.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@SuperSU_text=SuperSU will be installed.}</action>
+					<action function="set">tw_text2={@SuperSU_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="pbtools_button">
+				<placement x="%center_x%" y="%row2_y%"/>
+				<text>{@Lazy_Flasher_btn=Lazy Flasher}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/lazyflasher.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Lazy_Flasher_text=Lazy Flasher will be installed.}</action>
+					<action function="set">tw_text2={@Lazy_Flasher_confirm=Try to Lazy Flasher Device?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="pbtools_button">
+				<placement x="%indent%" y="%row4_y%"/>
+				<text>{@Unroot_SuperSU_btn=Unroot SuperSU}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/unrootsupersu.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Unroot_SuperSU_text=Unroot SuperSU.}</action>
+					<action function="set">tw_text2={@Unroot_SuperSU_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%center_x%" y="%row4_y%"/>
+				<text>{@Magisk_btn=Magisk}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/magisk.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Magisk_text=Magisk will be installed.}</action>
+					<action function="set">tw_text2={@Magisk_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%indent%" y="%row6_y%"/>
+				<text>{@Unroot_Magisk_btn=Unroot Magisk}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/unrootmagisk.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Unroot_Magisk_text=Unroot Magisk will be installed.}</action>
+					<action function="set">tw_text2={@Unroot_Magisk_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%center_x%" y="%row6_y%"/>
+				<text>{@Aroma_FM_btn=Aroma FM}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/aromafm/aromafm.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Aroma_FM_text=Aroma FM will be installed.}</action>
+					<action function="set">tw_text2={@Aroma_FM_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%indent%" y="%row8_y%"/>
+				<text>{@FP_Scanner_btn=FP Scanner}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/fpscan.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@FP_Scanner_text=FP Scanner will be installed.}</action>
+					<action function="set">tw_text2={@FP_Scanner_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%center_x%" y="%row8_y%"/>
+				<text>{@Pin/Pass_Remover_btn=Pin/Pass Remover}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/rmpass.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Pin/Pass_Remover_text=Pin/Pass Remover will be installed.}</action>
+					<action function="set">tw_text2={@Pin/Pass_Remover_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%indent%" y="%row10_y%"/>
+				<text>{@RM_Subs_Overlays_btn=RM Subs Overlays}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/overlays.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@RM_Subs_Overlays_text=RM Subs Overlays will be installed.}</action>
+					<action function="set">tw_text2={@RM_Subs_Overlays_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%center_x%" y="%row10_y%"/>
+				<text>{@RM_All_Subs_Overlays_btn=RM All Subs Overlays}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/alloverlays.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@RM_All_Subs_Overlays_text=RM All Subs Overlays will be installed.}</action>
+					<action function="set">tw_text2={@RM_All_Subs_Overlays_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%indent%" y="%row12_y%"/>
+				<text>{@Enable_HAL3_btn=Enabled HAL3}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/enablehal3.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Enable_HAL3_text=Enable HAL3 will be installed.}</action>
+					<action function="set">tw_text2={@Enable_HAL3_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%center_x%" y="%row12_y%"/>
+				<text>{@App_Delete_btn=App Delete}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/appdel.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@App_Delete_text=App Delete will be installed.}</action>
+					<action function="set">tw_text2={@App_Delete_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="pbtools_button">
+				<placement x="%indent%" y="%row14_y%"/>
+				<text>{@MTP_Fix_btn=MTP Fix}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/mtp.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@MTP_Fix_text=MTP Fix will be installed.}</action>
+					<action function="set">tw_text2={@MTP_Fix_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">advanced</action>
+			</action>
+		</page>
+
+        <page name="pbthemes">
 		   <template name="page"/>
 
 			<text style="text_l">
@@ -3569,7 +3815,7 @@
 			</text>
 			
 			<button style="pbtools_button">
-				<placement x="%row1a_y%" y="%pby6%"/>
+				<placement x="%row1a_y%" y="%pby7%"/>
 				<text>{@theme0_btn=PBTWRP Def. Black}</text>
 				<actions>
 					<action function="set">tw_back=pbthemes</action>
@@ -3580,6 +3826,23 @@
 					<action function="set">tw_action2_param=flash_zip</action>
 					<action function="set">tw_text1={@theme0_text=This will restore PBTWRP Default Black theme}</action>
 					<action function="set">tw_text2={@theme0_confirm=Sure?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+            <button style="pbtools_button">
+				<placement x="%row1a_y%" y="%pby6%"/>
+				<text>{@theme4_btn=Neon Yellow}</text>
+				<actions>
+					<action function="set">tw_back=pbthemes</action>
+					<action function="set">tw_filename=/twres/themes/nyellow.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@theme4_text=Neon Yellow PBTWRP theme will be installed}</action>
+					<action function="set">tw_text2={@theme4_confirm=Sure?}</action>
 					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
 					<action function="page">confirm_action</action>
 				</actions>
@@ -3652,23 +3915,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-
-			<button style="pbtools_button">
-				<placement x="%row1a_y%" y="%pby6%"/>
-				<text>{@theme4_btn=Neon Yellow}</text>
-				<actions>
-					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/twres/themes/nyellow.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@theme4_text=Neon Yellow PBTWRP theme will be installed}</action>
-					<action function="set">tw_text2={@theme4_confirm=Sure?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
 			
 			<action>
 				<touch key="home"/>
@@ -3684,11 +3930,24 @@
 		<page name="about">
 		<template name="pbaboutpage2"/>
 		   
-		  	<button style="pbabout_button">
-				<placement x="%pbxa2%" y="%row18_y%"/>
+		   	<button style="pbabout_button">
+				<placement x="%pbxa1%" y="%row18_y%"/>
 				<text>{@about_pbtwrp=About PBTWRP}</text>
 				<action function="page">about_pbtwrp</action>
 			</button>
+			
+		   	<button style="pbabout_button">
+				<placement x="%pbxa2%" y="%row18_y%"/>
+				<text>{@thanksto=Thanks to}</text>
+				<action function="page">thanksto</action>
+			</button>
+			
+		   	<button style="pbabout_button">
+				<placement x="%pbxa3%" y="%row18_y%" />
+				<text>{@toolscr=Tools Credit}</text>
+				<action function="page">toolscr</action>
+			</button>
+				
 			
 			<action>
 				<touch key="home"/>
@@ -3706,7 +3965,7 @@
 		
 			<text style="text_exl">
 			    <placement x="540" y="1260" placement="5"/>
-				<text>PitchBlack TWRP</text>
+				<text>PitchBlack 2.6</text>
 			</text>
 			
 			<text style="text_m">
@@ -3733,6 +3992,170 @@
 			    <placement x="540" y="1540" placement="5"/>
 				<text>Telegram Chat : @twrppb</text>
 			</text>
+			
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">about</action>
+			</action>
+			</page>
+			
+		<page name="thanksto">
+		<template name="pbaboutpage0"/>
+			
+			<text style="text_l">
+			    <placement x="540" y="900" placement="5"/>
+				<text>Thanks to</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="990" placement="5"/>
+				<text>github for source code</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1020" placement="5"/>
+				<text>twrp.me</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1050" placement="5"/>
+				<text>G.M.L</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1080" placement="5"/>
+				<text>Innu Ghifary Dev</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1110" placement="5"/>
+				<text>Helmi Amirudin</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1140" placement="5"/>
+				<text>Santy Safitri</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1170" placement="5"/>
+				<text>Anik Khan</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1200" placement="5"/>
+				<text>Albert I</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1230" placement="5"/>
+				<text>ATG Droid</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1260" placement="5"/>
+				<text>Mifans Indonesia</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1290" placement="5"/>
+				<text>Ahmad Sa'id Mabruri</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1320" placement="5"/>
+				<text>Rivv</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1350" placement="5"/>
+				<text>Zaeni Loverz</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1380" placement="5"/>
+				<text>Abhishek</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1410" placement="5"/>
+				<text>osmOsis</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1440" placement="5"/>
+				<text>All Developers & Users</text>
+			</text>
+			
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">about</action>
+			</action>
+			   
+		</page>
+
+		<page name="toolscr">
+		<template name="pbaboutpage"/>
+
+		<text style="text_l">
+			    <placement x="540" y="700" placement="5"/>
+				<text>Thanks to them for tools</text>
+		</text>
+		
+			  <text style="text_m">
+			    <placement x="540" y="790" placement="5"/>
+				<text>Chainfire - SuperSU Installer</text>
+			</text>
+			
+			 <text style="text_m">
+			    <placement x="540" y="830" placement="5"/>
+				<text>Brigudav - SuperSU Uninstaller</text>
+			</text>
+		
+			<text style="text_m">
+			    <placement x="540" y="870" placement="5"/>
+				<text>Topjohnwu - Magisk Installer, Uninstaller</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="910" placement="5"/>
+				<text>Jcadduono - LazyFlasher</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="950" placement="5"/>
+				<text>Amarullz - Aroma File Manager</text>
+			</text>
+			
+			 <text style="text_m">
+			    <placement x="540" y="990" placement="5"/>
+				<text>Magua - Fingerprint & Pin/Password Remover</text>
+			</text>
+			
+					 <text style="text_m">
+			    <placement x="540" y="1030" placement="5"/>
+				<text>Helmiau - MTP Fixer & HAL3 Enabler</text>
+			</text>
+			
+					 <text style="text_m">
+			    <placement x="540" y="1070" placement="5"/>
+				<text>Projekt Dev Team - Substratum Rescue</text>
+			</text>
+			
+					 <text style="text_m">
+			    <placement x="540" y="1150" placement="5"/>
+				<text>The Pirate Predator = Bloatware Remover</text>
+			</text>
 				
 		    <action>
 				<touch key="home"/>
@@ -3743,6 +4166,7 @@
 				<touch key="back"/>
 				<action function="page">about</action>
 			</action>
+		
 		</page>
 		
 		<page name="partsdcardsel">
