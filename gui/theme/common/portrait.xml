@@ -3947,7 +3947,12 @@
 				<text>{@toolscr=Tools Credit}</text>
 				<action function="page">toolscr</action>
 			</button>
-				
+			
+			<button style="pbabout_button">
+				<placement x="%pbxa2%" y="%row21_y%"/>
+				<text>{@contributors=Contributors}</text>
+				<action function="page">contributors</action>
+			</button>
 			
 			<action>
 				<touch key="home"/>
@@ -3973,23 +3978,33 @@
 				<text>Based On TWRP %tw_version%</text>
 			</text>
 			
-			<text style="text_l">
+			<text style="text_s">
 			    <placement x="540" y="1390" placement="5"/>
+				<text>https://github.com/PitchBlackTWRP</text>
+			</text>
+			
+			<text style="text_s">
+			    <placement x="540" y="1440" placement="5"/>
 				<text>Developed by Reza Adi</text>
 			</text>
 			
-			<text style="text_l">
-			    <placement x="540" y="1440" placement="5"/>
+			<text style="text_s">
+			    <placement x="540" y="1490" placement="5"/>
 				<text>Themed by Firewolf</text>
 			</text>
 			
-			<text style="text_l">
-			    <placement x="540" y="1490" placement="5"/>
-				<text>Sources Maintained By Manjot Sidhu & Arbaz Khan</text>
+			<text style="text_s">
+			    <placement x="540" y="1540" placement="5"/>
+				<text>Sources Maintained By</text>
 			</text>
 			
-			<text style="text_l">
-			    <placement x="540" y="1540" placement="5"/>
+			<text style="text_s">
+			    <placement x="540" y="1590" placement="5"/>
+				<text>Manjot Sidhu, Arbaz Khan & Mohd Faraz</text>
+			</text>
+			
+			<text style="text_s">
+			    <placement x="540" y="1640" placement="5"/>
 				<text>Telegram Chat : @twrppb</text>
 			</text>
 			
@@ -4005,90 +4020,90 @@
 			</page>
 			
 		<page name="thanksto">
-		<template name="pbaboutpage0"/>
+		<template name="pbaboutpage"/>
 			
 			<text style="text_l">
-			    <placement x="540" y="900" placement="5"/>
+			    <placement x="540" y="700" placement="5"/>
 				<text>Thanks to</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="990" placement="5"/>
+			    <placement x="540" y="790" placement="5"/>
 				<text>github for source code</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1020" placement="5"/>
+			    <placement x="540" y="820" placement="5"/>
 				<text>twrp.me</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1050" placement="5"/>
+			    <placement x="540" y="850" placement="5"/>
 				<text>G.M.L</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1080" placement="5"/>
+			    <placement x="540" y="880" placement="5"/>
 				<text>Innu Ghifary Dev</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1110" placement="5"/>
+			    <placement x="540" y="910" placement="5"/>
 				<text>Helmi Amirudin</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1140" placement="5"/>
+			    <placement x="540" y="940" placement="5"/>
 				<text>Santy Safitri</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1170" placement="5"/>
+			    <placement x="540" y="970" placement="5"/>
 				<text>Anik Khan</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1200" placement="5"/>
+			    <placement x="540" y="1000" placement="5"/>
 				<text>Albert I</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1230" placement="5"/>
+			    <placement x="540" y="1030" placement="5"/>
 				<text>ATG Droid</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1260" placement="5"/>
+			    <placement x="540" y="1060" placement="5"/>
 				<text>Mifans Indonesia</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1290" placement="5"/>
+			    <placement x="540" y="1090" placement="5"/>
 				<text>Ahmad Sa'id Mabruri</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1320" placement="5"/>
+			    <placement x="540" y="1120" placement="5"/>
 				<text>Rivv</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1350" placement="5"/>
+			    <placement x="540" y="1150" placement="5"/>
 				<text>Zaeni Loverz</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1380" placement="5"/>
+			    <placement x="540" y="1180" placement="5"/>
 				<text>Abhishek</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1410" placement="5"/>
+			    <placement x="540" y="1210" placement="5"/>
 				<text>osmOsis</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1440" placement="5"/>
+			    <placement x="540" y="1240" placement="5"/>
 				<text>All Developers & Users</text>
 			</text>
 			
@@ -4153,8 +4168,8 @@
 			</text>
 			
 					 <text style="text_m">
-			    <placement x="540" y="1150" placement="5"/>
-				<text>The Pirate Predator = Bloatware Remover</text>
+			    <placement x="540" y="1110" placement="5"/>
+				<text>The Pirate Predator - Bloatware Remover</text>
 			</text>
 				
 		    <action>
@@ -4166,7 +4181,45 @@
 				<touch key="back"/>
 				<action function="page">about</action>
 			</action>
+		</page>
 		
+		<page name="contributors">
+		<template name="pbaboutpage"/>
+			
+			<text style="text_l">
+			    <placement x="540" y="700" placement="5"/>
+				<text>Contributors</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="790" placement="5"/>
+				<text>Mohd Faraz - LYF Water 8</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="830" placement="5"/>
+				<text>Manjot Sidhu - Micromax A106</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="870" placement="5"/>
+				<text>Reza Adi & Arbaz Khan - Redmi Note 4</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="910" placement="5"/>
+				<text>Firewolf - Redmi 3</text>
+			</text>
+			
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">about</action>
+			</action>   
 		</page>
 		
 		<page name="partsdcardsel">

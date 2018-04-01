@@ -478,7 +478,7 @@
 
 		<!-- Various console messages - these consist of user displayed messages, oftentimes errors -->
 		<string name="no_kernel_selinux">Kernel tidak mempunyai dukungan untuk membaca konten SELinux.</string>
-		<string name="full_selinux">Dukungan penuh SELinux tersedia.</string>
+		<string name="full_selinux">Dukungan SELinux penuh hadir.</string>
 		<string name="no_selinux">Tidak ada dukungan SELinux (tidak ada libselinux).</string>
 		<string name="mtp_enabled">MTP Diaktifkan</string>
 		<string name="mtp_crash">MTP Macet, tidak dapat memulai MTP saat boot.</string>
@@ -700,24 +700,51 @@
 		<string name="FP_Scanner_btn">FP Scanner</string>
 		<string name="FP_Scanner_text">FP scanner akan di pasang.</string>
 		<string name="FP_Scanner_confirm">Coba untuk memasang?</string>
-		<string name="Pin/Pass_Remover_btn">Pin/Pass Remover</string>
-		<string name="Pin/Pass_Remover_text">Pin/Pass Remover akan di pasang.</string>
-		<string name="Pin/Pass_Remover_confirm">Coba untuk memasang?</string>
+		<string name="Pin/Password_Remover_btn">Pin/Password Remover</string>
+		<string name="Pin/Password_Remover_text">Pin/Password Remover akan di pasang.</string>
+		<string name="Pin/Password_Remover_confirm">Coba untuk memasang?</string>
 		<string name="RM_Subs_Overlays_btn">RM Subs Overlays</string>
 		<string name="RM_Subs_Overlays_text">RM Subs Overlays akan di pasang.</string>
 		<string name="RM_Subs_Overlays_confirm">Coba untuk memasang?</string>
 		<string name="RM_All_Subs_Overlays_btn">RM All Subs Overlays</string>
 		<string name="RM_All_Subs_Overlays_text">RM All Subs Overlays akan di pasang.</string>
 		<string name="RM_All_Subs_Overlays_confirm">Coba untuk memasang?</string>
+		<string name="Camera_OldBlobs_btn">Camera OldBlobs</string>
+		<string name="Camera_OldBlobs_text">Camera OldBlobs akan di pasang.</string>
+		<string name="Camera_OldBlobs_confirm">Coba untuk memasang?</string>
+		<string name="Camera_NewBlobs_btn">Camera NewBlobs</string>
+		<string name="Camera_NewBlobs_text">Camera NewBlobs akan di pasang.</string>
+		<string name="Camera_NewBlobs_confirm">Coba untuk memasang?</string>
+		<string name="Camera_Feature_Miui_btn">Camera Feature Miui</string>
+		<string name="Camera_Feature_Miui_text">Camera Feature Miui akan di pasang.</string>
+		<string name="Camera_Feature_Miui_confirm">Coba untuk memasang?</string>
+		<string name="Stock_Splash_btn">Stock Splash</string>
+		<string name="Stock_Splash_text">Stock Splash akan di pasang.</string>
+		<string name="Stock_Splash_confirm">Coba untuk memasang?</string>
+		<string name="Permission_Sdcard_btn">Permission Sdcard</string>
+		<string name="Permission_Sdcard_text">Permission Sdcard akan di pasang.</string>
+		<string name="Permission_Sdcard_confirm">Coba untuk memasang?</string>
 		<string name="Enable_HAL3_btn">Enable HAL3</string>
 		<string name="Enable_HAL3_text">Enable HAL3 akan di pasang.</string>
 		<string name="Enable_HAL3_confirm">Coba untuk memasang?</string>
 		<string name="App_Delete_btn">App Delete</string>
 		<string name="App_Delete_text">App Delete akan di pasang.</string>
 		<string name="App_Delete_confirm">Coba untuk memasang?</string>
+		<string name="Ramdisk_Cleaner_btn">Ramdisk Cleaner</string>
+		<string name="Ramdisk_Cleaner_text">Ramdisk Cleaner akan di pasang.</string>
+		<string name="Ramdisk_Cleaner_confirm">Coba untuk memasang?</string>
+		<string name="Thermal_btn">Thermal</string>
+		<string name="Thermal_text">Thermal akan di pasang.</string>
+		<string name="Thermal_confirm">Coba untuk memasang?</string>
+		<string name="Thermal_Uninstall_btn">Thermal Uninstall</string>
+		<string name="Thermal_Uninstall_text">Thermal Uninstall akan di pasang.</string>
+		<string name="Thermal_Uninstall_confirm">Coba untuk memasang?</string>
 		<string name="MTP_Fix_btn">MTP Fix</string>
 		<string name="MTP_Fix_text">MTP Fix akan di pasang.</string>
 		<string name="MTP_Fix_confirm">Coba untuk memasang?</string>
+		<string name="Magisk_Treble_btn">Magisk Treble</string>
+		<string name="Magisk_Treble_text">Magisk Treble akan di pasang.</string>
+		<string name="Magisk_Treble_confirm">Coba untuk memasang?</string>
 		
 		<!--PBTWRP Themes-->
 		<string name="pbthemes">Tema</string>
@@ -734,11 +761,11 @@
 		<string name="theme2_btn">Neon Green</string>
 		<string name="theme2_text">Neon Green PBTWRP tema akan di pasang</string>		
 		<string name="theme2_confirm">Yakin?</string>		
-		<string name="theme3_btn">Neon Blue</string>
-		<string name="theme3_text">Neon Blue PBTWRP tema akan di pasang</string>			
+		<string name="theme3_btn">Neon Yellow</string>
+		<string name="theme3_text">Neon Yellow PBTWRP tema akan di pasang</string>			
 		<string name="theme3_confirm">Yakin?</string>
-		<string name="theme4_btn">Neon Yellow</string>
-		<string name="theme4_text">Neon Yellow PBTWRP tema akan di pasang</string>			
+		<string name="theme4_btn">Neon Blue</string>
+		<string name="theme4_text">Neon Blue PBTWRP tema akan di pasang</string>			
 		<string name="theme4_confirm">Yakin?</string>
 		
 		<!--PBTWRP about-->
@@ -747,6 +774,7 @@
 		<string name="about_pbtwrp">Tentang PBTWRP</string>
 		<string name="thanksto">Terimakasih Untuk</string>
 		<string name="toolscr">Tools Credit</string>
+		<string name="contributors">Kontribusi</string>
 	</resources>
 </language>
 
