@@ -1,6 +1,9 @@
 /*
 	Copyright 2013 to 2017 TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
+	
+	Copyright 2018 ATG Droid  
+	This file is part of RWRP/RedWolf Recovery Project
 
 	TWRP is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
