@@ -775,6 +775,42 @@
 		<string name="thanksto">Terimakasih Untuk</string>
 		<string name="toolscr">Tools Credit</string>
 		<string name="contributors">Kontribusi</string>
+		
+		<!-- Settings -->
+		<string name="pb_support_miui_ota_chk">Dukung MIUI Incremental OTA</string>
+		<string name="pb_incremental_ota_status_enabled">Status dukungan paket MIUI Incremental : Aktif</string>
+		<string name="pb_incremental_ota_status_disabled">Status dukungan paket MIUI Incremental : Dimatikan</string>
+		<string name="pb_incremental_package_detected">Paket Incremental terdeteksi '{1}'</string>
+		<string name="pb_survival_does_not_exist">OTA Survival tidak ada! Instalasi mungkin gagal!</string>
+		<string name="pb_install_detecting">Mendeteksi Paket Saat Ini</string>
+		<string name="pb_install_standard_detected">- Paket Standar Terdeteksi</string>
+		<string name="pb_install_miui_detected">- Paket Pembaruan MIUI Terdeteksi</string>
+		<string name="pb_disable_boot_chk">Matikan pemeriksaan boot</string>
+		<string name="pb_include_system_survival_chk">Sertakan sistem dalam Survival OTA</string>
+		<string name="pb_verify_incremental_ota_signature_chk">Verifikasi signature Incremental OTA</string>
+		<string name="pb_incremental_ota_compatibility_chk">Memverifikasi Signature Paket Incremental...</string>
+		<string name="pb_incremental_ota_compatibility_false">Paket incremental tidak cocok dengan ROM ini!</string>
+		<string name="pb_incremental_ota_compatibility_true">Paket incremental cocok</string>
+		<string name="pb_zip_have_bootloader">Peringatan: Mendeteksi memasang kembali bootloader didalam berkas '{1}'.</string>
+		<string name="pb_no_space_ota_survival">Tidak cukup ruang kosong pada penyimpanan internal untuk membuat OTA Survival.</string>
+
+		<string name="pb_incremental_ota_res">OTA_RES -- selesai!</string>		
+		<string name="pb_incremental_ota_res_run">Proses OTA_RES...</string>
+		<string name="pb_incremental_ota_bak_run">Proses OTA_BAK...</string>
+		<string name="pb_incremental_ota_bak">OTA_BAK -- selesai!</string>
+		<string name="pb_advanced_stock_recovery">Penonaktifan stok recovery secara agresif</string>
+		<string name="pb_reboot_dont_disable_stock_recovery_chk">Jangan matikan pergantian stock recovery</string>
+		<string name="pb_dmverity_chk">Matikan DM-Verity</string>
+		<string name="pb_forced_encryption_chk">Matikan Enkripsi paksa</string>
+		<string name="pb_run_process">Proses '{1}' Mulai</string>
+		<string name="pb_run_process_fail">Proses '{1}' tidak bisa selesai</string>
+		<string name="pb_run_process_done">Proses '{1}' selesai</string>
+		<string name="pb_encryption">Sukses menerapkan enkripsi paksa</string>
+		<string name="pb_encryption_off">Enkripsi paksa tidak diaktifkan</string>
+		<string name="pb_fstab">Deteksi fstab: '{1}'</string>
+		<string name="pb_dm_verity">Sukses menerapkan DM-Verity</string>
+		<string name="pb_dm_verity_off">DM-Verity tidak diaktifkan</string>
+
 	</resources>
 </language>
 
