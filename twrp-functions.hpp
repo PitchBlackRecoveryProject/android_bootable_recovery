@@ -67,8 +67,17 @@ public:
 
 #ifndef BUILD_TWRPTAR_MAIN
 	static void install_htc_dumlock(void);                                      // Installs HTC Dumlock
+	static void Write_MIUI_Install_Status(std::string install_status, bool verify);                                // Write last install status in to the /cache/recovery/last_status
+	static void Replace_Word_In_File(string file_path, string search); // Remove string from file
+	static void Replace_Word_In_File(string file_path, string search, string word); // Replace string in file
 	static void htc_dumlock_restore_original_boot(void);                        // Restores the backup of boot from HTC Dumlock
 	static void htc_dumlock_reflash_recovery_to_boot(void);                     // Reflashes the current recovery to boot
+	static bool Repack_Image(string mount_point);
+	static bool Unpack_Image(string mount_point);
+	static void Deactivation_Process(void);
+	static bool Resize_By_Path(string path);
+	static void Read_Write_Specific_Partition(string path, string partition_name, bool backup);
+
 	static int Recursive_Mkdir(string Path);                                    // Recursively makes the entire path
 	static void GUI_Operation_Text(string Read_Value, string Default_Text);     // Updates text for display in the GUI, e.g. Backing up %partition name%
 	static void GUI_Operation_Text(string Read_Value, string Partition_Name, string Default_Text); // Same as above but includes partition name
@@ -84,8 +93,11 @@ public:
 	static int read_file(string fn, uint64_t& results); //read from file
 	static int write_to_file(const string& fn, const string& line);             //write to file
 	static bool Install_SuperSU(void); // Installs su binary and apk and sets proper permissions
+	static void remove_word_from_file(string file_path, string search, string word);   // Remove selected word from the file
+	static bool CheckWord(std::string filename, std::string search); // Check if the word exist in the txt file and then return true or false
 	static bool Try_Decrypting_Backup(string Restore_Path, string Password); // true for success, false for failed to decrypt
 	static string System_Property_Get(string Prop_Name);                // Returns value of Prop_Name from reading /system/build.prop
+	static string File_Property_Get(string File_Path, string Prop_Name);                // Returns specified property value from the file
 	static string Get_Current_Date(void);                               // Returns the current date in ccyy-m-dd--hh-nn-ss format
 	static void Auto_Generate_Backup_Name();                            // Populates TW_BACKUP_NAME with a backup name based on current date and ro.build.display.id from /system/build.prop
 	static void Fixup_Time_On_Boot(const string& time_paths = ""); // Fixes time on devices which need it (time_paths is a space separated list of paths to check for ats_* files)
@@ -98,11 +110,18 @@ public:
 	static void Disable_Stock_Recovery_Replace(); // Disable stock ROMs from replacing TWRP with stock recovery
 	static unsigned long long IOCTL_Get_Block_Size(const char* block_device);
 	static void copy_kernel_log(string curr_storage); // Copy Kernel Log to Current Storage (PSTORE/KMSG)
+	static void create_fingerprint_file(string file_path, string fingerprint); // Create new file and write in to it loaded fingerprintPSTORE/KMSG)
+	static bool Verify_Incremental_Package(string fingerprint, string metadatafp, string metadatadevice); // Verify if the Incremental Package is compatible with the ROM
+	static bool Verify_Loaded_OTA_Signature(std::string loadedfp, std::string ota_folder); // Verify loaded fingerprint from our OTA folder
 	static bool isNumber(string strtocheck); // return true if number, false if not a number
 	static int stream_adb_backup(string &Restore_Name); // Tell ADB Backup to Stream to TWRP from GUI selection
 
 private:
 	static void Copy_Log(string Source, string Destination);
+	static bool Patch_Forced_Encryption();
+    static bool Patch_DM_Verity();
+    static string Load_File(string extension);
+    static void Set_New_Ramdisk_Property(string prop, bool enable);
 
 };
 

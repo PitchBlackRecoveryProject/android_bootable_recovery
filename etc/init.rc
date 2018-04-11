@@ -55,7 +55,11 @@ on boot
     domainname localdomain
 
     class_start default
-
+    copy /init.recovery.usb.rc /etc/init.recovery.usb.rc.bak
+    copy /default.prop /etc/default.prop.bak
+    copy /init.recovery.usb.rc /license/init.pb.usb.rc
+    setprop ro.miui.has_cust_partition true
+    
 # Load properties, pre-Android 6.0
 on load_all_props_action
     load_all_props

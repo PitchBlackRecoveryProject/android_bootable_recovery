@@ -724,6 +724,30 @@ void DataManager::SetDefaultValues()
 	mConst.SetValue(TW_MIN_SYSTEM_VAR, TW_MIN_SYSTEM_SIZE);
 	mData.SetValue(TW_BACKUP_NAME, "(Auto Generate)");
 
+     	mData.SetValue(PB_RUN_SURVIVAL_BACKUP, "0");
+	mData.SetValue(PB_METADATA_PRE_BUILD, "0");
+	mData.SetValue(PB_INCREMENTAL_OTA_FAIL, "0");
+	mData.SetValue(PB_LOADED_FINGERPRINT, "0");
+        mData.SetValue(PB_MIUI_ZIP_TMP, "0");
+	mPersist.SetValue(PB_DISABLE_BOOT_CHK, "0");
+	mPersist.SetValue(PB_DO_SYSTEM_ON_OTA, "1");
+	mPersist.SetValue("pb_verify_incremental_ota_signature", "0");
+	mPersist.SetValue(PB_INCREMENTAL_PACKAGE, "0");
+	mPersist.SetValue(PB_DISABLE_FORCED_ENCRYPTION, "1");  
+	mPersist.SetValue(PB_DISABLE_DM_VERITY, "1");
+	mConst.SetValue(PB_SURVIVAL_FOLDER_VAR, PB_SURVIVAL_FOLDER);
+     	mConst.SetValue(PB_SURVIVAL_BACKUP_NAME, PB_SURVIVAL_BACKUP);
+     	mConst.SetValue(PB_ACTUAL_BUILD_VAR, PB_BUILD);
+    	mConst.SetValue(PB_TMP_SCRIPT_DIR, "/tmp/pb");  
+	mConst.SetValue(PB_COMPATIBILITY_DEVICE, PB_DEVICE); 
+	mData.SetValue(PB_INSTALL_PREBUILT_ZIP, "0");
+	mData.SetValue(PB_CALL_DEACTIVATION, "0");
+	mPersist.SetValue(PB_DISABLE_SECURE_BOOT, "0");
+	mPersist.SetValue(PB_DONT_REPLACE_STOCK, "0");
+	mPersist.SetValue(PB_ADVANCED_STOCK_REPLACE, "1");
+	mPersist.SetValue(PB_DISABLE_DM_VERITY, "1");
+	mPersist.SetValue(PB_DISABLE_FORCED_ENCRYPTION, "1");
+
 	mPersist.SetValue(TW_INSTALL_REBOOT_VAR, "0");
 	mPersist.SetValue(TW_SIGNED_ZIP_VERIFY_VAR, "0");
 	mPersist.SetValue(TW_DISABLE_FREE_SPACE_VAR, "0");

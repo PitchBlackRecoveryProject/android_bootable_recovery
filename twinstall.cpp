@@ -50,6 +50,7 @@
 #include "verifier.h"
 #endif
 #include "variables.h"
+#include "cutils/properties.h"
 #include "data.hpp"
 #include "partitions.hpp"
 #include "twrpDigestDriver.hpp"
@@ -66,6 +67,10 @@ extern "C" {
 }
 
 #define AB_OTA "payload_properties.txt"
+#define OTA_CORRUPT "INSTALL_CORRUPT"
+#define OTA_ERROR "INSTALL_ERROR"
+#define OTA_VERIFY_FAIL "INSTALL_VERIFY_FAILURE"
+#define OTA_SUCCESS "INSTALL_SUCCESS"
 
 static const char* properties_path = "/dev/__properties__";
 static const char* properties_path_renamed = "/dev/__properties_kk__";
@@ -150,12 +155,142 @@ static int Install_Theme(const char* path, ZipWrap *Zip) {
 }
 
 static int Prepare_Update_Binary(const char *path, ZipWrap *Zip, int* wipe_cache) {
+string pre_something = "pre-";
+string miui_update = "_update";
+string bootloader = "firmware-update/emmc_appsboot.mbn";
+string meta = "META-INF/com";
+string metadata = "/android/metadata";
+string miui_word = "/miui";
+string miui_sg_path = meta + miui_word + miui_word + miui_update;
+string metadata_sg_path = meta + metadata;
+string fingerprint_property = "ro.build.fingerprint";
+string pre_device = pre_something + "device";
+string pre_build = pre_something + "build";
+
+
 	if (!Zip->ExtractEntry(ASSUMED_UPDATE_BINARY_NAME, TMP_UPDATER_BINARY_PATH, 0755)) {
 		Zip->Close();
 		LOGERR("Could not extract '%s'\n", ASSUMED_UPDATE_BINARY_NAME);
 		return INSTALL_ERROR;
 	}
+	
+	 if (DataManager::GetIntValue(PB_INSTALL_PREBUILT_ZIP) != 1) {
+	      DataManager::SetValue(PB_METADATA_PRE_BUILD, 0);
+          DataManager::SetValue(PB_MIUI_ZIP_TMP, 0);          
+          DataManager::SetValue(PB_RUN_SURVIVAL_BACKUP, 0);
+          DataManager::SetValue(PB_INCREMENTAL_OTA_FAIL, 0);
+          DataManager::SetValue(PB_LOADED_FINGERPRINT, 0);
+	
+	 gui_msg("pb_install_detecting=Detecting Current Package");
 
+   if (!Zip->EntryExists(miui_sg_path)) {
+   	if (Zip->EntryExists("system.new.dat") || Zip->EntryExists("system.new.dat.br"))
+           DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
+	       gui_msg("pb_install_standard_detected=- Detected standard Package");
+   } else {
+	   if (Zip->EntryExists("system.new.dat")) {
+	       DataManager::SetValue(PB_MIUI_ZIP_TMP, 1);
+	       DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
+	       }
+	       gui_msg("pb_install_miui_detected=- Detected MIUI Update Package");
+       }
+
+	
+	    if (DataManager::GetIntValue(PB_INCREMENTAL_PACKAGE) != 0) {
+	    gui_msg("pb_incremental_ota_status_enabled=Support MIUI Incremental package status: Enabled");
+	    if (Zip->EntryExists(metadata_sg_path)) {
+        const string take_out_metadata = "/tmp/build.prop";
+        if (Zip->ExtractEntry(metadata_sg_path, take_out_metadata, 0644)) {
+		string metadata_fingerprint = TWFunc::File_Property_Get(take_out_metadata, pre_build);
+		string metadata_device = TWFunc::File_Property_Get(take_out_metadata, pre_device);
+        string fingerprint = TWFunc::System_Property_Get(fingerprint_property);
+		if (!metadata_fingerprint.empty() && metadata_fingerprint.size() > PB_MIN_EXPECTED_FP_SIZE) {
+		gui_msg(Msg("pb_incremental_package_detected=Detected Incremental package '{1}'")(path));
+		DataManager::SetValue(PB_METADATA_PRE_BUILD, 1);
+		if (!fingerprint.empty() && fingerprint.size() > PB_MIN_EXPECTED_FP_SIZE && DataManager::GetIntValue("pb_verify_incremental_ota_signature") != 0) {
+		gui_msg("pb_incremental_ota_compatibility_chk=Verifying Incremental Package Signature...");
+		if (TWFunc::Verify_Incremental_Package(fingerprint, metadata_fingerprint, metadata_device)) {
+		gui_msg("pb_incremental_ota_compatibility_true=Incremental package is compatible.");
+		property_set(fingerprint_property.c_str(), metadata_fingerprint.c_str());
+	    DataManager::SetValue(PB_LOADED_FINGERPRINT, metadata_fingerprint);
+	    } else {
+		TWFunc::Write_MIUI_Install_Status(OTA_VERIFY_FAIL, false);
+		gui_err("pb_incremental_ota_compatibility_false=Incremental package isn't compatible with this ROM!");
+		return INSTALL_ERROR;
+		}
+		} else {
+		property_set(fingerprint_property.c_str(), metadata_fingerprint.c_str());
+		}
+	     unlink(take_out_metadata.c_str());
+		}
+        } else {
+			Zip->Close();
+			LOGERR("Could not extract '%s'\n", take_out_metadata.c_str());
+			TWFunc::Write_MIUI_Install_Status(OTA_ERROR, false);
+			return INSTALL_ERROR;
+			}
+	   }
+	} else {
+	gui_msg("pb_incremental_ota_status_disabled=Support MIUI Incremental package status: Disabled");
+   }
+ 
+
+
+        string ota_location_folder, ota_location_backup, loadedfp;
+        DataManager::GetValue(PB_SURVIVAL_FOLDER_VAR, ota_location_folder);
+		DataManager::GetValue(PB_SURVIVAL_BACKUP_NAME, ota_location_backup);
+		ota_location_folder += "/" + ota_location_backup;
+		DataManager::GetValue(PB_LOADED_FINGERPRINT, loadedfp);
+		
+        if (DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 && !TWFunc::Verify_Loaded_OTA_Signature(loadedfp, ota_location_folder)) {  	
+       TWPartition* survival_sys = PartitionManager.Find_Partition_By_Path("/system");
+	   TWPartition* survival_boot = PartitionManager.Find_Partition_By_Path("/boot");
+	
+    if (!survival_boot) {
+    TWFunc::Write_MIUI_Install_Status(OTA_ERROR, false);
+    LOGERR("OTA_Survival: Boot issue");
+    return INSTALL_ERROR;
+   }
+    if (!survival_sys) {
+    TWFunc::Write_MIUI_Install_Status(OTA_ERROR, false);
+	LOGERR("OTA_Survival: System issue");
+    return INSTALL_ERROR;
+   }
+   
+       std::string action;
+       DataManager::GetValue("tw_action", action);
+       if (action != "openrecoveryscript" && DataManager::GetIntValue(PB_MIUI_ZIP_TMP) != 0) {
+    	LOGERR("Please flash this package using MIUI updater app!");
+       return INSTALL_ERROR;
+       }
+   
+        string Boot_File = ota_location_folder + "/boot.emmc.win"; 
+        if (DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0) {
+        if (TWFunc::Path_Exists(Boot_File)) {
+		gui_msg("pb_incremental_ota_res_run=Running restore process of the current OTA file");
+		DataManager::SetValue(PB_RUN_SURVIVAL_BACKUP, 1);
+		PartitionManager.Set_Restore_Files(ota_location_folder);		
+		if (PartitionManager.Run_OTA_Survival_Restore(ota_location_folder)) {
+		gui_msg("pb_incremental_ota_res=Process OTA_RES -- done!!");
+		} else {
+        TWFunc::Write_MIUI_Install_Status(OTA_ERROR, false);
+		LOGERR("OTA_Survival: Unable to finish OTA_RES!\n");
+	    return INSTALL_ERROR;
+	      }
+		} else {
+  TWFunc::Write_MIUI_Install_Status(OTA_CORRUPT, false);
+  gui_err("pb_survival_does_not_exist=OTA Survival does not exist! Please flash a full ROM first!");
+  return INSTALL_ERROR;
+  }
+  } else {
+  TWFunc::Write_MIUI_Install_Status(OTA_CORRUPT, false);
+  gui_err("pb_survival_encrypted_err=Internal storage is encrypted! Please do decrypt first!");
+  return INSTALL_ERROR;
+  }	
+  }
+      if (Zip->EntryExists(bootloader)) 
+	  gui_msg(Msg(msg::kWarning, "pb_zip_have_bootloader=Warning: PitchBlack detected bootloader inside of the {1}")(path));
+  }
 	// If exists, extract file_contexts from the zip file
 	if (!Zip->EntryExists("file_contexts")) {
 		Zip->Close();
@@ -165,6 +300,7 @@ static int Prepare_Update_Binary(const char *path, ZipWrap *Zip, int* wipe_cache
 		LOGINFO("Zip contains SELinux file_contexts file in its root. Extracting to %s\n", output_filename.c_str());
 		if (!Zip->ExtractEntry("file_contexts", output_filename, 0644)) {
 			Zip->Close();
+			TWFunc::Write_MIUI_Install_Status(OTA_CORRUPT, false);
 			LOGERR("Could not extract '%s'\n", output_filename.c_str());
 			return INSTALL_ERROR;
 		}
@@ -308,9 +444,11 @@ static int Run_Update_Binary(const char *path, ZipWrap *Zip, int* wipe_cache, zi
 	}
 #endif
 
-	if (waitrc != 0)
+	if (waitrc != 0) {
+		TWFunc::Write_MIUI_Install_Status(OTA_CORRUPT, false);
 		return INSTALL_ERROR;
-
+        }
+        
 	return INSTALL_SUCCESS;
 }
 
@@ -322,6 +460,9 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 		return INSTALL_CORRUPT;
 	}
 
+
+	
+    if (DataManager::GetIntValue(PB_INSTALL_PREBUILT_ZIP) != 1) {
 	gui_msg(Msg("installing_zip=Installing zip file '{1}'")(path));
 	if (strlen(path) < 9 || strncmp(path, "/sideload", 9) != 0) {
 		string digest_str;
@@ -349,6 +490,7 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 				}
 				else {
 					LOGERR("Aborting zip install: Digest verification failed\n");
+					TWFunc::Write_MIUI_Install_Status(OTA_CORRUPT, true);
 					delete digest;
 					return INSTALL_CORRUPT;
 				}
@@ -356,6 +498,7 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 			}
 		}
 	}
+  }
 
 #ifndef TW_OEM_BUILD
 	DataManager::GetValue(TW_SIGNED_ZIP_VERIFY_VAR, zip_verify);
@@ -381,6 +524,7 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 		if (!load_keys("/res/keys", loadedKeys)) {
 			LOGINFO("Failed to load keys");
 			gui_err("verify_zip_fail=Zip signature verification failed!");
+			TWFunc::Write_MIUI_Install_Status(OTA_VERIFY_FAIL, true);
 #ifdef USE_MINZIP
 			sysReleaseMap(&map);
 #endif
@@ -391,6 +535,7 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 		if (ret_val != VERIFY_SUCCESS) {
 			LOGINFO("Zip signature verification failed: %i\n", ret_val);
 			gui_err("verify_zip_fail=Zip signature verification failed!");
+			TWFunc::Write_MIUI_Install_Status(OTA_VERIFY_FAIL, true);
 #ifdef USE_MINZIP
 			sysReleaseMap(&map);
 #endif
@@ -401,6 +546,7 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 	}
 	ZipWrap Zip;
 	if (!Zip.Open(path, &map)) {
+		TWFunc::Write_MIUI_Install_Status(OTA_CORRUPT, true);
 		gui_err("zip_corrupt=Zip file is corrupt!");
 #ifdef USE_MINZIP
 			sysReleaseMap(&map);
@@ -424,6 +570,10 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 			ret_val = Prepare_Update_Binary(path, &Zip, wipe_cache);
 			if (ret_val == INSTALL_SUCCESS)
 				ret_val = Run_Update_Binary(path, &Zip, wipe_cache, UPDATE_BINARY_ZIP_TYPE);
+				else
+				DataManager::SetValue(PB_INCREMENTAL_OTA_FAIL, 1);
+				if (ret_val != INSTALL_SUCCESS)
+				   DataManager::SetValue(PB_INCREMENTAL_OTA_FAIL, 1);
 		}
 	} else {
 		if (Zip.EntryExists(AB_OTA)) {
@@ -442,9 +592,41 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 	time(&stop);
 	int total_time = (int) difftime(stop, start);
 	if (ret_val == INSTALL_CORRUPT) {
+		TWFunc::Write_MIUI_Install_Status(OTA_CORRUPT, true);
 		gui_err("invalid_zip_format=Invalid zip file format!");
-	} else {
-		LOGINFO("Install took %i second(s).\n", total_time);
+	       } else {
+	    if (DataManager::GetIntValue(PB_MIUI_ZIP_TMP) != 0 && DataManager::GetIntValue(PB_INCREMENTAL_OTA_FAIL) != 1 || DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 && DataManager::GetIntValue(PB_INCREMENTAL_OTA_FAIL) != 1)  {
+	     string ota_folder, ota_backup, loadedfp;
+		DataManager::GetValue(PB_SURVIVAL_FOLDER_VAR, ota_folder);
+		DataManager::GetValue(PB_SURVIVAL_BACKUP_NAME, ota_backup);
+		DataManager::GetValue(PB_LOADED_FINGERPRINT, loadedfp);
+		ota_folder += "/" + ota_backup;
+		string ota_info = ota_folder + "/pb.info";
+		if (TWFunc::Verify_Loaded_OTA_Signature(loadedfp, ota_folder)) {
+		gui_msg("pb_incremental_ota_bak_skip=Detected OTA survival with the same ID - leaving");
+		} else {
+		if (TWFunc::Path_Exists(ota_folder))
+		TWFunc::removeDir(ota_folder, false);
+	
+		DataManager::SetValue(PB_RUN_SURVIVAL_BACKUP, 1);
+        gui_msg("pb_incremental_ota_bak_run=Running OTA_BAK process...");
+		PartitionManager.Run_OTA_Survival_Backup(false);
+		gui_msg("pb_incremental_ota_bak=Process OTA_BAK --- done!");  
+		if (TWFunc::Path_Exists(ota_folder) && !TWFunc::Path_Exists(ota_info)) {
+        TWFunc::create_fingerprint_file(ota_info, loadedfp);
+                  }
+       }
+     }       
+          if (ret_val == INSTALL_SUCCESS)
+		  TWFunc::Write_MIUI_Install_Status(OTA_SUCCESS, false);
+		  if (ret_val == INSTALL_ERROR)
+	      TWFunc::Write_MIUI_Install_Status(OTA_ERROR, false);
+	      DataManager::SetValue(PB_METADATA_PRE_BUILD, 0);
+          DataManager::SetValue(PB_MIUI_ZIP_TMP, 0);          
+          DataManager::SetValue(PB_RUN_SURVIVAL_BACKUP, 0);
+          DataManager::SetValue(PB_INCREMENTAL_OTA_FAIL, 0);
+          DataManager::SetValue(PB_LOADED_FINGERPRINT, 0);
+	      LOGINFO("Install took %i second(s).\n", total_time);
 	}
 #ifdef USE_MINZIP
 	sysReleaseMap(&map);

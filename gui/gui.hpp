@@ -25,6 +25,7 @@ void set_select_fd();
 
 void gui_msg(const char* text);
 void gui_warn(const char* text);
+void gui_process(const char* text);
 void gui_err(const char* text);
 void gui_highlight(const char* text);
 void gui_msg(Message msg);

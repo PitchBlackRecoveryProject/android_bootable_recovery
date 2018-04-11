@@ -740,7 +740,7 @@
 		
 		<!--PBTWRP Themes-->
 		<string name="pbthemes">Themes</string>
-	    <string name="pbthemes_hdr">Themes</string>
+	    	<string name="pbthemes_hdr">Themes</string>
 		<string name="theme0_btn">PBTWRP Def. Black</string>
 		<string name="theme0_text">This will restore PBTWRP Default Black theme</string>		
 		<string name="theme0_confirm">Sure?</string>
@@ -767,6 +767,42 @@
 		<string name="thanksto">Thanks to</string>
 		<string name="toolscr">Tools Credit</string>
 		<string name="contributors">Contributors</string>
+
+		<!-- Settings -->
+		<string name="pb_support_miui_ota_chk">Support MIUI Incremental OTA</string>
+		<string name="pb_incremental_ota_status_enabled">Support MIUI Incremental package status: Enabled</string>
+		<string name="pb_incremental_ota_status_disabled">Support MIUI Incremental package status: Disabled</string>
+		<string name="pb_incremental_package_detected">Detected Incremental package '{1}'</string>
+		<string name="pb_survival_does_not_exist">OTA Survival does not exist! Please flash a full ROM first!</string>
+		<string name="pb_install_detecting">Detecting Current Package</string>
+		<string name="pb_install_standard_detected">- Detected Standard Package</string>
+		<string name="pb_install_miui_detected">- Detected MIUI Update Package</string>
+		<string name="pb_disable_boot_chk">Disable boot check</string>
+		<string name="pb_include_system_survival_chk">Include system in OTA survival</string>
+		<string name="pb_verify_incremental_ota_signature_chk">Incremental OTA signature verification</string>
+		<string name="pb_incremental_ota_compatibility_chk">Verifying Incremental Package Signature...</string>
+		<string name="pb_incremental_ota_compatibility_false">Incremental package isn't compatible with this ROM!</string>
+		<string name="pb_incremental_ota_compatibility_true">Incremental package is compatible</string>
+		<string name="pb_zip_have_bootloader">Warning: Detected reinstallation of the bootloader which was called by '{1}'.</string>
+		<string name="pb_no_space_ota_survival">Not enough free space on internal storage for creating the OTA survival.</string>
+
+		<string name="pb_incremental_ota_res">OTA_RES -- done!</string>		
+		<string name="pb_incremental_ota_res_run">Running OTA_RES process...</string>
+		<string name="pb_incremental_ota_bak_run">Running OTA_BAK process...</string>
+		<string name="pb_incremental_ota_bak">OTA_BAK -- done!</string>
+		<string name="pb_advanced_stock_recovery">Aggressive stock recovery deactivation</string>
+		<string name="pb_reboot_dont_disable_stock_recovery_chk">Don't disable stock recovery replace</string>
+		<string name="pb_dmverity_chk">Disable DM-Verity</string>
+		<string name="pb_forced_encryption_chk">Disable Forced Encryption</string>
+		<string name="pb_run_process">Starting '{1}' process</string>
+		<string name="pb_run_process_fail">Unable to finish '{1}' process</string>
+		<string name="pb_run_process_done">Finished '{1}' process</string>
+		<string name="pb_encryption">Successfully patched forced encryption</string>
+		<string name="pb_encryption_off">Forced Encryption is not enabled</string>
+		<string name="pb_fstab">Detected fstab: '{1}'</string>
+		<string name="pb_dm_verity">Successfully patched DM-Verity</string>
+		<string name="pb_dm_verity_off">DM-Verity is not enabled</string>
+
 	</resources>
 </language>
 

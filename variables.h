@@ -17,6 +17,9 @@
 #ifndef _VARIABLES_HEADER_
 #define _VARIABLES_HEADER_
 
+#ifdef PB_OFFICIAL
+#define TW_DEVICE_VERSION	   "Official"
+#endif
 #define TW_MAIN_VERSION_STR       "3.2.1"
 #define TW_VERSION_STR TW_MAIN_VERSION_STR TW_DEVICE_VERSION
 
@@ -139,6 +142,39 @@
 #define TW_MILITARY_TIME            "tw_military_time"
 #define TW_USE_SHA2                 "tw_use_sha2"
 #define TW_NO_SHA2                  "tw_no_sha2"
+
+// PitchBlack Variables
+#define PB_BUILD                TW_DEVICE_VERSION
+#define PB_DEVICE               PB_DEVICE_MODEL
+#define PB_VERSION              TW_MAIN_VERSION_STR
+
+#define PB_SURVIVAL_BACKUP          "OTA"
+#define PB_SURVIVAL_BACKUP_NAME       "pb_survival_backup_folder_name"
+#define PB_SURVIVAL_FOLDER      "/sdcard/PB"
+#define PB_SURVIVAL_BACKUP       "OTA"
+#define PB_FILES_BACKUPS_FOLDER_VAR       "pb_files_backup_folder_var"
+#define PB_DISABLE_BOOT_CHK       "pb_disable_boot_check"
+#define PB_DO_SYSTEM_ON_OTA       "pb_include_system_survival"
+#define PB_ACTUAL_BUILD_VAR              "pb_actual_build"
+#define PB_INCREMENTAL_PACKAGE          "pb_support_miui_ota"
+#define PB_MIUI_ZIP_TMP                    "pb_miui_zip_tmp"
+#define PB_LOADED_FINGERPRINT                    "pb_loaded_singature"
+#define PB_INCREMENTAL_OTA_FAIL                 "pb_ota_fail"
+#define PB_RUN_SURVIVAL_BACKUP                 "pb_run_survival_backup"
+#define PB_METADATA_PRE_BUILD                 "pb_pre_build"
+#define PB_INSTALL_PREBUILT_ZIP       "pb_install_built_in_zip"
+#define PB_CALL_DEACTIVATION         "pb_call_deactivation_process"
+#define PB_MIN_EXPECTED_FP_SIZE 30
+#define PB_DISABLE_SECURE_BOOT           "pb_reboot_disable_secure_boot"
+#define PB_DISABLE_FORCED_ENCRYPTION           "pb_reboot_forced_encryption_check"
+#define PB_DISABLE_DM_VERITY           "pb_reboot_dm_verity_check"
+#define PB_SURVIVAL_FOLDER_VAR      "pb_survival_backup_folder_path"
+#define PB_TMP_SCRIPT_DIR       "pb_tmp_script_directory"
+#define PB_COMPATIBILITY_DEVICE         "pb_compatibility_pb_device"
+#define PB_ADVANCED_STOCK_REPLACE           "pb_reboot_advanced_stock_recovery_check"
+#define PB_DONT_REPLACE_STOCK       "pb_reboot_dont_disable_stock_recovery"
+#define PB_DISABLE_DM_VERITY           "pb_reboot_dm_verity_check"
+#define PB_DISABLE_FORCED_ENCRYPTION           "pb_reboot_forced_encryption_check"
 
 // Also used:
 //   tw_boot_is_mountable

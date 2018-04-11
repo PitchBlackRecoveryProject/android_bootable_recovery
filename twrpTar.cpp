@@ -822,8 +822,10 @@ int twrpTar::tarList(std::vector<TarListStruct> *TarList, unsigned thread_id) {
 				fs = 0; // Sending a 0 size to the pipe tells it to increment the file counter
 				write(progress_pipe_fd, &fs, sizeof(fs));
 			}
+			if (DataManager::GetIntValue(PB_RUN_SURVIVAL_BACKUP) != 1)
 			LOGINFO("addFile '%s' including root: %i\n", buf, include_root_dir);
 			if (addFile(buf, include_root_dir) != 0) {
+				if (DataManager::GetIntValue(PB_RUN_SURVIVAL_BACKUP) != 1)
 				LOGINFO("Error adding file '%s' to '%s'\n", buf, tarfn.c_str());
 				gui_err("backup_error=Error creating backup.");
 				return -1;

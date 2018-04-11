@@ -140,6 +140,14 @@ void gui_warn(const char* text)
 	}
 }
 
+void gui_process(const char* text)
+{
+	if (text) {
+		Message msg = Msg(msg::kProcess, text);
+		gui_msg(msg);
+	}
+}
+
 void gui_err(const char* text)
 {
 	if (text) {
@@ -189,6 +197,8 @@ void GUIConsole::Translate_Now()
 			color = "highlight";
 		else if (gMessages[m].GetKind() == msg::kWarning)
 			color = "warning";
+		else if (gMessages[m].GetKind() == msg::kProcess)
+			color = "process";
 		gConsole.push_back(message);
 		gConsoleColor.push_back(color);
 	}

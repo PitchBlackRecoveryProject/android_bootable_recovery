@@ -40,10 +40,16 @@ TWHTCD_PATH := $(TWRES_PATH)htcd/
 
 TARGET_RECOVERY_GUI := true
 
-ifneq ($(TW_DEVICE_VERSION),)
-    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-$(TW_DEVICE_VERSION)"'
+ifeq ($(PB_OFFICIAL),true)
+    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.6-Official"'
 else
-    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-0"'
+    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.6-Unofficial"'
+endif
+
+DEVICE := $(subst omni_,,$(TARGET_PRODUCT))
+
+ifeq ($(PB_DEVICE_MODEL),)
+    LOCAL_CFLAGS += -DPB_DEVICE_MODEL='"$(DEVICE)"'
 endif
 
 LOCAL_SRC_FILES := \
