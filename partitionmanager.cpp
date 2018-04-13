@@ -2021,7 +2021,7 @@ int TWPartitionManager::Partition_SDCard(void) {
 
 	// recreate TWRP folder and rewrite settings - these will be gone after sdcard is partitioned
 	if (SDCard->Mount(true)) {
-		string TWRP_Folder = SDCard->Mount_Point + "/TWRP";
+		string TWRP_Folder = SDCard->Mount_Point + "/PBTWRP";
 		mkdir(TWRP_Folder.c_str(), 0777);
 		DataManager::Flush();
 	}

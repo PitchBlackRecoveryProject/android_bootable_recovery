@@ -141,7 +141,7 @@ static int Install_Theme(const char* path, ZipWrap *Zip) {
 	if (!PartitionManager.Mount_Settings_Storage(true))
 		return INSTALL_ERROR;
 	string theme_path = DataManager::GetSettingsStoragePath();
-	theme_path += "/TWRP/theme";
+	theme_path += "/PBTWRP/theme";
 	if (!TWFunc::Path_Exists(theme_path)) {
 		if (!TWFunc::Recursive_Mkdir(theme_path)) {
 			return INSTALL_ERROR;
@@ -584,7 +584,7 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 			ret_val = Run_Update_Binary(path, &Zip, wipe_cache, AB_OTA_ZIP_TYPE);
 		} else {
 			if (Zip.EntryExists("ui.xml")) {
-				LOGINFO("TWRP theme zip\n");
+				LOGINFO("PBTWRP theme zip\n");
 				ret_val = Install_Theme(path, &Zip);
 			} else {
 				Zip.Close();

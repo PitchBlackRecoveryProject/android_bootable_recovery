@@ -3598,7 +3598,7 @@
 				<text>{@SuperSU_btn=SuperSU}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/supersu.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/supersu.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3615,7 +3615,7 @@
 				<text>{@Unroot_SuperSU_btn=Unroot SuperSU}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/unrootsupersu.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/unrootsupersu.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3632,7 +3632,7 @@
 				<text>{@Magisk_btn=Magisk}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/magisk.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/magisk.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3649,7 +3649,7 @@
 				<text>{@Unroot_Magisk_btn=Unroot Magisk}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/unrootmagisk.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/unrootmagisk.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3666,7 +3666,7 @@
 				<text>{@Aroma_FM_btn=Aroma FM}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/aromafm/aromafm.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/aromafm/aromafm.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3683,7 +3683,7 @@
 				<text>{@FP_Scanner_btn=FP Scanner}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/fpscan.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/fpscan.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3700,7 +3700,7 @@
 				<text>{@Pin/Pass_Remover_btn=Pin/Pass Remover}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/rmpass.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/rmpass.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3717,7 +3717,7 @@
 				<text>{@RM_Subs_Overlays_btn=RM Subs Overlays}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/overlays.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/overlays.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3734,7 +3734,7 @@
 				<text>{@RM_All_Subs_Overlays_btn=RM All Subs Overlays}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/alloverlays.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/alloverlays.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3751,7 +3751,7 @@
 				<text>{@Enable_HAL3_btn=Enabled HAL3}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/enablehal3.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/enablehal3.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3768,7 +3768,7 @@
 				<text>{@App_Delete_btn=App Delete}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/appdel.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/appdel.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3785,7 +3785,7 @@
 				<text>{@MTP_Fix_btn=MTP Fix}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/TWRP/PBTWRP/tools/mtp.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/mtp.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
