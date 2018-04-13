@@ -195,6 +195,7 @@ string pre_build = pre_something + "build";
 	       DataManager::SetValue(PB_MIUI_ZIP_TMP, 1);
 	       DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
 	       }
+               DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
 	       gui_msg("pb_install_miui_detected=- Detected MIUI Update Package");
        }
 
