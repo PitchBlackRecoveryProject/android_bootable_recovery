@@ -1048,7 +1048,7 @@ int GUIAction::flash(std::string arg)
 			}
 		DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
 		}
-         
+
          reinject_after_flash();
 	PartitionManager.Update_System_Details();
 	operation_end(ret_val);

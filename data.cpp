@@ -734,7 +734,7 @@ void DataManager::SetDefaultValues()
         mData.SetValue(PB_MIUI_ZIP_TMP, "0");
 	mPersist.SetValue(PB_DISABLE_BOOT_CHK, "0");
 	mPersist.SetValue(PB_DO_SYSTEM_ON_OTA, "1");
-	mPersist.SetValue("pb_verify_incremental_ota_signature", "0");
+	mPersist.SetValue("pb_verify_incremental_ota_signature", "1");
 	mPersist.SetValue(PB_INCREMENTAL_PACKAGE, "0");
 	mPersist.SetValue(PB_DISABLE_FORCED_ENCRYPTION, "1");  
 	mPersist.SetValue(PB_DISABLE_DM_VERITY, "1");
@@ -748,7 +748,6 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue(PB_DISABLE_SECURE_BOOT, "0");
 	mPersist.SetValue(PB_DONT_REPLACE_STOCK, "0");
 	mPersist.SetValue(PB_ADVANCED_STOCK_REPLACE, "1");
-	mPersist.SetValue(PB_DISABLE_DM_VERITY, "1");
 	mPersist.SetValue(PB_DISABLE_FORCED_ENCRYPTION, "1");
 
 	mPersist.SetValue(TW_INSTALL_REBOOT_VAR, "0");

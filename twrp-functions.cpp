@@ -1130,11 +1130,17 @@ std::string TWFunc::to_string(unsigned long value) {
 void TWFunc::Disable_Stock_Recovery_Replace(void) {
 	if (PartitionManager.Mount_By_Path("/system", false)) {
 		// Disable flashing of stock recovery
+		if (DataManager::GetIntValue(PB_ADVANCED_STOCK_REPLACE) == 1) {
+			  if (Path_Exists("/system/bin/install-recovery.sh")) 
+				     rename("/system/bin/install-recovery.sh", "/system/bin/wlfx0install-recoverybak0xwlf");    
+			if (Path_Exists("/system/etc/install-recovery.sh"))
+				  rename("/system/etc/install-recovery.sh", "/system/etc/wlfx0install-recoverybak0xwlf");
+			if (Path_Exists("/system/etc/recovery-resource.dat"))
+				    rename("/system/etc/recovery-resource.dat", "/system/etc/wlfx0recovery-resource0xwlf");
+	       }
 		if (TWFunc::Path_Exists("/system/recovery-from-boot.p")) {
-		if (DataManager::GetIntValue(PB_DONT_REPLACE_STOCK) != 1) {
-				rename("/system/recovery-from-boot.p", "/system/wlfx0recovery-from-boot.bak0xwlf");
+				rename("/system/recovery-from-boot.p", "/system/wlfx0recovery-from-bootbak0xwlf");
         sync();
-		      }
 	      }
 		PartitionManager.UnMount_By_Path("/system", false);
 	}
@@ -1662,13 +1668,13 @@ gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"
 if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
 DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 1);
 if (Patch_DM_Verity())
-gui_process("pb_dm_verity=Successfully patched DM-Verity");
+gui_msg("pb_dm_verity=Successfully patched DM-Verity");
 else
 gui_msg("pb_dm_verity_off=DM-Verity is not enabled");
 }
 if (DataManager::GetIntValue(PB_DISABLE_FORCED_ENCRYPTION) == 1) {
 if (Patch_Forced_Encryption())
-gui_process("pb_encryption=Successfully patched forced encryption");
+gui_msg("pb_encryption=Successfully patched forced encryption");
 else
 gui_msg("pb_encryption_off=Forced Encryption is not enabled");
 }

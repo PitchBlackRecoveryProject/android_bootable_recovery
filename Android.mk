@@ -386,6 +386,8 @@ LOCAL_ADDITIONAL_DEPENDENCIES += \
     fsck.fat \
     fatlabel \
     mkfs.fat \
+    mkbootimg \
+    unpackbootimg \
     permissive.sh \
     simg2img_twrp \
     libbootloader_message_twrp \

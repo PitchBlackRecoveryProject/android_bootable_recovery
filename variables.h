@@ -174,7 +174,6 @@
 #define PB_COMPATIBILITY_DEVICE         "pb_compatibility_pb_device"
 #define PB_ADVANCED_STOCK_REPLACE           "pb_reboot_advanced_stock_recovery_check"
 #define PB_DONT_REPLACE_STOCK       "pb_reboot_dont_disable_stock_recovery"
-#define PB_DISABLE_DM_VERITY           "pb_reboot_dm_verity_check"
 #define PB_DISABLE_FORCED_ENCRYPTION           "pb_reboot_forced_encryption_check"
 
 // Also used:

@@ -614,6 +614,7 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 		DataManager::SetValue(PB_RUN_SURVIVAL_BACKUP, 1);
         gui_msg("pb_incremental_ota_bak_run=Running OTA_BAK process...");
 		PartitionManager.Run_OTA_Survival_Backup(false);
+		TWFunc::Write_MIUI_Install_Status(OTA_SUCCESS, false);
 		gui_msg("pb_incremental_ota_bak=Process OTA_BAK --- done!");  
 		if (TWFunc::Path_Exists(ota_folder) && !TWFunc::Path_Exists(ota_info)) {
         TWFunc::create_fingerprint_file(ota_info, loadedfp);
