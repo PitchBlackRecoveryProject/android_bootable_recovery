@@ -3838,7 +3838,7 @@
 				<text>{@theme4_btn=Neon Yellow}</text>
 				<actions>
 					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/twres/themes/nyellow.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/themes/nyellow.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3855,7 +3855,7 @@
 				<text>{@themexy_btn=Just Black}</text>
 				<actions>
 					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/twres/themes/justblack.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/themes/justblack.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3872,7 +3872,7 @@
 				<text>{@theme1_btn=Neon Red}</text>
 				<actions>
 					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/twres/themes/nred.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/themes/nred.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3889,7 +3889,7 @@
 				<text>{@theme2_btn=Neon Green}</text>
 				<actions>
 					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/twres/themes/ngreen.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/themes/ngreen.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3906,7 +3906,7 @@
 				<text>{@theme3_btn=Neon Blue}</text>
 				<actions>
 					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/twres/themes/nblue.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/themes/nblue.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
