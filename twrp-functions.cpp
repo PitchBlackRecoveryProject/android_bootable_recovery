@@ -1660,6 +1660,7 @@ while ((de = readdir(d)) != NULL)
     }
     
 void TWFunc::Deactivation_Process(void) {
+if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
 if (!Unpack_Image("/boot")) {
 LOGINFO("Deactivation_Process: Unable to unpack image\n");
 return;
@@ -1684,6 +1685,7 @@ return;
 }
 gui_msg(Msg(msg::kProcess, "pb_run_process_done=Finished '{1}' process")("PitchBlack"));
 return;
+}
 }
 
 void TWFunc::Read_Write_Specific_Partition(string path, string partition_name, bool backup) {
