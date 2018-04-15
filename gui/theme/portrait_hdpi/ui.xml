@@ -18,6 +18,7 @@
 		<font name="font_l" filename="RobotoCondensed-Regular.ttf" size="45"/>
 		<font name="font_about" filename="RobotoCondensed-Regular.ttf" size="37"/>
 		<font name="font_m" filename="RobotoCondensed-Regular.ttf" size="30"/>
+		<font name="font_n" filename="RobotoCondensed-Regular.ttf" size="20"/>
 		<font name="font_s" filename="RobotoCondensed-Regular.ttf" size="32"/>
 		<font name="fixed" filename="DroidSansMono.ttf" size="30"/>
 

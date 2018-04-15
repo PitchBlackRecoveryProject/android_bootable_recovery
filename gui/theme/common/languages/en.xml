@@ -701,9 +701,6 @@
 		<string name="SuperSU_btn">SuperSU</string>
 		<string name="SuperSU_text">SuperSU will be installed.</string>
 		<string name="SuperSU_confirm">Try to install it?</string>
-		<string name="Lazy_Flasher_btn">Lazy Flasher</string>
-		<string name="Lazy_Flasher_text">Lazy Flasher will be installed.</string>
-		<string name="Lazy_Flasher_confirm">Try to install it?</string>
 		<string name="Unroot_SuperSU_btn">Unroot SuperSU</string>
 		<string name="Unroot_SuperSU_text">Unroot SuperSU will be installed.</string>
 		<string name="Unroot_SuperSU_confirm">Try to install it?</string>
@@ -737,10 +734,13 @@
 		<string name="MTP_Fix_btn">MTP Fix</string>
 		<string name="MTP_Fix_text">MTP Fix will be installed.</string>
 		<string name="MTP_Fix_confirm">Try to install it?</string>
+		<string name="Dm_Verity_btn">Dm Verity</string>
+		<string name="Dm_Verity_text">Dm Verity will be installed.</string>
+		<string name="Dm_Verity_confirm">Try to install it?</string>
 		
 		<!--PBTWRP Themes-->
 		<string name="pbthemes">Themes</string>
-	    	<string name="pbthemes_hdr">Themes</string>
+	    <string name="pbthemes_hdr">Themes</string>
 		<string name="theme0_btn">PBTWRP Def. Black</string>
 		<string name="theme0_text">This will restore PBTWRP Default Black theme</string>		
 		<string name="theme0_confirm">Sure?</string>
@@ -759,6 +759,9 @@
 		<string name="theme4_btn">Neon Yellow</string>
 		<string name="theme4_text">Neon Yellow PBTWRP theme will be installed</string>			
 		<string name="theme4_confirm">Sure?</string>
+		<string name="theme5_btn">Rainbow</string>
+		<string name="theme5_text">Rainbow PBTWRP theme will be installed</string>			
+		<string name="theme5_confirm">Sure?</string>
 		
 		<!--PBTWRP about-->
 		<string name="about">About</string>
@@ -767,6 +770,7 @@
 		<string name="thanksto">Thanks to</string>
 		<string name="toolscr">Tools Credit</string>
 		<string name="contributors">Contributors</string>
+		<string name="OTAMIUI">OTA MIUI</string>
 
 		<!-- Settings -->
 		<string name="pb_support_miui_ota_chk">Support MIUI Incremental OTA</string>
