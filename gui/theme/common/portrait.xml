@@ -25,10 +25,6 @@
 		<style name="text_m_fail">
 			<font resource="font_m" color="%text_fail_color%"/>
 		</style>
-		
-		<style name="text_n">
-			<font resource="font_n" color="%text_color%"/>
-		</style>
 
 		<style name="text_s">
 			<font resource="font_s" color="%text_color%"/>
@@ -3613,25 +3609,8 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-			
-			<button style="pbtools_button">
-				<placement x="%center_x%" y="%row2_y%"/>
-				<text>{@MTP_Fix_btn=MTP Fix}</text>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/mtp.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@MTP_Fix_text=MTP Fix will be installed.}</action>
-					<action function="set">tw_text2={@MTP_Fix_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
 
-	        <button style="pbtools_button">
+			<button style="pbtools_button">
 				<placement x="%indent%" y="%row4_y%"/>
 				<text>{@Unroot_SuperSU_btn=Unroot SuperSU}</text>
 				<actions>
@@ -3803,16 +3782,16 @@
 			
 			<button style="pbtools_button">
 				<placement x="%indent%" y="%row14_y%"/>
-				<text>{@Dm_Verity_btn=Dm Verity}</text>
+				<text>{@MTP_Fix_btn=MTP Fix}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/noverity.zip</action>
+					<action function="set">tw_filename=/sdcard/PBTWRP/tools/mtp.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
 					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@Dm_Verity_text=Dm Verity will be installed.}</action>
-					<action function="set">tw_text2={@Dm_Verity_confirm=Try to install it?}</action>
+					<action function="set">tw_text1={@MTP_Fix_text=MTP Fix will be installed.}</action>
+					<action function="set">tw_text2={@MTP_Fix_confirm=Try to install it?}</action>
 					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
 					<action function="page">confirm_action</action>
 				</actions>
@@ -3838,11 +3817,11 @@
 			</text>
 			
 			<button style="pbtools_button">
-				<placement x="%row1a_y%" y="%pby8%"/>
+				<placement x="%row1a_y%" y="%pby7%"/>
 				<text>{@theme0_btn=PBTWRP Def. Black}</text>
 				<actions>
 					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/themes/removethemes.zip</action>
+					<action function="set">tw_filename=/twres/themes/removethemes.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3853,23 +3832,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-			
-			     <button style="pbtools_button">
-				<placement x="%row1a_y%" y="%pby7%"/>
-				<text>{@theme5_btn=Rainbow}</text>
-				<actions>
-					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/themes/rainbow.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@theme5_text=Rainbow PBTWRP theme will be installed}</action>
-					<action function="set">tw_text2={@theme5_confirm=Sure?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>	
 
             <button style="pbtools_button">
 				<placement x="%row1a_y%" y="%pby6%"/>
@@ -3989,15 +3951,9 @@
 			</button>
 			
 			<button style="pbabout_button">
-				<placement x="%pbxa1%" y="%row21_y%"/>
+				<placement x="%pbxa2%" y="%row21_y%"/>
 				<text>{@contributors=Contributors}</text>
 				<action function="page">contributors</action>
-			</button>
-			
-			<button style="pbabout_button">
-				<placement x="%pbxa3%" y="%row21_y%"/>
-				<text>{@OTAMIUI=OTA MIUI}</text>
-				<action function="page">OTAMIUI</action>
 			</button>
 			
 			<action>
@@ -4080,7 +4036,7 @@
 			
 			<text style="text_m">
 			    <placement x="540" y="820" placement="5"/>
-				<text>TeamWin for source code TWRP</text>
+				<text>twrp.me</text>
 			</text>
 			
 			<text style="text_m">
@@ -4255,80 +4211,6 @@
 			<text style="text_m">
 			    <placement x="540" y="910" placement="5"/>
 				<text>Firewolf - Redmi 3</text>
-			</text>
-			
-			<action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">about</action>
-			</action>   
-		</page>
-		
-		<page name="OTAMIUI">
-		<template name="pbaboutpage"/>
-			
-			<text style="text_m">
-			    <placement x="540" y="700" placement="5"/>
-				<text>OTA MIUI</text>
-			</text>
-			
-			<text style="text_n">
-			    <placement x="540" y="790" placement="5"/>
-				<text>--1 Please make your internal space 5GB</text>
-			</text>
-			
-			<text style="text_n">
-			    <placement x="540" y="830" placement="5"/>
-				<text>--2 Reboot to PBTWRP then Checklist incremental OTA signature verification,</text>
-			</text>
-			
-			<text style="text_n">
-			    <placement x="540" y="870" placement="5"/>
-				<text>include system in OTA survival, support MIUI incremental OTA, aggresive stock recovery deactivation,</text>
-			</text>
-			
-			<text style="text_n">
-			    <placement x="540" y="910" placement="5"/>
-				<text>disable DM Verity</text>
-			</text>
-			
-			<text style="text_n">
-			    <placement x="540" y="950" placement="5"/>
-				<text>--3 Install full rom MIUI, it will automatic backup boot and system for the OTA survival. example miui 8.3.15</text>
-			</text>
-			
-			<text style="text_n">
-			    <placement x="540" y="990" placement="5"/>
-				<text>--4 Check OTA survival in folder PB internal storage you can found boot and system</text>
-			</text>
-			
-			<text style="text_n">
-			    <placement x="540" y="1030" placement="5"/>
-				<text>--5 Open updater app and when update releases, download it and press update. example miui 8.3.15 - 8.3.29</text>
-			</text>
-			
-			<text style="text_n">
-			    <placement x="540" y="1070" placement="5"/>
-				<text>Automatically device will reboot to PBTWRP then OTA flashing will start,</text>
-			</text>
-			
-			<text style="text_n">
-			    <placement x="540" y="1110" placement="5"/>
-				<text>this time the backed up boot and system will be flashed and</text>
-			</text>
-			
-			<text style="text_n">
-			    <placement x="540" y="1150" placement="5"/>
-				<text>thus patching will happen and your device will be updated</text>
-			</text>
-			
-			<text style="text_n">
-			    <placement x="540" y="1230" placement="5"/>
-				<text>Pre-requisite > unlock bootloader</text>
 			</text>
 			
 			<action>
