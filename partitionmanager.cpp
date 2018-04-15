@@ -1409,6 +1409,9 @@ int TWPartitionManager::Format_Data(void) {
 
 int TWPartitionManager::Wipe_Media_From_Data(void) {
 	TWPartition* dat = Find_Partition_By_Path("/data");
+	string o_file, c_file, src, src_t, src_th, dest_t, dest_th, dest="/tmp/pb/backup_wip";
+	src="/sdcard/PBTWRP"; src_t=src + "/tools"; src_th=src + "/themes";
+	dest_t=dest + "/tools"; dest_th=dest + "/themes";
 
 	if (dat != NULL) {
 		if (!dat->Has_Data_Media) {
@@ -1417,12 +1420,85 @@ int TWPartitionManager::Wipe_Media_From_Data(void) {
 		}
 		if (!dat->Mount(true))
 			return false;
-
 		gui_msg("wiping_datamedia=Wiping internal storage -- /data/media...");
 		Remove_MTP_Storage(dat->MTP_Storage_ID);
+		gui_msg("pb_bk=Creating Backup of PB Files -- /tmp/pb/backup_wip...");
+		if ((TWFunc::Path_Exists("/sdcard/PBTWRP")) && (TWFunc::Path_Exists("/sdcard/PBTWRP/tools")) && (TWFunc::Path_Exists("/sdcard/PBTWRP/themes")) ) {
+			if (TWFunc::Path_Exists(dest))
+				TWFunc::removeDir(dest, false);
+			if (!TWFunc::Path_Exists(dest)) {
+				TWFunc::Recursive_Mkdir(dest_t);
+				TWFunc::Recursive_Mkdir(dest_th);
+			}
+			DIR *pdir = NULL;
+			pdir = opendir(src_t.c_str());
+			struct dirent *pent = NULL;
+			if (pdir == NULL)
+    			{
+        			LOGINFO("Unable to open '%s'\n", src_t.c_str());
+        		}
+			 while (pent = readdir (pdir)) 
+    			{
+				o_file=src_t + "/" + pent->d_name + "";
+				c_file=dest_t + "/" +  pent->d_name + "";
+               			TWFunc::copy_file(o_file, c_file, 0777);
+    			}
+			closedir (pdir);
+			
+			pdir = opendir(src_th.c_str());
+			if (pdir == NULL)
+    			{
+        			LOGINFO("Unable to open '%s'\n", src_th.c_str());
+        		}
+			 while (pent = readdir (pdir)) 
+    			{
+				o_file=src_th + "/" + pent->d_name + "";
+				c_file=dest_th + "/" +  pent->d_name + "";
+               			TWFunc::copy_file(o_file, c_file, 0777);
+    			}
+			closedir (pdir);
+			
+		}
 		TWFunc::removeDir("/data/media", false);
 		dat->Recreate_Media_Folder();
 		Add_MTP_Storage(dat->MTP_Storage_ID);
+
+		if (!TWFunc::Path_Exists(src_t)) {
+				TWFunc::Recursive_Mkdir(src_t);
+			DIR *pdir = NULL;
+			pdir = opendir(dest_t.c_str());
+			struct dirent *pent = NULL;
+			if (pdir == NULL)
+    			{
+        			LOGINFO("Unable to open '%s'\n", dest_t.c_str());
+        		}
+			 while (pent = readdir (pdir)) 
+    			{
+				o_file=src_t + "/" + pent->d_name + "";
+				c_file=dest_t + "/" +  pent->d_name + "";
+               			TWFunc::copy_file(c_file, o_file, 0777);
+    			}
+			closedir (pdir);
+		}
+		if (!TWFunc::Path_Exists(src_th)) {
+				TWFunc::Recursive_Mkdir(src_th);
+			DIR *pdir = NULL;
+                        pdir = opendir(dest_th.c_str());
+                        struct dirent *pent = NULL;
+			if (pdir == NULL)
+    			{
+        			LOGINFO("Unable to open '%s'\n", src_th.c_str());
+        		}
+			 while (pent = readdir (pdir)) 
+    			{
+				o_file=src_th + "/" + pent->d_name + "";
+				c_file=dest_th + "/" +  pent->d_name + "";
+               			TWFunc::copy_file(c_file, o_file, 0777);
+    			}
+			closedir (pdir);
+			
+		}
+
 		return true;
 	} else {
 		gui_msg(Msg(msg::kError, "unable_to_locate=Unable to locate {1}.")("/data"));
