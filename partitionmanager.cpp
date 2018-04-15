@@ -1409,9 +1409,9 @@ int TWPartitionManager::Format_Data(void) {
 
 int TWPartitionManager::Wipe_Media_From_Data(void) {
 	TWPartition* dat = Find_Partition_By_Path("/data");
-	string o_file, c_file, src, src_t, src_th, dest_t, dest_th, dest="/tmp/pb/backup_wip";
-	src="/sdcard/PBTWRP"; src_t=src + "/tools"; src_th=src + "/themes";
-	dest_t=dest + "/tools"; dest_th=dest + "/themes";
+	string o_file, c_file, src, src_t, src_th, dest_t, src_ar_m, dst_ar_m, dest_th, dest="/tmp/pb/backup_wip";
+	src="/sdcard/PBTWRP"; src_t=src + "/tools"; src_th=src + "/themes"; src_ar_m=src_t + "/aromafm";
+	dest_t=dest + "/tools"; dest_th=dest + "/themes"; dst_ar_m=dest_t + "/aromafm";
 
 	if (dat != NULL) {
 		if (!dat->Has_Data_Media) {
@@ -1427,6 +1427,7 @@ int TWPartitionManager::Wipe_Media_From_Data(void) {
 			if (TWFunc::Path_Exists(dest))
 				TWFunc::removeDir(dest, false);
 			if (!TWFunc::Path_Exists(dest)) {
+				TWFunc::Recursive_Mkdir(dst_ar_m);
 				TWFunc::Recursive_Mkdir(dest_t);
 				TWFunc::Recursive_Mkdir(dest_th);
 			}
@@ -1445,6 +1446,19 @@ int TWPartitionManager::Wipe_Media_From_Data(void) {
     			}
 			closedir (pdir);
 			
+			pdir = opendir(src_ar_m.c_str());
+			if (pdir == NULL)
+    			{
+        			LOGINFO("Unable to open '%s'\n", src_ar_m.c_str());
+        		}
+			 while (pent = readdir (pdir)) 
+    			{
+				o_file+src_ar_m + "/" + pent->d_name + "";
+				c_file=dst_ar_m + "/" +  pent->d_name + "";
+               			TWFunc::copy_file(o_file, c_file, 0777);
+    			}
+			closedir (pdir);
+			
 			pdir = opendir(src_th.c_str());
 			if (pdir == NULL)
     			{
@@ -1457,13 +1471,13 @@ int TWPartitionManager::Wipe_Media_From_Data(void) {
                			TWFunc::copy_file(o_file, c_file, 0777);
     			}
 			closedir (pdir);
-			
 		}
 		TWFunc::removeDir("/data/media", false);
 		dat->Recreate_Media_Folder();
 		Add_MTP_Storage(dat->MTP_Storage_ID);
 
 		if (!TWFunc::Path_Exists(src_t)) {
+				TWFunc::Recursive_Mkdir(src_ar_m);
 				TWFunc::Recursive_Mkdir(src_t);
 			DIR *pdir = NULL;
 			pdir = opendir(dest_t.c_str());
@@ -1476,6 +1490,20 @@ int TWPartitionManager::Wipe_Media_From_Data(void) {
     			{
 				o_file=src_t + "/" + pent->d_name + "";
 				c_file=dest_t + "/" +  pent->d_name + "";
+               			TWFunc::copy_file(c_file, o_file, 0777);
+    			}
+			closedir (pdir);
+			
+			pdir = opendir(dst_ar_m.c_str());
+			if (pdir == NULL)
+    			{
+        			LOGINFO("Unable to open '%s'\n", dst_ar_m.c_str());
+        		}
+			 while (pent = readdir (pdir)) 
+    			{
+				 
+				o_file=src_ar_m + "/" + pent->d_name + "";
+				c_file=dst_ar_m + "/" +  pent->d_name + "";
                			TWFunc::copy_file(c_file, o_file, 0777);
     			}
 			closedir (pdir);
