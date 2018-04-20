@@ -3115,9 +3115,6 @@
 				<listitem name="{@rev_navbar_chk=Reversed navbar layout}">
 					<data variable="tw_samsung_navbar"/>
 				</listitem>
-				<listitem name="{@reboot_install_app_prompt_install=Prompt to install TWRP app on every reboot}">
-					<data variable="tw_app_prompt"/>
-				</listitem>
 				<listitem name="{@simact_chk=Simulate actions for theme testing}">
 					<data variable="tw_simulate_actions"/>
 				</listitem>
