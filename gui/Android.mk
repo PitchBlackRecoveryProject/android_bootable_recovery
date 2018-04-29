@@ -120,6 +120,12 @@ define TW_CUSTOM_THEME_WARNING_MSG
     $(notdir $(wildcard $(commands_recovery_local_path)/gui/theme/*_*))
 ****************************************************************************
 endef
+define PB_UNSUPPORTED_RESOLUTION_ERR
+
+****************************************************************************
+  PitchBlack TWRP is not yet supported for $(TW_THEME) resolution variants
+****************************************************************************
+endef
 
 TWRP_RES := $(commands_recovery_local_path)/gui/theme/common/fonts
 TWRP_RES += $(commands_recovery_local_path)/gui/theme/common/languages
@@ -146,8 +152,10 @@ ifeq ($(TW_CUSTOM_THEME),)
             ifeq ($(shell test $(GUI_WIDTH) -gt $(GUI_HEIGHT); echo $$?),0)
                 ifeq ($(shell test $(GUI_WIDTH) -ge 1280; echo $$?),0)
                     TW_THEME := landscape_hdpi
+		    $(error $(PB_UNSUPPORTED_RESOLUTION_ERR))
                 else
                     TW_THEME := landscape_mdpi
+		    $(error $(PB_UNSUPPORTED_RESOLUTION_ERR))
                 endif
             else ifeq ($(shell test $(GUI_WIDTH) -lt $(GUI_HEIGHT); echo $$?),0)
                 ifeq ($(shell test $(GUI_WIDTH) -ge 720; echo $$?),0)
@@ -158,6 +166,7 @@ ifeq ($(TW_CUSTOM_THEME),)
             else ifeq ($(shell test $(GUI_WIDTH) -eq $(GUI_HEIGHT); echo $$?),0)
                 # watch_hdpi does not yet exist
                 TW_THEME := watch_mdpi
+		$(error $(PB_UNSUPPORTED_RESOLUTION_ERR))
             endif
         endif
         endif
