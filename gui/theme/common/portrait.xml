@@ -4018,7 +4018,7 @@
 			
 			<text style="text_m">
 			    <placement x="540" y="1340" placement="5"/>
-				<text>Based On TWRP %tw_version%</text>
+				<text>Based On TWRP 3.2.1-x</text>
 			</text>
 			
 			<text style="text_s">
