@@ -31,7 +31,7 @@
 		<string name="adopted_storage">Geadopteerde Opslag</string>
 
 		<!-- GUI XML strings -->
-		<string name="twrp_header">Team Win Recovery Project</string>
+		<string name="twrp_header">PitchBlack Recovery Project</string>
 		<string name="twrp_watch_header">TWRP %tw_version%</string>
 		<string name="cpu_temp">CPU: %tw_cpu_temp% ° C</string>
 		<string name="battery_pct">Accu: %tw_battery%</string>

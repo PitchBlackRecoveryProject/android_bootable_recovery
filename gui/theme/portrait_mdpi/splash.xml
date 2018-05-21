@@ -1,22 +1,24 @@
 <?xml version="1.0"?>
 <recovery>
 	<details>
-		<resolution width="480" height="800"/>
-		<author>TeamWin</author>
-		<title>TWRP</title>
+		<resolution width="1080" height="1920"/>
+		<author>TeamWin & Reza Adi</author>
+		<title>PitchBlack Recovery Project</title>
 		<description>splash screen</description>
 		<themeversion>3</themeversion>
 	</details>
 
 	<resources>
-		<font name="font_l" filename="RobotoCondensed-Regular.ttf" size="24"/>
+		<font name="font_l" filename="RobotoCondensed-Regular.ttf" size="52"/>
+		<image name="background" filename="background" retainaspect="1"/>
+		<image name="background2" filename="background2" retainaspect="1"/>
 		<image name="splashlogo" filename="splashlogo" retainaspect="1"/>
 		<image name="splashteamwin" filename="splashteamwin" retainaspect="1"/>
 	</resources>
 
 	<variables>
-		<variable name="screen_width" value="480"/>
-		<variable name="screen_height" value="800"/>
+		<variable name="screen_width" value="1080"/>
+		<variable name="screen_height" value="1920"/>
 		<variable name="background_color" value="#000000"/>
 		<variable name="header_color" value="#000000"/>
 		<variable name="accent_color" value="#0090CA"/>
@@ -27,18 +29,24 @@
 			<background color="%background_color%"/>
 
 			<fill color="%header_color%">
-				<placement x="0" y="0" w="%screen_width%" h="200"/>
+				<placement x="0" y="0" w="%screen_width%" h="960"/>
 			</fill>
-
+			
 			<image>
-				<image resource="splashlogo"/>
-				<placement x="240" y="200" placement="4"/>
-			</image>
+				<image resource="background"/>
+				<placement y="0" x="0"/> 
+            </image>
+            
+            <image>
+				<image resource="background2"/>
+				<placement y="3" x="3"/> 
+            </image>
 
 			<image>
 				<image resource="splashteamwin"/>
-				<placement x="240" y="660" placement="4"/>
+				<placement x="540" y="960" placement="4"/>
 			</image>
+			
 		</page>
 	</pages>
 </recovery>

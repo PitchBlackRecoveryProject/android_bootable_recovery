@@ -19,7 +19,7 @@
 		</style>
 
 		<style name="text_m_accent">
-			<font resource="font_about" color="#1763a9"/>
+			<font resource="font_about" color="#FF0000"/>
 		</style>
 
 		<style name="text_m_fail">
@@ -32,6 +32,10 @@
 
 		<style name="text_s">
 			<font resource="font_s" color="%text_color%"/>
+		</style>
+		
+		<style name="text_xl">
+			<font resource="font_xl" color="%text_color%"/>
 		</style>
 
 		<style name="input">
@@ -194,7 +198,7 @@
 
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
-				<text>{@twrp_header=Team Win Recovery Project}</text>
+				<text>{@twrp_header=PitchBlack Recovery Project}</text>
 			</text>
 
 			<text style="text_m">
@@ -3118,25 +3122,7 @@
 				<listitem name="{@simact_chk=Simulate actions for theme testing}">
 					<data variable="tw_simulate_actions"/>
 				</listitem>
-				<listitem name="{@pb_verify_incremental_ota_signature_chk=Incremental OTA signature verification}">
-					<data variable="pb_verify_incremental_ota_signature"/>
-				</listitem>
-				<listitem name="{@pb_include_system_survival_chk=Include system in OTA survival}">
-					<data variable="pb_include_system_survival"/>
-					</listitem>
-				<listitem name="{@pb_support_miui_ota_chk=Support MIUI Incremental OTA}">
-					<data variable="pb_support_miui_ota"/>
-				</listitem>
-				<listitem name="{@pb_advanced_stock_recovery=Simulate failure for actions}">
-					<data variable="pb_reboot_advanced_stock_recovery_check"/>
-				</listitem>
-				<listitem name="{@pb_reboot_dont_disable_stock_recovery_chk=}">
-					<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
-					<data variable="pb_reboot_dont_disable_stock_recovery"/>
-				</listitem>
-				<listitem name="{@pb_dmverity_chk=Zip signature verification}">
-					<data variable="pb_reboot_dm_verity_check"/>
-				</listitem>
+                
 				<listitem name="{@simfail_chk=Simulate failure for actions}">
 					<condition var1="tw_simulate_actions" var2="1"/>
 					<data variable="tw_simulate_fail"/>
@@ -3331,7 +3317,7 @@
 				<condition var1="tw_has_brightnesss_file" var2="1"/>
 				<placement x="indent" y="%row10_y%" w="%content_width%"/>
 				<text>{@screen_bright_slider=Brightness: %tw_brightness_pct%%}</text>
-				<data variable="tw_brightness_pct" min="10" max="100"/>
+				<data variable="tw_brightness_pct" min="5" max="100"/>
 				<actions>
 					<action function="set">tw_brightness=%tw_brightness_max%</action>
 					<action function="compute">tw_brightness*%tw_brightness_pct%</action>
@@ -3528,29 +3514,29 @@
 				<text>{@adb_sideload_btn=ADB Sideload}</text>
 				<action function="page">sideload</action>
 			</button>			
-			
-			<button style="main_button">
-				<placement x="%indent%" y="%row14_y%"/>
-				<text>{@pbthemes=Themes}</text>
-				<action function="page">pbthemes</action>
-			</button>			
 					
 			<button style="main_button">
-				<placement x="%center_x%" y="%row14_y%"/>
+				<placement x="%indent%" y="%row14_y%"/>
 				<text>{@reload_theme_btn=Reload Theme}</text>
 				<action function="reload"/>
 			</button>
 
 			<button style="main_button">
-				<placement x="%indent%" y="%row18_y%"/>
+				<placement x="%center_x%" y="%row14_y%"/>
 				<text>{@tools=Tools}</text>
 				<action function="page">tools</action>
 			</button>
 			
 			<button style="main_button">
-				<placement x="%center_x%" y="%row18_y%"/>
-				<text>{@about=About}</text>
+				<placement x="%indent%" y="%row18_y%"/>
+				<text>{@special=Special}</text>
 				<action function="page">about</action>
+			</button>
+			
+			<button style="main_button">
+				<placement x="%center_x%" y="%row18_y%"/>
+				<text>{@eta=Eta}</text>
+				<action function="page">eta</action>
 			</button>
 			
 			<button style="main_button">
@@ -3599,7 +3585,7 @@
 				<text>{@SuperSU_btn=SuperSU}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/supersu.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/supersu.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3616,7 +3602,7 @@
 				<text>{@MTP_Fix_btn=MTP Fix}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/mtp.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/mtp.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3633,7 +3619,7 @@
 				<text>{@Unroot_SuperSU_btn=Unroot SuperSU}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/unrootsupersu.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/unrootsupersu.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3650,7 +3636,7 @@
 				<text>{@Magisk_btn=Magisk}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/magisk.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/magisk.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3667,7 +3653,7 @@
 				<text>{@Unroot_Magisk_btn=Unroot Magisk}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/unrootmagisk.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/unrootmagisk.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3684,7 +3670,7 @@
 				<text>{@Aroma_FM_btn=Aroma FM}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/aromafm/aromafm.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/aromafm/aromafm.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3701,7 +3687,7 @@
 				<text>{@FP_Scanner_btn=FP Scanner}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/fpscan.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/fpscan.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3718,7 +3704,7 @@
 				<text>{@Pin/Pass_Remover_btn=Pin/Pass Remover}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/rmpass.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/rmpass.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3735,7 +3721,7 @@
 				<text>{@RM_Subs_Overlays_btn=RM Subs Overlays}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/overlays.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/overlays.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3752,7 +3738,7 @@
 				<text>{@RM_All_Subs_Overlays_btn=RM All Subs Overlays}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/alloverlays.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/alloverlays.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3766,16 +3752,16 @@
 			
 			<button style="pbtools_button">
 				<placement x="%indent%" y="%row12_y%"/>
-				<text>{@Enable_HAL3_btn=Enabled HAL3}</text>
+				<text>{@Camera2API_Enabler_btn=Camera2API Enabler}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/enablehal3.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/enablehal3.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
 					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@Enable_HAL3_text=Enable HAL3 will be installed.}</action>
-					<action function="set">tw_text2={@Enable_HAL3_confirm=Try to install it?}</action>
+					<action function="set">tw_text1={@Camera2API_Enabler_text=Camera2API Enabler will be installed.}</action>
+					<action function="set">tw_text2={@Camera2API_Enabler_confirm=Try to install it?}</action>
 					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
 					<action function="page">confirm_action</action>
 				</actions>
@@ -3786,7 +3772,7 @@
 				<text>{@App_Delete_btn=App Delete}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/appdel.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/appdel.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3803,7 +3789,7 @@
 				<text>{@Dm_Verity_btn=Dm Verity}</text>
 				<actions>
 					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/tools/noverity.zip</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/noverity.zip</action>
 					<action function="set">tw_action=queuezip</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
@@ -3826,134 +3812,10 @@
 			</action>
 		</page>
 
-        <page name="pbthemes">
-		   <template name="page"/>
-
-			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
-				<text>{@pbthemes_hdr=Themes}</text>
-			</text>
+        <page name="eta">
+		<template name="pbaboutpage7"/>
 			
-			<button style="pbtools_button">
-				<placement x="%row1a_y%" y="%pby8%"/>
-				<text>{@theme0_btn=PBTWRP Def. Black}</text>
-				<actions>
-					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/themes/removethemes.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@theme0_text=This will restore PBTWRP Default Black theme}</action>
-					<action function="set">tw_text2={@theme0_confirm=Sure?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			     <button style="pbtools_button">
-				<placement x="%row1a_y%" y="%pby7%"/>
-				<text>{@theme5_btn=Rainbow}</text>
-				<actions>
-					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/themes/rainbow.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@theme5_text=Rainbow PBTWRP theme will be installed}</action>
-					<action function="set">tw_text2={@theme5_confirm=Sure?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>	
-
-            <button style="pbtools_button">
-				<placement x="%row1a_y%" y="%pby6%"/>
-				<text>{@theme4_btn=Neon Yellow}</text>
-				<actions>
-					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/themes/nyellow.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@theme4_text=Neon Yellow PBTWRP theme will be installed}</action>
-					<action function="set">tw_text2={@theme4_confirm=Sure?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>	
-
-			<button style="pbtools_button">
-				<placement x="%row1a_y%" y="%pby5%"/>
-				<text>{@themexy_btn=Just Black}</text>
-				<actions>
-					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/themes/justblack.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@themexy_text=Just Black PBTWRP theme will be installed}</action>
-					<action function="set">tw_text2={@themexy_confirm=Sure?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-
-			<button style="pbtools_button">
-				<placement x="%row1a_y%" y="%pby2%"/>
-				<text>{@theme1_btn=Neon Red}</text>
-				<actions>
-					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/themes/nred.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@theme1_text=Neon Red PBTWRP theme will be installed.}</action>
-					<action function="set">tw_text2={@theme1_confirm=Sure?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<button style="pbtools_button">
-				<placement x="%row1a_y%" y="%pby3%"/>
-				<text>{@theme2_btn=Neon Green}</text>
-				<actions>
-					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/themes/ngreen.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@theme2_text=Neon Green PBTWRP theme will be installed.}</action>
-					<action function="set">tw_text2={@theme2_confirm=Sure?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<button style="pbtools_button">
-				<placement x="%row1a_y%" y="%pby4%"/>
-				<text>{@theme3_btn=Neon Blue}</text>
-				<actions>
-					<action function="set">tw_back=pbthemes</action>
-					<action function="set">tw_filename=/sdcard/PBTWRP/themes/nblue.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@theme3_text=Neon Blue PBTWRP theme will be installed.}</action>
-					<action function="set">tw_text2={@theme3_confirm=Sure?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<action>
+	     <action>
 				<touch key="home"/>
 				<action function="page">main</action>
 			</action>
@@ -3962,39 +3824,45 @@
 				<touch key="back"/>
 				<action function="page">advanced</action>
 			</action>
-		</page>
+		  </page>
 		
 		<page name="about">
-		<template name="pbaboutpage2"/>
+		<template name="pbaboutpage4"/>
 		   
 		   	<button style="pbabout_button">
-				<placement x="%pbxa1%" y="%row18_y%"/>
-				<text>{@about_pbtwrp=About PBTWRP}</text>
-				<action function="page">about_pbtwrp</action>
+				<placement x="%pbxa1%" y="%row17_y%"/>
+				<text>{@about_pbrp=About PBRP}</text>
+				<action function="page">about_pbrp</action>
 			</button>
 			
 		   	<button style="pbabout_button">
-				<placement x="%pbxa2%" y="%row18_y%"/>
+				<placement x="%pbxa2%" y="%row17_y%"/>
 				<text>{@thanksto=Thanks to}</text>
 				<action function="page">thanksto</action>
 			</button>
 			
 		   	<button style="pbabout_button">
-				<placement x="%pbxa3%" y="%row18_y%" />
+				<placement x="%pbxa3%" y="%row17_y%" />
 				<text>{@toolscr=Tools Credit}</text>
 				<action function="page">toolscr</action>
 			</button>
 			
 			<button style="pbabout_button">
-				<placement x="%pbxa1%" y="%row21_y%"/>
+				<placement x="%pbxa1%" y="%row20_y%"/>
 				<text>{@contributors=Contributors}</text>
 				<action function="page">contributors</action>
 			</button>
 			
 			<button style="pbabout_button">
-				<placement x="%pbxa3%" y="%row21_y%"/>
-				<text>{@OTAMIUI=OTA MIUI}</text>
-				<action function="page">OTAMIUI</action>
+				<placement x="%pbxa2%" y="%row20_y%"/>
+				<text>{@SETTINGOTA=Setting OTA}</text>
+				<action function="page">SETTINGOTA</action>
+			</button>
+			
+			<button style="pbabout_button">
+				<placement x="%pbxa3%" y="%row20_y%"/>
+				<text>{@surprise=Surprise}</text>
+				<action function="page">surprise</action>
 			</button>
 			
 			<action>
@@ -4008,47 +3876,47 @@
 			</action>
 			</page>
 			
-	    <page name="about_pbtwrp">
-		<template name="pbaboutpage2"/>
-		
-			<text style="text_exl">
-			    <placement x="540" y="1260" placement="5"/>
-				<text>PitchBlack 2.7.1</text>
-			</text>
+	    <page name="about_pbrp">
+		<template name="pbaboutpage4"/>
 			
 			<text style="text_m">
-			    <placement x="540" y="1340" placement="5"/>
-				<text>Based On TWRP 3.2.1-x</text>
+			    <placement x="540" y="1110" placement="5"/>
+				<text>Based On %tw_version%</text>
 			</text>
 			
 			<text style="text_s">
-			    <placement x="540" y="1390" placement="5"/>
-				<text>https://github.com/PitchBlackTWRP</text>
+			    <placement x="540" y="1160" placement="5"/>
+				<text>https://github.com/PitchBlack-Recovery</text>
 			</text>
 			
 			<text style="text_s">
-			    <placement x="540" y="1440" placement="5"/>
-				<text>Developed by Reza Adi</text>
+			    <placement x="540" y="1210" placement="5"/>
+				<text>Themed Maintained By</text>
 			</text>
 			
 			<text style="text_s">
-			    <placement x="540" y="1490" placement="5"/>
-				<text>Themed by Firewolf</text>
+			    <placement x="540" y="1260" placement="5"/>
+				<text>Reza Adi & Firewolf</text>
 			</text>
 			
 			<text style="text_s">
-			    <placement x="540" y="1540" placement="5"/>
+			    <placement x="540" y="1310" placement="5"/>
 				<text>Sources Maintained By</text>
 			</text>
 			
 			<text style="text_s">
-			    <placement x="540" y="1590" placement="5"/>
+			    <placement x="540" y="1360" placement="5"/>
 				<text>Manjot Sidhu, Arbaz Khan & Mohd Faraz</text>
 			</text>
 			
 			<text style="text_s">
-			    <placement x="540" y="1640" placement="5"/>
+			    <placement x="540" y="1410" placement="5"/>
 				<text>Telegram Chat : @twrppb</text>
+			</text>
+			
+			<text style="text_s">
+			    <placement x="540" y="1460" placement="5"/>
+				<text>Telegram Channel : @pbtwrp</text>
 			</text>
 			
 			<action>
@@ -4063,90 +3931,95 @@
 			</page>
 			
 		<page name="thanksto">
-		<template name="pbaboutpage"/>
+		<template name="pbaboutpage4"/>
 			
 			<text style="text_l">
-			    <placement x="540" y="700" placement="5"/>
+			    <placement x="540" y="1110" placement="5"/>
 				<text>Thanks to</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="790" placement="5"/>
+			    <placement x="540" y="1180" placement="5"/>
 				<text>github for source code</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="820" placement="5"/>
-				<text>TeamWin for source code TWRP</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="850" placement="5"/>
-				<text>G.M.L</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="880" placement="5"/>
-				<text>Innu Ghifary Dev</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="910" placement="5"/>
-				<text>Helmi Amirudin</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="940" placement="5"/>
-				<text>Santy Safitri</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="970" placement="5"/>
-				<text>Anik Khan</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="1000" placement="5"/>
-				<text>Albert I</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="1030" placement="5"/>
-				<text>ATG Droid</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="1060" placement="5"/>
-				<text>Mifans Indonesia</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="1090" placement="5"/>
-				<text>Ahmad Sa'id Mabruri</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="1120" placement="5"/>
-				<text>Rivv</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="1150" placement="5"/>
-				<text>Zaeni Loverz</text>
-			</text>
-			
-			<text style="text_m">
-			    <placement x="540" y="1180" placement="5"/>
-				<text>Abhishek</text>
-			</text>
-			
-			<text style="text_m">
 			    <placement x="540" y="1210" placement="5"/>
-				<text>osmOsis</text>
+				<text>TeamWin for source code of TWRP</text>
 			</text>
 			
 			<text style="text_m">
 			    <placement x="540" y="1240" placement="5"/>
+				<text>G.M.L</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1270" placement="5"/>
+				<text>Innu Ghifary Dev</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1300" placement="5"/>
+				<text>Helmi Amirudin</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1330" placement="5"/>
+				<text>Santy Safitri</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1360" placement="5"/>
+				<text>Anik Khan</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1390" placement="5"/>
+				<text>Albert I</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1420" placement="5"/>
+				<text>ATG Droid</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1450" placement="5"/>
+				<text>Mifans Indonesia</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1480" placement="5"/>
+				<text>Ahmad Sa'id Mabruri</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1510" placement="5"/>
+				<text>Rivv</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1540" placement="5"/>
+				<text>Zaeni Loverz</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1570" placement="5"/>
+				<text>Abhishek</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1600" placement="5"/>
+				<text>Louis Lee Encrypted</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1630" placement="5"/>
+				<text>osmOsis</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="540" y="1660" placement="5"/>
 				<text>All Developers & Users</text>
 			</text>
 			
@@ -4163,55 +4036,55 @@
 		</page>
 
 		<page name="toolscr">
-		<template name="pbaboutpage"/>
+		<template name="pbaboutpage4"/>
 
 		<text style="text_l">
-			    <placement x="540" y="700" placement="5"/>
+			    <placement x="540" y="1110" placement="5"/>
 				<text>Thanks to them for tools</text>
 		</text>
 		
 			  <text style="text_m">
-			    <placement x="540" y="790" placement="5"/>
+			    <placement x="540" y="1180" placement="5"/>
 				<text>Chainfire - SuperSU Installer</text>
 			</text>
 			
 			 <text style="text_m">
-			    <placement x="540" y="830" placement="5"/>
+			    <placement x="540" y="1220" placement="5"/>
 				<text>Brigudav - SuperSU Uninstaller</text>
 			</text>
 		
 			<text style="text_m">
-			    <placement x="540" y="870" placement="5"/>
+			    <placement x="540" y="1260" placement="5"/>
 				<text>Topjohnwu - Magisk Installer, Uninstaller</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="910" placement="5"/>
+			    <placement x="540" y="1300" placement="5"/>
 				<text>Jcadduono - LazyFlasher</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="950" placement="5"/>
+			    <placement x="540" y="1340" placement="5"/>
 				<text>Amarullz - Aroma File Manager</text>
 			</text>
 			
 			 <text style="text_m">
-			    <placement x="540" y="990" placement="5"/>
+			    <placement x="540" y="1380" placement="5"/>
 				<text>Magua - Fingerprint & Pin/Password Remover</text>
 			</text>
 			
 					 <text style="text_m">
-			    <placement x="540" y="1030" placement="5"/>
+			    <placement x="540" y="1420" placement="5"/>
 				<text>Helmiau - MTP Fixer & HAL3 Enabler</text>
 			</text>
 			
 					 <text style="text_m">
-			    <placement x="540" y="1070" placement="5"/>
+			    <placement x="540" y="1460" placement="5"/>
 				<text>Projekt Dev Team - Substratum Rescue</text>
 			</text>
 			
 					 <text style="text_m">
-			    <placement x="540" y="1110" placement="5"/>
+			    <placement x="540" y="1500" placement="5"/>
 				<text>The Pirate Predator - Bloatware Remover</text>
 			</text>
 				
@@ -4227,31 +4100,31 @@
 		</page>
 		
 		<page name="contributors">
-		<template name="pbaboutpage"/>
+		<template name="pbaboutpage4"/>
 			
 			<text style="text_l">
-			    <placement x="540" y="700" placement="5"/>
+			    <placement x="540" y="1110" placement="5"/>
 				<text>Contributors</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="790" placement="5"/>
-				<text>Mohd Faraz - LYF Water 8</text>
+			    <placement x="540" y="1180" placement="5"/>
+				<text>Mohd Faraz - LYF Water 8 & Redmi 4A</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="830" placement="5"/>
-				<text>Manjot Sidhu - Micromax A106</text>
+			    <placement x="540" y="1220" placement="5"/>
+				<text>Manjot Sidhu - A106</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="870" placement="5"/>
+			    <placement x="540" y="1260" placement="5"/>
 				<text>Reza Adi & Arbaz Khan - Redmi Note 4</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="910" placement="5"/>
-				<text>Firewolf - Redmi 3 & Redmi Note 3 Pro</text>
+			    <placement x="540" y="1300" placement="5"/>
+				<text>Firewolf - Redmi 3</text>
 			</text>
 			
 			<action>
@@ -4265,70 +4138,89 @@
 			</action>   
 		</page>
 		
-		<page name="OTAMIUI">
-		<template name="pbaboutpage"/>
-			
-			<text style="text_m">
-			    <placement x="540" y="700" placement="5"/>
-				<text>OTA MIUI</text>
-			</text>
+		<page name="SETTINGOTA">
+		<template name="pbaboutpage5"/>
 			
 			<text style="text_n">
-			    <placement x="540" y="790" placement="5"/>
+			    <placement x="540" y="350" placement="5"/>
 				<text>--1 Please make your internal space 5GB</text>
 			</text>
 			
 			<text style="text_n">
-			    <placement x="540" y="830" placement="5"/>
-				<text>--2 Reboot to PBTWRP then Checklist incremental OTA signature verification,</text>
+			    <placement x="540" y="385" placement="5"/>
+				<text>--2 Reboot to PBRP then Checklist incremental OTA signature verification,</text>
 			</text>
 			
 			<text style="text_n">
-			    <placement x="540" y="870" placement="5"/>
+			    <placement x="540" y="420" placement="5"/>
 				<text>include system in OTA survival, support MIUI incremental OTA, aggresive stock recovery deactivation,</text>
 			</text>
 			
 			<text style="text_n">
-			    <placement x="540" y="910" placement="5"/>
+			    <placement x="540" y="455" placement="5"/>
 				<text>disable DM Verity</text>
 			</text>
 			
 			<text style="text_n">
-			    <placement x="540" y="950" placement="5"/>
+			    <placement x="540" y="490" placement="5"/>
 				<text>--3 Install full rom MIUI, it will automatic backup boot and system for the OTA survival. example miui 8.3.15</text>
 			</text>
 			
 			<text style="text_n">
-			    <placement x="540" y="990" placement="5"/>
+			    <placement x="540" y="525" placement="5"/>
 				<text>--4 Check OTA survival in folder PB internal storage you can found boot and system</text>
 			</text>
 			
 			<text style="text_n">
-			    <placement x="540" y="1030" placement="5"/>
+			    <placement x="540" y="560" placement="5"/>
 				<text>--5 Open updater app and when update releases, download it and press update. example miui 8.3.15 - 8.3.29</text>
 			</text>
 			
 			<text style="text_n">
-			    <placement x="540" y="1070" placement="5"/>
-				<text>Automatically device will reboot to PBTWRP then OTA flashing will start,</text>
+			    <placement x="540" y="595" placement="5"/>
+				<text>Automatically device will reboot to PBRP then OTA flashing will start,</text>
 			</text>
 			
 			<text style="text_n">
-			    <placement x="540" y="1110" placement="5"/>
+			    <placement x="540" y="630" placement="5"/>
 				<text>this time the backed up boot and system will be flashed and</text>
 			</text>
 			
 			<text style="text_n">
-			    <placement x="540" y="1150" placement="5"/>
+			    <placement x="540" y="665" placement="5"/>
 				<text>thus patching will happen and your device will be updated</text>
 			</text>
 			
 			<text style="text_n">
-			    <placement x="540" y="1230" placement="5"/>
+			    <placement x="540" y="700" placement="5"/>
 				<text>Pre-requisite > unlock bootloader</text>
 			</text>
 			
-			<action>
+			<listbox style="scrolllist">
+				<placement x="%indent%" y="%row9_y%" w="%content_width%" h="%listbox_settings_height%"/>
+				<icon selected="checkbox_true" unselected="checkbox_false"/>
+               <listitem name="{@pb_verify_incremental_ota_signature_chk=Incremental OTA signature verification}">
+					<data variable="pb_verify_incremental_ota_signature"/>
+				</listitem>
+				<listitem name="{@pb_include_system_survival_chk=Include system in OTA survival}">
+					<data variable="pb_include_system_survival"/>
+					</listitem>
+				<listitem name="{@pb_support_miui_ota_chk=Support MIUI Incremental OTA}">
+					<data variable="pb_support_miui_ota"/>
+				</listitem>
+				<listitem name="{@pb_advanced_stock_recovery=Simulate failure for actions}">
+					<data variable="pb_reboot_advanced_stock_recovery_check"/>
+				</listitem>
+				<listitem name="{@pb_reboot_dont_disable_stock_recovery_chk=}">
+					<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
+					<data variable="pb_reboot_dont_disable_stock_recovery"/>
+				</listitem>
+				<listitem name="{@pb_dmverity_chk=Zip signature verification}">
+					<data variable="pb_reboot_dm_verity_check"/>
+				</listitem>
+				</listbox>
+		
+		<action>
 				<touch key="home"/>
 				<action function="page">main</action>
 			</action>
@@ -4338,6 +4230,22 @@
 				<action function="page">about</action>
 			</action>   
 		</page>
+		
+		<page name="surprise">
+		<template name="pbaboutpage6"/>
+		
+		
+		<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">about</action>
+			</action>   
+		</page>
+		
 		
 		<page name="partsdcardsel">
 			<template name="page"/>
@@ -4590,12 +4498,32 @@
 
 		<page name="lock">
 			<background color="%semi_transparent%"/>
+			
+			<image>
+				<image resource="background"/>
+				<placement y="0" x="0"/> 
+            </image>
 
 			<image>
 				<image resource="unlock_icon"/>
-				<placement x="%center_x%" y="%row10_y%" placement="4"/>
-			</image>
-
+				<placement y="3" x="3"/> 
+            </image>
+            
+            <text style="text_exl">
+				<placement x="540" y="350" placement="4"/>
+				<text>TIME: %tw_time%</text>
+			</text>
+			
+			<text style="text_exl">
+				<placement x="540" y="500" placement="4"/>
+				<text>BATTERY: %tw_battery%</text>
+			</text>
+			
+			<text style="text_exl">
+				<placement x="540" y="650" placement="4"/>
+				<text>CPU: %tw_cpu_temp% &#xB0;C</text>
+			</text>
+			
 			<slider>
 				<text>{@swipe_to_unlock=Swipe to Unlock}</text>
 				<action function="overlay"/>
@@ -4604,6 +4532,11 @@
 			<action>
 				<touch key="power"/>
 				<action function="togglebacklight"/>
+			</action>
+			
+			<action>
+				<touch key="power+voldown" />
+				<action function="screenshot" />
 			</action>
 		</page>
 

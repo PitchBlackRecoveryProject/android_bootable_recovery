@@ -26,7 +26,7 @@
 		<string name="sdext">SD-EXT</string>
 		<string name="adopted_data">Přijaté data</string>
 		<string name="adopted_storage">Přijaté úložiště</string>
-		<string name="twrp_header">Team Win Recovery Project</string>
+		<string name="twrp_header">PitchBlack Recovery Project</string>
 		<string name="twrp_watch_header">TWRP %tw_version%</string>
 		<string name="cpu_temp">CPU: %tw_cpu_temp% °C</string>
 		<string name="battery_pct">Baterie: %tw_battery%</string>

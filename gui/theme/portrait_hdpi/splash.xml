@@ -2,14 +2,16 @@
 <recovery>
 	<details>
 		<resolution width="1080" height="1920"/>
-		<author>TeamWin</author>
-		<title>TWRP</title>
+		<author>TeamWin & Reza Adi</author>
+		<title>PitchBlack Recovery Project</title>
 		<description>splash screen</description>
 		<themeversion>3</themeversion>
 	</details>
 
 	<resources>
 		<font name="font_l" filename="RobotoCondensed-Regular.ttf" size="52"/>
+		<image name="background" filename="background" retainaspect="1"/>
+		<image name="background2" filename="background2" retainaspect="1"/>
 		<image name="splashlogo" filename="splashlogo" retainaspect="1"/>
 		<image name="splashteamwin" filename="splashteamwin" retainaspect="1"/>
 	</resources>
@@ -29,16 +31,22 @@
 			<fill color="%header_color%">
 				<placement x="0" y="0" w="%screen_width%" h="960"/>
 			</fill>
-
+			
 			<image>
-				<image resource="splashlogo"/>
-				<placement x="540" y="960" placement="4"/>
-			</image>
+				<image resource="background"/>
+				<placement y="0" x="0"/> 
+            </image>
+            
+            <image>
+				<image resource="background2"/>
+				<placement y="3" x="3"/> 
+            </image>
 
 			<image>
 				<image resource="splashteamwin"/>
-				<placement x="540" y="1540" placement="4"/>
+				<placement x="540" y="960" placement="4"/>
 			</image>
+			
 		</page>
 	</pages>
 </recovery>

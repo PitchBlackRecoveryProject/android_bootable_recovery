@@ -33,7 +33,7 @@
 		<string name="autostorage">Storage</string>
 
 		<!-- GUI XML strings -->
-		<string name="twrp_header">Team Win Recovery Project</string>
+		<string name="twrp_header">PitchBlack Recovery Project</string>
 		<string name="twrp_watch_header">TWRP %tw_version%</string>
 		<string name="cpu_temp">CPU: %tw_cpu_temp% &#xB0;C</string>
 		<string name="battery_pct">Battery: %tw_battery%</string>
@@ -725,9 +725,9 @@
 		<string name="RM_All_Subs_Overlays_btn">RM All Subs Overlays</string>
 		<string name="RM_All_Subs_Overlays_text">RM All Subs Overlays will be installed.</string>
 		<string name="RM_All_Subs_Overlays_confirm">Try to install it?</string>
-		<string name="Enable_HAL3_btn">Enable HAL3</string>
-		<string name="Enable_HAL3_text">Enable HAL3 will be installed.</string>
-		<string name="Enable_HAL3_confirm">Try to install it?</string>
+		<string name="Camera2API_Enabler_btn">Camera2API Enabler</string>
+		<string name="Camera2API_Enabler_text">Camera2API Enabler will be installed.</string>
+		<string name="Camera2API_Enabler_confirm">Try to install it?</string>
 		<string name="App_Delete_btn">App Delete</string>
 		<string name="App_Delete_text">App Delete will be installed.</string>
 		<string name="App_Delete_confirm">Try to install it?</string>
@@ -738,39 +738,25 @@
 		<string name="Dm_Verity_text">Dm Verity will be installed.</string>
 		<string name="Dm_Verity_confirm">Try to install it?</string>
 		
-		<!--PBTWRP Themes-->
+		<!--PBRP Themes-->
 		<string name="pbthemes">Themes</string>
 	    <string name="pbthemes_hdr">Themes</string>
-		<string name="theme0_btn">PBTWRP Def. Black</string>
-		<string name="theme0_text">This will restore PBTWRP Default Black theme</string>		
-		<string name="theme0_confirm">Sure?</string>
-		<string name="themexy_btn">PBTWRP Just Black</string>
-		<string name="themexy_text">Just Black PBTWRP theme will be installed</string>		
-		<string name="themexy_confirm">Sure?</string>
-		<string name="theme1_btn">Neon Red</string>
-		<string name="theme1_text">Neon Red PBTWRP theme will be installed</string>		
-		<string name="theme1_confirm">Sure?</string>
-		<string name="theme2_btn">Neon Green</string>
-		<string name="theme2_text">Neon Green PBTWRP theme will be installed</string>		
-		<string name="theme2_confirm">Sure?</string>		
-		<string name="theme3_btn">Neon Blue</string>
-		<string name="theme3_text">Neon Blue PBTWRP theme will be installed</string>			
-		<string name="theme3_confirm">Sure?</string>
-		<string name="theme4_btn">Neon Yellow</string>
-		<string name="theme4_text">Neon Yellow PBTWRP theme will be installed</string>			
-		<string name="theme4_confirm">Sure?</string>
-		<string name="theme5_btn">Rainbow</string>
-		<string name="theme5_text">Rainbow PBTWRP theme will be installed</string>			
-		<string name="theme5_confirm">Sure?</string>
 		
-		<!--PBTWRP about-->
-		<string name="about">About</string>
-		<string name="about_hdr">About</string>
-		<string name="about_pbtwrp">About PBTWRP</string>
+		<string name="yellow_btn">yellow</string>
+		<string name="yellow_text">yellow PBRP theme will be installed</string>			
+		<string name="yellow_confirm">Sure?</string>
+		
+		
+		<!--PBRP about-->
+		<string name="special">Special</string>
+		<string name="special_hdr">Special</string>
+		<string name="about_pbrp">About PBRP</string>
 		<string name="thanksto">Thanks to</string>
 		<string name="toolscr">Tools Credit</string>
 		<string name="contributors">Contributors</string>
-		<string name="OTAMIUI">OTA MIUI</string>
+		<string name="SETTINGOTA">Setting OTA</string>
+		<string name="surprise">Surprise</string>
+		<string name="eta">Eta</string>
 
 		<!-- Settings -->
 		<string name="pb_support_miui_ota_chk">Support MIUI Incremental OTA</string>

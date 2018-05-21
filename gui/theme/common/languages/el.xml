@@ -24,7 +24,7 @@
         <string name="sdext">SD-EXT</string>
         <string name="adopted_data">Εγκεκριμένα δεδομένα</string>
         <string name="adopted_storage">Εγκεκριμένος Αποθ. Χώρος</string>
-        <string name="twrp_header">Team Win Recovery Project</string>
+        <string name="twrp_header">PitchBlack Recovery Project</string>
         <string name="twrp_watch_header">TWRP %tw_version%</string>
         <string name="cpu_temp">CPU: %tw_cpu_temp% &#xB0;C</string>
         <string name="battery_pct">Μπαταρία: %tw_battery%</string>
