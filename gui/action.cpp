@@ -1152,12 +1152,12 @@ int GUIAction::wipe(std::string arg)
 			string Storage_Path = DataManager::GetSettingsStoragePath();
 
 			if (PartitionManager.Mount_By_Path(Storage_Path, true)) {
-				LOGINFO("Making PBTWRP folder and saving settings.\n");
-				Storage_Path += "/PBTWRP";
+				LOGINFO("Making PBRP folder and saving settings.\n");
+				Storage_Path += "/PBRP";
 				mkdir(Storage_Path.c_str(), 0777);
 				DataManager::Flush();
 			} else {
-				LOGERR("Unable to recreate PBTWRP folder and save settings.\n");
+				LOGERR("Unable to recreate PBRP folder and save settings.\n");
 			}
 		}
 #endif

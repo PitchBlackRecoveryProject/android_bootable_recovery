@@ -1410,7 +1410,7 @@ int TWPartitionManager::Format_Data(void) {
 int TWPartitionManager::Wipe_Media_From_Data(void) {
 	TWPartition* dat = Find_Partition_By_Path("/data");
 	string o_file, c_file, src, src_t, src_th, dest_t, src_ar_m, dst_ar_m, dest_th, dest="/tmp/pb/backup_wip";
-	src="/sdcard/PBTWRP"; src_t=src + "/tools"; src_th=src + "/themes"; src_ar_m=src_t + "/aromafm";
+	src="/sdcard/PBRP"; src_t=src + "/tools"; src_th=src + "/themes"; src_ar_m=src_t + "/aromafm";
 	dest_t=dest + "/tools"; dest_th=dest + "/themes"; dst_ar_m=dest_t + "/aromafm";
 
 	if (dat != NULL) {
@@ -1423,7 +1423,7 @@ int TWPartitionManager::Wipe_Media_From_Data(void) {
 		gui_msg("wiping_datamedia=Wiping internal storage -- /data/media...");
 		Remove_MTP_Storage(dat->MTP_Storage_ID);
 		gui_msg("pb_bk=Creating Backup of PB Files -- /tmp/pb/backup_wip...");
-		if ((TWFunc::Path_Exists("/sdcard/PBTWRP")) && (TWFunc::Path_Exists("/sdcard/PBTWRP/tools")) && (TWFunc::Path_Exists("/sdcard/PBTWRP/themes")) ) {
+		if ((TWFunc::Path_Exists("/sdcard/PBRP")) && (TWFunc::Path_Exists("/sdcard/PBRP/tools")) && (TWFunc::Path_Exists("/sdcard/PBRP/themes")) ) {
 			if (TWFunc::Path_Exists(dest))
 				TWFunc::removeDir(dest, false);
 			if (!TWFunc::Path_Exists(dest)) {
@@ -2125,7 +2125,7 @@ int TWPartitionManager::Partition_SDCard(void) {
 
 	// recreate TWRP folder and rewrite settings - these will be gone after sdcard is partitioned
 	if (SDCard->Mount(true)) {
-		string TWRP_Folder = SDCard->Mount_Point + "/PBTWRP";
+		string TWRP_Folder = SDCard->Mount_Point + "/PBRP";
 		mkdir(TWRP_Folder.c_str(), 0777);
 		DataManager::Flush();
 	}

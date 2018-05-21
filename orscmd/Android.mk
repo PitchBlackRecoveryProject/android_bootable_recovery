@@ -2,9 +2,9 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 ifeq ($(PB_OFFICIAL),true)
-    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.7.1-Official"'
+    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.7.2-Official"'
 else
-    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.7.1-Unofficial"'
+    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.7.2-Unofficial"'
 endif
 
 LOCAL_SRC_FILES:= \

@@ -528,7 +528,7 @@ void DataManager::SetBackupFolder()
 {
 	string str = GetCurrentStoragePath();
 	TWPartition* partition = PartitionManager.Find_Partition_By_Path(str);
-	str += "/PBTWRP/BACKUPS/";
+	str += "/PBRP/BACKUPS/";
 
 	string dev_id;
 	GetValue("device_id", dev_id);
@@ -610,7 +610,7 @@ void DataManager::SetDefaultValues()
 
 	str = GetCurrentStoragePath();
 	mPersist.SetValue(TW_ZIP_LOCATION_VAR, str);
-	str += "/PBTWRP/BACKUPS/";
+	str += "/PBRP/BACKUPS/";
 
 	string dev_id;
 	mConst.GetValue("device_id", dev_id);
@@ -1093,7 +1093,7 @@ void DataManager::ReadSettingsFile(void)
 
 	memset(mkdir_path, 0, sizeof(mkdir_path));
 	memset(settings_file, 0, sizeof(settings_file));
-	sprintf(mkdir_path, "%s/PBTWRP", GetSettingsStoragePath().c_str());
+	sprintf(mkdir_path, "%s/PBRP", GetSettingsStoragePath().c_str());
 	sprintf(settings_file, "%s/.twrps", mkdir_path);
 
 	if (!PartitionManager.Mount_Settings_Storage(false))
