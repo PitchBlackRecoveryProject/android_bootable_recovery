@@ -169,10 +169,10 @@ int main(int argc, char **argv) {
 		}
 	}
 
-        gui_print("**************************");
-        gui_print("PitchBlack TWRP: Welcome! ^_^");
-	gui_print("Brought to you by PitchBlack Team *_*");
-	gui_print("**************************");
+        gui_print("*********************************");
+        gui_print("PitchBlack Recovery: Welcome! ^_^");
+	gui_print("aintained By PBRP Team *_*");
+	gui_print("*********************************");
 	PartitionManager.Mount_By_Path("/cache", false);
 
 	bool Shutdown = false;
