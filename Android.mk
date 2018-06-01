@@ -392,7 +392,8 @@ LOCAL_ADDITIONAL_DEPENDENCIES += \
     simg2img_twrp \
     libbootloader_message_twrp \
     init.recovery.hlthchrg.rc \
-    init.recovery.service.rc
+    init.recovery.service.rc \
+    parted
 
 ifneq ($(TARGET_ARCH), arm64)
     ifneq ($(TARGET_ARCH), x86_64)
