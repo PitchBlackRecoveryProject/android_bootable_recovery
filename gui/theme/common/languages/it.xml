@@ -691,5 +691,6 @@
 		<string name="copy_kernel_log">Log del kernel copiato in {1}</string>
 		<string name="include_kernel_log">Includi Log del Kernel</string>
 		<string name="unable_set_boot_slot">Errore nel cambio slot d'avvio del bootloader in {1}</string>
+		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
 </language>

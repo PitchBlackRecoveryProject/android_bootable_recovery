@@ -691,5 +691,6 @@
 		<string name="copy_kernel_log">Kernel-Log wurde nach {1} kopiert</string>
 		<string name="include_kernel_log">Zusätzlich Kernel-Log kopieren</string>
 		<string name="unable_set_boot_slot">Fehler während Wechsel zu Slot {1}</string>
+		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
 </language>

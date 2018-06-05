@@ -670,5 +670,6 @@
         <string name="partition_not_found">διαδρομή: {1} δεν βρέθηκε στην λίστα τομέων</string>
         <string name="copy_kernel_log">Το log του kernel αντιγράφηκε στο {1}</string>
         <string name="include_kernel_log">Εισαγωγή Kernel Log</string>
+        <string name="show_free_sdmb">Show Free SD Mb</string>
     </resources>
 </language>

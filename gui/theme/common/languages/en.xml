@@ -696,6 +696,8 @@
 		<string name="unable_set_boot_slot">Error changing bootloader boot slot to {1}</string>
 		
 		<!--mod tools-->
+		<string name="additional_hdr">Additional</string>
+		<string name="additional">Additional</string>
 		<string name="tools_hdr">Tools</string>
 		<string name="tools">Tools</string>
 		<string name="SuperSU_btn">SuperSU</string>
@@ -792,7 +794,7 @@
 		<string name="pb_fstab">Detected fstab: '{1}'</string>
 		<string name="pb_dm_verity">Successfully patched DM-Verity</string>
 		<string name="pb_dm_verity_off">DM-Verity is not enabled</string>
-
+		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
 </language>
 

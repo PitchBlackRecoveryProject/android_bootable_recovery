@@ -201,5 +201,6 @@
 		<string name="config_twrp">Konfigurerar TWRP...</string>
 		<string name="auto_gen">(Auto-generera)</string>
 		<string name="curr_date">(Dagens datum)</string>
+		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
 </language>

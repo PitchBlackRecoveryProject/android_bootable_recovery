@@ -10,6 +10,10 @@
 			<font resource="font_l" color="%text_color%"/>
 		</style>
 		
+		<style name="text_pb">
+			<font resource="font_pb" color="%text_main_button_color%"/>
+		</style>
+		
 		<style name="text_about">
 			<font resource="font_about" color="%text_color%"/>
 		</style>
@@ -55,6 +59,144 @@
 			<image resource="main_button"/>
 		</style>
 		
+		<style name="main_button_install">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_install"/>
+		</style>
+		
+		<style name="main_button_wipe">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_wipe"/>
+		</style>
+		
+		<style name="main_button_backup">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_backup"/>
+		</style>
+		
+		<style name="main_button_restore">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_restore"/>
+		</style>
+		
+		<style name="main_button_mount">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_mount"/>
+		</style>
+		
+		<style name="main_button_settings">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_settings"/>
+		</style>
+		
+		<style name="main_button_advanced">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_advanced"/>
+		</style>
+		
+		<style name="main_button_reboot">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_reboot"/>
+		</style>
+		
+		<style name="main_button_log">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_log"/>
+		</style>
+		
+		<style name="main_button_fixcontexts">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_fixcontexts"/>
+		</style>
+		
+		<style name="main_button_partitionsd">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_partitionsd"/>
+		</style>
+		
+		<style name="main_button_adb">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_adb"/>
+		</style>
+		
+		<style name="main_button_terminal">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_terminal"/>
+		</style>
+		
+		<style name="main_button_explorer">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_explorer"/>
+		</style>
+		
+		<style name="main_button_system">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_system"/>
+		</style>
+		
+		<style name="main_button_download">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_download"/>
+		</style>
+		
+		<style name="main_button_bootloader">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_bootloader"/>
+		</style>
+		
+		<style name="main_button_poweroff">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_poweroff"/>
+		</style>
+		
+		<style name="main_button_recovery">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_recovery"/>
+		</style>
+		
+		<style name="main_button_special">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_special"/>
+		</style>
+		
+		<style name="main_button_tools">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_tools"/>
+		</style>
+		
+		<style name="main_button_eta">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_eta"/>
+		</style>
+		
+		<style name="main_button_reloadtheme">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_reloadtheme"/>
+		</style>
+		
 		<style name="pbabout_button">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_l" color="%text_button_color%"/>
@@ -71,6 +213,12 @@
 			<highlight color="%highlight_color%"/>
 			<font resource="font_m" color="%text_button_color%"/>
 			<image resource="main_button_half_height"/>
+		</style>
+		
+		<style name="main_button_half_height_wipe">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_m" color="%text_color%"/>
+			<image resource="main_button_half_height_wipe"/>
 		</style>
 
 		<style name="main_button_half_height_full_width">
@@ -100,7 +248,7 @@
 		<style name="tab">
 			<highlight color="%highlight_color%"/>
 			<fill color="%transparent%"/>
-			<font resource="font_s" color="%text_button_color%"/>
+			<font resource="font_s" color="%text_color%"/>
 		</style>
 
 		<style name="console">
@@ -166,7 +314,7 @@
 		</style>
 
 		<style name="slider">
-			<placement x="%center_x%" y="%row23_y%"/>
+			<placement x="%center_x%" y="%row23_y%" placement="4"/>
 			<font resource="font_s" color="%text_color%"/>
 			<resource base="slider" used="slider_used" touch="slider_touch"/>
 		</style>
@@ -174,7 +322,7 @@
 		<style name="slidervalue">
 			<resource handle="handle"/>
 			<font resource="font_m" color="%text_color%"/>
-			<colors line="%fileselector_linecolor%"/>
+			<colors line="%fileselector_linecolor2%"/>
 			<dimensions lineh="%slidervalue_lineh%" linepadding="%slidervalue_padding%" sliderw="%slidervalue_sliderw%" sliderh="%slidervalue_sliderh%"/>
 		</style>
 
@@ -207,57 +355,89 @@
 				<text>%tw_version% </text>
 			</text>
 
-			<button style="main_button">
-				<placement x="%indent%" y="%row2a_y%"/>
-				<text>{@install_btn=Install}</text>
+			<button style="main_button_install">
+				<placement x="%indent_main_button%" y="296"/>
 				<actions>
 					<action function="queueclear"/>
 					<action function="set">tw_selectimage=0</action>
 					<action function="page">install</action>
 				</actions>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="315"/>
+				<text>{@install_btn=Install}</text>
+			</text>
 
-			<button style="main_button">
-				<placement x="%center_x%" y="%row2a_y%"/>
-				<text>{@wipe_btn=Wipe}</text>
+			<button style="main_button_wipe">
+				<placement x="%indent_main_button%" y="481"/>
 				<action function="page">wipe</action>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="500"/>
+				<text>{@wipe_btn=Wipe}</text>
+			</text>
 
-			<button style="main_button">
-				<placement x="%indent%" y="%row8_y%"/>
-				<text>{@backup_btn=Backup}</text>
+			<button style="main_button_backup">
+				<placement x="%indent_main_button%" y="666"/>
 				<action function="page">backup</action>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="685"/>
+				<text>{@backup_btn=Backup}</text>
+			</text>
 
-			<button style="main_button">
-				<placement x="%center_x%" y="%row8_y%"/>
-				<text>{@restore_btn=Restore}</text>
+			<button style="main_button_restore">
+				<placement x="%indent_main_button%" y="851"/>
 				<action function="page">restore</action>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="870"/>
+				<text>{@restore_btn=Restore}</text>
+			</text>
 
-			<button style="main_button">
-				<placement x="%indent%" y="%row13a_y%"/>
-				<text>{@mount_btn=Mount}</text>
+			<button style="main_button_mount">
+				<placement x="%indent_main_button%" y="1036"/>
 				<action function="page">mount</action>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="1055"/>
+				<text>{@mount_btn=Mount}</text>
+			</text>
 
-			<button style="main_button">
-				<placement x="%center_x%" y="%row13a_y%"/>
-				<text>{@settings_btn=Settings}</text>
+			<button style="main_button_settings">
+				<placement x="%indent_main_button%" y="1221"/>
 				<action function="page">settings</action>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="1240"/>
+				<text>{@settings_btn=Settings}</text>
+			</text>
 
-			<button style="main_button">
-				<placement x="%indent%" y="%row19_y%"/>
-				<text>{@advanced_btn=Advanced}</text>
+			<button style="main_button_advanced">
+				<placement x="%indent_main_button%" y="1406"/>
 				<action function="page">advanced</action>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="1425"/>
+				<text>{@advanced_btn=Advanced}</text>
+			</text>
 
-			<button style="main_button">
-				<placement x="%center_x%" y="%row19_y%"/>
-				<text>{@reboot_btn=Reboot}</text>
+			<button style="main_button_reboot">
+				<placement x="%indent_main_button%" y="1591"/>
 				<action function="page">reboot</action>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="1610"/>
+				<text>{@reboot_btn=Reboot}</text>
+			</text>
 		</page>
 
 		<page name="install">
@@ -1039,7 +1219,7 @@
 				<text>{@back_cancel=Press back button to cancel.}</text>
 			</text>
 
-			<button style="main_button_half_height">
+			<button style="main_button_half_height_wipe">
 				<placement x="%indent%" y="%row18a_y%"/>
 				<text>{@advanced_wipe_btn=Advanced Wipe}</text>
 				<actions>
@@ -1048,7 +1228,7 @@
 				</actions>
 			</button>
 
-			<button style="main_button_half_height">
+			<button style="main_button_half_height_wipe">
 				<condition var1="tw_has_data_media" var2="1"/>
 				<placement x="%center_x%" y="%row18a_y%"/>
 				<text>{@format_data_btn=Format Data}</text>
@@ -2788,20 +2968,23 @@
 				<text>{@reboot_hdr=Reboot}</text>
 			</text>
 
-			<button style="main_button">
+			<button style="main_button_system">
 				<condition var1="tw_reboot_system" var2="1"/>
-				<placement x="%indent%" y="%row2a_y%"/>
-				<text>{@rb_system_btn=System}</text>
+				<placement x="%indent_main_button%" y="296"/>
 				<actions>
 					<action function="set">tw_back=reboot</action>
 					<action function="page">reboot_system_routine</action>
 				</actions>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="315"/>
+				<text>{@rb_system_btn=System}</text>
+			</text>
 
-			<button style="main_button">
+			<button style="main_button_poweroff">
 				<condition var1="tw_reboot_poweroff" var2="1"/>
-				<placement x="%center_x%" y="%row2a_y%"/>
-				<text>{@rb_poweroff_btn=Power Off}</text>
+				<placement x="%indent_main_button%" y="481"/>
 				<actions>
 					<action function="set">tw_back=reboot</action>
 					<action function="set">tw_action=reboot</action>
@@ -2816,11 +2999,15 @@
 					<action function="page">rebootcheck</action>
 				</actions>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="500"/>
+				<text>{@rb_poweroff_btn=Power Off}</text>
+			</text>
 
-			<button style="main_button">
+			<button style="main_button_recovery">
 				<condition var1="tw_reboot_recovery" var2="1"/>
-				<placement x="%indent%" y="%row8_y%"/>
-				<text>{@rb_recovery_btn=Recovery}</text>
+				<placement x="%indent_main_button%" y="666"/>
 				<actions>
 					<action function="set">tw_back=reboot</action>
 					<action function="set">tw_action=reboot</action>
@@ -2835,11 +3022,15 @@
 					<action function="page">rebootcheck</action>
 				</actions>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="685"/>
+				<text>{@rb_recovery_btn=Recovery}</text>
+			</text>
 
-			<button style="main_button">
+			<button style="main_button_bootloader">
 				<condition var1="tw_reboot_bootloader" var2="1"/>
-				<placement x="%center_x%" y="%row8_y%"/>
-				<text>{@rb_bootloader_btn=Bootloader}</text>
+				<placement x="%indent_main_button%" y="851"/>
 				<actions>
 					<action function="set">tw_back=reboot</action>
 					<action function="set">tw_action=reboot</action>
@@ -2854,11 +3045,16 @@
 					<action function="page">rebootcheck</action>
 				</actions>
 			</button>
+			
+			<text style="text_pb">
+				<condition var1="tw_reboot_bootloader" var2="1"/>
+				<placement x="250" y="870"/>
+				<text>{@rb_bootloader_btn=Bootloader}</text>
+			</text>
 
-			<button style="main_button">
+			<button style="main_button_download">
 				<condition var1="tw_download_mode" var2="1"/>
-				<placement x="%indent%" y="%row13a_y%"/>
-				<text>{@rb_download_btn=Download}</text>
+				<placement x="%indent_main_button%" y="1036"/>
 				<actions>
 					<action function="set">tw_back=reboot</action>
 					<action function="set">tw_action=reboot</action>
@@ -2873,6 +3069,12 @@
 					<action function="page">rebootcheck</action>
 				</actions>
 			</button>
+			
+			<text style="text_pb">
+				<condition var1="tw_download_mode" var2="1"/>
+				<placement x="250" y="1055"/>
+				<text>{@rb_download_btn=Download}</text>
+			</text>
 
 			<text style="text_m">
 				<condition var1="tw_has_boot_slots" var2="1"/>
@@ -3122,7 +3324,6 @@
 				<listitem name="{@simact_chk=Simulate actions for theme testing}">
 					<data variable="tw_simulate_actions"/>
 				</listitem>
-                
 				<listitem name="{@simfail_chk=Simulate failure for actions}">
 					<condition var1="tw_simulate_actions" var2="1"/>
 					<data variable="tw_simulate_fail"/>
@@ -3130,6 +3331,9 @@
 				<listitem name="{@sha2_chk=Use SHA2 for hashing}">
 					<condition var1="tw_no_sha2" var2="0"/>
 					<data variable="tw_use_sha2"/>
+				</listitem>
+				<listitem name="{@show_free_sdmb=Show Free SD Mb}">
+					<data variable="tw_sd_free"/>
 				</listitem>
 			</listbox>
 
@@ -3405,7 +3609,7 @@
 			</fill>
 
 			<listbox>
-				<placement x="%indent%" y="%row3_y%" w="%content_width%" h="%listbox_settings_height%"/>
+				<placement x="%indent%" y="%row3_y%" w="%content_width%" h="1140"/>
 				<text>{@select_language=Select Language:}</text>
 				<icon selected="radio_true" unselected="radio_false" />
 				<data name="tw_language" />
@@ -3474,70 +3678,81 @@
 				<text>{@advanced_hdr=Advanced}</text>
 			</text>
 
-			<button style="main_button">
-				<placement x="%indent%" y="%row2_y%"/>
-				<text>{@copy_log_btn=Copy Log}</text>
+			<button style="main_button_log">
+				<placement x="%indent_main_button%" y="296"/>
 				<action function="page">copylog</action>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="315"/>
+				<text>{@copy_log_btn=Copy Log}</text>
+			</text>
 
-			<button style="main_button">
+			<button style="main_button_fixcontexts">
 				<condition var1="tw_has_data_media" var2="1"/>
-				<placement x="%center_x%" y="%row2_y%"/>
-				<text>{@fix_context_btn=Fix Contexts}</text>
+				<placement x="%indent_main_button%" y="481"/>
 				<action function="page">fixcontexts</action>
 			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="500"/>
+				<text>{@fix_context_btn=Fix Contexts}</text>
+			</text>
 
-			<button style="main_button">
+			<button style="main_button_explorer">
+				<placement x="%indent_main_button%" y="666"/>
+				<action function="page">filemanagerlist</action>
+			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="685"/>
+				<text>{@file_manager_btn=File Manager}</text>
+			</text>
+
+			<button style="main_button_terminal">
+				<placement x="%indent_main_button%" y="851"/>
+				<action function="page">terminalcommand</action>
+			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="870"/>
+				<text>{@terminal_btn=Terminal}</text>
+			</text>
+			
+			<button style="main_button_adb">
+				<placement x="%indent_main_button%" y="1036"/>
+				<action function="page">sideload</action>
+			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="1055"/>
+				<text>{@adb_sideload_btn=ADB Sideload}</text>
+			</text>
+					
+			<button style="main_button_reloadtheme">
+				<placement x="%indent_main_button%" y="1221"/>
+				<action function="reload"/>
+			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="1240"/>
+				<text>{@reload_theme_btn=Reload Theme}</text>
+			</text>
+			
+			<button style="main_button_partitionsd">
 				<condition var1="tw_allow_partition_sdcard" var2="1"/>
-				<placement x="%indent%" y="%row6_y%"/>
-				<text>{@part_sd_btn=Partition SD Card}</text>
+				<placement x="%indent_main_button%" y="1406"/>
 				<actions>
 					<action function="set">partitionlisterror=0</action>
 					<action function="page">partsdcardsel</action>
 				</actions>
 			</button>
-
-			<button style="main_button">
-				<placement x="%center_x%" y="%row6_y%"/>
-				<text>{@file_manager_btn=File Manager}</text>
-				<action function="page">filemanagerlist</action>
-			</button>
-
-			<button style="main_button">
-				<placement x="%indent%" y="%row10_y%"/>
-				<text>{@terminal_btn=Terminal}</text>
-				<action function="page">terminalcommand</action>
-			</button>
 			
-			<button style="main_button">
-				<placement x="%center_x%" y="%row10_y%"/>
-				<text>{@adb_sideload_btn=ADB Sideload}</text>
-				<action function="page">sideload</action>
-			</button>			
-					
-			<button style="main_button">
-				<placement x="%indent%" y="%row14_y%"/>
-				<text>{@reload_theme_btn=Reload Theme}</text>
-				<action function="reload"/>
-			</button>
-
-			<button style="main_button">
-				<placement x="%center_x%" y="%row14_y%"/>
-				<text>{@tools=Tools}</text>
-				<action function="page">tools</action>
-			</button>
-			
-			<button style="main_button">
-				<placement x="%indent%" y="%row18_y%"/>
-				<text>{@special=Special}</text>
-				<action function="page">about</action>
-			</button>
-			
-			<button style="main_button">
-				<placement x="%center_x%" y="%row18_y%"/>
-				<text>{@eta=Eta}</text>
-				<action function="page">eta</action>
-			</button>
+			<text style="text_pb">
+				<condition var1="tw_allow_partition_sdcard" var2="1"/>
+				<placement x="250" y="1425"/>
+				<text>{@part_sd_btn=Partition SD Card}</text>
+			</text>
 			
 			<button style="main_button">
 				<condition var1="tw_show_dumlock" var2="1"/>
@@ -3560,6 +3775,16 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
+			
+			<button style="main_button_tools">
+				<placement x="%indent_main_button%" y="1591"/>
+				<action function="page">tools1</action>
+			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="1610"/>
+				<text>{@additional=Additional}</text>
+			</text>
 
 			<action>
 				<touch key="home"/>
@@ -3569,6 +3794,55 @@
 			<action>
 				<touch key="back"/>
 				<action function="page">main</action>
+			</action>
+		</page>
+		
+		<page name="tools1">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
+				<text>{@tools=Tools}</text>
+			</text>
+
+			<button style="main_button_tools">
+				<placement x="%indent_main_button%" y="296"/>
+				<action function="page">tools</action>
+			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="315"/>
+				<text>{@tools=Tools}</text>
+			</text>
+			
+			<button style="main_button_special">
+				<placement x="%indent_main_button%" y="481"/>
+				<action function="page">about</action>
+			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="500"/>
+				<text>{@special=Special}</text>
+			</text>
+			
+			<button style="main_button_eta">
+				<placement x="%indent_main_button%" y="666"/>
+				<action function="page">eta</action>
+			</button>
+			
+			<text style="text_pb">
+				<placement x="250" y="685"/>
+				<text>{@eta=Eta}</text>
+			</text>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">advanced</action>
 			</action>
 		</page>
 
@@ -3808,12 +4082,23 @@
 
 			<action>
 				<touch key="back"/>
-				<action function="page">advanced</action>
+				<action function="page">tools1</action>
 			</action>
 		</page>
 
         <page name="eta">
 		<template name="pbaboutpage7"/>
+		
+		<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@twrp_header=PitchBlack Recovery Project}</text>
+			</text>
+
+			<text style="text_m">
+				<condition var1="tw_no_cpu_temp" var2="0"/>
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>%tw_version% </text>
+			</text>
 			
 	     <action>
 				<touch key="home"/>
@@ -3822,7 +4107,7 @@
 
 			<action>
 				<touch key="back"/>
-				<action function="page">advanced</action>
+				<action function="page">tools1</action>
 			</action>
 		  </page>
 		
@@ -3872,7 +4157,7 @@
 
 			<action>
 				<touch key="back"/>
-				<action function="page">advanced</action>
+				<action function="page">tools1</action>
 			</action>
 			</page>
 			
@@ -3939,87 +4224,107 @@
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1180" placement="5"/>
+			    <placement x="270" y="1230" placement="5"/>
 				<text>github for source code</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1210" placement="5"/>
+			    <placement x="270" y="1260" placement="5"/>
 				<text>TeamWin for source code of TWRP</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1240" placement="5"/>
-				<text>G.M.L</text>
+			    <placement x="270" y="1290" placement="5"/>
+				<text>George Pasakalis (G.M.L.)</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1270" placement="5"/>
+			    <placement x="270" y="1320" placement="5"/>
 				<text>Innu Ghifary Dev</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1300" placement="5"/>
+			    <placement x="270" y="1350" placement="5"/>
 				<text>Helmi Amirudin</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1330" placement="5"/>
+			    <placement x="270" y="1380" placement="5"/>
 				<text>Santy Safitri</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1360" placement="5"/>
+			    <placement x="270" y="1410" placement="5"/>
 				<text>Anik Khan</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1390" placement="5"/>
+			    <placement x="270" y="1440" placement="5"/>
 				<text>Albert I</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1420" placement="5"/>
+			    <placement x="270" y="1470" placement="5"/>
 				<text>ATG Droid</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1450" placement="5"/>
+			    <placement x="270" y="1500" placement="5"/>
+				<text>Manish4586</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="270" y="1530" placement="5"/>
+				<text>Muhammad Rifa'i</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="810" y="1230" placement="5"/>
+				<text>Imranpopz</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="810" y="1260" placement="5"/>
 				<text>Mifans Indonesia</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1480" placement="5"/>
+			    <placement x="810" y="1290" placement="5"/>
 				<text>Ahmad Sa'id Mabruri</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1510" placement="5"/>
+			    <placement x="810" y="1320" placement="5"/>
 				<text>Rivv</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1540" placement="5"/>
+			    <placement x="810" y="1350" placement="5"/>
 				<text>Zaeni Loverz</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1570" placement="5"/>
+			    <placement x="810" y="1380" placement="5"/>
 				<text>Abhishek</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1600" placement="5"/>
+			    <placement x="810" y="1410" placement="5"/>
 				<text>Louis Lee Encrypted</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1630" placement="5"/>
+			    <placement x="810" y="1440" placement="5"/>
+				<text>Yashpal Joshi</text>
+			</text>
+			
+			<text style="text_m">
+			    <placement x="810" y="1470" placement="5"/>
 				<text>osmOsis</text>
 			</text>
 			
 			<text style="text_m">
-			    <placement x="540" y="1660" placement="5"/>
+			    <placement x="810" y="1500" placement="5"/>
 				<text>All Developers & Users</text>
 			</text>
 			
@@ -4075,7 +4380,7 @@
 			
 					 <text style="text_m">
 			    <placement x="540" y="1420" placement="5"/>
-				<text>Helmiau - MTP Fixer & HAL3 Enabler</text>
+				<text>Helmiau - MTP Fixer & Camera2API enabler</text>
 			</text>
 			
 					 <text style="text_m">
@@ -4234,6 +4539,16 @@
 		<page name="surprise">
 		<template name="pbaboutpage6"/>
 		
+		<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@twrp_header=PitchBlack Recovery Project}</text>
+			</text>
+
+			<text style="text_m">
+				<condition var1="tw_no_cpu_temp" var2="0"/>
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>%tw_version% </text>
+			</text>
 		
 		<action>
 				<touch key="home"/>
@@ -4245,7 +4560,6 @@
 				<action function="page">about</action>
 			</action>   
 		</page>
-		
 		
 		<page name="partsdcardsel">
 			<template name="page"/>
@@ -4499,10 +4813,9 @@
 		<page name="lock">
 			<background color="%semi_transparent%"/>
 			
-			<image>
-				<image resource="background"/>
-				<placement y="0" x="0"/> 
-            </image>
+			<fill color="#FFFFFF">
+				<placement x="0" y="0" w="%screen_width%" h="%screen_height%"/>
+			</fill>
 
 			<image>
 				<image resource="unlock_icon"/>
@@ -5224,7 +5537,7 @@
 		</page>
 
 		<page name="terminalcommand">
-			<template name="page"/>
+			<template name="page_terminal"/>
 
 			<fill color="%background_color%">
 				<placement x="0" y="%row2_header_y%" w="%screen_width%" h="%slideout_bg_height%"/>
@@ -5499,12 +5812,21 @@
 		</page>
 
 		<page name="slideout">
-			<fill color="%background_color%">
-				<placement x="0" y="%row2_header_y%" w="%screen_width%" h="%slideout_bg_height%"/>
-			</fill>
+			<template name="page"/>
+			
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@twrp_header=PitchBlack Recovery Project}</text>
+			</text>
+
+			<text style="text_m">
+				<condition var1="tw_no_cpu_temp" var2="0"/>
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>%tw_version% </text>
+			</text>
 
 			<console>
-				<placement x="%indent%" y="%row3_header_y%" w="%content_width%" h="%slideout_height%"/>
+				<placement x="%indent%" y="285" w="%content_width%" h="1450"/>
 			</console>
 
 			<button>
