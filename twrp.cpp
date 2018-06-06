@@ -176,6 +176,7 @@ int main(int argc, char **argv) {
 	PartitionManager.Mount_By_Path("/cache", false);
 
 	bool Shutdown = false;
+	bool SkipDecryption = false;
 	string Send_Intent = "";
 	{
 		TWPartition* misc = PartitionManager.Find_Partition_By_Path("/misc");
@@ -209,6 +210,9 @@ int main(int argc, char **argv) {
 				if (*ptr) {
 					string ORSCommand = "install ";
 					ORSCommand.append(ptr);
+
+					// If we have a map of blocks we don't need to mount data.
+					SkipDecryption = *ptr == '@';
 
 					if (!OpenRecoveryScript::Insert_ORS_Command(ORSCommand))
 						break;
@@ -278,10 +282,17 @@ int main(int argc, char **argv) {
 	TWFunc::Update_Log_File();
 	// Offer to decrypt if the device is encrypted
 	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
-		LOGINFO("Is encrypted, do decrypt page first\n");
-		if (gui_startPage("decrypt", 1, 1) != 0) {
-			LOGERR("Failed to start decrypt GUI page.\n");
-		} 
+		if (SkipDecryption) {
+			LOGINFO("Skipping decryption\n");
+		} else {
+			LOGINFO("Is encrypted, do decrypt page first\n");
+			if (gui_startPage("decrypt", 1, 1) != 0) {
+				LOGERR("Failed to start decrypt GUI page.\n");
+			} else {
+				// Check for and load custom theme if present
+				gui_loadCustomResources();
+			}
+		}
 	} else if (datamedia) {
 		if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
 			LOGINFO("Failed to get default contexts and file mode for storage files.\n");
