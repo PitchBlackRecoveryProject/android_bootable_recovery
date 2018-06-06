@@ -11,7 +11,7 @@
 	<resources>
 		<font name="font_l" filename="RobotoCondensed-Regular.ttf" size="52"/>
 		<image name="background" filename="background" retainaspect="1"/>
-		<image name="background2" filename="background2" retainaspect="1"/>
+		<image name="background3" filename="background3" retainaspect="1"/>
 		<image name="splashlogo" filename="splashlogo" retainaspect="1"/>
 		<image name="splashteamwin" filename="splashteamwin" retainaspect="1"/>
 	</resources>
@@ -19,9 +19,9 @@
 	<variables>
 		<variable name="screen_width" value="1080"/>
 		<variable name="screen_height" value="1920"/>
-		<variable name="background_color" value="#000000"/>
-		<variable name="header_color" value="#000000"/>
-		<variable name="accent_color" value="#0090CA"/>
+		<variable name="background_color" value="#FFFFFF"/>
+		<variable name="header_color" value="#00000000"/>
+		<variable name="accent_color" value="#00000000"/>
 	</variables>
 
 	<pages>
@@ -32,16 +32,11 @@
 				<placement x="0" y="0" w="%screen_width%" h="960"/>
 			</fill>
 			
-			<image>
-				<image resource="background"/>
-				<placement y="0" x="0"/> 
-            </image>
-            
-            <image>
-				<image resource="background2"/>
+	        <image>
+				<image resource="background3"/>
 				<placement y="3" x="3"/> 
             </image>
-
+            
 			<image>
 				<image resource="splashteamwin"/>
 				<placement x="540" y="960" placement="4"/>

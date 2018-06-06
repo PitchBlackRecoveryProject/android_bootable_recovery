@@ -677,6 +677,8 @@
 		<string name="partition_not_found">lokasi: {1} tidak ditemukan dalam daftar partisi</string>
 
 		<!--mod tools-->
+		<string name="additional_hdr">Tambahan</string>
+		<string name="additional">Tambahan</string>
 		<string name="tools_hdr">Tools</string>
 		<string name="tools">Tools</string>
 		<string name="SuperSU_btn">SuperSU</string>
@@ -764,7 +766,7 @@
 		<string name="pb_fstab">Deteksi fstab: '{1}'</string>
 		<string name="pb_dm_verity">Sukses menerapkan DM-Verity</string>
 		<string name="pb_dm_verity_off">DM-Verity tidak diaktifkan</string>
-
+		<string name="show_free_sdmb">Tampilkan Memory Bebas</string>
 	</resources>
 </language>
 

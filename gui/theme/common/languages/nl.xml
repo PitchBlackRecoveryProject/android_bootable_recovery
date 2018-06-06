@@ -669,5 +669,6 @@
 		<string name="theme_ver_err">Aangepaste thema versie komt niet overeen met TWRP versie. Stock thema gebruiken.</string>
 		<string name="up_a_level">(Niveau omhoog)</string>
 		<string name="install_reboot">Herstarten in 5 seconden</string>
+		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
 </language>
