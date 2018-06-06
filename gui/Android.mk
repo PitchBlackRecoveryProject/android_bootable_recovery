@@ -129,10 +129,6 @@ endef
 
 TWRP_RES := $(commands_recovery_local_path)/gui/theme/common/fonts
 TWRP_RES += $(commands_recovery_local_path)/gui/theme/common/languages
-ifeq ($(TW_EXTRA_LANGUAGES),true)
-    TWRP_RES += $(commands_recovery_local_path)/gui/theme/extra-languages/fonts
-    TWRP_RES += $(commands_recovery_local_path)/gui/theme/extra-languages/languages
-endif
 
 ifeq ($(TW_CUSTOM_THEME),)
     ifeq ($(TW_THEME),)
