@@ -693,6 +693,5 @@
 		<string name="include_kernel_log">包含内核日志</string>
 		<string name="sha2_chk">使用 SHA2 进行散列校验</string>
 		<string name="unable_set_boot_slot">更改 bootloader 启动分区至 {1} 错误</string>
-		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
 </language>

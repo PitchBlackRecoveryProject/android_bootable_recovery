@@ -691,6 +691,5 @@
 		<string name="copy_kernel_log">Kernel log másolva: {1}</string>
 		<string name="include_kernel_log">Emellett Kernel Log másolása</string>
 		<string name="unable_set_boot_slot">Hiba a boot slot váltása során erre: {1}</string>
-		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
 </language>

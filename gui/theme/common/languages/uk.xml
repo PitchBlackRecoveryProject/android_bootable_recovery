@@ -666,6 +666,5 @@
 		<string name="partition_not_found">шлях: {1} не знайдено у списку розділів</string>
 		<string name="copy_kernel_log">Копіювання kernel log у {1}</string>
 		<string name="include_kernel_log">Увімкнути Kernel Log</string>
-		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
 </language>

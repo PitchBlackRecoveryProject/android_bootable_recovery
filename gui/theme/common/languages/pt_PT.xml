@@ -694,6 +694,5 @@
 		<string name="include_kernel_log">Incluir log do Kernel</string>
 		<string name="sha2_chk">Usar SHA2 para fazer hash</string>
 		<string name="unable_set_boot_slot">Erro ao alterar o slot do bootloader para {1}</string>
-		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
 </language>
