@@ -231,6 +231,8 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(twcmd);
 		ADD_ACTION(setbootslot);
 		ADD_ACTION(installapp);
+                ADD_ACTION(unpack);
+                ADD_ACTION(repack);
 	}
 
 	// First, get the action
@@ -2055,3 +2057,28 @@ exit:
 	operation_end(0);
 	return 0;
 }
+
+int GUIAction::unpack(std::string arg __unused)
+{
+	operation_start("Prepartion to unpack");
+	if (simulate) {
+        simulate_progress_bar();
+         } else {
+		TWFunc::Unpack_Image("/recovery");
+	}
+	operation_end(0);
+	return 0;
+}
+
+int GUIAction::repack(std::string arg __unused)
+{
+	operation_start("Repacking done");
+	if (simulate) {
+        simulate_progress_bar();
+         } else {
+		TWFunc::Repack_Image("/recovery");
+	}
+	operation_end(0);
+	return 0;
+}
+
