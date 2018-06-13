@@ -1496,7 +1496,7 @@ if (local.find("-ramdisk.") != string::npos) {
 Command += " --ramdisk " + tmp + "/ramdisk-new";
 continue;
 }
-if (local.find("-dtb") != string::npos) {
+if (local.find("-dtb") != string::npos || local.find("-dt") != string::npos) {
 Command += " --dt " + split_img + "/" + local;
 continue;
 }
