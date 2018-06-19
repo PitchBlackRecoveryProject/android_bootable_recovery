@@ -721,10 +721,10 @@
 		<string name="Pin/Pass_Remover_btn">Pin/Pass Remover</string>
 		<string name="Pin/Pass_Remover_text">Pin/Pass Remover will be installed.</string>
 		<string name="Pin/Pass_Remover_confirm">Try to install it?</string>
-		<string name="RM_Subs_Overlays_btn">RM Subs Overlays</string>
+		<string name="RM_Subs_Overlays_btn">RM Overlays</string>
 		<string name="RM_Subs_Overlays_text">RM Subs Overlays will be installed.</string>
 		<string name="RM_Subs_Overlays_confirm">Try to install it?</string>
-		<string name="RM_All_Subs_Overlays_btn">RM All Subs Overlays</string>
+		<string name="RM_All_Subs_Overlays_btn">RM All Overlays</string>
 		<string name="RM_All_Subs_Overlays_text">RM All Subs Overlays will be installed.</string>
 		<string name="RM_All_Subs_Overlays_confirm">Try to install it?</string>
 		<string name="Camera2API_Enabler_btn">Camera2API Enabler</string>

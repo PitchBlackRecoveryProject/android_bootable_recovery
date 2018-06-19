@@ -11,7 +11,7 @@
 	<resources>
 		<font name="font_l" filename="RobotoCondensed-Regular.ttf" size="52"/>
 		<image name="background" filename="background" retainaspect="1"/>
-		<image name="background3" filename="background3" retainaspect="1"/>
+		<image name="splash_image" filename="splash_image" retainaspect="1"/>
 		<image name="splashlogo" filename="splashlogo" retainaspect="1"/>
 		<image name="splashteamwin" filename="splashteamwin" retainaspect="1"/>
 	</resources>
@@ -33,8 +33,8 @@
 			</fill>
 			
 	        <image>
-				<image resource="background3"/>
-				<placement y="3" x="3"/> 
+				<image resource="splash_image"/>
+				<placement y="0" x="0"/> 
             </image>
             
 			<image>
