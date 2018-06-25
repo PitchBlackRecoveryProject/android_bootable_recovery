@@ -626,10 +626,7 @@ int OpenRecoveryScript::Run_OpenRecoveryScript_Action() {
 	}
 	if (reboot) {
 		// Disable stock recovery reflashing
-	if (DataManager::GetIntValue(PB_CALL_DEACTIVATION) != 0) {
-		 TWFunc::Deactivation_Process();
-		 DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
-	}
+		TWFunc::Deactivation_Process();
 		TWFunc::Disable_Stock_Recovery_Replace();
 		usleep(2000000); // Sleep for 2 seconds before rebooting
 		TWFunc::tw_reboot(rb_system);
