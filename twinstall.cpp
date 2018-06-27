@@ -186,18 +186,21 @@ string pre_build = pre_something + "build";
 	
 	 gui_msg("pb_install_detecting=Detecting Current Package");
 
-   if (!Zip->EntryExists(miui_sg_path)) {
-   	if (Zip->EntryExists("system.new.dat") || Zip->EntryExists("system.new.dat.br"))
-           DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
-	       gui_msg("pb_install_standard_detected=- Detected standard Package");
-   } else {
-	   if (Zip->EntryExists("system.new.dat")) {
+	if (Zip->ExtractEntry(meta + "/google/android/update-binary", "/tmp/miui_check", 0644)) {
+	   string outp=TWFunc::Get_output("grep miui /tmp/miui_check");
+	   if (outp.size() > 0 || Zip->EntryExists(miui_sg_path) == true){
+	   if (Zip->EntryExists("system.new.dat") || Zip->EntryExists("system.new.dat.br")) {
 	       DataManager::SetValue(PB_MIUI_ZIP_TMP, 1);
 	       DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
 	       }
                DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
 	       gui_msg("pb_install_miui_detected=- Detected MIUI Update Package");
-       }
+	   } else {
+		if (Zip->EntryExists("system.new.dat") || Zip->EntryExists("system.new.dat.br"))
+           		DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
+	       		gui_msg("pb_install_standard_detected=- Detected standard Package");
+		}
+	}
 
 	
 	    if (DataManager::GetIntValue(PB_INCREMENTAL_PACKAGE) != 0) {

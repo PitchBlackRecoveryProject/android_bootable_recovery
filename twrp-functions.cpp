@@ -123,6 +123,22 @@ string TWFunc::Get_Path(const string& Path) {
 		return Path;
 }
 
+string TWFunc::Get_output(const string& cmd) {
+	string data;
+	FILE * stream;
+	const int max_buffer = 256;
+	char buffer[max_buffer];
+	string s = cmd + " 2>&1";
+
+	stream = popen(s.c_str(), "r");
+	if (stream) {
+		while (!feof(stream))
+		if (fgets(buffer, max_buffer, stream) != NULL) data.append(buffer);
+			pclose(stream);
+	}
+	return data;
+}
+
 int TWFunc::Wait_For_Child(pid_t pid, int *status, string Child_Name) {
 	pid_t rc_pid;
 
