@@ -62,6 +62,8 @@ static string tmp = "/tmp/pb";
 static string ramdisk = tmp + "/ramdisk";
 static string split_img = tmp + "/split_img";
 static string default_prop = ramdisk + "/default.prop";
+static string fstab1 = "/system/vendor/etc";
+static string fstab2 = "/vendor/etc";
 
 /* Execute a command */
 int TWFunc::Exec_Cmd(const string& cmd, string &result) {
@@ -1620,14 +1622,14 @@ struct dirent* de;
 struct dirent* de1;
 struct dirent* de2;
 d = opendir(ramdisk.c_str());
-d1 = opendir("/system/vendor/etc".c_str());
-d2 = opendir("/vendor/etc".c_str());
+d1 = opendir(fstab1.c_str());
+d2 = opendir(fstab2.c_str());
 if (d == NULL)
 {
 LOGINFO("Unable to open '%s'\n", ramdisk.c_str());
 return false;
 }
-if ((PartitionManager.Mount_By_Path("/vendor", false) || (PartitionManager.Mount_By_Path("/system", false)) {
+if (PartitionManager.Mount_By_Path("/vendor", false) || PartitionManager.Mount_By_Path("/system", false)) {
 while ((de = readdir(d)) != NULL)
 {
 cmp = de->d_name;
@@ -1641,7 +1643,7 @@ cmp = de->d_name;
 while ((de1 = readdir(d1)) != NULL)
 {
 cmp1 = de1->d_name;
-	path = "/system/vendor/etc/" + cmp1;
+	path = fstab1 + "/" + cmp1;
 	if (cmp1.find("fstab.") != string::npos) {
 	gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp1));
 	if (!status) {
@@ -1652,7 +1654,7 @@ closedir (d1);
 while ((de2 = readdir(d2)) != NULL)
 {
 cmp2 = de2->d_name;
-	path = "/vendor/etc/" + cmp2;
+	path = fstab2 + "/" + cmp2;
 	if (cmp1.find("fstab.") != string::npos) {
 	gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp2));
 	if (!status) {
@@ -1706,14 +1708,14 @@ struct dirent* de;
 struct dirent* de1;
 struct dirent* de2;
 d = opendir(ramdisk.c_str());
-d1 = opendir("/system/vendor/etc".c_str());
-d2 = opendir("vendor/etc".c_str());
+d1 = opendir(fstab1.c_str());
+d2 = opendir(fstab2.c_str());
 if (d == NULL)
 {
 LOGINFO("Unable to open '%s'\n", ramdisk.c_str());
 return false;
 }
-if ((PartitionManager.Mount_By_Path("/vendor", false) || (PartitionManager.Mount_By_Path("/system", false)) {
+if (PartitionManager.Mount_By_Path("/vendor", false) || PartitionManager.Mount_By_Path("/system", false)) {
 while ((de = readdir(d)) != NULL)
 {
    cmp = de->d_name;
@@ -1732,7 +1734,7 @@ while ((de = readdir(d)) != NULL)
 while ((de1 = readdir(d1)) != NULL)
 {
    cmp = de1->d_name;
-   path = "/system/vendor/etc" + "/" + cmp;
+   path = fstab1 + "/" + cmp;
    if (cmp.find("fstab.") != string::npos) {
    	if (encryption != 1)
        gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
@@ -1747,7 +1749,7 @@ while ((de1 = readdir(d1)) != NULL)
 while ((de2 = readdir(d2)) != NULL)
 {
    cmp = de2->d_name;
-   path = "/vendor/etc" + "/" + cmp;
+   path = fstab2 + "/" + cmp;
    if (cmp.find("fstab.") != string::npos) {
    	if (encryption != 1)
        gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
