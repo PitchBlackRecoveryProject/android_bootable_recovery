@@ -10,8 +10,6 @@
 
 	<resources>
 		<font name="font_l" filename="RobotoCondensed-Regular.ttf" size="52"/>
-		<image name="background" filename="background" retainaspect="1"/>
-		<image name="splash_image" filename="splash_image" retainaspect="1"/>
 		<image name="splashlogo" filename="splashlogo" retainaspect="1"/>
 		<image name="splashteamwin" filename="splashteamwin" retainaspect="1"/>
 	</resources>
@@ -26,16 +24,11 @@
 
 	<pages>
 		<page name="splash">
-			<background color="%background_color%"/>
+			<background color="%background_color2%"/>
 
-			<fill color="%header_color%">
-				<placement x="0" y="0" w="%screen_width%" h="960"/>
+			<fill color="%front_color%">
+				<placement x="3" y="3" w="1074" h="1914"/>
 			</fill>
-			
-	        <image>
-				<image resource="splash_image"/>
-				<placement y="0" x="0"/> 
-            </image>
             
 			<image>
 				<image resource="splashteamwin"/>
