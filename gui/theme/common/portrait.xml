@@ -71,6 +71,12 @@
 			<image resource="pb_theme_button"/>
 		</style>
 		
+		<style name="main_button_black">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_black"/>
+		</style>
+		
 		<style name="main_button_install">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_pb" color="%text_button_color%"/>
@@ -209,6 +215,12 @@
 			<image resource="main_button_themes"/>
 		</style>
 		
+		<style name="special_button_black">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="special_button_black"/>
+		</style>
+		
 		<style name="special_button_info">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_pb" color="%text_button_color%"/>
@@ -237,6 +249,12 @@
 			<highlight color="%highlight_color%"/>
 			<font resource="font_pb" color="%text_button_color%"/>
 			<image resource="special_button_settingota"/>
+		</style>
+		
+		<style name="tool_button_black">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="tool_button_black"/>
 		</style>
 		
 		<style name="tool_button_supersu">
@@ -490,7 +508,7 @@
 				<text>%tw_version% </text>
 			</text>
 
-			<button style="main_button_install">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="296"/>
 				<actions>
 					<action function="queueclear"/>
@@ -499,75 +517,115 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="93" y="310"/>
+				<image resource="main_button_install"/>
+			</image>
+			
 			<text style="text_pb">
 				<placement x="250" y="318"/>
 				<text>{@install_btn=Install}</text>
 			</text>
 
-			<button style="main_button_wipe">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="481"/>
 				<action function="page">wipe</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="495"/>
+				<image resource="main_button_wipe"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="503"/>
 				<text>{@wipe_btn=Wipe}</text>
 			</text>
 
-			<button style="main_button_backup">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="666"/>
 				<action function="page">backup</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="680"/>
+				<image resource="main_button_backup"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="688"/>
 				<text>{@backup_btn=Backup}</text>
 			</text>
 
-			<button style="main_button_restore">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="851"/>
 				<action function="page">restore</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="865"/>
+				<image resource="main_button_restore"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="873"/>
 				<text>{@restore_btn=Restore}</text>
 			</text>
 
-			<button style="main_button_mount">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="1036"/>
 				<action function="page">mount</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="1050"/>
+				<image resource="main_button_mount"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="1058"/>
 				<text>{@mount_btn=Mount}</text>
 			</text>
 
-			<button style="main_button_settings">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="1221"/>
 				<action function="page">settings</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="1235"/>
+				<image resource="main_button_settings"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="1243"/>
 				<text>{@settings_btn=Settings}</text>
 			</text>
 
-			<button style="main_button_advanced">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="1406"/>
 				<action function="page">advanced</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="1420"/>
+				<image resource="main_button_advanced"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="1428"/>
 				<text>{@advanced_btn=Advanced}</text>
 			</text>
 
-			<button style="main_button_reboot">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="1591"/>
 				<action function="page">reboot</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="1605"/>
+				<image resource="main_button_reboot"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="1613"/>
@@ -3103,7 +3161,7 @@
 				<text>{@reboot_hdr=Reboot}</text>
 			</text>
 
-			<button style="main_button_system">
+			<button style="main_button_black">
 				<condition var1="tw_reboot_system" var2="1"/>
 				<placement x="%indent_main_button%" y="296"/>
 				<actions>
@@ -3112,12 +3170,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="93" y="310"/>
+				<image resource="main_button_system"/>
+			</image>
+			
 			<text style="text_pb">
-				<placement x="250" y="318"/>
+				<placement x="250" y="315"/>
 				<text>{@rb_system_btn=System}</text>
 			</text>
 
-			<button style="main_button_poweroff">
+			<button style="main_button_black">
 				<condition var1="tw_reboot_poweroff" var2="1"/>
 				<placement x="%indent_main_button%" y="481"/>
 				<actions>
@@ -3135,12 +3198,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="93" y="495"/>
+				<image resource="main_button_poweroff"/>
+			</image>
+			
 			<text style="text_pb">
-				<placement x="250" y="503"/>
+				<placement x="250" y="500"/>
 				<text>{@rb_poweroff_btn=Power Off}</text>
 			</text>
 
-			<button style="main_button_recovery">
+			<button style="main_button_black">
 				<condition var1="tw_reboot_recovery" var2="1"/>
 				<placement x="%indent_main_button%" y="666"/>
 				<actions>
@@ -3158,12 +3226,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="93" y="680"/>
+				<image resource="main_button_recovery"/>
+			</image>
+			
 			<text style="text_pb">
-				<placement x="250" y="688"/>
+				<placement x="250" y="685"/>
 				<text>{@rb_recovery_btn=Recovery}</text>
 			</text>
 
-			<button style="main_button_bootloader">
+			<button style="main_button_black">
 				<condition var1="tw_reboot_bootloader" var2="1"/>
 				<placement x="%indent_main_button%" y="851"/>
 				<actions>
@@ -3181,13 +3254,18 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="93" y="862"/>
+				<image resource="main_button_bootloader"/>
+			</image>
+			
 			<text style="text_pb">
 				<condition var1="tw_reboot_bootloader" var2="1"/>
-				<placement x="250" y="873"/>
+				<placement x="250" y="870"/>
 				<text>{@rb_bootloader_btn=Bootloader}</text>
 			</text>
 
-			<button style="main_button_download">
+			<button style="main_button_black">
 				<condition var1="tw_download_mode" var2="1"/>
 				<placement x="%indent_main_button%" y="1036"/>
 				<actions>
@@ -3205,9 +3283,15 @@
 				</actions>
 			</button>
 			
+			<image>
+				<condition var1="tw_download_mode" var2="1"/>
+				<placement x="93" y="1047"/>
+				<image resource="main_button_download"/>
+			</image>
+			
 			<text style="text_pb">
 				<condition var1="tw_download_mode" var2="1"/>
-				<placement x="250" y="1058"/>
+				<placement x="250" y="1055"/>
 				<text>{@rb_download_btn=Download}</text>
 			</text>
 
@@ -3470,6 +3554,9 @@
 				<listitem name="{@show_free_sdmb=Show Free SD Mb}">
 					<data variable="tw_sd_free"/>
 				</listitem>
+				<listitem name="{@use_aromafm=Use Aroma File Manager}">
+					<data variable="aromafm"/>
+				</listitem>
 			</listbox>
 
 			<button style="main_button_half_height">
@@ -3649,7 +3736,7 @@
 				<condition var1="tw_no_screen_timeout" op="!=" var2="1"/>
 				<placement x="indent" y="%row5_y%" w="%content_width%"/>
 				<text>{@screen_to_slider=Screen timeout in seconds:}</text>
-				<data variable="tw_screen_timeout_secs" min="15" max="300"/>
+				<data variable="tw_screen_timeout_secs" min="15" max="3600"/>
 			</slidervalue>
 
 			<slidervalue>
@@ -3813,68 +3900,121 @@
 				<text>{@advanced_hdr=Advanced}</text>
 			</text>
 
-			<button style="main_button_log">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="296"/>
 				<action function="page">copylog</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="310"/>
+				<image resource="main_button_log"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="318"/>
 				<text>{@copy_log_btn=Copy Log}</text>
 			</text>
 
-			<button style="main_button_fixcontexts">
+			<button style="main_button_black">
 				<condition var1="tw_has_data_media" var2="1"/>
 				<placement x="%indent_main_button%" y="481"/>
 				<action function="page">fixcontexts</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="495"/>
+				<image resource="main_button_fixcontexts"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="503"/>
 				<text>{@fix_context_btn=Fix Contexts}</text>
 			</text>
 
-			<button style="main_button_explorer">
+			<button style="main_button_black">
+				<condition var1="aromafm" op="!=" var2="1"/>
 				<placement x="%indent_main_button%" y="666"/>
 				<action function="page">filemanagerlist</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="680"/>
+				<image resource="main_button_explorer"/>
+			</image>
+			
+			<button style="main_button_black">
+				<condition var1="aromafm" var2="1"/>
+				<placement x="%indent_main_button%" y="666"/>
+				<actions>
+					<action function="set">tw_back=filemanagerlist</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/aromafm/aromafm.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Aroma_FM_text=Aroma FM will be installed.}</action>
+					<action function="set">tw_text2={@Aroma_FM_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<image>
+				<placement x="93" y="680"/>
+				<image resource="main_button_explorer"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="688"/>
 				<text>{@file_manager_btn=File Manager}</text>
 			</text>
 
-			<button style="main_button_terminal">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="851"/>
 				<action function="page">terminalcommand</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="865"/>
+				<image resource="main_button_terminal"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="873"/>
 				<text>{@terminal_btn=Terminal}</text>
 			</text>
 			
-			<button style="main_button_adb">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="1036"/>
 				<action function="page">sideload</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="1050"/>
+				<image resource="main_button_adb"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="1058"/>
 				<text>{@adb_sideload_btn=ADB Sideload}</text>
 			</text>
 					
-			<button style="main_button_reloadtheme">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="1221"/>
 				<action function="reload"/>
 			</button>
+			
+			<image>
+				<placement x="93" y="1235"/>
+				<image resource="main_button_reloadtheme"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="1243"/>
 				<text>{@reload_theme_btn=Reload Theme}</text>
 			</text>
 			
-			<button style="main_button_partitionsd">
+			<button style="main_button_black">
 				<condition var1="tw_allow_partition_sdcard" var2="1"/>
 				<placement x="%indent_main_button%" y="1406"/>
 				<actions>
@@ -3882,6 +4022,12 @@
 					<action function="page">partsdcardsel</action>
 				</actions>
 			</button>
+			
+			<image>
+				<condition var1="tw_allow_partition_sdcard" var2="1"/>
+				<placement x="93" y="1420"/>
+				<image resource="main_button_partitionsd"/>
+			</image>
 			
 			<text style="text_pb">
 				<condition var1="tw_allow_partition_sdcard" var2="1"/>
@@ -3911,10 +4057,15 @@
 				</actions>
 			</button>
 			
-			<button style="main_button_tools">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="1591"/>
 				<action function="page">tools1</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="1605"/>
+				<image resource="main_button_tools"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="1613"/>
@@ -3940,30 +4091,45 @@
 				<text>{@tools=Tools}</text>
 			</text>
 
-			<button style="main_button_tools">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="296"/>
 				<action function="page">tools</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="310"/>
+				<image resource="main_button_tools"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="318"/>
 				<text>{@tools=Tools}</text>
 			</text>
 			
-			<button style="main_button_special">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="481"/>
 				<action function="page">about</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="495"/>
+				<image resource="main_button_special"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="503"/>
 				<text>{@special=Special}</text>
 			</text>
 			
-			<button style="main_button_themes">
+			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="666"/>
 				<action function="page">color_changer</action>
 			</button>
+			
+			<image>
+				<placement x="93" y="680"/>
+				<image resource="main_button_themes"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="688"/>
@@ -3989,7 +4155,7 @@
 				<text>{@tools_hdr=Tools}</text>
 			</text>
 
-			<button style="tool_button_supersu">
+			<button style="tool_button_black">
 				<placement x="26" y="294"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
@@ -4005,12 +4171,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="47" y="329"/>
+				<image resource="tool_button_supersu"/>
+			</image>
+			
 			<text style="text_pb_tools">
 				<placement x="160" y="346"/>
 				<text>{@SuperSU_btn=SuperSU}</text>
 			</text>
 			
-			<button style="tool_button_unrootsupersu">
+			<button style="tool_button_black">
 				<placement x="26" y="459"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
@@ -4026,12 +4197,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="47" y="493"/>
+				<image resource="tool_button_unrootsupersu"/>
+			</image>
+			
 			<text style="text_pb_tools">
 				<placement x="160" y="511"/>
 				<text>{@Unroot_SuperSU_btn=Unroot SuperSU}</text>
 			</text>
 			
-			<button style="tool_button_magisk">
+			<button style="tool_button_black">
 				<placement x="26" y="624"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
@@ -4047,12 +4223,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="47" y="657"/>
+				<image resource="tool_button_magisk"/>
+			</image>
+			
 			<text style="text_pb_tools">
 				<placement x="160" y="676"/>
 				<text>{@Magisk_btn=Magisk}</text>
 			</text>
 			
-			<button style="tool_button_unrootmagisk">
+			<button style="tool_button_black">
 				<placement x="26" y="789"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
@@ -4068,12 +4249,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="47" y="821"/>
+				<image resource="tool_button_unrootmagisk"/>
+			</image>
+			
 			<text style="text_pb_tools">
 				<placement x="160" y="841"/>
 				<text>{@Unroot_Magisk_btn=Unroot Magisk}</text>
 			</text>
 			
-			<button style="tool_button_mtp">
+			<button style="tool_button_black">
 				<placement x="26" y="954"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
@@ -4089,12 +4275,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="47" y="985"/>
+				<image resource="tool_button_mtp"/>
+			</image>
+			
 			<text style="text_pb_tools">
 				<placement x="160" y="1006"/>
 				<text>{@MTP_Fix_btn=MTP Fix}</text>
 			</text>
 			
-			<button style="tool_button_substratum">
+			<button style="tool_button_black">
 				<placement x="26" y="1119"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
@@ -4110,13 +4301,18 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="47" y="1149"/>
+				<image resource="tool_button_substratum"/>
+			</image>
+			
 			<text style="text_pb_tools">
 				<placement x="160" y="1171"/>
 				<text>{@RM_Subs_Overlays_btn=RM Overlays}</text>
 			</text>
 			
-			<button style="tool_button_substratum">
-				<placement x="26" y="1284"/>
+			<button style="tool_button_black">
+				<placement x="537" y="294"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
 					<action function="set">tw_filename=/sdcard/PBRP/tools/alloverlays.zip</action>
@@ -4131,33 +4327,17 @@
 				</actions>
 			</button>
 			
-			<text style="text_pb_tools">
-				<placement x="160" y="1336"/>
-				<text>{@RM_All_Subs_Overlays_btn=RM All Overlays}</text>
-			</text>
-			
-			<button style="tool_button_aroma">
-				<placement x="537" y="294"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/aromafm/aromafm.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@Aroma_FM_text=Aroma FM will be installed.}</action>
-					<action function="set">tw_text2={@Aroma_FM_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
+			<image>
+				<placement x="559" y="329"/>
+				<image resource="tool_button_substratum"/>
+			</image>
 			
 			<text style="text_pb_tools">
 				<placement x="670" y="346"/>
-				<text>{@Aroma_FM_btn=Aroma FM}</text>
+				<text>{@RM_All_Subs_Overlays_btn=RM All Overlays}</text>
 			</text>
 			
-			<button style="tool_button_fpscanner">
+			<button style="tool_button_black">
 				<placement x="537" y="459"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
@@ -4173,12 +4353,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="559" y="493"/>
+				<image resource="tool_button_fpscanner"/>
+			</image>
+			
 			<text style="text_pb_tools">
 				<placement x="670" y="511"/>
 				<text>{@FP_Scanner_btn=FP Scanner}</text>
 			</text>
 			
-			<button style="tool_button_removepin">
+			<button style="tool_button_black">
 				<placement x="537" y="624"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
@@ -4194,12 +4379,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="559" y="657"/>
+				<image resource="tool_button_removepin"/>
+			</image>
+			
 			<text style="text_pb_tools">
 				<placement x="670" y="676"/>
 				<text>{@Pin/Pass_Remover_btn=Pin/Pass Remover}</text>
 			</text>
 			
-			<button style="tool_button_cam2ap">
+			<button style="tool_button_black">
 				<placement x="537" y="789"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
@@ -4215,12 +4405,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="559" y="821"/>
+				<image resource="tool_button_cam2ap"/>
+			</image>
+			
 			<text style="text_pb_tools">
 				<placement x="670" y="841"/>
 				<text>{@Camera2API_Enabler_btn=Camera2API Enabler}</text>
 			</text>
 			
-			<button style="tool_button_appdelete">
+			<button style="tool_button_black">
 				<placement x="537" y="954"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
@@ -4236,12 +4431,17 @@
 				</actions>
 			</button>
 			
+			<image>
+				<placement x="559" y="985"/>
+				<image resource="tool_button_appdelete"/>
+			</image>
+			
 			<text style="text_pb_tools">
 				<placement x="670" y="1006"/>
 				<text>{@App_Delete_btn=App Delete}</text>
 			</text>
 			
-			<button style="tool_button_dmverity">
+			<button style="tool_button_black">
 				<placement x="537" y="1119"/>
 				<actions>
 					<action function="set">tw_back=tools</action>
@@ -4256,6 +4456,11 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
+			
+			<image>
+				<placement x="559" y="1149"/>
+				<image resource="tool_button_dmverity"/>
+			</image>
 			
 			<text style="text_pb_tools">
 				<placement x="670" y="1171"/>
@@ -4276,60 +4481,90 @@
 		<page name="about">
 		<template name="about"/>
 		   
-		   	<button style="special_button_info">
+		   <button style="special_button_black">
 				<placement x="45" y="105"/>
 				<action function="page">about</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="141"/>
+				<image resource="special_button_info"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="155"/>
 				<text>{@about_pbrp=About PBRP}</text>
 			</text>
 			
-		   <button style="special_button_thanksto">
+		   <button style="special_button_black">
 				<placement x="45" y="277"/>
 				<action function="page">thanksto</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="313"/>
+				<image resource="special_button_thanksto"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="327"/>
 				<text>{@thanksto=Thanks to}</text>
 			</text>
 			
-		   	<button style="special_button_toolcredit">
+		   	<button style="special_button_black">
 				<placement x="45" y="449"/>
 				<action function="page">toolscr</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="485"/>
+				<image resource="special_button_toolcredit"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="499"/>
 				<text>{@toolscr=Tools Credit}</text>
 			</text>
 			
-			<button style="special_button_contributors">
+			<button style="special_button_black">
 				<placement x="45" y="621"/>
 				<action function="page">contributors</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="657"/>
+				<image resource="special_button_contributors"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="671"/>
 				<text>Official Maintainers</text>
 			</text>
 			
-			<button style="special_button_settingota">
+			<button style="special_button_black">
 				<placement x="45" y="793"/>
 				<action function="page">SETTINGOTA</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="829"/>
+				<image resource="special_button_settingota"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="843"/>
 				<text>{@SETTINGOTA=Setting OTA}</text>
 			</text>
 			
-			<button style="special_button_changelog">
+			<button style="special_button_black">
 				<placement x="45" y="965"/>
 				<action function="page">changelog</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="1001"/>
+				<image resource="special_button_changelog"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="1015"/>
@@ -4386,60 +4621,90 @@
 		<page name="thanksto">
 			<template name="about"/>
 		   
-		   	<button style="special_button_info">
+		   	<button style="special_button_black">
 				<placement x="45" y="105"/>
 				<action function="page">about</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="141"/>
+				<image resource="special_button_info"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="155"/>
 				<text>{@about_pbrp=About PBRP}</text>
 			</text>
 			
-		   <button style="special_button_thanksto">
+		   <button style="special_button_black">
 				<placement x="45" y="277"/>
 				<action function="page">thanksto</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="313"/>
+				<image resource="special_button_thanksto"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="327"/>
 				<text>{@thanksto=Thanks to}</text>
 			</text>
 			
-		   	<button style="special_button_toolcredit">
+		   	<button style="special_button_black">
 				<placement x="45" y="449"/>
 				<action function="page">toolscr</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="485"/>
+				<image resource="special_button_toolcredit"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="499"/>
 				<text>{@toolscr=Tools Credit}</text>
 			</text>
 			
-			<button style="special_button_contributors">
+			<button style="special_button_black">
 				<placement x="45" y="621"/>
 				<action function="page">contributors</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="657"/>
+				<image resource="special_button_contributors"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="671"/>
 				<text>Official Maintainers</text>
 			</text>
 			
-			<button style="special_button_settingota">
+			<button style="special_button_black">
 				<placement x="45" y="793"/>
 				<action function="page">SETTINGOTA</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="829"/>
+				<image resource="special_button_settingota"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="843"/>
 				<text>{@SETTINGOTA=Setting OTA}</text>
 			</text>
 			
-			<button style="special_button_changelog">
+			<button style="special_button_black">
 				<placement x="45" y="965"/>
 				<action function="page">changelog</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="1001"/>
+				<image resource="special_button_changelog"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="1015"/>
@@ -4488,60 +4753,90 @@
 		<page name="toolscr">
 		<template name="about"/>
 		   
-		   	<button style="special_button_info">
+		  <button style="special_button_black">
 				<placement x="45" y="105"/>
 				<action function="page">about</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="141"/>
+				<image resource="special_button_info"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="155"/>
 				<text>{@about_pbrp=About PBRP}</text>
 			</text>
 			
-		   <button style="special_button_thanksto">
+		   <button style="special_button_black">
 				<placement x="45" y="277"/>
 				<action function="page">thanksto</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="313"/>
+				<image resource="special_button_thanksto"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="327"/>
 				<text>{@thanksto=Thanks to}</text>
 			</text>
 			
-		   	<button style="special_button_toolcredit">
+		   	<button style="special_button_black">
 				<placement x="45" y="449"/>
 				<action function="page">toolscr</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="485"/>
+				<image resource="special_button_toolcredit"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="499"/>
 				<text>{@toolscr=Tools Credit}</text>
 			</text>
 			
-			<button style="special_button_contributors">
+			<button style="special_button_black">
 				<placement x="45" y="621"/>
 				<action function="page">contributors</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="657"/>
+				<image resource="special_button_contributors"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="671"/>
 				<text>Official Maintainers</text>
 			</text>
 			
-			<button style="special_button_settingota">
+			<button style="special_button_black">
 				<placement x="45" y="793"/>
 				<action function="page">SETTINGOTA</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="829"/>
+				<image resource="special_button_settingota"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="843"/>
 				<text>{@SETTINGOTA=Setting OTA}</text>
 			</text>
 			
-			<button style="special_button_changelog">
+			<button style="special_button_black">
 				<placement x="45" y="965"/>
 				<action function="page">changelog</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="1001"/>
+				<image resource="special_button_changelog"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="1015"/>
@@ -4580,60 +4875,90 @@
 		<page name="contributors">
 		<template name="about"/>
 		   
-		   	<button style="special_button_info">
+		   <button style="special_button_black">
 				<placement x="45" y="105"/>
 				<action function="page">about</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="141"/>
+				<image resource="special_button_info"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="155"/>
 				<text>{@about_pbrp=About PBRP}</text>
 			</text>
 			
-		   <button style="special_button_thanksto">
+		   <button style="special_button_black">
 				<placement x="45" y="277"/>
 				<action function="page">thanksto</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="313"/>
+				<image resource="special_button_thanksto"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="327"/>
 				<text>{@thanksto=Thanks to}</text>
 			</text>
 			
-		   	<button style="special_button_toolcredit">
+		   	<button style="special_button_black">
 				<placement x="45" y="449"/>
 				<action function="page">toolscr</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="485"/>
+				<image resource="special_button_toolcredit"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="499"/>
 				<text>{@toolscr=Tools Credit}</text>
 			</text>
 			
-			<button style="special_button_contributors">
+			<button style="special_button_black">
 				<placement x="45" y="621"/>
 				<action function="page">contributors</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="657"/>
+				<image resource="special_button_contributors"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="671"/>
 				<text>Official Maintainers</text>
 			</text>
 			
-			<button style="special_button_settingota">
+			<button style="special_button_black">
 				<placement x="45" y="793"/>
 				<action function="page">SETTINGOTA</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="829"/>
+				<image resource="special_button_settingota"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="843"/>
 				<text>{@SETTINGOTA=Setting OTA}</text>
 			</text>
 			
-			<button style="special_button_changelog">
+			<button style="special_button_black">
 				<placement x="45" y="965"/>
 				<action function="page">changelog</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="1001"/>
+				<image resource="special_button_changelog"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="1015"/>
@@ -4645,6 +4970,7 @@
 			</fill>
 			
 			<listbox style="about">
+				<placement x="58" y="1204" w="964" h="534"/>
 				<placement x="58" y="1204" w="964" h="534"/>
 				<listitem name="Maintainer"/>
 				<listitem name=""/>
@@ -4690,60 +5016,90 @@
 		<page name="SETTINGOTA">
 		<template name="about"/>
 		   
-		   	<button style="special_button_info">
+		   <button style="special_button_black">
 				<placement x="45" y="105"/>
 				<action function="page">about</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="141"/>
+				<image resource="special_button_info"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="155"/>
 				<text>{@about_pbrp=About PBRP}</text>
 			</text>
 			
-		   <button style="special_button_thanksto">
+		   <button style="special_button_black">
 				<placement x="45" y="277"/>
 				<action function="page">thanksto</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="313"/>
+				<image resource="special_button_thanksto"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="327"/>
 				<text>{@thanksto=Thanks to}</text>
 			</text>
 			
-		   	<button style="special_button_toolcredit">
+		   	<button style="special_button_black">
 				<placement x="45" y="449"/>
 				<action function="page">toolscr</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="485"/>
+				<image resource="special_button_toolcredit"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="499"/>
 				<text>{@toolscr=Tools Credit}</text>
 			</text>
 			
-			<button style="special_button_contributors">
+			<button style="special_button_black">
 				<placement x="45" y="621"/>
 				<action function="page">contributors</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="657"/>
+				<image resource="special_button_contributors"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="671"/>
 				<text>Official Maintainers</text>
 			</text>
 			
-			<button style="special_button_settingota">
+			<button style="special_button_black">
 				<placement x="45" y="793"/>
 				<action function="page">SETTINGOTA</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="829"/>
+				<image resource="special_button_settingota"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="843"/>
 				<text>{@SETTINGOTA=Setting OTA}</text>
 			</text>
 			
-			<button style="special_button_changelog">
+			<button style="special_button_black">
 				<placement x="45" y="965"/>
 				<action function="page">changelog</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="1001"/>
+				<image resource="special_button_changelog"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="1015"/>
@@ -4797,60 +5153,90 @@
 			<page name="settingsota_info">
 				<template name="about"/>
 		   
-		   	<button style="special_button_info">
+		   <button style="special_button_black">
 				<placement x="45" y="105"/>
 				<action function="page">about</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="141"/>
+				<image resource="special_button_info"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="155"/>
 				<text>{@about_pbrp=About PBRP}</text>
 			</text>
 			
-		   <button style="special_button_thanksto">
+		   <button style="special_button_black">
 				<placement x="45" y="277"/>
 				<action function="page">thanksto</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="313"/>
+				<image resource="special_button_thanksto"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="327"/>
 				<text>{@thanksto=Thanks to}</text>
 			</text>
 			
-		   	<button style="special_button_toolcredit">
+		   	<button style="special_button_black">
 				<placement x="45" y="449"/>
 				<action function="page">toolscr</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="485"/>
+				<image resource="special_button_toolcredit"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="499"/>
 				<text>{@toolscr=Tools Credit}</text>
 			</text>
 			
-			<button style="special_button_contributors">
+			<button style="special_button_black">
 				<placement x="45" y="621"/>
 				<action function="page">contributors</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="657"/>
+				<image resource="special_button_contributors"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="671"/>
 				<text>Official Maintainers</text>
 			</text>
 			
-			<button style="special_button_settingota">
+			<button style="special_button_black">
 				<placement x="45" y="793"/>
 				<action function="page">SETTINGOTA</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="829"/>
+				<image resource="special_button_settingota"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="843"/>
 				<text>{@SETTINGOTA=Setting OTA}</text>
 			</text>
 			
-			<button style="special_button_changelog">
+			<button style="special_button_black">
 				<placement x="45" y="965"/>
 				<action function="page">changelog</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="1001"/>
+				<image resource="special_button_changelog"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="1015"/>
@@ -4864,16 +5250,20 @@
 			<listbox style="about">
 				<placement x="58" y="1204" w="964" h="534"/>
 				<listitem name="--1 Please make your internal space 5GB"/>
-				<listitem name="--2 Reboot to PBRP then Checklist incremental OTA signature verification,"/>
-				<listitem name="include system in OTA survival, support MIUI incremental OTA, aggresive stock recovery deactivation,"/>
+				<listitem name="--2 Reboot to PBRP then Checklist incremental"/>
+				<listitem name="OTA signature verification, include system in OTA survival,"/>
+				<listitem name=" support MIUI incremental OTA,  aggresive stock recovery deactivation,"/>
 				<listitem name="disable DM Verity"/>
-				<listitem name="--3 Install full rom MIUI, it will automatic backup boot and system for the OTA survival. example miui 8.3.15"/>
-				<listitem name="--4 Check OTA survival in folder PB internal storage you can found boot and system"/>
-				<listitem name="--5 Open updater app and when update releases, download it and press update. example miui 8.3.15 - 8.3.29"/>
+				<listitem name="--3 Install full rom MIUI, it will automatic backup boot and system"/>
+				<listitem name="for the OTA survival. example miui 8.3.15"/>
+				<listitem name="--4 Check OTA survival in folder PB internal storage"/>
+				<listitem name="you can found boot and system"/>
+				<listitem name="--5 Open updater app and when update releases,"/>
+				<listitem name="download it and press update. example miui 8.3.15 - 8.3.29"/>
 				<listitem name="Automatically device will reboot to PBRP then OTA flashing will start,"/>
 				<listitem name="this time the backed up boot and system will be flashed and"/>
 				<listitem name="thus patching will happen and your device will be updated"/>
-				<listitem name="Pre-requisite  unlock bootloader"/>
+				<listitem name="---Pre-requisite  unlock bootloader---"/>
 			</listbox>
 			
 			<action>
@@ -4890,60 +5280,90 @@
 		<page name="changelog">
 		<template name="about"/>
 		   
-		   	<button style="special_button_info">
+		   <button style="special_button_black">
 				<placement x="45" y="105"/>
 				<action function="page">about</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="141"/>
+				<image resource="special_button_info"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="155"/>
 				<text>{@about_pbrp=About PBRP}</text>
 			</text>
 			
-		   <button style="special_button_thanksto">
+		   <button style="special_button_black">
 				<placement x="45" y="277"/>
 				<action function="page">thanksto</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="313"/>
+				<image resource="special_button_thanksto"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="327"/>
 				<text>{@thanksto=Thanks to}</text>
 			</text>
 			
-		   	<button style="special_button_toolcredit">
+		   	<button style="special_button_black">
 				<placement x="45" y="449"/>
 				<action function="page">toolscr</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="485"/>
+				<image resource="special_button_toolcredit"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="499"/>
 				<text>{@toolscr=Tools Credit}</text>
 			</text>
 			
-			<button style="special_button_contributors">
+			<button style="special_button_black">
 				<placement x="45" y="621"/>
 				<action function="page">contributors</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="657"/>
+				<image resource="special_button_contributors"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="671"/>
 				<text>Official Maintainers</text>
 			</text>
 			
-			<button style="special_button_settingota">
+			<button style="special_button_black">
 				<placement x="45" y="793"/>
 				<action function="page">SETTINGOTA</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="829"/>
+				<image resource="special_button_settingota"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="843"/>
 				<text>{@SETTINGOTA=Setting OTA}</text>
 			</text>
 			
-			<button style="special_button_changelog">
+			<button style="special_button_black">
 				<placement x="45" y="965"/>
 				<action function="page">changelog</action>
 			</button>
+			
+			<image>
+				<placement x="63" y="1001"/>
+				<image resource="special_button_changelog"/>
+			</image>
 			
 			<text style="text_pb_small">
 				<placement x="190" y="1015"/>
@@ -4963,6 +5383,14 @@
 				<listitem name="Custom Text Color"/>
 				<listitem name="Enable and Disable Rounded"/>
 				<listitem name="Magisk (Treble and Non Treble)"/>
+				<listitem name="etc"/>
+				<listitem name="-----------------"/>
+				<listitem name="PB v2.7.4"/>
+				<listitem name="-----------------"/>
+				<listitem name="Theme Updated"/>
+				<listitem name="Custom Color"/>
+				<listitem name="Enable and Disable Rounded"/>
+				<listitem name="Added exFAT & NTFS Support"/>
 				<listitem name="etc"/>
 				<listitem name="-----------------"/>
 				<listitem name="PB v2.7.3"/>
@@ -5297,18 +5725,12 @@
 		</page>
 
 		<page name="lock">
-			<background color="%semi_transparent%"/>
+			<background color="%background_color2%"/>
 			
-			<image>
-				<image resource="splash_image"/>
-				<placement y="0" x="0"/> 
-            </image>
-
-			<image>
-				<image resource="unlock_icon"/>
-				<placement y="3" x="3"/> 
-            </image>
-            
+			<fill color="#000000">
+				<placement x="3" y="3" w="1074" h="1914"/>
+			</fill>
+			
             <text style="text_exl">
 				<placement x="540" y="350" placement="4"/>
 				<text>TIME: %tw_time%</text>
@@ -6508,72 +6930,108 @@
 			</text>
 			
 			<image>
-				<placement x="0" y="375"/>
+				<placement x="0" y="275"/>
 				<image resource="pb_image"/>
 			</image>
 			
 			<button style="pb_theme_button">
-				<placement x="42" y="403"/>
+				<placement x="95" y="283"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Red</action>
 					<action function="set">tw_folder=pb_red</action>
+					<action function="set">tw_background_color2=FD0000</action>
 					<action function="page">change_theme</action>
 				</actions>
 			</button>
 			
 			<button style="pb_theme_button">
-				<placement x="387" y="403"/>
+				<placement x="424" y="283"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Green</action>
 					<action function="set">tw_folder=pb_green</action>
+					<action function="set">tw_background_color2=2AFD00</action>
 					<action function="page">change_theme</action>
 				</actions>
 			</button>
 			
 			<button style="pb_theme_button">
-				<placement x="732" y="403"/>
+				<placement x="753" y="283"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Blue</action>
 					<action function="set">tw_folder=pb_blue</action>
+					<action function="set">tw_background_color2=0058FB</action>
 					<action function="page">change_theme</action>
 				</actions>
 			</button>
 			
 			<button style="pb_theme_button">
-				<placement x="42" y="973"/>
+				<placement x="95" y="716"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Yello</action>
 					<action function="set">tw_folder=pb_yello</action>
+					<action function="set">tw_background_color2=F9FD00</action>
 					<action function="page">change_theme</action>
 				</actions>
 			</button>
 			
 			<button style="pb_theme_button">
-				<placement x="387" y="973"/>
+				<placement x="424" y="716"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Violet</action>
 					<action function="set">tw_folder=pb_violet</action>
+					<action function="set">tw_background_color2=8B00FD</action>
 					<action function="page">change_theme</action>
 				</actions>
 			</button>
 			
 			<button style="pb_theme_button">
-				<placement x="732" y="973"/>
+				<placement x="753" y="716"/>
 				<actions>
 					<action function="set">tw_theme_name=PB LightBlue</action>
 					<action function="set">tw_folder=pb_lightblue</action>
+					<action function="set">tw_background_color2=00A0FD</action>
 					<action function="page">change_theme</action>
 				</actions>
 			</button>
 			
-			<button style="main_button_half_height">
-				<placement x="%indent%" y="1564"/>
-				<text>No Rounded</text>
-				<action function="page">color_changer_nr</action>
+			<button style="pb_theme_button">
+				<placement x="95" y="1151"/>
+				<actions>
+					<action function="set">tw_theme_name=PB Brown</action>
+					<action function="set">tw_folder=pb_brown</action>
+					<action function="set">tw_background_color2=4B3829</action>
+					<action function="page">change_theme_black</action>
+				</actions>
+			</button>
+			
+			<button style="pb_theme_button">
+				<placement x="424" y="1151"/>
+				<actions>
+					<action function="set">tw_theme_name=PB White</action>
+					<action function="set">tw_folder=pb_white</action>
+					<action function="set">tw_background_color2=FDFDFD</action>
+					<action function="page">change_theme_black</action>
+				</actions>
+			</button>
+			
+			<button style="pb_theme_button">
+				<placement x="753" y="1151"/>
+				<actions>
+					<action function="set">tw_theme_name=PB Cyan</action>
+					<action function="set">tw_folder=pb_cyan</action>
+					<action function="set">tw_background_color2=30E6F1</action>
+					<action function="page">change_theme_black</action>
+				</actions>
 			</button>
 			
 			<button style="main_button_half_height">
-				<placement x="%center_x%" y="1564"/>
+				<placement x="%indent%" y="1584"/>
+				<text>Black Fill</text>
+				<action function="page">color_changer_black</action>
+			</button>
+			
+			<button style="main_button_half_height">
+				<placement x="%center_x%" y="1584"/>
 				<text>Text Color</text>
 				<action function="page">text_color</action>
 			</button>
@@ -6589,7 +7047,7 @@
 			</action>
 		</page>
 		
-		<page name="color_changer_nr">
+		<page name="color_changer_black">
 			<template name="page"/>
 			
 			<text style="text_l">
@@ -6598,78 +7056,108 @@
 			</text>
 			
 			<image>
-				<placement x="0" y="375"/>
-				<image resource="pb_image_nr"/>
+				<placement x="0" y="275"/>
+				<image resource="pb_image_black"/>
 			</image>
 			
 			<button style="pb_theme_button">
-				<placement x="42" y="403"/>
+				<placement x="95" y="283"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Red</action>
 					<action function="set">tw_folder=pb_red</action>
-					<action function="set">tw_folder_nr=pb_red_nr</action>
-					<action function="page">change_theme_nr</action>
+					<action function="set">tw_background_color2=010100</action>
+					<action function="page">change_theme_black</action>
 				</actions>
 			</button>
 			
 			<button style="pb_theme_button">
-				<placement x="387" y="403"/>
+				<placement x="424" y="283"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Green</action>
 					<action function="set">tw_folder=pb_green</action>
-					<action function="set">tw_folder_nr=pb_green_nr</action>
-					<action function="page">change_theme_nr</action>
+					<action function="set">tw_background_color2=010100</action>
+					<action function="page">change_theme_black</action>
 				</actions>
 			</button>
 			
 			<button style="pb_theme_button">
-				<placement x="732" y="403"/>
+				<placement x="753" y="283"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Blue</action>
 					<action function="set">tw_folder=pb_blue</action>
-					<action function="set">tw_folder_nr=pb_blue_nr</action>
-					<action function="page">change_theme_nr</action>
+					<action function="set">tw_background_color2=010100</action>
+					<action function="page">change_theme_black</action>
 				</actions>
 			</button>
 			
 			<button style="pb_theme_button">
-				<placement x="42" y="973"/>
+				<placement x="95" y="716"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Yello</action>
 					<action function="set">tw_folder=pb_yello</action>
-					<action function="set">tw_folder_nr=pb_yello_nr</action>
-					<action function="page">change_theme_nr</action>
+					<action function="set">tw_background_color2=010100</action>
+					<action function="page">change_theme_black</action>
 				</actions>
 			</button>
 			
 			<button style="pb_theme_button">
-				<placement x="387" y="973"/>
+				<placement x="424" y="716"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Violet</action>
 					<action function="set">tw_folder=pb_violet</action>
-					<action function="set">tw_folder_nr=pb_violet_nr</action>
-					<action function="page">change_theme_nr</action>
+					<action function="set">tw_background_color2=010100</action>
+					<action function="page">change_theme_black</action>
 				</actions>
 			</button>
 			
 			<button style="pb_theme_button">
-				<placement x="732" y="973"/>
+				<placement x="753" y="716"/>
 				<actions>
 					<action function="set">tw_theme_name=PB LightBlue</action>
 					<action function="set">tw_folder=pb_lightblue</action>
-					<action function="set">tw_folder_nr=pb_lightblue_nr</action>
-					<action function="page">change_theme_nr</action>
+					<action function="set">tw_background_color2=010100</action>
+					<action function="page">change_theme_black</action>
+				</actions>
+			</button>
+			
+			<button style="pb_theme_button">
+				<placement x="95" y="1151"/>
+				<actions>
+					<action function="set">tw_theme_name=PB Brown</action>
+					<action function="set">tw_folder=pb_brown</action>
+					<action function="set">tw_background_color2=010100</action>
+					<action function="page">change_theme_black</action>
+				</actions>
+			</button>
+			
+			<button style="pb_theme_button">
+				<placement x="424" y="1151"/>
+				<actions>
+					<action function="set">tw_theme_name=PB White</action>
+					<action function="set">tw_folder=pb_white</action>
+					<action function="set">tw_background_color2=010100</action>
+					<action function="page">change_theme_black</action>
+				</actions>
+			</button>
+			
+			<button style="pb_theme_button">
+				<placement x="753" y="1151"/>
+				<actions>
+					<action function="set">tw_theme_name=PB Cyan</action>
+					<action function="set">tw_folder=pb_cyan</action>
+					<action function="set">tw_background_color2=010100</action>
+					<action function="page">change_theme_black</action>
 				</actions>
 			</button>
 			
 			<button style="main_button_half_height">
-				<placement x="%indent%" y="1564"/>
-				<text>Rounded</text>
+				<placement x="%indent%" y="1584"/>
+				<text>Color Fill</text>
 				<action function="page">color_changer</action>
 			</button>
 			
 			<button style="main_button_half_height">
-				<placement x="%center_x%" y="1564"/>
+				<placement x="%center_x%" y="1584"/>
 				<text>Text Color</text>
 				<action function="page">text_color</action>
 			</button>
@@ -6698,6 +7186,10 @@
 					cd "/twres";
 					cp -r %tw_folder%/* "images";
                     cp -r %tw_folder%/* "/tmp/pb/ramdisk/twres/images";
+                    mv "/twres/ui.xml" "/twres/ui_temp.xml";
+					sed "s/%background_color2%/#%tw_background_color2%/g" "/twres/ui_temp.xml" &gt; "/twres/ui.xml";
+					rm -f "/twres/ui_temp.xml";
+                    cp "/twres/ui.xml"  "/tmp/pb/ramdisk/twres/";
 					cd /;
 					</action>
 					<action function="repack" />
@@ -6707,10 +7199,10 @@
 			</action>
 		</page>
 		
-		<page name="change_theme_nr">
+		<page name="change_theme_black">
 			<action>
 				<condition var1="color_theme_change" var2="0"/>
-				<action function="page">color_changer_nr</action>
+				<action function="page">color_changer_black</action>
 			</action>
 			
 			<action>
@@ -6720,8 +7212,10 @@
 					cd "/twres";
 					cp -r %tw_folder%/* "images";
                     cp -r %tw_folder%/* "/tmp/pb/ramdisk/twres/images";
-                    cp -r %tw_folder_nr%/* "images";
-                    cp -r %tw_folder_nr%/* "/tmp/pb/ramdisk/twres/images";
+                    mv "/twres/ui.xml" "/twres/ui_temp.xml";
+					sed "s/%background_color2%/#%tw_background_color2%/g" "/twres/ui_temp.xml" &gt; "/twres/ui.xml";
+					rm -f "/twres/ui_temp.xml";
+                    cp "/twres/ui.xml"  "/tmp/pb/ramdisk/twres/";
 					cd /;
 					</action>
 					<action function="repack" />

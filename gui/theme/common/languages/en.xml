@@ -739,6 +739,7 @@
 		<string name="Dm_Verity_btn">Dm Verity</string>
 		<string name="Dm_Verity_text">Dm Verity will be installed.</string>
 		<string name="Dm_Verity_confirm">Try to install it?</string>
+		<string name="use_aromafm">Use Aroma File Manager</string>
 		
 		<!--PBRP Themes-->
 		<string name="pbthemes">Themes</string>
