@@ -817,7 +817,7 @@
 				<placement x="0" y="%keyboard_terminal_y%" w="%screen_width%" h="96"/>
 				<keymargin x="0" y="0"/>
 				<background color="#111111"/>
-				<key-alphanumeric color="#111111" font="keylabel" textcolor="#EEEEEE"/>
+				<key-alphanumeric color="#111111" font="keylabel" textcolor="%text_main_button_color%"/>
 				<key-other color="#111111" font="keylabel-small" textcolor="#5b5b5bff"/>
 				<longpress font="keylabel-longpress" textcolor="#5b5b5bff" x="12" y="0"/>
 				<keylabel key="0:k:29" text="Ctrl"/>
@@ -842,7 +842,7 @@
 				<placement x="0" y="%keyboard_y%" w="1080" h="644"/>
 				<keymargin x="8" y="8"/>
 				<background color="#7F000000"/>
-				<key-alphanumeric color="#7F000000" font="keylabel" textcolor="#EEEEEE"/>
+				<key-alphanumeric color="#7F000000" font="keylabel" textcolor="%text_main_button_color%"/>
 				<key-other color="#7F000000" font="keylabel-small" textcolor="#5b5b5bff"/>
 				<longpress font="keylabel-longpress" textcolor="#5b5b5bff" x="12" y="0"/>
 				<keylabel key="0:c:8" text="Bksp" resource="backspace"/>
