@@ -53,6 +53,7 @@ public:
 	static string Get_Root_Path(const string& Path);                            // Trims any trailing folders or filenames from the path, also adds a leading / if not present
 	static string Get_Path(const string& Path);                                 // Trims everything after the last / in the string
 	static string Get_Filename(const string& Path);                             // Trims the path off of a filename
+	static string Get_output(const string& cmd);
 
 	static int Exec_Cmd(const string& cmd, string &result);                     //execute a command and return the result as a string by reference
 	static int Exec_Cmd(const string& cmd);                                     //execute a command
@@ -70,7 +71,6 @@ public:
 
 #ifndef BUILD_TWRPTAR_MAIN
 	static void install_htc_dumlock(void);                                      // Installs HTC Dumlock
-	static void Write_MIUI_Install_Status(std::string install_status, bool verify);                                // Write last install status in to the /cache/recovery/last_status
 	static void Replace_Word_In_File(string file_path, string search); // Remove string from file
 	static void Replace_Word_In_File(string file_path, string search, string word); // Replace string in file
 	static void htc_dumlock_restore_original_boot(void);                        // Restores the backup of boot from HTC Dumlock

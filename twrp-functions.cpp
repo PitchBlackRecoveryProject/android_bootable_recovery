@@ -62,6 +62,8 @@ static string tmp = "/tmp/pb";
 static string ramdisk = tmp + "/ramdisk";
 static string split_img = tmp + "/split_img";
 static string default_prop = ramdisk + "/default.prop";
+static string fstab1 = "/system/vendor/etc";
+static string fstab2 = "/vendor/etc";
 
 /* Execute a command */
 int TWFunc::Exec_Cmd(const string& cmd, string &result) {
@@ -121,6 +123,22 @@ string TWFunc::Get_Path(const string& Path) {
 		return Pathonly;
 	} else
 		return Path;
+}
+
+string TWFunc::Get_output(const string& cmd) {
+	string data;
+	FILE * stream;
+	const int max_buffer = 256;
+	char buffer[max_buffer];
+	string s = cmd + " 2>&1";
+
+	stream = popen(s.c_str(), "r");
+	if (stream) {
+		while (!feof(stream))
+		if (fgets(buffer, max_buffer, stream) != NULL) data.append(buffer);
+			pclose(stream);
+	}
+	return data;
 }
 
 int TWFunc::Wait_For_Child(pid_t pid, int *status, string Child_Name) {
@@ -1135,12 +1153,26 @@ void TWFunc::Disable_Stock_Recovery_Replace(void) {
 	if (PartitionManager.Mount_By_Path("/system", false)) {
 		// Disable flashing of stock recovery
 		if (DataManager::GetIntValue(PB_ADVANCED_STOCK_REPLACE) == 1) {
-			  if (Path_Exists("/system/bin/install-recovery.sh")) 
+			  if (Path_Exists("/system/bin/install-recovery.sh"))
 				     rename("/system/bin/install-recovery.sh", "/system/bin/wlfx0install-recoverybak0xwlf");    
 			if (Path_Exists("/system/etc/install-recovery.sh"))
 				  rename("/system/etc/install-recovery.sh", "/system/etc/wlfx0install-recoverybak0xwlf");
 			if (Path_Exists("/system/etc/recovery-resource.dat"))
 				    rename("/system/etc/recovery-resource.dat", "/system/etc/wlfx0recovery-resource0xwlf");
+			  if (Path_Exists("/system/vendor/bin/install-recovery.sh")) 
+				     rename("/system/vendor/bin/install-recovery.sh", "/system/vendor/bin/wlfx0install-recoverybak0xwlf");    
+			if (Path_Exists("/system/vendor/etc/install-recovery.sh"))
+				  rename("/system/vendor/etc/install-recovery.sh", "/system/vendor/etc/wlfx0install-recoverybak0xwlf");
+			if (Path_Exists("/system/vendor/etc/recovery-resource.dat"))
+				    rename("/system/vendor/etc/recovery-resource.dat", "/system/vendor/etc/wlfx0recovery-resource0xwlf");
+			  if (Path_Exists("/vendor/bin/install-recovery.sh")) 
+				     rename("/vendor/bin/install-recovery.sh", "/vendor/bin/wlfx0install-recoverybak0xwlf");    
+			if (Path_Exists("/vendor/etc/install-recovery.sh"))
+				  rename("/vendor/etc/install-recovery.sh", "/vendor/etc/wlfx0install-recoverybak0xwlf");
+			if (Path_Exists("/vendor/etc/recovery-resource.dat"))
+				    rename("/vendor/etc/recovery-resource.dat", "/vendor/etc/wlfx0recovery-resource0xwlf");
+
+
 	       }
 		if (TWFunc::Path_Exists("/system/recovery-from-boot.p")) {
 				rename("/system/recovery-from-boot.p", "/system/wlfx0recovery-from-bootbak0xwlf");
@@ -1581,11 +1613,14 @@ return true;
 
 bool TWFunc::Patch_DM_Verity() {
 bool status = false;
+int stat = 0;
 string firmware_key = ramdisk + "/sbin/firmware_key.cer";
 string path, cmp, remove = "verify,;,verify;verify;support_scfs,;,support_scfs;support_scfs;";
 DIR* d;
+DIR* d1;
 struct dirent* de;
 d = opendir(ramdisk.c_str());
+//d1 = opendir(fstab1.c_str());
 if (d == NULL)
 {
 LOGINFO("Unable to open '%s'\n", ramdisk.c_str());
@@ -1597,6 +1632,7 @@ cmp = de->d_name;
    path = ramdisk + "/" + cmp;
   if (cmp.find("fstab.") != string::npos) {
   gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
+	stat = 1;
   if (!status) {
  if (TWFunc::CheckWord(path, "verify") || TWFunc::CheckWord(path, "support_scfs")) 
  status = true;
@@ -1620,8 +1656,38 @@ TWFunc::Replace_Word_In_File(path, remove);
 		status = true;
 		unlink(path.c_str());
 	}
-} 
+}
 closedir (d);
+if (stat == 0) {
+if (PartitionManager.Mount_By_Path("/vendor", false)) {
+d1 = opendir(fstab2.c_str());
+stat = 2; }
+else {
+PartitionManager.Mount_By_Path("/system", false);
+stat = 1;
+d1 = opendir(fstab1.c_str()); }
+while ((de = readdir(d1)) != NULL)
+{
+cmp = de->d_name;
+ if (stat == 2)
+   path = fstab2 + "/" + cmp;
+ else if (stat == 1)
+   path = fstab1 + "/" + cmp;
+  if (cmp.find("fstab.") != string::npos) {
+  gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
+  if (!status) {
+ if (TWFunc::CheckWord(path, "verify") || TWFunc::CheckWord(path, "support_scfs")) 
+ status = true;
+ }
+TWFunc::Replace_Word_In_File(path, remove);
+  }
+}
+closedir (d1);
+if (PartitionManager.Is_Mounted_By_Path("/system"))
+PartitionManager.UnMount_By_Path("/system", false);
+if (PartitionManager.Is_Mounted_By_Path("/vendor"))
+PartitionManager.UnMount_By_Path("/vendor", false);
+}
     if (TWFunc::Path_Exists(firmware_key)) {
     if (!status)
     status = true;
@@ -1634,10 +1700,12 @@ return status;
 
 bool TWFunc::Patch_Forced_Encryption() {
 string path, cmp;
+int stat = 0;
 bool status = false;
 int encryption;
 DataManager::GetValue(PB_DISABLE_DM_VERITY, encryption);
 DIR* d;
+DIR* d1;
 struct dirent* de;
 d = opendir(ramdisk.c_str());
 if (d == NULL)
@@ -1650,8 +1718,9 @@ while ((de = readdir(d)) != NULL)
    cmp = de->d_name;
    path = ramdisk + "/" + cmp;
    if (cmp.find("fstab.") != string::npos) {
-   	if (encryption != 1)
+   	if (encryption != 1) {
        gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
+	stat = 1; }
    	if (!status) {
        if (TWFunc::CheckWord(path, "forceencrypt") || TWFunc::CheckWord(path, "forcefdeorfbe"))
        status = true;
@@ -1660,6 +1729,39 @@ while ((de = readdir(d)) != NULL)
        }   
       }
       closedir (d);
+if (stat == 0) {
+if (PartitionManager.Mount_By_Path("/vendor", false)) {
+d1 = opendir(fstab2.c_str());
+stat = 2; }
+else {
+PartitionManager.Mount_By_Path("/system", false);
+stat = 1;
+d1 = opendir(fstab1.c_str()); }
+
+	while ((de = readdir(d1)) != NULL)
+	{
+	   cmp = de->d_name;
+	    if (stat == 2)
+		   path = fstab2 + "/" + cmp;
+	    else if (stat == 1)
+		   path = fstab1 + "/" + cmp;
+	   if (cmp.find("fstab.") != string::npos) {
+	        if (encryption != 1) {
+	       gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
+	        stat = 1; }
+	        if (!status) {
+	       if (TWFunc::CheckWord(path, "forceencrypt") || TWFunc::CheckWord(path, "forcefdeorfbe"))
+	       status = true;
+	       }
+	       TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;", "encryptable=");
+	       }
+        }
+      closedir (d1);
+}
+if (PartitionManager.Is_Mounted_By_Path("/system"))
+PartitionManager.UnMount_By_Path("/system", false);
+if (PartitionManager.Is_Mounted_By_Path("/vendor"))
+PartitionManager.UnMount_By_Path("/vendor", false);
      return status;
     }
     
@@ -1721,7 +1823,7 @@ void TWFunc::Read_Write_Specific_Partition(string path, string partition_name, b
 	return;
 }
 
-void TWFunc::Write_MIUI_Install_Status(std::string install_status, bool verify) {
+/**void TWFunc::Write_MIUI_Install_Status(std::string install_status, bool verify) {
 std::string last_status = "/cache/recovery/last_status";
 if (!verify) {
 if (DataManager::GetIntValue(PB_MIUI_ZIP_TMP) != 0 || DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0) {
@@ -1744,7 +1846,7 @@ if (DataManager::GetIntValue(PB_MIUI_ZIP_TMP) != 0 || DataManager::GetIntValue(P
      status << install_status;
      status.close();
      }
-}
+}*/
 void TWFunc::copy_kernel_log(string curr_storage) {
 	std::string dmesgDst = curr_storage + "/dmesg.log";
 	std::string dmesgCmd = "/sbin/dmesg";
