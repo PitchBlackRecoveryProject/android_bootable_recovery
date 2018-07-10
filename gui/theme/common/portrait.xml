@@ -7015,7 +7015,7 @@
 					<action function="set">tw_theme_name=PB Brown</action>
 					<action function="set">tw_folder=pb_brown</action>
 					<action function="set">tw_background_color2=4B3829</action>
-					<action function="page">change_theme_black</action>
+					<action function="page">change_theme</action>
 				</actions>
 			</button>
 			
@@ -7025,7 +7025,7 @@
 					<action function="set">tw_theme_name=PB White</action>
 					<action function="set">tw_folder=pb_white</action>
 					<action function="set">tw_background_color2=FDFDFD</action>
-					<action function="page">change_theme_black</action>
+					<action function="page">change_theme</action>
 				</actions>
 			</button>
 			
@@ -7035,7 +7035,7 @@
 					<action function="set">tw_theme_name=PB Cyan</action>
 					<action function="set">tw_folder=pb_cyan</action>
 					<action function="set">tw_background_color2=30E6F1</action>
-					<action function="page">change_theme_black</action>
+					<action function="page">change_theme</action>
 				</actions>
 			</button>
 			
