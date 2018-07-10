@@ -612,6 +612,21 @@
 				<action function="screenshot"/>
 			</action>
 		</template>
+		
+		<template name="progress_bar">
+			<progressbar>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource empty="progress_empty" full="progress_full"/>
+				<data name="ui_progress"/>
+			</progressbar>
+
+			<animation>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource name="progress"/>
+				<speed fps="24" render="2"/>
+				<loop frame="1"/>
+			</animation>
+		</template>
 
 		<template name="sort_options">
 			<image>
@@ -746,6 +761,8 @@
 				<action function="page">backup_options</action>
 			</button>
 		</template>
+		
+		
 
 		<template name="tabs_settings">
 			<fill color="%accent_color%">
@@ -782,7 +799,7 @@
 				<action function="page">settings_language</action>
 			</button>
 		</template>
-
+		
 		<template name="console">
 			<console>
 				<placement x="%indent%" y="%row2_y%" w="%content_width%" h="%console_height%"/>
@@ -817,7 +834,7 @@
 				<placement x="0" y="%keyboard_terminal_y%" w="%screen_width%" h="96"/>
 				<keymargin x="0" y="0"/>
 				<background color="#111111"/>
-				<key-alphanumeric color="#111111" font="keylabel" textcolor="#EEEEEE"/>
+				<key-alphanumeric color="#111111" font="keylabel" textcolor="%text_main_button_color%"/>
 				<key-other color="#111111" font="keylabel-small" textcolor="#5b5b5bff"/>
 				<longpress font="keylabel-longpress" textcolor="#5b5b5bff" x="12" y="0"/>
 				<keylabel key="0:k:29" text="Ctrl"/>
@@ -842,7 +859,7 @@
 				<placement x="0" y="%keyboard_y%" w="1080" h="644"/>
 				<keymargin x="8" y="8"/>
 				<background color="#7F000000"/>
-				<key-alphanumeric color="#7F000000" font="keylabel" textcolor="#EEEEEE"/>
+				<key-alphanumeric color="#7F000000" font="keylabel" textcolor="%text_main_button_color%"/>
 				<key-other color="#7F000000" font="keylabel-small" textcolor="#5b5b5bff"/>
 				<longpress font="keylabel-longpress" textcolor="#5b5b5bff" x="12" y="0"/>
 				<keylabel key="0:c:8" text="Bksp" resource="backspace"/>
