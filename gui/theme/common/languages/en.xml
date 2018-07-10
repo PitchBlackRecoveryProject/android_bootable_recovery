@@ -796,6 +796,8 @@
 		<string name="pb_fstab">Detected fstab: '{1}'</string>
 		<string name="pb_dm_verity">Successfully patched DM-Verity</string>
 		<string name="pb_dm_verity_off">DM-Verity is not enabled</string>
+		<string name="pb_bk">Creating Backup of PB Files -- /tmp/pb/backup_wip...</string>
+		<string name="pb_bk_no">No Tools of PBRP are detecting Reflash the PBRP Package</string>
 		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
 </language>
