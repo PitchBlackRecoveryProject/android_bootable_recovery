@@ -222,9 +222,9 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
       string outp = TWFunc::Get_output("grep miui /tmp/miui_check");
 
   if (PartitionManager.Mount_By_Path("/system", false)) {
-	if ((!TWFunc::Path_Exists("/system/build.prop") || !TWFunc::Path_Exists("/system/system/build.prop")) && outp.size() > 0)
+	if ((Zip -> EntryExists("vendor.new.dat.br") | Zip -> EntryExists("vendor.new.dat")) && outp.size() > 0)
 		chk_sdk = "27";
-	else if ((!TWFunc::Path_Exists("/system/build.prop") || !TWFunc::Path_Exists("/system/system/build.prop")) && Zip -> EntryExists(miui_sg_path) == true )
+	else if (Zip -> EntryExists(miui_sg_path) == true )
 		chk_sdk = "26";
   	PartitionManager.UnMount_By_Path("/system", false);
   }
