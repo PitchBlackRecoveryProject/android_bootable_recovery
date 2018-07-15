@@ -1757,11 +1757,11 @@ d1 = opendir(fstab1.c_str()); }
 	       }
         }
       closedir (d1);
-}
 if (PartitionManager.Is_Mounted_By_Path("/system"))
 PartitionManager.UnMount_By_Path("/system", false);
 if (PartitionManager.Is_Mounted_By_Path("/vendor"))
 PartitionManager.UnMount_By_Path("/vendor", false);
+}
      return status;
     }
     

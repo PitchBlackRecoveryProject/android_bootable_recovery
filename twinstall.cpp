@@ -201,7 +201,7 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
   string fingerprint_property = "ro.build.fingerprint";
   string pre_device = pre_something + "device";
   string pre_build = pre_something + "build";
-  string chk_sdk = TWFunc::System_Property_Get("ro.build.version.sdk");
+  int chk_sdk = 26 ;
 
   if (!Zip -> ExtractEntry(ASSUMED_UPDATE_BINARY_NAME, TMP_UPDATER_BINARY_PATH, 0755)) {
     Zip -> Close();
@@ -223,20 +223,23 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
 
   if (PartitionManager.Mount_By_Path("/system", false)) {
 	if ((Zip -> EntryExists("vendor.new.dat.br") | Zip -> EntryExists("vendor.new.dat")) && outp.size() > 0)
-		chk_sdk = "27";
-	else if (Zip -> EntryExists(miui_sg_path) == true )
-		chk_sdk = "26";
+		chk_sdk = 27;
+	else if (Zip -> EntryExists(miui_sg_path) == true)
+		chk_sdk = 26;
   	PartitionManager.UnMount_By_Path("/system", false);
   }
-      if ((outp.size() > 0 || Zip -> EntryExists(miui_sg_path) == true) && stoi(chk_sdk) < 27) {
+      if ((outp.size() > 0 || Zip -> EntryExists(miui_sg_path) == true) && chk_sdk < 27) {
         if (Zip -> EntryExists("system.new.dat") || Zip -> EntryExists("system.new.dat.br")) {
           DataManager::SetValue(PB_MIUI_ZIP_TMP, 1);
           DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
         }
         DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
+	if (Zip -> EntryExists(miui_sg_path) == true)
         gui_msg("pb_install_miui_detected=- Detected Standard MIUI Update Package");
+	else
+        gui_msg("pb_install_miui_10_detected=- Detected MIUI 10 Non-Treble Update Package");
       } else {
-	        if (outp.size() > 0 && stoi(chk_sdk) >= 27) {
+	        if (outp.size() > 0 && chk_sdk >= 27) {
 	          DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
 	          DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
 	          trb_en = true;
@@ -294,7 +297,7 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
     DataManager::GetValue(PB_LOADED_FINGERPRINT, loadedfp);
     string Boot_File = ota_location_folder + "/boot.emmc.win";
 
-    if ((DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 && !TWFunc::Verify_Loaded_OTA_Signature(loadedfp, ota_location_folder)) && !trb_en) {
+    if ((DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 && !TWFunc::Verify_Loaded_OTA_Signature(loadedfp, ota_location_folder)) && !trb_en && Zip -> EntryExists(miui_sg_path) == true) {
       TWPartition * survival_sys = PartitionManager.Find_Partition_By_Path("/system");
       TWPartition * survival_boot = PartitionManager.Find_Partition_By_Path("/boot");
 
@@ -339,7 +342,7 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
         return INSTALL_ERROR;
       }
     }
-  else if (trb_en) {
+  else if (trb_en || (Zip -> EntryExists(miui_sg_path) == false && !trb_en)) {
         if (DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 && !TWFunc::Verify_Loaded_OTA_Signature(loadedfp, ota_location_folder)) {
 	   TWPartition* survival_boot = PartitionManager.Find_Partition_By_Path("/boot");
 
@@ -700,7 +703,7 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
                   }
        }
      }
-	else if (trb_en && DataManager::GetIntValue(PB_DO_SYSTEM_ON_OTA) != 0) {
+	else if ((trb_en || (!trb_en && Zip -> EntryExists(miui_sg_path) == false)) && DataManager::GetIntValue(PB_DO_SYSTEM_ON_OTA) != 0) {
 		DataManager::SetValue(PB_DO_SYSTEM_ON_OTA, 0);
 		string ota_folder, ota_backup, loadedfp;
 		DataManager::GetValue(PB_SURVIVAL_FOLDER_VAR, ota_folder);
