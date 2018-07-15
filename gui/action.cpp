@@ -1758,18 +1758,25 @@ int GUIAction::stopmtp(std::string arg __unused)
 
 int GUIAction::flashimage(std::string arg __unused)
 {
+	DataManager::SetValue("ui_progress", 0);
 	int op_status = 0;
 
 	operation_start("Flash Image");
 	string path, filename;
 	DataManager::GetValue("tw_zip_location", path);
 	DataManager::GetValue("tw_file", filename);
+	if (simulate) {
+		simulate_progress_bar();
+	} else {
 	if (PartitionManager.Flash_Image(path, filename))
 		op_status = 0; // success
 	else
 		op_status = 1; // fail
+	}
 
 	operation_end(op_status);
+	DataManager::SetValue("ui_progress", 100);
+	DataManager::SetValue("ui_progress", 0);
 	return 0;
 }
 
