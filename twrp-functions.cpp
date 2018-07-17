@@ -1150,7 +1150,8 @@ std::string TWFunc::to_string(unsigned long value) {
 }
 
 void TWFunc::Disable_Stock_Recovery_Replace(void) {
-	if (PartitionManager.Mount_By_Path("/system", false)) {
+	PartitionManager.Mount_By_Path("/vendor", false);
+	PartitionManager.Mount_By_Path("/system", false);
 		// Disable flashing of stock recovery
 		if (DataManager::GetIntValue(PB_ADVANCED_STOCK_REPLACE) == 1) {
 			  if (Path_Exists("/system/bin/install-recovery.sh"))
@@ -1171,15 +1172,15 @@ void TWFunc::Disable_Stock_Recovery_Replace(void) {
 				  rename("/vendor/etc/install-recovery.sh", "/vendor/etc/wlfx0install-recoverybak0xwlf");
 			if (Path_Exists("/vendor/etc/recovery-resource.dat"))
 				    rename("/vendor/etc/recovery-resource.dat", "/vendor/etc/wlfx0recovery-resource0xwlf");
-
-
-	       }
-		if (TWFunc::Path_Exists("/system/recovery-from-boot.p")) {
+			if (TWFunc::Path_Exists("/system/recovery-from-boot.p")) {
 				rename("/system/recovery-from-boot.p", "/system/wlfx0recovery-from-bootbak0xwlf");
-        sync();
-	      }
-		PartitionManager.UnMount_By_Path("/system", false);
-	}
+		        	sync();
+			}		
+		}
+		if (PartitionManager.Is_Mounted_By_Path("/system"))
+			PartitionManager.UnMount_By_Path("/system", false);
+		if (PartitionManager.Mount_By_Path("/vendor", false))
+			PartitionManager.UnMount_By_Path("/vendor", false);
 }
 
 unsigned long long TWFunc::IOCTL_Get_Block_Size(const char* block_device) {
@@ -1659,9 +1660,10 @@ TWFunc::Replace_Word_In_File(path, remove);
 }
 closedir (d);
 if (stat == 0) {
-if (PartitionManager.Mount_By_Path("/vendor", false)) {
+if (std || trb_en) {
+	if (PartitionManager.Mount_By_Path("/vendor", false)) {
 d1 = opendir(fstab2.c_str());
-stat = 2; }
+stat = 2; } }
 else {
 PartitionManager.Mount_By_Path("/system", false);
 stat = 1;
@@ -1685,8 +1687,10 @@ TWFunc::Replace_Word_In_File(path, remove);
 closedir (d1);
 if (PartitionManager.Is_Mounted_By_Path("/system"))
 PartitionManager.UnMount_By_Path("/system", false);
-if (PartitionManager.Is_Mounted_By_Path("/vendor"))
-PartitionManager.UnMount_By_Path("/vendor", false);
+	if (std || trb_en) {
+		if (PartitionManager.Mount_By_Path("/vendor", false))
+			PartitionManager.UnMount_By_Path("/vendor", false); }
+}
 }
     if (TWFunc::Path_Exists(firmware_key)) {
     if (!status)
@@ -1730,9 +1734,10 @@ while ((de = readdir(d)) != NULL)
       }
       closedir (d);
 if (stat == 0) {
-if (PartitionManager.Mount_By_Path("/vendor", false)) {
+if (std || trb_en) {
+	if (PartitionManager.Mount_By_Path("/vendor", false)) {
 d1 = opendir(fstab2.c_str());
-stat = 2; }
+stat = 2; } }
 else {
 PartitionManager.Mount_By_Path("/system", false);
 stat = 1;
@@ -1759,8 +1764,9 @@ d1 = opendir(fstab1.c_str()); }
       closedir (d1);
 if (PartitionManager.Is_Mounted_By_Path("/system"))
 PartitionManager.UnMount_By_Path("/system", false);
-if (PartitionManager.Is_Mounted_By_Path("/vendor"))
-PartitionManager.UnMount_By_Path("/vendor", false);
+	if (std || trb_en) {
+		if (PartitionManager.Mount_By_Path("/vendor", false))
+			PartitionManager.UnMount_By_Path("/vendor", false); }
 }
      return status;
     }
