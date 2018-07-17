@@ -1614,7 +1614,9 @@ return true;
 
 bool TWFunc::Patch_DM_Verity() {
 bool status = false;
-int stat = 0;
+int stat = 0, std, trb_en;
+DataManager::GetValue(TRB_EN, trb_en);
+DataManager::GetValue(STD, std);
 string firmware_key = ramdisk + "/sbin/firmware_key.cer";
 string path, cmp, remove = "verify,;,verify;verify;support_scfs,;,support_scfs;support_scfs;";
 DIR* d;
@@ -1660,7 +1662,7 @@ TWFunc::Replace_Word_In_File(path, remove);
 }
 closedir (d);
 if (stat == 0) {
-if (std || trb_en) {
+if (std == 1 || trb_en == 1) {
 	if (PartitionManager.Mount_By_Path("/vendor", false)) {
 d1 = opendir(fstab2.c_str());
 stat = 2; } }
@@ -1687,10 +1689,9 @@ TWFunc::Replace_Word_In_File(path, remove);
 closedir (d1);
 if (PartitionManager.Is_Mounted_By_Path("/system"))
 PartitionManager.UnMount_By_Path("/system", false);
-	if (std || trb_en) {
+	if (std == 1 || trb_en == 1) {
 		if (PartitionManager.Mount_By_Path("/vendor", false))
 			PartitionManager.UnMount_By_Path("/vendor", false); }
-}
 }
     if (TWFunc::Path_Exists(firmware_key)) {
     if (!status)
@@ -1704,7 +1705,9 @@ return status;
 
 bool TWFunc::Patch_Forced_Encryption() {
 string path, cmp;
-int stat = 0;
+int stat = 0, std, trb_en;
+DataManager::GetValue(TRB_EN, trb_en);
+DataManager::GetValue(STD, std);
 bool status = false;
 int encryption;
 DataManager::GetValue(PB_DISABLE_DM_VERITY, encryption);
@@ -1734,7 +1737,7 @@ while ((de = readdir(d)) != NULL)
       }
       closedir (d);
 if (stat == 0) {
-if (std || trb_en) {
+if (std == 1 || trb_en == 1) {
 	if (PartitionManager.Mount_By_Path("/vendor", false)) {
 d1 = opendir(fstab2.c_str());
 stat = 2; } }
@@ -1764,7 +1767,7 @@ d1 = opendir(fstab1.c_str()); }
       closedir (d1);
 if (PartitionManager.Is_Mounted_By_Path("/system"))
 PartitionManager.UnMount_By_Path("/system", false);
-	if (std || trb_en) {
+	if (std == 1 || trb_en == 1) {
 		if (PartitionManager.Mount_By_Path("/vendor", false))
 			PartitionManager.UnMount_By_Path("/vendor", false); }
 }

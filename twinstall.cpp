@@ -78,7 +78,7 @@ extern "C" {
 #define OTA_SUCCESS "INSTALL_SUCCESS"
 bool trb_en = false;
 bool non = false;
-bool std = false;
+bool std_pac = false;
 
 static const char* properties_path = "/dev/__properties__";
 static const char* properties_path_renamed = "/dev/__properties_kk__";
@@ -244,11 +244,13 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
 	          DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
 	          DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
 	          trb_en = true;
+                  DataManager::SetValue(TRB_EN, "1");
 	          gui_msg("pb_install_miui_oreo_detected=- Detected Treble MIUI Update Package");
 	        }
             else if (Zip -> EntryExists("system.new.dat") || Zip -> EntryExists("system.new.dat.br")) {
                    DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
-		    std = true;
+		    std_pac = true;
+                  DataManager::SetValue(STD, "1");
                    gui_msg("pb_install_standard_detected=- Detected standard Package");
 	        }
         }
@@ -299,7 +301,7 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
     DataManager::GetValue(PB_LOADED_FINGERPRINT, loadedfp);
     string Boot_File = ota_location_folder + "/boot.emmc.win";
 
-    if ((DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 && !TWFunc::Verify_Loaded_OTA_Signature(loadedfp, ota_location_folder)) && !trb_en && non && !std) {
+    if ((DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 && !TWFunc::Verify_Loaded_OTA_Signature(loadedfp, ota_location_folder)) && !trb_en && non && !std_pac) {
       TWPartition * survival_sys = PartitionManager.Find_Partition_By_Path("/system");
       TWPartition * survival_boot = PartitionManager.Find_Partition_By_Path("/boot");
 
@@ -344,7 +346,7 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
         return INSTALL_ERROR;
       }
     }
-  else if (trb_en || (!non && !trb_en) && !std) {
+  else if (trb_en || (!non && !trb_en) && !std_pac) {
         if (DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 && !TWFunc::Verify_Loaded_OTA_Signature(loadedfp, ota_location_folder)) {
 	   TWPartition* survival_boot = PartitionManager.Find_Partition_By_Path("/boot");
 
@@ -682,7 +684,7 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 		Write_MIUI_Install_Status(OTA_CORRUPT, true);
 		gui_err("invalid_zip_format=Invalid zip file format!");
 	       } else {
-	    if (((DataManager::GetIntValue(PB_MIUI_ZIP_TMP) != 0 && DataManager::GetIntValue(PB_INCREMENTAL_OTA_FAIL) != 1) || (DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 && DataManager::GetIntValue(PB_INCREMENTAL_OTA_FAIL) != 1)) && !trb_en && !std)  {
+	    if (((DataManager::GetIntValue(PB_MIUI_ZIP_TMP) != 0 && DataManager::GetIntValue(PB_INCREMENTAL_OTA_FAIL) != 1) || (DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 && DataManager::GetIntValue(PB_INCREMENTAL_OTA_FAIL) != 1)) && !trb_en && !std_pac)  {
 	     string ota_folder, ota_backup, loadedfp;
 		DataManager::GetValue(PB_SURVIVAL_FOLDER_VAR, ota_folder);
 		DataManager::GetValue(PB_SURVIVAL_BACKUP_NAME, ota_backup);
@@ -705,7 +707,7 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
                   }
        }
      }
-	else if ((trb_en || (!trb_en && !non) && !std) && DataManager::GetIntValue(PB_DO_SYSTEM_ON_OTA) != 0) {
+	else if ((trb_en || (!trb_en && !non) && !std_pac) && DataManager::GetIntValue(PB_DO_SYSTEM_ON_OTA) != 0) {
 		DataManager::SetValue(PB_DO_SYSTEM_ON_OTA, 0);
 		string ota_folder, ota_backup, loadedfp;
 		DataManager::GetValue(PB_SURVIVAL_FOLDER_VAR, ota_folder);

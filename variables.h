@@ -174,6 +174,8 @@
 #define PB_COMPATIBILITY_DEVICE         "pb_compatibility_pb_device"
 #define PB_ADVANCED_STOCK_REPLACE           "pb_reboot_advanced_stock_recovery_check"
 #define PB_DISABLE_FORCED_ENCRYPTION           "pb_reboot_forced_encryption_check"
+#define TRB_EN "0"
+#define STD "0"
 
 // Also used:
 //   tw_boot_is_mountable
