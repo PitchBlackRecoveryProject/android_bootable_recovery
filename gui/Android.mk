@@ -171,13 +171,19 @@ ifeq ($(TW_CUSTOM_THEME),)
         endif
     endif
 
-    TWRP_THEME_LOC := $(commands_recovery_local_path)/gui/theme/$(TW_THEME)
+    ifeq ($(PB_GO), true)
+	    TWRP_THEME_LOC := $(commands_recovery_local_path)/gui/theme/$(TW_THEME)/PB_GO
+	    TWRP_RES += $(commands_recovery_local_path)/gui/theme/common/PB_GO/$(word 1,$(subst _, ,$(TW_THEME))).xml
+    else
+	    TWRP_THEME_LOC := $(commands_recovery_local_path)/gui/theme/$(TW_THEME)/PB
+            TWRP_RES += $(commands_recovery_local_path)/gui/theme/common/$(word 1,$(subst _, ,$(TW_THEME))).xml
+    endif
     ifeq ($(wildcard $(TWRP_THEME_LOC)/ui.xml),)
         $(warning $(TW_THEME_WARNING_MSG))
         $(error Theme selection failed; exiting)
     endif
 
-    TWRP_RES += $(commands_recovery_local_path)/gui/theme/common/$(word 1,$(subst _, ,$(TW_THEME))).xml
+    #TWRP_RES += $(commands_recovery_local_path)/gui/theme/common/$(word 1,$(subst _, ,$(TW_THEME))).xml
     # for future copying of used include xmls and fonts:
     # UI_XML := $(TWRP_THEME_LOC)/ui.xml
     # TWRP_INCLUDE_XMLS := $(shell xmllint --xpath '/recovery/include/xmlfile/@name' $(UI_XML)|sed -n 's/[^\"]*\"\([^\"]*\)\"[^\"]*/\1\n/gp'|sort|uniq)

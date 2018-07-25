@@ -42,9 +42,17 @@ TWHTCD_PATH := $(TWRES_PATH)htcd/
 TARGET_RECOVERY_GUI := true
 
 ifeq ($(PB_OFFICIAL),true)
-    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.1-Official"'
+	ifeq ($(PB_GO),true)
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.8.1-Official"'
+	else
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.1-Official"'
+	endif
 else
-    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.1-Unofficial"'
+	ifeq ($(PB_GO),true)
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.8.1-Unofficial"'
+	else
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.1-Unofficial"'
+	endif
 endif
 
 DEVICE := $(subst omni_,,$(TARGET_PRODUCT))

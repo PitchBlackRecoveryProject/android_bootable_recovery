@@ -2,9 +2,17 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 ifeq ($(PB_OFFICIAL),true)
-    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.1-Official"'
+	ifeq ($(PB_GO),true)
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.8.1-Official"'
+	else
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.1-Official"'
+	endif
 else
-    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.1-Unofficial"'
+        ifeq ($(PB_GO),true)
+            LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.8.1-Unofficial"'
+	else
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.1-Unofficial"'
+	endif
 endif
 
 LOCAL_SRC_FILES:= \
