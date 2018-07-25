@@ -741,6 +741,8 @@
 		<string name="pb_install_detecting">Mendeteksi Paket Saat Ini</string>
 		<string name="pb_install_standard_detected">- Paket Standar Terdeteksi</string>
 		<string name="pb_install_miui_detected">- Paket Pembaruan MIUI Terdeteksi</string>
+                <string name="pb_install_miui_oreo_detected">- Paket Pembaruan MIUI Treble Terdeteksi</string>
+		<string name="pb_install_miui_10_detected">- Paket Pembaruan MIUI 10 Non-Treble Terdeteksi</string>
 		<string name="pb_disable_boot_chk">Matikan pemeriksaan boot</string>
 		<string name="pb_include_system_survival_chk">Sertakan sistem dalam Survival OTA</string>
 		<string name="pb_verify_incremental_ota_signature_chk">Verifikasi signature Incremental OTA</string>

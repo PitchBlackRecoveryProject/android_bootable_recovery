@@ -42,9 +42,9 @@ TWHTCD_PATH := $(TWRES_PATH)htcd/
 TARGET_RECOVERY_GUI := true
 
 ifeq ($(PB_OFFICIAL),true)
-    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.0-Official"'
+    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.1-Official"'
 else
-    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.0-Unofficial"'
+    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.8.1-Unofficial"'
 endif
 
 DEVICE := $(subst omni_,,$(TARGET_PRODUCT))
