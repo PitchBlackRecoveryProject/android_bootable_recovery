@@ -717,7 +717,7 @@
 		<string name="include_kernel_log">Include Kernel Log</string>
 		<string name="sha2_chk">Use SHA2 for hashing</string>
 		<string name="unable_set_boot_slot">Error changing bootloader boot slot to {1}</string>
-		
+
 		<!--mod tools-->
 		<string name="additional_hdr">Additional</string>
 		<string name="additional">Additional</string>
@@ -832,6 +832,7 @@
 		<string name="pb_error_treble">Fix Treble Compatibility Error</string>
 		<string name="substratum_done">-- Substratum Overlays Wipe Complete!</string>
 		<string name="show_free_sdmb">Show Free SD Mb</string>
+		<string name="assert_failed_hint">An assert failed. Please check the output above for more details.</string>
 	</resources>
 </language>
 
