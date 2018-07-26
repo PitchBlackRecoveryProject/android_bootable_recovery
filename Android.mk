@@ -382,7 +382,6 @@ LOCAL_ADDITIONAL_DEPENDENCIES += \
     fsck.fat \
     fatlabel \
     mkfs.fat \
-    convert \
     mkbootimg \
     unpackbootimg \
     permissive.sh \
