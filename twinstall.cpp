@@ -346,7 +346,7 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
         return INSTALL_ERROR;
       }
     }
-  else if (trb_en || (!non && !trb_en) && !std_pac) {
+  else if ((trb_en || (!non && !trb_en)) && !std_pac) {
         if (DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 && !TWFunc::Verify_Loaded_OTA_Signature(loadedfp, ota_location_folder)) {
 	   TWPartition* survival_boot = PartitionManager.Find_Partition_By_Path("/boot");
 
