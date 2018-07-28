@@ -505,7 +505,7 @@
 			<text style="text_m">
 				<condition var1="tw_no_cpu_temp" var2="0"/>
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
-				<text>%tw_version% </text>
+				<text>%tw_version%</text>
 			</text>
 
 			<button style="main_button_black">
@@ -523,7 +523,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="318"/>
+				<placement x="250" y="320"/>
 				<text>{@install_btn=Install}</text>
 			</text>
 
@@ -538,7 +538,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="503"/>
+				<placement x="250" y="505"/>
 				<text>{@wipe_btn=Wipe}</text>
 			</text>
 
@@ -553,7 +553,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="688"/>
+				<placement x="250" y="690"/>
 				<text>{@backup_btn=Backup}</text>
 			</text>
 
@@ -568,7 +568,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="873"/>
+				<placement x="250" y="875"/>
 				<text>{@restore_btn=Restore}</text>
 			</text>
 
@@ -583,7 +583,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="1058"/>
+				<placement x="250" y="1060"/>
 				<text>{@mount_btn=Mount}</text>
 			</text>
 
@@ -598,7 +598,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="1243"/>
+				<placement x="250" y="1245"/>
 				<text>{@settings_btn=Settings}</text>
 			</text>
 
@@ -613,7 +613,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="1428"/>
+				<placement x="250" y="1430"/>
 				<text>{@advanced_btn=Advanced}</text>
 			</text>
 
@@ -628,7 +628,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="1613"/>
+				<placement x="250" y="1615"/>
 				<text>{@reboot_btn=Reboot}</text>
 			</text>
 		</page>
@@ -951,7 +951,7 @@
 
 			<template name="console"/>
 
-			<template name="progress_bar"/>
+			<template name="progress_bar_wipe"/>
 
 			<button style="main_button_half_height">
 				<condition var1="tw_sleep" op="&gt;" var2="0"/>
@@ -1167,7 +1167,7 @@
 
 			<template name="console"/>
 
-			<template name="progress_bar"/>
+			<template name="progress_bar_wipe"/>
 
 			<button style="main_button_half_height">
 				<condition var1="tw_has_cancel" var2="1"/>
@@ -2543,7 +2543,7 @@
 
 			<template name="console"/>
 
-			<template name="progress_bar"/>
+			<template name="progress_bar_backuprestore"/>
 
 			<text style="text_m_accent">
 				<placement x="%indent%" y="%row19_y%"/>
@@ -2958,7 +2958,7 @@
 
 			<template name="console"/>
 
-			<template name="progress_bar"/>
+			<template name="progress_bar_backuprestore"/>
 
 			<text style="text_m_accent">
 				<placement x="%indent%" y="%row19_y%"/>
@@ -3176,7 +3176,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="315"/>
+				<placement x="250" y="320"/>
 				<text>{@rb_system_btn=System}</text>
 			</text>
 
@@ -3204,7 +3204,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="500"/>
+				<placement x="250" y="505"/>
 				<text>{@rb_poweroff_btn=Power Off}</text>
 			</text>
 
@@ -3232,7 +3232,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="685"/>
+				<placement x="250" y="690"/>
 				<text>{@rb_recovery_btn=Recovery}</text>
 			</text>
 
@@ -3261,7 +3261,7 @@
 			
 			<text style="text_pb">
 				<condition var1="tw_reboot_bootloader" var2="1"/>
-				<placement x="250" y="870"/>
+				<placement x="250" y="872"/>
 				<text>{@rb_bootloader_btn=Bootloader}</text>
 			</text>
 
@@ -3291,7 +3291,7 @@
 			
 			<text style="text_pb">
 				<condition var1="tw_download_mode" var2="1"/>
-				<placement x="250" y="1055"/>
+				<placement x="250" y="1057"/>
 				<text>{@rb_download_btn=Download}</text>
 			</text>
 
@@ -3382,7 +3382,7 @@
 
 			<button style="main_button_half_height">
 				<placement x="%indent%" y="%row16_y%"/>
-				<text>{@install_cancel=Do not Install}</text>
+				<text>{@su_cancel=Do not Install}</text>
 				<action function="reboot">%tw_reboot_param%</action>
 			</button>
 
@@ -3514,7 +3514,7 @@
 			</fill>
 
 			<listbox style="scrolllist">
-				<placement x="%indent%" y="%row3a_y%" w="%content_width%" h="%listbox_settings_height%"/>
+				<placement x="%indent%" y="%row3a_y%" w="%content_width%" h="1140"/>
 				<icon selected="checkbox_true" unselected="checkbox_false"/>
 				<listitem name="{@zip_sig_chk=Zip signature verification}">
 					<data variable="tw_signed_zip_verify"/>
@@ -3540,22 +3540,22 @@
 				<listitem name="{@rev_navbar_chk=Reversed navbar layout}">
 					<data variable="tw_samsung_navbar"/>
 				</listitem>
+				<listitem name="{@show_free_sdmb=Show Free SD Mb}">
+					<data variable="tw_sd_free"/>
+				</listitem>
+				<listitem name="{@use_aromafm=Use Aroma File Manager}">
+					<data variable="aromafm"/>
+				</listitem>
 				<listitem name="{@simact_chk=Simulate actions for theme testing}">
 					<data variable="tw_simulate_actions"/>
 				</listitem>
 				<listitem name="{@simfail_chk=Simulate failure for actions}">
 					<condition var1="tw_simulate_actions" var2="1"/>
 					<data variable="tw_simulate_fail"/>
-				</listitem>
+					</listitem>
 				<listitem name="{@sha2_chk=Use SHA2 for hashing}">
 					<condition var1="tw_no_sha2" var2="0"/>
 					<data variable="tw_use_sha2"/>
-				</listitem>
-				<listitem name="{@show_free_sdmb=Show Free SD Mb}">
-					<data variable="tw_sd_free"/>
-				</listitem>
-				<listitem name="{@use_aromafm=Use Aroma File Manager}">
-					<data variable="aromafm"/>
 				</listitem>
 			</listbox>
 
@@ -3911,7 +3911,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="318"/>
+				<placement x="250" y="320"/>
 				<text>{@copy_log_btn=Copy Log}</text>
 			</text>
 
@@ -3927,7 +3927,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="503"/>
+				<placement x="250" y="505"/>
 				<text>{@fix_context_btn=Fix Contexts}</text>
 			</text>
 
@@ -3965,7 +3965,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="688"/>
+				<placement x="250" y="690"/>
 				<text>{@file_manager_btn=File Manager}</text>
 			</text>
 
@@ -3980,7 +3980,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="873"/>
+				<placement x="250" y="875"/>
 				<text>{@terminal_btn=Terminal}</text>
 			</text>
 			
@@ -3995,7 +3995,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="1058"/>
+				<placement x="250" y="1060"/>
 				<text>{@adb_sideload_btn=ADB Sideload}</text>
 			</text>
 					
@@ -4010,7 +4010,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="1243"/>
+				<placement x="250" y="1245"/>
 				<text>{@reload_theme_btn=Reload Theme}</text>
 			</text>
 			
@@ -4031,7 +4031,7 @@
 			
 			<text style="text_pb">
 				<condition var1="tw_allow_partition_sdcard" var2="1"/>
-				<placement x="250" y="1428"/>
+				<placement x="250" y="1430"/>
 				<text>{@part_sd_btn=Partition SD Card}</text>
 			</text>
 			
@@ -4068,7 +4068,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="1613"/>
+				<placement x="250" y="1615"/>
 				<text>{@additional=Additional}</text>
 			</text>
 
@@ -4102,7 +4102,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="318"/>
+				<placement x="250" y="320"/>
 				<text>{@tools=Tools}</text>
 			</text>
 			
@@ -4117,7 +4117,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="503"/>
+				<placement x="250" y="505"/>
 				<text>{@special=Special}</text>
 			</text>
 			
@@ -4132,7 +4132,7 @@
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="688"/>
+				<placement x="250" y="690"/>
 				<text>Themes</text>
 			</text>
 
@@ -4203,7 +4203,7 @@
 			</image>
 			
 			<text style="text_pb_tools">
-				<placement x="160" y="511"/>
+				<placement x="160" y="510"/>
 				<text>{@Unroot_SuperSU_btn=Unroot SuperSU}</text>
 			</text>
 			
@@ -4229,7 +4229,7 @@
 			</image>
 			
 			<text style="text_pb_tools">
-				<placement x="160" y="676"/>
+				<placement x="160" y="674"/>
 				<text>{@Magisk_btn=Magisk}</text>
 			</text>
 			
@@ -4255,7 +4255,7 @@
 			</image>
 			
 			<text style="text_pb_tools">
-				<placement x="160" y="841"/>
+				<placement x="160" y="838"/>
 				<text>{@Unroot_Magisk_btn=Unroot Magisk}</text>
 			</text>
 			
@@ -4281,7 +4281,7 @@
 			</image>
 			
 			<text style="text_pb_tools">
-				<placement x="160" y="1006"/>
+				<placement x="160" y="1002"/>
 				<text>{@MTP_Fix_btn=MTP Fix}</text>
 			</text>
 			
@@ -4307,7 +4307,7 @@
 			</image>
 			
 			<text style="text_pb_tools">
-				<placement x="160" y="1171"/>
+				<placement x="160" y="1166"/>
 				<text>{@RM_Subs_Overlays_btn=RM Overlays}</text>
 			</text>
 			
@@ -4359,7 +4359,7 @@
 			</image>
 			
 			<text style="text_pb_tools">
-				<placement x="670" y="511"/>
+				<placement x="670" y="510"/>
 				<text>{@FP_Scanner_btn=FP Scanner}</text>
 			</text>
 			
@@ -4385,7 +4385,7 @@
 			</image>
 			
 			<text style="text_pb_tools">
-				<placement x="670" y="676"/>
+				<placement x="670" y="674"/>
 				<text>{@Pin/Pass_Remover_btn=Pin/Pass Remover}</text>
 			</text>
 			
@@ -4411,7 +4411,7 @@
 			</image>
 			
 			<text style="text_pb_tools">
-				<placement x="670" y="841"/>
+				<placement x="670" y="838"/>
 				<text>{@Camera2API_Enabler_btn=Camera2API Enabler}</text>
 			</text>
 			
@@ -4437,7 +4437,7 @@
 			</image>
 			
 			<text style="text_pb_tools">
-				<placement x="670" y="1006"/>
+				<placement x="670" y="1002"/>
 				<text>{@App_Delete_btn=App Delete}</text>
 			</text>
 			
@@ -4463,8 +4463,34 @@
 			</image>
 			
 			<text style="text_pb_tools">
-				<placement x="670" y="1171"/>
+				<placement x="670" y="1166"/>
 				<text>{@Dm_Verity_btn=Dm Verity}</text>
+			</text>
+			
+			<button style="tool_button_black">
+				<placement x="26" y="1284"/>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/phhsupersu.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@PhhSuperSU_text=Phh SuperSU will be installed.}</action>
+					<action function="set">tw_text2={@PhhSuperSU_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<image>
+				<placement x="47" y="1313"/>
+				<image resource="tool_button_supersu"/>
+			</image>
+			
+			<text style="text_pb_tools">
+				<placement x="160" y="1330"/>
+				<text>{@PhhSuperSU_btn=Phh SuperSU}</text>
 			</text>
 			
 	     <action>
@@ -4601,10 +4627,10 @@
 				<listitem name="Source Maintained"/>
 				<listitem name=""/>
 				<listitem name="Telegram Chat"/>
-				<listitem name="@twrppb"/>
+				<listitem name="t.me/twrppb"/>
 				<listitem name=""/>
 				<listitem name="Telegram Channel"/>
-				<listitem name="@pbtwrp"/>
+				<listitem name="t.me/pbtwrp"/>
 			</listbox>
 			
 			<action>
@@ -4737,6 +4763,7 @@
 				<listitem name="Yashpal Joshi"/>
 				<listitem name="Rajesh Rajput"/>
 				<listitem name="Joker (Whyred)"/>
+				<listitem name="Miko"/>
 				<listitem name="osmOsis"/>
 				<listitem name="Mifans Indonesia"/>
 				<listitem name="All Developers & Users"/>
@@ -4973,7 +5000,6 @@
 			</fill>
 			
 			<listbox style="about">
-				<placement x="58" y="1204" w="964" h="534"/>
 				<placement x="58" y="1204" w="964" h="534"/>
 				<listitem name="Maintainer"/>
 				<listitem name=""/>
@@ -5260,8 +5286,8 @@
 				<listitem name="--1 Please make your internal space 5GB"/>
 				<listitem name="--2 Reboot to PBRP then Checklist incremental"/>
 				<listitem name="OTA signature verification, include system in OTA survival,"/>
-				<listitem name="support MIUI incremental OTA, aggresive stock recovery deactivation,"/>
-				<listitem name="disable DM Verity"/>
+				<listitem name="support MIUI incremental OTA, aggresive stock recovery"/>
+				<listitem name="deactivation, disable DM Verity"/>
 				<listitem name="--3 Install full rom MIUI, it will automatic backup boot and system"/>
 				<listitem name="for the OTA survival. example miui 8.3.15"/>
 				<listitem name="--4 Check OTA survival in folder PB internal storage"/>
@@ -5386,12 +5412,12 @@
 			<listbox style="about">
 				<placement x="58" y="1204" w="964" h="534"/>
 				<listitem name="PB v2.8.1"/>
-                                <listitem name="-----------------"/>
-                                <listitem name="Theme Updated added new"/>
-                                <listitem name="Theme 18:9 and other issue fixed"/>
-                                <listitem name="Fixed MiUI Treble OTA"/>
-                                <listitem name="etc"/>
-                                <listitem name="-----------------"/>
+                <listitem name="-----------------"/>
+                <listitem name="Theme Updated added new"/>
+                <listitem name="Theme 18:9 and other issue fixed"/>
+                <listitem name="Fixed MiUI Treble OTA"/>
+                <listitem name="etc"/>
+                <listitem name="-----------------"/>
 				<listitem name="PB v2.8.0"/>
 				<listitem name="-----------------"/>
 				<listitem name="Theme Updated"/>
@@ -5747,18 +5773,23 @@
 				<placement x="3" y="3" w="1074" h="1914"/>
 			</fill>
 			
+			<image>
+				<image resource="splashlogo"/>
+				<placement x="540" y="900" placement="4"/>
+			</image>
+			
             <text style="text_exl">
-				<placement x="540" y="350" placement="4"/>
+				<placement x="540" y="150" placement="4"/>
 				<text>TIME: %tw_time%</text>
 			</text>
 			
 			<text style="text_exl">
-				<placement x="540" y="500" placement="4"/>
+				<placement x="540" y="300" placement="4"/>
 				<text>BATTERY: %tw_battery%</text>
 			</text>
 			
 			<text style="text_exl">
-				<placement x="540" y="650" placement="4"/>
+				<placement x="540" y="450" placement="4"/>
 				<text>CPU: %tw_cpu_temp% &#xB0;C</text>
 			</text>
 			
@@ -6691,6 +6722,51 @@
 			</action>
 		</page>
 
+		<page name="installsu">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@reboot_hdr=Reboot}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@su_hdr=SuperSU Check}</text>
+			</text>
+
+			<text style="text_m_accent">
+				<placement x="%center_x%" y="%row2_y%" placement="5"/>
+				<text>{@su_note1=Your device does not appear to be rooted.}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%center_x%" y="%row4_y%" placement="5"/>
+				<text>{@su_note2=Install SuperSU now?}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%center_x%" y="%row5_y%" placement="5"/>
+				<text>{@su_note3=This will root your device.}</text>
+			</text>
+
+			<button style="main_button_half_height">
+				<placement x="%indent%" y="%row18a_y%"/>
+				<text>{@su_cancel=Do not Install}</text>
+				<action function="set">tw_page_done=1</action>
+			</button>
+
+			<slider>
+				<text>{@swipe_su_to_install=Swipe to Install}</text>
+				<actions>
+					<action function="set">tw_action=installsu</action>
+					<action function="set">tw_action_text1={@su_installing=Installing SuperSU}</action>
+					<action function="set">tw_action_text2=</action>
+					<action function="page">singleaction_page</action>
+				</actions>
+			</slider>
+		</page>
+
 		<page name="slideout">
 			<template name="page"/>
 			
@@ -6906,27 +6982,7 @@
 			</image>
 			
 			<button style="pb_theme_button">
-				<placement x="95" y="283"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Red</action>
-					<action function="set">tw_folder=pb_red</action>
-					<action function="set">tw_background_color2=FD0000</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="283"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Green</action>
-					<action function="set">tw_folder=pb_green</action>
-					<action function="set">tw_background_color2=2AFD00</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="283"/>
+				<placement x="753" y="716"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Blue</action>
 					<action function="set">tw_folder=pb_blue</action>
@@ -6938,59 +6994,9 @@
 			<button style="pb_theme_button">
 				<placement x="95" y="716"/>
 				<actions>
-					<action function="set">tw_theme_name=PB Yello</action>
-					<action function="set">tw_folder=pb_yello</action>
-					<action function="set">tw_background_color2=F9FD00</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="716"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Violet</action>
-					<action function="set">tw_folder=pb_violet</action>
-					<action function="set">tw_background_color2=8B00FD</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="716"/>
-				<actions>
-					<action function="set">tw_theme_name=PB LightBlue</action>
-					<action function="set">tw_folder=pb_lightblue</action>
-					<action function="set">tw_background_color2=00A0FD</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="95" y="1151"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Brown</action>
-					<action function="set">tw_folder=pb_brown</action>
-					<action function="set">tw_background_color2=4B3829</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="1151"/>
-				<actions>
 					<action function="set">tw_theme_name=PB White</action>
 					<action function="set">tw_folder=pb_white</action>
 					<action function="set">tw_background_color2=FDFDFD</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="1151"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Cyan</action>
-					<action function="set">tw_folder=pb_cyan</action>
-					<action function="set">tw_background_color2=30E6F1</action>
 					<action function="page">change_theme</action>
 				</actions>
 			</button>
@@ -7032,27 +7038,7 @@
 			</image>
 			
 			<button style="pb_theme_button">
-				<placement x="95" y="283"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Red</action>
-					<action function="set">tw_folder=pb_red</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="283"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Green</action>
-					<action function="set">tw_folder=pb_green</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="283"/>
+				<placement x="753" y="716"/>
 				<actions>
 					<action function="set">tw_theme_name=PB Blue</action>
 					<action function="set">tw_folder=pb_blue</action>
@@ -7064,58 +7050,8 @@
 			<button style="pb_theme_button">
 				<placement x="95" y="716"/>
 				<actions>
-					<action function="set">tw_theme_name=PB Yello</action>
-					<action function="set">tw_folder=pb_yello</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="716"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Violet</action>
-					<action function="set">tw_folder=pb_violet</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="716"/>
-				<actions>
-					<action function="set">tw_theme_name=PB LightBlue</action>
-					<action function="set">tw_folder=pb_lightblue</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="95" y="1151"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Brown</action>
-					<action function="set">tw_folder=pb_brown</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="1151"/>
-				<actions>
 					<action function="set">tw_theme_name=PB White</action>
 					<action function="set">tw_folder=pb_white</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="1151"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Cyan</action>
-					<action function="set">tw_folder=pb_cyan</action>
 					<action function="set">tw_background_color2=010100</action>
 					<action function="page">change_theme_black</action>
 				</actions>

@@ -60,9 +60,12 @@
 		<image name="sort_asc" filename="sort_asc" retainaspect="1"/>
 		<image name="sort_desc" filename="sort_desc" retainaspect="1"/>
 		<image name="sort_empty" filename="sort_empty" retainaspect="1"/>
-		<animation name="progress" filename="indeterminate" retainaspect="1"/>
 		<image name="progress_empty" filename="progress_empty" retainaspect="1"/>
 		<image name="progress_full" filename="progress_fill" retainaspect="1"/>
+		<image name="progress_full_flash" filename="progress_fill_flash" retainaspect="1"/>
+		<image name="progress_full_backuprestore" filename="progress_fill_backuprestore" retainaspect="1"/>
+		<image name="progress_full_wipe" filename="progress_fill_wipe" retainaspect="1"/>
+		<image name="progress_full_reboot" filename="progress_fill_reboot" retainaspect="1"/>
 		<image name="slider" filename="slider" retainaspect="1"/>
 		<image name="slider_used" filename="slider_used" retainaspect="1"/>
 		<image name="slider_touch" filename="slider_touch" retainaspect="1"/>
@@ -235,7 +238,7 @@
 		<variable name="keyboard_y" value="1149"/>
 		<variable name="keyboard_terminal_y" value="1053"/>
 		<variable name="background_color" value="#000000"/>
-		<variable name="background_color2" value="#FD0000"/>
+		<variable name="background_color2" value="#010100"/>
 		<variable name="front_color" value="#010100"/>
 		<variable name="accent_color" value="#7F000000"/>
         <variable name="accent_color2" value="#555555"/>
@@ -618,15 +621,104 @@
 				<placement x="%indent%" y="%row17a_y%"/>
 				<resource empty="progress_empty" full="progress_full"/>
 				<data name="ui_progress"/>
-			</progressbar>
-
+			
+			
 			<animation>
 				<placement x="%indent%" y="%row17a_y%"/>
 				<resource name="progress"/>
 				<speed fps="24" render="2"/>
 				<loop frame="1"/>
 			</animation>
+		</progressbar>
 		</template>
+		
+		
+		
+		
+		
+		<template name="progress_bar_flash">
+			<progressbar>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource empty="progress_empty" full="progress_full_flash"/>
+				<data name="ui_progress"/>
+			
+			
+			<animation>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource name="progress"/>
+				<speed fps="24" render="2"/>
+				<loop frame="1"/>
+			</animation>
+		</progressbar>
+		</template>
+		
+		
+		
+		
+		
+			
+		<template name="progress_bar_backuprestore">
+			<progressbar>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource empty="progress_empty" full="progress_full_backuprestore"/>
+				<data name="ui_progress"/>
+			
+			
+			<animation>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource name="progress"/>
+				<speed fps="24" render="2"/>
+				<loop frame="1"/>
+			</animation>
+		</progressbar>
+			</template>
+			
+			
+			
+			
+			
+			
+		<template name="progress_bar_wipe">
+			<progressbar>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource empty="progress_empty" full="progress_full_wipe"/>
+				<data name="ui_progress"/>
+			
+			
+			<animation>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource name="progress"/>
+				<speed fps="24" render="2"/>
+				<loop frame="1"/>
+			</animation>
+			</progressbar>
+			</template>
+			
+			
+			
+			
+			
+			
+		<template name="progress_bar_reboot">
+			<progressbar>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource empty="progress_empty" full="progress_full_reboot"/>
+				<data name="ui_progress"/>
+			
+			
+			<animation>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource name="progress"/>
+				<speed fps="24" render="2"/>
+				<loop frame="1"/>
+			</animation>
+			</progressbar>
+		</template>
+
+
+
+
+
 
 		<template name="sort_options">
 			<image>
@@ -762,8 +854,6 @@
 			</button>
 		</template>
 		
-		
-
 		<template name="tabs_settings">
 			<fill color="%accent_color%">
 				<placement x="0" y="row1_y" w="%screen_width%" h="tab_height"/>
