@@ -176,7 +176,7 @@ ifeq ($(TW_CUSTOM_THEME),)
 	    TWRP_RES += $(commands_recovery_local_path)/gui/theme/common/PB_GO/$(word 1,$(subst _, ,$(TW_THEME))).xml
     else
 	    TWRP_THEME_LOC := $(commands_recovery_local_path)/gui/theme/$(TW_THEME)/PB
-            TWRP_RES += $(commands_recovery_local_path)/gui/theme/common/$(word 1,$(subst _, ,$(TW_THEME))).xml
+            TWRP_RES += $(commands_recovery_local_path)/gui/theme/common/PB/$(word 1,$(subst _, ,$(TW_THEME))).xml
     endif
     ifeq ($(wildcard $(TWRP_THEME_LOC)/ui.xml),)
         $(warning $(TW_THEME_WARNING_MSG))
