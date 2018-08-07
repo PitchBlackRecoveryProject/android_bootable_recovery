@@ -419,7 +419,7 @@
 		<style name="fileselector">
 			<highlight color="%fileselector_highlight_color%"/>
 			<header background="%background_color%" textcolor="%accent_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
-			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<fastscroll linecolor="%fileselector_linecolor2%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
 			<sort name="tw_gui_sort_order"/>
 			<icon folder="folder" file="file"/>
