@@ -4973,8 +4973,7 @@
 			</fill>
 			
 			<listbox style="about">
-				<placement x="58" y="1204" w="964" h="534"/>
-				<placement x="58" y="1204" w="964" h="534"/>
+				<placement x="58" y="1204" w="964" h="534"/>				
 				<listitem name="Maintainer"/>
 				<listitem name=""/>
 				<listitem name="Reza Adi Pangestu"/>
