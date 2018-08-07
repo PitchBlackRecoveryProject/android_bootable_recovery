@@ -235,7 +235,7 @@
 		<variable name="keyboard_y" value="1149"/>
 		<variable name="keyboard_terminal_y" value="1053"/>
 		<variable name="background_color" value="#000000"/>
-		<variable name="background_color2" value="#FD0000"/>
+		<variable name="background_color2" value="#010100"/>
 		<variable name="front_color" value="#010100"/>
 		<variable name="accent_color" value="#7F000000"/>
         <variable name="accent_color2" value="#555555"/>
@@ -619,11 +619,11 @@
 				<resource empty="progress_empty" full="progress_full"/>
 				<data name="ui_progress"/>
 			</progressbar>
-
+			
 			<animation>
-				<placement x="%indent%" y="%row17a_y%"/>
+				<placement x="45" y="1320"/>
 				<resource name="progress"/>
-				<speed fps="24" render="2"/>
+				<speed fps="150" render="2"/>
 				<loop frame="1"/>
 			</animation>
 		</template>
