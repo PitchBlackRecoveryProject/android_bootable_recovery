@@ -446,7 +446,7 @@
 		<style name="partitionlist">
 			<highlight color="%fileselector_highlight_color%"/>
 			<header background="%background_color%" textcolor="%accent_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
-			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<fastscroll linecolor="%fileselector_linecolor2%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<dimensions lineh="%slidervalue_lineh%" linepadding="%slidervalue_padding%" sliderw="%slidervalue_sliderw%" sliderh="%slidervalue_sliderh%"/>
 			<icon selected="checkbox_true" unselected="checkbox_false"/>
 			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
@@ -458,7 +458,7 @@
 			<highlight color="%fileselector_highlight_color%"/>
 			<placement x="%col1_x_left%" y="%row5_y%" w="%content_overlay_width%" h="%partitionlist_storage_height%"/>
 			<header background="%background_color%" textcolor="%accent_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
-			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<fastscroll linecolor="%fileselector_linecolor2%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<dimensions lineh="%slidervalue_lineh%" linepadding="%slidervalue_padding%" sliderw="%slidervalue_sliderw%" sliderh="%slidervalue_sliderh%"/>
 			<icon selected="radio_true" unselected="radio_false"/>
 			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
