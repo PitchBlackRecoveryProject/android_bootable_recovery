@@ -946,7 +946,7 @@ int GUIAction::screenshot(std::string arg __unused)
 
 	const std::string storage = DataManager::GetCurrentStoragePath();
 	if (PartitionManager.Is_Mounted_By_Path(storage)) {
-		snprintf(path, sizeof(path), "%s/Pictures/Screenshots/", storage.c_str());
+		snprintf(path, sizeof(path), "%s/PBRP/Screenshots/", storage.c_str());
 	} else {
 		strcpy(path, "/tmp/");
 	}
@@ -957,8 +957,8 @@ int GUIAction::screenshot(std::string arg __unused)
 	tm = time(NULL);
 	path_len = strlen(path);
 
-	// Screenshot_2014-01-01-18-21-38.png
-	strftime(path+path_len, sizeof(path)-path_len, "Screenshot_%Y-%m-%d-%H-%M-%S.png", localtime(&tm));
+	// Screenshot_PBRP_2014-01-01-18-21-38.png
+	strftime(path+path_len, sizeof(path)-path_len, "Screenshot_PBRP_%Y-%m-%d-%H-%M-%S.png", localtime(&tm));
 
 	int res = gr_save_screenshot(path);
 	if (res == 0) {
