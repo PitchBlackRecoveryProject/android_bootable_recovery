@@ -5255,30 +5255,36 @@
 			
 			<listbox style="about">
 				<placement x="58" y="1204" w="964" h="534"/>
-				<listitem name="--1 Please make your internal space 5GB"/>
+				<listitem name="*    Please make your internal space 5GB"/>
 				<listitem name=""/>
-				<listitem name="--2 Reboot to PBRP then Checklist incremental"/>
-				<listitem name="OTA signature verification, include system in OTA"/>
-				<listitem name="survival, support MIUI incremental OTA,"/>
-				<listitem name="aggresive stock recovery deactivation,"/>
-				<listitem name="disable DM Verity"/>
+				<listitem name="*    Reboot to PBRP then Checklist incremental"/>
+				<listitem name="     OTA signature verification, include system in OTA"/>
+				<listitem name="     survival, support MIUI incremental OTA,"/>
+				<listitem name="     aggresive stock recovery deactivation,"/>
+				<listitem name="     disable DM Verity"/>
 				<listitem name=""/>
-				<listitem name="--3 Install full rom MIUI, it will automatic backup"/>
-				<listitem name="boot and system for the OTA survival. "/>
-				<listitem name="example miui 8.3.15"/>
+				<listitem name="*    Install full rom MIUI, it will automatic backup"/>
+				<listitem name="     boot and system for the OTA survival."/>
+				<listitem name="     example miui 8.3.15"/>
 				<listitem name=""/>
-				<listitem name="--4 Check OTA survival in folder PB internal storage"/>
-				<listitem name="you can found boot and system"/>
+				<listitem name="*    Check OTA survival in folder PB internal storage"/>
+				<listitem name="     you can found boot and system"/>
 				<listitem name=""/>
-				<listitem name="--5 Open updater app and when update releases,"/>
-				<listitem name="download it and press update. example miui 8.3.15 - 8.3.29"/>
-				<listitem name="Automatically device will reboot to PBRP then OTA"/>
-				<listitem name="flashing will start, this time the backed up boot"/>
-				<listitem name="and system will be flashed and thus patching"/>
-				<listitem name="will happen and your device will be updated"/>
+				<listitem name="*    Open updater app and when update releases,"/>
+				<listitem name="     download it and press update. example miui"/>
+				<listitem name="     8.3.15 - 8.3.29 Automatically device will"/>
+				<listitem name="     reboot to PBRP then OTA flashing will start,"/>
+				<listitem name="     this time the backed up boot and system"/>
+				<listitem name="     will be flashed and thus patching"/>
+				<listitem name="     will happen and your device will be updated"/>
+				<listitem name=""/>
+				<listitem name="!    Pre-requisite unlock bootloader"/>
 				<listitem name=""/>
 				<listitem name=""/>
-				<listitem name="---Pre-requisite  unlock bootloader---"/>
+				<listitem name="?    Note: for those who do not use OTA,"/>
+                                <listitem name="     please checklist aggressive stock recovery"/>                                                                                                       
+                                <listitem name="     deactivation and disable dm verity,"/>
+                                <listitem name="     thus preventing recovery returning to stock."/>
 			</listbox>
 			
 			<action>
