@@ -1877,6 +1877,7 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 	    {
 	      LOGINFO ("Unable to open '%s'\n", src_t.c_str ());
 	    }
+	else {
 	  while (pent = readdir (pdir))
 	    {
 	      o_file = src_t + "/" + pent->d_name + "";
@@ -1884,12 +1885,14 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 	      TWFunc::copy_file (o_file, c_file, 0777);
 	    }
 	  closedir (pdir);
+	}
 
 	  pdir = opendir (src_ar_m.c_str ());
 	  if (pdir == NULL)
 	    {
 	      LOGINFO ("Unable to open '%s'\n", src_ar_m.c_str ());
 	    }
+	else {
 	  while (pent = readdir (pdir))
 	    {
 	      o_file + src_ar_m + "/" + pent->d_name + "";
@@ -1897,6 +1900,7 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 	      TWFunc::copy_file (o_file, c_file, 0777);
 	    }
 	  closedir (pdir);
+	}
 	}
       else
 	{
