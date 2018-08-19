@@ -1171,7 +1171,7 @@ void TWFunc::Disable_Stock_Recovery_Replace(void) {
 		}
 		if (PartitionManager.Is_Mounted_By_Path("/system"))
 			PartitionManager.UnMount_By_Path("/system", false);
-		if (PartitionManager.Mount_By_Path("/vendor", false))
+		if (PartitionManager.Is_Mounted_By_Path("/vendor"))
 			PartitionManager.UnMount_By_Path("/vendor", false);
 }
 
@@ -1605,168 +1605,240 @@ return true;
 
 
 bool TWFunc::Patch_DM_Verity() {
-bool status = false;
-int stat = 0, std, trb_en;
-DataManager::GetValue(TRB_EN, trb_en);
-DataManager::GetValue(STD, std);
-string firmware_key = ramdisk + "/sbin/firmware_key.cer";
-string path, cmp, remove = "verify,;,verify;verify;support_scfs,;,support_scfs;support_scfs;";
-DIR* d;
-DIR* d1;
-struct dirent* de;
-d = opendir(ramdisk.c_str());
-//d1 = opendir(fstab1.c_str());
-if (d == NULL)
-{
-LOGINFO("Unable to open '%s'\n", ramdisk.c_str());
-return false;
-}
-while ((de = readdir(d)) != NULL)
-{
-cmp = de->d_name;
-   path = ramdisk + "/" + cmp;
-  if (cmp.find("fstab.") != string::npos) {
-  gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
-	stat = 1;
-  if (!status) {
- if (TWFunc::CheckWord(path, "verify") || TWFunc::CheckWord(path, "support_scfs")) 
- status = true;
- }
-TWFunc::Replace_Word_In_File(path, remove);
-  }
-  if (cmp == "default.prop") {
-  if (TWFunc::CheckWord(path, "ro.config.dmverity=")) {
-  if (TWFunc::CheckWord(path, "ro.config.dmverity=true"))
-  TWFunc::Replace_Word_In_File(path, "ro.config.dmverity=true;", "ro.config.dmverity=false");
-  } else {
-             ofstream File(path.c_str(), ios_base::app | ios_base::out);  
-             if (File.is_open()) {
-             File << "ro.config.dmverity=false" << endl;
-             File.close();
-             }			
+	bool status = false;
+	int stat = 0, std, trb_en;
+	DataManager::GetValue(TRB_EN, trb_en);
+	DataManager::GetValue(STD, std);
+	string firmware_key = ramdisk + "/sbin/firmware_key.cer";
+	string path, cmp, remove = "verify,;,verify;verify;support_scfs,;,support_scfs;support_scfs;";
+	DIR* d;
+	DIR* d1;
+	struct dirent* de;
+	d = opendir(ramdisk.c_str());
+	if (d == NULL)
+	{
+		LOGINFO("Unable to open '%s'\n", ramdisk.c_str());
+		return false;
+	}
+	while ((de = readdir(d)) != NULL)
+	{
+		cmp = de->d_name;
+		path = ramdisk + "/" + cmp;
+		if (cmp.find("fstab.") != string::npos)
+		{
+			gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
+			LOGINFO("Fstab Found at '%s'\n", ramdisk.c_str());
+			stat = 1;
+			if (!status)
+			{
+				if (TWFunc::CheckWord(path, "verify") || TWFunc::CheckWord(path, "support_scfs")) 
+					status = true;
+			}
+			TWFunc::Replace_Word_In_File(path, remove);
+		}
+		if (cmp == "default.prop")
+		{
+			if (TWFunc::CheckWord(path, "ro.config.dmverity="))
+			{
+				if (TWFunc::CheckWord(path, "ro.config.dmverity=true"))
+					TWFunc::Replace_Word_In_File(path, "ro.config.dmverity=true;", "ro.config.dmverity=false");
+			}
+			else
+			{
+				ofstream File(path.c_str(), ios_base::app | ios_base::out);  
+				if (File.is_open())
+				{
+					File << "ro.config.dmverity=false" << endl;
+					File.close();
+				}			
 			}
 		}
-	    if (cmp == "verity_key") {
-		if (!status)
-		status = true;
-		unlink(path.c_str());
+		if (cmp == "verity_key")
+		{
+			if (!status)
+				status = true;
+			unlink(path.c_str());
+		}
 	}
-}
-closedir (d);
-if (stat == 0) {
-if (std == 1 || trb_en == 1) {
-	if (PartitionManager.Mount_By_Path("/vendor", false)) {
-d1 = opendir(fstab2.c_str());
-stat = 2; } }
-else {
-PartitionManager.Mount_By_Path("/system", false);
-stat = 1;
-d1 = opendir(fstab1.c_str()); }
-while ((de = readdir(d1)) != NULL)
-{
-cmp = de->d_name;
- if (stat == 2)
-   path = fstab2 + "/" + cmp;
- else if (stat == 1)
-   path = fstab1 + "/" + cmp;
-  if (cmp.find("fstab.") != string::npos) {
-  gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
-  if (!status) {
- if (TWFunc::CheckWord(path, "verify") || TWFunc::CheckWord(path, "support_scfs")) 
- status = true;
- }
-TWFunc::Replace_Word_In_File(path, remove);
-  }
-}
-closedir (d1);
-if (PartitionManager.Is_Mounted_By_Path("/system"))
-PartitionManager.UnMount_By_Path("/system", false);
-	if (std == 1 || trb_en == 1) {
-		if (PartitionManager.Mount_By_Path("/vendor", false))
-			PartitionManager.UnMount_By_Path("/vendor", false); }
-}
-    if (TWFunc::Path_Exists(firmware_key)) {
-    if (!status)
-    status = true;
-    unlink(firmware_key.c_str());
-    }
-return status;
-}            
-		
-
-
-bool TWFunc::Patch_Forced_Encryption() {
-string path, cmp;
-int stat = 0, std, trb_en;
-DataManager::GetValue(TRB_EN, trb_en);
-DataManager::GetValue(STD, std);
-bool status = false;
-int encryption;
-DataManager::GetValue(PB_DISABLE_DM_VERITY, encryption);
-DIR* d;
-DIR* d1;
-struct dirent* de;
-d = opendir(ramdisk.c_str());
-if (d == NULL)
-{
-LOGINFO("Unable to open '%s'\n", ramdisk.c_str());
-return false;
-}
-while ((de = readdir(d)) != NULL)
-{
-   cmp = de->d_name;
-   path = ramdisk + "/" + cmp;
-   if (cmp.find("fstab.") != string::npos) {
-   	if (encryption != 1) {
-       gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
-	stat = 1; }
-   	if (!status) {
-       if (TWFunc::CheckWord(path, "forceencrypt") || TWFunc::CheckWord(path, "forcefdeorfbe"))
-       status = true;
-       }
-       TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;", "encryptable=");
-       }   
-      }
-      closedir (d);
-if (stat == 0) {
-if (std == 1 || trb_en == 1) {
-	if (PartitionManager.Mount_By_Path("/vendor", false)) {
-d1 = opendir(fstab2.c_str());
-stat = 2; } }
-else {
-PartitionManager.Mount_By_Path("/system", false);
-stat = 1;
-d1 = opendir(fstab1.c_str()); }
-
-	while ((de = readdir(d1)) != NULL)
+	closedir (d);
+	if (stat == 0)
 	{
-	   cmp = de->d_name;
-	    if (stat == 2)
-		   path = fstab2 + "/" + cmp;
-	    else if (stat == 1)
-		   path = fstab1 + "/" + cmp;
-	   if (cmp.find("fstab.") != string::npos) {
-	        if (encryption != 1) {
-	       gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
-	        stat = 1; }
-	        if (!status) {
-	       if (TWFunc::CheckWord(path, "forceencrypt") || TWFunc::CheckWord(path, "forcefdeorfbe"))
-	       status = true;
-	       }
-	       TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;", "encryptable=");
-	       }
-        }
-      closedir (d1);
-if (PartitionManager.Is_Mounted_By_Path("/system"))
-PartitionManager.UnMount_By_Path("/system", false);
-	if (std == 1 || trb_en == 1) {
-		if (PartitionManager.Mount_By_Path("/vendor", false))
-			PartitionManager.UnMount_By_Path("/vendor", false); }
+		if(std == 2 || trb_en == 1)
+		{
+			if(PartitionManager.Mount_By_Path("/vendor", false))
+				d1 = opendir(fstab2.c_str());
+			stat = 2;
+		}
+		else
+		{
+			if(PartitionManager.Mount_By_Path("/system", false))
+				d1 = opendir(fstab1.c_str());
+			stat = 1;
+		}
+		if (d1 == NULL)
+		{
+			if(stat == 2)
+				LOGINFO("Unable to open '%s'\n", fstab2.c_str());
+			else if(stat == 1)
+				LOGINFO("Unable to open '%s'\n", fstab1.c_str());
+			return false;
+		}
+		while ((de = readdir(d1)) != NULL)
+		{
+			cmp = de->d_name;
+			if (stat == 2)
+				path = fstab2 + "/" + cmp;
+			else if (stat == 1)
+				path = fstab1 + "/" + cmp;
+			if (cmp.find("fstab.") != string::npos)
+			{
+				gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
+				if (stat == 2)
+					LOGINFO("Fstab Found at '%s'\n", fstab2.c_str());
+				else if (stat == 1)
+					LOGINFO("Fstab Found at '%s'\n", fstab1.c_str());
+				if (!status)
+				{
+					if (TWFunc::CheckWord(path, "verify") || TWFunc::CheckWord(path, "support_scfs")) 
+						status = true;
+				}
+				TWFunc::Replace_Word_In_File(path, remove);
+			}
+			if (cmp == "default.prop")
+			{
+				if (TWFunc::CheckWord(path, "ro.config.dmverity="))
+				{
+					if (TWFunc::CheckWord(path, "ro.config.dmverity=true"))
+						TWFunc::Replace_Word_In_File(path, "ro.config.dmverity=true;", "ro.config.dmverity=false");
+				}
+				else
+				{
+					ofstream File(path.c_str(), ios_base::app | ios_base::out);  
+					if (File.is_open())
+					{
+						File << "ro.config.dmverity=false" << endl;
+						File.close();
+					}			
+				}
+			}
+		}
+	        closedir (d1);
+		if (PartitionManager.Is_Mounted_By_Path("/system"))
+			PartitionManager.UnMount_By_Path("/system", false);
+		if (PartitionManager.Is_Mounted_By_Path("/vendor"))
+			PartitionManager.UnMount_By_Path("/vendor", false);
+	}
+	if (TWFunc::Path_Exists(firmware_key))
+	{
+		if (!status)
+			status = true;
+		unlink(firmware_key.c_str());
+	}
+	return status;
+}            
+
+bool TWFunc::Patch_Forced_Encryption()
+{
+	string path, cmp;
+	int stat = 0, std, trb_en;
+	DataManager::GetValue(TRB_EN, trb_en);
+	DataManager::GetValue(STD, std);
+	bool status = false;
+	int encryption;
+	DataManager::GetValue(PB_DISABLE_DM_VERITY, encryption);
+	DIR* d;
+	DIR* d1;
+	struct dirent* de;
+	d = opendir(ramdisk.c_str());
+	if (d == NULL)
+	{
+		LOGINFO("Unable to open '%s'\n", ramdisk.c_str());
+		return false;
+	}
+	while ((de = readdir(d)) != NULL)
+	{
+		cmp = de->d_name;
+		path = ramdisk + "/" + cmp;
+		if (cmp.find("fstab.") != string::npos)
+		{
+			if (encryption != 1)
+			{
+				gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
+				LOGINFO("Fstab Found at '%s'\n", ramdisk.c_str());
+				stat = 1;
+			}
+			if (!status)
+			{
+			       if (TWFunc::CheckWord(path, "forceencrypt") || TWFunc::CheckWord(path, "forcefdeorfbe"))
+					status = true;
+			}
+			TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;", "encryptable=");
+		}   
+	}
+	closedir (d);
+	if (stat == 0)
+	{
+		if(std == 2 || trb_en == 1)
+		{
+			if(PartitionManager.Mount_By_Path("/vendor", false))
+				d1 = opendir(fstab2.c_str());
+			stat = 2;
+		}
+		else
+		{
+			if(PartitionManager.Mount_By_Path("/system", false))
+				d1 = opendir(fstab1.c_str());
+			stat = 1;
+		}
+		if (d1 == NULL)
+		{
+			if(stat == 2)
+				LOGINFO("Unable to open '%s'\n", fstab2.c_str());
+			else if(stat == 1)
+				LOGINFO("Unable to open '%s'\n", fstab1.c_str());
+			return false;
+		}
+		while ((de = readdir(d1)) != NULL)
+		{
+			cmp = de->d_name;
+			if (stat == 2)
+				path = fstab2 + "/" + cmp;
+			else if (stat == 1)
+				path = fstab1 + "/" + cmp;
+			if (cmp.find("fstab.") != string::npos)
+			{
+			        if (encryption != 1)
+				{
+					gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
+				if (stat == 2)
+					LOGINFO("Fstab Found at '%s'\n", fstab2.c_str());
+				else if (stat == 1)
+					LOGINFO("Fstab Found at '%s'\n", fstab1.c_str());
+				}
+				if (!status)
+				{
+					if (TWFunc::CheckWord(path, "forceencrypt") || TWFunc::CheckWord(path, "forcefdeorfbe"))
+					status = true;
+				}
+				TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;", "encryptable=");
+		       }
+	        }
+	        closedir (d1);
+		if (PartitionManager.Is_Mounted_By_Path("/system"))
+			PartitionManager.UnMount_By_Path("/system", false);
+		if (PartitionManager.Is_Mounted_By_Path("/vendor"))
+			PartitionManager.UnMount_By_Path("/vendor", false);
+	}
+	return status;
 }
-     return status;
-    }
     
 void TWFunc::Deactivation_Process(void) {
+if(PartitionManager.Is_Mounted_By_Path("/vendor"))
+	PartitionManager.UnMount_By_Path("/vendor", false);
+else if(PartitionManager.Is_Mounted_By_Path("/cust"))
+	PartitionManager.UnMount_By_Path("/cust", false);
+if(PartitionManager.Is_Mounted_By_Path("/system"))
+        PartitionManager.UnMount_By_Path("/system", false);
 if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
 if (!Unpack_Image("/boot")) {
 LOGINFO("Deactivation_Process: Unable to unpack image\n");
@@ -1824,30 +1896,6 @@ void TWFunc::Read_Write_Specific_Partition(string path, string partition_name, b
 	return;
 }
 
-/**void TWFunc::Write_MIUI_Install_Status(std::string install_status, bool verify) {
-std::string last_status = "/cache/recovery/last_status";
-if (!verify) {
-if (DataManager::GetIntValue(PB_MIUI_ZIP_TMP) != 0 || DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0) {
-    if (PartitionManager.Mount_By_Path("/cache", true)) {
-    if (Path_Exists(last_status)) 
-    unlink(last_status.c_str());
-    
-     ofstream status;
-     status.open (last_status.c_str());
-     status << install_status;
-     status.close();
-     }
-    }
-   } else if (PartitionManager.Mount_By_Path("/cache", true) && DataManager::GetIntValue(PB_INCREMENTAL_PACKAGE) != 0) {
-    if (Path_Exists(last_status)) 
-    unlink(last_status.c_str());
-    
-     ofstream status;
-     status.open (last_status.c_str());
-     status << install_status;
-     status.close();
-     }
-}*/
 void TWFunc::copy_kernel_log(string curr_storage) {
 	std::string dmesgDst = curr_storage + "/dmesg.log";
 	std::string dmesgCmd = "/sbin/dmesg";

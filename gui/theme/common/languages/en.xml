@@ -765,6 +765,7 @@
 		<string name="pb_install_miui_detected">- Detected MIUI Update Package</string>
                 <string name="pb_install_miui_oreo_detected">- Detected Treble MIUI Update Package</string>
 		<string name="pb_install_miui_10_detected">- Detected MIUI 10 Non-Treble Update Package</string>
+		<string name="pb_install_patch_detected">- Detected Either a Patch or Fix Package</string>
 		<string name="pb_disable_boot_chk">Disable boot check</string>
 		<string name="pb_include_system_survival_chk">Include system in OTA survival</string>
 		<string name="pb_verify_incremental_ota_signature_chk">Incremental OTA signature verification</string>
