@@ -252,8 +252,10 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
                    gui_msg("pb_install_standard_detected=- Detected standard Package");
 	        }
 	    else {
+		    if (Zip -> EntryExists("boot.img")) {
                 DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
 		DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
+		    }
 		gui_msg("pb_install_patch_detected=- Detected Either a Patch or Fix Package"); }
         }
     }
