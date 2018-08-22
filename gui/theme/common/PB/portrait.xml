@@ -4975,7 +4975,7 @@
 			
 			<listbox style="about">
 				<placement x="58" y="1204" w="964" h="534"/>				
-				<listitem name="Maintainer"/>
+				<listitem name="Maintainers"/>
 				<listitem name=""/>
 				<listitem name="Reza Adi Pangestu"/>
 				<listitem name="Redmi Note 4 (Mido)"/>
@@ -4994,9 +4994,8 @@
 				<listitem name="Redmi 3/PRO (Ido), Redmi 4X (Santoni)"/>
 				<listitem name="Redmi 5 (Rosy)"/>
 				<listitem name=""/>
-				<listitem name="Manish4586"/>
-				<listitem name="Lava Iris X8 (zaw809), HTC Desire 10 Lifestyle (a56dj),"/>
-				<listitem name="Micromax Q340 (s5222)"/>
+				<listitem name="Manish4586"/>				
+				<listitem name="Mi A2 (Jasmine)"/>
 				<listitem name=""/>
 				<listitem name="Manjot Sidhu"/>
 				<listitem name="A106"/>
