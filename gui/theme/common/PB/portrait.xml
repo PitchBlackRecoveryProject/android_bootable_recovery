@@ -4981,35 +4981,44 @@
 			
 			<listbox style="about">
 				<placement x="58" y="1204" w="964" h="534"/>				
-				<listitem name="Maintainers"/>
+				<listitem name="Device And Maintainers"/>
 				<listitem name=""/>
 				<listitem name="Reza Adi Pangestu"/>
+				<listitem name="https://t.me/Reza_Adi_Pangestu"/>
 				<listitem name="Redmi Note 4 (Mido)"/>
 				<listitem name=""/>
 				<listitem name="Mohd Faraz"/>
+				<listitem name="https://t.me/ANDROIABLEDROID"/>
 				<listitem name="LYF Water 8 (LS-5015), Redmi 4A (Rolex), InFocus G42"/>
 				<listitem name=""/>
 				<listitem name="Darkstar"/>
+				<listitem name="https://t.me/Darkstar085"/>
 				<listitem name="Redmi 3S/X (Land)"/>
 				<listitem name=""/>			
 				<listitem name="Amogha Maiya"/>
+				<listitem name="https://t.me/amog787"/>
 				<listitem name="Asus X00TD, Lenovo Zuk Z2 (Plus)"/>
 				<listitem name="Redmi Note 3 Pro (Kenzo)"/>
 				<listitem name=""/>
 				<listitem name="ZHANtech"/>
+				<listitem name="https://t.me/zhantech"/>
 				<listitem name="Redmi 3/PRO (Ido), Redmi 4X (Santoni)"/>
 				<listitem name="Redmi 5 (Rosy)"/>
 				<listitem name=""/>
-				<listitem name="Manish4586"/>				
+				<listitem name="Manish"/>
+				<listitem name="https://t.me/Manish4586"/>
 				<listitem name="Mi A2 (Jasmine)"/>
 				<listitem name=""/>
 				<listitem name="Manjot Sidhu"/>
+				<listitem name="https://t.me/manjotsidhu"/>
 				<listitem name="A106"/>
 				<listitem name=""/>
 				<listitem name="Louis Lee Encrypted"/>
+				<listitem name="https://t.me/boot_loop"/>
 				<listitem name="Redmi 5A (Riva)"/>
 				<listitem name=""/>
 				<listitem name="Aayush Kumar"/>
+				<listitem name="https://t.me/ayushk780"/>
 				<listitem name="Redmi Note 5 Pro (Whyred)"/>
 			</listbox>
 			
