@@ -1447,7 +1447,7 @@ TWPartitionManager::Run_Restore (const string & Restore_Name)
     }
   TWFunc::GUI_Operation_Text (TW_UPDATE_SYSTEM_DETAILS_TEXT,
 			      gui_parse_text ("{@updating_system_details}"));
-  UnMount_By_Path ("/system", false);
+  UnMount_By_Path (Get_Android_Root_Path(), false);
   Update_System_Details ();
   UnMount_Main_Partitions ();
   time (&rStop);
@@ -2581,7 +2581,7 @@ TWPartitionManager::UnMount_Main_Partitions (void)
 
   TWPartition *Boot_Partition = Find_Partition_By_Path ("/boot");
 
-  UnMount_By_Path ("/system", true);
+  UnMount_By_Path (Get_Android_Root_Path(), true);
   if (!datamedia)
     UnMount_By_Path ("/data", true);
 
@@ -3798,6 +3798,13 @@ TWPartitionManager::Get_Active_Slot_Display ()
   return Active_Slot_Display;
 }
 
+string TWPartitionManager::Get_Android_Root_Path() {
+	std::string Android_Root = getenv("ANDROID_ROOT");
+	if (Android_Root == "")
+		Android_Root = "/system";
+	return Android_Root;
+}
+
 void
 TWPartitionManager::Remove_Uevent_Devices (const string & Mount_Point)
 {
@@ -4540,7 +4547,7 @@ TWPartitionManager::Run_OTA_Survival_Restore (const string & Restore_Name)
 	  end_pos = Restore_List.find (";", start_pos);
 	}
     }
-  UnMount_By_Path ("/system", false);
+  UnMount_By_Path (Get_Android_Root_Path(), false);
   Update_System_Details_OTA_Survival ();
   UnMount_Main_Partitions ();
   time (&rStop);

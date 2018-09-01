@@ -41,7 +41,6 @@ twrpAdbBuFifo::twrpAdbBuFifo(void) {
 
 void twrpAdbBuFifo::Check_Adb_Fifo_For_Events(void) {
 	char cmd[512];
-	int ret;
 
 	memset(&cmd, 0, sizeof(cmd));
 
@@ -169,10 +168,9 @@ bool twrpAdbBuFifo::Backup_ADB_Command(std::string Options) {
 bool twrpAdbBuFifo::Restore_ADB_Backup(void) {
 	int partition_count = 0;
 	std::string Restore_Name;
-	std::size_t pos = 0;
 	struct AdbBackupFileTrailer adbmd5;
 	struct PartitionSettings part_settings;
-	int adb_control_twrp_fd, adb_write_fd, systemro;
+	int adb_control_twrp_fd;
 	int adb_control_bu_fd, ret = 0;
 	char cmd[512];
 
@@ -311,7 +309,7 @@ bool twrpAdbBuFifo::Restore_ADB_Backup(void) {
 					part_settings.Part->Set_Backup_FileName(Backup_FileName);
 					PartitionManager.Set_Restore_Files(path);
 
-					if (path.compare("/system") == 0) {
+					if (path.compare(PartitionManager.Get_Android_Root_Path()) == 0) {
 						if (part_settings.Part->Is_Read_Only()) {
 							if (!twadbbu::Write_TWERROR())
 								LOGERR("Unable to write to TWRP ADB Backup.\n");
