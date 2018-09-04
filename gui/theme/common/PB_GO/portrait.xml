@@ -404,10 +404,10 @@
 			<font resource="fixed"/>
 		</style>
 		
-		<style name="about">
+	<style name="about">
 			<background color="%transparent%"/>
-			<fastscroll rectcolor="%accent%" w="18" rectw="14" recth="120" />
-			<font resource="font_m" spacing="8" color="%text_color%" />
+			<fastscroll linecolor="%fileselector_linecolor2%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<font resource="font_s" spacing="8" color="%text_color%" />
 		</style>
 
 		<style name="terminal">
@@ -4609,28 +4609,34 @@
 				<listitem name="https://github.com/PitchBlack-Recovery"/>
 				<listitem name=""/>
 				<listitem name="Reza Adi Pangestu - Indonesia"/>
+				<listitem name="https://t.me/Reza_Adi_Pangestu"/>
 				<listitem name="Owner/Lead Developer"/>
 				<listitem name=""/>
 				<listitem name="George Pasakalis (G.M.L.) - Greece"/>
+				<listitem name="https://t.me/PasakalisGeorge_GML"/>
 				<listitem name="UI Developer"/>
 				<listitem name=""/>
 				<listitem name="Firewolf - Bangladesh"/>
+				<listitem name="https://t.me/firewolfxda"/>
 				<listitem name="UI Developer"/>
 				<listitem name=""/>
 				<listitem name="Manjot Sidhu - India"/>
+				<listitem name="https://t.me/manjotsidhu"/>
 				<listitem name="Source Maintained"/>
 				<listitem name=""/>
 				<listitem name="Mohd Faraz - India"/>
+				<listitem name="https://t.me/ANDROIABLEDROID"/>
 				<listitem name="Source Maintained"/>
 				<listitem name=""/>
 				<listitem name="Arbaz Khan - India"/>
+				<listitem name="https://t.me/papa_ka_prince"/>
 				<listitem name="Source Maintained"/>
 				<listitem name=""/>
 				<listitem name="Telegram Chat"/>
-				<listitem name="t.me/twrppb"/>
+				<listitem name="https://t.me/twrppb"/>
 				<listitem name=""/>
 				<listitem name="Telegram Channel"/>
-				<listitem name="t.me/pbtwrp"/>
+				<listitem name="https://t.me/pbtwrp"/>
 			</listbox>
 			
 			<action>
@@ -4758,12 +4764,12 @@
 				<listitem name="Ahmad Sa'id Mabruri"/>
 				<listitem name="Rivv"/>
 				<listitem name="Zaeni Loverz"/>
-				<listitem name="Abhishek"/>
+				<listitem name="Abhishek Aggarwal"/>
 				<listitem name="Louis Lee Encrypted"/>
 				<listitem name="Yashpal Joshi"/>
 				<listitem name="Rajesh Rajput"/>
 				<listitem name="Joker (Whyred)"/>
-				<listitem name="Miko"/>
+				<listitem name="Balo 1000"/>
 				<listitem name="osmOsis"/>
 				<listitem name="Mifans Indonesia"/>
 				<listitem name="All Developers & Users"/>
@@ -5001,35 +5007,44 @@
 			
 			<listbox style="about">
 				<placement x="58" y="1204" w="964" h="534"/>
-				<listitem name="Maintainer"/>
+			<listitem name="Device And Maintainers"/>
 				<listitem name=""/>
 				<listitem name="Reza Adi Pangestu"/>
+				<listitem name="https://t.me/Reza_Adi_Pangestu"/>
 				<listitem name="Redmi Note 4 (Mido)"/>
 				<listitem name=""/>
 				<listitem name="Mohd Faraz"/>
+				<listitem name="https://t.me/ANDROIABLEDROID"/>
 				<listitem name="LYF Water 8 (LS-5015), Redmi 4A (Rolex), InFocus G42"/>
 				<listitem name=""/>
 				<listitem name="Darkstar"/>
-				<listitem name="Redmi 3S/X (Land)"/>							
-				<listitem name=""/>
+				<listitem name="https://t.me/Darkstar085"/>
+				<listitem name="Redmi 3S/X (Land)"/>
+				<listitem name=""/>			
 				<listitem name="Amogha Maiya"/>
+				<listitem name="https://t.me/amog787"/>
 				<listitem name="Asus X00TD, Lenovo Zuk Z2 (Plus)"/>
 				<listitem name="Redmi Note 3 Pro (Kenzo)"/>
 				<listitem name=""/>
 				<listitem name="ZHANtech"/>
+				<listitem name="https://t.me/zhantech"/>
 				<listitem name="Redmi 3/PRO (Ido), Redmi 4X (Santoni)"/>
 				<listitem name="Redmi 5 (Rosy)"/>
 				<listitem name=""/>
-				<listitem name="Manish4586"/>
-				<listitem name="Mi A2 (Jasmine)"/>	
+				<listitem name="Manish"/>
+				<listitem name="https://t.me/Manish4586"/>
+				<listitem name="Mi A2 (Jasmine)"/>
 				<listitem name=""/>
 				<listitem name="Manjot Sidhu"/>
+				<listitem name="https://t.me/manjotsidhu"/>
 				<listitem name="A106"/>
 				<listitem name=""/>
 				<listitem name="Louis Lee Encrypted"/>
+				<listitem name="https://t.me/boot_loop"/>
 				<listitem name="Redmi 5A (Riva)"/>
 				<listitem name=""/>
 				<listitem name="Aayush Kumar"/>
+				<listitem name="https://t.me/ayushk780"/>
 				<listitem name="Redmi Note 5 Pro (Whyred)"/>
 			</listbox>
 			
@@ -5280,22 +5295,36 @@
 			
 			<listbox style="about">
 				<placement x="58" y="1204" w="964" h="534"/>
-				<listitem name="--1 Please make your internal space 5GB"/>
-				<listitem name="--2 Reboot to PBRP then Checklist incremental"/>
-				<listitem name="OTA signature verification, include system in OTA survival,"/>
-				<listitem name="support MIUI incremental OTA, aggresive stock recovery"/>
-				<listitem name="deactivation, disable DM Verity"/>
-				<listitem name="--3 Install full rom MIUI, it will automatic backup boot and system"/>
-				<listitem name="for the OTA survival. example miui 8.3.15"/>
-				<listitem name="--4 Check OTA survival in folder PB internal storage"/>
-				<listitem name="you can found boot and system"/>
-				<listitem name="--5 Open updater app and when update releases,"/>
-				<listitem name="download it and press update. example miui 8.3.15 - 8.3.29"/>
-				<listitem name="Automatically device will reboot to PBRP then OTA flashing will start,"/>
-				<listitem name="this time the backed up boot and system will be flashed and"/>
-				<listitem name="thus patching will happen and your device will be updated"/>
+				<listitem name="*   Please make your internal space 5GB"/>
 				<listitem name=""/>
-				<listitem name="---Pre-requisite  unlock bootloader---"/>
+				<listitem name="*   Reboot to PBRP then Checklist incremental"/>
+				<listitem name="     OTA signature verification, include system in OTA"/>
+				<listitem name="     survival, support MIUI incremental OTA,"/>
+				<listitem name="     aggresive stock recovery deactivation,"/>
+				<listitem name="     disable DM Verity"/>
+				<listitem name=""/>
+				<listitem name="*   Install full rom MIUI, it will automatic backup"/>
+				<listitem name="     boot and system for the OTA survival."/>
+				<listitem name="     example miui 8.3.15"/>
+				<listitem name=""/>
+				<listitem name="*   Check OTA survival in folder PB internal storage"/>
+				<listitem name="     you can found boot and system"/>
+				<listitem name=""/>
+				<listitem name="*   Open updater app and when update releases,"/>
+				<listitem name="     download it and press update. example miui"/>
+				<listitem name="     8.3.15 - 8.3.29 Automatically device will"/>
+				<listitem name="     reboot to PBRP then OTA flashing will start,"/>
+				<listitem name="     this time the backed up boot and system"/>
+				<listitem name="     will be flashed and thus patching"/>
+				<listitem name="     will happen and your device will be updated"/>
+				<listitem name=""/>
+				<listitem name="!    Pre-requisite unlock bootloader"/>
+				<listitem name=""/>
+				<listitem name=""/>
+				<listitem name="?   Note: for those who do not use OTA,"/>
+                                <listitem name="     please checklist aggressive stock recovery"/>                                                                                                       
+                                <listitem name="     deactivation and disable dm verity,"/>
+                                <listitem name="     thus preventing recovery returning to stock."/>
 			</listbox>
 			
 			<action>
