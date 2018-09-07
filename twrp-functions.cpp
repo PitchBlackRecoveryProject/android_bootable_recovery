@@ -1768,10 +1768,11 @@ bool TWFunc::Patch_Forced_Encryption()
 			}
 			if (!status)
 			{
-			       if (TWFunc::CheckWord(path, "forceencrypt") || TWFunc::CheckWord(path, "forcefdeorfbe"))
+			       if ((TWFunc::CheckWord(path, "forceencrypt")) || (TWFunc::CheckWord(path, "forcefdeorfbe"))|| (TWFunc::CheckWord(path, "fileencryption")))
 					status = true;
 			}
 			TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;", "encryptable=");
+	    		TWFunc::Replace_Word_In_File(path, "fileencryption=ice;", "encryptable=footer");
 		}   
 	}
 	closedir (d);
