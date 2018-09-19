@@ -219,7 +219,7 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
     gui_msg("pb_install_detecting=Detecting Current Package");
 
     if (Zip -> ExtractEntry(meta + "/google/android/update-binary", "/tmp/miui_check", 0644)) {
-      string outp = TWFunc::Get_output("grep miui /tmp/miui_check");
+      string outp = TWFunc::Get_output("grep miui.ui /tmp/miui_check");
 
 	if (Zip -> EntryExists("vendor.new.dat.br") || Zip -> EntryExists("vendor.new.dat"))
 		chk_sdk = 27;
