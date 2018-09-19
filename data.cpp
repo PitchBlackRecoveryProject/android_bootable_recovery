@@ -805,10 +805,10 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue("tw_military_time", "0");
 
 #ifdef TW_INCLUDE_CRYPTO
-	mConst.SetValue(TW_USE_SHA2, "1");
-	mConst.SetValue(TW_NO_SHA2, "0");
+	mPersist.SetValue(TW_USE_SHA2, "1");
+	mPersist.SetValue(TW_NO_SHA2, "0");
 #else
-	mConst.SetValue(TW_NO_SHA2, "1");
+	mPersist.SetValue(TW_NO_SHA2, "1");
 #endif
         mPersist.SetValue(TRB_EN, "0");
         mPersist.SetValue(STD, "0");
