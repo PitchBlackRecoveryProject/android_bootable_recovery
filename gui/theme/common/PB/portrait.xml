@@ -5412,7 +5412,7 @@
 			
 			<listbox style="about">
 				<placement x="58" y="1204" w="964" h="534"/>
-				<listitem name="PB v2.8.1"/>
+				<listitem name="PB v2.9.0"/>
                                 <listitem name="-----------------"/>
                                 <listitem name="Theme Updated added new"/>
                                 <listitem name="Theme 18:9 and other issue fixed"/>
