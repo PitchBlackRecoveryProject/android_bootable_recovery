@@ -232,6 +232,7 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
         }
 	DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
         DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
+	DataManager::SetValue(NON_STD, 1);
 	if (Zip -> EntryExists(miui_sg_path) == true) {
         gui_msg("pb_install_miui_detected=- Detected Standard MIUI Update Package"); }
 	else
