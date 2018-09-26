@@ -1611,7 +1611,7 @@ bool TWFunc::Patch_DM_Verity() {
 	string firmware_key = ramdisk + "/sbin/firmware_key.cer";
 	string path, cmp, remove = "verify,;,verify;verify;support_scfs,;,support_scfs;support_scfs;";
 	DIR* d;
-	DIR* d1;
+	DIR* d1 = nullptr;
 	struct dirent* de;
 	d = opendir(ramdisk.c_str());
 	if (d == NULL)
@@ -1746,7 +1746,7 @@ bool TWFunc::Patch_Forced_Encryption()
 	int encryption;
 	DataManager::GetValue(PB_DISABLE_DM_VERITY, encryption);
 	DIR* d;
-	DIR* d1;
+	DIR* d1 = nullptr;
 	struct dirent* de;
 	d = opendir(ramdisk.c_str());
 	if (d == NULL)
