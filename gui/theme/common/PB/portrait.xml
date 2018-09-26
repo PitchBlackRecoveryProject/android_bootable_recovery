@@ -1074,6 +1074,7 @@
 				<action function="set">tw_cancel_param=</action>
 				<action function="set">tw_show_exclamation=0</action>
 				<action function="set">tw_show_reboot=0</action>
+				<action function="set">pb_install_built_in_zip=0</action>
 				<action function="page">%tw_clear_destination%</action>
 			</action>
 		</page>
@@ -3949,6 +3950,7 @@
 					<action function="set">tw_back=filemanagerlist</action>
 					<action function="set">tw_filename=/sdcard/PBRP/tools/aromafm/aromafm.zip</action>
 					<action function="set">tw_action=queuezip</action>
+					<action function="set">pb_install_built_in_zip=1</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
 					<action function="set">tw_action2_param=flash_zip</action>
@@ -4213,6 +4215,7 @@
 					<action function="set">tw_back=tools</action>
 					<action function="set">tw_filename=/sdcard/PBRP/tools/magisk.zip</action>
 					<action function="set">tw_action=queuezip</action>
+					<action function="set">_install_built_in_zip=1</action>
 					<action function="set">tw_has_action2=1</action>
 					<action function="set">tw_action2=flash</action>
 					<action function="set">tw_action2_param=flash_zip</action>
