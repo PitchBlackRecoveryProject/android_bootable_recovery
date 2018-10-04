@@ -1609,7 +1609,7 @@ bool TWFunc::Patch_DM_Verity() {
 	DataManager::GetValue(TRB_EN, trb_en);
 	DataManager::GetValue(STD, std);
 	string firmware_key = ramdisk + "/sbin/firmware_key.cer";
-	string path, cmp, remove = "verify,;,verify;verify;support_scfs,;,support_scfs;support_scfs;";
+	string path, cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;";
 	DIR* d;
 	DIR* d1 = nullptr;
 	struct dirent* de;
@@ -1630,7 +1630,9 @@ bool TWFunc::Patch_DM_Verity() {
 			stat = 1;
 			if (!status)
 			{
-				if (TWFunc::CheckWord(path, "verify") || TWFunc::CheckWord(path, "support_scfs")) 
+				if (TWFunc::CheckWord(path, "verify")
+				|| TWFunc::CheckWord(path, "support_scfs")
+				|| TWFunc::CheckWord(path, "avb"))
 					status = true;
 			}
 			TWFunc::Replace_Word_In_File(path, remove);
@@ -1698,7 +1700,9 @@ bool TWFunc::Patch_DM_Verity() {
 					LOGINFO("Fstab Found at '%s'\n", fstab1.c_str());
 				if (!status)
 				{
-					if (TWFunc::CheckWord(path, "verify") || TWFunc::CheckWord(path, "support_scfs")) 
+					if (TWFunc::CheckWord(path, "verify")
+					|| TWFunc::CheckWord(path, "support_scfs")
+					|| TWFunc::CheckWord(path, "avb"))
 						status = true;
 				}
 				TWFunc::Replace_Word_In_File(path, remove);
@@ -1768,12 +1772,13 @@ bool TWFunc::Patch_Forced_Encryption()
 			}
 			if (!status)
 			{
-			       if ((TWFunc::CheckWord(path, "forceencrypt")) || (TWFunc::CheckWord(path, "forcefdeorfbe"))|| (TWFunc::CheckWord(path, "fileencryption")))
+			       if (TWFunc::CheckWord(path, "forceencrypt")
+				|| TWFunc::CheckWord(path, "forcefdeorfbe")
+				|| TWFunc::CheckWord(path, "fileencryption"))
 					status = true;
 			}
-			TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;", "encryptable=");
-	    		TWFunc::Replace_Word_In_File(path, "fileencryption=ice;", "encryptable=footer");
-		}   
+			TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;fileencryption=", "encryptable=");
+		}
 	}
 	closedir (d);
 	if (stat == 0)
@@ -1817,10 +1822,12 @@ bool TWFunc::Patch_Forced_Encryption()
 				}
 				if (!status)
 				{
-					if (TWFunc::CheckWord(path, "forceencrypt") || TWFunc::CheckWord(path, "forcefdeorfbe"))
+					if (TWFunc::CheckWord(path, "forceencrypt")
+					|| TWFunc::CheckWord(path, "forcefdeorfbe")
+					|| TWFunc::CheckWord(path, "fileencryption"))
 					status = true;
 				}
-				TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;", "encryptable=");
+				TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;fileencryption=", "encryptable=");
 		       }
 	        }
 	        closedir (d1);
