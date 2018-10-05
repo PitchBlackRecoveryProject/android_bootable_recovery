@@ -1,3 +1,4 @@
-**Team Win Recovery Project (TWRP)**
+**Pitch Black Recovery Project (PBRP)**
+**Based on TWRP**
 
 You can find a compiling guide [here](http://forum.xda-developers.com/showthread.php?t=1943625 "Guide").
