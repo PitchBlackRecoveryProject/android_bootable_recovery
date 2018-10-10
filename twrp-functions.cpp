@@ -1777,7 +1777,7 @@ bool TWFunc::Patch_Forced_Encryption()
 				|| TWFunc::CheckWord(path, "fileencryption"))
 					status = true;
 			}
-			TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;fileencryption=", "encryptable=");
+			TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;fileencryption=;", "encryptable=");
 		}
 	}
 	closedir (d);
@@ -1827,7 +1827,7 @@ bool TWFunc::Patch_Forced_Encryption()
 					|| TWFunc::CheckWord(path, "fileencryption"))
 					status = true;
 				}
-				TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;fileencryption=", "encryptable=");
+				TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;fileencryption=;", "encryptable=");
 		       }
 	        }
 	        closedir (d1);
