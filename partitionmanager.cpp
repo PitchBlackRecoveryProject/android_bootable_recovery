@@ -66,22 +66,25 @@
 #include "mtp/MtpMessage.hpp"
 #endif
 
-extern "C"
-{
-#include "cutils/properties.h"
-#include "gui/gui.h"
+#ifdef TW_INCLUDE_CRYPTO
+	#include "crypto/fde/cryptfs.h"
+#endif
+
+extern "C" {
+	#include "cutils/properties.h"
+	#include "gui/gui.h"
 }
 
 #ifdef TW_INCLUDE_CRYPTO
-#include "crypto/lollipop/cryptfs.h"
-#include "gui/rapidxml.hpp"
-#include "gui/pages.hpp"
-#ifdef TW_INCLUDE_FBE
-#include "crypto/ext4crypt/Decrypt.h"
-#endif
-#ifdef TW_CRYPTO_USE_SYSTEM_VOLD
-#include "crypto/vold_decrypt/vold_decrypt.h"
-#endif
+	//#include "crypto/lollipop/cryptfs.h"
+	#include "gui/rapidxml.hpp"
+	#include "gui/pages.hpp"
+	#ifdef TW_INCLUDE_FBE
+		#include "crypto/ext4crypt/Decrypt.h"
+	#endif
+	#ifdef TW_CRYPTO_USE_SYSTEM_VOLD
+		#include "crypto/vold_decrypt/vold_decrypt.h"
+	#endif
 #endif
 
 #ifdef AB_OTA_UPDATER
@@ -2275,33 +2278,29 @@ TWPartitionManager::Decrypt_Device (string Password)
 #else
       LOGERR ("FBE support is not present\n");
 #endif
-      return -1;
-    }
+		return -1;
+	}
 
-  int pwret = -1;
-  pid_t pid = fork ();
-  if (pid < 0)
-    {
-      LOGERR ("fork failed\n");
-      return -1;
-    }
-  else if (pid == 0)
-    {
-      // Child process
-      char cPassword[255];
-      strcpy (cPassword, Password.c_str ());
-      int ret = cryptfs_check_passwd (cPassword);
-      exit (ret);
-    }
-  else
-    {
-      // Parent
-      int status;
-      if (TWFunc::Wait_For_Child_Timeout (pid, &status, "Decrypt", 30))
-	pwret = -1;
-      else
-	pwret = WEXITSTATUS (status) ? -1 : 0;
-    }
+	int pwret = -1;
+	pid_t pid = fork();
+	if (pid < 0) {
+		LOGERR("fork failed\n");
+		return -1;
+	} else if (pid == 0) {
+		// Child process
+		char cPassword[255];
+		strcpy(cPassword, Password.c_str());
+		int ret = cryptfs_check_passwd(cPassword);
+		LOGERR("cryptfs_check_passwd returned %i\n", ret);
+		exit(ret);
+	} else {
+		// Parent
+		int status;
+		if (TWFunc::Wait_For_Child_Timeout(pid, &status, "Decrypt", 30))
+			pwret = -1;
+		else
+			pwret = WEXITSTATUS(status) ? -1 : 0;
+	}
 
 #ifdef TW_CRYPTO_USE_SYSTEM_VOLD
   if (pwret != 0)
