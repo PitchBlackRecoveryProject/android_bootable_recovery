@@ -47,6 +47,9 @@
 #include "set_metadata.h"
 #include "gui/gui.hpp"
 #include "adbbu/libtwadbbu.hpp"
+#ifdef TW_INCLUDE_CRYPTO
+	#include "crypto/fde/cryptfs.h"
+#endif
 extern "C" {
 	#include "mtdutils/mtdutils.h"
 	#include "mtdutils/mounts.h"
@@ -56,7 +59,7 @@ extern "C" {
 #endif
 
 #ifdef TW_INCLUDE_CRYPTO
-	#include "crypto/lollipop/cryptfs.h"
+	//#include "crypto/lollipop/cryptfs.h"
 	#include "gpt/gpt.h"
 	#ifdef TW_INCLUDE_FBE
 		#include "crypto/ext4crypt/Decrypt.h"
