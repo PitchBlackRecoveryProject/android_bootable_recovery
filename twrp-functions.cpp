@@ -62,7 +62,7 @@ static string tmp = "/tmp/pb";
 static string ramdisk = tmp + "/ramdisk";
 static string split_img = tmp + "/split_img";
 static string default_prop = ramdisk + "/default.prop";
-static string fstab1 = "/system/vendor/etc";
+static string fstab1 = PartitionManager.Get_Android_Root_Path() + "/vendor/etc";
 static string fstab2 = "/vendor/etc";
 
 /* Execute a command */
@@ -1609,7 +1609,15 @@ bool TWFunc::Patch_DM_Verity() {
 	DataManager::GetValue(TRB_EN, trb_en);
 	DataManager::GetValue(STD, std);
 	string firmware_key = ramdisk + "/sbin/firmware_key.cer";
-	string path, cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;";
+	string path, cmp, null, command = "sed -i \"";
+	string remove[] = {",verify", "verify,", "verify", ",avb", "avb,", "avb", ",support_scfs","support_scfs,", "support_scfs"};
+	for(int i=0;i<9;i++)
+	{
+		if(i != 8)
+		command += "s|" + remove[i] + "||g; ";
+		else
+		command += "s|" + remove[i] + "||g\"";
+	}
 	DIR* d;
 	DIR* d1 = nullptr;
 	struct dirent* de;
@@ -1630,12 +1638,11 @@ bool TWFunc::Patch_DM_Verity() {
 			stat = 1;
 			if (!status)
 			{
-				if (TWFunc::CheckWord(path, "verify")
-				|| TWFunc::CheckWord(path, "support_scfs")
-				|| TWFunc::CheckWord(path, "avb"))
-					status = true;
+				if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
+					if(null.empty())
+						status=true;
 			}
-			TWFunc::Replace_Word_In_File(path, remove);
+				
 		}
 		if (cmp == "default.prop")
 		{
@@ -1672,7 +1679,7 @@ bool TWFunc::Patch_DM_Verity() {
 		}
 		else
 		{
-			if(PartitionManager.Mount_By_Path("/system", false))
+			if(PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), false))
 				d1 = opendir(fstab1.c_str());
 			stat = 1;
 		}
@@ -1700,12 +1707,11 @@ bool TWFunc::Patch_DM_Verity() {
 					LOGINFO("Fstab Found at '%s'\n", fstab1.c_str());
 				if (!status)
 				{
-					if (TWFunc::CheckWord(path, "verify")
-					|| TWFunc::CheckWord(path, "support_scfs")
-					|| TWFunc::CheckWord(path, "avb"))
-						status = true;
+					if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
+						if(null.empty())
+							status=true;
 				}
-				TWFunc::Replace_Word_In_File(path, remove);
+
 			}
 			if (cmp == "default.prop")
 			{
@@ -1726,8 +1732,8 @@ bool TWFunc::Patch_DM_Verity() {
 			}
 		}
 	        closedir (d1);
-		if (PartitionManager.Is_Mounted_By_Path("/system"))
-			PartitionManager.UnMount_By_Path("/system", false);
+		if (PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
+			PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 		if (PartitionManager.Is_Mounted_By_Path("/vendor"))
 			PartitionManager.UnMount_By_Path("/vendor", false);
 	}
@@ -1742,8 +1748,20 @@ bool TWFunc::Patch_DM_Verity() {
 
 bool TWFunc::Patch_Forced_Encryption()
 {
-	string path, cmp;
+	string path, null, cmp, command = "";
+	command += command + "sed -i \"";
 	int stat = 0, std, trb_en;
+	string remove[] = {"forceencrypt=", "forcefdeorfbe=", "fileencryption=",
+				"discard,", "errors=panic"};
+	for(int i=0;i<5;i++)
+	{
+		if(i == 3)
+		command = command + "s|" + remove[i] + "||g; ";
+		else if(i == 4)
+		command = command + "s|" + remove[i] + "||g\"";
+		else
+		command = command + "s|" + remove[i] + "|encryptable=|g; ";
+	}
 	DataManager::GetValue(TRB_EN, trb_en);
 	DataManager::GetValue(STD, std);
 	bool status = false;
@@ -1772,12 +1790,10 @@ bool TWFunc::Patch_Forced_Encryption()
 			}
 			if (!status)
 			{
-			       if (TWFunc::CheckWord(path, "forceencrypt")
-				|| TWFunc::CheckWord(path, "forcefdeorfbe")
-				|| TWFunc::CheckWord(path, "fileencryption"))
-					status = true;
-			}
-			TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;fileencryption=;", "encryptable=");
+				if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
+					if(null.empty())
+						status = true;
+			};
 		}
 	}
 	closedir (d);
@@ -1791,7 +1807,7 @@ bool TWFunc::Patch_Forced_Encryption()
 		}
 		else
 		{
-			if(PartitionManager.Mount_By_Path("/system", false))
+			if(PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), false))
 				d1 = opendir(fstab1.c_str());
 			stat = 1;
 		}
@@ -1822,17 +1838,15 @@ bool TWFunc::Patch_Forced_Encryption()
 				}
 				if (!status)
 				{
-					if (TWFunc::CheckWord(path, "forceencrypt")
-					|| TWFunc::CheckWord(path, "forcefdeorfbe")
-					|| TWFunc::CheckWord(path, "fileencryption"))
-					status = true;
+					if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
+						if(null.empty())
+							status = true;
 				}
-				TWFunc::Replace_Word_In_File(path, "forcefdeorfbe=;forceencrypt=;fileencryption=;", "encryptable=");
 		       }
 	        }
 	        closedir (d1);
-		if (PartitionManager.Is_Mounted_By_Path("/system"))
-			PartitionManager.UnMount_By_Path("/system", false);
+		if (PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
+			PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 		if (PartitionManager.Is_Mounted_By_Path("/vendor"))
 			PartitionManager.UnMount_By_Path("/vendor", false);
 	}
@@ -1844,8 +1858,8 @@ if(PartitionManager.Is_Mounted_By_Path("/vendor"))
 	PartitionManager.UnMount_By_Path("/vendor", false);
 else if(PartitionManager.Is_Mounted_By_Path("/cust"))
 	PartitionManager.UnMount_By_Path("/cust", false);
-if(PartitionManager.Is_Mounted_By_Path("/system"))
-        PartitionManager.UnMount_By_Path("/system", false);
+if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
+        PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
 if (!Unpack_Image("/boot")) {
 LOGINFO("Deactivation_Process: Unable to unpack image\n");
