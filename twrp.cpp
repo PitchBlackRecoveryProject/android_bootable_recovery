@@ -173,6 +173,11 @@ int main(int argc, char **argv) {
         gui_print("PitchBlack Recovery: Welcome! ^_^");
 	gui_print("Maintained By PBRP Team");
 	gui_print("*********************************");
+	string null;
+	TWFunc::Exec_Cmd("getprop ro.omni.version > /tmp/prop.info && mv /tmp/prop.info /sdcard/PBRP/prop.info", null);
+	if(!null.empty())
+	LOGERR("Failed To Copy prop.info");
+
 	PartitionManager.Mount_By_Path("/cache", false);
 
 	bool Shutdown = false;
