@@ -1640,7 +1640,10 @@ bool TWFunc::Patch_DM_Verity() {
 			{
 				if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
 					if(null.empty())
+					{
+						command="";
 						status=true;
+					}
 			}
 				
 		}
@@ -1709,7 +1712,10 @@ bool TWFunc::Patch_DM_Verity() {
 				{
 					if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
 						if(null.empty())
+						{
+							command="";
 							status=true;
+						}
 				}
 
 			}
@@ -1792,7 +1798,10 @@ bool TWFunc::Patch_Forced_Encryption()
 			{
 				if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
 					if(null.empty())
+					{
+						command="";
 						status = true;
+					}
 			};
 		}
 	}
@@ -1840,7 +1849,10 @@ bool TWFunc::Patch_Forced_Encryption()
 				{
 					if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
 						if(null.empty())
+						{
+							command="";
 							status = true;
+						}
 				}
 		       }
 	        }
