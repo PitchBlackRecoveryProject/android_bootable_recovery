@@ -1865,6 +1865,7 @@ bool TWFunc::Patch_Forced_Encryption()
 }
     
 void TWFunc::Deactivation_Process(void) {
+string out;
 if(PartitionManager.Is_Mounted_By_Path("/vendor"))
 	PartitionManager.UnMount_By_Path("/vendor", false);
 else if(PartitionManager.Is_Mounted_By_Path("/cust"))
@@ -1878,7 +1879,8 @@ return;
 }
 gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
 if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
-if (TWFunc::Get_output("getprop ro.crypto.state") != "encrypted")
+TWFunc::Exec_Cmd("getprop ro.crypto.state", out);
+if (out != "encrypted")
 DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 1);
 else
 DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);
