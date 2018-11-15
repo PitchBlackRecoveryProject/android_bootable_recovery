@@ -1611,12 +1611,12 @@ bool TWFunc::Patch_DM_Verity() {
 	string firmware_key = ramdisk + "/sbin/firmware_key.cer";
 	string path, cmp, null, command = "sed -i \"";
 	string remove[] = {",verify", "verify,", "verify", ",avb", "avb,", "avb", ",support_scfs","support_scfs,", "support_scfs"};
-	for(int i=0;i<9;i++)
+	for(int i=0;i<=8;i++)
 	{
-		if(i != 8)
-		command += "s|" + remove[i] + "||g; ";
-		else
+		if (i == 8)
 		command += "s|" + remove[i] + "||g\"";
+		else
+		command += "s|" + remove[i] + "||g; ";
 	}
 	DIR* d;
 	DIR* d1 = nullptr;
@@ -1645,7 +1645,6 @@ bool TWFunc::Patch_DM_Verity() {
 						status=true;
 					}
 			}
-				
 		}
 		if (cmp == "default.prop")
 		{
@@ -1759,7 +1758,7 @@ bool TWFunc::Patch_Forced_Encryption()
 	int stat = 0, std, trb_en;
 	string remove[] = {"forceencrypt=", "forcefdeorfbe=", "fileencryption=",
 				"discard,", "errors=panic"};
-	for(int i=0;i<5;i++)
+	for(int i=0;i<=4;i++)
 	{
 		if(i == 3)
 		command = command + "s|" + remove[i] + "||g; ";
@@ -1879,7 +1878,10 @@ return;
 }
 gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
 if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
+if (TWFunc::Get_output("getprop ro.crypto.state") != "encrypted")
 DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 1);
+else
+DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);
 if (Patch_DM_Verity())
 gui_msg("pb_dm_verity=Successfully patched DM-Verity");
 else
