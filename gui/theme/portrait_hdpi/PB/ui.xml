@@ -252,6 +252,7 @@
 		<variable name="warning" value="#F8F8A0"/>
 		<variable name="error" value="#FF0101"/>
 		<variable name="highlight" value="#FFFFFF"/>
+		<variable name="process" value="#00CC44"/>
 		<variable name="fileselector_linecolor" value="#000000"/>
 		<variable name="fileselector_linecolor2" value="#FFFFFF"/>
 		<variable name="fileselector_highlight_color" value="#555555"/>

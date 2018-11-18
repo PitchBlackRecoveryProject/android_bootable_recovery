@@ -1870,20 +1870,24 @@ return;
 gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
 if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
 TWFunc::Exec_Cmd("getprop ro.crypto.state", out);
-if (out != "encrypted")
+if (out.compare("encrypted") != 0)
 DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 1);
 else
 DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);
 if (Patch_DM_Verity())
-gui_msg("pb_dm_verity=Successfully patched DM-Verity");
+gui_process("pb_dm_verity=Successfully patched DM-Verity");
 else
 gui_msg("pb_dm_verity_off=DM-Verity is not enabled");
 }
 if (DataManager::GetIntValue(PB_DISABLE_FORCED_ENCRYPTION) == 1) {
 if (Patch_Forced_Encryption())
-gui_msg("pb_encryption=Successfully patched forced encryption");
+gui_process("pb_encryption=Successfully patched forced encryption");
 else
 gui_msg("pb_encryption_off=Forced Encryption is not enabled");
+}
+else {
+if (out.compare("encrypted") == 0)
+gui_msg("pb_ecryption_leave=Device Encrypted Leaving Forceencrypt");
 }
 if (!Repack_Image("/boot")) {
 gui_msg(Msg(msg::kProcess, "pb_run_process_fail=Unable to finish '{1}' process")("PitchBlack"));

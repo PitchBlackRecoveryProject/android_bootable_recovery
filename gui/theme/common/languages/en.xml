@@ -787,6 +787,7 @@
 		<string name="pb_run_process_fail">Unable to finish '{1}' process</string>
 		<string name="pb_run_process_done">Finished '{1}' process</string>
 		<string name="pb_encryption">Successfully patched forced encryption</string>
+		<string name="pb_ecryption_leave">Device Encrypted Leaving Forceencrypt</string>
 		<string name="pb_encryption_off">Forced Encryption is not enabled</string>
 		<string name="pb_fstab">Detected fstab: '{1}'</string>
 		<string name="pb_dm_verity">Successfully patched DM-Verity</string>
