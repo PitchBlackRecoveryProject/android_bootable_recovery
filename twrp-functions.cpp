@@ -1780,8 +1780,9 @@ bool TWFunc::Patch_Forced_Encryption()
 			{
 				gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
 				LOGINFO("Fstab Found at '%s'\n", ramdisk.c_str());
-				stat = 1;
+				
 			}
+			stat = 1;
 			if (!status)
 			{
 				if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
