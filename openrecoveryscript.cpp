@@ -408,6 +408,9 @@ int OpenRecoveryScript::run_script_file(void) {
 		fclose(fp);
 		unlink(SCRIPT_FILE_TMP);
 		gui_msg("done_ors=Done processing script file");
+		if (DataManager::GetIntValue(PB_DISABLE_REBOOT_OTA) == 1) {
+			ret_val = 24;
+		}
 	} else {
 		gui_msg(Msg(msg::kError, "error_opening_strerr=Error opening: '{1}' ({2})")(SCRIPT_FILE_TMP)(strerror(errno)));
 		return 1;
@@ -604,14 +607,15 @@ void OpenRecoveryScript::Run_OpenRecoveryScript(void) {
 
 // this is called by the "openrecoveryscript" GUI action called via action page from Run_OpenRecoveryScript
 int OpenRecoveryScript::Run_OpenRecoveryScript_Action() {
-	int op_status = 1;
+	int op_status = 1, ret;
 	// Check for the SCRIPT_FILE_TMP first as these are AOSP recovery commands
 	// that we converted to ORS commands during boot in recovery.cpp.
 	// Run those first.
 	int reboot = 0;
 	if (TWFunc::Path_Exists(SCRIPT_FILE_TMP)) {
 		gui_msg("running_recovery_commands=Running Recovery Commands");
-		if (OpenRecoveryScript::run_script_file() == 0) {
+		ret = OpenRecoveryScript::run_script_file();
+		if (ret == 0) {
 			reboot = 1;
 			op_status = 0;
 		}
@@ -619,18 +623,27 @@ int OpenRecoveryScript::Run_OpenRecoveryScript_Action() {
 	// Check for the ORS file in /cache and attempt to run those commands.
 	if (OpenRecoveryScript::check_for_script_file()) {
 		gui_msg("running_ors=Running OpenRecoveryScript");
-		if (OpenRecoveryScript::run_script_file() == 0) {
+		ret = OpenRecoveryScript::run_script_file();
+		if (ret == 0) {
 			reboot = 1;
 			op_status = 0;
 		}
 	}
-	if (reboot) {
+	if (reboot || ret == 24) {
 		// Disable stock recovery reflashing
 		TWFunc::Disable_Stock_Recovery_Replace();
 		TWFunc::Deactivation_Process();
-		usleep(2000000); // Sleep for 2 seconds before rebooting
-		TWFunc::tw_reboot(rb_system);
-		usleep(5000000); // Sleep for 5 seconds to allow reboot to occur
+		if (ret == 24)
+		{
+			gui_process("Reboot After OTA is Disabled-Enjoy");
+			op_status = 0;
+			DataManager::SetValue("tw_page_done", 1);
+		}
+		else {
+			usleep(2000000); // Sleep for 2 seconds before rebooting
+			TWFunc::tw_reboot(rb_system);
+			usleep(5000000); // Sleep for 5 seconds to allow reboot to occur
+		}
 	} else {
 		DataManager::SetValue("tw_page_done", 1);
 	}

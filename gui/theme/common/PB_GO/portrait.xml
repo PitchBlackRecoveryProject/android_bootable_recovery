@@ -5179,6 +5179,9 @@
 				<listitem name="{@pb_dmverity_chk=Zip signature verification}">
 					<data variable="pb_reboot_dm_verity_check"/>
 				</listitem>
+                                <listitem name="{@pb_disable_reboot_ota_check=Disable Rebooting After OTA}">
+                                        <data variable="pb_disable_reboot_ota"/>
+                                </listitem>
 				</listbox>
 				
 			<button style="settingsota_info">
