@@ -1874,13 +1874,13 @@ DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);
 if (Patch_DM_Verity())
 gui_process("pb_dm_verity=Successfully patched DM-Verity");
 else
-gui_print_color("warning", "pb_dm_verity_off=DM-Verity is not enabled");
+gui_print_color("warning", "DM-Verity is not enabled");
 }
 if (DataManager::GetIntValue(PB_DISABLE_FORCED_ENCRYPTION) == 1) {
 if (Patch_Forced_Encryption())
 gui_process("pb_encryption=Successfully patched forced encryption");
 else
-gui_print_color("warning", "pb_encryption_off=Forced Encryption is not enabled");
+gui_print_color("warning", "Forced Encryption is not enabled");
 }
 else {
 if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0)
