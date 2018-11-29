@@ -64,6 +64,7 @@ static string split_img = tmp + "/split_img";
 static string default_prop = ramdisk + "/default.prop";
 static string fstab1 = PartitionManager.Get_Android_Root_Path() + "/vendor/etc";
 static string fstab2 = "/vendor/etc";
+static int trb_en = 0;
 
 /* Execute a command */
 int TWFunc::Exec_Cmd(const string& cmd, string &result) {
@@ -1604,9 +1605,9 @@ return true;
 
 bool TWFunc::Patch_DM_Verity() {
 	bool status = false;
-	int stat = 0, std, trb_en;
-	DataManager::GetValue(TRB_EN, trb_en);
-	DataManager::GetValue(STD, std);
+	int stat = 0;
+	//DataManager::GetValue(TRB_EN, trb_en);
+	//DataManager::GetValue(STD, std);
 	string firmware_key = ramdisk + "/sbin/firmware_key.cer";
 	string path, cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;";
 	DIR* d;
@@ -1663,7 +1664,7 @@ bool TWFunc::Patch_DM_Verity() {
 	closedir (d);
 	if (stat == 0)
 	{
-		if(std == 2 || trb_en == 1)
+		if(trb_en != 0)
 		{
 			PartitionManager.Mount_By_Path("/vendor", false);
 			d1 = opendir(fstab2.c_str());
@@ -1744,7 +1745,7 @@ bool TWFunc::Patch_Forced_Encryption()
 {
 	string path, null, cmp, command = "";
 	command = "sed -i \"";
-	int stat = 0, std, trb_en;
+	int stat = 0;
 	string remove[] = {"forceencrypt=", "forcefdeorfbe=", "fileencryption=",
 				"discard,", "errors=panic"};
 	for(int i=0;i<=4;i++)
@@ -1756,8 +1757,8 @@ bool TWFunc::Patch_Forced_Encryption()
 		else
 		command = command + "s|" + remove[i] + "|encryptable=|g; ";
 	}
-	DataManager::GetValue(TRB_EN, trb_en);
-	DataManager::GetValue(STD, std);
+	//DataManager::GetValue(TRB_EN, trb_en);
+	//DataManager::GetValue(STD, std);
 	bool status = false;
 	int encryption;
 	DataManager::GetValue(PB_DISABLE_DM_VERITY, encryption);
@@ -1797,7 +1798,7 @@ bool TWFunc::Patch_Forced_Encryption()
 	closedir (d);
 	if (stat == 0)
 	{
-		if(std == 2 || trb_en == 1)
+		if(trb_en != 0)
 		{
 			PartitionManager.Mount_By_Path("/vendor", false);
 			d1 = opendir(fstab2.c_str());
@@ -1867,6 +1868,7 @@ LOGINFO("Deactivation_Process: Unable to unpack image\n");
 return;
 }
 gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
+DataManager::GetValue(TRB_EN, trb_en);
 if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
 if (DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0)
 DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 1);

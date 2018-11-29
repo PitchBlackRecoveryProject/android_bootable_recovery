@@ -219,10 +219,11 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
     gui_msg("pb_install_detecting=Detecting Current Package");
 
     if (Zip -> ExtractEntry(meta + "/google/android/update-binary", "/tmp/miui_check", 0644)) {
-      string outp = TWFunc::Get_output("grep miui.ui /tmp/miui_check");
+      string outp = TWFunc::Get_output("grep miui.ui.version /tmp/miui_check");
 
-	if (Zip -> EntryExists("vendor.new.dat.br") || Zip -> EntryExists("vendor.new.dat"))
+	if (Zip -> EntryExists("vendor.new.dat.br") || Zip -> EntryExists("vendor.new.dat")) {
 		chk_sdk = 27;
+		DataManager::SetValue(TRB_EN, "1"); }
 	else
 		chk_sdk = 26;
 
@@ -243,7 +244,7 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
 	          DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
 	          //DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
 	          trb_en = true;
-                  DataManager::SetValue(TRB_EN, "1");
+		  //DataManager::SetValue(TRB_EN, "1");
 	          gui_msg("pb_install_miui_oreo_detected=- Detected Treble MIUI Update Package");
 	        }
             else if (Zip -> EntryExists("system.new.dat") || Zip -> EntryExists("system.new.dat.br")) {
@@ -261,8 +262,8 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
         }
     }
 
-	if(DataManager::GetIntValue(STD) == 1 && chk_sdk >= 27)
-		DataManager::SetValue(STD, "2");
+	//if(DataManager::GetIntValue(STD) == 1 && chk_sdk >= 27)
+		//DataManager::SetValue(STD, "2");
 
     if (DataManager::GetIntValue(PB_INCREMENTAL_PACKAGE) != 0) {
       gui_msg("pb_incremental_ota_status_enabled=Support MIUI Incremental package status: Enabled");
