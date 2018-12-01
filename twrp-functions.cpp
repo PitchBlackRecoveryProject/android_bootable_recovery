@@ -1664,9 +1664,9 @@ bool TWFunc::Patch_DM_Verity() {
 	closedir (d);
 	if (stat == 0)
 	{
-		if(trb_en != 0)
+		if(PartitionManager.Mount_By_Path("/vendor", false))
 		{
-			PartitionManager.Mount_By_Path("/vendor", false);
+			//PartitionManager.Mount_By_Path("/vendor", false);
 			d1 = opendir(fstab2.c_str());
 			stat = 2;
 		}
@@ -1798,9 +1798,9 @@ bool TWFunc::Patch_Forced_Encryption()
 	closedir (d);
 	if (stat == 0)
 	{
-		if(trb_en != 0)
+		if(PartitionManager.Mount_By_Path("/vendor", false))
 		{
-			PartitionManager.Mount_By_Path("/vendor", false);
+			//PartitionManager.Mount_By_Path("/vendor", false);
 			d1 = opendir(fstab2.c_str());
 			stat = 2;
 		}
@@ -1862,6 +1862,7 @@ else if(PartitionManager.Is_Mounted_By_Path("/cust"))
 	PartitionManager.UnMount_By_Path("/cust", false);
 if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
         PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
+usleep(1000);
 if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
 if (!Unpack_Image("/boot")) {
 LOGINFO("Deactivation_Process: Unable to unpack image\n");
