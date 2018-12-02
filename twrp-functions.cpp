@@ -1743,20 +1743,22 @@ bool TWFunc::Patch_DM_Verity() {
 
 bool TWFunc::Patch_Forced_Encryption()
 {
-	string path, null, cmp, command = "";
+	string path, null, null1, cmp, command = "", command_p;
 	command = "sed -i \"";
+	command_p = command;
 	int stat = 0;
-	string remove[] = {"forceencrypt=", "forcefdeorfbe=", "fileencryption=",
-				"discard,", "errors=panic"};
-	for(int i=0;i<=4;i++)
+	string remove[] = {"forceencrypt=", "forcefdeorfbe=", "fileencryption="};
+	for(int i=0;i<=2;i++)
 	{
-		if(i == 3)
-		command = command + "s|" + remove[i] + "||g; ";
-		else if(i == 4)
-		command = command + "s|" + remove[i] + "||g\"";
+		if(i < 2)
+			command += "s|" + remove[i] + "|encryptable=|g; ";
 		else
-		command = command + "s|" + remove[i] + "|encryptable=|g; ";
+			command += "s|" + remove[i] + "|encryptable=|g;\"";
 	}
+	
+	//for additional kernel panic replacements
+	command_p += "s|discard,||g; s|errors=panic||g;\"";
+	
 	//DataManager::GetValue(TRB_EN, trb_en);
 	//DataManager::GetValue(STD, std);
 	bool status = false;
@@ -1786,10 +1788,11 @@ bool TWFunc::Patch_Forced_Encryption()
 			stat = 1;
 			if (!status)
 			{
-				if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
-					if(null.empty())
+				if (TWFunc::Exec_Cmd(command + " " + path, null) == 0 && TWFunc::Exec_Cmd(command_p + " " + path, null1) == 0)
+					if(null.empty() || null1.empty())
 					{
 						command="";
+						command_p="";
 						status = true;
 					}
 			};
@@ -1837,10 +1840,11 @@ bool TWFunc::Patch_Forced_Encryption()
 				}
 				if (!status)
 				{
-					if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
-						if(null.empty())
+					if (TWFunc::Exec_Cmd(command + " " + path, null) == 0 && TWFunc::Exec_Cmd(command_p + " " + path, null1) == 0)
+						if(null.empty() || null1.empty())
 						{
 							command="";
+							command_p="";
 							status = true;
 						}
 				}
