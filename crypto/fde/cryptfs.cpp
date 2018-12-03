@@ -631,6 +631,10 @@ constexpr CryptoType supported_crypto_types[] = {
         .set_property_name("Speck128/128-XTS")
         .set_crypto_name("speck128-xts-plain64")
         .set_keysize(32),
+    CryptoType()
+        .set_property_name("adiantum")
+        .set_crypto_name("xchacha12,aes-adiantum-plain64")
+        .set_keysize(32),
     // Add new CryptoTypes here.  Order is not important.
 };
 
