@@ -1727,6 +1727,7 @@ bool TWFunc::Patch_DM_Verity() {
 			}
 		}
 	        closedir (d1);
+		chmod(path.c_str(), 0644);
 		if (PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
 			PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 		if (PartitionManager.Is_Mounted_By_Path("/vendor"))
@@ -1851,6 +1852,7 @@ bool TWFunc::Patch_Forced_Encryption()
 		       }
 	        }
 	        closedir (d1);
+		chmod(path.c_str(), 0644);
 		if (PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
 			PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 		if (PartitionManager.Is_Mounted_By_Path("/vendor"))
