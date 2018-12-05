@@ -1056,6 +1056,7 @@ int GUIAction::flash(std::string arg)
 		}
 		DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
 	}
+	DataManager::SetValue(TRB_EN, 0); //Reset At end
 	operation_end(ret_val);
 	// This needs to be after the operation_end call so we change pages before we change variables that we display on the screen
 	DataManager::SetValue(TW_ZIP_QUEUE_COUNT, zip_queue_index);

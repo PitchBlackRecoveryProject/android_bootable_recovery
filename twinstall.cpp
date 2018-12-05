@@ -221,9 +221,11 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
     if (Zip -> ExtractEntry(meta + "/google/android/update-binary", "/tmp/miui_check", 0644)) {
       string outp = TWFunc::Get_output("grep miui.ui.version /tmp/miui_check");
 
-	if (Zip -> EntryExists("vendor.new.dat.br") || Zip -> EntryExists("vendor.new.dat")) {
+	if (Zip -> EntryExists("vendor.new.dat.br") || Zip -> EntryExists("vendor.new.dat"))
+	{
 		chk_sdk = 27;
-		DataManager::SetValue(TRB_EN, "1"); }
+		DataManager::SetValue(TRB_EN, 1);
+	}
 	else
 		chk_sdk = 26;
 
