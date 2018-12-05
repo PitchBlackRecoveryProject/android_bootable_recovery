@@ -1777,7 +1777,12 @@ int GUIAction::flashimage(std::string arg __unused)
 	else
 		op_status = 1; // fail
 	}
-
+	// Start Deactivation on flashing either boot.img, system.img or vendor.img
+	if (DataManager::GetIntValue(PB_CALL_DEACTIVATION) != 0)
+	{
+		TWFunc::Deactivation_Process();
+	}
+	DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
 	operation_end(op_status);
 	DataManager::SetValue("ui_progress", 100);
 	DataManager::SetValue("ui_progress", 0);

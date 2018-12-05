@@ -3358,6 +3358,7 @@ TWPartitionManager::Remove_MTP_Storage (unsigned int Storage_ID)
 bool
 TWPartitionManager::Flash_Image (string & path, string & filename)
 {
+  bool deactivation = false;
   int partition_count = 0;
   TWPartition *flash_part = NULL;
   string Flash_List, flash_path, full_filename;
@@ -3401,6 +3402,8 @@ TWPartitionManager::Flash_Image (string & path, string & filename)
 	  flash_part = Find_Partition_By_Path (flash_path);
 	  if (flash_part != NULL)
 	    {
+		if (flash_path.compare("/boot") == 0 || flash_path.compare("/system_image") == 0 || flash_path.compare("/vendor_image") == 0)
+			deactivation = true;
 	      partition_count++;
 	      if (partition_count > 1)
 		{
@@ -3441,6 +3444,8 @@ TWPartitionManager::Flash_Image (string & path, string & filename)
       return false;
     }
   gui_highlight ("flash_done=IMAGE FLASH COMPLETED]");
+	if (deactivation)
+		DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
   return true;
 }
 
