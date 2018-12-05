@@ -635,7 +635,7 @@ int OpenRecoveryScript::Run_OpenRecoveryScript_Action() {
 		TWFunc::Deactivation_Process();
 		if (ret == 24)
 		{
-			gui_process("Reboot After OTA is Disabled-Enjoy");
+			gui_process("pb_disable_reboot_ota_check=Disable Rebooting after OTA");
 			op_status = 0;
 			DataManager::SetValue("tw_page_done", 1);
 		}
