@@ -1618,8 +1618,7 @@ return true;
 
 bool TWFunc::Patch_DM_Verity() {
 	bool status = false, def = false;
-	int stat = 0, trb_en;
-	DataManager::GetValue(TRB_EN, trb_en);
+	int stat = 0;
 	//DataManager::GetValue(STD, std);
 	string firmware_key = ramdisk + "/sbin/firmware_key.cer";
 	string null, path, fstab = "", cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;discard,;,errors=panic;";
@@ -1698,7 +1697,7 @@ bool TWFunc::Patch_DM_Verity() {
 	PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 	if (stat == 0)
 	{
-		if(trb_en || PartitionManager.Mount_By_Path("/vendor", false))
+		if(trb_en == 1 || PartitionManager.Mount_By_Path("/vendor", false))
 		{
 			//PartitionManager.Mount_By_Path("/vendor", false);
 			d1 = opendir(fstab2.c_str());
@@ -1806,7 +1805,7 @@ bool TWFunc::Patch_Forced_Encryption()
 {
 	string path, null, fstab = "", cmp, command = "";
 	command = "sed -i \"";
-	int stat = 0, trb_en;
+	int stat = 0;
 	string remove[] = {"forceencrypt=", "forcefdeorfbe=", "fileencryption="};
 	for(int i=0;i<=2;i++)
 	{
@@ -1816,7 +1815,7 @@ bool TWFunc::Patch_Forced_Encryption()
 			command += "s|" + remove[i] + "|encryptable=|g;\"";
 	}
 	
-	DataManager::GetValue(TRB_EN, trb_en);
+	//DataManager::GetValue(TRB_EN, trb_en);
 	//DataManager::GetValue(STD, std);
 	bool status = false;
 	int encryption;
