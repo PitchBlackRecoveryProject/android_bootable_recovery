@@ -404,7 +404,8 @@ LOCAL_REQUIRED_MODULES += \
     libbootloader_message_twrp \
     init.recovery.hlthchrg.rc \
     init.recovery.service.rc \
-    parted
+    parted \
+    magiskboot
 
 ifneq ($(TARGET_ARCH), arm64)
     ifneq ($(TARGET_ARCH), x86_64)

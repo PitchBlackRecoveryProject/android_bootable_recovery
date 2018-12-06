@@ -65,6 +65,7 @@ static string default_prop = ramdisk + "/default.prop";
 static string fstab1 = PartitionManager.Get_Android_Root_Path() + "/vendor/etc";
 static string fstab2 = "/vendor/etc";
 static int trb_en = 0;
+static string dtb = "";
 
 /* Execute a command */
 int TWFunc::Exec_Cmd(const string& cmd, string &result) {
@@ -1325,6 +1326,17 @@ while ((der = readdir(dir)) != NULL)
 Command = der->d_name;
 if (Command.find("-ramdisk.") != string::npos)
 break; 
+if (Command.find("-dtb") != string::npos || Command.find("-dt") != string::npos)
+dtb = split_img + "/" + Command;
+}
+if(dtb.empty())
+{
+while ((der = readdir(dir)) != NULL)
+{
+Command = der->d_name;
+if (Command.find("-zImage") != string::npos)
+dtb = split_img + "/" + Command;
+}
 }
 closedir (dir);
 if (Command.empty())
@@ -1610,7 +1622,7 @@ bool TWFunc::Patch_DM_Verity() {
 	DataManager::GetValue(TRB_EN, trb_en);
 	//DataManager::GetValue(STD, std);
 	string firmware_key = ramdisk + "/sbin/firmware_key.cer";
-	string path, fstab = "", cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;discard,;,errors=panic;";
+	string null, path, fstab = "", cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;discard,;,errors=panic;";
 	DIR* d;
 	DIR* d1 = nullptr;
 	struct dirent* de;
@@ -1664,8 +1676,26 @@ bool TWFunc::Patch_DM_Verity() {
 				status = true;
 			unlink(path.c_str());
 		}
+
 	}
 	closedir (d);
+	//Patched Dtb verity
+		LOGINFO("DTB Found at '%s'\n", dtb.c_str());
+	if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()) || PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), false))
+	{
+		TWFunc::Exec_Cmd("mount -o bind /dev/urandom /dev/random", null);
+		TWFunc::Exec_Cmd("mv /sbin /sbin_tmp", null);
+		if (TWFunc::Exec_Cmd("magiskboot --dtb-patch " + dtb, null) == 0)
+		{
+			LOGINFO("Successfully Patched Verity in DTB");
+		}
+		else
+			LOGINFO("Verity not found in DTB");
+		TWFunc::Exec_Cmd("umount -l /dev/random ", null);
+		TWFunc::Exec_Cmd("mv /sbin_tmp /sbin", null);
+	}
+
+	PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 	if (stat == 0)
 	{
 		if(trb_en || PartitionManager.Mount_By_Path("/vendor", false))
