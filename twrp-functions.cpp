@@ -1610,7 +1610,7 @@ bool TWFunc::Patch_DM_Verity() {
 	DataManager::GetValue(TRB_EN, trb_en);
 	//DataManager::GetValue(STD, std);
 	string firmware_key = ramdisk + "/sbin/firmware_key.cer";
-	string path, fstab = "", cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;";
+	string path, fstab = "", cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;discard,;,errors=panic;";
 	DIR* d;
 	DIR* d1 = nullptr;
 	struct dirent* de;
@@ -1633,7 +1633,9 @@ bool TWFunc::Patch_DM_Verity() {
 			{
 				if (TWFunc::CheckWord(path, "verify")
 				|| TWFunc::CheckWord(path, "support_scfs")
-				|| TWFunc::CheckWord(path, "avb"))
+				|| TWFunc::CheckWord(path, "avb")
+				|| TWFunc::CheckWord(path, "discard")
+				|| TWFunc::CheckWord(path, "errors=panic"))
 					status = true;
 			}
 			TWFunc::Replace_Word_In_File(path, remove);
@@ -1705,7 +1707,9 @@ bool TWFunc::Patch_DM_Verity() {
 				{
 					if (TWFunc::CheckWord(path, "verify")
 					|| TWFunc::CheckWord(path, "support_scfs")
-					|| TWFunc::CheckWord(path, "avb"))
+					|| TWFunc::CheckWord(path, "avb")
+					|| TWFunc::CheckWord(path, "discard")
+					|| TWFunc::CheckWord(path, "errors=panic"))
 						status = true;
 				}
 				TWFunc::Replace_Word_In_File(path, remove);
@@ -1770,9 +1774,8 @@ bool TWFunc::Patch_DM_Verity() {
 
 bool TWFunc::Patch_Forced_Encryption()
 {
-	string path, null, null1, fstab = "", cmp, command = "", command_p;
+	string path, null, fstab = "", cmp, command = "";
 	command = "sed -i \"";
-	command_p = command;
 	int stat = 0, trb_en;
 	string remove[] = {"forceencrypt=", "forcefdeorfbe=", "fileencryption="};
 	for(int i=0;i<=2;i++)
@@ -1782,9 +1785,6 @@ bool TWFunc::Patch_Forced_Encryption()
 		else
 			command += "s|" + remove[i] + "|encryptable=|g;\"";
 	}
-	
-	//for additional kernel panic replacements
-	command_p += "s|discard,||g; s|,errors=panic||g;\"";
 	
 	DataManager::GetValue(TRB_EN, trb_en);
 	//DataManager::GetValue(STD, std);
@@ -1815,11 +1815,10 @@ bool TWFunc::Patch_Forced_Encryption()
 			stat = 1;
 			if (!status)
 			{
-				if (TWFunc::Exec_Cmd(command + " " + path, null) == 0 && TWFunc::Exec_Cmd(command_p + " " + path, null1) == 0)
-					if(null.empty() || null1.empty())
+				if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
+					if(null.empty())
 					{
 						command="";
-						command_p="";
 						status = true;
 					}
 			};
@@ -1868,11 +1867,10 @@ bool TWFunc::Patch_Forced_Encryption()
 				}
 				if (!status)
 				{
-					if (TWFunc::Exec_Cmd(command + " " + path, null) == 0 && TWFunc::Exec_Cmd(command_p + " " + path, null1) == 0)
-						if(null.empty() || null1.empty())
+					if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
+						if(null.empty())
 						{
 							command="";
-							command_p="";
 							status = true;
 						}
 				}
