@@ -1233,7 +1233,7 @@ void TWFunc::Replace_Word_In_File(std::string file_path, std::string search) {
       new_file << contents_of_file << '\n';
   }
   unlink(renamed.c_str());
-  chmod(file_path.c_str(), 0640);  
+  chmod(file_path.c_str(), 0644);  
 }
 
 
@@ -1326,17 +1326,6 @@ while ((der = readdir(dir)) != NULL)
 Command = der->d_name;
 if (Command.find("-ramdisk.") != string::npos)
 break; 
-if (Command.find("-dtb") != string::npos || Command.find("-dt") != string::npos)
-dtb = split_img + "/" + Command;
-}
-if(dtb.empty())
-{
-while ((der = readdir(dir)) != NULL)
-{
-Command = der->d_name;
-if (Command.find("-zImage") != string::npos)
-dtb = split_img + "/" + Command;
-}
 }
 closedir (dir);
 if (Command.empty())
@@ -1365,6 +1354,26 @@ if (TWFunc::Exec_Cmd(result, null) != 0) {
 TWFunc::removeDir(tmp, false);
 return false;
 }
+
+dir = opendir(split_img.c_str());
+while((der = readdir(dir)) != NULL)
+{
+	Command = der->d_name;
+	if (Command.find("-dtb") != string::npos || Command.find("-dt") != string::npos || Command.find("-zImage") != string::npos)
+	{
+		FILE *p_file = NULL;
+		p_file = fopen((split_img + "/" + Command).c_str(), "rb");
+		fseek(p_file,0,SEEK_END);
+		if (ftell(p_file) > 0 && (Command.find("-dtb") != string::npos || Command.find("-dt") != string::npos))
+		{
+			dtb = split_img + "/" + Command;
+		}
+		else if(Command.find("-zImage") != string::npos && dtb.empty())
+			dtb = split_img + "/" + Command;
+	}
+}
+closedir (dir);
+
 return true;
 }
 
@@ -1621,7 +1630,7 @@ bool TWFunc::Patch_DM_Verity() {
 	int stat = 0;
 	//DataManager::GetValue(STD, std);
 	string firmware_key = ramdisk + "/sbin/firmware_key.cer";
-	string null, path, fstab = "", cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;discard,;,errors=panic;";
+	string null, path, fstab = "", cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;";
 	DIR* d;
 	DIR* d1 = nullptr;
 	struct dirent* de;
@@ -1644,9 +1653,7 @@ bool TWFunc::Patch_DM_Verity() {
 			{
 				if (TWFunc::CheckWord(path, "verify")
 				|| TWFunc::CheckWord(path, "support_scfs")
-				|| TWFunc::CheckWord(path, "avb")
-				|| TWFunc::CheckWord(path, "discard")
-				|| TWFunc::CheckWord(path, "errors=panic"))
+				|| TWFunc::CheckWord(path, "avb"))
 					status = true;
 			}
 			TWFunc::Replace_Word_In_File(path, remove);
@@ -1686,10 +1693,10 @@ bool TWFunc::Patch_DM_Verity() {
 		TWFunc::Exec_Cmd("mv /sbin /sbin_tmp", null);
 		if (TWFunc::Exec_Cmd("magiskboot --dtb-patch " + dtb, null) == 0)
 		{
-			LOGINFO("Successfully Patched Verity in DTB");
+			LOGINFO("Successfully Patched Verity in DTB\n");
 		}
 		else
-			LOGINFO("Verity not found in DTB");
+			LOGINFO("Verity not found in DTB\n");
 		TWFunc::Exec_Cmd("umount -l /dev/random ", null);
 		TWFunc::Exec_Cmd("mv /sbin_tmp /sbin", null);
 	}
@@ -1736,9 +1743,7 @@ bool TWFunc::Patch_DM_Verity() {
 				{
 					if (TWFunc::CheckWord(path, "verify")
 					|| TWFunc::CheckWord(path, "support_scfs")
-					|| TWFunc::CheckWord(path, "avb")
-					|| TWFunc::CheckWord(path, "discard")
-					|| TWFunc::CheckWord(path, "errors=panic"))
+					|| TWFunc::CheckWord(path, "avb"))
 						status = true;
 				}
 				TWFunc::Replace_Word_In_File(path, remove);
@@ -1775,15 +1780,6 @@ bool TWFunc::Patch_DM_Verity() {
 			{
 				if (TWFunc::CheckWord(path, "ro.config.dmverity=true"))
 					TWFunc::Replace_Word_In_File(path, "ro.config.dmverity=true;", "ro.config.dmverity=false");
-			}
-			else
-			{
-				ofstream File(path.c_str(), ios_base::app | ios_base::out);  
-				if (File.is_open())
-				{
-					File << "ro.config.dmverity=false" << endl;
-					File.close();
-				}			
 			}
 		}
 		//end
