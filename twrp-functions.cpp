@@ -1927,16 +1927,26 @@ return;
 }
 gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
 DataManager::GetValue(TRB_EN, trb_en);
-if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
-TWFunc::Exec_Cmd("getprop ro.crypto.state", out);
-if (strncmp((char *)out.c_str(), "e", 1) != 0)
-DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 1);
+if (TWFunc::Exec_Cmd("grep -E '/dev/root|/system_root' /proc/mounts", out))
+{
+	if(!out.empty())
+	{
+		gui_print_color("warning", "Detected Using System_root_image Disable Dm-Verity not applied");
+		DataManager::SetValue(PB_DISABLE_DM_VERITY, 0);
+		out="";
+	}
+}
+TWFunc::Exec_Cmd("grep /data /proc/mounts | grep dm-", out);
+if (out.empty() || TWFunc::Path_Exists("/data/unencrypted"))
+	DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 1);
 else
-DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);
+	DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);
+
+if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
 if (Patch_DM_Verity())
 gui_process("pb_dm_verity=Successfully patched DM-Verity");
 else
-gui_print_color("warning", "DM-Verity is not enabled");
+gui_print_color("warning", "DM-Verity is not enabled\n");
 }
 if (DataManager::GetIntValue(PB_DISABLE_FORCED_ENCRYPTION) == 1) {
 if (Patch_Forced_Encryption())
