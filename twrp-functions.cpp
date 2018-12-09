@@ -1691,7 +1691,7 @@ bool TWFunc::Patch_DM_Verity() {
 	{
 		TWFunc::Exec_Cmd("mount -o bind /dev/urandom /dev/random", null);
 		TWFunc::Exec_Cmd("mv /sbin /sbin_tmp", null);
-		if (TWFunc::Exec_Cmd("magiskboot --dtb-patch " + dtb, null) == 0)
+		if (TWFunc::Exec_Cmd("/sbin_tmp/magiskboot --dtb-patch " + dtb, null) == 0)
 		{
 			LOGINFO("Successfully Patched Verity in DTB\n");
 		}
