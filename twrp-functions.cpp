@@ -71,16 +71,16 @@ static string dtb = "";
 /* Execute a command */
 int TWFunc::Exec_Cmd(const string& cmd, string &result) {
 	FILE* exec;
-	char buffer[130];
+	char buffer[512];
 	int ret = 0;
-	exec = __popen(cmd.c_str(), "r");
+	exec = popen(cmd.c_str(), "r");
 	if (!exec) return -1;
 	while (!feof(exec)) {
-		if (fgets(buffer, 128, exec) != NULL) {
+		if (fgets(buffer, 512, exec) != NULL) {
 			result += buffer;
 		}
 	}
-	ret = __pclose(exec);
+	ret = pclose(exec);
 	return ret;
 }
 
@@ -1297,6 +1297,9 @@ return line;
   
 bool TWFunc::Unpack_Image(string mount_point) {
 string null;
+TWFunc::Symlink("/sbin/linker64", "/system/bin");
+TWFunc::Symlink("/sbin/linker", "/system/bin");
+usleep(500);
 if (TWFunc::Path_Exists(tmp))
 TWFunc::removeDir(tmp, false);
 if (!TWFunc::Recursive_Mkdir(ramdisk))
@@ -1308,323 +1311,78 @@ LOGERR("TWFunc::Unpack_Image: Partition don't exist or isn't emmc");
 return false;
 }
 Read_Write_Specific_Partition("/tmp/pb/boot.img", mount_point, true);
-string Command = "unpackbootimg -i " + tmp + "/boot.img" + " -o " + split_img;
+string Command = "cd " + split_img + " && /sbin/magiskboot --unpack /tmp/pb/boot.img";
 if (TWFunc::Exec_Cmd(Command, null) != 0) {
 TWFunc::removeDir(tmp, false);
 return false;
 }
-string local, result, hexdump;
 DIR* dir;
 struct dirent* der;
-dir = opendir(split_img.c_str());
-if (dir == NULL)
-{
-LOGINFO("Unable to open '%s'\n", split_img.c_str());
-return false;
-}
-while ((der = readdir(dir)) != NULL)
-{
-Command = der->d_name;
-if (Command.find("-ramdisk.") != string::npos)
-break; 
-}
-closedir (dir);
-if (Command.empty())
-return false;
-hexdump = "hexdump -vn2 -e '2/1 \"%x\"' " + split_img + "/" + Command;
-if (TWFunc::Exec_Cmd(hexdump, result) != 0) {
-TWFunc::removeDir(tmp, false);
-return false;
-}
-if (result == "425a")
-local = "bzip2 -dc";
-else if (result == "1f8b" || result == "1f9e")
-local = "gzip -dc";
-else if (result == "0221")
-local = "lz4 -d";
-else if (result == "5d00")
-local = "lzma -dc";
-else if (result == "894c")
-local = "lzop -dc";
-else if (result == "fd37")
-local = "xz -dc";
-else
-return false;
-result = "cd " + ramdisk + "; " + local + " < " + split_img + "/" + Command + " | cpio -i";
-if (TWFunc::Exec_Cmd(result, null) != 0) {
-TWFunc::removeDir(tmp, false);
-return false;
-}
-
 dir = opendir(split_img.c_str());
 while((der = readdir(dir)) != NULL)
 {
 	Command = der->d_name;
-	if (Command.find("-dtb") != string::npos || Command.find("-dt") != string::npos || Command.find("-zImage") != string::npos)
+	if (Command.find("extra") != string::npos)
 	{
-		FILE *p_file = NULL;
-		p_file = fopen((split_img + "/" + Command).c_str(), "rb");
-		fseek(p_file,0,SEEK_END);
-		if (ftell(p_file) > 0 && (Command.find("-dtb") != string::npos || Command.find("-dt") != string::npos))
-		{
-			dtb = split_img + "/" + Command;
-		}
-		else if(Command.find("-zImage") != string::npos && dtb.empty())
 			dtb = split_img + "/" + Command;
 	}
 }
 closedir (dir);
-
 return true;
 }
-
-bool TWFunc::Resize_By_Path(string path) {
-string null, local;
-if (TWFunc::Path_Exists(tmp))
-TWFunc::removeDir(tmp, false);
-if (!TWFunc::Recursive_Mkdir(split_img))
-return false;
-string Command = "unpackbootimg -i " + path + " -o " + split_img;
-TWFunc::Exec_Cmd(Command, null);
-DIR* dir;
-struct dirent* der;
-dir = opendir(split_img.c_str());
-if (dir == NULL)
-{
-LOGINFO("Unable to open '%s'\n", split_img.c_str());
-return false;
-}
-Command = "mkbootimg";
-while ((der = readdir(dir)) != NULL)
-{
-local = der->d_name;
-if (local.find("-zImage") != string::npos) {
-Command += " --kernel " + split_img + "/" + local;
-continue;
-}
-if (local.find("-ramdisk.") != string::npos) {
-Command += " --ramdisk " + split_img + "/" + local;
-continue;
-}
-if (local.find("-dtb") != string::npos) {
-Command += " --dt " + split_img + "/" + local;
-continue;
-}
-if (local == "boot.img-second") {
-Command += " --second " + split_img + "/" + local;
-continue;
-}
-if (local.find("-secondoff") != string::npos) {
-Command += " --second_offset " + TWFunc::Load_File(local);
-continue;
-}
-if (local.find("-cmdline") != string::npos) {
-Command += " --cmdline \"" + TWFunc::Load_File(local) + "\"";
-continue;
-}
-if (local.find("-board") != string::npos) {
-Command += " --board \"" + TWFunc::Load_File(local) + "\"";
-continue;
-}
-if (local.find("-base") != string::npos) {
-Command += " --base " + TWFunc::Load_File(local);
-continue;
-}
-if (local.find("-pagesize") != string::npos) {
-Command += " --pagesize " + TWFunc::Load_File(local);
-continue;
-}
-if (local.find("-kerneloff") != string::npos) {
-Command += " --kernel_offset " + TWFunc::Load_File(local);
-continue;
-}
-if (local.find("-ramdiskoff") != string::npos) {
-Command += " --ramdisk_offset " + TWFunc::Load_File(local);
-continue;
-}
-if (local.find("-tagsoff") != string::npos) {
-Command += " --tags_offset \"" + TWFunc::Load_File(local) + "\"";
-continue;
-}
-if (local.find("-hash") != string::npos) {
-if (Load_File(local) == "unknown")
-Command += " --hash sha1";
-else
-Command += " --hash " + Load_File(local);
-continue;
-}
-if (local.find("-osversion") != string::npos) {
-Command += " --os_version \"" + Load_File(local) + "\"";
-continue;
-}
-if (local.find("-oslevel") != string::npos) {
-Command += " --os_patch_level \"" + Load_File(local) + "\"";
-continue;
-}
-}
-closedir (dir);
-Command += " --output " + path;
-if (TWFunc::Exec_Cmd(Command, null) != 0) {
-TWFunc::removeDir(tmp, false);
-return false;
-}
-char brand[PROPERTY_VALUE_MAX];
-property_get("ro.product.manufacturer", brand, "");
-Command = brand;
-if (!Command.empty()) {
-for (size_t i = 0; i < Command.size(); i++)
-Command[i] = tolower(Command[i]);
-if (Command == "samsung") {
-ofstream File(path.c_str(), ios::binary);
-	if (File.is_open()) {
-		File << "SEANDROIDENFORCE" << endl;
-		File.close();
-	}
- }
-   }
-TWFunc::removeDir(tmp, false);
-return true;
-}
-  
-
 
 bool TWFunc::Repack_Image(string mount_point) {
-string null, local, result, hexdump, Command;
+string null, Command;
+usleep(1000);
 DIR* dir;
 struct dirent* der;
 dir = opendir(split_img.c_str());
 if (dir == NULL)
 {
-LOGINFO("Unable to open '%s'\n", split_img.c_str());
-return false;
+	LOGINFO("Unable to open '%s'\n", split_img.c_str());
+	return false;
 }
-while ((der = readdir(dir)) != NULL)
+closedir(dir);
+Command = "cd " + split_img + " && /sbin/magiskboot --repack /tmp/pb/boot.img";
+if (TWFunc::Exec_Cmd(Command, null) != 0)
 {
-local = der->d_name;
-if (local.find("-ramdisk.") != string::npos)
-break; 
+	TWFunc::removeDir(tmp, false);
+	return false;
 }
-closedir (dir);
-if (local.empty())
-return false;
-hexdump = "hexdump -vn2 -e '2/1 \"%x\"' " + split_img + "/" + local;
-TWFunc::Exec_Cmd(hexdump, result);
-if (result == "425a")
-local = "bzip2 -9c";
-else if (result == "1f8b" || result == "1f9e")
-local = "gzip -9c";
-else if (result == "0221")
-local = "lz4 -9";
-else if (result == "5d00")
-local = "lzma -c";
-else if (result == "894c")
-local = "lzop -9c";
-else if (result == "fd37")
-local = "xz --check=crc32 --lzma2=dict=2MiB";
-else
-return false;
-string repack = "cd " + ramdisk + "; find | cpio -o -H newc | " + local + " > " + tmp + "/ramdisk-new";
-TWFunc::Exec_Cmd(repack, null);
-dir = opendir(split_img.c_str());
-if (dir == NULL)
-{
-LOGINFO("Unable to open '%s'\n", split_img.c_str());
-return false;
-}
-Command = "mkbootimg";
-while ((der = readdir(dir)) != NULL)
-{
-local = der->d_name;
-if (local.find("-zImage") != string::npos) {
-Command += " --kernel " + split_img + "/" + local;
-continue;
-}
-if (local.find("-ramdisk.") != string::npos) {
-Command += " --ramdisk " + tmp + "/ramdisk-new";
-continue;
-}
-if (local.find("-dtb") != string::npos || local.find("-dt") != string::npos) {
-Command += " --dt " + split_img + "/" + local;
-continue;
-}
-if (local == "boot.img-second") {
-Command += " --second " + split_img + "/" + local;
-continue;
-}
-if (local.find("-secondoff") != string::npos) {
-Command += " --second_offset " + TWFunc::Load_File(local);
-continue;
-}
-if (local.find("-cmdline") != string::npos) {
-Command += " --cmdline \"" + TWFunc::Load_File(local) + "\"";
-continue;
-}
-if (local.find("-board") != string::npos) {
-Command += " --board \"" + TWFunc::Load_File(local) + "\"";
-continue;
-}
-if (local.find("-base") != string::npos) {
-Command += " --base " + TWFunc::Load_File(local);
-continue;
-}
-if (local.find("-pagesize") != string::npos) {
-Command += " --pagesize " + TWFunc::Load_File(local);
-continue;
-}
-if (local.find("-kerneloff") != string::npos) {
-Command += " --kernel_offset " + TWFunc::Load_File(local);
-continue;
-}
-if (local.find("-ramdiskoff") != string::npos) {
-Command += " --ramdisk_offset " + TWFunc::Load_File(local);
-continue;
-}
-if (local.find("-tagsoff") != string::npos) {
-Command += " --tags_offset \"" + TWFunc::Load_File(local) + "\"";
-continue;
-}
-if (local.find("-hash") != string::npos) {
-if (Load_File(local) == "unknown")
-Command += " --hash sha1";
-else
-Command += " --hash " + Load_File(local);
-continue;
-}
-if (local.find("-osversion") != string::npos) {
-Command += " --os_version \"" + Load_File(local) + "\"";
-continue;
-}
-if (local.find("-oslevel") != string::npos) {
-Command += " --os_patch_level \"" + Load_File(local) + "\"";
-continue;
-}
-}
-closedir (dir);
-Command += " --output " + tmp + "/boot.img";
-rename("/tmp/pb/boot.img", "/tmp/pb/boot.img.bak");
-if (TWFunc::Exec_Cmd(Command, null) != 0) {
-TWFunc::removeDir(tmp, false);
-return false;
-}
-char brand[PROPERTY_VALUE_MAX];
-property_get("ro.product.manufacturer", brand, "");
-hexdump = brand;
-if (!hexdump.empty()) {
-for (size_t i = 0; i < hexdump.size(); i++)
-hexdump[i] = tolower(hexdump[i]);
-if (hexdump == "samsung") {
-ofstream File("/tmp/pb/boot.img", ios::binary);
-	if (File.is_open()) {
-		File << "SEANDROIDENFORCE" << endl;
-		File.close();
-	}
- }
-   }
-Read_Write_Specific_Partition("/tmp/pb/boot.img", mount_point, false);
+Read_Write_Specific_Partition(split_img + "/new-boot.img", mount_point, false);
 TWFunc::removeDir(tmp, false);
 return true;
 }
 
+bool TWFunc::Symlink(string src, string dest)
+{
+	string null;
+	if(TWFunc::Path_Exists(src))
+	{
+		if(TWFunc::Path_Exists(dest) || TWFunc::Recursive_Mkdir(dest))
+		{
+			if (TWFunc::Exec_Cmd("cd " + dest + " && ln -s " + src, null) == 0)
+			{
+				LOGINFO("Symlink Created : '%s'\n", (dest + "/" + TWFunc::Get_Filename(src)).c_str());
+			}
+			else {
+				LOGINFO("Symlink Creation failed \n");
+				return false;
+			}
+		}
+		else
+		{
+			LOGINFO("Symlink: either dest not preset or not created\n");
+			return false;
+		}
+	}
+	else
+	{
+		LOGINFO("Source Dir : '%s' is not Exists\n", src.c_str());
+		return false;
+	}
+	return true;
+}
 
 bool TWFunc::Patch_DM_Verity() {
 	bool status = false, def = false;
@@ -1687,21 +1445,24 @@ bool TWFunc::Patch_DM_Verity() {
 	}
 	closedir (d);
 	//Patched Dtb verity
-		LOGINFO("DTB Found at '%s'\n", dtb.c_str());
-	PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
-	//TWFunc::Exec_Cmd("mount -o bind /dev/urandom /dev/random", null);
-	rename("/sbin", "/sbin_tmp");
-	TWFunc::Exec_Cmd("/sbin_tmp/magiskboot --dtb-patch " + dtb, null);
-	if (null.find("remove") != string::npos)
+	LOGINFO("DTB Found at '%s'\n", dtb.c_str());
+	TWFunc::Exec_Cmd("mount -o bind /dev/urandom /dev/random", null);
+	//rename("/sbin", "/sbin_tmp");
+	if (TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --dtb-patch dtb", null) == 1 || TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --dtb-patch extra", null) == 1)
 	{
-		LOGINFO("Successfully Patched Verity in DTB\n");
+		LOGINFO("Verity flags detected in DTB\n");
+		if (!status)
+			status = true;
 	}
 	else
 		LOGINFO("Verity not found in DTB\n");
-	rename("/sbin_tmp", "/sbin");
-	//TWFunc::Exec_Cmd("umount -l /dev/random ", null);
+	//rename("/sbin_tmp", "/sbin");
+	if (DataManager::GetIntValue(PB_DISABLE_FORCED_ENCRYPTION) == 1)
+		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --cpio ramdisk.cpio \"patch true true\"", null);
+	else
+		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --cpio ramdisk.cpio \"patch true false\"", null);
+	TWFunc::Exec_Cmd("umount -l /dev/random ", null);
 
-	PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 	if (stat == 0)
 	{
 		if(trb_en == 1 || PartitionManager.Mount_By_Path("/vendor", false))
@@ -1956,11 +1717,11 @@ gui_print_color("warning", "Forced Encryption is not enabled");
 }
 else {
 if (!out.empty())
-gui_msg("pb_ecryption_leave=Device Encrypted Leaving Forceencrypt");
+gui_msg(Msg(msg::kHighlight, "pb_ecryption_leave=Device Encrypted Leaving Forceencrypt"));
 }
 out="";
 if (!Repack_Image("/boot")) {
-gui_msg(Msg(msg::kProcess, "pb_run_process_fail=Unable to finish '{1}' process")("PitchBlack"));
+gui_msg(Msg(msg::kError, "pb_run_process_fail=Unable to finish '{1}' process")("PitchBlack"));
 return;
 }
 gui_msg(Msg(msg::kProcess, "pb_run_process_done=Finished '{1}' process")("PitchBlack"));
