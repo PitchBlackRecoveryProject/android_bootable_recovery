@@ -1,3 +1,4 @@
+
 /*
 	Copyright 2012 bigbiff/Dees_Troy TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
@@ -1687,19 +1688,18 @@ bool TWFunc::Patch_DM_Verity() {
 	closedir (d);
 	//Patched Dtb verity
 		LOGINFO("DTB Found at '%s'\n", dtb.c_str());
-	if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()) || PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), false))
+	PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
+	//TWFunc::Exec_Cmd("mount -o bind /dev/urandom /dev/random", null);
+	rename("/sbin", "/sbin_tmp");
+	TWFunc::Exec_Cmd("/sbin_tmp/magiskboot --dtb-patch " + dtb, null);
+	if (null.find("remove") != string::npos)
 	{
-		TWFunc::Exec_Cmd("mount -o bind /dev/urandom /dev/random", null);
-		TWFunc::Exec_Cmd("mv /sbin /sbin_tmp", null);
-		if (TWFunc::Exec_Cmd("/sbin_tmp/magiskboot --dtb-patch " + dtb, null) == 0)
-		{
-			LOGINFO("Successfully Patched Verity in DTB\n");
-		}
-		else
-			LOGINFO("Verity not found in DTB\n");
-		TWFunc::Exec_Cmd("umount -l /dev/random ", null);
-		TWFunc::Exec_Cmd("mv /sbin_tmp /sbin", null);
+		LOGINFO("Successfully Patched Verity in DTB\n");
 	}
+	else
+		LOGINFO("Verity not found in DTB\n");
+	rename("/sbin_tmp", "/sbin");
+	//TWFunc::Exec_Cmd("umount -l /dev/random ", null);
 
 	PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 	if (stat == 0)
