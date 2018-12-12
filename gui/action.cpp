@@ -2,6 +2,8 @@
 	Copyright 2013 bigbiff/Dees_Troy TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
 
+	This file is part of PBRP/PitchBlack Recovery Project.
+
 	TWRP is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
@@ -57,6 +59,7 @@ extern "C" {
 #include "rapidxml.hpp"
 #include "objects.hpp"
 #include "../tw_atomic.hpp"
+#include <fstream>
 
 GUIAction::mapFunc GUIAction::mf;
 std::set<string> GUIAction::setActionsRunningInCallerThread;
@@ -228,6 +231,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(resize);
 		ADD_ACTION(changefilesystem);
 		ADD_ACTION(flashimage);
+		ADD_ACTION(flashlight);
 		ADD_ACTION(twcmd);
 		ADD_ACTION(setbootslot);
 		ADD_ACTION(installapp);
@@ -2078,8 +2082,8 @@ int GUIAction::unpack(std::string arg __unused)
 {
 	operation_start("Prepartion to unpack");
 	if (simulate) {
-        simulate_progress_bar();
-         } else {
+		simulate_progress_bar();
+	} else {
 		TWFunc::Unpack_Image("/recovery");
 	}
 	operation_end(0);
@@ -2090,11 +2094,66 @@ int GUIAction::repack(std::string arg __unused)
 {
 	operation_start("Repacking done");
 	if (simulate) {
-        simulate_progress_bar();
-         } else {
+		simulate_progress_bar();
+	} else {
 		TWFunc::Repack_Image("/recovery");
 	}
 	operation_end(0);
 	return 0;
 }
 
+int GUIAction::flashlight(std::string arg __unused)
+{
+	if (simulate)
+	{
+		simulate_progress_bar();
+	}
+	else {
+		fstream File;
+		int val=0;
+		DIR* d;
+		struct dirent* de;
+		string str_val,null, file, flashp1 = "/sys/class/leds", flashp2 = "/flashlight/brightness", flashpath;
+		flashpath = flashp1 + flashp2;
+		if (!TWFunc::Path_Exists(flashpath))
+		{
+			d = opendir(flashp1.c_str());
+			if (d == NULL)
+			{
+				LOGINFO("Unable to open '%s'\n", flashp1.c_str());
+				return 0;
+			}
+			while ((de = readdir(d)) != NULL)
+			{
+				file = de->d_name;
+				if(file.find("torch") != string::npos)
+				{
+					flashpath = flashp1 + "/" + file + "/brightness";
+					break;
+				}
+			}
+			closedir (d);
+			LOGINFO("Node located at  '%s'\n", flashpath.c_str());
+		}
+		File.open(flashpath, ios::in | ios::out);
+		if(File.is_open())
+		{
+			LOGINFO("Flashlight Node Located at '%s'\n", flashpath.c_str());
+			getline (File, str_val);
+			val = std::stoi (str_val);
+			if (val > 0)
+			{
+				operation_start("Flashlight Turning Off");
+				File << "0";
+			}
+			else
+			{
+				operation_start("Flashlight Turning On");
+				File << "255";
+			}
+		}
+		File.close();
+	}
+	operation_end(0);
+	return 0;
+}

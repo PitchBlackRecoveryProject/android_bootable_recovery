@@ -5837,6 +5837,11 @@
 				<touch key="power+voldown" />
 				<action function="screenshot" />
 			</action>
+			
+			<action>
+				<touch key="volup" />
+				<action function="flashlight" />
+			</action>
 		</page>
 
 		<page name="filemanagerlist">
@@ -6647,6 +6652,11 @@
 				<touch key="power+voldown" />
 				<action function="screenshot" />
 			</action>
+			
+			<action>
+				<touch key="volup" />
+				<action function="flashlight" />
+			</action>
 		</page>
 
 		<page name="sideload">
@@ -6785,6 +6795,11 @@
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
 			</action>
+			
+			<action>
+				<touch key="volup" />
+				<action function="flashlight" />
+			</action>
 		</page>
 
 		<page name="select_storage">
@@ -6868,6 +6883,11 @@
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
 			</action>
+			
+			<action>
+				<touch key="volup" />
+				<action function="flashlight" />
+			</action>
 		</page>
 
 		<page name="select_language">
@@ -6950,6 +6970,11 @@
 			<action>
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
+			</action>
+			
+			<action>
+				<touch key="volup" />
+				<action function="flashlight" />
 			</action>
 		</page>
 		
@@ -7318,6 +7343,11 @@
 			<action>
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
+			</action>
+			
+			<action>
+				<touch key="volup" />
+				<action function="flashlight" />
 			</action>
 			
 			<action>

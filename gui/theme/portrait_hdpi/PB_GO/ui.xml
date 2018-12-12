@@ -438,6 +438,11 @@
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
 			</action>
+			
+			<action>
+				<touch key="volup"/>
+				<action function="flashlight"/>
+			</action>
 		</template>
 
 		<template name="page_terminal">
@@ -504,6 +509,11 @@
 			<action>
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
+			</action>
+			
+			<action>
+				<touch key="volup"/>
+				<action function="flashlight"/>
 			</action>
 		</template>
 
@@ -614,6 +624,11 @@
 			<action>
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
+			</action>
+			
+			<action>
+				<touch key="volup"/>
+				<action function="flashlight"/>
 			</action>
 		</template>
 		
