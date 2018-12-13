@@ -2117,6 +2117,12 @@ int GUIAction::flashlight(std::string arg __unused)
 		string bright = "/brightness", maxpath, max = "/max_brightness";
 		flashpath = flashp1 + flashp2 + bright;
 		maxpath = flashp1 + flashp2 + max;
+		string switch_path = flashp1 + "/led:switch" + bright;
+#ifdef PB_TORCH_PATH
+		flashpath = PB_TORCH_PATH + bright;
+		maxpath = PB_TORCH_PATH + max;
+		LOGINFO("Custom Node located at '%s'\n", flashpath.c_str());
+#else
 		if (!TWFunc::Path_Exists(flashpath))
 		{
 			d = opendir(flashp1.c_str());
@@ -2128,16 +2134,17 @@ int GUIAction::flashlight(std::string arg __unused)
 			while ((de = readdir(d)) != NULL)
 			{
 				file = de->d_name;
-				if(file.find("torch") != string::npos)
+				if(file.find("torch-") != string::npos)
 				{
-					flashpath = flashp1 + "/" + file + bright;
 					maxpath= flashp1 + "/" + file + max;
+					flashpath = flashp1 + "/" + file + bright;
 					break;
 				}
 			}
 			closedir (d);
-			LOGINFO("Node located at  '%s'\n", flashpath.c_str());
+			LOGINFO("Detected Node located at  '%s'\n", flashpath.c_str());
 		}
+#endif
 		File.open(maxpath, ios::in);
 		if (File.is_open())
 		{
@@ -2155,11 +2162,16 @@ int GUIAction::flashlight(std::string arg __unused)
 			if (val > 0)
 			{
 				operation_start("Flashlight Turning Off");
+				if (TWFunc::Path_Exists(switch_path))
+					TWFunc::write_to_file(switch_path, "0");
 				File << "0";
 			}
 			else
 			{
 				operation_start("Flashlight Turning On");
+				LOGINFO("Brightening with Maximum Brightness");
+				if (TWFunc::Path_Exists(switch_path))
+					TWFunc::write_to_file(switch_path, "1");
 				File << max_val;
 			}
 		}

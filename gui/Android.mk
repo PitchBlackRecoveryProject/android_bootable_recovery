@@ -83,6 +83,9 @@ endif
 ifeq ($(TW_SCREEN_BLANK_ON_BOOT), true)
     LOCAL_CFLAGS += -DTW_SCREEN_BLANK_ON_BOOT
 endif
+ifneq ($(PB_TORCH_PATH),)
+        LOCAL_CFLAGS += -DPB_TORCH_PATH=\"$(PB_TORCH_PATH)\"
+endif
 
 LOCAL_C_INCLUDES += \
     bionic \
