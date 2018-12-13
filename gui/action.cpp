@@ -2110,11 +2110,13 @@ int GUIAction::flashlight(std::string arg __unused)
 	}
 	else {
 		fstream File;
-		int val=0;
+		int val=0, max_val=0;
 		DIR* d;
 		struct dirent* de;
-		string str_val,null, file, flashp1 = "/sys/class/leds", flashp2 = "/flashlight/brightness", flashpath;
-		flashpath = flashp1 + flashp2;
+		string str_val,null, file, flashp1 = "/sys/class/leds", flashp2 = "/flashlight", flashpath;
+		string bright = "/brightness", maxpath, max = "/max_brightness";
+		flashpath = flashp1 + flashp2 + bright;
+		maxpath = flashp1 + flashp2 + max;
 		if (!TWFunc::Path_Exists(flashpath))
 		{
 			d = opendir(flashp1.c_str());
@@ -2128,13 +2130,22 @@ int GUIAction::flashlight(std::string arg __unused)
 				file = de->d_name;
 				if(file.find("torch") != string::npos)
 				{
-					flashpath = flashp1 + "/" + file + "/brightness";
+					flashpath = flashp1 + "/" + file + bright;
+					maxpath= flashp1 + "/" + file + max;
 					break;
 				}
 			}
 			closedir (d);
 			LOGINFO("Node located at  '%s'\n", flashpath.c_str());
 		}
+		File.open(maxpath, ios::in);
+		if (File.is_open())
+		{
+			getline (File, str_val);
+			max_val = std::stoi (str_val);
+		}
+		File.close();
+		str_val="";
 		File.open(flashpath, ios::in | ios::out);
 		if(File.is_open())
 		{
@@ -2149,7 +2160,7 @@ int GUIAction::flashlight(std::string arg __unused)
 			else
 			{
 				operation_start("Flashlight Turning On");
-				File << "255";
+				File << max_val;
 			}
 		}
 		File.close();
