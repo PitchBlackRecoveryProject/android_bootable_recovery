@@ -1050,6 +1050,7 @@ int GUIAction::flash(std::string arg)
 	}
 
         reinject_after_flash();
+	PartitionManager.UnMount_Main_Partitions();
 	PartitionManager.Update_System_Details();
 	
 	if (DataManager::GetIntValue(PB_INSTALL_PREBUILT_ZIP) != 1)
@@ -1172,6 +1173,7 @@ int GUIAction::wipe(std::string arg)
 		}
 #endif
 	}
+	PartitionManager.UnMount_Main_Partitions();
 	PartitionManager.Update_System_Details();
 	PartitionManager.UnMount_By_Path (PartitionManager.Get_Android_Root_Path(), false);
 	if (ret_val)
@@ -1781,6 +1783,8 @@ int GUIAction::flashimage(std::string arg __unused)
 	else
 		op_status = 1; // fail
 	}
+	PartitionManager.UnMount_Main_Partitions ();
+	PartitionManager.Update_System_Details();
 	// Start Deactivation on flashing either boot.img, system.img or vendor.img
 	if (DataManager::GetIntValue(PB_CALL_DEACTIVATION) != 0)
 	{
