@@ -2160,22 +2160,20 @@ int GUIAction::flashlight(std::string arg __unused)
 		val = std::stoi (str_val);
 		if (val > 0)
 		{
-			operation_start("Flashlight Turning Off");
+			LOGINFO("Flashlight Turning Off\n");
 			if (TWFunc::Path_Exists(switch_path))
 				TWFunc::write_to_file(switch_path, "0");
 			File << "0";
 		}
 		else
 		{
-			operation_start("Flashlight Turning On");
-			LOGINFO("Brightening with Maximum Brightness");
+			LOGINFO("Flashlight Turning On\n");
+			LOGINFO("Brightening with Maximum Brightness\n");
 			if (TWFunc::Path_Exists(switch_path))
 				TWFunc::write_to_file(switch_path, "1");
 			File << max_val;
 		}
 	}
 	File.close();
-	
-	operation_end(0);
 	return 0;
 }
