@@ -261,6 +261,7 @@ int keymaster_compatibility_cryptfs_scrypt() {
     return 0;
 }*/
 
+#ifndef TW_INCLUDE_CRYPTO_OLD
 int keymaster_sign_object_for_cryptfs_scrypt(const uint8_t* key_blob,
                                              size_t key_blob_size,
                                              uint32_t ratelimit,
@@ -344,3 +345,4 @@ int keymaster_sign_object_for_cryptfs_scrypt(const uint8_t* key_blob,
     std::copy(output.data(), output.data() + output.size(), *signature_buffer);
     return 0;
 }
+#endif
