@@ -142,10 +142,12 @@ enum class KeymasterSignResult {
     upgrade = -2,
 };
 
-//int keymaster_compatibility_cryptfs_scrypt();
-/*int keymaster_create_key_for_cryptfs_scrypt(uint32_t rsa_key_size, uint64_t rsa_exponent,
+#ifdef TW_INCLUDE_CRYPTO_OLD
+int keymaster_compatibility_cryptfs_scrypt();
+int keymaster_create_key_for_cryptfs_scrypt(uint32_t rsa_key_size, uint64_t rsa_exponent,
                                             uint32_t ratelimit, uint8_t* key_buffer,
-                                            uint32_t key_buffer_size, uint32_t* key_out_size);*/
+                                            uint32_t key_buffer_size, uint32_t* key_out_size);
+#endif
 
 int keymaster_upgrade_key_for_cryptfs_scrypt(uint32_t rsa_key_size, uint64_t rsa_exponent,
                                              uint32_t ratelimit, const uint8_t* key_blob,
