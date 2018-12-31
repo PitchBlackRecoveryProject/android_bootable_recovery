@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
 	property_set("ro.twrp.version", TW_VERSION_STR);
 
 	time_t StartupTime = time(NULL);
-	printf("Starting PitchBlackTWRP %s-%s on %s (pid %s)\n", TW_VERSION_STR, PB_BUILD, TW_GIT_REVISION, ctime(&StartupTime), getpid());
+	printf("Starting PitchBlackTWRP %s-%s on %s (pid %s)\n", TW_VERSION_STR, PB_BUILD, TW_GIT_REVISION, ctime(&StartupTime));
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();

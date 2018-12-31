@@ -135,6 +135,7 @@ __BEGIN_DECLS
                                             uint32_t key_buffer_size,
                                             uint32_t* key_out_size);*/
 
+#ifndef TW_INCLUDE_CRYPTO_OLD
 int keymaster_sign_object_for_cryptfs_scrypt(const uint8_t* key_blob,
                                              size_t key_blob_size,
                                              uint32_t ratelimit,
@@ -145,6 +146,7 @@ int keymaster_sign_object_for_cryptfs_scrypt(const uint8_t* key_blob,
                                              uint8_t* key_buffer,
                                              uint32_t key_buffer_size,
                                              uint32_t* key_out_size);
+#endif
 
 __END_DECLS
 
