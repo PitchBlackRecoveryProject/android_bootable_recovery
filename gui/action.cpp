@@ -189,6 +189,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(getpartitiondetails);
 		ADD_ACTION(screenshot);
 		ADD_ACTION(setbrightness);
+		ADD_ACTION(flashlight);
 		ADD_ACTION(fileexists);
 		ADD_ACTION(killterminal);
 		ADD_ACTION(checkbackupname);
@@ -231,7 +232,6 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(resize);
 		ADD_ACTION(changefilesystem);
 		ADD_ACTION(flashimage);
-		ADD_ACTION(flashlight);
 		ADD_ACTION(twcmd);
 		ADD_ACTION(setbootslot);
 		ADD_ACTION(installapp);
