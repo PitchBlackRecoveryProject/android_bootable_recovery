@@ -1760,4 +1760,3 @@ int cryptfs_get_master_key(struct crypt_mnt_ftr* ftr, const char* password,
     return memcmp(scrypted_intermediate_key, ftr->scrypted_intermediate_key,
                   intermediate_key_size);
 }
-

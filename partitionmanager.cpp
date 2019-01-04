@@ -2283,7 +2283,6 @@ TWPartitionManager::Decrypt_Device (string Password)
 #else
       LOGERR ("FBE support is not present\n");
 #endif
-<<<<<<< HEAD
       return -1;
     }
 
@@ -4710,4 +4709,3 @@ TWPartitionManager::Update_System_Details_OTA_Survival (void)
     LOGERR ("Error creating fstab\n");
   return;
 }
-
