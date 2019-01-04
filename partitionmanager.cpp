@@ -2283,7 +2283,6 @@ TWPartitionManager::Decrypt_Device (string Password)
 #else
       LOGERR ("FBE support is not present\n");
 #endif
-<<<<<<< HEAD
       return -1;
     }
 
