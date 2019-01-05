@@ -55,6 +55,9 @@
 #endif
 #include "set_metadata.h"
 
+// Shouldn't be needed, but it really fix the error!
+#define nullptr 0
+
 extern "C" {
 	#include "libcrecovery/common.h"
 }
@@ -1199,7 +1202,7 @@ unsigned long long TWFunc::IOCTL_Get_Block_Size(const char* block_device) {
 bool TWFunc::CheckWord(std::string filename, std::string search) {
     std::string line;
     ifstream File;
-    File.open (filename);
+    File.open (filename.c_str());
     if(File.is_open()) {
         while(!File.eof()) {
             getline(File,line);
@@ -1287,7 +1290,7 @@ File.close();
 string TWFunc::Load_File(string extension) {
 string line, path = split_img + "/" + extension;
 ifstream File;
-File.open (path);
+File.open (path.c_str());
 if(File.is_open()) {
 getline(File,line);
 File.close();

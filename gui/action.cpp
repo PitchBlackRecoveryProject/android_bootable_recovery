@@ -2144,20 +2144,20 @@ int GUIAction::flashlight(std::string arg __unused)
 		LOGINFO("Detected Node located at  '%s'\n", flashpath.c_str());
 	}
 #endif
-	File.open(maxpath, ios::in);
+	File.open(maxpath.c_str(), ios::in);
 	if (File.is_open())
 	{
 		getline (File, str_val);
-		max_val = std::stoi (str_val);
+		max_val = std::atoi (str_val.c_str());
 	}
 	File.close();
 	str_val="";
-	File.open(flashpath, ios::in | ios::out);
+	File.open(flashpath.c_str(), ios::in | ios::out);
 	if(File.is_open())
 	{
 		LOGINFO("Flashlight Node Located at '%s'\n", flashpath.c_str());
 		getline (File, str_val);
-		val = std::stoi (str_val);
+		val = std::atoi (str_val.c_str());
 		if (val > 0)
 		{
 			LOGINFO("Flashlight Turning Off\n");
