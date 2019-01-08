@@ -74,9 +74,42 @@ int main(int argc, char **argv) {
 	// Recovery needs to install world-readable files, so clear umask
 	// set by init
 	umask(0);
-
 	Log_Offset = 0;
+#ifdef TARGET_USES_GENERIC_SUPPORT
+	// check kernel version, and use correct fstab
+        string cat_out;
+	string find_out;
+        string kernel_version;
 
+        TWFunc::Exec_Cmd("chmod 777 /proc/version");
+        TWFunc::Exec_Cmd("cat /proc/version", cat_out);
+
+	if (cat_out.find("3.18.79") != string::npos || cat_out.find("4.4.95") != string::npos) {
+		TWFunc::Exec_Cmd("chmod 777 /dev/block/platform/mtk-msdc.0/by-name");
+	        TWFunc::Exec_Cmd("chmod 777 /dev/block/platform/mtk-msdc.0/by-name/*");
+		TWFunc::Exec_Cmd("find /dev/block/platform/mtk-msdc.0/by-name/", find_out);
+
+		if (find_out.find("vendor") != string::npos) { 
+			kernel_version="Treble Oreo";
+			rename("/etc/generic-o.fstab", "/etc/recovery.fstab");
+		} else {
+			kernel_version="Non-Treble Oreo";
+		    	rename("/etc/generic.fstab", "/etc/recovery.fstab");
+		}
+        } else {
+                rename("/etc/generic.fstab", "/etc/recovery.fstab");
+                if (cat_out.find("3.18.35") != string::npos) {
+			kernel_version="Nougat";
+	        } else if (cat_out.find("3.18.19") != string::npos) {
+	        	kernel_version="Marshmallow";
+        	} else if (cat_out.find("3.10.72") != string::npos || cat_out.find("3.10.65") != string::npos || cat_out.find("3.10.54") != string::npos) {
+        		kernel_version="Lollipop";
+	        } else if (cat_out.find("3.4.67") != string::npos) {
+			kernel_version = "KitKat";
+                } else {
+		        kernel_version = "Custom";
+        } }
+#endif
 	// Set up temporary log file (/tmp/recovery.log)
 	freopen(TMP_LOG_FILE, "a", stdout);
 	setbuf(stdout, NULL);
@@ -112,6 +145,8 @@ int main(int argc, char **argv) {
 
 	time_t StartupTime = time(NULL);
 	printf("Starting PitchBlackTWRP %s-%s on %s (pid %s)\n", TW_VERSION_STR, PB_BUILD, TW_GIT_REVISION, ctime(&StartupTime));
+
+	printf("Generic Recovery by svoboda18");
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
@@ -169,7 +204,16 @@ int main(int argc, char **argv) {
 		}
 	}
 
-        gui_print("*********************************");
+#ifdef TARGET_USES_GENERIC_SUPPORT
+        if (!cat_out.empty()) { 
+	gui_print("\n* Generic Support Successfully Loaded!");
+	} else if (kernel_version == "Custom" || cat_out.empty()){
+	gui_print("\n! Unable To Recognize Current Kernel Version, Please Use Stock One!");
+	}
+        gui_print("* You Are Using Generic Recovery On %s Kernel", kernel_version.c_str());
+#endif
+
+        gui_print("\n*********************************");
         gui_print("PitchBlack Recovery: Welcome! ^_^");
 	gui_print("Maintained By PBRP Team");
 	gui_print("*********************************");

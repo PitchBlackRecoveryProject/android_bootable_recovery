@@ -50,9 +50,9 @@ ifeq ($(PB_OFFICIAL),true)
 	endif
 else
 	ifeq ($(PB_GO),true)
-	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.9.0-Unofficial"'
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.9.0-Unofficial-By-svoboda18"'
 	else
-	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.9.0-Unofficial"'
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.9.0-Unofficial-By-svoboda18"'
 	endif
 endif
 
@@ -79,6 +79,7 @@ LOCAL_SRC_FILES := \
     openrecoveryscript.cpp \
     tarWrite.c \
     twrpAdbBuFifo.cpp
+
 
 ifneq ($(TARGET_RECOVERY_REBOOT_SRC),)
   LOCAL_SRC_FILES += $(TARGET_RECOVERY_REBOOT_SRC)
@@ -221,6 +222,9 @@ endif
 LOCAL_CFLAGS += -DTW_GIT_REVISION='"$(tw_git_revision)"'
 
 #TWRP Build Flags
+ifeq ($(TARGET_USES_GENERIC_SUPPORT), true)
+    LOCAL_CFLAGS += -DTARGET_USES_GENERIC_SUPPORT
+endif
 ifeq ($(TW_EXCLUDE_MTP),)
     LOCAL_SHARED_LIBRARIES += libtwrpmtp
     LOCAL_CFLAGS += -DTW_HAS_MTP
