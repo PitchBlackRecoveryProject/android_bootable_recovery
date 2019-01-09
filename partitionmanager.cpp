@@ -1754,11 +1754,14 @@ TWPartitionManager::Wipe_Dalvik_Cache (void)
     return false;
 
   dir.push_back ("/data/dalvik-cache");
-  if (Mount_By_Path ("/cache", false))
-    {
-      dir.push_back ("/cache/dalvik-cache");
-      dir.push_back ("/cache/dc");
-    }
+  std::string cacheDir = TWFunc::get_cache_dir();
+  if (cacheDir == NON_AB_CACHE_DIR) {
+	if (!PartitionManager.Mount_By_Path(NON_AB_CACHE_DIR, false)) {
+		LOGINFO("Unable to mount %s for wiping cache.\n", NON_AB_CACHE_DIR);
+	}
+	dir.push_back(cacheDir + "dalvik-cache");
+	dir.push_back(cacheDir + "/dc");
+  }
 
   TWPartition *sdext = Find_Partition_By_Path ("/sd-ext");
   if (sdext && sdext->Is_Present && sdext->Mount (false))
@@ -1769,7 +1772,11 @@ TWPartitionManager::Wipe_Dalvik_Cache (void)
 	}
     }
 
-  gui_msg ("wiping_dalvik=Wiping Dalvik Cache Directories...");
+  if (cacheDir == NON_AB_CACHE_DIR) {
+	gui_msg("wiping_cache_dalvik=Wiping Dalvik Cache Directories...");
+  } else {
+	gui_msg("wiping_dalvik=Wiping Dalvik Directory...");
+  }
   for (unsigned i = 0; i < dir.size (); ++i)
     {
       if (stat (dir.at (i).c_str (), &st) == 0)
@@ -1778,7 +1785,13 @@ TWPartitionManager::Wipe_Dalvik_Cache (void)
 	  gui_msg (Msg ("cleaned=Cleaned: {1}...") (dir.at (i)));
 	}
     }
-  gui_msg ("dalvik_done=-- Dalvik Cache Directories Wipe Complete!");
+
+  if (cacheDir == NON_AB_CACHE_DIR) {
+	gui_msg("cache_dalvik_done=-- Dalvik Cache Directories Wipe Complete!");
+  } else {
+	gui_msg("dalvik_done=-- Dalvik Directory Wipe Complete!");
+  }
+
   return true;
 }
 
@@ -3028,12 +3041,12 @@ TWPartitionManager::Output_Storage_Fstab (void)
   std::vector < TWPartition * >::iterator iter;
   char storage_partition[255];
   string Temp;
-  FILE *fp = fopen ("/cache/recovery/storage.fstab", "w");
+  std::string storageFstab = TWFunc::get_cache_dir() + "recovery/storage.fstab";
+  FILE *fp = fopen(storageFstab.c_str(), "w");
 
   if (fp == NULL)
     {
-      gui_msg (Msg (msg::kError, "unable_to_open=Unable to open '{1}'.")
-	       ("/cache/recovery/storage.fstab"));
+      gui_msg(Msg(msg::kError, "unable_to_open=Unable to open '{1}'.")(storageFstab));
       return;
     }
 

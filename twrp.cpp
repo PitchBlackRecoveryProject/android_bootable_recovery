@@ -57,9 +57,6 @@ extern "C" {
 }
 #endif
 
-#include <selinux/label.h>
-struct selabel_handle *selinux_handle;
-
 //extern int adb_server_main(int is_daemon, int server_port, int /* reply_fd */);
 
 TWPartitionManager PartitionManager;
@@ -286,7 +283,6 @@ int main(int argc, char **argv) {
 	LOGINFO("Backup of TWRP ramdisk done.\n");
 #endif
 
-	TWFunc::Update_Log_File();
 	// Offer to decrypt if the device is encrypted
 	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
 		if (SkipDecryption) {
@@ -297,10 +293,12 @@ int main(int argc, char **argv) {
 				LOGERR("Failed to start decrypt GUI page.\n");
 			} else {
 				// Check for and load custom theme if present
+				TWFunc::check_selinux_support();
 				gui_loadCustomResources();
 			}
 		}
 	} else if (datamedia) {
+		TWFunc::check_selinux_support();
 		if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
 			LOGINFO("Failed to get default contexts and file mode for storage files.\n");
 		} else {
@@ -308,17 +306,20 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	// Read the settings file
-	DataManager::ReadSettingsFile();
-	PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
-	GUIConsole::Translate_Now();
-
 	// Fixup the RTC clock on devices which require it
 	if (crash_counter == 0)
 		TWFunc::Fixup_Time_On_Boot();
 
+	// Read the settings file
+	TWFunc::Update_Log_File();
+	DataManager::ReadSettingsFile();
+	PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
+	GUIConsole::Translate_Now();
+
 	// Run any outstanding OpenRecoveryScript
-	if ((DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0 || SkipDecryption) && (TWFunc::Path_Exists(SCRIPT_FILE_TMP) || TWFunc::Path_Exists(SCRIPT_FILE_CACHE))) {
+	std::string cacheDir = TWFunc::get_cache_dir();
+	std::string orsFile = cacheDir + "/recovery/openrecoveryscript";
+	if ((DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0 || SkipDecryption) && (TWFunc::Path_Exists(SCRIPT_FILE_TMP) || TWFunc::Path_Exists(orsFile))) {
 		OpenRecoveryScript::Run_OpenRecoveryScript();
 	}
 
@@ -404,3 +405,4 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
+
