@@ -370,6 +370,9 @@ protected:
 	int installapp(std::string arg);
 	int unpack(std::string arg);
         int repack(std::string arg);
+	int repackimage(std::string arg);
+	int fixabrecoverybootloop(std::string arg);
+
 	int simulate;
 };
 
