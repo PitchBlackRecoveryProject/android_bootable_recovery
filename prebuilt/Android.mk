@@ -512,6 +512,18 @@ LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
+ifeq ($(TW_USE_TOOLBOX), true)
+    include $(CLEAR_VARS)
+    LOCAL_MODULE := mkshrc_twrp
+    LOCAL_MODULE_TAGS := eng
+    LOCAL_MODULE_CLASS := ETC
+    LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/etc
+    LOCAL_SRC_FILES := $(LOCAL_MODULE)
+    LOCAL_POST_INSTALL_CMD := \
+        $(hide) mv $(TARGET_RECOVERY_ROOT_OUT)/etc/mkshrc_twrp $(TARGET_RECOVERY_ROOT_OUT)/etc/mkshrc
+    include $(BUILD_PREBUILT)
+endif
+
 #Parted
 include $(CLEAR_VARS)
 LOCAL_MODULE := parted
