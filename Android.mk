@@ -61,7 +61,7 @@ DEVICE := $(subst omni_,,$(TARGET_PRODUCT))
 ifeq ($(PB_DEVICE_MODEL),)
     LOCAL_CFLAGS += -DPB_DEVICE_MODEL='"$(DEVICE)"'
 endif
-LOCAL_CFLAGS += -Wno-unused-variable
+
 LOCAL_SRC_FILES := \
     twrp.cpp \
     fixContexts.cpp \
@@ -319,12 +319,7 @@ ifeq ($(TW_INCLUDE_L_CRYPTO), true)
 endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO
-    ifeq ($(TW_INCLUDE_CRYPTO_OLD), true)
-        LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO_OLD
-        LOCAL_SHARED_LIBRARIES += libcryptfslollipop libgpt_twrp
-    else
-        LOCAL_SHARED_LIBRARIES += libcryptfsfde libgpt_twrp
-    endif
+    LOCAL_SHARED_LIBRARIES += libcryptfsfde libgpt_twrp
     LOCAL_C_INCLUDES += external/boringssl/src/include
     ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 24; echo $$?),0)
         TW_INCLUDE_CRYPTO_FBE := true
@@ -856,11 +851,7 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 24; echo $$?),0)
 endif
 
 ifeq ($(TW_INCLUDE_CRYPTO), true)
-    ifeq ($(TW_INCLUDE_CRYPTO_OLD), true)
-        include $(commands_TWRP_local_path)/crypto/lollipop/Android.mk
-    else
-       include $(commands_TWRP_local_path)/crypto/fde/Android.mk
-    endif
+    include $(commands_TWRP_local_path)/crypto/fde/Android.mk
     include $(commands_TWRP_local_path)/crypto/scrypt/Android.mk
     ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
         include $(commands_TWRP_local_path)/crypto/ext4crypt/Android.mk

@@ -48,11 +48,7 @@
 #include "gui/gui.hpp"
 #include "adbbu/libtwadbbu.hpp"
 #ifdef TW_INCLUDE_CRYPTO
-	#ifndef TW_INCLUDE_CRYPTO_OLD
-		#include "crypto/fde/cryptfs.h"
-	#else
-		#include "crypto/lollipop/cryptfs.h"
-	#endif
+	#include "crypto/fde/cryptfs.h"
 #endif
 extern "C" {
 	#include "mtdutils/mtdutils.h"
