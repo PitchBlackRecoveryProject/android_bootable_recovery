@@ -111,6 +111,19 @@ static inline int ABS(int x) {
     return x<0?-x:x;
 }
 
+int write_to_file(const std::string& fn, const std::string& line) {
+	FILE *file;
+	file = fopen(fn.c_str(), "w");
+	if (file != NULL) {
+		fwrite(line.c_str(), line.size(), 1, file);
+		fclose(file);
+		return 0;
+	}
+	LOGI("Cannot find file %s\n", fn.c_str());
+	return -1;
+}
+
+#ifndef TW_NO_HAPTICS
 int vibrate(int timeout_ms)
 {
     char str[20];
@@ -160,6 +173,7 @@ int vibrate(int timeout_ms)
 
     return 0;
 }
+#endif
 
 /* Returns empty tokens */
 static char *vk_strtok_r(char *str, const char *delim, char **save_str)
@@ -747,7 +761,9 @@ static int vk_modify(struct ev *e, struct input_event *ev)
 
                 last_virt_key = e->vks[i].scancode;
 
+#ifndef TW_NO_HAPTICS
                 vibrate(VIBRATOR_TIME_MS);
+#endif
 
                 // Mark that all further movement until lift is discard,
                 // and make sure we don't come back into this area
