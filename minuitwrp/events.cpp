@@ -131,6 +131,8 @@ int vibrate(int timeout_ms)
     int ret;
 
     if (timeout_ms > 10000) timeout_ms = 1000;
+    char tout[6];
+    sprintf(tout, "%i", timeout_ms);
 
 #ifdef TW_USE_QCOM_HAPTICS_VIBRATOR
 
