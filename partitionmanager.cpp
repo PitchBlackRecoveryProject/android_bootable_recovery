@@ -3045,34 +3045,34 @@ TWPartitionManager::Fstab_Processed (void)
   return Partitions.size ();
 }
 
-void
-TWPartitionManager::Output_Storage_Fstab (void)
-{
-  std::vector < TWPartition * >::iterator iter;
-  char storage_partition[255];
-  string Temp;
-  std::string storageFstab = TWFunc::get_cache_dir() + "recovery/storage.fstab";
-  FILE *fp = fopen(storageFstab.c_str(), "w");
+void TWPartitionManager::Output_Storage_Fstab(void) {
+	std::vector<TWPartition*>::iterator iter;
+	char storage_partition[255];
+	std::string Temp;
+	std::string cacheDir = TWFunc::get_cache_dir();
 
-  if (fp == NULL)
-    {
-      gui_msg(Msg(msg::kError, "unable_to_open=Unable to open '{1}'.")(storageFstab));
-      return;
-    }
-
-  // Iterate through all partitions
-  for (iter = Partitions.begin (); iter != Partitions.end (); iter++)
-    {
-      if ((*iter)->Is_Storage)
-	{
-	  Temp = (*iter)->Storage_Path + ";" + (*iter)->Storage_Name + ";\n";
-	  strcpy (storage_partition, Temp.c_str ());
-	  fwrite (storage_partition, sizeof (storage_partition[0]),
-		  strlen (storage_partition) / sizeof (storage_partition[0]),
-		  fp);
+	if (cacheDir.empty()) {
+		LOGINFO("Unable to find cache directory\n");
+		return;
 	}
-    }
-  fclose (fp);
+
+	std::string storageFstab = TWFunc::get_cache_dir() + "recovery/storage.fstab";
+	FILE *fp = fopen(storageFstab.c_str(), "w");
+
+	if (fp == NULL) {
+		gui_msg(Msg(msg::kError, "unable_to_open=Unable to open '{1}'.")(storageFstab));
+		return;
+	}
+
+	// Iterate through all partitions
+	for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {
+		if ((*iter)->Is_Storage) {
+			Temp = (*iter)->Storage_Path + ";" + (*iter)->Storage_Name + ";\n";
+			strcpy(storage_partition, Temp.c_str());
+			fwrite(storage_partition, sizeof(storage_partition[0]), strlen(storage_partition) / sizeof(storage_partition[0]), fp);
+		}
+	}
+	fclose(fp);
 }
 
 TWPartition *

@@ -31,6 +31,7 @@ using namespace std;
 
 #define NON_AB_CACHE_DIR "/cache/"
 #define AB_CACHE_DIR "/data/cache/"
+#define PERSIST_CACHE_DIR "/persist/cache/"
 
 typedef enum
 {
