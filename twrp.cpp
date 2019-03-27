@@ -108,7 +108,7 @@ int main(int argc, char **argv) {
 	property_set("ro.twrp.version", TW_VERSION_STR);
 
 	time_t StartupTime = time(NULL);
-	printf("Starting PitchBlackTWRP %s-%s on %s (pid %s)\n", TW_VERSION_STR, PB_BUILD, TW_GIT_REVISION, ctime(&StartupTime), getpid());
+	printf("Starting PitchBlackTWRP %s-%s on %s (pid %s)\n", TW_VERSION_STR, PB_BUILD, TW_GIT_REVISION, ctime(&StartupTime));
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
@@ -129,43 +129,6 @@ int main(int argc, char **argv) {
 	// Load up all the resources
 	gui_loadResources();
 
-	if (TWFunc::Path_Exists("/prebuilt_file_contexts")) {
-		if (TWFunc::Path_Exists("/file_contexts")) {
-			printf("Renaming regular /file_contexts -> /file_contexts.bak\n");
-			rename("/file_contexts", "/file_contexts.bak");
-		}
-		printf("Moving /prebuilt_file_contexts -> /file_contexts\n");
-		rename("/prebuilt_file_contexts", "/file_contexts");
-	}
-	struct selinux_opt selinux_options[] = {
-		{ SELABEL_OPT_PATH, "/file_contexts" }
-	};
-	selinux_handle = selabel_open(SELABEL_CTX_FILE, selinux_options, 1);
-	if (!selinux_handle)
-		printf("No file contexts for SELinux\n");
-	else
-		printf("SELinux contexts loaded from /file_contexts\n");
-	{ // Check to ensure SELinux can be supported by the kernel
-		char *contexts = NULL;
-
-		if (PartitionManager.Mount_By_Path("/cache", false) && TWFunc::Path_Exists("/cache/recovery")) {
-			lgetfilecon("/cache/recovery", &contexts);
-			if (!contexts) {
-				lsetfilecon("/cache/recovery", "test");
-				lgetfilecon("/cache/recovery", &contexts);
-			}
-		} else {
-			LOGINFO("Could not check /cache/recovery SELinux contexts, using /sbin/teamwin instead which may be inaccurate.\n");
-			lgetfilecon("/sbin/teamwin", &contexts);
-		}
-		if (!contexts) {
-			gui_warn("no_kernel_selinux=Kernel does not have support for reading SELinux contexts.");
-		} else {
-			free(contexts);
-			gui_msg("full_selinux=Full SELinux support is present.");
-		}
-	}
-
         gui_print("*********************************");
         gui_print("PitchBlack Recovery: Welcome! ^_^");
 	gui_print("Maintained By PBRP Team");
@@ -176,8 +139,6 @@ int main(int argc, char **argv) {
 	TWFunc::Exec_Cmd("getprop ro.omni.version > /tmp/prop.info && mv /tmp/prop.info /sdcard/PBRP/pbrp.info", null);
 	if(!null.empty())
 	LOGERR("Failed To Copy prop.info");
-
-	PartitionManager.Mount_By_Path("/cache", false);
 
 	bool Shutdown = false;
 	bool SkipDecryption = false;

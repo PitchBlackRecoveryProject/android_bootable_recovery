@@ -1008,7 +1008,6 @@ TWPartitionManager::Run_Backup (bool adbbackup)
 {
   PartitionSettings part_settings;
   int partition_count = 0, disable_free_space_check = 0, skip_digest = 0;
-  int gui_adb_backup;
   string Backup_Name, Backup_List, backup_path;
   unsigned long long total_bytes = 0, free_space = 0;
   TWPartition *storage = NULL;
@@ -4337,7 +4336,6 @@ TWPartitionManager::Run_OTA_Survival_Backup (bool adbbackup)
 
 
   time (&total_stop);
-  int total_time = (int) difftime (total_stop, total_start);
 
   uint64_t actual_backup_size;
   if (!adbbackup)

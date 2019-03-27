@@ -1356,7 +1356,6 @@ bool TWFunc::Repack_Image(string mount_point) {
 string null, Command;
 usleep(1000);
 DIR* dir;
-struct dirent* der;
 dir = opendir(split_img.c_str());
 if (dir == NULL)
 {
