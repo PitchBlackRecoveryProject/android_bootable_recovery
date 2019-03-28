@@ -3832,7 +3832,7 @@
 
 			<text style="text_m">
 				<condition var1="tw_disable_haptics" var2="1"/>
-				<placement x="col1_x_left" y="%row4_y%" w="%content_width%"/>
+				<placement x="indent" y="%row4_y%" w="%content_width%"/>
 				<text>{@vibration_disabled=Vibration Disabled for Device}</text>
 			</text>
 

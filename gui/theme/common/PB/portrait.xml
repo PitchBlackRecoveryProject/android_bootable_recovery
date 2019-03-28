@@ -899,7 +899,7 @@
 				</actions>
 			</button>
 
-			<button style="main_button_half_width">
+			<button style="main_button_half_height">
 				<condition var1="tw_ab_device" var2="1"/>
 				<placement x="%center_x%" y="%row21a_y%"/>
 				<text>{@wipe_dalvik_btn=Wipe Dalvik}</text>
@@ -915,8 +915,8 @@
 				</actions>
 			</button>
 
-			<button style="main_button_half_width">
-				<placement x="%center_x%" y="%row15a_y%"/>\
+			<button style="main_button_half_height">
+				<placement x="%center_x%" y="%row21a_y%"/>\
 				<text>{@reboot_system_btn=Reboot System}</text>
 				<actions>
 					<action function="set">tw_back=main2</action>
@@ -3833,7 +3833,7 @@
 
 			<text style="text_m">
 				<condition var1="tw_disable_haptics" var2="1"/>
-				<placement x="col1_x_left" y="%row4_y%" w="%content_width%"/>
+				<placement x="indent" y="%row4_y%" w="%content_width%"/>
 				<text>{@vibration_disabled=Vibration Disabled for Device}</text>
 			</text>
 
