@@ -3334,13 +3334,13 @@
 
 			<image>
 				<condition var1="tw_edl_mode" var2="1"/>
-				<placement x="93" y="1235"/>
+				<placement x="93" y="1050"/>
 				<image resource="main_button_fixcontexts"/>
 			</image>
 			
 			<text style="text_pb">
 				<condition var1="tw_edl_mode" var2="1"/>
-				<placement x="250" y="1245"/>
+				<placement x="250" y="1260"/>
 				<text>{@rb_edl_btn=Edl}</text>
 			</text>
 
