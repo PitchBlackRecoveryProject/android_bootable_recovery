@@ -668,6 +668,8 @@ TWPartitionManager::UnMount_By_Path (string Path, bool Display_Error)
   bool found = false;
   string Local_Path = TWFunc::Get_Root_Path (Path);
 
+if (TWPartitionManager::Is_Mounted_By_Path (Path))
+{
   // Iterate through all partitions
   for (iter = Partitions.begin (); iter != Partitions.end (); iter++)
     {
@@ -700,6 +702,7 @@ TWPartitionManager::UnMount_By_Path (string Path, bool Display_Error)
       LOGINFO ("UnMount: Unable to find partition for path '%s'\n",
 	       Local_Path.c_str ());
     }
+}
   return false;
 }
 
