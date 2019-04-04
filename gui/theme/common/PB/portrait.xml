@@ -3315,7 +3315,7 @@
 
 			<button style="main_button_black">
 				<condition var1="tw_edl_mode" var2="1"/>
-				<placement x="%indent_main_button%" y="1221"/>
+				<placement x="%indent_main_button%" y="1036"/>
 				<text>{@rb_edl_btn=Edl}</text>
 				<actions>
 					<action function="set">tw_back=reboot</action>
