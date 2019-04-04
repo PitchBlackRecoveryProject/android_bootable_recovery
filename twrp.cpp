@@ -134,8 +134,6 @@ int main(int argc, char **argv) {
 	gui_print("Maintained By PBRP Team");
 	gui_print("*********************************");
 	string null;
-	TWFunc::Symlink("/sbin/linker", "/system/bin");
-	TWFunc::Symlink("/sbin/linker64", "/system/bin");
 	TWFunc::Exec_Cmd("getprop ro.omni.version > /tmp/prop.info && mv /tmp/prop.info /sdcard/PBRP/pbrp.info", null);
 	if(!null.empty())
 	LOGERR("Failed To Copy prop.info");
