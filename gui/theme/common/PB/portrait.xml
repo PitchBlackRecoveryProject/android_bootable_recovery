@@ -3340,7 +3340,7 @@
 			
 			<text style="text_pb">
 				<condition var1="tw_edl_mode" var2="1"/>
-				<placement x="250" y="1260"/>
+				<placement x="250" y="1060"/>
 				<text>{@rb_edl_btn=Edl}</text>
 			</text>
 
