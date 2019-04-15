@@ -136,7 +136,7 @@ int main(int argc, char **argv) {
 	string null;
 	TWFunc::Exec_Cmd("getprop ro.omni.version > /tmp/prop.info && mv /tmp/prop.info /sdcard/PBRP/pbrp.info", null);
 	if(!null.empty())
-	LOGERR("Failed To Copy prop.info");
+		LOGERR("Failed To Copy prop.info\n");
 
 	bool Shutdown = false;
 	bool SkipDecryption = false;
@@ -281,6 +281,12 @@ int main(int argc, char **argv) {
 	if ((DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0 || SkipDecryption) && (TWFunc::Path_Exists(SCRIPT_FILE_TMP) || TWFunc::Path_Exists(orsFile))) {
 		OpenRecoveryScript::Run_OpenRecoveryScript();
 	}
+
+	char encrypt_status[PROPERTY_VALUE_MAX];
+	gui_print("");
+	property_get("ro,crypto.state", encrypt_status, "");
+	gui_print("Encryption Status: %s", encrypt_status);
+	gui_print("");
 
 #ifdef TW_HAS_MTP
 	char mtp_crash_check[PROPERTY_VALUE_MAX];
