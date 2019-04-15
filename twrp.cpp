@@ -283,10 +283,8 @@ int main(int argc, char **argv) {
 	}
 
 	char encrypt_status[PROPERTY_VALUE_MAX];
-	gui_print("");
-	property_get("ro,crypto.state", encrypt_status, "");
-	gui_print("Encryption Status: %s", encrypt_status);
-	gui_print("");
+	property_get("ro.crypto.state", encrypt_status, "");
+	gui_msg(Msg(msg::kProcess,"pb_encrypt_st=Encryption Status : {1}")(encrypt_status));
 
 #ifdef TW_HAS_MTP
 	char mtp_crash_check[PROPERTY_VALUE_MAX];
