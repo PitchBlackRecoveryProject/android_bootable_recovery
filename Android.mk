@@ -438,6 +438,10 @@ LOCAL_REQUIRED_MODULES += \
     parted \
     magiskboot
 
+ifneq ($(TW_INCLUDE_REPACKTOOLS), true)
+    TW_INCLUDE_REPACKTOOLS := true
+endif
+
 ifneq ($(TARGET_ARCH), arm64)
     ifneq ($(TARGET_ARCH), x86_64)
         LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker

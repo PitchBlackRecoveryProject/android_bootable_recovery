@@ -234,7 +234,6 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
             ifneq ($(wildcard hardware/interfaces/confirmationui/1.0/Android.bp),)
                 RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.confirmationui@1.0.so
             endif
-
             RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libhardware_legacy.so
         else
             RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster1.so
@@ -587,11 +586,11 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
     endif
 endif
 
-ifeq ($(wildcard external/magisk-prebuilt/Android.mk),)
-	$(warning Magisk repacking tools not found!)
+ifeq ($(TW_INCLUDE_REPACKTOOLS), true)
+    ifeq ($(wildcard external/magisk-prebuilt/Android.mk),)
+        $(warning Magisk repacking tools not found!)
         $(warning Please place https://github.com/TeamWin/external_magisk-prebuilt)
         $(warning into external/magisk-prebuilt)
         $(error magiskboot prebuilts not present; exiting)
-else
-	TW_INCLUDE_REPACKTOOLS := true
+    endif
 endif

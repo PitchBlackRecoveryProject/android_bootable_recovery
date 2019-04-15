@@ -1,4 +1,3 @@
-
 /*
 	Copyright 2012 bigbiff/Dees_Troy TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
@@ -67,7 +66,7 @@ static string default_prop = ramdisk + "/default.prop";
 static string fstab1 = PartitionManager.Get_Android_Root_Path() + "/vendor/etc";
 static string fstab2 = "/vendor/etc";
 static int trb_en = 0;
-static string dtb = "";
+static string dtb = "", ram = "";
 struct selabel_handle *selinux_handle;
 
 /* Execute a command */
@@ -1311,22 +1310,21 @@ return line;
 
 bool TWFunc::Unpack_Image(string mount_point) {
 string null;
-TWFunc::Symlink("/sbin/linker64", "/system/bin");
-TWFunc::Symlink("/sbin/linker", "/system/bin");
 usleep(500);
 if (TWFunc::Path_Exists(tmp))
 TWFunc::removeDir(tmp, false);
-if (!TWFunc::Recursive_Mkdir(ramdisk))
+//if (!TWFunc::Recursive_Mkdir(ramdisk))
+//return fals
+if (!TWFunc::Recursive_Mkdir(split_img))
 return false;
-mkdir(split_img.c_str(), 0644);
 TWPartition* Partition = PartitionManager.Find_Partition_By_Path(mount_point);
 if (Partition == NULL || Partition->Current_File_System != "emmc") {
 LOGERR("TWFunc::Unpack_Image: Partition don't exist or isn't emmc");
 return false;
 }
 Read_Write_Specific_Partition("/tmp/pb/boot.img", mount_point, true);
-string ram="", Command = "cd " + split_img + " && /sbin/magiskboot --unpack /tmp/pb/boot.img";
-if (TWFunc::Exec_Cmd(Command, null) != 0) {
+string Command = "cd " + split_img + " && /sbin/magiskboot --unpack -h /tmp/pb/boot.img";
+if (TWFunc::Exec_Cmd(Command) != 0) {
 TWFunc::removeDir(tmp, false);
 return false;
 }
@@ -1336,7 +1334,7 @@ dir = opendir(split_img.c_str());
 while((der = readdir(dir)) != NULL)
 {
 	Command = der->d_name;
-	if (Command.find("extra") != string::npos)
+	if (Command.find("extra") != string::npos || Command.find("dtb") != string::npos)
 	{
 		dtb = split_img + "/" + Command;
 	}
@@ -1346,10 +1344,16 @@ while((der = readdir(dir)) != NULL)
 	}
 }
 closedir (dir);
-if (TWFunc::Exec_Cmd("cd " + ramdisk + "; cpio -i < " + ram, null) == 0)
-	unlink(ram.c_str());
+if (ram.find("ramdisk") != string::npos) {
+	if (!TWFunc::Recursive_Mkdir(ramdisk))
+		return false;
+	if (TWFunc::Exec_Cmd("cd " + ramdisk + "; cpio -i < " + ram, null) == 0)
+		unlink(ram.c_str());
+	else
+		return false;
+}
 else
-	return false;
+	LOGINFO("Unpack_Image: Doesn't have Ramdisk");
 return true;
 }
 
@@ -1364,13 +1368,16 @@ if (dir == NULL)
 	return false;
 }
 closedir(dir);
-Exec_Cmd("cd " + ramdisk + "; find | cpio -o -H newc > " + split_img + "/ramdisk.cpio", null);
-Command = "cd " + split_img + " && /sbin/magiskboot --repack /tmp/pb/boot.img";
-if (!Path_Exists(split_img + "/ramdisk.cpio"))
-{
-	LOGINFO("Failed to backup Cpio");
-	return false;
+if (ram.find("ramdisk") != string::npos) {
+	Exec_Cmd("cd " + ramdisk + "; find | cpio -o -H newc > " + split_img + "/ramdisk.cpio", null);
+//	Command = "cd " + split_img + " && /sbin/magiskboot --repack /tmp/pb/boot.img";
+	if (!Path_Exists(split_img + "/ramdisk.cpio"))
+	{
+		LOGINFO("Failed to backup Cpio");
+		return false;
+	}
 }
+Command = "cd " + split_img + " && /sbin/magiskboot --repack /tmp/pb/boot.img";
 if (TWFunc::Exec_Cmd(Command, null) != 0)
 {
 	TWFunc::removeDir(tmp, false);
@@ -1425,6 +1432,7 @@ bool TWFunc::Patch_DM_Verity() {
 	DIR* d;
 	DIR* d1 = nullptr;
 	struct dirent* de;
+	if (ram.find("ramdisk") != string::npos) {
 	d = opendir(ramdisk.c_str());
 	if (d == NULL)
 	{
@@ -1477,10 +1485,11 @@ bool TWFunc::Patch_DM_Verity() {
 	}
 	closedir (d);
 	//Patched Dtb verity
+	}
 	LOGINFO("DTB Found at '%s'\n", dtb.c_str());
-	TWFunc::Exec_Cmd("mount -o bind /dev/urandom /dev/random", null);
+//	TWFunc::Exec_Cmd("mount -o bind /dev/urandom /dev/random", null);
 	//rename("/sbin", "/sbin_tmp");
-	if (TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --dtb-patch dtb", null) == 1 || TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --dtb-patch extra", null) == 1)
+	if (TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --dtb-patch " + dtb, null) == 1)
 	{
 		LOGINFO("Verity flags detected in DTB\n");
 		if (!status)
@@ -1493,9 +1502,9 @@ bool TWFunc::Patch_DM_Verity() {
 		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --cpio ramdisk.cpio \"patch true true\"", null);
 	else
 		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --cpio ramdisk.cpio \"patch true false\"", null);
-	TWFunc::Exec_Cmd("umount -l /dev/random ", null);
+//	TWFunc::Exec_Cmd("umount -l /dev/random ", null);
 
-	if (stat == 0)
+	if (stat == 0 || ram.find("ramdisk") != string::npos)
 	{
 		if(trb_en == 1 || PartitionManager.Mount_By_Path("/vendor", false))
 		{
@@ -1612,6 +1621,7 @@ bool TWFunc::Patch_Forced_Encryption()
 	DIR* d;
 	DIR* d1 = nullptr;
 	struct dirent* de;
+	if (ram.find("ramdisk") != string::npos) {
 	d = opendir(ramdisk.c_str());
 	if (d == NULL)
 	{
@@ -1643,7 +1653,8 @@ bool TWFunc::Patch_Forced_Encryption()
 		}
 	}
 	closedir (d);
-	if (stat == 0)
+	}
+	if (stat == 0 || ram.find("ramdisk") != string::npos)
 	{
 		if(trb_en == 1 || PartitionManager.Mount_By_Path("/vendor", false))
 		{
@@ -1696,6 +1707,8 @@ bool TWFunc::Patch_Forced_Encryption()
 	        }
 	        closedir (d1);
 		chmod(fstab.c_str(), 0644);
+		if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 0)
+			TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --cpio ramdisk.cpio \"patch false true\"", null);
 		if (PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
 			PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 		if (PartitionManager.Is_Mounted_By_Path("/vendor"))
