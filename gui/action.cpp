@@ -234,6 +234,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(flashimage);
 		ADD_ACTION(twcmd);
 		ADD_ACTION(setbootslot);
+		ADD_ACTION(readfile);
 		ADD_ACTION(installapp);
                 ADD_ACTION(unpack);
                 ADD_ACTION(repack);
@@ -1995,6 +1996,30 @@ exit:
 	return 0;
 }
 
+int GUIAction::readfile(std::string arg __unused)
+{
+	if (simulate)
+	{
+		simulate_progress_bar();
+	}
+	else {
+		operation_start("Started Process Read File");
+		string name = "";
+		DataManager::GetValue("tw_filename1", name);
+		ifstream file(name);
+		if (file.is_open()) {
+			gui_print_color("process","Started Process Read File\n");
+			string line;
+			while (getline(file, line)) {
+				gui_print("%s", line.c_str());
+			}
+			file.close();
+		}
+		gui_print_color("process","Ended Process Read File\n");
+	}
+	operation_end(0);
+	return 0;
+}
 int GUIAction::installapp(std::string arg __unused)
 {
 	int op_status = 1;
