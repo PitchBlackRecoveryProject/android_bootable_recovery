@@ -2008,14 +2008,14 @@ int GUIAction::readfile(std::string arg __unused)
 		DataManager::GetValue("tw_filename1", name);
 		ifstream file(name);
 		if (file.is_open()) {
-			gui_print_color("process","Started Process Read File\n");
+			gui_msg(Msg(msg::kProcess, "pb_start_read=Started Process Read {1}")(name));
 			string line;
 			while (getline(file, line)) {
 				gui_print("%s", line.c_str());
 			}
 			file.close();
 		}
-		gui_print_color("process","Ended Process Read File\n");
+		gui_msg(Msg(msg::kProcess, "pb_end_read=Ended Process Read {1}")(name));
 	}
 	operation_end(0);
 	return 0;

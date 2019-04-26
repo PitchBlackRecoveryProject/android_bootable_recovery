@@ -821,6 +821,8 @@
 		<string name="pb_ecryption_leave">Device Encrypted Leaving Forceencrypt</string>
 		<string name="pb_encryption_off">Forced Encryption is not enabled</string>
 		<string name="pb_fstab">Detected fstab: '{1}'</string>
+		<string name="pb_end_read">Ended Process Read {1}</string>
+		<string name="pb_start_read">Started Process Read {1}</string>
 		<string name="pb_dm_verity">Successfully patched DM-Verity</string>
 		<string name="pb_dm_verity_off">DM-Verity is not enabled</string>
 		<string name="pb_bk">Creating Backup of PB Files -- /tmp/pb/backup_wip...</string>
