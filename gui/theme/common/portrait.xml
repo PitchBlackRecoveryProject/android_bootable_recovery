@@ -1098,6 +1098,9 @@
 				<action function="set">tw_show_exclamation=0</action>
 				<action function="set">tw_show_reboot=0</action>
 				<action function="set">pb_reboot_recovery=</action>
+				<action function="set">tw_crypto_user_id=</action>
+				<action function="set">tw_multiuser_warning_accepted=</action>
+				<action function="set">tw_multiuser_warning_destination=</action>
 				<action function="page">%tw_clear_destination%</action>
 			</action>
 		</page>
@@ -1467,7 +1470,6 @@
 
 			<image>
 				<image resource="alert-circle"/>
-				<condition var1="pb_reboot_recovery" var2="1" />
 				<placement x="340" y="%row6_y%"/>
 			</image>
 
@@ -1478,9 +1480,14 @@
 			</text>
 
 			<text>
-				<condition var1="tw_has_data_media" var2="1"/>
 				<font resource="font_pb_tools" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="%row14a_y%" placement="5"/>
+				<text>{@factory_reset5=(not including users/lockscreen)}</text>
+			</text>
+
+			<text>
+				<font resource="font_pb_tools" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="%row15a_y%" placement="5"/>
 				<text>{@factory_reset2=(not including internal storage)}</text>
 			</text>
 
@@ -2116,6 +2123,18 @@
 		<page name="backup">
 			<template name="page"/>
 
+			<action>
+				<conditions>
+					<condition var1="tw_is_fbe" var2="1"/>
+					<condition var1="tw_all_users_decrypted" var2="0"/>
+					<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
+				</conditions>
+				<actions>
+					<action function="set">tw_multiuser_warning_destination=backup</action>
+					<action function="page">multiuser_warning</action>
+				</actions>
+			</action>
+
 			<image>
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
@@ -2298,6 +2317,56 @@
 			<action>
 				<touch key="back"/>
 				<action function="page">backup</action>
+			</action>
+		</page>
+
+		<page name="multiuser_warning">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@multiuser_warning_hdr=Multiuser Warning}</text>
+			</text>
+
+			<text>
+				<font resource="font_pb_tools" color="%text_main_button_color%"/>
+				<placement x="%center_x%" y="%row7_y%" placement="5"/>
+				<text>{@multiuser_warning1=Not all users decrypted!}</text>
+			</text>
+
+			<text>
+				<font resource="font_pb_tools" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="%row8_y%" placement="5"/>
+				<text>{@multiuser_warning2=Backup/restore operations may fail!}</text>
+			</text>
+
+			<image>
+				<image resource="alert-circle"/>
+				<placement x="340" y="%row10_y%"/>
+			</image>
+
+			<button style="main_button_m">
+				<placement x="%col1_x_left%" y="%row15a_y%"/>
+				<text>{@decrypt_users=Decrypt Users}</text>
+				<action function="page">decrypt_users</action>
+			</button>
+
+			<slider>
+				<text>{@multiuser_warning_accept=Continue Anyway}</text>
+				<actions>
+					<action function="set">tw_multiuser_warning_accepted=1</action>
+					<action function="page">%tw_multiuser_warning_destination%</action>
+				</actions>
+			</slider>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">main</action>
 			</action>
 		</page>
 
@@ -2636,6 +2705,18 @@
 
 		<page name="restore">
 			<template name="page"/>
+
+			<action>
+				<conditions>
+					<condition var1="tw_is_fbe" var2="1"/>
+					<condition var1="tw_all_users_decrypted" var2="0"/>
+					<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
+				</conditions>
+				<actions>
+					<action function="set">tw_multiuser_warning_destination=restore</action>
+					<action function="page">multiuser_warning</action>
+				</actions>
+			</action>
 
 			<image>
 				<image resource="main_button_black3"/>
@@ -3137,6 +3218,10 @@
 				</conditions>
 				<placement x="%center_x%" y="%row18_y%"/>
 				<text>{@decrypt_data_btn=Decrypt Data}</text>
+				<action function="set">tw_crypto_user_id=0</action>
+				<action function="set">tw_crypto_password=</action>
+				<action function="set">tw_password_fail=0</action>
+				<action function="set">tw_crypto_pwtype=%tw_crypto_pwtype_0%</action>
 				<action function="page">decrypt</action>
 			</button>
 
@@ -3468,7 +3553,6 @@
 			</button>
 
 			<button style="main_button_half_height_new">
-
 				<condition var1="tw_download_mode" var2="1"/>
 				<text>{@rb_download_btn=Download}</text>
 				<placement x="520" y="%row16_y%"/>
@@ -3488,7 +3572,6 @@
 			</button>
 
 			<button style="main_button_half_height_new">
-
 				<condition var1="tw_edl_mode" var2="1"/>
 				<text>{@rb_edl_btn=Edl}</text>
 				<placement x="20" y="%row16_y%"/>
@@ -4276,6 +4359,17 @@
 					<text>{@fix_context_btn1=soon}</text>
 					<icon icon="main_button_fixcontexts"/>
 					<action function="page">fixcontexts</action>
+				</listitem>
+				<listitem name="{@decrypt_users=Decrypt Users}">
+					<conditions>
+						<condition var1="tw_is_fbe" var2="1"/>
+						<condition var1="tw_all_users_decrypted" var2="0"/>
+					</conditions>
+					<icon icon="main_button_fixcontexts"/>
+					<actions>
+						<action function="set">tw_crypto_user_id=</action>
+						<action function="page">decrypt_users</action>
+					</actions>
 				</listitem>
 				<listitem name="{@reload_theme_btn=Reload Theme}">
 					<text>{@reload_theme_btn1=Reload recovery theme if there are issues}</text>
@@ -5829,8 +5923,15 @@
 			</text>
 
 			<text style="text_m_accent">
+				<condition var1="tw_is_fbe" op="!=" var2="1"/>
 				<placement x="%center_x%" y="%row2_y%" placement="5"/>
 				<text>{@decrypt_data_enter_pass=Enter Password:}</text>
+			</text>
+
+			<text style="text_m_accent">
+				<condition var1="tw_is_fbe" var2="1"/>
+				<placement x="%center_x%" y="%row2_y%" placement="5"/>
+				<text>{@decrypt_data_enter_pass_fbe=Enter Password for User [%tw_crypto_user_id%]}</text>
 			</text>
 
 			<input>
@@ -6389,6 +6490,56 @@
 			<action>
 				<touch hkey="volup" />
 				<action function="flashlight" />
+			</action>
+		</page>
+
+		<page name="decrypt_users">
+			<template name="page"/>
+
+			<image>
+				<image resource="main_button_black3"/>
+				<placement x="%indent%" y="%upper_header%"/>
+			</image>
+
+			<image>
+				<image resource="pb"/>
+				<placement x="45" y="%row3_header_y%"/>
+			</image>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@decrypt_users=Decrypt Users}</text>
+			</text>
+
+			<text style="text_m_accent">
+				<placement x="%center_x%" y="%row2_y%" placement="5"/>
+				<text>{@decrypt_users_selection=Select a user ID to decrypt}</text>
+			</text>
+
+			<listbox>
+				<placement x="90" y="%row3_y%" w="%content_width%" h="%listbox_advanced_height%"/>
+				<text>{@select_user=Select User}</text>
+				<icon selected="radio_true" unselected="radio_false" />
+				<data name="tw_crypto_user_id" />
+			</listbox>
+
+			<button style="main_button_half_height_new">
+				<placement x="%center_x%" y="%row19a_y%"/>
+				<image resource="main_button_tools"/>
+				<text>{@decrypt_users=Decrypt Users}</text>
+				<action function="set">tw_crypto_password=</action>
+				<action function="set">tw_password_fail=0</action>
+				<action function="page">decrypt</action>
+			</button>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">advanced</action>
 			</action>
 		</page>
 

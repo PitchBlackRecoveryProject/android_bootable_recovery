@@ -295,6 +295,13 @@ friend class GUIAction;
 friend class PageManager;
 };
 
+struct users_struct {
+	std::string userId;
+	std::string userName;
+	int type;
+	bool isDecrypted;
+};
+
 class TWPartitionManager
 {
 public:
@@ -340,7 +347,8 @@ public:
 	int Resize_By_Path(string Path, bool Display_Error);                      // Resizes a partition based on path
 	void Update_System_Details();                                             // Updates fstab, file systems, sizes, etc.
 	void Update_System_Details_OTA_Survival();                                             // Updates fstab, file systems, sizes, etc.
-	int Decrypt_Device(string Password);                                      // Attempt to decrypt any encrypted partitions
+	int Decrypt_Device(string Password, int user_id = 0);                     // Attempt to decrypt any encrypted partitions
+	void Parse_Users();                                                       // Parse FBE users
 	int usb_storage_enable(void);                                             // Enable USB storage mode
 	int usb_storage_disable(void);                                            // Disable USB storage mode
 	void Mount_All_Storage(void);                                             // Mounts all storage locations
@@ -393,6 +401,7 @@ public:
 	void Setup_Super_Partition();											  // Setup the super partition for backup and restore
 	bool Recreate_Logs_Dir();                                                 // Recreate TWRP_AB_LOGS_DIR after wipe
 	void Change_System_Root(bool root);
+	std::vector<users_struct>* Get_Users_List();                              // Returns pointer to list of users
 
 private:
 	void Setup_Settings_Storage_Partition(TWPartition* Part);                 // Sets up settings storage
@@ -413,11 +422,14 @@ private:
 	Backup_Method_enum Backup_Method;                                         // Method used for backup
 	std::string original_ramdisk_format;                                      // Ramdisk format of boot partition
 	std::string repacked_ramdisk_format;                                      // Ramdisk format of boot image to repack from
+	void Mark_User_Decrypted(int userID);                                     // Marks given user ID in Users_List as decrypted
+	void Check_Users_Decryption_Status();                                      // Checks to see if all users are decrypted
 
 
 private:
 	std::vector<TWPartition*> Partitions;                                     // Vector list of all partitions
 	string Active_Slot_Display;                                               // Current Active Slot (A or B) for display purposes
+	std::vector<users_struct> Users_List;                                     // List of FBE users
 };
 
 extern TWPartitionManager PartitionManager;

@@ -46,7 +46,7 @@ void print_usage(void) {
 	printf("  sideload\n");
 	printf("  get <variable> \n");
 	printf("  set <variable> [value]\n");
-	printf("  decrypt <password>\n");
+	printf("  decrypt <password> [USER ID]\n");
 	printf("  changepage=<page> | like advanced|action|etc \n");
 	printf("  remountrw\n");
 	printf("  fixperms\n");

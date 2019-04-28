@@ -29,7 +29,9 @@ void gui_process(const char* text);
 void gui_err(const char* text);
 void gui_highlight(const char* text);
 void gui_msg(Message msg);
+void gui_err(Message msg);
 extern long mime;
+
 std::string gui_parse_text(std::string inText);
 std::string gui_lookup(const std::string& resource_name, const std::string& default_value);
 
