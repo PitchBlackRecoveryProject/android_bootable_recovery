@@ -40,6 +40,9 @@ else
         ifneq ($(wildcard system/core/libziparchive/Android.bp),)
             RELINK_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/unzip
         endif
+        ifneq ($(wildcard external/one-true-awk/Android.bp),)
+            RELINK_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/awk
+        endif
     endif
 endif
 endif
