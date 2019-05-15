@@ -1181,7 +1181,6 @@ int GUIAction::wipe(std::string arg)
 #endif
 	}
 	PartitionManager.Update_System_Details();
-	PartitionManager.UnMount_By_Path (PartitionManager.Get_Android_Root_Path(), false);
 	if (ret_val)
 		ret_val = 0; // 0 is success
 	else
