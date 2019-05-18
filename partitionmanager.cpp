@@ -1,5 +1,5 @@
 /*
-	Copyright 2014 to 2017 TeamWin
+	Copyright 2014 to 2019 TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
 
 	Copyright 2018 ATG Droid  
@@ -863,6 +863,12 @@ TWPartitionManager::Backup_Partition (PartitionSettings * part_settings)
 	{
 	  if (!twrpDigestDriver::Make_Digest (Full_Filename))
 	    goto backup_error;
+
+	  int check_digest_after_backup = 0;
+	  DataManager::GetValue(TW_CHECK_DIGEST_AFTER_BACKUP, check_digest_after_backup);
+	  if (check_digest_after_backup > 0 && !twrpDigestDriver::Check_Digest(Full_Filename)) {
+		goto backup_error;
+           }
 	}
 
       if (part_settings->Part->Has_SubPartition)
@@ -891,6 +897,11 @@ TWPartitionManager::Backup_Partition (PartitionSettings * part_settings)
 			{
 			  goto backup_error;
 			}
+			int check_digest_after_backup = 0;
+			DataManager::GetValue(TW_CHECK_DIGEST_AFTER_BACKUP, check_digest_after_backup);
+			if (check_digest_after_backup > 0 && !twrpDigestDriver::Check_Digest(Full_Filename)) {
+			  goto backup_error;
+                        }
 		    }
 		}
 	    }
