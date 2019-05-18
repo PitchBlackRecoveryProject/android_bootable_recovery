@@ -883,6 +883,7 @@ TWPartitionManager::Backup_Partition (PartitionSettings * part_settings)
 		    }
 		  sync ();
 		  sync ();
+                  string Full_Filename = part_settings->Backup_Folder + "/" + part_settings->Part->Backup_FileName;
 		  if (!part_settings->adbbackup
 		      && part_settings->generate_digest)
 		    {
