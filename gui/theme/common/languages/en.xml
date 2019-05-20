@@ -827,6 +827,8 @@
 		<string name="pb_dm_verity_off">DM-Verity is not enabled</string>
 		<string name="pb_bk">Creating Backup of PB Files -- /tmp/pb/backup_wip...</string>
 		<string name="pb_bk_no">No Tools of PBRP are detecting Reflash the PBRP Package</string>
+		<string name="pb_wipe_substratum_overlays">Substratum Overlays</string>
+		<string name="substratum_done">-- Substratum Overlays Wipe Complete!</string>
 		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
 </language>
