@@ -416,6 +416,9 @@ endif
 ifneq ($(TW_CLOCK_OFFSET),)
 	LOCAL_CFLAGS += -DTW_CLOCK_OFFSET=$(TW_CLOCK_OFFSET)
 endif
+
+TW_INCLUDE_REPACKTOOLS := true
+
 TWRP_REQUIRED_MODULES += \
     dump_image \
     erase_image \
@@ -437,10 +440,6 @@ TWRP_REQUIRED_MODULES += \
     init.recovery.service.rc \
     parted \
     magiskboot
-
-ifneq ($(TW_INCLUDE_REPACKTOOLS), true)
-    TW_INCLUDE_REPACKTOOLS := true
-endif
 
 ifneq ($(TARGET_ARCH), arm64)
     ifneq ($(TARGET_ARCH), x86_64)
