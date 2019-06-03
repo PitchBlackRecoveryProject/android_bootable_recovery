@@ -873,7 +873,7 @@ int GUIAction::checkpartitionlist(std::string arg)
 		while (end_pos != string::npos && start_pos < List.size()) {
 			part_path = List.substr(start_pos, end_pos - start_pos);
 			LOGINFO("checkpartitionlist part_path '%s'\n", part_path.c_str());
-			if (part_path == "/and-sec" || part_path == "DALVIK" || part_path == "INTERNAL" || part_path == "SUBSTRATUM") {
+			if (part_path == "/and-sec" || part_path == "DALVIK" || part_path == "INTERNAL" || part_path == "SUBSTRATUM" || part_path == "MAGISK") {
 				// Do nothing
 			} else {
 				count++;
@@ -902,7 +902,7 @@ int GUIAction::getpartitiondetails(std::string arg)
 		while (end_pos != string::npos && start_pos < List.size()) {
 			part_path = List.substr(start_pos, end_pos - start_pos);
 			LOGINFO("getpartitiondetails part_path '%s'\n", part_path.c_str());
-			if (part_path == "/and-sec" || part_path == "DALVIK" || part_path == "INTERNAL" || part_path == "SUBSTRATUM") {
+			if (part_path == "/and-sec" || part_path == "DALVIK" || part_path == "INTERNAL" || part_path == "SUBSTRATUM" || part_path == "MAGISK") {
 				// Do nothing
 			} else {
 				DataManager::SetValue("tw_partition_path", part_path);
@@ -1158,6 +1158,14 @@ int GUIAction::wipe(std::string arg)
                                                         gui_err("pb_substratum_wipe_err=Failed to wipe substratum overlays");
                                                         ret_val = false;
 			                                break;
+                                                } else {
+			                                skip = true;
+                                                }
+                                        } else if (wipe_path == "MAGISK") {
+                                                if (!PartitionManager.Wipe_Magisk_Modules()) {
+                                                        gui_err("pb_magisk_wipe_err=Failed to wipe magisk modules");
+                                                        ret_val = false;
+                                                        break;
                                                 } else {
 			                                skip = true;
                                                 }

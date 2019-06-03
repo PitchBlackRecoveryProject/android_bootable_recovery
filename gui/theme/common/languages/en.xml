@@ -846,7 +846,8 @@
 		<string name="substratum_done">-- Substratum Overlays Wipe Complete!</string>
 		<string name="show_free_sdmb">Show Free SD Mb</string>
 		<string name="assert_failed_hint">An assert failed. Please check the output above for more details.</string>
-
+		<string name="pb_wipe_magisk_modules">Magisk Modules</string>
+		<string name="magisk_done">-- Magisk Modules Wipe Complete!</string>
 	</resources>
 </language>
 

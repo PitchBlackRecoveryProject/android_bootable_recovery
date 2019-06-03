@@ -1737,6 +1737,29 @@ if (TWFunc::Path_Exists(subs_module3))
 }
 
 int
+TWPartitionManager::Wipe_Magisk_Modules(void)
+{
+  string magisk_dir = "/data/adb/modules";
+  string magisk_dir2 = "/data/adb/post-fs-data.d";
+  string magisk_dir3 = "/data/adb/service.d";
+
+if (!Mount_By_Path("/data", true))
+  return false;
+
+if (TWFunc::Path_Exists(magisk_dir))
+  TWFunc::removeDir(magisk_dir, false);
+
+if (TWFunc::Path_Exists(magisk_dir2))
+  TWFunc::removeDir(magisk_dir2, false);
+
+if (TWFunc::Path_Exists(magisk_dir3))
+  TWFunc::removeDir(magisk_dir3, false);
+
+  gui_msg("magisk_done=-- Magisk Modules Wipe Complete!");
+  return true;
+}
+
+int
 TWPartitionManager::Wipe_By_Path (string Path, string New_File_System)
 {
   std::vector < TWPartition * >::iterator iter;
@@ -3058,6 +3081,11 @@ TWPartitionManager::Get_Partition_List (string ListType,
       substratum.Mount_Point = "SUBSTRATUM";
       substratum.selected = 0;
       Partition_List->push_back(substratum);
+      struct PartitionList magisk;
+      magisk.Display_Name = gui_parse_text ("{@pb_wipe_magisk_modules}");
+      magisk.Mount_Point = "MAGISK";
+      magisk.selected = 0;
+      Partition_List->push_back(magisk);
       for (iter = Partitions.begin (); iter != Partitions.end (); iter++)
 	{
 	  if ((*iter)->Wipe_Available_in_GUI && !(*iter)->Is_SubPartition)
