@@ -180,6 +180,7 @@
 #define TRB_EN "0"
 #define STD "0"
 #define NON_STD "0"
+#define PB_TREBLE_COMP "pb_error_treble"
 
 // Also used:
 //   tw_boot_is_mountable
