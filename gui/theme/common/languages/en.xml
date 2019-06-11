@@ -80,6 +80,7 @@
 		<string name="zip_warn2">software and render your device unusable.</string>
 		<string name="zip_back_cancel">Press back to cancel adding this zip.</string>
 		<string name="zip_back_clear">Press back button to clear the queue.</string>
+		<string name="zip_compatible_err">Zip Treble compatibility error!</string>
 		<string name="folder">Folder:</string>
 		<string name="file">File:</string>
 		<string name="zip_sig_chk">Zip signature verification</string>
@@ -792,7 +793,7 @@
 		<string name="pb_install_detecting">Detecting Current Package</string>
 		<string name="pb_install_standard_detected">- Detected Standard Package</string>
 		<string name="pb_install_miui_detected">- Detected MIUI Update Package</string>
-                <string name="pb_install_miui_oreo_detected">- Detected Treble MIUI Update Package</string>
+        <string name="pb_install_miui_oreo_detected">- Detected Treble MIUI Update Package</string>
 		<string name="pb_install_miui_10_detected">- Detected MIUI 10 Non-Treble Update Package</string>
 		<string name="pb_install_patch_detected">- Detected Either a Patch or Fix Package</string>
 		<string name="pb_disable_boot_chk">Disable boot check</string>
@@ -828,6 +829,7 @@
 		<string name="pb_bk">Creating Backup of PB Files -- /tmp/pb/backup_wip...</string>
 		<string name="pb_bk_no">No Tools of PBRP are detecting Reflash the PBRP Package</string>
 		<string name="pb_wipe_substratum_overlays">Substratum Overlays</string>
+		<string name="pb_error_treble">Fix Treble Compatibility Error</string>
 		<string name="substratum_done">-- Substratum Overlays Wipe Complete!</string>
 		<string name="show_free_sdmb">Show Free SD Mb</string>
 	</resources>
