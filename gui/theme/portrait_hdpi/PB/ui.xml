@@ -40,6 +40,7 @@
 		<image name="pbtools_button" filename="pbtools_button" retainaspect="1"/>
 		<image name="pbabout_button" filename="pbabout_button" retainaspect="1"/>
 		<image name="main_button_half_height" filename="main_button_half_height" retainaspect="1"/>
+		<image name="main_button_half_height_full" filename="main_button_half_height_full" retainaspect="1"/>
 		<image name="main_button_half_height_wipe" filename="main_button_half_height_wipe" retainaspect="1"/>
 		<image name="main_button_half_height_full_width" filename="main_button_half_height_full_width" retainaspect="1"/>
 		<image name="fab_selectfolder" filename="fab_selectfolder" retainaspect="1"/>

@@ -6208,6 +6208,18 @@
 				<placement x="%indent%" y="%row3_y%"/>
 				<text>%tw_filename1%</text>
 			</text>
+			
+			<button style="main_button_half_height_full">
+				<condition var1="tw_fm_isfolder" var2="0"/>
+				<placement x="%indent%" y="%row12a_y%"/>
+				<text>{@fm_open_file_btn=Read File}</text>
+				<template name="console"/>
+				<actions>
+					<action function="set">tw_filemanager_command=cat %tw_filename1%</action>
+					<action function="set">tw_fm_text1={@fm_reading=Reading}</action>
+					<action function="page">readfile</action>
+				</actions>
+			</button>
 
 			<button style="main_button_half_height">
 				<condition var1="tw_fm_isfolder" var2="0"/>
@@ -6305,6 +6317,53 @@
 					<action function="page">filemanagerrenamefolder</action>
 				</actions>
 			</button>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">filemanagerlist</action>
+			</action>
+		</page>
+		
+		<page name="readfile">
+			<template name="page"/>
+		
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@fm_hdr=File Manager}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@fm_reading=Reading File}</text>
+			</text>
+			
+			<console>
+				<placement x="%indent%" y="285" w="%content_width%" h="1450"/>
+			</console>
+
+			<action>
+				<action function="readfile"></action>
+			</action>
+
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+			
+			<action>
+					<touch key="volup" />
+					<action function="flashlight" />
+			</action>
 
 			<action>
 				<touch key="home"/>
