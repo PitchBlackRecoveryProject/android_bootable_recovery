@@ -717,7 +717,6 @@ void DataManager::SetDefaultValues()
 #ifdef TW_INCLUDE_INJECTTWRP
 	printf("TW_INCLUDE_INJECTTWRP := true\n");
 	mConst.SetValue(TW_HAS_INJECTTWRP, "1");
-	mPersist(TW_INJECT_AFTER_ZIP, "1");
 #else
 	mConst.SetValue(TW_HAS_INJECTTWRP, "0");
 #endif
@@ -772,6 +771,7 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue(PB_ADVANCED_STOCK_REPLACE, "1");
 	mPersist.SetValue(PB_DISABLE_FORCED_ENCRYPTION, "1");
 
+	mPersist.SetValue(TW_HAS_INJECTTWRP, "0");
 	mPersist.SetValue(TW_INSTALL_REBOOT_VAR, "0");
 	mPersist.SetValue(TW_SIGNED_ZIP_VERIFY_VAR, "0");
 	mPersist.SetValue(TW_DISABLE_FREE_SPACE_VAR, "0");
