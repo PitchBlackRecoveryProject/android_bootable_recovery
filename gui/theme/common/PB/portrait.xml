@@ -6202,13 +6202,39 @@
 			
 			<button style="main_button_half_height_full">
 				<condition var1="tw_fm_isfolder" var2="0"/>
-				<placement x="%indent%" y="%row12a_y%"/>
+				<placement x="%indent%" y="%row9a_y%"/>
 				<text>{@fm_open_file_btn=Read File}</text>
 				<template name="console"/>
 				<actions>
-					<action function="set">tw_filemanager_command=cat %tw_filename1%</action>
+					<action function="set">tw_filemanager_command=cat</action>
 					<action function="set">tw_fm_text1={@fm_reading=Reading}</action>
 					<action function="page">readfile</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height">
+				<conditions>
+					<condition var1="tw_fm_isfolder" var2="0"/>
+				</conditions>
+				<placement x="%center_x%" y="%row12a_y%"/>
+				<text>{@fm_unzip_btn=Unzip}</text>
+				<actions>
+					<action function="set">tw_filemanager_command=unzip</action>
+					<action function="set">tw_fm_text1={@fm_unzipping=Unzipping}</action>
+					<action function="set">pb_filemanager_unzip=1</action>
+					<action function="page">choosedestinationfolderforunzip</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height">
+				<condition var1="tw_fm_isfolder" var2="1"/>
+				<placement x="%indent%" y="%row12a_y%"/>
+				<text>{@fm_zip_btn=Zip}</text>
+				<actions>
+					<action function="set">tw_filemanager_command=cd "%tw_file_location1%" &amp;&amp; </action>
+					<action function="set">tw_fm_text1={@fm_zipping=Zipping}</action>
+					<action function="set">pb_filemanager_unzip=2</action>
+					<action function="page">zipname</action>
 				</actions>
 			</button>
 
@@ -6378,6 +6404,58 @@
 			<text style="text_m">
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
 				<text>{@fm_sel_dest=Select Destination Folder}</text>
+			</text>
+
+			<template name="sort_options"/>
+
+			<fileselector>
+				<placement x="%indent%" y="%row3_y%" w="%content_width%" h="%fileselector_filemanager_height%"/>
+				<text>%tw_file_location2%</text>
+				<filter folders="1" files="0"/>
+				<path name="tw_file_location2" default="/"/>
+				<data name="tw_filename2"/>
+				<selection name="tw_selection2"/>
+			</fileselector>
+
+			<button style="fab">
+				<image resource="fab_selectfolder"/>
+				<actions>
+					<action function="set">tw_fm_text2=to</action>
+					<action function="set">tw_fm_text3=%tw_file_location2%</action>
+					<action function="set">tw_include_text3=1</action>
+					<action function="set">pb_filemanager_unzip=0</action>
+					<action function="set">tw_back=filemanageroptions</action>
+					<action function="page">filemanagerconfirm</action>
+				</actions>
+			</button>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">filemanageroptions</action>
+			</action>
+		</page>
+
+		<page name="choosedestinationfolderforunzip">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@fm_hdr=File Manager}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@fm_sel_dest=Select Destination Folder}</text>
+			</text>
+
+			<text style="text_m_accent">
+				<placement x="%indent%" y="%row3a_y%"/>
+				<text>{@name=Name:}</text>
 			</text>
 
 			<template name="sort_options"/>
@@ -6672,13 +6750,90 @@
 			</action>
 
 			<action>
-				<condition var1="tw_include_text3" var2="0"/>
+				<conditions>
+					<condition var1="tw_include_text3" var2="0"/>
+					<condition var1="pb_filemanager_unzip" var2="0"/>
+				</conditions>
 				<action function="cmd">%tw_filemanager_command% "%tw_filename1%"</action>
 			</action>
 
 			<action>
-				<condition var1="tw_include_text3" var2="1"/>
+				<conditions>
+					<condition var1="tw_include_text3" var2="1"/>
+					<condition var1="pb_filemanager_unzip" var2="0"/>
+				</conditions>
 				<action function="cmd">%tw_filemanager_command% "%tw_filename1%" "%tw_fm_text3%"</action>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_include_text3" var2="1"/>
+					<condition var1="pb_filemanager_unzip" var2="1"/>
+				</conditions>
+				<action function="cmd">%tw_filemanager_command% "%tw_filename1%" -d "%tw_fm_text3%"</action>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_include_text3" var2="1"/>
+					<condition var1="pb_filemanager_unzip" var2="2"/>
+				</conditions>
+				<action function="cmd">%tw_filemanager_command% zip -r %pb_zip_new_name% *</action>
+			</action>
+		</page>
+
+		<page name="zipname">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@fm_hdr=File Manager}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@pb_zip_name=Zipping} %tw_filename1%</text>
+			</text>
+
+			<text style="text_m_accent">
+				<placement x="%indent%" y="%row2_y%"/>
+				<text>{@name=Name:}</text>
+			</text>
+
+			<input>
+				<placement x="%indent%" y="%row2_input_y%" w="%content_width%" h="%input_height%"/>
+				<text>%tw_filename1%</text>
+				<data name="tw_filemanager_rename"/>
+				<restrict minlen="1" maxlen="128"/>
+				<actions>
+					<action function="set">tw_fm_text2=to</action>
+					<action function="set">pb_zip_new_name="%tw_filemanager_rename%"</action>
+					<action function="set">tw_include_text3=1</action>
+					<action function="set">tw_back=filemanageroptions</action>
+					<action function="page">choosedestinationfolderforunzip</action>
+				</actions>
+			</input>
+
+			<fill color="%accent_color%">
+				<placement x="%indent%" y="row4_y" w="%content_width%" h="input_line_width" placement="1"/>
+			</fill>
+
+			<button style="main_button_half_height">
+				<placement x="%indent%" y="%row10_y%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="page">filemanageroptions</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">filemanageroptions</action>
 			</action>
 		</page>
 

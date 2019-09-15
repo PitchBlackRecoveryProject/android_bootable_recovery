@@ -110,6 +110,7 @@
 		<string name="wipe_cache_dalvik_confirm">Wipe Cache &amp; Dalvik?</string>
 		<string name="wipe_dalvik_confirm">Wipe Dalvik?</string>
 		<string name="wiping_cache_dalvik">Wiping Cache &amp; Dalvik...</string>
+		<string name="wiping_dalvik">Wiping Dalvik...</string>
 		<string name="wipe_cache_dalvik_complete">Cache &amp; Dalvik Wipe Complete</string>
 		<string name="wipe_dalvik_complete">Dalvik Wipe Complete</string>
 		<string name="swipe_wipe">Swipe to Wipe</string>
@@ -435,6 +436,12 @@
 		<string name="fm_type_file">File</string>
 		<string name="fm_choose_act">Choose Action</string>
 		<string name="fm_selected">%tw_fm_type% selected:</string>
+		<string name="fm_open_file_btn">Read File</string>
+		<string name="fm_reading">Reading</string>
+		<string name="fm_unzipping">Unzipping</string>
+		<string name="fm_zipping">Zipping</string>
+		<string name="fm_unzip_btn">Unzip</string>
+		<string name="fm_zip_btn">Zip</string>
 		<string name="fm_copy_btn">Copy</string>
 		<string name="fm_copy_file_btn">Copy File</string>
 		<string name="fm_copy_folder_btn">Copy Folder</string>
@@ -453,6 +460,7 @@
 		<string name="fm_sel_dest">Select Destination Folder</string>
 		<string name="fm_sel_curr_folder">Select Current Folder</string>
 		<string name="fm_rename_hdr">Rename</string>
+		<string name="pb_zip_name">Zipping</string>
 		<string name="fm_set_perms_hdr">Set Permissions</string>
 		<string name="fm_perms">Permissions:</string>
 		<string name="fm_complete">File Operation Complete</string>
@@ -760,6 +768,9 @@
 		<string name="MTP_Fix_btn">MTP Fix</string>
 		<string name="MTP_Fix_text">MTP Fix will be installed.</string>
 		<string name="MTP_Fix_confirm">Try to install it?</string>
+		<string name="DFE_btn">DFE</string>
+		<string name="Dfe_text">DFE will be installed.</string>
+		<string name="Dfe_confirm">Try to install it?</string>
 		<string name="Dm_Verity_btn">Dm Verity</string>
 		<string name="Dm_Verity_text">Dm Verity will be installed.</string>
 		<string name="Dm_Verity_confirm">Try to install it?</string>
@@ -794,7 +805,7 @@
 		<string name="pb_install_detecting">Detecting Current Package</string>
 		<string name="pb_install_standard_detected">- Detected Standard Package</string>
 		<string name="pb_install_miui_detected">- Detected MIUI Update Package</string>
-        <string name="pb_install_miui_oreo_detected">- Detected Treble MIUI Update Package</string>
+                <string name="pb_install_miui_oreo_detected">- Detected Treble MIUI Update Package</string>
 		<string name="pb_install_miui_10_detected">- Detected MIUI 10 Non-Treble Update Package</string>
 		<string name="pb_install_patch_detected">- Detected Either a Patch or Fix Package</string>
 		<string name="pb_disable_boot_chk">Disable boot check</string>
@@ -834,6 +845,7 @@
 		<string name="substratum_done">-- Substratum Overlays Wipe Complete!</string>
 		<string name="show_free_sdmb">Show Free SD Mb</string>
 		<string name="assert_failed_hint">An assert failed. Please check the output above for more details.</string>
+
 	</resources>
 </language>
 
