@@ -439,6 +439,7 @@ TWRP_REQUIRED_MODULES += \
     init.recovery.hlthchrg.rc \
     init.recovery.service.rc \
     parted \
+    zip \
     magiskboot
 
 ifneq ($(TARGET_ARCH), arm64)
