@@ -444,6 +444,7 @@ TWRP_REQUIRED_MODULES += \
 endif
 TWRP_REQUIRED_MODULES += \
     parted \
+    zip \
     magiskboot
 
 ifneq ($(TW_OZIP_DECRYPT_KEY),)

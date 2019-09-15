@@ -609,3 +609,14 @@ ifeq ($(TW_INCLUDE_REPACKTOOLS), true)
         $(error magiskboot prebuilts not present; exiting)
     endif
 endif
+
+#zip
+ifeq ($(TARGET_ARCH), arm64)
+include $(CLEAR_VARS)
+LOCAL_MODULE := zip
+LOCAL_MODULE_TAGS := eng
+LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
+LOCAL_SRC_FILES := zip_64
+include $(BUILD_PREBUILT)
+endif
