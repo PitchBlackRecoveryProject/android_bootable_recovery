@@ -6179,6 +6179,7 @@
 
 			<action>
 				<condition var1="tw_filename1" op="modified"/>
+				<action function="exten">%tw_filename1%</action>
 				<action function="page">filemanageroptions</action>
 			</action>
 		</page>
@@ -6221,6 +6222,7 @@
 			<button style="main_button_half_height">
 				<conditions>
 					<condition var1="tw_fm_isfolder" var2="0"/>
+					<condition var1="pb_file_extn" var2="zip"/>
 				</conditions>
 				<placement x="%center_x%" y="%row12a_y%"/>
 				<text>{@fm_unzip_btn=Unzip}</text>

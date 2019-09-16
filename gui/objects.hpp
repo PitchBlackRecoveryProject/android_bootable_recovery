@@ -309,6 +309,7 @@ protected:
 	int reload(std::string arg);
 	int readBackup(std::string arg);
 	int set(std::string arg);
+	int exten(std::string arg);
 	int clear(std::string arg);
 	int mount(std::string arg);
 	int unmount(std::string arg);
