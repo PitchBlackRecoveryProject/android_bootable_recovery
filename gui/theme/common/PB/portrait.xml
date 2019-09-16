@@ -6253,6 +6253,7 @@
 				<text>{@fm_copy_file_btn=Copy File}</text>
 				<actions>
 					<action function="set">tw_filemanager_command=cp</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text1={@fm_copying=Copying}</action>
 					<action function="page">choosedestinationfolder</action>
 				</actions>
@@ -6265,6 +6266,7 @@
 				<actions>
 					<action function="set">tw_filemanager_command=cd "%tw_file_location1%" &amp;&amp; cd .. &amp;&amp; cp -R</action>
 					<action function="set">tw_fm_text1={@fm_copying=Copying}</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="page">choosedestinationfolder</action>
 				</actions>
 			</button>
@@ -6275,6 +6277,7 @@
 				<actions>
 					<action function="set">tw_filemanager_command=mv</action>
 					<action function="set">tw_fm_text1={@fm_moving=Moving}</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="page">choosedestinationfolder</action>
 				</actions>
 			</button>
@@ -6286,6 +6289,7 @@
 					<action function="set">tw_filemanager_command=chmod 755</action>
 					<action function="set">tw_fm_text1={@fm_chmod755ing=chmod 755}</action>
 					<action function="set">tw_fm_text2=</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text3=</action>
 					<action function="set">tw_include_text3=0</action>
 					<action function="set">tw_back=filemanageroptions</action>
@@ -6299,6 +6303,7 @@
 				<actions>
 					<action function="set">tw_filemanager_rename=0000</action>
 					<action function="set">tw_fm_text2=</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text3=</action>
 					<action function="set">tw_include_text3=0</action>
 					<action function="set">tw_back=filemanageroptions</action>
@@ -6312,6 +6317,7 @@
 				<actions>
 					<action function="set">tw_filemanager_command=rm -rf</action>
 					<action function="set">tw_fm_text1={@fm_deleting=Deleting}</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text2=</action>
 					<action function="set">tw_fm_text3=</action>
 					<action function="set">tw_include_text3=0</action>
@@ -6326,6 +6332,7 @@
 				<text>{@fm_rename_file_btn=Rename File}</text>
 				<actions>
 					<action function="set">tw_filemanager_rename=tw_selection1</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text1={@fm_renaming=Renaming}</action>
 					<action function="set">tw_filemanager_command=mv</action>
 					<action function="page">filemanagerrenamefile</action>
@@ -6338,6 +6345,7 @@
 				<text>{@fm_rename_folder_btn=Rename Folder}</text>
 				<actions>
 					<action function="set">tw_filemanager_rename=tw_selection1</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text1={@fm_renaming=Renaming}</action>
 					<action function="set">tw_filemanager_command=cd "%tw_file_location1%" &amp;&amp; cd .. &amp;&amp; mv</action>
 					<action function="page">filemanagerrenamefolder</action>
@@ -6787,7 +6795,7 @@
 					<condition var1="tw_include_text3" var2="1"/>
 					<condition var1="pb_filemanager_unzip" var2="2"/>
 				</conditions>
-				<action function="cmd">%tw_filemanager_command% zip -r %pb_zip_new_name% *</action>
+				<action function="cmd">%tw_filemanager_command% zip -r %tw_file_location2%/%pb_zip_new_name% *</action>
 			</action>
 		</page>
 
