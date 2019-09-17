@@ -6217,8 +6217,26 @@
 			</text>
 			
 			<button style="main_button_half_height_full">
-				<condition var1="tw_fm_isfolder" var2="0"/>
+				<contitions>
+					<condition var1="tw_fm_isfolder" var2="0"/>
+					<condition var1="pb_file_extn" var2="zip"/>
+				</conditions>
 				<placement x="%indent%" y="%row9a_y%"/>
+				<text>{@fm_open_file_btn=Read File}</text>
+				<template name="console"/>
+				<actions>
+					<action function="set">tw_filemanager_command=cat</action>
+					<action function="set">tw_fm_text1={@fm_reading=Reading}</action>
+					<action function="page">readfile</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height_full">
+				<conditions>
+					<condition var1="tw_fm_isfolder" var2="0"/>
+					<condition var1="pb_file_extn" op="!=" var2="zip"/>
+				</conditions>
+				<placement x="%indent%" y="%row12a_y%"/>
 				<text>{@fm_open_file_btn=Read File}</text>
 				<template name="console"/>
 				<actions>
