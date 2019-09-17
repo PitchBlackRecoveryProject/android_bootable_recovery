@@ -6262,6 +6262,21 @@
 			</button>
 
 			<button style="main_button_half_height">
+				<conditions>
+					<condition var1="tw_fm_isfolder" var2="1"/>
+				</conditions>
+				<placement x="%center_x%" y="%row12a_y%"/>
+				<text>{@fm_pb_make=Make Folder}</text>
+				<actions>
+					<action function="set">tw_filemanager_command=mkdir</action>
+					<action function="set">tw_fm_text1={@fm_pb_mk=Making Folder}</action>
+					<action function="set">pb_filemanager_unzip=3</action>
+					<action function="set">tw_include_text3=0</action>
+					<action function="page">mkd</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height">
 				<condition var1="tw_fm_isfolder" var2="1"/>
 				<placement x="%indent%" y="%row12a_y%"/>
 				<text>{@fm_zip_btn=Zip}</text>
@@ -6823,6 +6838,14 @@
 				</conditions>
 				<action function="cmd">%tw_filemanager_command% zip -r %tw_file_location2%/%pb_zip_new_name% *</action>
 			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_include_text3" var2="0"/>
+					<condition var1="pb_filemanager_unzip" var2="3"/>
+				</conditions>
+				<action function="cmd">%tw_filemanager_command% %tw_filename1%/%pb_zip_new_name%</action>
+			</action>
 		</page>
 
 		<page name="zipname">
@@ -6854,6 +6877,61 @@
 					<action function="set">tw_include_text3=1</action>
 					<action function="set">tw_back=filemanageroptions</action>
 					<action function="page">choosedestinationfolderforunzip</action>
+				</actions>
+			</input>
+
+			<fill color="%accent_color%">
+				<placement x="%indent%" y="row4_y" w="%content_width%" h="input_line_width" placement="1"/>
+			</fill>
+
+			<button style="main_button_half_height">
+				<placement x="%indent%" y="%row10_y%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="page">filemanageroptions</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">filemanageroptions</action>
+			</action>
+		</page>
+
+		<page name="mkd">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@fm_hdr=File Manager}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@fm_pb_mk=Making Folder} %tw_filename1%</text>
+			</text>
+
+			<text style="text_m_accent">
+				<placement x="%indent%" y="%row2_y%"/>
+				<text>{@name=Name:}</text>
+			</text>
+
+			<input>
+				<placement x="%indent%" y="%row2_input_y%" w="%content_width%" h="%input_height%"/>
+				<text>%tw_filename1%</text>
+				<data name="tw_filemanager_rename"/>
+				<restrict minlen="1" maxlen="128"/>
+				<actions>
+					<action function="set">tw_fm_text2=to</action>
+					<action function="set">pb_zip_new_name="%tw_filemanager_rename%"</action>
+					<action function="set">tw_include_text3=0</action>
+					<action function="set">tw_back=filemanageroptions</action>
+					<action function="page">filemanagerconfirm</action>
 				</actions>
 			</input>
 
