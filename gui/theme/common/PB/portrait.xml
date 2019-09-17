@@ -358,6 +358,12 @@
 			<font resource="font_m" color="%text_button_color%"/>
 			<image resource="main_button_half_height_wipe"/>
 		</style>
+		
+		<style name="main_button_half_height_full">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_m" color="%text_button_color%"/>
+			<image resource="main_button_half_height_full"/>
+		</style>
 
 		<style name="main_button_half_height_full_width">
 			<highlight color="%highlight_color%"/>
