@@ -129,10 +129,10 @@ int main(int argc, char **argv) {
 	// Load up all the resources
 	gui_loadResources();
 
-        gui_print("*********************************");
-        gui_print("PitchBlack Recovery: Welcome! ^_^");
-	gui_print("Maintained By PBRP Team");
-	gui_print("*********************************");
+    gui_print("********************************* \n");
+    gui_print("PitchBlack Recovery: Welcome! ^_^ \n");
+	gui_print("Maintained By PBRP Team \n");
+	gui_print("********************************* \n");
 	string null;
 	TWFunc::Exec_Cmd("getprop ro.omni.version > /tmp/prop.info && mv /tmp/prop.info /sdcard/PBRP/pbrp.info", null);
 	if(!null.empty())
