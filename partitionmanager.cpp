@@ -1500,7 +1500,7 @@ TWPartitionManager::Run_Restore (const string & Restore_Name)
     }
   TWFunc::GUI_Operation_Text (TW_UPDATE_SYSTEM_DETAILS_TEXT,
 			      gui_parse_text ("{@updating_system_details}"));
-  UnMount_By_Path (Get_Android_Root_Path(), false);
+  Unmount_Root(false);
   Update_System_Details ();
   UnMount_Main_Partitions ();
   time (&rStop);
@@ -2166,7 +2166,7 @@ TWPartitionManager::Update_System_Details (void)
       (*iter)->Update_Size (true);
       if ((*iter)->Can_Be_Mounted)
 	{
-	  if ((*iter)->Mount_Point == "/system")
+	  if ((*iter)->Mount_Point == "/system" || (*iter)->Mount_Point == "/system_root")
 	    {
 	      int backup_display_size =
 		(int) ((*iter)->Backup_Size / 1048576LLU);
@@ -2678,6 +2678,13 @@ TWPartitionManager::Mount_All_Storage (void)
     }
 }
 
+bool TWPartitionManager::Unmount_Root(bool display) {
+	if (!UnMount_By_Path (Get_Android_Root_Path(), false) && Is_Mounted_By_Path("/system_root"))
+		return UnMount_By_Path ("/system_root", display);
+	else
+		return UnMount_By_Path (Get_Android_Root_Path(), display);
+}
+
 void
 TWPartitionManager::UnMount_Main_Partitions (void)
 {
@@ -2687,7 +2694,7 @@ TWPartitionManager::UnMount_Main_Partitions (void)
 
   TWPartition *Boot_Partition = Find_Partition_By_Path ("/boot");
 
-  UnMount_By_Path (Get_Android_Root_Path(), true);
+  Unmount_Root(true);
   if (!datamedia)
     UnMount_By_Path ("/data", true);
 
@@ -3681,6 +3688,7 @@ TWPartitionManager::Translate_Partition_Display_Names ()
 {
   LOGINFO ("Translating partition display names\n");
   Translate_Partition ("/system", "system", "System");
+  Translate_Partition ("/system_root", "system", "System");
   Translate_Partition ("/system_image", "system_image", "System Image");
   Translate_Partition ("/vendor", "vendor", "Vendor");
   Translate_Partition ("/vendor_image", "vendor_image", "Vendor Image");
@@ -4848,7 +4856,7 @@ TWPartitionManager::Run_OTA_Survival_Restore (const string & Restore_Name)
 	  end_pos = Restore_List.find (";", start_pos);
 	}
     }
-  UnMount_By_Path (Get_Android_Root_Path(), false);
+  Unmount_Root(false);
   Update_System_Details_OTA_Survival ();
   UnMount_Main_Partitions ();
   time (&rStop);
@@ -4869,7 +4877,7 @@ TWPartitionManager::Update_System_Details_OTA_Survival (void)
       (*iter)->Update_Size (true);
       if ((*iter)->Can_Be_Mounted)
 	{
-	  if ((*iter)->Mount_Point == "/system")
+	  if ((*iter)->Mount_Point == "/system" || (*iter)->Mount_Point == "/system_root")
 	    {
 	      int backup_display_size =
 		(int) ((*iter)->Backup_Size / 1048576LLU);

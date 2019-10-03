@@ -345,6 +345,7 @@ public:
 	int usb_storage_disable(void);                                            // Disable USB storage mode
 	void Mount_All_Storage(void);                                             // Mounts all storage locations
 	void UnMount_Main_Partitions(void);                                       // Unmounts system and data if not data/media and boot if boot is mountable
+	bool Unmount_Root(bool display);					  // Unmounts system either it is system or System_root
 	int Partition_SDCard(void);                                               // Repartitions the sdcard
 	TWPartition *Get_Default_Storage_Partition();                             // Returns a pointer to a default storage partition
 	int Check_Backup_Cancel();                                                // Returns the value of stop_backup
