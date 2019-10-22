@@ -1924,6 +1924,17 @@ void TWFunc::Read_Write_Specific_Partition(string path, string partition_name, b
 	return;
 }
 
+void TWFunc::copy_logcat_log(string curr_storage) {
+	std::string logcatDst = curr_storage + "/logcat.log";
+	std::string logcatCmd = "/sbin/logcat -d";
+
+	std::string result;
+	Exec_Cmd(logcatCmd, result);
+	write_to_file(logcatDst, result);
+	gui_msg(Msg("copy_logcat_log=Copied logcat log to {1}")(logcatDst));
+	tw_set_default_metadata(logcatDst.c_str());
+}
+
 void TWFunc::copy_kernel_log(string curr_storage) {
 	std::string dmesgDst = curr_storage + "/dmesg.log";
 	std::string dmesgCmd = "/sbin/dmesg";

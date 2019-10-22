@@ -686,8 +686,10 @@ int GUIAction::copylog(std::string arg __unused)
 		int path_len;
 
 		string dst, curr_storage, cache_strg;
+		int copy_logcat_log = 0;
 		int copy_kernel_log = 0;
 
+		DataManager::GetValue("tw_include_logcat_log", copy_logcat_log);
 		DataManager::GetValue("tw_include_kernel_log", copy_kernel_log);
 		PartitionManager.Mount_Current_Storage(true);
 		curr_storage = DataManager::GetCurrentStoragePath();
@@ -716,6 +718,20 @@ int GUIAction::copylog(std::string arg __unused)
 		}
 
 		tw_set_default_metadata(dst.c_str());
+                if (copy_logcat_log || DataManager::GetIntValue("pb_inlclude_logcat_logging")) {
+                        std::string logcatDst = path;
+                        logcatDst.replace(logcatDst.find_last_of("/")+1,8,"logcat");
+                        std::string logcatCmd = "/sbin/logcat -d";
+                        std::string result;
+                        TWFunc::Exec_Cmd(logcatCmd, result);
+                        TWFunc::write_to_file(logcatDst, result);
+                        if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
+                                cache_strg.replace(cache_strg.find_last_of("/")+1,8,"logcat");
+                                TWFunc::copy_file(logcatDst, cache_strg.c_str(), 0755);
+                        }
+                        gui_msg(Msg("copy_logcat_log=Copied logcat log to {1}")(logcatDst));
+                        tw_set_default_metadata(logcatDst.c_str());
+                }
 		if (copy_kernel_log || DataManager::GetIntValue("pb_inlclude_dmesg_logging")) {
 			std::string dmesgDst = path;
 			dmesgDst.replace(dmesgDst.find_last_of("/")+1,8,"dmesg");
