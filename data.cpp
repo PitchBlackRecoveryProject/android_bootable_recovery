@@ -758,7 +758,7 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue(PB_INCREMENTAL_PACKAGE, "0");
 	mPersist.SetValue(PB_DISABLE_FORCED_ENCRYPTION, "0");
 	mPersist.SetValue(PB_DISABLE_DM_VERITY, "1");
-	mPersist.SetValue(PB_TREBLE_COMP, "1");
+	mPersist.SetValue(PB_TREBLE_COMP, "0");
 	mPersist.SetValue(PB_DISABLE_REBOOT_OTA, "0");
 	mConst.SetValue(PB_SURVIVAL_FOLDER_VAR, PB_SURVIVAL_FOLDER);
      	mConst.SetValue(PB_SURVIVAL_BACKUP_NAME, PB_SURVIVAL_BACKUP);

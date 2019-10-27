@@ -3574,7 +3574,7 @@
 				<listitem name="{@zip_sig_chk=Zip signature verification}">
 					<data variable="tw_signed_zip_verify"/>
 				</listitem>
-				<listitem name="{@zip_err_compatibility=Fix Treble Compatibility Error}">
+				<listitem name="{@zip_err_compatibility=Bypass Treble Compatibility}">
 					<data variable="pb_error_treble"/>
 				</listitem>
 				<listitem name="{@install_reboot_chk=Reboot after installation is complete}">
