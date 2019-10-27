@@ -797,7 +797,7 @@
 			<checkbox>
 				<condition var1="tw_has_injecttwrp" var2="1"/>
 				<placement x="%indent%" y="%row15_y%"/>
-				<text>{@inject_twrp_chk=Inject TWRP after install}</text>
+				<text>{@inject_twrp_chk=Flash PBRP after install}</text>
 				<data variable="tw_inject_after_zip"/>
 			</checkbox>
 
