@@ -107,6 +107,7 @@
 		<image name="main_button_tools" filename="main_button_tools" retainaspect="1"/>
 		<image name="main_button_themes" filename="main_button_themes" retainaspect="1"/>
 		<image name="main_button_reloadtheme" filename="main_button_reloadtheme" retainaspect="1"/>
+		<image name="main_button_rename_c" filename="main_button_rename_c" retainaspect="1"/>
 		<image name="special_button_black" filename="special_button_black" retainaspect="1"/>
 		<image name="special_button_settingota" filename="special_button_settingota" retainaspect="1"/>
 		<image name="special_button_contributors" filename="special_button_contributors" retainaspect="1"/>
