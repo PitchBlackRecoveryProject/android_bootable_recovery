@@ -1129,6 +1129,22 @@
 			</action>
 		</page>
 
+		<page name="reboot_recovery_routine">
+			<action>
+				<action function="set">tw_back=reboot</action>
+				<action function="set">tw_action=reboot</action>
+				<action function="set">tw_action_param=recovery</action>
+				<action function="set">tw_reboot_param=recovery</action>
+				<action function="set">tw_has_action2=0</action>
+				<action function="set">tw_text1={@no_os1=No OS Installed! Are you}</action>
+				<action function="set">tw_text2={@no_osrb=sure you wish to reboot?}</action>
+				<action function="set">tw_action_text1={@rebooting=Rebooting...}</action>
+				<action function="set">tw_complete_text1={@rebooting=Rebooting...}</action>
+				<action function="set">tw_slider_text={@swipe_reboot=Swipe to Reboot}</action>
+				<action function="page">rebootcheck</action>
+			</action>
+		</page>
+
 		<page name="confirm_action">
 			<template name="page"/>
 
@@ -1305,11 +1321,22 @@
 			</button>
 
 			<button style="main_button_half_height">
+				<condition var1="pb_reboot_recovery" op="!=" var2="1"/>
 				<placement x="%center_x%" y="%row21a_y%"/>
 				<text>{@reboot_system_btn=Reboot System}</text>
 				<actions>
 					<action function="set">tw_back=main2</action>
 					<action function="page">reboot_system_routine</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height">
+				<condition var1="pb_reboot_recovery" var2="1"/>
+				<placement x="%center_x%" y="%row21a_y%"/>
+				<text>{@reboot_recovery_btn=Reboot Recovery}</text>
+				<actions>
+					<action function="set">tw_back=main2</action>
+					<action function="page">reboot_recovery_routine</action>
 				</actions>
 			</button>
 
@@ -4187,6 +4214,7 @@
 					<action function="set">tw_action=change_codename</action>
 					<action function="set">tw_text1={@pb_dev_name_change=Wanna Change Your device Codename?}</action>
 					<action function="set">tw_action_text1={@pb_dev_change=Changing Device Codename from %pb_prop_value% to %pb_codename_change%}</action>
+					<action function="set">pb_reboot_recovery=1</action>
 					<action function="set">tw_complete_text1={@pb_dev_changed=Device Codename Changed to %pb_codename_change%}</action>
 					<action function="set">tw_text4={@pb_dev_reboot=A Reboot is mandatory After switching Codenames}</action>
 					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
@@ -4199,7 +4227,7 @@
 			</fill>
 
 			<button style="main_button_half_height">
-				<placement x="%indent%" y="%row10_y%"/>
+				<placement x="%indent%" y="%row9_y%"/>
 				<text>{@cancel_btn=Cancel}</text>
 				<action function="page">advanced</action>
 			</button>
