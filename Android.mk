@@ -438,6 +438,7 @@ TWRP_REQUIRED_MODULES += \
     libbootloader_message_twrp \
     init.recovery.hlthchrg.rc \
     init.recovery.service.rc \
+    init.recovery.ldconfig.rc \
     parted \
     zip \
     magiskboot
