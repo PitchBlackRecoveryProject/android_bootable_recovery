@@ -3986,6 +3986,7 @@
 			<button style="main_button_rename_c">
 				<placement x="927" y="93"/>
 				<action function="getprop">"ro.product.device"</action>
+				<action function="set">pb_codename_change=%pb_prop_value%</action>
 				<action function="page">rename_c</action>
 			</button>
 
