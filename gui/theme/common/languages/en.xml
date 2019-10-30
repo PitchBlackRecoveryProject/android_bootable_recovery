@@ -102,6 +102,7 @@
 		<string name="wipe_cache_dalvik_btn">Wipe Cache/Dalvik</string>
 		<string name="wipe_dalvik_btn">Wipe Dalvik</string>
 		<string name="reboot_system_btn">Reboot System</string>
+		<string name="reboot_recovery_btn">Reboot Recovery</string>
 		<string name="install_sel_target">Select Target Partition</string>
 		<string name="flash_image_select">Select Partition to Flash Image:</string>
 		<string name="target_partition">Target Partition:</string>
