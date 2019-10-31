@@ -85,7 +85,7 @@ RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libext2_e2p.so
 RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libext2fs.so
 RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libext2_profile.so
 RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libext2_uuid.so
-ifneq ($(wildcard external/e2fsprogs/misc/Android.*),)
+ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 27; echo $$?),0)
     RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libext2_misc.so
 endif
 ifneq ($(wildcard external/e2fsprogs/lib/quota/Android.mk),)
