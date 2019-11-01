@@ -2181,13 +2181,16 @@ int GUIAction::flashlight(std::string arg __unused)
 		LOGINFO("Detected Node located at  '%s'\n", flashpath.c_str());
 	}
 #endif
-	File.open(maxpath, ios::in);
-	if (File.is_open())
+	if (TWFunc::Path_Exists(maxpath))
 	{
-		getline (File, str_val);
-		max_val = std::stoi (str_val);
+		File.open(maxpath, ios::in);
+		if (File.is_open())
+		{
+			getline (File, str_val);
+			max_val = std::stoi (str_val);
+		}
+		File.close();
 	}
-	File.close();
 	str_val="";
 	File.open(flashpath, ios::in | ios::out);
 	if(File.is_open())
@@ -2208,7 +2211,10 @@ int GUIAction::flashlight(std::string arg __unused)
 			LOGINFO("Brightening with Maximum Brightness\n");
 			if (TWFunc::Path_Exists(switch_path))
 				TWFunc::write_to_file(switch_path, "1");
-			File << max_val;
+			if (TWFunc::Path_Exists(maxpath))
+				File << max_val;
+			else
+				File << "1";
 		}
 	}
 	File.close();
