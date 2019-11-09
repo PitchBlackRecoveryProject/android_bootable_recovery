@@ -503,13 +503,13 @@ TWPartitionManager::Output_Partition (TWPartition * Part)
 {
   unsigned long long mb = 1048576;
 
-  printf ("%s | %s | Size: %iMB", Part->Mount_Point.c_str (),
-	  Part->Actual_Block_Device.c_str (), (int) (Part->Size / mb));
+  printf ("%s | %s | Size: %.1lfMB", Part->Mount_Point.c_str (),
+	  Part->Actual_Block_Device.c_str (), (double)Part->Size / mb);
   if (Part->Can_Be_Mounted)
     {
-      printf (" Used: %iMB Free: %iMB Backup Size: %iMB",
-	      (int) (Part->Used / mb), (int) (Part->Free / mb),
-	      (int) (Part->Backup_Size / mb));
+      printf (" Used: %.1lfMB Free: %.1lfMB Backup Size: %.1lfMB",
+	      (double)Part->Used / mb, (double)Part->Free / mb,
+	      (double)Part->Backup_Size / mb);
     }
   printf ("\n   Flags: ");
   if (Part->Can_Be_Mounted)
@@ -2968,7 +2968,7 @@ TWPartitionManager::Get_Partition_List (string ListType,
 	  if ((*iter)->Is_Storage)
 	    {
 	      struct PartitionList part;
-	      sprintf (free_space, "%llu", (*iter)->Free / 1024 / 1024);
+	      sprintf (free_space, "%.1lf", (double)(*iter)->Free / 1024 / 1024);
 	      part.Display_Name = (*iter)->Storage_Name + " (";
 	      part.Display_Name += free_space;
 	      part.Display_Name += "MB)";
@@ -3007,7 +3007,7 @@ TWPartitionManager::Get_Partition_List (string ListType,
 			Backup_Size += (*subpart)->Backup_Size;
 		    }
 		}
-	      sprintf (backup_size, "%llu", Backup_Size / 1024 / 1024);
+	      sprintf (backup_size, "%.1lf", (double)Backup_Size / 1024 / 1024);
 	      part.Display_Name = (*iter)->Backup_Display_Name + " (";
 	      part.Display_Name += backup_size;
 	      part.Display_Name += "MB)";
