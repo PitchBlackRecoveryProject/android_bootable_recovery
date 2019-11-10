@@ -427,7 +427,6 @@ TWRP_REQUIRED_MODULES += \
     pigz \
     teamwin \
     toolbox_symlinks \
-    ozip_decrypt \
     twrp \
     fsck.fat \
     fatlabel \
@@ -446,6 +445,11 @@ endif
 TWRP_REQUIRED_MODULES += \
     parted \
     magiskboot
+
+ifneq ($(TW_OZIP_DECRYPT_KEY),)
+TWRP_REQUIRED_MODULES += \
+    ozip_decrypt
+endif
 
 ifneq ($(TARGET_ARCH), arm64)
     ifneq ($(TARGET_ARCH), x86_64)
