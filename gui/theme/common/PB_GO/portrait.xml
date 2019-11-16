@@ -106,7 +106,11 @@
 			<font resource="font_pb" color="%text_button_color%"/>
 			<image resource="main_button_mount"/>
 		</style>
-		
+
+		<style name="main_button_rename_c">
+			<image resource="main_button_rename_c"/>
+		</style>
+
 		<style name="main_button_settings">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_pb" color="%text_button_color%"/>
@@ -359,6 +363,13 @@
 			<image resource="main_button_half_height_wipe"/>
 		</style>
 
+		
+		<style name="main_button_half_height_full">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_m" color="%text_button_color%"/>
+			<image resource="main_button_half_height_full"/>
+		</style>
+
 		<style name="main_button_half_height_full_width">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_m" color="%text_button_color%"/>
@@ -581,7 +592,7 @@
 				<placement x="93" y="1050"/>
 				<image resource="main_button_mount"/>
 			</image>
-			
+
 			<text style="text_pb">
 				<placement x="250" y="1060"/>
 				<text>{@mount_btn=Mount}</text>
@@ -1112,6 +1123,22 @@
 			</action>
 		</page>
 
+		<page name="reboot_recovery_routine">
+			<action>
+				<action function="set">tw_back=reboot</action>
+				<action function="set">tw_action=reboot</action>
+				<action function="set">tw_action_param=recovery</action>
+				<action function="set">tw_reboot_param=recovery</action>
+				<action function="set">tw_has_action2=0</action>
+				<action function="set">tw_text1={@no_os1=No OS Installed! Are you}</action>
+				<action function="set">tw_text2={@no_osrb=sure you wish to reboot?}</action>
+				<action function="set">tw_action_text1={@rebooting=Rebooting...}</action>
+				<action function="set">tw_complete_text1={@rebooting=Rebooting...}</action>
+				<action function="set">tw_slider_text={@swipe_reboot=Swipe to Reboot}</action>
+				<action function="page">rebootcheck</action>
+			</action>
+		</page>
+
 		<page name="confirm_action">
 			<template name="page"/>
 
@@ -1187,6 +1214,7 @@
 			<template name="progress_bar_wipe"/>
 
 			<button style="main_button_half_height">
+				<condition var1="pb_reboot_recovery" op="!=" var2="1"/>
 				<condition var1="tw_has_cancel" var2="1"/>
 				<placement x="%center_x%" y="%row21a_y%"/>
 				<text>{@cancel_btn=Cancel}</text>
@@ -1293,6 +1321,16 @@
 				<actions>
 					<action function="set">tw_back=main2</action>
 					<action function="page">reboot_system_routine</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height">
+				<condition var1="pb_reboot_recovery" var2="1"/>
+				<placement x="%center_x%" y="%row21a_y%"/>
+				<text>{@reboot_recovery_btn=Reboot Recovery}</text>
+				<actions>
+					<action function="set">tw_back=main2</action>
+					<action function="page">reboot_recovery_routine</action>
 				</actions>
 			</button>
 
@@ -3966,6 +4004,13 @@
 				<text>{@advanced_hdr=Advanced}</text>
 			</text>
 
+			<button style="main_button_rename_c">
+				<placement x="927" y="93"/>
+				<action function="getprop">"ro.product.device"</action>
+				<action function="set">pb_codename_change=%pb_prop_value%</action>
+				<action function="page">rename_c</action>
+			</button>
+
 			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="296"/>
 				<action function="page">copylog</action>
@@ -4131,6 +4176,66 @@
 			<action>
 				<touch key="back"/>
 				<action function="page">main</action>
+			</action>
+		</page>
+
+		<page name="rename_c">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@pb_dev_name=PBRP Device Codename Changer}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@fm_rename_hdr=Rename} %tw_fm_type%</text>
+			</text>
+
+			<text style="text_m_accent">
+				<placement x="%indent%" y="%row2_y%"/>
+				<text>{@name=Name:}</text>
+			</text>
+
+			<input>
+				<placement x="%indent%" y="%row2_input_y%" w="%content_width%" h="%input_height%"/>
+				<text>%pb_codename_change%</text>
+				<data name="pb_codename_change"/>
+				<restrict minlen="1" maxlen="128"/>
+				<actions>
+					<action function="set">tw_back=advanced</action>
+					<action function="set">tw_action=change_codename</action>
+					<action function="set">tw_text1={@pb_dev_name_change=Wanna Change Your device Codename?}</action>
+					<action function="set">tw_action_text1={@pb_dev_change=Changing Device Codename from %pb_prop_value% to %pb_codename_change%}</action>
+
+					<action function="set">pb_reboot_recovery=1</action>
+					<action function="set">tw_complete_text1={@pb_dev_changed=Device Codename Changed to %pb_codename_change%}</action>
+					<action function="set">tw_text4={@pb_dev_reboot=A Reboot is mandatory After switching Codenames}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</input>
+
+			<fill color="%accent_color%">
+				<placement x="%indent%" y="row4_y" w="%content_width%" h="input_line_width" placement="1"/>
+			</fill>
+
+			<button style="main_button_half_height">
+				<placement x="%indent%" y="%row9_y%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="page">advanced</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">advanced</action>
 			</action>
 		</page>
 		
@@ -6146,6 +6251,7 @@
 
 			<action>
 				<condition var1="tw_filename1" op="modified"/>
+				<action function="exten">%tw_filename1%</action>
 				<action function="page">filemanageroptions</action>
 			</action>
 		</page>
@@ -6172,6 +6278,78 @@
 				<placement x="%indent%" y="%row3_y%"/>
 				<text>%tw_filename1%</text>
 			</text>
+			
+			<button style="main_button_half_height_full">
+				<contitions>
+					<condition var1="tw_fm_isfolder" var2="0"/>
+					<condition var1="pb_file_extn" var2="zip"/>
+				</conditions>
+				<placement x="%indent%" y="%row9a_y%"/>
+				<text>{@fm_open_file_btn=Read File}</text>
+				<template name="console"/>
+				<actions>
+					<action function="set">tw_filemanager_command=cat</action>
+					<action function="set">tw_fm_text1={@fm_reading=Reading}</action>
+					<action function="page">readfile</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height">
+				<conditions>
+					<condition var1="tw_fm_isfolder" var2="0"/>
+					<condition var1="pb_file_extn" var2="zip"/>
+				</conditions>
+				<placement x="%center_x%" y="%row12a_y%"/>
+				<text>{@fm_unzip_btn=Unzip}</text>
+				<actions>
+					<action function="set">tw_filemanager_command=unzip</action>
+					<action function="set">tw_fm_text1={@fm_unzipping=Unzipping}</action>
+					<action function="set">pb_filemanager_unzip=1</action>
+					<action function="page">choosedestinationfolderforunzip</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height">
+				<conditions>
+					<condition var1="tw_fm_isfolder" var2="1"/>
+				</conditions>
+				<placement x="%center_x%" y="%row12a_y%"/>
+				<text>{@fm_pb_make=Make Folder}</text>
+				<actions>
+					<action function="set">tw_filemanager_command=mkdir</action>
+					<action function="set">tw_fm_text1={@fm_pb_mk=Making Folder}</action>
+					<action function="set">pb_filemanager_unzip=3</action>
+					<action function="set">tw_include_text3=0</action>
+					<action function="page">mkd</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height">
+				<condition var1="tw_fm_isfolder" var2="1"/>
+				<placement x="%indent%" y="%row12a_y%"/>
+				<text>{@fm_zip_btn=Zip}</text>
+				<actions>
+					<action function="set">tw_filemanager_command=cd "%tw_file_location1%" &amp;&amp; </action>
+					<action function="set">tw_fm_text1={@fm_zipping=Zipping}</action>
+					<action function="set">pb_filemanager_unzip=2</action>
+					<action function="page">zipname</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height">
+				<conditions>
+					<condition var1="tw_fm_isfolder" var2="1"/>
+				</conditions>
+				<placement x="%center_x%" y="%row12a_y%"/>
+				<text>{@fm_pb_make=Make Folder}</text>
+				<actions>
+					<action function="set">tw_filemanager_command=mkdir</action>
+					<action function="set">tw_fm_text1={@fm_pb_mk=Making Folder}</action>
+					<action function="set">pb_filemanager_unzip=3</action>
+					<action function="set">tw_include_text3=0</action>
+					<action function="page">mkd</action>
+				</actions>
+			</button>
 
 			<button style="main_button_half_height">
 				<condition var1="tw_fm_isfolder" var2="0"/>
@@ -6179,6 +6357,7 @@
 				<text>{@fm_copy_file_btn=Copy File}</text>
 				<actions>
 					<action function="set">tw_filemanager_command=cp</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text1={@fm_copying=Copying}</action>
 					<action function="page">choosedestinationfolder</action>
 				</actions>
@@ -6191,6 +6370,7 @@
 				<actions>
 					<action function="set">tw_filemanager_command=cd "%tw_file_location1%" &amp;&amp; cd .. &amp;&amp; cp -R</action>
 					<action function="set">tw_fm_text1={@fm_copying=Copying}</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="page">choosedestinationfolder</action>
 				</actions>
 			</button>
@@ -6201,6 +6381,7 @@
 				<actions>
 					<action function="set">tw_filemanager_command=mv</action>
 					<action function="set">tw_fm_text1={@fm_moving=Moving}</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="page">choosedestinationfolder</action>
 				</actions>
 			</button>
@@ -6212,6 +6393,7 @@
 					<action function="set">tw_filemanager_command=chmod 755</action>
 					<action function="set">tw_fm_text1={@fm_chmod755ing=chmod 755}</action>
 					<action function="set">tw_fm_text2=</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text3=</action>
 					<action function="set">tw_include_text3=0</action>
 					<action function="set">tw_back=filemanageroptions</action>
@@ -6225,6 +6407,7 @@
 				<actions>
 					<action function="set">tw_filemanager_rename=0000</action>
 					<action function="set">tw_fm_text2=</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text3=</action>
 					<action function="set">tw_include_text3=0</action>
 					<action function="set">tw_back=filemanageroptions</action>
@@ -6238,6 +6421,7 @@
 				<actions>
 					<action function="set">tw_filemanager_command=rm -rf</action>
 					<action function="set">tw_fm_text1={@fm_deleting=Deleting}</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text2=</action>
 					<action function="set">tw_fm_text3=</action>
 					<action function="set">tw_include_text3=0</action>
@@ -6252,6 +6436,7 @@
 				<text>{@fm_rename_file_btn=Rename File}</text>
 				<actions>
 					<action function="set">tw_filemanager_rename=tw_selection1</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text1={@fm_renaming=Renaming}</action>
 					<action function="set">tw_filemanager_command=mv</action>
 					<action function="page">filemanagerrenamefile</action>
@@ -6264,11 +6449,59 @@
 				<text>{@fm_rename_folder_btn=Rename Folder}</text>
 				<actions>
 					<action function="set">tw_filemanager_rename=tw_selection1</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text1={@fm_renaming=Renaming}</action>
 					<action function="set">tw_filemanager_command=cd "%tw_file_location1%" &amp;&amp; cd .. &amp;&amp; mv</action>
 					<action function="page">filemanagerrenamefolder</action>
 				</actions>
 			</button>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">filemanagerlist</action>
+			</action>
+		</page>
+		
+		<page name="readfile">
+			<template name="page"/>
+		
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@fm_hdr=File Manager}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@fm_reading=Reading File}</text>
+			</text>
+			
+			<console>
+				<placement x="%indent%" y="285" w="%content_width%" h="1450"/>
+			</console>
+
+			<action>
+				<action function="readfile"></action>
+			</action>
+
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+			
+			<action>
+					<touch key="volup" />
+					<action function="flashlight" />
+			</action>
 
 			<action>
 				<touch key="home"/>
@@ -6292,6 +6525,58 @@
 			<text style="text_m">
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
 				<text>{@fm_sel_dest=Select Destination Folder}</text>
+			</text>
+
+			<template name="sort_options"/>
+
+			<fileselector>
+				<placement x="%indent%" y="%row3_y%" w="%content_width%" h="%fileselector_filemanager_height%"/>
+				<text>%tw_file_location2%</text>
+				<filter folders="1" files="0"/>
+				<path name="tw_file_location2" default="/"/>
+				<data name="tw_filename2"/>
+				<selection name="tw_selection2"/>
+			</fileselector>
+
+			<button style="fab">
+				<image resource="fab_selectfolder"/>
+				<actions>
+					<action function="set">tw_fm_text2=to</action>
+					<action function="set">tw_fm_text3=%tw_file_location2%</action>
+					<action function="set">tw_include_text3=1</action>
+					<action function="set">pb_filemanager_unzip=0</action>
+					<action function="set">tw_back=filemanageroptions</action>
+					<action function="page">filemanagerconfirm</action>
+				</actions>
+			</button>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">filemanageroptions</action>
+			</action>
+		</page>
+
+		<page name="choosedestinationfolderforunzip">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@fm_hdr=File Manager}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@fm_sel_dest=Select Destination Folder}</text>
+			</text>
+
+			<text style="text_m_accent">
+				<placement x="%indent%" y="%row3a_y%"/>
+				<text>{@name=Name:}</text>
 			</text>
 
 			<template name="sort_options"/>
@@ -6586,13 +6871,153 @@
 			</action>
 
 			<action>
-				<condition var1="tw_include_text3" var2="0"/>
+				<conditions>
+					<condition var1="tw_include_text3" var2="0"/>
+					<condition var1="pb_filemanager_unzip" var2="0"/>
+				</conditions>
 				<action function="cmd">%tw_filemanager_command% "%tw_filename1%"</action>
 			</action>
 
 			<action>
-				<condition var1="tw_include_text3" var2="1"/>
+				<conditions>
+					<condition var1="tw_include_text3" var2="1"/>
+					<condition var1="pb_filemanager_unzip" var2="0"/>
+				</conditions>
 				<action function="cmd">%tw_filemanager_command% "%tw_filename1%" "%tw_fm_text3%"</action>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_include_text3" var2="1"/>
+					<condition var1="pb_filemanager_unzip" var2="1"/>
+				</conditions>
+				<action function="cmd">%tw_filemanager_command% "%tw_filename1%" -d "%tw_fm_text3%"</action>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_include_text3" var2="1"/>
+					<condition var1="pb_filemanager_unzip" var2="2"/>
+				</conditions>
+				<action function="cmd">%tw_filemanager_command% zip -r %tw_file_location2%/%pb_zip_new_name% *</action>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_include_text3" var2="0"/>
+					<condition var1="pb_filemanager_unzip" var2="3"/>
+				</conditions>
+				<action function="cmd">%tw_filemanager_command% %tw_filename1%/%pb_zip_new_name%</action>
+			</action>
+		</page>
+
+		<page name="zipname">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@fm_hdr=File Manager}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@pb_zip_name=Zipping} %tw_filename1%</text>
+			</text>
+
+			<text style="text_m_accent">
+				<placement x="%indent%" y="%row2_y%"/>
+				<text>{@name=Name:}</text>
+			</text>
+
+			<input>
+				<placement x="%indent%" y="%row2_input_y%" w="%content_width%" h="%input_height%"/>
+				<text>%tw_filename1%</text>
+				<data name="tw_filemanager_rename"/>
+				<restrict minlen="1" maxlen="128"/>
+				<actions>
+					<action function="set">tw_fm_text2=to</action>
+					<action function="set">pb_zip_new_name="%tw_filemanager_rename%"</action>
+					<action function="set">tw_include_text3=1</action>
+					<action function="set">tw_back=filemanageroptions</action>
+					<action function="page">choosedestinationfolderforunzip</action>
+				</actions>
+			</input>
+
+			<fill color="%accent_color%">
+				<placement x="%indent%" y="row4_y" w="%content_width%" h="input_line_width" placement="1"/>
+			</fill>
+
+			<button style="main_button_half_height">
+				<placement x="%indent%" y="%row10_y%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="page">filemanageroptions</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">filemanageroptions</action>
+			</action>
+		</page>
+
+		<page name="mkd">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@fm_hdr=File Manager}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@fm_pb_mk=Making Folder} %tw_filename1%</text>
+			</text>
+
+			<text style="text_m_accent">
+				<placement x="%indent%" y="%row2_y%"/>
+				<text>{@name=Name:}</text>
+			</text>
+
+			<input>
+				<placement x="%indent%" y="%row2_input_y%" w="%content_width%" h="%input_height%"/>
+				<text>%tw_filename1%</text>
+				<data name="tw_filemanager_rename"/>
+				<restrict minlen="1" maxlen="128"/>
+				<actions>
+					<action function="set">tw_fm_text2=to</action>
+					<action function="set">pb_zip_new_name="%tw_filemanager_rename%"</action>
+					<action function="set">tw_include_text3=0</action>
+					<action function="set">tw_back=filemanageroptions</action>
+					<action function="page">filemanagerconfirm</action>
+				</actions>
+			</input>
+
+			<fill color="%accent_color%">
+				<placement x="%indent%" y="row4_y" w="%content_width%" h="input_line_width" placement="1"/>
+			</fill>
+
+			<button style="main_button_half_height">
+				<placement x="%indent%" y="%row10_y%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="page">filemanageroptions</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">filemanageroptions</action>
 			</action>
 		</page>
 
