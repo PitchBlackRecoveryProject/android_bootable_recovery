@@ -1,0 +1,3 @@
+files:
+  - source: /gui/theme/common/languages/*.xml
+    translation: /gui/theme/common/languages/%two_letters_code%.xml
