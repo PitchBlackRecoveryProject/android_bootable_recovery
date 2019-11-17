@@ -1851,19 +1851,28 @@ void TWFunc::Read_Write_Specific_Partition(string path, string partition_name, b
 	string Read_Write, oldfile, null;
 	unsigned long long Remain, Remain_old;
 	oldfile = path + ".bak";
-	if (backup)
-	Read_Write = "dump_image " + Partition->Actual_Block_Device + " " + path;
+	if (backup) {
+#ifdef PB_FORCE_DD_FLASH
+		Read_Write = "dd if=" + Partition->Actual_Block_Device + " of=" + path + " bs=6291456 count=1";
+#else
+		Read_Write = "dump_image " + Partition->Actual_Block_Device + " " + path;
+#endif
+	}
 	else {
-    Read_Write = "flash_image " + Partition->Actual_Block_Device + " " + path;
-   if (TWFunc::Path_Exists(oldfile)) {
-    Remain_old = TWFunc::Get_File_Size(oldfile);
-    Remain = TWFunc::Get_File_Size(path);
-    if (Remain_old < Remain) {
-    return;
-    }
-    }
-    TWFunc::Exec_Cmd(Read_Write, null);
-	return;
+#ifdef PB_FORCE_DD_FLASH
+		Read_Write = "dd if=" + path + " of=" + Partition->Actual_Block_Device;
+#else
+		Read_Write = "flash_image " + Partition->Actual_Block_Device + " " + path;
+#endif
+		if (TWFunc::Path_Exists(oldfile)) {
+			Remain_old = TWFunc::Get_File_Size(oldfile);
+			Remain = TWFunc::Get_File_Size(path);
+			if (Remain_old < Remain) {
+				return;
+			}
+		}
+		TWFunc::Exec_Cmd(Read_Write, null);
+		return;
 	}
 	if (TWFunc::Path_Exists(path))
 	unlink(path.c_str());
