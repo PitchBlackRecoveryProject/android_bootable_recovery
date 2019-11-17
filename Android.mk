@@ -74,6 +74,11 @@ ifeq ($(PB_DEVICE_MODEL),)
 endif
 LOCAL_CFLAGS += -DPLATFORM_SDK_VERSION=$(PLATFORM_SDK_VERSION)
 
+
+ifeq ($(PB_FORCE_DD_FLASH),true)
+    LOCAL_CFLAGS += -DPB_FORCE_DD_FLASH='true'
+endif
+
 LOCAL_SRC_FILES := \
     twrp.cpp \
     fixContexts.cpp \
