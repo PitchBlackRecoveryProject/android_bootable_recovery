@@ -80,8 +80,9 @@ public:
 	static void Replace_Word_In_File(string file_path, string search, string word); // Replace string in file
 	static void htc_dumlock_restore_original_boot(void);                        // Restores the backup of boot from HTC Dumlock
 	static void htc_dumlock_reflash_recovery_to_boot(void);                     // Reflashes the current recovery to boot
-	static bool Repack_Image(string mount_point);
-	static bool Unpack_Image(string mount_point);
+	static bool Repack_Image(string mount_point, bool part = true);
+	static bool Unpack_Repack_ramdisk(bool repack);
+	static bool Unpack_Image(string mount_point, bool part = true);
 	static void Deactivation_Process(void);
 	static bool Symlink(string src, string dest);
 	static void Read_Write_Specific_Partition(string path, string partition_name, bool backup);
