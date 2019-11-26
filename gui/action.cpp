@@ -1029,12 +1029,13 @@ void GUIAction::backup_before_flash()
     char getvalue[PROPERTY_VALUE_MAX];
     property_get("ro.boot.fastboot", getvalue, "");
     std::string bootmode(getvalue);
-	if (DataManager::GetIntValue(TW_HAS_INJECTTWRP) == 1 && DataManager::GetIntValue(TW_INJECT_AFTER_ZIP) == 1 && bootmode != "1") {
+	if (((DataManager::GetIntValue(TW_HAS_INJECTTWRP) == 1 && DataManager::GetIntValue(TW_INJECT_AFTER_ZIP) == 1) || DataManager::GetIntValue("pb_theming_mode") == 1)
+		 && bootmode != "1") {
 		if (simulate) {
 			simulate_progress_bar();
 		} else {
 			TWPartition* Boot = PartitionManager.Find_Partition_By_Path("/boot");
-			std::string target_image = "/tmp/backup_boot_twrp.img";
+			std::string target_image = "/tmp/boot.img";
 			PartitionSettings part_settings;
 			part_settings.Part = Boot;
 			part_settings.Backup_Folder = "/tmp/";
@@ -1045,18 +1046,20 @@ void GUIAction::backup_before_flash()
 			part_settings.progress = NULL;
 			pid_t not_a_pid = 0;
 			if (!Boot->Backup(&part_settings, &not_a_pid))
-            {
-            return;
-            }
+            		{
+            			return;
+            		}
 			else {
-			    std::string backed_up_image = part_settings.Backup_Folder;
-			    backed_up_image += Boot->Backup_FileName;
-			    target_image = "/tmp/backup_boot_twrp.img";
-			    if (rename(backed_up_image.c_str(), target_image.c_str()) != 0) {
-				    LOGERR("Failed to rename '%s' to '%s'\n", backed_up_image.c_str(), target_image.c_str());
-                }
+				std::string backed_up_image = part_settings.Backup_Folder;
+				backed_up_image += Boot->Backup_FileName;
+				target_image = "/tmp/boot.img";
+				if (rename(backed_up_image.c_str(), target_image.c_str()) != 0) {
+					LOGERR("Failed to rename '%s' to '%s'\n", backed_up_image.c_str(), target_image.c_str());
+				}
 			}
 		}
+		if (DataManager::GetIntValue("pb_theming_mode") == 1)
+			DataManager::SetValue("pb_theming_mode", "0");
 		gui_msg("done=Done.");
 	}
 }
@@ -1066,8 +1069,9 @@ int GUIAction::reinject_after_flash()
     char getvalue[PROPERTY_VALUE_MAX];
     property_get("ro.boot.fastboot", getvalue, "");
     std::string bootmode(getvalue);
-	if (DataManager::GetIntValue(TW_HAS_INJECTTWRP) == 1 && DataManager::GetIntValue(TW_INJECT_AFTER_ZIP) == 1 && bootmode != "1") {
-        if (!TWFunc::Path_Exists("/tmp/backup_boot_twrp.img")) {
+	if (((DataManager::GetIntValue(TW_HAS_INJECTTWRP) == 1 && DataManager::GetIntValue(TW_INJECT_AFTER_ZIP) == 1) || DataManager::GetIntValue("pb_theming_mode") == 1)
+		 && bootmode != "1") {
+        if (!TWFunc::Path_Exists("/tmp/boot.img")) {
             LOGERR("Backup image doesn't exist so TWRP is unable to restore it!");
             return 0;
         }
@@ -1076,7 +1080,7 @@ int GUIAction::reinject_after_flash()
 		operation_start("Repack Image");
 		if (!simulate)
 		{
-			std::string path = "/tmp/backup_boot_twrp.img";
+			std::string path = "/tmp/boot.img";
 			Repack_Options_struct Repack_Options;
 			Repack_Options.Disable_Verity = false;
 			Repack_Options.Disable_Force_Encrypt = false;
@@ -1089,6 +1093,8 @@ int GUIAction::reinject_after_flash()
 		} else
 			simulate_progress_bar();
 		op_status = 0;
+		if (DataManager::GetIntValue("pb_theming_mode") == 1)
+			DataManager::SetValue("pb_theming_mode", "0");
 		operation_end(op_status);
         return 1;
 	}
@@ -2209,7 +2215,13 @@ int GUIAction::unpack(std::string arg __unused)
 	if (simulate) {
 		simulate_progress_bar();
 	} else {
-		TWFunc::Unpack_Image("/recovery");
+		if (DataManager::GetIntValue("tw_has_boot_slots")) {
+			DataManager::SetValue("pb_theming_mode", "1");
+			backup_before_flash();
+			TWFunc::Unpack_Image("/tmp/boot.img", false);
+		}
+		else
+			TWFunc::Unpack_Image("/recovery");
 	}
 	operation_end(0);
 	return 0;
@@ -2221,7 +2233,15 @@ int GUIAction::repack(std::string arg __unused)
 	if (simulate) {
 		simulate_progress_bar();
 	} else {
-		TWFunc::Repack_Image("/recovery");
+		DataManager::SetValue("pb_theming_mode", "1");
+		if (DataManager::GetIntValue("tw_has_boot_slots")) {
+			if(!TWFunc::Repack_Image("/tmp/boot.img", false))
+				LOGINFO("Repack: failed to repack Ramdisk\n");
+			reinject_after_flash();
+			DataManager::SetValue("pb_theming_mode", "0");
+		}
+		else
+			TWFunc::Repack_Image("/recovery");
 	}
 	operation_end(0);
 	return 0;
@@ -2405,7 +2425,7 @@ int GUIAction::change_codename(std::string arg __unused)
 		//Removal of Newlines from values
 		codename.erase(std::remove(codename.begin(), codename.end(), '\n'), codename.end());
 		new_codename.erase(std::remove(new_codename.begin(), new_codename.end(), '\n'), new_codename.end());
-		if (!DataManager::GetIntValue("tw_ab_device"))
+		if (!DataManager::GetIntValue("tw_has_boot_slots"))
 		{
 			part_name = "/recovery";
 			values = 1;
