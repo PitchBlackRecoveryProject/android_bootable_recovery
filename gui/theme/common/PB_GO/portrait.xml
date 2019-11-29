@@ -812,6 +812,12 @@
 				<data variable="tw_inject_after_zip"/>
 			</checkbox>
 
+			<checkbox>
+				<placement x="%indent%" y="%row17_y%"/>
+				<text>{@pb_enable_dmesg_logging=Enable Dmesg logging after Flash}</text>
+				<data variable="pb_inlclude_dmesg_logging"/>
+			</checkbox>
+
 			<button style="main_button_half_height">
 				<placement x="%indent%" y="%row18a_y%"/>
 				<text>{@zip_add_btn=Add more Zips}</text>

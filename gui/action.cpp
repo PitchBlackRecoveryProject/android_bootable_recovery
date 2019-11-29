@@ -697,9 +697,9 @@ int GUIAction::copylog(std::string arg __unused)
 		dst = string(path);
 		TWFunc::copy_file("/tmp/recovery.log", dst.c_str(), 0755);
 		tw_set_default_metadata(dst.c_str());
-		if (copy_kernel_log) {
+		if (copy_kernel_log || DataManager::GetIntValue("pb_inlclude_dmesg_logging")) {
 			std::string dmesgDst = path;
-			dmesgDst.replace(dmesgDst.find("recovery_"),dmesgDst.find("recovery_")+7,"dmesg");
+			dmesgDst.replace(dmesgDst.find_last_of("/")+1,8,"dmesg");
 			std::string dmesgCmd = "/sbin/dmesg";
 			std::string result;
 			TWFunc::Exec_Cmd(dmesgCmd, result);
@@ -1137,7 +1137,7 @@ int GUIAction::ozip_decrypt(string zip_path)
 
 int GUIAction::flash(std::string arg)
 {
-    backup_before_flash();
+	backup_before_flash();
 	int i, ret_val = 0, wipe_cache = 0;
 	// We're going to jump to this page first, like a loading page
 	gui_changePage(arg);
@@ -1191,6 +1191,8 @@ int GUIAction::flash(std::string arg)
 		}
 		DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
 	}
+	gui_highlight("pb_saving_log=Saving Taking log...\n");
+	copylog();
 	DataManager::SetValue(TRB_EN, 0); //Reset At end
 	operation_end(ret_val);
 	// This needs to be after the operation_end call so we change pages before we change variables that we display on the screen
