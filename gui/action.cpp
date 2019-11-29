@@ -673,17 +673,40 @@ int GUIAction::copylog(std::string arg __unused)
 	operation_start("Copy Log");
 	if (!simulate)
 	{
+		time_t tm;
+		char path[256];
+		int path_len;
+
 		string dst, curr_storage;
 		int copy_kernel_log = 0;
 
 		DataManager::GetValue("tw_include_kernel_log", copy_kernel_log);
 		PartitionManager.Mount_Current_Storage(true);
 		curr_storage = DataManager::GetCurrentStoragePath();
-		dst = curr_storage + "/recovery.log";
+
+		snprintf(path, sizeof(path), "%s/PBRP/logs/", curr_storage.c_str());
+		if (!TWFunc::Path_Exists(path))
+			TWFunc::Recursive_Mkdir(path);
+		curr_storage = path;
+
+		tm = time(NULL);
+		path_len = strlen(path);
+
+		strftime(path+path_len, sizeof(path)-path_len, "recovery_%Y-%m-%d-%H-%M-%S.log", localtime(&tm));
+
+		dst = string(path);
 		TWFunc::copy_file("/tmp/recovery.log", dst.c_str(), 0755);
 		tw_set_default_metadata(dst.c_str());
-		if (copy_kernel_log)
-			TWFunc::copy_kernel_log(curr_storage);
+		if (copy_kernel_log) {
+			std::string dmesgDst = path;
+			dmesgDst.replace(dmesgDst.find("recovery_"),dmesgDst.find("recovery_")+7,"dmesg");
+			std::string dmesgCmd = "/sbin/dmesg";
+			std::string result;
+			TWFunc::Exec_Cmd(dmesgCmd, result);
+			TWFunc::write_to_file(dmesgDst, result);
+			gui_msg(Msg("copy_kernel_log=Copied kernel log to {1}")(dmesgDst));
+			tw_set_default_metadata(dmesgDst.c_str());
+		}
 		sync();
 		gui_msg(Msg("copy_log=Copied recovery log to {1}")(dst));
 	} else
