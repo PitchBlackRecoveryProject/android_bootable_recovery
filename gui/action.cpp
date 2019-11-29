@@ -677,12 +677,13 @@ int GUIAction::copylog(std::string arg __unused)
 		char path[256];
 		int path_len;
 
-		string dst, curr_storage;
+		string dst, curr_storage, cache_strg;
 		int copy_kernel_log = 0;
 
 		DataManager::GetValue("tw_include_kernel_log", copy_kernel_log);
 		PartitionManager.Mount_Current_Storage(true);
 		curr_storage = DataManager::GetCurrentStoragePath();
+		cache_strg = TWFunc::get_cache_dir() + "/PBRP/logs/";
 
 		snprintf(path, sizeof(path), "%s/PBRP/logs/", curr_storage.c_str());
 		if (!TWFunc::Path_Exists(path))
@@ -693,9 +694,18 @@ int GUIAction::copylog(std::string arg __unused)
 		path_len = strlen(path);
 
 		strftime(path+path_len, sizeof(path)-path_len, "recovery_%Y-%m-%d-%H-%M-%S.log", localtime(&tm));
-
 		dst = string(path);
 		TWFunc::copy_file("/tmp/recovery.log", dst.c_str(), 0755);
+		if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0)
+		{
+			LOGINFO("PBRP: Data Encrypted\n");
+			gui_msg(Msg("pb_copy_log_cache=Copying Logs to Cache as well."));
+			if (!TWFunc::Path_Exists(cache_strg))
+				TWFunc::Recursive_Mkdir(cache_strg);
+			cache_strg += dst.substr(dst.find_last_of("/")+1);
+			TWFunc::copy_file("/tmp/recovery.log", cache_strg.c_str(), 0755);
+		}
+
 		tw_set_default_metadata(dst.c_str());
 		if (copy_kernel_log || DataManager::GetIntValue("pb_inlclude_dmesg_logging")) {
 			std::string dmesgDst = path;
@@ -704,6 +714,10 @@ int GUIAction::copylog(std::string arg __unused)
 			std::string result;
 			TWFunc::Exec_Cmd(dmesgCmd, result);
 			TWFunc::write_to_file(dmesgDst, result);
+			if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
+				cache_strg.replace(cache_strg.find_last_of("/")+1,8,"dmesg");
+				TWFunc::copy_file(dmesgDst, cache_strg.c_str(), 0755);
+			}
 			gui_msg(Msg("copy_kernel_log=Copied kernel log to {1}")(dmesgDst));
 			tw_set_default_metadata(dmesgDst.c_str());
 		}
@@ -1192,7 +1206,7 @@ int GUIAction::flash(std::string arg)
 		DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
 	}
 	gui_highlight("pb_saving_log=Saving Taking log...\n");
-	copylog();
+	copylog("rom");
 	DataManager::SetValue(TRB_EN, 0); //Reset At end
 	operation_end(ret_val);
 	// This needs to be after the operation_end call so we change pages before we change variables that we display on the screen

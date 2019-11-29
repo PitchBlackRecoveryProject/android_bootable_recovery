@@ -853,6 +853,7 @@
 		<string name="pb_dev_change">Changing Device Codename from %pb_prop_value% to %pb_codename_change%</string>
 		<string name="pb_saving_log">Saving Taking log...</string>
 		<string name="pb_enable_dmesg_logging">Enable Dmesg logging after Flash</string>
+		<string name="pb_copy_log_cache">Copying Logs to Cache as well.</string>
 		<string name="pb_dev_changed">Device Codename Changed to %pb_codename_change%</string>
 		<string name="pb_dev_reboot">A Reboot is mandatory After switching Codenames</string>
 		<string name="pb_dev_name">PBRP Device Codename Changer</string>
