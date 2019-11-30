@@ -685,7 +685,7 @@ int GUIAction::copylog(std::string arg __unused)
 		curr_storage = DataManager::GetCurrentStoragePath();
 		cache_strg = TWFunc::get_cache_dir() + "/PBRP/logs/";
 
-		snprintf(path, sizeof(path), "%s/PBRP/logs/", curr_storage.c_str());
+		snprintf(path, sizeof(path), "%s/PBRP/logs/recovery_%s", curr_storage.c_str(), arg.c_str());
 		if (!TWFunc::Path_Exists(path))
 			TWFunc::Recursive_Mkdir(path);
 		curr_storage = path;
@@ -693,7 +693,7 @@ int GUIAction::copylog(std::string arg __unused)
 		tm = time(NULL);
 		path_len = strlen(path);
 
-		strftime(path+path_len, sizeof(path)-path_len, "recovery_%Y-%m-%d-%H-%M-%S.log", localtime(&tm));
+		strftime(path+path_len, sizeof(path)-path_len, "_%Y-%m-%d-%H-%M-%S.log", localtime(&tm));
 		dst = string(path);
 		TWFunc::copy_file("/tmp/recovery.log", dst.c_str(), 0755);
 		if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0)
@@ -1153,12 +1153,13 @@ int GUIAction::flash(std::string arg)
 {
 	backup_before_flash();
 	int i, ret_val = 0, wipe_cache = 0;
+	string zip_filename = "";
 	// We're going to jump to this page first, like a loading page
 	gui_changePage(arg);
 	for (i=0; i<zip_queue_index; i++) {
 		string zip_path = zip_queue[i];
 		size_t slashpos = zip_path.find_last_of('/');
-		string zip_filename = (slashpos == string::npos) ? zip_path : zip_path.substr(slashpos + 1);
+		zip_filename = (slashpos == string::npos) ? zip_path : zip_path.substr(slashpos + 1);
 		operation_start("Flashing");
         if((zip_path.substr(zip_path.size() - 4, 4))=="ozip")
 		{
@@ -1206,7 +1207,7 @@ int GUIAction::flash(std::string arg)
 		DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
 	}
 	gui_highlight("pb_saving_log=Saving Taking log...\n");
-	copylog("rom");
+	copylog(zip_filename);
 	DataManager::SetValue(TRB_EN, 0); //Reset At end
 	operation_end(ret_val);
 	// This needs to be after the operation_end call so we change pages before we change variables that we display on the screen
