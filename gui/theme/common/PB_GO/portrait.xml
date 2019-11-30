@@ -813,7 +813,15 @@
 			</checkbox>
 
 			<checkbox>
-				<placement x="%indent%" y="%row17_y%"/>
+				<condition var1="tw_has_injecttwrp" var2="1"/>
+				<placement x="%indent%" y="%row16a_y%"/>
+				<text>{@pb_enable_dmesg_logging=Enable Dmesg logging after Flash}</text>
+				<data variable="pb_inlclude_dmesg_logging"/>
+			</checkbox>
+
+			<checkbox>
+				<condition var1="tw_has_injecttwrp" op="!=" var2="1"/>
+				<placement x="%indent%" y="%row15_y%"/>
 				<text>{@pb_enable_dmesg_logging=Enable Dmesg logging after Flash}</text>
 				<data variable="pb_inlclude_dmesg_logging"/>
 			</checkbox>
