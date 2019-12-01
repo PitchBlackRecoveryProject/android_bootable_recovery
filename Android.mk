@@ -442,7 +442,8 @@ TWRP_REQUIRED_MODULES += \
     simg2img_twrp \
     libbootloader_message_twrp \
     init.recovery.hlthchrg.rc \
-    init.recovery.service.rc
+    init.recovery.service.rc \
+    startup.sh
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
 TWRP_REQUIRED_MODULES += \
     init.recovery.ldconfig.rc

@@ -121,6 +121,13 @@ service predecrypt /sbin/predecrypt.sh
     group root
     seclabel u:r:recovery:s0
 
+service pb.startup /sbin/startup.sh
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
 # Always start adbd on userdebug and eng builds
 on property:ro.debuggable=1
     #write /sys/class/android_usb/android0/enable 1
@@ -135,3 +142,4 @@ on property:service.adb.root=1
 
 on init
     start predecrypt
+    start pb.startup
