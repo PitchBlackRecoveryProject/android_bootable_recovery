@@ -129,8 +129,8 @@ int main(int argc, char **argv) {
 	// Load up all the resources
 	gui_loadResources();
 
-    gui_print("********************************* \n");
-    gui_print("PitchBlack Recovery: Welcome! ^_^ \n");
+	gui_print("********************************* \n");
+	gui_print("PitchBlack Recovery: Welcome! ^_^ \n");
 	gui_print("Maintained By PBRP Team \n");
 	gui_print("********************************* \n");
 	string null;
@@ -280,8 +280,6 @@ int main(int argc, char **argv) {
 		else
 			strcpy(encrypt_status, "uncrypted");
 	}
-	else if (strcmp(encrypt_status, "encrypted") == 0 && out.empty())
-		strcpy(encrypt_status, "uncrypted");
 	gui_msg(Msg(msg::kProcess,"pb_encrypt_st=Encryption Status : {1}")(encrypt_status));
 
 #ifdef TW_HAS_MTP

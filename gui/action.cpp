@@ -673,17 +673,54 @@ int GUIAction::copylog(std::string arg __unused)
 	operation_start("Copy Log");
 	if (!simulate)
 	{
-		string dst, curr_storage;
+		time_t tm;
+		char path[256];
+		int path_len;
+
+		string dst, curr_storage, cache_strg;
 		int copy_kernel_log = 0;
 
 		DataManager::GetValue("tw_include_kernel_log", copy_kernel_log);
 		PartitionManager.Mount_Current_Storage(true);
 		curr_storage = DataManager::GetCurrentStoragePath();
-		dst = curr_storage + "/recovery.log";
+		cache_strg = TWFunc::get_cache_dir() + "/PBRP/logs/";
+
+		snprintf(path, sizeof(path), "%s/PBRP/logs/recovery_%s", curr_storage.c_str(), arg.c_str());
+		if (!TWFunc::Path_Exists(path))
+			TWFunc::Recursive_Mkdir(path);
+		curr_storage = path;
+
+		tm = time(NULL);
+		path_len = strlen(path);
+
+		strftime(path+path_len, sizeof(path)-path_len, "_%Y-%m-%d-%H-%M-%S.log", localtime(&tm));
+		dst = string(path);
 		TWFunc::copy_file("/tmp/recovery.log", dst.c_str(), 0755);
+		if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0)
+		{
+			LOGINFO("PBRP: Data Encrypted\n");
+			gui_msg(Msg("pb_copy_log_cache=Copying Logs to Cache as well."));
+			if (!TWFunc::Path_Exists(cache_strg))
+				TWFunc::Recursive_Mkdir(cache_strg);
+			cache_strg += dst.substr(dst.find_last_of("/")+1);
+			TWFunc::copy_file("/tmp/recovery.log", cache_strg.c_str(), 0755);
+		}
+
 		tw_set_default_metadata(dst.c_str());
-		if (copy_kernel_log)
-			TWFunc::copy_kernel_log(curr_storage);
+		if (copy_kernel_log || DataManager::GetIntValue("pb_inlclude_dmesg_logging")) {
+			std::string dmesgDst = path;
+			dmesgDst.replace(dmesgDst.find_last_of("/")+1,8,"dmesg");
+			std::string dmesgCmd = "/sbin/dmesg";
+			std::string result;
+			TWFunc::Exec_Cmd(dmesgCmd, result);
+			TWFunc::write_to_file(dmesgDst, result);
+			if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
+				cache_strg.replace(cache_strg.find_last_of("/")+1,8,"dmesg");
+				TWFunc::copy_file(dmesgDst, cache_strg.c_str(), 0755);
+			}
+			gui_msg(Msg("copy_kernel_log=Copied kernel log to {1}")(dmesgDst));
+			tw_set_default_metadata(dmesgDst.c_str());
+		}
 		sync();
 		gui_msg(Msg("copy_log=Copied recovery log to {1}")(dst));
 	} else
@@ -1114,14 +1151,15 @@ int GUIAction::ozip_decrypt(string zip_path)
 
 int GUIAction::flash(std::string arg)
 {
-    backup_before_flash();
+	backup_before_flash();
 	int i, ret_val = 0, wipe_cache = 0;
+	string zip_filename = "";
 	// We're going to jump to this page first, like a loading page
 	gui_changePage(arg);
 	for (i=0; i<zip_queue_index; i++) {
 		string zip_path = zip_queue[i];
 		size_t slashpos = zip_path.find_last_of('/');
-		string zip_filename = (slashpos == string::npos) ? zip_path : zip_path.substr(slashpos + 1);
+		zip_filename = (slashpos == string::npos) ? zip_path : zip_path.substr(slashpos + 1);
 		operation_start("Flashing");
         if((zip_path.substr(zip_path.size() - 4, 4))=="ozip")
 		{
@@ -1168,6 +1206,8 @@ int GUIAction::flash(std::string arg)
 		}
 		DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
 	}
+	gui_highlight("pb_saving_log=Saving Taking log...\n");
+	copylog(zip_filename);
 	DataManager::SetValue(TRB_EN, 0); //Reset At end
 	operation_end(ret_val);
 	// This needs to be after the operation_end call so we change pages before we change variables that we display on the screen
