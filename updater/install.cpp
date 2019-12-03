@@ -1067,7 +1067,7 @@ static int ApplyParsedPerms(State* state, const char* filename, const struct sta
     } else {
       struct vfs_cap_data cap_data;
       memset(&cap_data, 0, sizeof(cap_data));
-      cap_data.magic_etc = VFS_CAP_REVISION | VFS_CAP_FLAGS_EFFECTIVE;
+      cap_data.magic_etc = VFS_CAP_REVISION_2 | VFS_CAP_FLAGS_EFFECTIVE;
       cap_data.data[0].permitted = (uint32_t)(parsed.capabilities & 0xffffffff);
       cap_data.data[0].inheritable = 0;
       cap_data.data[1].permitted = (uint32_t)(parsed.capabilities >> 32);
