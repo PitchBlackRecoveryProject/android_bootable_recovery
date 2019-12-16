@@ -242,6 +242,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(fixabrecoverybootloop);
 		ADD_ACTION(change_codename);
 		ADD_ACTION(getprop);
+		ADD_ACTION(flush_up_console);
 	}
 
 	// First, get the action
@@ -2542,5 +2543,11 @@ int GUIAction::getprop(std::string arg)
 	}
 	else
 		simulate_progress_bar();
+	return 0;
+}
+
+int GUIAction::flush_up_console(std::string arg __unused)
+{
+	GUIConsole::Clear_For_Retranslation();
 	return 0;
 }

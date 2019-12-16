@@ -6523,18 +6523,20 @@
 			</action>
 			
 			<action>
-					<touch key="volup" />
-					<action function="flashlight" />
+				<touch key="volup" />
+				<action function="flashlight" />
 			</action>
 
 			<action>
 				<touch key="home"/>
 				<action function="page">main</action>
+				<action function="flush_up_console"></action>
 			</action>
 
 			<action>
 				<touch key="back"/>
 				<action function="page">filemanagerlist</action>
+				<action function="flush_up_console"></action>
 			</action>
 		</page>
 
