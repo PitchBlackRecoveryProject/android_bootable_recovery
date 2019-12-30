@@ -2292,8 +2292,6 @@ int GUIAction::flashlight(std::string arg __unused)
 {
 	fstream File;
 	int val=0, max_val=0;
-	DIR* d;
-	struct dirent* de;
 	string str_val,null, file, flashp1 = "/sys/class/leds", flashp2 = "/flashlight", flashpath;
 	string bright = "/brightness", maxpath, max = "/max_brightness";
 	flashpath = flashp1 + flashp2 + bright;
@@ -2304,6 +2302,8 @@ int GUIAction::flashlight(std::string arg __unused)
 	maxpath = PB_TORCH_PATH + max;
 	LOGINFO("Custom Node located at '%s'\n", flashpath.c_str());
 #else
+	DIR* d;
+	struct dirent* de;
 	if (!TWFunc::Path_Exists(flashpath))
 	{
 		d = opendir(flashp1.c_str());
