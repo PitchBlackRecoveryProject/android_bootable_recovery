@@ -757,11 +757,16 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue("pb_verify_incremental_ota_signature", "1");
 	mPersist.SetValue(PB_INCREMENTAL_PACKAGE, "0");
 	mPersist.SetValue(PB_DISABLE_FORCED_ENCRYPTION, "0");
+#ifdef PB_DISABLE_PATCHING_PROCESS
+	mPersist.SetValue(PB_DISABLE_PATCHING_PROCESS, "0");
+#else
+	mPersist.SetValue(PB_DISABLE_PATCHING_PROCESS, "1");
+#endif
 #ifdef PB_DISABLE_DEFAULT_DM_VERITY
 	mPersist.SetValue(PB_DISABLE_DM_VERITY, "0");
 #else
 	mPersist.SetValue(PB_DISABLE_DM_VERITY, "1");
-#endif
+#endif	
 	mPersist.SetValue(PB_TREBLE_COMP, "0");
 	mPersist.SetValue(PB_DISABLE_REBOOT_OTA, "0");
 	mConst.SetValue(PB_SURVIVAL_FOLDER_VAR, PB_SURVIVAL_FOLDER);
