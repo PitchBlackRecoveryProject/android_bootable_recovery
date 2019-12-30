@@ -1199,7 +1199,7 @@ int GUIAction::flash(std::string arg)
         if (reinject_after_flash() == 0) {
 		PartitionManager.Update_System_Details();
 	}
-	if (DataManager::GetIntValue(PB_INSTALL_PREBUILT_ZIP) != 1)
+	if (DataManager::GetIntValue(PB_INSTALL_PREBUILT_ZIP) != 1 && DataManager::GetIntValue(PB_DISABLE_PATCHING_PROCESS) != 1)
 	{
 		if (DataManager::GetIntValue(PB_CALL_DEACTIVATION) != 0 && ret_val != 1)//get to know whether everything is ok or not
 		{
@@ -1930,7 +1930,7 @@ int GUIAction::flashimage(std::string arg __unused)
 		op_status = 1; // fail
 	}
 	// Start Deactivation on flashing either boot.img, system.img or vendor.img
-	if (DataManager::GetIntValue(PB_CALL_DEACTIVATION) != 0)
+	if (DataManager::GetIntValue(PB_CALL_DEACTIVATION) != 0 && DataManager::GetIntValue(PB_DISABLE_PATCHING_PROCESS) != 1)
 	{
 		TWFunc::Deactivation_Process();
 	}
