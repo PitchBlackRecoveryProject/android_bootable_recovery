@@ -79,6 +79,9 @@ ifeq ($(PB_FORCE_DD_FLASH),true)
     LOCAL_CFLAGS += -DPB_FORCE_DD_FLASH='true'
 endif
 
+ifeq ($(PB_DISABLE_DEFAULT_DM_VERITY),true)
+    LOCAL_CFLAGS += -DPB_DISABLE_DEFAULT_DM_VERITY=$(PB_DISABLE_DEFAULT_DM_VERITY)
+endif
 LOCAL_SRC_FILES := \
     twrp.cpp \
     fixContexts.cpp \
