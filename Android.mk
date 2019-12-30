@@ -79,6 +79,9 @@ ifeq ($(PB_FORCE_DD_FLASH),true)
     LOCAL_CFLAGS += -DPB_FORCE_DD_FLASH='true'
 endif
 
+ifeq ($(PB_DISABLE_DEFAULT_DM_VERITY),true)
+    LOCAL_CFLAGS += -DPB_DISABLE_DEFAULT_DM_VERITY=$(PB_DISABLE_DEFAULT_DM_VERITY)
+endif
 LOCAL_SRC_FILES := \
     twrp.cpp \
     fixContexts.cpp \
@@ -442,7 +445,8 @@ TWRP_REQUIRED_MODULES += \
     simg2img_twrp \
     libbootloader_message_twrp \
     init.recovery.hlthchrg.rc \
-    init.recovery.service.rc
+    init.recovery.service.rc \
+    startup.sh
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
 TWRP_REQUIRED_MODULES += \
     init.recovery.ldconfig.rc
