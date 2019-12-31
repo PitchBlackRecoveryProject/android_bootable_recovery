@@ -256,7 +256,6 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
           DataManager::SetValue(PB_MIUI_ZIP_TMP, 1);
         }
 	DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
-        //DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
 	DataManager::SetValue(NON_STD, 1);
 	if (Zip -> EntryExists(miui_sg_path) == true) {
         gui_msg("pb_install_miui_detected=- Detected Standard MIUI Update Package"); }
@@ -266,21 +265,18 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
 	        if (outp.size() > 0 && chk_sdk >= 27) {
 		  DataManager::SetValue(PB_MIUI_ZIP_TMP, 1);
 	          DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
-	          //DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
 	          trb_en = true;
 		  //DataManager::SetValue(TRB_EN, "1");
 	          gui_msg("pb_install_miui_oreo_detected=- Detected Treble MIUI Update Package");
 	        }
             else if (Zip -> EntryExists("system.new.dat") || Zip -> EntryExists("system.new.dat.br")) {
                    DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
-			//DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
                   DataManager::SetValue(STD, "1");
                    gui_msg("pb_install_standard_detected=- Detected standard Package");
 	        }
 	    else {
 		    if (Zip -> EntryExists("boot.img")) {
                 DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
-		//DataManager::SetValue(PB_DISABLE_DM_VERITY, 1);
 		    }
 		gui_msg("pb_install_patch_detected=- Detected Either a Patch or Fix Package"); }
         }
