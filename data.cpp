@@ -758,9 +758,9 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue(PB_INCREMENTAL_PACKAGE, "0");
 	mPersist.SetValue(PB_DISABLE_FORCED_ENCRYPTION, "0");
 #ifdef PB_DISABLE_DEFAULT_DM_VERITY
-	mPersist.SetValue(PB_DISABLE_DM_VERITY, "0");
+	mData.SetValue(PB_DISABLE_DM_VERITY, "0");
 #else
-	mPersist.SetValue(PB_DISABLE_DM_VERITY, "1");
+	mData.SetValue(PB_DISABLE_DM_VERITY, "1");
 #endif
 	mPersist.SetValue(PB_TREBLE_COMP, "0");
 	mPersist.SetValue(PB_DISABLE_REBOOT_OTA, "0");
