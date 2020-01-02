@@ -1520,6 +1520,26 @@ bool TWFunc::Symlink(string src, string dest)
 	return true;
 }
 
+bool TWFunc::check_system_root() {
+	string out;
+	if (TWFunc::Exec_Cmd("grep -q \'/system_root\' /proc/mounts", out) == 0)
+		return true;
+	else if (TWFunc::Exec_Cmd("grep \'/\' /proc/mounts | grep -qv rootfs", out) == 0)
+		return true;
+	else if (TWFunc::Path_Exists(PartitionManager.Get_Android_Root_Path() + "/init.rc"))
+		return true;
+return false;
+}
+
+bool TWFunc::check_encrypt_status() {
+	string out;
+	if (TWFunc::Exec_Cmd("grep /data /proc/mounts | grep -q dm-", out) == 0)
+		return true;
+	else if (TWFunc::Path_Exists("/data/unencrypted"))
+		return true;
+return false;
+}
+
 bool TWFunc::Patch_DM_Verity() {
 	bool status = false, def = false;
 	int stat = 0;
@@ -1822,53 +1842,44 @@ else if(PartitionManager.Is_Mounted_By_Path("/cust"))
 	PartitionManager.UnMount_By_Path("/cust", false);
 if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
         PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
-usleep(1000);
-if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
-if (!Unpack_Image("/boot")) {
-LOGINFO("Deactivation_Process: Unable to unpack image\n");
-return;
-}
-gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
-DataManager::GetValue(TRB_EN, trb_en);
-if (TWFunc::Exec_Cmd("grep -E '/dev/root|/system_root' /proc/mounts", out))
-{
-	if(!out.empty())
-	{
-		gui_print_color("warning", "Detected Using System_root_image Disable Dm-Verity not applied");
-		DataManager::SetValue(PB_DISABLE_DM_VERITY, 0);
-		out="";
-	}
-}
-TWFunc::Exec_Cmd("grep /data /proc/mounts | grep dm-", out);
-if (out.empty() || TWFunc::Path_Exists("/data/unencrypted"))
-	DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 1);
-else
-	DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);
+	if (!TWFunc::check_system_root()) {
+		if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
+			if (!Unpack_Image("/boot")) {
+				LOGINFO("Deactivation_Process: Unable to unpack image\n");
+				return;
+			}
+			gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
+			DataManager::GetValue(TRB_EN, trb_en);
+			if (TWFunc::check_encrypt_status()) {
+				gui_msg(Msg(msg::kHighlight, "pb_ecryption_leave=Device Encrypted Leaving Forceencrypt"));
+				DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);
+			}
+			else
+				DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 1);
 
-if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
-if (Patch_DM_Verity())
-gui_process("pb_dm_verity=Successfully patched DM-Verity");
-else
-gui_print_color("warning", "DM-Verity is not enabled\n");
-}
-if (DataManager::GetIntValue(PB_DISABLE_FORCED_ENCRYPTION) == 1) {
-if (Patch_Forced_Encryption())
-gui_process("pb_encryption=Successfully patched forced encryption");
-else
-gui_print_color("warning", "Forced Encryption is not enabled");
-}
-else {
-if (!out.empty())
-gui_msg(Msg(msg::kHighlight, "pb_ecryption_leave=Device Encrypted Leaving Forceencrypt"));
-}
-out="";
-if (!Repack_Image("/boot")) {
-gui_msg(Msg(msg::kError, "pb_run_process_fail=Unable to finish '{1}' process")("PitchBlack"));
-return;
-}
-gui_msg(Msg(msg::kProcess, "pb_run_process_done=Finished '{1}' process")("PitchBlack"));
-return;
-}
+			if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
+				if (Patch_DM_Verity())
+					gui_process("pb_dm_verity=Successfully patched DM-Verity");
+				else
+					gui_print_color("warning", "DM-Verity is not enabled\n");
+			}
+			if (DataManager::GetIntValue(PB_DISABLE_FORCED_ENCRYPTION) == 1) {
+				if (Patch_Forced_Encryption())
+					gui_process("pb_encryption=Successfully patched forced encryption");
+				else
+					gui_print_color("warning", "Forced Encryption is not enabled");
+			}
+			out="";
+			if (!Repack_Image("/boot")) {
+				gui_msg(Msg(msg::kError, "pb_run_process_fail=Unable to finish '{1}' process")("PitchBlack"));
+				return;
+			}
+			gui_msg(Msg(msg::kProcess, "pb_run_process_done=Finished '{1}' process")("PitchBlack"));
+			return;
+		}
+	}
+	else
+		gui_print_color("warning", "System-as-root detected");
 }
 
 void TWFunc::Read_Write_Specific_Partition(string path, string partition_name, bool backup) {

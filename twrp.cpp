@@ -271,11 +271,8 @@ int main(int argc, char **argv) {
 
 	char encrypt_status[PROPERTY_VALUE_MAX];
 	property_get("ro.crypto.state", encrypt_status, "");
-	string out;
-	TWFunc::Exec_Cmd("grep /data /proc/mounts | grep dm-", out);
 	if (strcmp(encrypt_status, "") == 0) {
-		if ((DataManager::GetIntValue(TW_IS_ENCRYPTED) == 1 ||
-			DataManager::GetIntValue(TW_IS_DECRYPTED) == 0) && !out.empty())
+		if (TWFunc::check_encrypt_status())
 			strcpy(encrypt_status, "encrypted");
 		else
 			strcpy(encrypt_status, "uncrypted");
