@@ -687,8 +687,9 @@ int GUIAction::copylog(std::string arg __unused)
 		cache_strg = TWFunc::get_cache_dir() + "/PBRP/logs/";
 
 		snprintf(path, sizeof(path), "%s/PBRP/logs/recovery_%s", curr_storage.c_str(), arg.c_str());
-		if (!TWFunc::Path_Exists(path))
-			TWFunc::Recursive_Mkdir(path);
+		curr_storage += "/PBRP/logs";
+		if (!TWFunc::Path_Exists(curr_storage))
+			TWFunc::Recursive_Mkdir(curr_storage);
 		curr_storage = path;
 
 		tm = time(NULL);
