@@ -2292,14 +2292,14 @@ int GUIAction::repack(std::string arg __unused)
 int GUIAction::flashlight(std::string arg __unused)
 {
 	fstream File;
-	int val=0, max_val=0;
+	int val=0, max_val=0, br_value = DataManager::GetIntValue("pb_bright_value");
 	string str_val,null, file, flashp1 = "/sys/class/leds", flashp2 = "/flashlight", flashpath;
 	string bright = "/brightness", maxpath, max = "/max_brightness";
 	string switch_path = flashp1 + "/led:switch" + bright;
 #ifdef PB_TORCH_PATH
 	flashpath = PB_TORCH_PATH + bright;
 	maxpath = PB_TORCH_PATH + max;
-	LOGINFO("Custom Node located at '%s'\n", flashpath.c_str());
+	LOGINFO("flashlight: Custom Node located at '%s'\n", flashpath.c_str());
 #else
 	flashpath = flashp1 + flashp2 + bright;
 	maxpath = flashp1 + flashp2 + max;
@@ -2354,13 +2354,21 @@ int GUIAction::flashlight(std::string arg __unused)
 		else
 		{
 			LOGINFO("Flashlight Turning On\n");
-			LOGINFO("Brightening with Maximum Brightness\n");
 			if (TWFunc::Path_Exists(switch_path))
 				TWFunc::write_to_file(switch_path, "1");
-			if (TWFunc::Path_Exists(maxpath))
-				File << max_val;
-			else
-				File << "1";
+			if (br_value == 0 || br_value == 255)
+			{
+				LOGINFO("Flashlight: Brightening with Maximum Brightness\n");
+				if (TWFunc::Path_Exists(maxpath))
+					File << max_val;
+				else
+					File << "1";
+			}
+			else {
+				LOGINFO("Flashlight: Brightning value '%d'\n", br_value);
+				File << br_value;
+			}
+				
 		}
 	}
 	File.close();
