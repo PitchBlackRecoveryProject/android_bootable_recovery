@@ -9,7 +9,7 @@
 	</details>
 
 	<resources>
-		<font name="font_l" filename="RobotoCondensed-Regular.ttf" size="52"/>
+		<font name="font_l" filename="pb.ttf" size="52"/>
 		<image name="splashlogo" filename="splashlogo" retainaspect="1"/>
 		<image name="splashteamwin" filename="splashteamwin" retainaspect="1"/>
 	</resources>
