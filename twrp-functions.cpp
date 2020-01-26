@@ -1522,6 +1522,8 @@ bool TWFunc::Symlink(string src, string dest)
 
 bool TWFunc::check_system_root() {
 	string out;
+	if(!PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
+	        PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 	if (TWFunc::Path_Exists(PartitionManager.Get_Android_Root_Path() + "/init.rc"))
 		return true;
 	else if (TWFunc::Exec_Cmd("grep -q \'/system_root\' /proc/mounts", out) == 0 || TWFunc::Exec_Cmd("grep \' / \' /proc/mounts | grep -qv rootfs", out) == 0)
@@ -1535,95 +1537,67 @@ bool TWFunc::check_encrypt_status() {
 		return true;
 	else if (TWFunc::Path_Exists("/data/unencrypted"))
 		return true;
-return false;
+	return false;
 }
 
-bool TWFunc::Patch_DM_Verity() {
+static bool Patch_AVBDM_Verity() {
 	bool status = false, def = false;
-	int stat = 0;
-	//DataManager::GetValue(STD, std);
-	string firmware_key = ramdisk + "sbin/firmware_key.cer";
-	string null, path, fstab = "", cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;";
 	DIR* d;
 	DIR* d1 = nullptr;
 	struct dirent* de;
+	int stat = 0;
+	string path, fstab = "", cmp, remove = "verify,;,verify;verify;,avb;avb;avb,;support_scfs,;,support_scfs;support_scfs;";
 	if (ram.find("ramdisk") != string::npos) {
-	d = opendir(ramdisk.c_str());
-	if (d == NULL)
-	{
-		LOGINFO("Unable to open '%s'\n", ramdisk.c_str());
-		return false;
-	}
-	while ((de = readdir(d)) != NULL)
-	{
-		cmp = de->d_name;
-		path = ramdisk + cmp;
-		if (cmp.find("fstab.") != string::npos)
+		d = opendir(ramdisk.c_str());
+		if (d == NULL)
 		{
-			gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
-			LOGINFO("Fstab Found at '%s'\n", ramdisk.c_str());
-			stat = 1;
-			if (!status)
-			{
-				if (TWFunc::CheckWord(path, "verify")
-				|| TWFunc::CheckWord(path, "support_scfs")
-				|| TWFunc::CheckWord(path, "avb"))
-					status = true;
-			}
-			TWFunc::Replace_Word_In_File(path, remove);
+			LOGINFO("Unable to open '%s'\n", ramdisk.c_str());
+			return false;
 		}
-		if (cmp == "default.prop")
+		while ((de = readdir(d)) != NULL)
 		{
-			if (TWFunc::CheckWord(path, "ro.config.dmverity="))
+			cmp = de->d_name;
+			path = ramdisk + cmp;
+			if (cmp.find("fstab.") != string::npos)
 			{
-				if (TWFunc::CheckWord(path, "ro.config.dmverity=true"))
-					TWFunc::Replace_Word_In_File(path, "ro.config.dmverity=true;", "ro.config.dmverity=false");
-			}
-			else
-			{
-				ofstream File(path.c_str(), ios_base::app | ios_base::out);  
-				if (File.is_open())
+				gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
+				LOGINFO("Fstab Found at '%s'\n", ramdisk.c_str());
+				stat = 1;
+				if (!status)
 				{
-					def = true;
-					File << "ro.config.dmverity=false" << endl;
-					File.close();
+					if (TWFunc::CheckWord(path, "verify")
+					|| TWFunc::CheckWord(path, "support_scfs")
+					|| TWFunc::CheckWord(path, "avb"))
+						status = true;
+				}
+				TWFunc::Replace_Word_In_File(path, remove);
+			}
+			if (cmp == "default.prop")
+			{
+				if (TWFunc::CheckWord(path, "ro.config.dmverity="))
+				{
+					if (TWFunc::CheckWord(path, "ro.config.dmverity=true"))
+						TWFunc::Replace_Word_In_File(path, "ro.config.dmverity=true;", "ro.config.dmverity=false");
+				}
+				else
+				{
+					ofstream File(path.c_str(), ios_base::app | ios_base::out);  
+					if (File.is_open())
+					{
+						def = true;
+						File << "ro.config.dmverity=false" << endl;
+						File.close();
+					}
 				}
 			}
 		}
-		if (cmp == "verity_key")
-		{
-			if (!status)
-				status = true;
-			unlink(path.c_str());
-		}
+		closedir (d);
+	}
 
-	}
-	closedir (d);
-	//Patched Dtb verity
-	}
-	LOGINFO("DTB Found at '%s'\n", dtb.c_str());
-//	TWFunc::Exec_Cmd("mount -o bind /dev/urandom /dev/random", null);
-	//rename("/sbin", "/sbin_tmp");
-	if (TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --dtb-patch " + dtb, null) == 1)
-	{
-		LOGINFO("Verity flags detected in DTB\n");
-		if (!status)
-			status = true;
-	}
-	else
-		LOGINFO("Verity not found in DTB\n");
-	//rename("/sbin_tmp", "/sbin");
-	if (DataManager::GetIntValue(PB_DISABLE_FORCED_ENCRYPTION) == 1)
-		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --cpio ramdisk.cpio \"patch true true\"", null);
-	else
-		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --cpio ramdisk.cpio \"patch true false\"", null);
-//	TWFunc::Exec_Cmd("umount -l /dev/random ", null);
-
-	if (stat == 0 || ram.find("ramdisk") != string::npos)
+	if (stat == 0)
 	{
 		if(trb_en == 1 || PartitionManager.Mount_By_Path("/vendor", false))
 		{
-			//PartitionManager.Mount_By_Path("/vendor", false);
 			d1 = opendir(fstab2.c_str());
 			stat = 2;
 		}
@@ -1700,17 +1674,36 @@ bool TWFunc::Patch_DM_Verity() {
 			}
 		}
 		//end
-		if (PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
-			PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
-		if (PartitionManager.Is_Mounted_By_Path("/vendor"))
-			PartitionManager.UnMount_By_Path("/vendor", false);
 	}
+	return status;
+}
+
+bool TWFunc::Patch_DM_Verity() {
+	bool status = false;
+	string firmware_key = ramdisk + "sbin/firmware_key.cer";
+	string null, sys_rt = TWFunc::check_system_root() ? "true" : "false";
+	if (sys_rt == "false")
+		status = Patch_AVBDM_Verity();
+
+	if (TWFunc::Path_Exists(ramdisk + "verity_key")) {
+		gui_msg(Msg("pb_unlink=Unlinking: '{1}'")("verity_key"));
+		unlink((ramdisk + "verity_key").c_str());
+	}
+	LOGINFO("DTB Found at '%s'\n", dtb.c_str());
+	setenv("KEEPVERITY", sys_rt.c_str(), true);
+
 	if (TWFunc::Path_Exists(firmware_key))
 	{
-		if (!status)
-			status = true;
+		gui_msg(Msg("pb_unlink=Unlinking: '{1}'")("firmware_key.cer"));
 		unlink(firmware_key.c_str());
 	}
+
+	if(PartitionManager.Is_Mounted_By_Path("/vendor"))
+		PartitionManager.UnMount_By_Path("/vendor", false);
+	else if(PartitionManager.Is_Mounted_By_Path("/cust"))
+		PartitionManager.UnMount_By_Path("/cust", false);
+	if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
+	        PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 	return status;
 }            
 
@@ -1727,9 +1720,7 @@ bool TWFunc::Patch_Forced_Encryption()
 		else
 			command += "s|" + remove[i] + "|encryptable=|g;\"";
 	}
-	
-	//DataManager::GetValue(TRB_EN, trb_en);
-	//DataManager::GetValue(STD, std);
+
 	bool status = false;
 	int encryption;
 	DataManager::GetValue(PB_DISABLE_DM_VERITY, encryption);
@@ -1737,37 +1728,36 @@ bool TWFunc::Patch_Forced_Encryption()
 	DIR* d1 = nullptr;
 	struct dirent* de;
 	if (ram.find("ramdisk") != string::npos) {
-	d = opendir(ramdisk.c_str());
-	if (d == NULL)
-	{
-		LOGINFO("Unable to open '%s'\n", ramdisk.c_str());
-		return false;
-	}
-	while ((de = readdir(d)) != NULL)
-	{
-		cmp = de->d_name;
-		path = ramdisk + cmp;
-		if (cmp.find("fstab.") != string::npos)
+		d = opendir(ramdisk.c_str());
+		if (d == NULL)
 		{
-			if (encryption != 1)
-			{
-				gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
-				LOGINFO("Fstab Found at '%s'\n", ramdisk.c_str());
-				
-			}
-			stat = 1;
-			if (!status)
-			{
-				if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
-					if(null.empty())
-					{
-						command="";
-						status = true;
-					}
-			};
+			LOGINFO("Unable to open '%s'\n", ramdisk.c_str());
+			return false;
 		}
-	}
-	closedir (d);
+		while ((de = readdir(d)) != NULL)
+		{
+			cmp = de->d_name;
+			path = ramdisk + cmp;
+			if (cmp.find("fstab.") != string::npos)
+			{
+				if (encryption != 1)
+				{
+					gui_msg(Msg("pb_fstab=Detected fstab: '{1}'")(cmp));
+					LOGINFO("Fstab Found at '%s'\n", ramdisk.c_str());
+				}
+				stat = 1;
+				if (!status)
+				{
+					if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
+						if(null.empty())
+						{
+							command="";
+							status = true;
+						}
+				}
+			}
+		}
+		closedir (d);
 	}
 	if (stat == 0 || ram.find("ramdisk") != string::npos)
 	{
@@ -1812,72 +1802,76 @@ bool TWFunc::Patch_Forced_Encryption()
 				if (!status)
 				{
 					if (TWFunc::Exec_Cmd(command + " " + path, null) == 0)
+					{
 						if(null.empty())
 						{
 							command="";
 							status = true;
 						}
+					}
 				}
 		       }
 	        }
 	        closedir (d1);
 		chmod(fstab.c_str(), 0644);
-		if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 0)
-			TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot --cpio ramdisk.cpio \"patch false true\"", null);
-		if (PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
-			PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
-		if (PartitionManager.Is_Mounted_By_Path("/vendor"))
-			PartitionManager.UnMount_By_Path("/vendor", false);
+
 	}
+	if(PartitionManager.Is_Mounted_By_Path("/vendor"))
+		PartitionManager.UnMount_By_Path("/vendor", false);
+	else if(PartitionManager.Is_Mounted_By_Path("/cust"))
+		PartitionManager.UnMount_By_Path("/cust", false);
+	if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
+	        PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 	return status;
 }
     
-void TWFunc::Deactivation_Process(void) {
-string out;
-if(PartitionManager.Is_Mounted_By_Path("/vendor"))
-	PartitionManager.UnMount_By_Path("/vendor", false);
-else if(PartitionManager.Is_Mounted_By_Path("/cust"))
-	PartitionManager.UnMount_By_Path("/cust", false);
-if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
-        PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
-	if (!TWFunc::check_system_root()) {
-		if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
-			if (!Unpack_Image("/boot")) {
-				LOGINFO("Deactivation_Process: Unable to unpack image\n");
-				return;
-			}
-			gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
-			DataManager::GetValue(TRB_EN, trb_en);
-			if (TWFunc::check_encrypt_status()) {
-				gui_msg(Msg(msg::kHighlight, "pb_ecryption_leave=Device Encrypted Leaving Forceencrypt"));
-				DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);
-			}
-			else
-				DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 1);
-
-			if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
-				if (Patch_DM_Verity())
-					gui_process("pb_dm_verity=Successfully patched DM-Verity");
-				else
-					gui_print_color("warning", "DM-Verity is not enabled\n");
-			}
-			if (DataManager::GetIntValue(PB_DISABLE_FORCED_ENCRYPTION) == 1) {
-				if (Patch_Forced_Encryption())
-					gui_process("pb_encryption=Successfully patched forced encryption");
-				else
-					gui_print_color("warning", "Forced Encryption is not enabled");
-			}
-			out="";
-			if (!Repack_Image("/boot")) {
-				gui_msg(Msg(msg::kError, "pb_run_process_fail=Unable to finish '{1}' process")("PitchBlack"));
-				return;
-			}
-			gui_msg(Msg(msg::kProcess, "pb_run_process_done=Finished '{1}' process")("PitchBlack"));
+void TWFunc::Deactivation_Process(void)
+{
+	string out;
+	if(PartitionManager.Is_Mounted_By_Path("/vendor"))
+		PartitionManager.UnMount_By_Path("/vendor", false);
+	else if(PartitionManager.Is_Mounted_By_Path("/cust"))
+		PartitionManager.UnMount_By_Path("/cust", false);
+	if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path()))
+	        PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
+	if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
+		if (!Unpack_Image("/boot")) {
+			LOGINFO("Deactivation_Process: Unable to unpack image\n");
 			return;
 		}
+		gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
+		DataManager::GetValue(TRB_EN, trb_en);
+		if (TWFunc::check_encrypt_status()) {
+			gui_msg(Msg(msg::kHighlight, "pb_ecryption_leave=Device Encrypted Leaving Forceencrypt"));
+			DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);
+		}
+		else {
+			setenv("KEEPFORCEENCRYPT", "false", true);
+			DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 1);
+		}
+
+		if (DataManager::GetIntValue(PB_DISABLE_DM_VERITY) == 1) {
+			if (!Patch_DM_Verity())
+				gui_print_color("warning", "DM-Verity is not enabled\n");
+		}
+		if (DataManager::GetIntValue(PB_DISABLE_FORCED_ENCRYPTION) == 1) {
+			if (!Patch_Forced_Encryption())
+				gui_print_color("warning", "Forced Encryption is not enabled\n");
+		}
+		gui_msg(Msg("pb_patching=Patching: '{1}'")("ramdisk"));
+		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot cpio ramdisk.cpio patch", out);
+		gui_msg(Msg("pb_patching=Patching: '{1}'")("dtb"));
+		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot dtb " + dtb + " patch", out);
+		unsetenv("KEEPFORCEENCRYPT");
+		unsetenv("KEEPVERITY");
+		out="";
+		if (!Repack_Image("/boot")) {
+			gui_msg(Msg(msg::kError, "pb_run_process_fail=Unable to finish '{1}' process")("PitchBlack"));
+			return;
+		}
+		gui_msg(Msg(msg::kProcess, "pb_run_process_done=Finished '{1}' process")("PitchBlack"));
+		return;
 	}
-	else
-		gui_print_color("warning", "System-as-root detected");
 }
 
 void TWFunc::Read_Write_Specific_Partition(string path, string partition_name, bool backup) {
