@@ -1522,13 +1522,11 @@ bool TWFunc::Symlink(string src, string dest)
 
 bool TWFunc::check_system_root() {
 	string out;
-	if (TWFunc::Exec_Cmd("grep -q \'/system_root\' /proc/mounts", out) == 0)
+	if (TWFunc::Path_Exists(PartitionManager.Get_Android_Root_Path() + "/init.rc"))
 		return true;
-	else if (TWFunc::Exec_Cmd("grep \'/\' /proc/mounts | grep -qv rootfs", out) == 0)
+	else if (TWFunc::Exec_Cmd("grep -q \'/system_root\' /proc/mounts", out) == 0 || TWFunc::Exec_Cmd("grep \' / \' /proc/mounts | grep -qv rootfs", out) == 0)
 		return true;
-	else if (TWFunc::Path_Exists(PartitionManager.Get_Android_Root_Path() + "/init.rc"))
-		return true;
-return false;
+	return false;
 }
 
 bool TWFunc::check_encrypt_status() {
