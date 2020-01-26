@@ -3693,6 +3693,9 @@
 				<listitem name="{@use_aromafm=Use Aroma File Manager}">
 					<data variable="aromafm"/>
 				</listitem>
+                                <listitem name="{@unmount_sys_install=Unmount System before installing a ZIP}">
+                                        <data variable="tw_unmount_system"/>
+                                </listitem>
 			</listbox>
 
 			<button style="main_button_half_height">
