@@ -31,6 +31,7 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <sys/mount.h>
 #include <unistd.h>
 #include <iostream>
 #include <fstream>
@@ -550,6 +551,13 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 
 	
     if (DataManager::GetIntValue(PB_INSTALL_PREBUILT_ZIP) != 1) {
+
+	/* First delink all our symlinks to /system, coz we donno the behaviour of the flashing zip */
+	if (PartitionManager.Is_Mounted_By_Path("/system_root"))
+	{
+		string UM ="/system";
+		umount(UM.c_str());
+	}
 	gui_msg(Msg("installing_zip=Installing zip file '{1}'")(path));
 	if (strlen(path) < 9 || strncmp(path, "/sideload", 9) != 0) {
 		string digest_str;
