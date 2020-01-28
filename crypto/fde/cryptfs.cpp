@@ -304,7 +304,7 @@ static int get_keymaster_hw_fde_passwd(const char* passwd, unsigned char* newpw,
 
     if (should_use_keymaster()) {
         if (scrypt_keymaster(passwd, salt, newpw, (void*)ftr)) {
-            SLOGE("scrypt failed");
+            SLOGE("scrypt failed\n");
         } else {
             rc = 0;
         }
@@ -341,7 +341,7 @@ static int verify_and_update_hw_fde_passwd(const char *passwd,
         ++crypt_ftr->failed_decrypt_count;
 
         if (ascii_passwd_updated) {
-            SLOGI("Ascii password was updated");
+            SLOGI("Ascii password was updated\n");
         } else {
             /* Code in else part would execute only once:
              * When device is upgraded from L->M release.
@@ -1588,7 +1588,7 @@ static int test_mount_encrypted_fs(struct crypt_mnt_ftr* crypt_ftr,
   if (rc == 0 && memcmp(scrypted_intermediate_key,
                         crypt_ftr->scrypted_intermediate_key,
                         sizeof(scrypted_intermediate_key)) == 0) {
-    SLOGI("Password matches");
+    SLOGI("Password matches\n");
     rc = 0;
   } else {
     /* Try mounting the file system anyway, just in case the problem's with
