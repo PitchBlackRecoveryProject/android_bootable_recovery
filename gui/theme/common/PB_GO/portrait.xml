@@ -3972,6 +3972,42 @@
 			</action>
 		</page>
 
+		<page name="settings_flash">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@settings_hdr=Settings}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@pb_flash_controller=Flashlight Brightness - %pb_bright_value%}</text>
+			</text>
+
+			<template name="tabs_settings"/>
+
+			<fill color="%text_color%">
+				<placement x="%tab5_col6_x%" y="%row_tab_y%" w="%tab5_width%" h="%tab_indicator_height%"/>
+			</fill>
+
+			<slidervalue>
+				<placement x="indent" y="%row6_y%" w="%content_width%"/>
+				<text>{@sel_br_val=Select Brightness Value:}</text>
+				<data variable="pb_bright_value" min="1" max="255"/>
+			</slidervalue>
+
+			<action>
+				<touch key="home" />
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back" />
+				<action function="page">settings</action>
+			</action>
+		</page>
+
 		<page name="copylog">
 			<template name="page"/>
 
@@ -5410,7 +5446,7 @@
 					<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
 					<data variable="pb_reboot_dont_disable_stock_recovery"/>
 				</listitem>
-				<listitem name="{@pb_dmverity_chk=Disable DM-Verity}">
+				<listitem name="{@pb_dmverity_chk=Deactivation After Flashing}">
 					<data variable="pb_reboot_dm_verity_check"/>
 				</listitem>
                                 <listitem name="{@pb_disable_reboot_ota_check=Disable Rebooting After OTA}">

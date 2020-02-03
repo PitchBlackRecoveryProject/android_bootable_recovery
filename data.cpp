@@ -769,6 +769,7 @@ void DataManager::SetDefaultValues()
 	mData.SetValue(PB_CALL_DEACTIVATION, "0");
 	mPersist.SetValue(PB_DISABLE_SECURE_BOOT, "0");
 	mPersist.SetValue(PB_ADVANCED_STOCK_REPLACE, "1");
+	mPersist.SetValue("pb_bright_value", "255");
 
 	mPersist.SetValue(TW_HAS_INJECTTWRP, "0");
 	mPersist.SetValue(TW_INSTALL_REBOOT_VAR, "0");

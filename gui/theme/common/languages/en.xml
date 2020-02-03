@@ -817,14 +817,15 @@
 		<string name="pb_incremental_ota_compatibility_true">Incremental package is compatible</string>
 		<string name="pb_zip_have_bootloader">Warning: Detected reinstallation of the bootloader which was called by '{1}'.</string>
 		<string name="pb_no_space_ota_survival">Not enough free space on internal storage for creating the OTA survival.</string>
-
+		<string name="pb_flash_controller">Flashlight Brightness</string>
+		<string name="sel_br_val">Select Brightness Value:</string>
 		<string name="pb_incremental_ota_res">OTA_RES -- done!</string>		
 		<string name="pb_incremental_ota_res_run">Running OTA_RES process...</string>
 		<string name="pb_incremental_ota_bak_run">Running OTA_BAK process...</string>
 		<string name="pb_incremental_ota_bak">OTA_BAK -- done!</string>
 		<string name="pb_advanced_stock_recovery">Aggressive stock recovery deactivation</string>
 		<string name="pb_reboot_dont_disable_stock_recovery_chk">Don't disable stock recovery replace</string>
-		<string name="pb_dmverity_chk">Disable DM-Verity</string>
+		<string name="pb_dmverity_chk">Deactivation After Flashing</string>
 		<string name="pb_forced_encryption_chk">Disable Forced Encryption</string>
 		<string name="pb_disable_reboot_ota_check">Disable Rebooting after OTA</string>
 		<string name="pb_run_process">Starting '{1}' process</string>
@@ -837,6 +838,8 @@
 		<string name="pb_ecryption_leave">Device Encrypted Leaving Forceencrypt</string>
 		<string name="pb_encryption_off">Forced Encryption is not enabled</string>
 		<string name="pb_fstab">Detected fstab: '{1}'</string>
+		<string name="pb_unlink">Unlinking: '{1}'</string>
+		<string name="pb_patching">Patching: '{1}'</string>
 		<string name="pb_end_read">Ended Process Read {1}</string>
 		<string name="pb_start_read">Started Process Read {1}</string>
 		<string name="pb_dm_verity">Successfully patched DM-Verity</string>

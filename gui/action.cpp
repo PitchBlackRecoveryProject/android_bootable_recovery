@@ -2292,14 +2292,14 @@ int GUIAction::repack(std::string arg __unused)
 int GUIAction::flashlight(std::string arg __unused)
 {
 	fstream File;
-	int val=0, max_val=0;
+	int val=0, max_val=0, br_value = DataManager::GetIntValue("pb_bright_value");
 	string str_val,null, file, flashp1 = "/sys/class/leds", flashp2 = "/flashlight", flashpath;
 	string bright = "/brightness", maxpath, max = "/max_brightness";
 	string switch_path = flashp1 + "/led:switch" + bright;
 #ifdef PB_TORCH_PATH
 	flashpath = PB_TORCH_PATH + bright;
 	maxpath = PB_TORCH_PATH + max;
-	LOGINFO("Custom Node located at '%s'\n", flashpath.c_str());
+	LOGINFO("flashlight: Custom Node located at '%s'\n", flashpath.c_str());
 #else
 	flashpath = flashp1 + flashp2 + bright;
 	maxpath = flashp1 + flashp2 + max;
@@ -2354,13 +2354,21 @@ int GUIAction::flashlight(std::string arg __unused)
 		else
 		{
 			LOGINFO("Flashlight Turning On\n");
-			LOGINFO("Brightening with Maximum Brightness\n");
 			if (TWFunc::Path_Exists(switch_path))
 				TWFunc::write_to_file(switch_path, "1");
-			if (TWFunc::Path_Exists(maxpath))
-				File << max_val;
-			else
-				File << "1";
+			if (br_value == 0 || br_value == 255)
+			{
+				LOGINFO("Flashlight: Brightening with Maximum Brightness\n");
+				if (TWFunc::Path_Exists(maxpath))
+					File << max_val;
+				else
+					File << "1";
+			}
+			else {
+				LOGINFO("Flashlight: Brightning value '%d'\n", br_value);
+				File << br_value;
+			}
+				
 		}
 	}
 	File.close();
@@ -2457,78 +2465,74 @@ int GUIAction::change_codename(std::string arg __unused)
 {
 	int op_status = 1;
 	operation_start("Codename Changing");
-	if (!simulate)
+	string codename, new_codename, part_name, null;
+	int values = 1;
+	DataManager::GetValue(PB_PROP_VALUE, codename);
+	DataManager::SetProgress(0);
+	DataManager::GetValue("pb_codename_change", new_codename);
+	//Removal of Newlines from values
+	codename.erase(std::remove(codename.begin(), codename.end(), '\n'), codename.end());
+	new_codename.erase(std::remove(new_codename.begin(), new_codename.end(), '\n'), new_codename.end());
+	if (!DataManager::GetIntValue("tw_has_boot_slots"))
 	{
-		string codename, new_codename, part_name, null;
-		int values = 1;
-		DataManager::GetValue(PB_PROP_VALUE, codename);
-		DataManager::SetProgress(0);
-		DataManager::GetValue("pb_codename_change", new_codename);
-		//Removal of Newlines from values
-		codename.erase(std::remove(codename.begin(), codename.end(), '\n'), codename.end());
-		new_codename.erase(std::remove(new_codename.begin(), new_codename.end(), '\n'), new_codename.end());
-		if (!DataManager::GetIntValue("tw_has_boot_slots"))
+		part_name = "/recovery";
+		values = 1;
+	}
+	else {
+		part_name = "/boot";
+		values = 2;
+	}
+	DataManager::SetProgress(.10);
+	for(int i=1; i<=values; i++)
+	{
+		if (values == 2)
 		{
-			part_name = "/recovery";
-			values = 1;
-		}
-		else {
-			part_name = "/boot";
-			values = 2;
-		}
-		DataManager::SetProgress(.10);
-		for(int i=1; i<=values; i++)
-		{
-			if (values == 2)
-			{
-				string Current_Slot = PartitionManager.Get_Active_Slot_Display();
-				if (Current_Slot == "A")
-					PartitionManager.Set_Active_Slot("B");
-				else
-					PartitionManager.Set_Active_Slot("A");
-				if (i==1)
-				DataManager::SetProgress(.15);
-				else
-				DataManager::SetProgress(.50);
-			}
+			string Current_Slot = PartitionManager.Get_Active_Slot_Display();
+			if (Current_Slot == "A")
+				PartitionManager.Set_Active_Slot("B");
 			else
-				DataManager::SetProgress(.50);
-			TWFunc::Unpack_Image(part_name);
-			string name, split_img = "/tmp/pb/ramdisk";
-			if (TWFunc::Path_Exists(split_img))
+				PartitionManager.Set_Active_Slot("A");
+			if (i==1)
+			DataManager::SetProgress(.15);
+			else
+			DataManager::SetProgress(.50);
+		}
+		else
+			DataManager::SetProgress(.50);
+		TWFunc::Unpack_Image(part_name);
+		string name, split_img = "/tmp/pb/ramdisk";
+		if (TWFunc::Path_Exists(split_img))
+		{
+			DIR* dir;
+			struct dirent* der;
+			dir = opendir(split_img.c_str());
+			while((der = readdir(dir)) != NULL)
 			{
-				DIR* dir;
-				struct dirent* der;
-				dir = opendir(split_img.c_str());
-				while((der = readdir(dir)) != NULL)
+				name = der->d_name;
+				if (name == "default.prop")
 				{
-					name = der->d_name;
-					if (name == "default.prop")
-					{
-						string command = "sed -i \'s|ro.product.device="+codename+"|ro.product.device="+new_codename+"|g\' "+ split_img + "/" + name;
-						TWFunc::Exec_Cmd(command, null);
-					}
+					string command = "sed -i \'s|ro.product.device="+codename+"|ro.product.device="+new_codename+"|g\' "+ split_img + "/" + name;
+					TWFunc::Exec_Cmd(command, null);
 				}
-				closedir(dir);
 			}
-			else
-			{
-				LOGINFO("PBRP: Ramdisk Doesnt Exists \n");
-				goto exit;
-			}
-			TWFunc::Repack_Image(part_name);
-			if (values == 1)
-				DataManager::SetProgress(1);
-			else {
-				if (i==1 && values == 2)
-					DataManager::SetProgress(.25);
-				else
-					DataManager::SetProgress(1);
-			}
-
+			closedir(dir);
 		}
-	} else
-		simulate_progress_bar();
+		else
+		{
+			LOGINFO("PBRP: Ramdisk Doesnt Exists \n");
+			goto exit;
+		}
+		TWFunc::Repack_Image(part_name);
+		if (values == 1)
+			DataManager::SetProgress(1);
+		else {
+			if (i==1 && values == 2)
+				DataManager::SetProgress(.25);
+			else
+				DataManager::SetProgress(1);
+		}
+
+	}
 	op_status = 0;
 exit:
 	operation_end(op_status);
@@ -2537,13 +2541,9 @@ exit:
 
 int GUIAction::getprop(std::string arg)
 {
-	if (!simulate) {
-		string value;
-		TWFunc::Exec_Cmd("getprop " + arg, value);
-		DataManager::SetValue(PB_PROP_VALUE, value);
-	}
-	else
-		simulate_progress_bar();
+	string value;
+	TWFunc::Exec_Cmd("getprop " + arg, value);
+	DataManager::SetValue(PB_PROP_VALUE, value);
 	return 0;
 }
 

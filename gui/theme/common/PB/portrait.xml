@@ -3622,7 +3622,7 @@
 			<template name="tabs_settings"/>
 
 			<fill color="%text_color%">
-				<placement x="0" y="%row_tab_y%" w="%tab5_width%" h="%tab_indicator_height%"/>
+				<placement x="80" y="%row_tab_y%" w="%tab5_width%" h="%tab_indicator_height%"/>
 			</fill>
 
 			<listbox style="scrolllist">
@@ -3966,6 +3966,42 @@
 				<text>{@set_language_btn=Set Language}</text>
 				<action function="setlanguage"></action>
 			</button>
+
+			<action>
+				<touch key="home" />
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back" />
+				<action function="page">settings</action>
+			</action>
+		</page>
+
+		<page name="settings_flash">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@settings_hdr=Settings}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@pb_flash_controller=Flashlight Brightness - %pb_bright_value%}</text>
+			</text>
+
+			<template name="tabs_settings"/>
+
+			<fill color="%text_color%">
+				<placement x="%tab5_col6_x%" y="%row_tab_y%" w="%tab5_width%" h="%tab_indicator_height%"/>
+			</fill>
+
+			<slidervalue>
+				<placement x="indent" y="%row6_y%" w="%content_width%"/>
+				<text>{@sel_br_val=Select Brightness Value:}</text>
+				<data variable="pb_bright_value" min="1" max="255"/>
+			</slidervalue>
 
 			<action>
 				<touch key="home" />
@@ -5420,7 +5456,7 @@
 			<listbox style="scrolllist">
 				<placement x="58" y="1204" w="964" h="534"/>
 				<icon selected="checkbox_true" unselected="checkbox_false"/>
-               <listitem name="{@pb_verify_incremental_ota_signature_chk=Incremental OTA signature verification}">
+				<listitem name="{@pb_verify_incremental_ota_signature_chk=Incremental OTA signature verification}">
 					<data variable="pb_verify_incremental_ota_signature"/>
 				</listitem>
 				<listitem name="{@pb_include_system_survival_chk=Include system in OTA survival}">
@@ -5436,13 +5472,13 @@
 					<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
 					<data variable="pb_reboot_dont_disable_stock_recovery"/>
 				</listitem>
-				<listitem name="{@pb_dmverity_chk=Disable DM-Verity}">
+				<listitem name="{@pb_dmverity_chk=Deactivation After Flashing}">
 					<data variable="pb_reboot_dm_verity_check"/>
 				</listitem>
 				<listitem name="{@pb_disable_reboot_ota_check=Disable Rebooting After OTA}">
                                         <data variable="pb_disable_reboot_ota"/>
                                 </listitem>
-				</listbox>
+			</listbox>
 				
 			<button style="settingsota_info">
 				<placement x="820" y="1544"/>

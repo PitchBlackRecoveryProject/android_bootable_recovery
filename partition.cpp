@@ -1530,7 +1530,7 @@ bool TWPartition::Mount(bool Display_Error) {
 	}
 	if (Mount_Point == "/system_root" && TWFunc::Path_Exists("/system_root/system"))
 	{
-		string Command = "mount -o bind " + Mount_Point + " /system";
+		string Command = "mount -o bind " + Mount_Point + "/system /system";
 		TWFunc::Exec_Cmd(Command);
 	}
 	return true;
