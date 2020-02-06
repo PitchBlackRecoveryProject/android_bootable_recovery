@@ -1296,7 +1296,7 @@ int GUIAction::wipe(std::string arg)
                                                 } else {
 			                                skip = true;
                                                 }
-                                        } else if (wipe_path == "FBE") {
+                                        } else if (wipe_path == "FBE" && DataManager::GetIntValue(TW_IS_FBE)) {
                                                 if (!PartitionManager.Wipe_FBE_Cache()) {
                                                         gui_err("pb_fbe_wipe_err=Failed to wipe fbe cache");
                                                         ret_val = false;

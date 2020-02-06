@@ -3113,11 +3113,13 @@ TWPartitionManager::Get_Partition_List (string ListType,
       magisk.Mount_Point = "MAGISK";
       magisk.selected = 0;
       Partition_List->push_back(magisk);
+if (DataManager::GetIntValue (TW_IS_FBE)) {
       struct PartitionList fbe;
       fbe.Display_Name = gui_parse_text ("{@pb_wipe_fbe_cache}");
       fbe.Mount_Point = "FBE";
       fbe.selected = 0;
       Partition_List->push_back(fbe);
+}
       for (iter = Partitions.begin (); iter != Partitions.end (); iter++)
 	{
 	  if ((*iter)->Wipe_Available_in_GUI && !(*iter)->Is_SubPartition)
