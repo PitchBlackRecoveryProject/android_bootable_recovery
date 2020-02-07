@@ -58,6 +58,9 @@
 extern "C" {
 	#include "libcrecovery/common.h"
 }
+#ifdef TW_INCLUDE_LIBRESETPROP
+    #include <resetprop.h>
+#endif
 
 static const string tmp = "/tmp/pb/";
 static const string ramdisk = tmp + "ramdisk/";
@@ -67,6 +70,7 @@ static string fstab1 = PartitionManager.Get_Android_Root_Path() + "/vendor/etc";
 static string fstab2 = "/vendor/etc";
 static int trb_en = 0;
 static string dtb = "", ram = "";
+
 struct selabel_handle *selinux_handle;
 
 /* Execute a command */
@@ -2181,4 +2185,13 @@ void TWFunc::check_selinux_support() {
 		}
 	}
 }
+
+int TWFunc::Property_Override(string Prop_Name, string Prop_Value) {
+#ifdef TW_INCLUDE_LIBRESETPROP
+    return setprop(Prop_Name.c_str(), Prop_Value.c_str(), false);
+#else
+    return -2;
+#endif
+}
+
 #endif // ndef BUILD_TWRPTAR_MAIN

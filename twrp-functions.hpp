@@ -132,6 +132,7 @@ public:
 	static void check_selinux_support(); // print whether selinux support is enabled to console
 	static bool check_system_root(); // return whether device is system-as-root or not
 	static int check_encrypt_status(); // return 1,2,3,0 on FDE, FBE, On some confusion & unencryptred respectively
+	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
 
 private:
 	static void Copy_Log(string Source, string Destination);
