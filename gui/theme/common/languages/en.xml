@@ -726,6 +726,8 @@
 		<string name="include_kernel_log">Include Kernel Log</string>
 		<string name="sha2_chk">Use SHA2 for hashing</string>
 		<string name="unable_set_boot_slot">Error changing bootloader boot slot to {1}</string>
+		<string name="flash_ab_inactive">Flashing A/B zip to inactive slot: {1}</string>
+		<string name="flash_ab_reboot">To flash additional zips, please reboot recovery to switch to the updated slot.</string>
 		<string name="ozip_decrypt_decryption">Starting Ozip Decryption...</string>
 		<string name="ozip_decrypt_finish">Ozip Decryption Finished!</string>
 		
