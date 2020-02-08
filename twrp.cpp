@@ -271,15 +271,22 @@ int main(int argc, char **argv) {
 
 	char encrypt_status[PROPERTY_VALUE_MAX];
 	property_get("ro.crypto.state", encrypt_status, "");
-	if (strcmp(encrypt_status, "") == 0) {
-		if ((DataManager::GetIntValue(TW_IS_ENCRYPTED) == 1 ||
-			DataManager::GetIntValue(TW_IS_DECRYPTED) == 0) && TWFunc::check_encrypt_status())
+	if (strcmp(encrypt_status, "") == 0 || strcmp(encrypt_status, "encrypted") == 0) {
+		int st = TWFunc::check_encrypt_status();
+		if (st != 0) {
 			strcpy(encrypt_status, "encrypted");
+			if (st == 1 || st == 3)
+				strcpy(encrypt_status, "encrypted with FDE");
+			else if (st == 2)
+				strcpy(encrypt_status, "encrypted with FBE");
+			if (st == 3)
+				gui_msg(Msg(msg::kWarning,"pb_encrypt_cn=Multiple Encryption Details Cached"));
+		}
 		else
-			strcpy(encrypt_status, "uncrypted");
+			strcpy(encrypt_status, "unencrypted");
 	}
-	else if (strcmp(encrypt_status, "encrypted") == 0 && !TWFunc::check_encrypt_status())
-		strcpy(encrypt_status, "uncrypted");
+	else if (strncmp(encrypt_status, "encrypted", 9) == 0 && TWFunc::check_encrypt_status() == 0)
+		strcpy(encrypt_status, "unencrypted");
 	gui_msg(Msg(msg::kProcess,"pb_encrypt_st=Encryption Status : {1}")(encrypt_status));
 
 #ifdef TW_HAS_MTP
