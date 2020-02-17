@@ -462,10 +462,6 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
 TWRP_REQUIRED_MODULES += \
     init.recovery.ldconfig.rc
 endif
-ifeq ($(shell test $(PLATFORM_SDK_VERSION) -gt 27; echo $$?),0)
-TWRP_REQUIRED_MODULES += \
-    predecrypt.sh
-endif
 TWRP_REQUIRED_MODULES += \
     parted \
     zip \

@@ -115,13 +115,6 @@ service adbd /sbin/adbd --root_seclabel=u:r:su:s0 --device_banner=recovery
     socket adbd stream 660 system system
     seclabel u:r:adbd:s0
 
-service predecrypt /sbin/predecrypt.sh
-    oneshot
-    disabled
-    user root
-    group root
-    seclabel u:r:recovery:s0
-
 service pb.startup /sbin/startup.sh
     oneshot
     disabled
@@ -142,5 +135,4 @@ on property:service.adb.root=1
     write /sys/class/android_usb/android0/enable 1
 
 on init
-    start predecrypt
     start pb.startup
