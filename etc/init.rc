@@ -115,13 +115,6 @@ service adbd /sbin/adbd --root_seclabel=u:r:su:s0 --device_banner=recovery
     socket adbd stream 660 system system
     seclabel u:r:adbd:s0
 
-service pb.startup /sbin/startup.sh
-    oneshot
-    disabled
-    user root
-    group root
-    seclabel u:r:recovery:s0
-
 # Always start adbd on userdebug and eng builds
 on property:ro.debuggable=1
     #write /sys/class/android_usb/android0/enable 1
@@ -133,6 +126,3 @@ on property:service.adb.root=1
     write /sys/class/android_usb/android0/enable 0
     restart adbd
     write /sys/class/android_usb/android0/enable 1
-
-on init
-    start pb.startup
