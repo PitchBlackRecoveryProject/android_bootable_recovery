@@ -740,6 +740,7 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 
 bool TWPartition::Decrypt_FBE_DE() {
 if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
+		DataManager::SetValue(TW_IS_FBE, 1);
 		LOGINFO("File Based Encryption is present\n");
 #ifdef TW_INCLUDE_FBE
 		Is_FBE = true;
@@ -786,6 +787,7 @@ if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 		LOGERR("FBE found but FBE support not present in TWRP\n");
 #endif
 	}
+	DataManager::SetValue(TW_IS_FBE, 0);
 	return false;
 }
 
