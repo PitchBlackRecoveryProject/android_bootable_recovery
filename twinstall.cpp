@@ -306,7 +306,7 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
               gui_msg("pb_incremental_ota_compatibility_chk=Verifying Incremental Package Signature...");
               if (TWFunc::Verify_Incremental_Package(fingerprint, metadata_fingerprint, metadata_device)) {
                 gui_msg("pb_incremental_ota_compatibility_true=Incremental package is compatible.");
-                property_set(fingerprint_property.c_str(), metadata_fingerprint.c_str());
+                TWFunc::Property_Override(fingerprint_property.c_str(), metadata_fingerprint.c_str());
                 DataManager::SetValue(PB_LOADED_FINGERPRINT, metadata_fingerprint);
               } else {
                 Write_MIUI_Install_Status(OTA_VERIFY_FAIL, false);
@@ -314,7 +314,7 @@ static int Prepare_Update_Binary(const char * path, ZipWrap * Zip, int * wipe_ca
                 return INSTALL_ERROR;
               }
             } else {
-              property_set(fingerprint_property.c_str(), metadata_fingerprint.c_str());
+              TWFunc::Property_Override(fingerprint_property.c_str(), metadata_fingerprint.c_str());
             }
             unlink(take_out_metadata.c_str());
           }
