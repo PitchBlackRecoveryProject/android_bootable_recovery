@@ -129,7 +129,7 @@ int main(int argc, char **argv) {
 
 // We are doing this here during SAR-detection, since we are mounting the system-partition anyway
 // This way we don't need to remount it later, just for overriding properties
-#if defined(TW_INCLUDE_LIBRESETPROP) && defined(TW_OVERRIDE_SYSTEM_PROPS)
+#ifdef TW_OVERRIDE_SYSTEM_PROPS
 	stringstream override_props(EXPAND(TW_OVERRIDE_SYSTEM_PROPS));
 	string current_prop;
 	while (getline(override_props, current_prop, ';')) {
