@@ -829,6 +829,7 @@
 		<string name="pb_forced_encryption_chk">Disable Forced Encryption</string>
 		<string name="pb_disable_reboot_ota_check">Disable Rebooting after OTA</string>
 		<string name="pb_run_process">Starting '{1}' process</string>
+		<string name="pb_encrypt_cn">Multiple Encryption Details Cached</string>
 		<string name="pb_encrypt_st">Encryption Status : {1}</string>
 		<string name="pb_run_process_fail">Unable to finish '{1}' process</string>
 		<string name="fm_pb_make">Make Folder</string>
@@ -861,6 +862,8 @@
 		<string name="pb_dev_reboot">A Reboot is mandatory After switching Codenames</string>
 		<string name="pb_dev_name">PBRP Device Codename Changer</string>
 		<string name="magisk_done">-- Magisk Modules Wipe Complete!</string>
+		<string name="pb_wipe_fbe_cache">FBE Cache</string>
+		<string name="fbe_done">-- FBE Cache Wipe Complete!</string>
 	</resources>
 </language>
 

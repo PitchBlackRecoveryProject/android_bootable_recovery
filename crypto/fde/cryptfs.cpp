@@ -74,6 +74,7 @@
 #include <openssl/sha.h>
 #include <hardware/keymaster0.h>
 #include <hardware/keymaster1.h>
+#include <hardware/keymaster2.h>
 #endif
 //#include "android-base/properties.h"
 //#include <bootloader_message/bootloader_message.h>
@@ -176,7 +177,8 @@ out:
 }
 #else //TW_KEYMASTER_MAX_API == 0
 static int keymaster_init(keymaster0_device_t **keymaster0_dev,
-                          keymaster1_device_t **keymaster1_dev)
+                          keymaster1_device_t **keymaster1_dev,
+			  keymaster2_device_t **keymaster2_dev)
 {
     int rc;
 
@@ -192,7 +194,11 @@ static int keymaster_init(keymaster0_device_t **keymaster0_dev,
 
     *keymaster0_dev = NULL;
     *keymaster1_dev = NULL;
-    if (mod->module_api_version == KEYMASTER_MODULE_API_VERSION_1_0) {
+    *keymaster2_dev = NULL;
+    if (mod->module_api_version == KEYMASTER_MODULE_API_VERSION_2_0) {
+        printf("Found keymaster2 module, using keymaster2 API.\n");
+        rc = keymaster2_open(mod, keymaster2_dev);
+    } else if (mod->module_api_version == KEYMASTER_MODULE_API_VERSION_1_0) {
         printf("Found keymaster1 module, using keymaster1 API.\n");
         rc = keymaster1_open(mod, keymaster1_dev);
     } else {
@@ -211,6 +217,7 @@ static int keymaster_init(keymaster0_device_t **keymaster0_dev,
 err:
     *keymaster0_dev = NULL;
     *keymaster1_dev = NULL;
+    *keymaster2_dev = NULL;
     return rc;
 }
 #endif //TW_KEYMASTER_MAX_API == 0
@@ -306,14 +313,14 @@ static int verify_and_update_hw_fde_passwd(const char *passwd,
                 new_passwd = (char*)malloc(strlen(DEFAULT_HEX_PASSWORD) + 1);
                 if (new_passwd == NULL) {
                     SLOGE("System out of memory. Password verification  incomplete");
-                    goto out;
+                    return key_index;
                 }
                 strlcpy(new_passwd, DEFAULT_HEX_PASSWORD, strlen(DEFAULT_HEX_PASSWORD) + 1);
             } else {
                 new_passwd = (char*)malloc(strlen(passwd) * 2 + 1);
                 if (new_passwd == NULL) {
                     SLOGE("System out of memory. Password verification  incomplete");
-                    goto out;
+                    return key_index;
                 }
                 convert_key_to_hex_ascii_for_upgrade((const unsigned char*)passwd,
                                        strlen(passwd), new_passwd);
@@ -349,7 +356,6 @@ static int verify_and_update_hw_fde_passwd(const char *passwd,
         if (!ascii_passwd_updated)
             crypt_ftr->flags |= CRYPT_ASCII_PASSWORD_UPDATED;
     }
-out:
     // update footer before leaving
     //put_crypt_ftr_and_key(crypt_ftr);
     return key_index;
@@ -412,7 +418,7 @@ static int keymaster_sign_object(struct crypt_mnt_ftr *ftr,
             // so) because we really should be using a proper deterministic
             // RSA padding function, such as PKCS1.
             memcpy(to_sign + 1, object, min((size_t)RSA_KEY_SIZE_BYTES - 1, object_size));
-            SLOGI("Signing safely-padded object");
+            SLOGI("Signing safely-padded object\n");
             break;
         default:
             SLOGE("Unknown KDF type %d", ftr->kdf_type);
@@ -424,7 +430,8 @@ static int keymaster_sign_object(struct crypt_mnt_ftr *ftr,
 #if TW_KEYMASTER_MAX_API >= 1
     keymaster0_device_t *keymaster0_dev = 0;
     keymaster1_device_t *keymaster1_dev = 0;
-    if (keymaster_init(&keymaster0_dev, &keymaster1_dev)) {
+    keymaster2_device_t *keymaster2_dev = 0;
+    if (keymaster_init(&keymaster0_dev, &keymaster1_dev, &keymaster2_dev)) {
 #else
     keymaster_device_t *keymaster0_dev = 0;
     if (keymaster_init(&keymaster0_dev)) {
@@ -504,6 +511,82 @@ static int keymaster_sign_object(struct crypt_mnt_ftr *ftr,
         *signature_size = tmp_sig.data_length;
         rc = 0;
     }
+    else if (keymaster2_dev) {
+        keymaster_key_blob_t key = { ftr->keymaster_blob, ftr->keymaster_blob_size };
+        keymaster_key_param_t params[] = {
+            keymaster_param_enum(KM_TAG_PADDING, KM_PAD_NONE),
+            keymaster_param_enum(KM_TAG_DIGEST, KM_DIGEST_NONE),
+        };
+        keymaster_key_param_set_t param_set = { params, sizeof(params)/sizeof(*params) };
+        keymaster_operation_handle_t op_handle;
+        keymaster_key_param_t config_params[] = {
+            // Set these to crazy values so we don't need to synchronize
+            // the recovery with system updates.
+            // key upgrades will be required; it will be upgraded in-memory
+            keymaster_param_int(KM_TAG_OS_VERSION, 999999),
+	    keymaster_param_int(KM_TAG_OS_PATCHLEVEL, 209912),
+        };
+        keymaster_key_param_set_t config_param_set = { config_params, sizeof(config_params)/sizeof(*config_params) };
+        keymaster2_dev->configure(keymaster2_dev, &config_param_set);
+        keymaster_error_t error = keymaster2_dev->begin(keymaster2_dev, KM_PURPOSE_SIGN, &key,
+                                                        &param_set, NULL /* out_params */,
+                                                        &op_handle);
+        if (error == KM_ERROR_KEY_RATE_LIMIT_EXCEEDED) {
+            // Key usage has been rate-limited.  Wait a bit and try again.
+            sleep(KEYMASTER_CRYPTFS_RATE_LIMIT);
+            error = keymaster2_dev->begin(keymaster2_dev, KM_PURPOSE_SIGN, &key,
+                                          &param_set, NULL /* out_params */,
+                                          &op_handle);
+        }
+
+        if (error == KM_ERROR_KEY_REQUIRES_UPGRADE) {
+            // Upgrade key in-memory if required
+            // Do not actually write it back; just keep it in memory
+            const keymaster_key_blob_t key_to_upd = key;
+            keymaster2_dev->upgrade_key(keymaster2_dev, &key_to_upd, &config_param_set, &key);
+            error = keymaster2_dev->begin(keymaster2_dev, KM_PURPOSE_SIGN, &key,
+                                          &param_set, NULL /* out_params */,
+                                          &op_handle);
+        }
+
+        if (error != KM_ERROR_OK) {
+            printf("Error starting keymaster signature transaction: %d\n", error);
+            rc = -1;
+            goto out;
+        }
+
+        keymaster_blob_t input = { to_sign, to_sign_size };
+        size_t input_consumed;
+        error = keymaster2_dev->update(keymaster2_dev, op_handle, NULL /* in_params */,
+                                       &input, &input_consumed, NULL /* out_params */,
+                                       NULL /* output */);
+        if (error != KM_ERROR_OK) {
+            printf("Error sending data to keymaster signature transaction: %d\n", error);
+            rc = -1;
+            goto out;
+        }
+        if (input_consumed != to_sign_size) {
+            // This should never happen.  If it does, it's a bug in the keymaster implementation.
+            printf("Keymaster update() did not consume all data.\n");
+            keymaster2_dev->abort(keymaster2_dev, op_handle);
+            rc = -1;
+            goto out;
+        }
+
+        keymaster_blob_t tmp_sig;
+        error = keymaster2_dev->finish(keymaster2_dev, op_handle, NULL /* in_params */,
+                                       NULL, NULL /* verify signature */, NULL /* out_params */,
+                                       &tmp_sig);
+        if (error != KM_ERROR_OK) {
+            printf("Error finishing keymaster signature transaction: %d\n", error);
+            rc = -1;
+            goto out;
+        }
+
+        *signature = (uint8_t*)tmp_sig.data;
+        *signature_size = tmp_sig.data_length;
+        rc = 0;
+    }
 #endif // TW_KEYMASTER_API >= 1
 
     out:
@@ -528,7 +611,7 @@ initfail:
             ftr->keymaster_blob, KEYMASTER_BLOB_SIZE, &ftr->keymaster_blob_size);
 #endif //TW_KEYMASTER_MAX_API == 3
 #if TW_KEYMASTER_MAX_API >= 4
-    //for (;;) {
+    for (;;) {
         auto result = keymaster_sign_object_for_cryptfs_scrypt(
             ftr->keymaster_blob, ftr->keymaster_blob_size, KEYMASTER_CRYPTFS_RATE_LIMIT, to_sign,
             to_sign_size, signature, signature_size);
@@ -552,8 +635,7 @@ initfail:
             SLOGE("Failed to write upgraded key to disk");
         }*/
         SLOGD("Key upgraded successfully\n");
-        return 0;
-    //}
+    }
 #endif
     return -1;
 }
@@ -630,6 +712,10 @@ constexpr CryptoType supported_crypto_types[] = {
     CryptoType()
         .set_property_name("Speck128/128-XTS")
         .set_crypto_name("speck128-xts-plain64")
+        .set_keysize(32),
+    CryptoType()
+        .set_property_name("adiantum")
+        .set_crypto_name("xchacha12,aes-adiantum-plain64")
         .set_keysize(32),
     // Add new CryptoTypes here.  Order is not important.
 };
@@ -912,7 +998,10 @@ static int load_crypto_mapping_table(struct crypt_mnt_ftr *crypt_ftr,
   tgt->length = crypt_ftr->fs_size;
   crypt_params = buffer + sizeof(struct dm_ioctl) + sizeof(struct dm_target_spec);
   buff_offset = crypt_params - buffer;
-  SLOGI("Extra parameters for dm_crypt: %s\n", extra_params);
+  SLOGI(
+	"Creating crypto dev \"%s\"; cipher=%s, keysize=%u, real_dev=%s, len=%llu, params=\"%s\"\n",
+	name, crypt_ftr->crypto_type_name, crypt_ftr->keysize, real_blk_name, tgt->length * 512,
+	extra_params);
 
 #ifdef CONFIG_HW_DISK_ENCRYPTION
   if(is_hw_disk_encryption((char*)crypt_ftr->crypto_type_name)) {
@@ -930,8 +1019,8 @@ static int load_crypto_mapping_table(struct crypt_mnt_ftr *crypt_ftr,
            crypt_ftr->crypto_type_name, master_key_ascii,
            real_blk_name, extra_params);
 
-  SLOGI("target_type = %s", tgt->target_type);
-  SLOGI("real_blk_name = %s, extra_params = %s", real_blk_name, extra_params);
+  SLOGI("target_type = %s\n", tgt->target_type);
+  SLOGI("real_blk_name = %s, extra_params = %s\n", real_blk_name, extra_params);
 #else
   convert_key_to_hex_ascii(master_key, crypt_ftr->keysize, master_key_ascii);
   strlcpy(tgt->target_type, "crypt", DM_MAX_TYPE_NAME);
@@ -945,7 +1034,9 @@ static int load_crypto_mapping_table(struct crypt_mnt_ftr *crypt_ftr,
   tgt->next = crypt_params - buffer;
 
   for (i = 0; i < TABLE_LOAD_RETRIES; i++) {
-    if (! ioctl(fd, DM_TABLE_LOAD, io)) {
+    int ret = ioctl(fd, DM_TABLE_LOAD, io);
+    if (!ret)  {
+      SLOGI("ioctl err: %d\n", ret);
       break;
     }
     usleep(500000);
@@ -1205,13 +1296,13 @@ static int scrypt_keymaster(const char *passwd, const unsigned char *salt,
                        INTERMEDIATE_BUF_SIZE);
 
     if (rc) {
-        SLOGE("scrypt failed");
+        SLOGE("scrypt failed\n");
         return -1;
     }
 
     if (keymaster_sign_object(ftr, ikey, INTERMEDIATE_BUF_SIZE,
                               &signature, &signature_size)) {
-        SLOGE("Keymaster signing failed");
+        SLOGE("Keymaster signing failed\n");
         return -1;
     }
 
@@ -1220,7 +1311,7 @@ static int scrypt_keymaster(const char *passwd, const unsigned char *salt,
     free(signature);
 
     if (rc) {
-        SLOGE("scrypt failed");
+        SLOGE("scrypt failed\n");
         return -1;
     }
 
@@ -1242,7 +1333,7 @@ static int decrypt_master_key_aux(const char *passwd, unsigned char *salt,
   /* Turn the password into an intermediate key and IV that can decrypt the
      master key */
   if (kdf(passwd, salt, ikey, kdf_params)) {
-    SLOGE("kdf failed");
+    SLOGE("kdf failed\n");
     return -1;
   }
 
@@ -1308,7 +1399,7 @@ static int decrypt_master_key(const char *passwd, unsigned char *decrypted_maste
                                  decrypted_master_key, kdf, kdf_params,
                                  intermediate_key, intermediate_key_size);
     if (ret != 0) {
-        SLOGW("failure decrypting master key");
+        SLOGW("failure decrypting master key\n");
     }
 
     return ret;
@@ -1332,6 +1423,13 @@ static int test_mount_hw_encrypted_fs(struct crypt_mnt_ftr* crypt_ftr,
 
   int key_index = 0;
   if(is_hw_disk_encryption((char*)crypt_ftr->crypto_type_name)) {
+    if (crypt_ftr->flags & CRYPT_FORCE_COMPLETE) {
+       if (decrypt_master_key(passwd, decrypted_master_key, crypt_ftr, 0, 0)) {
+           printf("Failed to decrypt master key\n");
+           rc = -1;
+           goto errout;
+       }
+    }
     key_index = verify_and_update_hw_fde_passwd(passwd, crypt_ftr);
     if (key_index < 0) {
       rc = -1;
@@ -1342,7 +1440,7 @@ static int test_mount_hw_encrypted_fs(struct crypt_mnt_ftr* crypt_ftr,
 #ifndef CONFIG_HW_DISK_ENCRYPT_PERF
         if (create_crypto_blk_dev(crypt_ftr, (unsigned char*)&key_index,
                             real_blkdev, crypto_blkdev, label, 0)) {
-          SLOGE("Error creating decrypted block device");
+          SLOGE("Error creating decrypted block device\n");
           rc = -1;
           goto errout;
         }
@@ -1350,7 +1448,7 @@ static int test_mount_hw_encrypted_fs(struct crypt_mnt_ftr* crypt_ftr,
       } else {
         if (create_crypto_blk_dev(crypt_ftr, decrypted_master_key,
                             real_blkdev, crypto_blkdev, label, 0)) {
-          SLOGE("Error creating decrypted block device");
+          SLOGE("Error creating decrypted block device\n");
           rc = -1;
           goto errout;
         }
@@ -1396,7 +1494,7 @@ static int test_mount_encrypted_fs(struct crypt_mnt_ftr* crypt_ftr,
   //char real_blkdev[MAXPATHLEN];
   char tmp_mount_point[64];
   unsigned int orig_failed_decrypt_count;
-  int rc;
+  int rc = 0;
   int use_keymaster = 0;
   unsigned char* intermediate_key = 0;
   size_t intermediate_key_size = 0;
@@ -1454,7 +1552,7 @@ static int test_mount_encrypted_fs(struct crypt_mnt_ftr* crypt_ftr,
       rc = -1;
     } else {
       /* Success! */
-      SLOGI("Password did not match but decrypted drive mounted - continue");
+      SLOGI("Password did not match but decrypted drive mounted - continue\n");
       umount(tmp_mount_point);
       rc = 0;
     }
@@ -1535,12 +1633,12 @@ int check_unmounted_and_get_ftr(struct crypt_mnt_ftr* crypt_ftr)
     property_get("ro.crypto.state", encrypted_state, "");
     if ( master_key_saved || strcmp(encrypted_state, "encrypted") ) {
         SLOGE("encrypted fs already validated or not running with encryption,"
-              " aborting");
+              " aborting\n");
         return -1;
     }
 
     if (get_crypt_ftr_and_key(crypt_ftr)) {
-        SLOGE("Error getting crypt footer and key");
+        SLOGE("Error getting crypt footer and key\n");
         return -1;
     }
 
@@ -1551,11 +1649,11 @@ int check_unmounted_and_get_ftr(struct crypt_mnt_ftr* crypt_ftr)
 int cryptfs_check_passwd_hw(const char* passwd)
 {
     struct crypt_mnt_ftr crypt_ftr;
-    int rc;
+    int rc = 0;
     unsigned char master_key[KEY_LEN_BYTES];
     /* get key */
     if (get_crypt_ftr_and_key(&crypt_ftr)) {
-        SLOGE("Error getting crypt footer and key");
+        SLOGE("Error getting crypt footer and key\n");
         return -1;
     }
 
@@ -1569,7 +1667,7 @@ int cryptfs_check_passwd_hw(const char* passwd)
          */
         rc = cryptfs_get_master_key(&crypt_ftr, passwd, master_key);
         if (rc) {
-            SLOGE("password doesn't match");
+            SLOGE("password doesn't match\n");
             return rc;
         }
 
@@ -1577,7 +1675,7 @@ int cryptfs_check_passwd_hw(const char* passwd)
             DATA_MNT_POINT, CRYPTO_BLOCK_DEVICE);
 
         if (rc) {
-            SLOGE("Default password did not match on reboot encryption");
+            SLOGE("Default password did not match on reboot encryption\n");
             return rc;
         }
     } else {
@@ -1602,7 +1700,7 @@ int cryptfs_check_passwd(const char *passwd)
 
     rc = check_unmounted_and_get_ftr(&crypt_ftr);
     if (rc) {
-        SLOGE("Could not get footer");
+        SLOGE("Could not get footer\n");
         return rc;
     }
 
@@ -1615,7 +1713,7 @@ int cryptfs_check_passwd(const char *passwd)
                                  DATA_MNT_POINT, CRYPTO_BLOCK_DEVICE);
 
     if (rc) {
-        SLOGE("Password did not match");
+        SLOGE("Password did not match\n");
         return rc;
     }
 
@@ -1628,7 +1726,7 @@ int cryptfs_check_passwd(const char *passwd)
         rc = test_mount_encrypted_fs(&crypt_ftr, DEFAULT_PASSWORD,
                                      DATA_MNT_POINT, CRYPTO_BLOCK_DEVICE);
         if (rc) {
-            SLOGE("Default password did not match on reboot encryption");
+            SLOGE("Default password did not match on reboot encryption\n");
             return rc;
         }
     }
@@ -1645,17 +1743,17 @@ int cryptfs_verify_passwd(const char *passwd)
 
     property_get("ro.crypto.state", encrypted_state, "");
     if (strcmp(encrypted_state, "encrypted") ) {
-        SLOGE("device not encrypted, aborting");
+        SLOGE("device not encrypted, aborting\n");
         return -2;
     }
 
     if (!master_key_saved) {
-        SLOGE("encrypted fs not yet mounted, aborting");
+        SLOGE("encrypted fs not yet mounted, aborting\n");
         return -1;
     }
 
     if (!saved_mount_point) {
-        SLOGE("encrypted fs failed to save mount point, aborting");
+        SLOGE("encrypted fs failed to save mount point, aborting\n");
         return -1;
     }
 
@@ -1735,7 +1833,7 @@ int cryptfs_get_master_key(struct crypt_mnt_ftr* ftr, const char* password,
                             &intermediate_key_size);
 
     if (rc) {
-        SLOGE("Can't calculate intermediate key");
+        SLOGE("Can't calculate intermediate key\n");
         return rc;
     }
 
@@ -1753,7 +1851,7 @@ int cryptfs_get_master_key(struct crypt_mnt_ftr* ftr, const char* password,
     free(intermediate_key);
 
     if (rc) {
-        SLOGE("Can't scrypt intermediate key");
+        SLOGE("Can't scrypt intermediate key\n");
         return rc;
     }
 

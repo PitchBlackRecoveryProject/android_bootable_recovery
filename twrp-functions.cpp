@@ -1531,13 +1531,14 @@ bool TWFunc::check_system_root() {
 	return false;
 }
 
-bool TWFunc::check_encrypt_status() {
+int TWFunc::check_encrypt_status() {
 	string out;
+	int status = 0;
 	if (TWFunc::Exec_Cmd("grep /data /proc/mounts | grep -q dm-", out) == 0)
-		return true;
-	else if (TWFunc::Path_Exists("/data/unencrypted"))
-		return true;
-	return false;
+		status += 1;
+	if (TWFunc::Path_Exists("/data/unencrypted"))
+		status += 2;
+	return status;
 }
 
 static bool Patch_AVBDM_Verity() {
@@ -1841,8 +1842,9 @@ void TWFunc::Deactivation_Process(void)
 		}
 		gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
 		DataManager::GetValue(TRB_EN, trb_en);
-		if (TWFunc::check_encrypt_status()) {
+		if (TWFunc::check_encrypt_status() != 0) {
 			gui_msg(Msg(msg::kHighlight, "pb_ecryption_leave=Device Encrypted Leaving Forceencrypt"));
+			setenv("KEEPFORCEENCRYPT", "true", true);
 			DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);
 		}
 		else {
