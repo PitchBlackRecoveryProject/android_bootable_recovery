@@ -89,11 +89,16 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
     endif
 else
     # <= 7.x rules
-    ifneq ($(wildcard hardware/libhardware/include/hardware/keymaster0.h),)
+    ifneq ($(wildcard hardware/libhardware/include/hardware/keymaster2.h),)
         LOCAL_C_INCLUDES +=  external/boringssl/src/include
-        LOCAL_CFLAGS += -DTW_KEYMASTER_MAX_API=1
+        LOCAL_CFLAGS += -DTW_KEYMASTER_MAX_API=2
     else
-        LOCAL_CFLAGS += -DTW_KEYMASTER_MAX_API=0
+        ifneq ($(wildcard hardware/libhardware/include/hardware/keymaster0.h),)
+            LOCAL_C_INCLUDES +=  external/boringssl/src/include
+            LOCAL_CFLAGS += -DTW_KEYMASTER_MAX_API=1
+        else
+            LOCAL_CFLAGS += -DTW_KEYMASTER_MAX_API=0
+        endif
     endif
 endif
 ifeq ($(TARGET_HW_DISK_ENCRYPTION),true)

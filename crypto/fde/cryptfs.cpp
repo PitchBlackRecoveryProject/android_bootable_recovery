@@ -74,7 +74,9 @@
 #include <openssl/sha.h>
 #include <hardware/keymaster0.h>
 #include <hardware/keymaster1.h>
+#if TW_KEYMASTER_MAX_API == 2
 #include <hardware/keymaster2.h>
+#endif
 #endif
 //#include "android-base/properties.h"
 //#include <bootloader_message/bootloader_message.h>
@@ -175,7 +177,7 @@ out:
     *keymaster_dev = NULL;
     return rc;
 }
-#else //TW_KEYMASTER_MAX_API == 0
+#elif TW_KEYMASTER_MAX_API == 2
 static int keymaster_init(keymaster0_device_t **keymaster0_dev,
                           keymaster1_device_t **keymaster1_dev,
 			  keymaster2_device_t **keymaster2_dev)
@@ -218,6 +220,45 @@ err:
     *keymaster0_dev = NULL;
     *keymaster1_dev = NULL;
     *keymaster2_dev = NULL;
+    return rc;
+}
+#else //TW_KEYMASTER_MAX_API == 0
+static int keymaster_init(keymaster0_device_t **keymaster0_dev,
+                          keymaster1_device_t **keymaster1_dev)
+{
+    int rc;
+
+    const hw_module_t* mod;
+    rc = hw_get_module_by_class(KEYSTORE_HARDWARE_MODULE_ID, NULL, &mod);
+    if (rc) {
+        printf("could not find any keystore module\n");
+        goto err;
+    }
+
+    printf("keymaster module name is %s\n", mod->name);
+    printf("keymaster version is %d\n", mod->module_api_version);
+
+    *keymaster0_dev = NULL;
+    *keymaster1_dev = NULL;
+    if (mod->module_api_version == KEYMASTER_MODULE_API_VERSION_1_0) {
+        printf("Found keymaster1 module, using keymaster1 API.\n");
+        rc = keymaster1_open(mod, keymaster1_dev);
+    } else {
+        printf("Found keymaster0 module, using keymaster0 API.\n");
+        rc = keymaster0_open(mod, keymaster0_dev);
+    }
+
+    if (rc) {
+        printf("could not open keymaster device in %s (%s)\n",
+              KEYSTORE_HARDWARE_MODULE_ID, strerror(-rc));
+        goto err;
+    }
+
+    return 0;
+
+err:
+    *keymaster0_dev = NULL;
+    *keymaster1_dev = NULL;
     return rc;
 }
 #endif //TW_KEYMASTER_MAX_API == 0
@@ -430,8 +471,12 @@ static int keymaster_sign_object(struct crypt_mnt_ftr *ftr,
 #if TW_KEYMASTER_MAX_API >= 1
     keymaster0_device_t *keymaster0_dev = 0;
     keymaster1_device_t *keymaster1_dev = 0;
+#if TW_KEYMASTER_MAX_API == 2
     keymaster2_device_t *keymaster2_dev = 0;
     if (keymaster_init(&keymaster0_dev, &keymaster1_dev, &keymaster2_dev)) {
+#else
+    if (keymaster_init(&keymaster0_dev, &keymaster1_dev)) {
+#endif
 #else
     keymaster_device_t *keymaster0_dev = 0;
     if (keymaster_init(&keymaster0_dev)) {
@@ -511,6 +556,7 @@ static int keymaster_sign_object(struct crypt_mnt_ftr *ftr,
         *signature_size = tmp_sig.data_length;
         rc = 0;
     }
+#if TW_KEYMASTER_MAX_API == 2
     else if (keymaster2_dev) {
         keymaster_key_blob_t key = { ftr->keymaster_blob, ftr->keymaster_blob_size };
         keymaster_key_param_t params[] = {
@@ -587,12 +633,17 @@ static int keymaster_sign_object(struct crypt_mnt_ftr *ftr,
         *signature_size = tmp_sig.data_length;
         rc = 0;
     }
+#endif
 #endif // TW_KEYMASTER_API >= 1
 
     out:
 #if TW_KEYMASTER_MAX_API >= 1
         if (keymaster1_dev)
             keymaster1_close(keymaster1_dev);
+#if TW_KEYMASTER_MAX_API == 2
+        if (keymaster2_dev)
+            keymaster2_close(keymaster2_dev);
+#endif
 #endif
         if (keymaster0_dev)
 #if TW_KEYMASTER_MAX_API >= 1
