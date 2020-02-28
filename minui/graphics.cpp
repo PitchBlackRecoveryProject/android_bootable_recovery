@@ -25,8 +25,6 @@
 
 #include <android-base/properties.h>
 
-#include "graphics_adf.h"
-#endif
 #include "graphics_drm.h"
 #include "graphics_fbdev.h"
 #include "graphics_overlay.h"
@@ -639,7 +637,7 @@ int gr_init() {
            ret);
   }
 
-  auto backend = std::unique_ptr<MinuiBackend>{ std::make_unique<MinuiBackendOverlay>() };
+  auto backend = std::unique_ptr<MinuiBackend>{ std::make_unique<MinuiBackendDrm>() };
   gr_draw = backend->Init();
 
 #ifdef MSM_BSP
