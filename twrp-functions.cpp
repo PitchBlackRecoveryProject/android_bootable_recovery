@@ -349,6 +349,15 @@ unsigned long TWFunc::Get_File_Size(const string& Path) {
 	return st.st_size;
 }
 
+std::string TWFunc::Remove_Beginning_Slash(const std::string& path) {
+	std::string res;
+	size_t pos = path.find_first_of("/");
+	if (pos != std::string::npos) {
+		res = path.substr(pos+1);
+	}
+	return res;
+}
+
 std::string TWFunc::Remove_Trailing_Slashes(const std::string& path, bool leaveLast)
 {
 	std::string res;
@@ -2211,6 +2220,15 @@ int TWFunc::Property_Override(string Prop_Name, string Prop_Value) {
 #else
     return Exec_Cmd("resetprop " + Prop_Name + " \"" + Prop_Value + "\"");
 #endif
+}
+
+void TWFunc::List_Mounts() {
+	std::vector<std::string> mounts;
+	read_file("/proc/mounts", mounts);
+	LOGINFO("Mounts:\n");
+	for (auto&& mount: mounts) {
+		LOGINFO("%s\n", mount.c_str());
+	}
 }
 
 #endif // ndef BUILD_TWRPTAR_MAIN
