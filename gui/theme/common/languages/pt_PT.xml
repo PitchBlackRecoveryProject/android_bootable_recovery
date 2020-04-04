@@ -5,10 +5,10 @@
 
 	<resources>
 		<!-- Font overrides - only change these if your language requires special characters -->
-		<resource name="font_l" type="fontoverride" filename="RobotoCondensed-Regular.ttf" scale="100" />
-		<resource name="font_m" type="fontoverride" filename="RobotoCondensed-Regular.ttf" scale="100" />
-		<resource name="font_s" type="fontoverride" filename="RobotoCondensed-Regular.ttf" scale="100" />
-		<resource name="fixed" type="fontoverride" filename="DroidSansMono.ttf" scale="100" />
+		<resource name="font_l" type="fontoverride" filename="pb.ttf" scale="100" />
+		<resource name="font_m" type="fontoverride" filename="pb.ttf" scale="100" />
+		<resource name="font_s" type="fontoverride" filename="pb.ttf" scale="100" />
+		<resource name="fixed" type="fontoverride" filename="pb.ttf" scale="100" />
 
 		<!-- Partition display names -->
 		<string name="system">Sistema</string>

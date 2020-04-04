@@ -55,15 +55,15 @@ TARGET_RECOVERY_GUI := true
 
 ifeq ($(PB_OFFICIAL),true)
 	ifeq ($(PB_GO),true)
-	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.9.0-Official"'
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.9.1-Official"'
 	else
-	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.9.0-Official"'
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.9.1-Official"'
 	endif
 else
 	ifeq ($(PB_GO),true)
-	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.9.0-Unofficial"'
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.9.1-Unofficial"'
 	else
-	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.9.0-Unofficial"'
+	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.9.1-Unofficial"'
 	endif
 endif
 

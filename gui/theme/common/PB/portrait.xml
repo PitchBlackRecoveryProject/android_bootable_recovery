@@ -1,3 +1,4 @@
+<description>Copyright 2018-2020 PitchBlackRecoveryProject</description>
 <?xml version="1.0"?>
 <recovery>
 	<styles>
@@ -33,9 +34,17 @@
 		<style name="text_m_accent">
 			<font resource="font_about" color="#FFFFFF"/>
 		</style>
+		
+		<style name="text_l_color">
+			<font resource="font_l" color="#00CC44"/>
+		</style>
 
 		<style name="text_m_fail">
 			<font resource="font_m" color="%text_fail_color%"/>
+		</style>
+		
+		<style name="text_fail_selected">
+			<font resource="font_l" color="%text_fail_selected%"/>
 		</style>
 		
 		<style name="text_n">
@@ -106,9 +115,15 @@
 			<font resource="font_pb" color="%text_button_color%"/>
 			<image resource="main_button_mount"/>
 		</style>
-
+		
 		<style name="main_button_rename_c">
 			<image resource="main_button_rename_c"/>
+		</style>
+		
+		<style name="main_button_miscellaneous">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_pb" color="%text_button_color%"/>
+			<image resource="main_button_miscellaneous"/>
 		</style>
 		
 		<style name="main_button_settings">
@@ -151,6 +166,10 @@
 			<highlight color="%highlight_color%"/>
 			<font resource="font_pb" color="%text_button_color%"/>
 			<image resource="main_button_adb"/>
+		</style>
+		
+		<style name="main_button_additional">
+			<image resource="main_button_additional"/>
 		</style>
 		
 		<style name="main_button_terminal">
@@ -369,12 +388,6 @@
 			<image resource="main_button_half_height_full"/>
 		</style>
 
-		<style name="main_button_half_height_full">
-			<highlight color="%highlight_color%"/>
-			<font resource="font_m" color="%text_button_color%"/>
-			<image resource="main_button_half_height_full"/>
-		</style>
-
 		<style name="main_button_half_height_full_width">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_m" color="%text_button_color%"/>
@@ -416,8 +429,8 @@
 
 		<style name="console">
 			<fastscroll rectcolor="%accent_color2%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
-			<color foreground="%text_color%" background="%background_color%" scroll="%background_color%"/>
-			<font resource="fixed"/>
+			<color foreground="%text_color%" background="%background_color2%" scroll="%background_color2%"/>
+			<font resource="font_m"/>
 		</style>
 		
 		<style name="about">
@@ -428,26 +441,26 @@
 		
 		<style name="terminal">
 			<fastscroll linecolor="%transparent%" rectcolor="%accent_color2%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
-			<background color="%background_color%"/>
-			<font resource="fixed" spacing="3" color="%text_color%"/>
+			<background color="%background_color2%"/>
+			<font resource="font_m" spacing="3" color="%text_color%"/>
 		</style>
 
 		<style name="fileselector">
 			<highlight color="%fileselector_highlight_color%"/>
-			<header background="%background_color%" textcolor="%accent_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
+			<header background="%background_color2%" textcolor="%text_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
 			<fastscroll linecolor="%fileselector_linecolor2%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
-			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
+			<separator color="%accent_color%" height="%fileselector_separatorheight%"/>
 			<sort name="tw_gui_sort_order"/>
 			<icon folder="folder" file="file"/>
-			<background color="%background_color%"/>
+			<background color="%background_color2%"/>
 			<font resource="font_m" spacing="%fileselector_spacing%" color="%text_color%" highlightcolor="%accent_color%"/>
 		</style>
 
 		<style name="listbox">
 			<highlight color="%fileselector_highlight_color%"/>
-			<header background="%background_color%" textcolor="%accent_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
+			<header background="%background_color%" textcolor="%text_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
 			<fastscroll linecolor="%fileselector_linecolor2%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
-			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
+			<separator color="%accent_color%" height="%fileselector_separatorheight%"/>
 			<icon selected="radio_true" unselected="radio_false"/>
 			<background color="%background_color%"/>
 			<font resource="font_m" spacing="%fileselector_spacing%" color="%text_color%" highlightcolor="%accent_color%"/>
@@ -461,11 +474,11 @@
 
 		<style name="partitionlist">
 			<highlight color="%fileselector_highlight_color%"/>
-			<header background="%background_color%" textcolor="%accent_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
+			<header background="%background_color%" textcolor="%text_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
 			<fastscroll linecolor="%fileselector_linecolor2%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<dimensions lineh="%slidervalue_lineh%" linepadding="%slidervalue_padding%" sliderw="%slidervalue_sliderw%" sliderh="%slidervalue_sliderh%"/>
 			<icon selected="checkbox_true" unselected="checkbox_false"/>
-			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
+			<separator color="%accent_color%" height="%fileselector_separatorheight%"/>
 			<background color="%background_color%"/>
 			<font resource="font_m" spacing="%partitionlist_spacing%" color="%text_color%" highlightcolor="%fileselector_highlight_font_color%"/>
 		</style>
@@ -473,7 +486,7 @@
 		<style name="partitionlist_storage">
 			<highlight color="%fileselector_highlight_color%"/>
 			<placement x="%col1_x_left%" y="%row5_y%" w="%content_overlay_width%" h="%partitionlist_storage_height%"/>
-			<header background="%background_color%" textcolor="%accent_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
+			<header background="%background_color%" textcolor="%text_color%" separatorcolor="%accent_color%" separatorheight="%fileselector_separatorheight%"/>
 			<fastscroll linecolor="%fileselector_linecolor2%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<dimensions lineh="%slidervalue_lineh%" linepadding="%slidervalue_padding%" sliderw="%slidervalue_sliderw%" sliderh="%slidervalue_sliderh%"/>
 			<icon selected="radio_true" unselected="radio_false"/>
@@ -495,13 +508,13 @@
 			<dimensions lineh="%slidervalue_lineh%" linepadding="%slidervalue_padding%" sliderw="%slidervalue_sliderw%" sliderh="%slidervalue_sliderh%"/>
 		</style>
 
-		<style name="patternpassword">
+        	<style name="patternpassword">
 			<size name="tw_gui_pattern_grid_size" default="3"/>
-		</style>
-	</styles>
+		    </style>
+	    	</styles>
 
-	<pages>
-		<page name="main">
+	    	<pages>
+		   <page name="main">
 			<action>
 				<actions>
 					<action function="set">tw_clear_destination=main2</action>
@@ -523,7 +536,12 @@
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
 				<text>%tw_version%</text>
 			</text>
-
+			
+			<button style="main_button_additional">
+				<placement x="927" y="93"/>
+				<action function="page">tools1</action>
+			</button>
+			
 			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="296"/>
 				<actions>
@@ -647,9 +665,9 @@
 				<placement x="250" y="1615"/>
 				<text>{@reboot_btn=Reboot}</text>
 			</text>
-		</page>
-
-		<page name="install">
+			</page>
+		
+			<page name="install">
 			<template name="page"/>
 
 			<text style="text_l">
@@ -816,17 +834,17 @@
 				<text>{@inject_twrp_chk=Flash PBRP after install}</text>
 				<data variable="tw_inject_after_zip"/>
 			</checkbox>
-
-			<checkbox>
-				<condition var1="tw_has_injecttwrp" var2="1"/>
-				<placement x="%indent%" y="%row16a_y%"/>
-				<text>{@pb_enable_dmesg_logging=Enable Dmesg logging after Flash}</text>
-				<data variable="pb_inlclude_dmesg_logging"/>
-			</checkbox>
-
+			
 			<checkbox>
 				<condition var1="tw_has_injecttwrp" op="!=" var2="1"/>
 				<placement x="%indent%" y="%row15_y%"/>
+				<text>{@pb_enable_dmesg_logging=Enable Dmesg logging after Flash}</text>
+				<data variable="pb_inlclude_dmesg_logging"/>
+			</checkbox>
+			
+			<checkbox>
+				<condition var1="tw_has_injecttwrp" var2="1"/>
+				<placement x="%indent%" y="%row16a_y%"/>
 				<text>{@pb_enable_dmesg_logging=Enable Dmesg logging after Flash}</text>
 				<data variable="pb_inlclude_dmesg_logging"/>
 			</checkbox>
@@ -911,9 +929,9 @@
 			<template name="console"/>
 
 			<button style="main_button_half_height">
-				<condition var1="tw_ab_device" var2="0"/>
+			<condition var1="tw_ab_device" var2="0"/>
 				<placement x="%indent%" y="%row21a_y%"/>
-				<text>{@wipe_cache_dalvik_btn=Wipe Cache/Dalvik}</text>
+			<text>{@wipe_cache_dalvik_btn=Wipe Cache/Dalvik}</text>
 				<actions>
 					<action function="set">tw_back=flash_done</action>
 					<action function="set">tw_action=wipe</action>
@@ -930,23 +948,23 @@
 			</button>
 
 			<button style="main_button_half_height">
-				<condition var1="tw_ab_device" var2="1"/>
+		    <condition var1="tw_ab_device" var2="1"/>
 				<placement x="%center_x%" y="%row21a_y%"/>
 				<text>{@wipe_dalvik_btn=Wipe Dalvik}</text>
-				<actions>
-					<action function="set">tw_back=flash_done</action>
-					<action function="set">tw_action=wipe</action>
-					<action function="set">tw_action_param=dalvik</action>
-					<action function="set">tw_text1={@wipe_dalvik_confirm=Wipe Dalvik?}</action>
-					<action function="set">tw_action_text1={@wiping_cache_dalvik=Wiping Dalvik...}</action>
-					<action function="set">tw_complete_text1={@wipe_dalvik_complete=Dalvik Wipe Complete}</action>
-					<action function="set">tw_slider_text={@swipe_wipe=Swipe to Wipe}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-
-			<button style="main_button_half_height">
-				<placement x="%center_x%" y="%row21a_y%"/>\
+					<actions>
+                      <action function="set">tw_back=flash_done</action>
+	                  <action function="set">tw_action=wipe</action>
+	                  <action function="set">tw_action_param=dalvik</action>
+	                  <action function="set">tw_text1={@wipe_dalvik_confirm=Wipe Dalvik?}</action>
+	                  <action function="set">tw_action_text1={@wiping_cache_dalvik=Wiping Dalvik...}</action>
+                      <action function="set">tw_complete_text1={@wipe_dalvik_complete=Dalvik Wipe Complete}</action>
+	                  <action function="set">tw_slider_text={@swipe_wipe=Swipe to Wipe}</action>
+                      <action function="page">confirm_action</action>
+					</actions>
+				</button>
+	
+				<button style="main_button_half_height">
+					<placement x="%center_x%" y="%row21a_y%"/>\
 				<text>{@reboot_system_btn=Reboot System}</text>
 				<actions>
 					<action function="set">tw_back=main2</action>
@@ -1142,7 +1160,7 @@
 				<action function="page">rebootcheck</action>
 			</action>
 		</page>
-
+		
 		<page name="reboot_recovery_routine">
 			<action>
 				<action function="set">tw_back=reboot</action>
@@ -1343,7 +1361,7 @@
 					<action function="page">reboot_system_routine</action>
 				</actions>
 			</button>
-
+			
 			<button style="main_button_half_height">
 				<condition var1="pb_reboot_recovery" var2="1"/>
 				<placement x="%center_x%" y="%row21a_y%"/>
@@ -1446,18 +1464,18 @@
 				<text>{@factory_reset_hdr=Factory Reset}</text>
 			</text>
 
-			<text style="text_m_accent">
+			<text style="text_m">
 				<placement x="%center_x%" y="%row2_y%" placement="5"/>
 				<text>{@factory_reset1=Wipes Data, Cache, and Dalvik}</text>
 			</text>
 
-			<text style="text_m_accent">
+			<text style="text_m">
 				<condition var1="tw_has_data_media" var2="1"/>
 				<placement x="%center_x%" y="%row3_y%" placement="5"/>
 				<text>{@factory_reset2=(not including internal storage)}</text>
 			</text>
 
-			<text style="text_m_accent">
+			<text style="text_m">
 				<conditions>
 					<condition var1="tw_has_android_secure" var2="1"/>
 					<condition var1="fileexists" var2="/and-sec"/>
@@ -1466,7 +1484,7 @@
 				<text>{@android_secure=Android Secure}</text>
 			</text>
 
-			<text style="text_m_accent">
+			<text style="text_m">
 				<condition var1="tw_has_sdext_partition" var2="1"/>
 				<placement x="%center_x%" y="%row5_y%" placement="5"/>
 				<text>{@sdext=SD-EXT}</text>
@@ -2066,7 +2084,7 @@
 				</actions>
 			</button>
 
-			<text style="text_m_accent">
+			<text style="text_m">
 				<placement x="%indent%" y="%row3a_y%"/>
 				<text>{@name=Name:}</text>
 			</text>
@@ -2076,7 +2094,7 @@
 				<text>%tw_backup_name%</text>
 			</text>
 
-			<fill color="%fileselector_linecolor%">
+			<fill color="%accent_color%">
 				<placement x="%indent%" y="row5a_y" w="%content_width%" h="input_line_width"/>
 			</fill>
 
@@ -2090,9 +2108,13 @@
 				</actions>
 			</button>
 
-			<partitionlist>
-				<placement x="%indent%" y="%row6_y%" w="%content_width%" h="%partitionlist_backup_height%"/>
+            <text style="text_m">
+				<placement x="%indent%" y="576"/>
 				<text>{@sel_part_backup=Select Partitions to Backup:}</text>
+			</text>
+
+			<partitionlist>
+				<placement x="%indent%" y="636" w="%content_width%" h="708"/>
 				<data name="tw_backup_list"/>
 				<listtype name="backup"/>
 			</partitionlist>
@@ -2192,7 +2214,7 @@
 				<text>{@skip_digest_backup_chk=Skip Digest generation during backup}</text>
 				<data variable="tw_skip_digest_generate"/>
 			</checkbox>
-
+			
 			<checkbox>
 				<placement x="%indent%" y="%row5a_y%"/>
 				<text>{@check_digest_after_backup=Check Digest After Backup}</text>
@@ -2314,7 +2336,7 @@
 				</actions>
 			</button>
 
-			<text style="text_m_accent">
+			<text style="text_m">
 				<placement x="%indent%" y="%row3a_y%"/>
 				<text>{@name=Name:}</text>
 			</text>
@@ -3379,7 +3401,6 @@
 			<button style="main_button_black">
 				<condition var1="tw_edl_mode" var2="1"/>
 				<placement x="%indent_main_button%" y="1036"/>
-				<text>{@rb_edl_btn=Edl}</text>
 				<actions>
 					<action function="set">tw_back=reboot</action>
 					<action function="set">tw_action=reboot</action>
@@ -3622,7 +3643,7 @@
 			<template name="tabs_settings"/>
 
 			<fill color="%text_color%">
-				<placement x="80" y="%row_tab_y%" w="%tab5_width%" h="%tab_indicator_height%"/>
+				<placement x="0" y="%row_tab_y%" w="%tab5_width%" h="%tab_indicator_height%"/>
 			</fill>
 
 			<listbox style="scrolllist">
@@ -3713,10 +3734,14 @@
 			<fill color="%text_color%">
 				<placement x="%tab5_col2_x%" y="%row_tab_y%" w="%tab5_width%" h="%tab_indicator_height%"/>
 			</fill>
+			
+			<text style="text_m">
+				<placement x="%indent%" y="420"/>
+				<text>{@sel_tz_list=Select Time Zone:}</text>
+			</text>
 
 			<listbox>
-				<placement x="%indent%" y="%row3_y%" w="%content_width%" h="%listbox_timezone_height%"/>
-				<text>{@sel_tz_list=Select Time Zone:}</text>
+				<placement x="%indent%" y="%row4a_y%" w="%content_width%" h="656"/>
 				<data name="tw_time_zone_guisel"/>
 				<listitem name="{@utcm11=(UTC -11) Samoa, Midway Island}">BST11;BDT</listitem>
 				<listitem name="{@utcm10=(UTC -10) Hawaii}">HST10;HDT</listitem>
@@ -3867,6 +3892,12 @@
 				</actions>
 			</slidervalue>
 
+			<slidervalue>
+				<placement x="indent" y="%row15_y%" w="%content_width%"/>
+				<text>{@sel_br_val=Flashlight Brightness Value: %pb_bright_value%%}</text>
+				<data variable="pb_bright_value" min="1" max="255"/>
+			</slidervalue>
+
 			<action>
 				<touch key="home"/>
 				<action function="page">main</action>
@@ -3897,11 +3928,11 @@
 				<placement x="%tab5_col4_x%" y="%row_tab_y%" w="%tab5_width%" h="%tab_indicator_height%"/>
 			</fill>
 
-			<text style="text_m">
-				<condition var1="tw_disable_haptics" var2="1"/>
-				<placement x="indent" y="%row4_y%" w="%content_width%"/>
-				<text>{@vibration_disabled=Vibration Disabled for Device}</text>
-			</text>
+                <text style="text_m">
+					<condition var1="tw_disable_haptics" var2="1"/>
+					<placement x="indent" y="%row4_y%" w="%content_width%"/>
+					<text>{@vibration_disabled=Vibration Disabled for Device}</text>
+				</text>
 
 			<slidervalue>
 				<condition var1="tw_disable_haptics" var2="0"/>
@@ -3953,10 +3984,14 @@
 			<fill color="%text_color%">
 				<placement x="%tab5_col5_x%" y="%row_tab_y%" w="%tab5_width%" h="%tab_indicator_height%"/>
 			</fill>
-
-			<listbox>
-				<placement x="%indent%" y="%row3_y%" w="%content_width%" h="1140"/>
+			
+			<text style="text_m">
+				<placement x="%indent%" y="420"/>
 				<text>{@select_language=Select Language:}</text>
+			</text>
+			
+			<listbox>
+				<placement x="%indent%" y="%row4a_y%" w="%content_width%" h="1040"/>
 				<icon selected="radio_true" unselected="radio_false" />
 				<data name="tw_language" />
 			</listbox>
@@ -3966,42 +4001,6 @@
 				<text>{@set_language_btn=Set Language}</text>
 				<action function="setlanguage"></action>
 			</button>
-
-			<action>
-				<touch key="home" />
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back" />
-				<action function="page">settings</action>
-			</action>
-		</page>
-
-		<page name="settings_flash">
-			<template name="page"/>
-
-			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3_header_y%"/>
-				<text>{@settings_hdr=Settings}</text>
-			</text>
-
-			<text style="text_m">
-				<placement x="%col1_x_header%" y="%row4_header_y%"/>
-				<text>{@pb_flash_controller=Flashlight Brightness - %pb_bright_value%}</text>
-			</text>
-
-			<template name="tabs_settings"/>
-
-			<fill color="%text_color%">
-				<placement x="%tab5_col6_x%" y="%row_tab_y%" w="%tab5_width%" h="%tab_indicator_height%"/>
-			</fill>
-
-			<slidervalue>
-				<placement x="indent" y="%row6_y%" w="%content_width%"/>
-				<text>{@sel_br_val=Select Brightness Value:}</text>
-				<data variable="pb_bright_value" min="1" max="255"/>
-			</slidervalue>
 
 			<action>
 				<touch key="home" />
@@ -4059,13 +4058,6 @@
 				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
 				<text>{@advanced_hdr=Advanced}</text>
 			</text>
-
-			<button style="main_button_rename_c">
-				<placement x="927" y="93"/>
-				<action function="getprop">"ro.product.device"</action>
-				<action function="set">pb_codename_change=%pb_prop_value%</action>
-				<action function="page">rename_c</action>
-			</button>
 
 			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="296"/>
@@ -4209,22 +4201,7 @@
 				<text>{@dumlock_btn=HTC Dumlock}</text>
 				<action function="page">htcdumlock</action>
 			</button>
-
-			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="1591"/>
-				<action function="page">tools1</action>
-			</button>
 			
-			<image>
-				<placement x="93" y="1605"/>
-				<image resource="main_button_tools"/>
-			</image>
-			
-			<text style="text_pb">
-				<placement x="250" y="1615"/>
-				<text>{@additional=Additional}</text>
-			</text>
-
 			<action>
 				<touch key="home"/>
 				<action function="page">main</action>
@@ -4233,1613 +4210,6 @@
 			<action>
 				<touch key="back"/>
 				<action function="page">main</action>
-			</action>
-		</page>
-
-		<page name="rename_c">
-			<template name="page"/>
-
-			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3_header_y%"/>
-				<text>{@pb_dev_name=PBRP Device Codename Changer}</text>
-			</text>
-
-			<text style="text_m">
-				<placement x="%col1_x_header%" y="%row4_header_y%"/>
-				<text>{@fm_rename_hdr=Rename} %tw_fm_type%</text>
-			</text>
-
-			<text style="text_m_accent">
-				<placement x="%indent%" y="%row2_y%"/>
-				<text>{@name=Name:}</text>
-			</text>
-
-			<input>
-				<placement x="%indent%" y="%row2_input_y%" w="%content_width%" h="%input_height%"/>
-				<text>%pb_codename_change%</text>
-				<data name="pb_codename_change"/>
-				<restrict minlen="1" maxlen="128"/>
-				<actions>
-					<action function="set">tw_back=advanced</action>
-					<action function="set">tw_action=change_codename</action>
-					<action function="set">tw_text1={@pb_dev_name_change=Wanna Change Your device Codename?}</action>
-					<action function="set">tw_action_text1={@pb_dev_change=Changing Device Codename from %pb_prop_value% to %pb_codename_change%}</action>
-					<action function="set">pb_reboot_recovery=1</action>
-					<action function="set">tw_complete_text1={@pb_dev_changed=Device Codename Changed to %pb_codename_change%}</action>
-					<action function="set">tw_text4={@pb_dev_reboot=A Reboot is mandatory After switching Codenames}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</input>
-
-			<fill color="%accent_color%">
-				<placement x="%indent%" y="row4_y" w="%content_width%" h="input_line_width" placement="1"/>
-			</fill>
-
-			<button style="main_button_half_height">
-				<placement x="%indent%" y="%row9_y%"/>
-				<text>{@cancel_btn=Cancel}</text>
-				<action function="page">advanced</action>
-			</button>
-
-			<template name="keyboardtemplate"/>
-
-			<action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">advanced</action>
-			</action>
-		</page>
-		
-		<page name="tools1">
-			<template name="page"/>
-
-			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
-				<text>{@tools=Tools}</text>
-			</text>
-
-			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="296"/>
-				<action function="page">tools</action>
-			</button>
-			
-			<image>
-				<placement x="93" y="310"/>
-				<image resource="main_button_tools"/>
-			</image>
-			
-			<text style="text_pb">
-				<placement x="250" y="320"/>
-				<text>{@tools=Tools}</text>
-			</text>
-			
-			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="481"/>
-				<action function="page">about</action>
-			</button>
-			
-			<image>
-				<placement x="93" y="495"/>
-				<image resource="main_button_special"/>
-			</image>
-			
-			<text style="text_pb">
-				<placement x="250" y="505"/>
-				<text>{@special=Special}</text>
-			</text>
-			
-			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="666"/>
-				<action function="page">color_changer</action>
-			</button>
-			
-			<image>
-				<placement x="93" y="680"/>
-				<image resource="main_button_themes"/>
-			</image>
-			
-			<text style="text_pb">
-				<placement x="250" y="690"/>
-				<text>Themes</text>
-			</text>
-
-			<button style="main_button_black">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="%indent_main_button%" y="851"/>
-				<action function="set">tw_repack_kernel=0</action>
-				<action function="page">repackselect</action>
-			</button>
-			
-			<image>
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="93" y="865"/>
-				<image resource="main_button_tools"/>
-			</image>
-			
-			<text style="text_pb">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="250" y="875"/>
-				<text>{@install_twrp_ramdisk=Install Recovery Ramdisk}</text>
-			</text>
-
-			<button style="main_button_black">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="%indent_main_button%" y="1036"/>
-				<action function="set">tw_repack_kernel=1</action>
-				<action function="page">repackselect</action>
-			</button>
-			
-			<image>
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="93" y="1050"/>
-				<image resource="main_button_tools"/>
-			</image>
-			
-			<text style="text_pb">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="250" y="1060"/>
-				<text>{@install_kernel=Install Kernel}</text>
-			</text>
-
-			<button style="main_button_black">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="%indent_main_button%" y="1221"/>
-				<actions>
-					<action function="set">tw_back=advanced</action>
-					<action function="set">tw_action=fixabrecoverybootloop</action>
-					<action function="set">tw_text1={@fix_recovery_loop_confirm=Fix Recovery Bootloop?}</action>
-					<action function="set">tw_action_text1={@fixing_recovery_loop=Fixing Recovery Bootloop...}</action>
-					<action function="set">tw_complete_text1={@fix_recovery_loop_complete=Fix Recovery Bootloop Complete}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="93" y="1235"/>
-				<image resource="main_button_tools"/>
-			</image>
-			
-			<text style="text_pb">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="250" y="1240"/>
-				<text>{@fix_recovery_loop=Fix Recovery Bootloop}</text>
-			</text>
-
-			<action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">advanced</action>
-			</action>
-		</page>
-
-        <page name="tools">
-		<template name="page"/>
-
-			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
-				<text>{@tools_hdr=Tools}</text>
-			</text>
-
-			<button style="tool_button_black">
-				<placement x="26" y="294"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/supersu.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@SuperSU_text=SuperSU will be installed.}</action>
-					<action function="set">tw_text2={@SuperSU_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="47" y="329"/>
-				<image resource="tool_button_supersu"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="160" y="346"/>
-				<text>{@SuperSU_btn=SuperSU}</text>
-			</text>
-			
-			<button style="tool_button_black">
-				<placement x="26" y="459"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/unrootsupersu.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@Unroot_SuperSU_text=Unroot SuperSU.}</action>
-					<action function="set">tw_text2={@Unroot_SuperSU_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="47" y="493"/>
-				<image resource="tool_button_unrootsupersu"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="160" y="510"/>
-				<text>{@Unroot_SuperSU_btn=Unroot SuperSU}</text>
-			</text>
-			
-			<button style="tool_button_black">
-				<placement x="26" y="624"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/magisk.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">_install_built_in_zip=1</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@Magisk_text=Magisk will be installed.}</action>
-					<action function="set">tw_text2={@Magisk_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="47" y="657"/>
-				<image resource="tool_button_magisk"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="160" y="674"/>
-				<text>{@Magisk_btn=Magisk}</text>
-			</text>
-			
-			<button style="tool_button_black">
-				<placement x="26" y="789"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/unrootmagisk.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@Unroot_Magisk_text=Unroot Magisk will be installed.}</action>
-					<action function="set">tw_text2={@Unroot_Magisk_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="47" y="821"/>
-				<image resource="tool_button_unrootmagisk"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="160" y="838"/>
-				<text>{@Unroot_Magisk_btn=Unroot Magisk}</text>
-			</text>
-			
-			<button style="tool_button_black">
-				<placement x="26" y="954"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/mtp.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@MTP_Fix_text=MTP Fix will be installed.}</action>
-					<action function="set">tw_text2={@MTP_Fix_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="47" y="985"/>
-				<image resource="tool_button_mtp"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="160" y="1002"/>
-				<text>{@MTP_Fix_btn=MTP Fix}</text>
-			</text>
-			
-			<button style="tool_button_black">
-				<placement x="26" y="1119"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/overlays.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@RM_Subs_Overlays_text=RM Subs Overlays will be installed.}</action>
-					<action function="set">tw_text2={@RM_Subs_Overlays_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="47" y="1149"/>
-				<image resource="tool_button_substratum"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="160" y="1166"/>
-				<text>{@RM_Subs_Overlays_btn=RM Overlays}</text>
-			</text>
-			
-			<button style="tool_button_black">
-				<placement x="537" y="294"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/alloverlays.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@RM_All_Subs_Overlays_text=RM All Subs Overlays will be installed.}</action>
-					<action function="set">tw_text2={@RM_All_Subs_Overlays_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="559" y="329"/>
-				<image resource="tool_button_substratum"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="670" y="346"/>
-				<text>{@RM_All_Subs_Overlays_btn=RM All Overlays}</text>
-			</text>
-			
-			<button style="tool_button_black">
-				<placement x="537" y="459"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/fpscan.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@FP_Scanner_text=FP Scanner will be installed.}</action>
-					<action function="set">tw_text2={@FP_Scanner_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="559" y="493"/>
-				<image resource="tool_button_fpscanner"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="670" y="510"/>
-				<text>{@FP_Scanner_btn=FP Scanner}</text>
-			</text>
-			
-			<button style="tool_button_black">
-				<placement x="537" y="624"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/rmpass.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@Pin/Pass_Remover_text=Pin/Pass Remover will be installed.}</action>
-					<action function="set">tw_text2={@Pin/Pass_Remover_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="559" y="657"/>
-				<image resource="tool_button_removepin"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="670" y="674"/>
-				<text>{@Pin/Pass_Remover_btn=Pin/Pass Remover}</text>
-			</text>
-			
-			<button style="tool_button_black">
-				<placement x="537" y="789"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/enablehal3.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@Camera2API_Enabler_text=Camera2API Enabler will be installed.}</action>
-					<action function="set">tw_text2={@Camera2API_Enabler_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="559" y="821"/>
-				<image resource="tool_button_cam2ap"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="670" y="838"/>
-				<text>{@Camera2API_Enabler_btn=Camera2API Enabler}</text>
-			</text>
-			
-			<button style="tool_button_black">
-				<placement x="537" y="954"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/appdel.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@App_Delete_text=App Delete will be installed.}</action>
-					<action function="set">tw_text2={@App_Delete_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="559" y="985"/>
-				<image resource="tool_button_appdelete"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="670" y="1002"/>
-				<text>{@App_Delete_btn=App Delete}</text>
-			</text>
-			
-			<button style="tool_button_black">
-				<placement x="537" y="1119"/>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/noverity.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@Dm_Verity_text=Dm Verity will be installed.}</action>
-					<action function="set">tw_text2={@Dm_Verity_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			
-			<image>
-				<placement x="559" y="1149"/>
-				<image resource="tool_button_dmverity"/>
-			</image>
-			
-			<text style="text_pb_tools">
-				<placement x="670" y="1166"/>
-				<text>{@Dm_Verity_btn=Dm Verity}</text>
-			</text>
-			
-	     <action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">tools1</action>
-			</action>
-		  </page>
-		
-		<page name="about">
-		<template name="about"/>
-		   
-		   <button style="special_button_black">
-				<placement x="45" y="105"/>
-				<action function="page">about</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="141"/>
-				<image resource="special_button_info"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="155"/>
-				<text>{@about_pbrp=About PBRP}</text>
-			</text>
-			
-		   <button style="special_button_black">
-				<placement x="45" y="277"/>
-				<action function="page">thanksto</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="313"/>
-				<image resource="special_button_thanksto"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="327"/>
-				<text>{@thanksto=Thanks to}</text>
-			</text>
-			
-		   	<button style="special_button_black">
-				<placement x="45" y="449"/>
-				<action function="page">toolscr</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="485"/>
-				<image resource="special_button_toolcredit"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="499"/>
-				<text>{@toolscr=Tools Credit}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="621"/>
-				<action function="page">contributors</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="657"/>
-				<image resource="special_button_contributors"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="671"/>
-				<text>Official Maintainers</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="793"/>
-				<action function="page">SETTINGOTA</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="829"/>
-				<image resource="special_button_settingota"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="843"/>
-				<text>{@SETTINGOTA=Setting OTA}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="965"/>
-				<action function="page">changelog</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="1001"/>
-				<image resource="special_button_changelog"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="1015"/>
-				<text>Changelog</text>
-			</text>
-			
-			<fill color="#212121">
-				<placement x="3" y="1179" w="1074" h="5"/>
-			</fill>
-			
-			<listbox style="about">
-				<placement x="58" y="1204" w="964" h="534"/>
-				<listitem name="Based On %tw_version%"/>
-				<listitem name=""/>
-				<listitem name="Source PBRP"/>
-				<listitem name="https://github.com/PitchBlackRecoveryProject"/>
-				<listitem name=""/>
-				<listitem name="Site PBRP"/>
-				<listitem name="https://pbrp.ml"/>
-				<listitem name=""/>
-				<listitem name="Reza Adi Pangestu - Indonesia"/>
-				<listitem name="https://t.me/Reza_Adi_Pangestu"/>
-				<listitem name="Founder & Lead Developer"/>
-				<listitem name=""/>
-				<listitem name="George Pasakalis (G.M.L.) - Greece"/>
-				<listitem name="https://t.me/PasakalisGeorge_GML"/>
-				<listitem name="UI Designer"/>
-				<listitem name=""/>
-				<listitem name="Firewolf - Bangladesh"/>
-				<listitem name="https://t.me/firewolfxda"/>
-				<listitem name="UI Designer & Developer"/>
-				<listitem name=""/>
-				<listitem name="Manjot Sidhu - India"/>
-				<listitem name="https://t.me/manjotsidhu"/>
-				<listitem name="Developer & Source Maintainer"/>
-				<listitem name=""/>
-				<listitem name="Mohd Faraz - India"/>
-				<listitem name="https://t.me/ANDROIABLEDROID"/>
-				<listitem name="Developer & Source Maintainer"/>
-				<listitem name=""/>
-				<listitem name="Arbaz Khan - India"/>
-				<listitem name="https://t.me/papa_ka_prince"/>
-				<listitem name="Developer & Source Maintainer"/>
-				<listitem name=""/>
-				<listitem name="Telegram Chat"/>
-				<listitem name="https://t.me/pbrpcom"/>
-				<listitem name=""/>
-				<listitem name="Telegram Channel"/>
-				<listitem name="https://t.me/pbtwrp"/>
-			</listbox>
-			
-			<action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">tools1</action>
-			</action>
-			</page>
-			
-		<page name="thanksto">
-			<template name="about"/>
-		   
-		   	<button style="special_button_black">
-				<placement x="45" y="105"/>
-				<action function="page">about</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="141"/>
-				<image resource="special_button_info"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="155"/>
-				<text>{@about_pbrp=About PBRP}</text>
-			</text>
-			
-		   <button style="special_button_black">
-				<placement x="45" y="277"/>
-				<action function="page">thanksto</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="313"/>
-				<image resource="special_button_thanksto"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="327"/>
-				<text>{@thanksto=Thanks to}</text>
-			</text>
-			
-		   	<button style="special_button_black">
-				<placement x="45" y="449"/>
-				<action function="page">toolscr</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="485"/>
-				<image resource="special_button_toolcredit"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="499"/>
-				<text>{@toolscr=Tools Credit}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="621"/>
-				<action function="page">contributors</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="657"/>
-				<image resource="special_button_contributors"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="671"/>
-				<text>Official Maintainers</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="793"/>
-				<action function="page">SETTINGOTA</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="829"/>
-				<image resource="special_button_settingota"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="843"/>
-				<text>{@SETTINGOTA=Setting OTA}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="965"/>
-				<action function="page">changelog</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="1001"/>
-				<image resource="special_button_changelog"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="1015"/>
-				<text>Changelog</text>
-			</text>
-			
-			<fill color="#212121">
-				<placement x="3" y="1179" w="1074" h="5"/>
-			</fill>
-			
-			<listbox style="about">
-				<placement x="58" y="1204" w="964" h="534"/>
-				<listitem name="Github for source code"/>
-				<listitem name="TeamWin for source code of TWRP"/>
-				<listitem name="Dees-Troy"/>
-				<listitem name="Innu Ghifary Dev"/>
-				<listitem name="Helmi Amirudin"/>
-				<listitem name="Santy Safitri"/>
-				<listitem name="Anik Khan"/>
-				<listitem name="Albert I"/>
-				<listitem name="ATG Droid"/>
-				<listitem name="Manish4586"/>
-				<listitem name="Zhantech"/>
-				<listitem name="Imranpopz"/>
-				<listitem name="Ahmad Sa'id Mabruri"/>
-				<listitem name="Rivv"/>
-				<listitem name="Zaeni Loverz"/>
-				<listitem name="Abhishek Aggarwal"/>
-				<listitem name="Louis Lee Encrypted"/>
-				<listitem name="Yashpal Joshi"/>
-				<listitem name="Rajesh Rajput"/>
-				<listitem name="Joker (Whyred)"/>
-				<listitem name="Balo 1000"/>
-				<listitem name="Coyote Suck"/>
-				<listitem name="osmOsis"/>
-				<listitem name="Mifans Indonesia"/>
-				<listitem name="All Developers & Users"/>
-			</listbox>
-			
-			<action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">tools1</action>
-			</action>
-			</page>
-
-		<page name="toolscr">
-		<template name="about"/>
-		   
-		  <button style="special_button_black">
-				<placement x="45" y="105"/>
-				<action function="page">about</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="141"/>
-				<image resource="special_button_info"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="155"/>
-				<text>{@about_pbrp=About PBRP}</text>
-			</text>
-			
-		   <button style="special_button_black">
-				<placement x="45" y="277"/>
-				<action function="page">thanksto</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="313"/>
-				<image resource="special_button_thanksto"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="327"/>
-				<text>{@thanksto=Thanks to}</text>
-			</text>
-			
-		   	<button style="special_button_black">
-				<placement x="45" y="449"/>
-				<action function="page">toolscr</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="485"/>
-				<image resource="special_button_toolcredit"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="499"/>
-				<text>{@toolscr=Tools Credit}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="621"/>
-				<action function="page">contributors</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="657"/>
-				<image resource="special_button_contributors"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="671"/>
-				<text>Official Maintainers</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="793"/>
-				<action function="page">SETTINGOTA</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="829"/>
-				<image resource="special_button_settingota"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="843"/>
-				<text>{@SETTINGOTA=Setting OTA}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="965"/>
-				<action function="page">changelog</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="1001"/>
-				<image resource="special_button_changelog"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="1015"/>
-				<text>Changelog</text>
-			</text>
-			
-			<fill color="#212121">
-				<placement x="3" y="1179" w="1074" h="5"/>
-			</fill>
-			
-			<listbox style="about">
-				<placement x="58" y="1204" w="964" h="534"/>
-				<listitem name="Thanks to them for tools"/>
-				<listitem name="Chainfire - SuperSU Installer"/>
-				<listitem name="Brigudav - SuperSU Uninstaller"/>
-				<listitem name="Topjohnwu - Magisk Installer, Uninstaller"/>
-				<listitem name="Jcadduono - LazyFlasher"/>
-				<listitem name="Amarullz - Aroma File Manager"/>
-				<listitem name="Magua - Fingerprint & Pin/Password Remover"/>
-				<listitem name="Helmiau - MTP Fixer & Camera2API enabler"/>
-				<listitem name="Projekt Dev Team - Substratum Rescue"/>
-				<listitem name="The Pirate Predator - Bloatware Remover"/>
-			</listbox>
-			
-			<action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">tools1</action>
-			</action>
-			</page>
-		
-		<page name="contributors">
-		<template name="about"/>
-		   
-		   <button style="special_button_black">
-				<placement x="45" y="105"/>
-				<action function="page">about</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="141"/>
-				<image resource="special_button_info"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="155"/>
-				<text>{@about_pbrp=About PBRP}</text>
-			</text>
-			
-		   <button style="special_button_black">
-				<placement x="45" y="277"/>
-				<action function="page">thanksto</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="313"/>
-				<image resource="special_button_thanksto"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="327"/>
-				<text>{@thanksto=Thanks to}</text>
-			</text>
-			
-		   	<button style="special_button_black">
-				<placement x="45" y="449"/>
-				<action function="page">toolscr</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="485"/>
-				<image resource="special_button_toolcredit"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="499"/>
-				<text>{@toolscr=Tools Credit}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="621"/>
-				<action function="page">contributors</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="657"/>
-				<image resource="special_button_contributors"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="671"/>
-				<text>Official Maintainers</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="793"/>
-				<action function="page">SETTINGOTA</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="829"/>
-				<image resource="special_button_settingota"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="843"/>
-				<text>{@SETTINGOTA=Setting OTA}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="965"/>
-				<action function="page">changelog</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="1001"/>
-				<image resource="special_button_changelog"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="1015"/>
-				<text>Changelog</text>
-			</text>
-			
-			<fill color="#212121">
-				<placement x="3" y="1179" w="1074" h="5"/>
-			</fill>
-			
-			<listbox style="about">
-				<placement x="58" y="1204" w="964" h="534"/>				
-				<listitem name="Device And Maintainers"/>
-				<listitem name=""/>
-				<listitem name="Reza Adi Pangestu"/>
-				<listitem name="https://t.me/Reza_Adi_Pangestu"/>
-				<listitem name="Redmi Note 5/Pro (whyred)"/>		
-				<listitem name="Xiaomi Mi 8 Lite (platina)"/>
-                                <listitem name=""/>
-				<listitem name="Mohd Faraz"/>
-				<listitem name="https://t.me/ANDROIABLEDROID"/>
-				<listitem name="LYF Water 8 (LS-5015), Redmi 4A (rolex)"/>
-				<listitem name="Xiaomi Pocophone F1 (beryllium)"/>
-				<listitem name=""/>
-				<listitem name="Amogha Maiya"/>
-				<listitem name="https://t.me/amog787"/>				
-				<listitem name="Redmi Note 3 Pro (kenzo)"/>
-				<listitem name=""/>
-				<listitem name="Firewolf"/>
-				<listitem name="https://t.me/firewolfxda"/>
-				<listitem name="Redmi 3/PRO (ido)"/>				
-				<listitem name=""/>
-				<listitem name="ZHANtech"/>
-				<listitem name="https://t.me/zhantech"/>
-				<listitem name="Redmi 4X (santoni)"/>
-				<listitem name="Redmi 5 (rosy)"/>
-				<listitem name=""/>
-				<listitem name="Manish4586"/>
-				<listitem name="https://t.me/Manish4586"/>
-				<listitem name="Mi A2 (Jasmine), OnePlus 6 (enchilada)"/>
-				<listitem name=""/>
-				<listitem name="Advaith Bhat"/>
-				<listitem name="https://t.me/AdvaithBhat"/>
-				<listitem name="Lenovo P2 (kuntao)"/>	
-				<listitem name=""/>
-				<listitem name="Travis Holt"/>
-				<listitem name="https://t.me/Travisholt92"/>
-				<listitem name="Huawei Honor 5X (kiwi)"/>
-				<listitem name=""/>
-				<listitem name="PIGGY"/>
-				<listitem name="https://t.me/PIPIPIG233666"/>
-				<listitem name="Xiaomi MI 6X (wayne)"/>
-				<listitem name=""/>
-				<listitem name="Harshit Jain"/>
-				<listitem name="https://t.me/dev_harsh1998"/>
-				<listitem name="Lenovo A6000 (a6000)"/>
-				<listitem name=""/>
-				<listitem name="Sakil"/>
-				<listitem name="https://t.me/SakilMondal"/>
-				<listitem name="Asus Zenfone Max (Z010D)"/>
-				<listitem name=""/>
-				<listitem name="legacy"/>
-				<listitem name="https://t.me/legacy07"/>
-				<listitem name="Asus Zenfone Max Pro M2 (X01BD)"/>
-                                <listitem name=""/>
-                                <listitem name="Mr.Anonymous"/>
-                                <listitem name="https://t.me/I_m_FlaSh"/>
-                                <listitem name="Coolpad Cool 1 Dual (c106)"/>
-                                <listitem name=""/>
-                                <listitem name="Akshat"/>
-                                <listitem name="https://t.me/akshat28"/>
-                                <listitem name="Asus Zenfone Max Pro M1 (X00T)"/>
-                                <listitem name=""/>
-	                        <listitem name="Aggelos Savvopoulos"/>
-	                        <listitem name="https://t.me/DarkAngelGR"/>
-                                <listitem name="Redmi 4 Prime (markw)"/>
-                                <listitem name=""/>
-                               @<listitem name="Oguz Bakir"/>
-	                        <listitem name="https://t.me/oguz298"/>
-                                <listitem name="Generan Mobile GM9Pro (gm9pro_sprout)"/>
-	                        <listitem name=""/>
-	                        <listitem name="Chachi Desuasido"/>
-                                <listitem name="https://t.me/chachinito"/>
-	                        <listitem name="Xiaomi MI 8 (dipper)"/>
-                                <listitem name=""/>
-                                <listitem name="Ashu Sharma"/>
-	                        <listitem name="https://t.me/SharmaAshu"/>
-	                        <listitem name="Asus Zenfone Max M2 (X01AD)"/>
-	                        <listitem name=""/>
-                                <listitem name="Barry Allen"/>
-	                        <listitem name="https://t.me/F1a5H"/>
-	                        <listitem name="Motorola E5 Plus (hannah)"/>
-                                <listitem name=""/>
-			</listbox>
-			
-			<action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">tools1</action>
-			</action>
-			</page>
-		
-		<page name="SETTINGOTA">
-		<template name="about"/>
-		   
-		   <button style="special_button_black">
-				<placement x="45" y="105"/>
-				<action function="page">about</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="141"/>
-				<image resource="special_button_info"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="155"/>
-				<text>{@about_pbrp=About PBRP}</text>
-			</text>
-			
-		   <button style="special_button_black">
-				<placement x="45" y="277"/>
-				<action function="page">thanksto</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="313"/>
-				<image resource="special_button_thanksto"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="327"/>
-				<text>{@thanksto=Thanks to}</text>
-			</text>
-			
-		   	<button style="special_button_black">
-				<placement x="45" y="449"/>
-				<action function="page">toolscr</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="485"/>
-				<image resource="special_button_toolcredit"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="499"/>
-				<text>{@toolscr=Tools Credit}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="621"/>
-				<action function="page">contributors</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="657"/>
-				<image resource="special_button_contributors"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="671"/>
-				<text>Official Maintainers</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="793"/>
-				<action function="page">SETTINGOTA</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="829"/>
-				<image resource="special_button_settingota"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="843"/>
-				<text>{@SETTINGOTA=Setting OTA}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="965"/>
-				<action function="page">changelog</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="1001"/>
-				<image resource="special_button_changelog"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="1015"/>
-				<text>Changelog</text>
-			</text>
-			
-			<fill color="#212121">
-				<placement x="3" y="1179" w="1074" h="5"/>
-			</fill>
-			
-			<listbox style="scrolllist">
-				<placement x="58" y="1204" w="964" h="534"/>
-				<icon selected="checkbox_true" unselected="checkbox_false"/>
-				<listitem name="{@pb_verify_incremental_ota_signature_chk=Incremental OTA signature verification}">
-					<data variable="pb_verify_incremental_ota_signature"/>
-				</listitem>
-				<listitem name="{@pb_include_system_survival_chk=Include system in OTA survival}">
-					<data variable="pb_include_system_survival"/>
-					</listitem>
-				<listitem name="{@pb_support_miui_ota_chk=Support MIUI Incremental OTA}">
-					<data variable="pb_support_miui_ota"/>
-				</listitem>
-				<listitem name="{@pb_advanced_stock_recovery=Simulate failure for actions}">
-					<data variable="pb_reboot_advanced_stock_recovery_check"/>
-				</listitem>
-				<listitem name="{@pb_reboot_dont_disable_stock_recovery_chk=}">
-					<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
-					<data variable="pb_reboot_dont_disable_stock_recovery"/>
-				</listitem>
-				<listitem name="{@pb_dmverity_chk=Deactivation After Flashing}">
-					<data variable="pb_reboot_dm_verity_check"/>
-				</listitem>
-				<listitem name="{@pb_disable_reboot_ota_check=Disable Rebooting After OTA}">
-                                        <data variable="pb_disable_reboot_ota"/>
-                                </listitem>
-			</listbox>
-				
-			<button style="settingsota_info">
-				<placement x="820" y="1544"/>
-				<action function="page">settingsota_info</action>
-			</button>
-			
-			<action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">tools1</action>
-			</action>
-			</page>
-			
-			<page name="settingsota_info">
-				<template name="about"/>
-		   
-		   <button style="special_button_black">
-				<placement x="45" y="105"/>
-				<action function="page">about</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="141"/>
-				<image resource="special_button_info"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="155"/>
-				<text>{@about_pbrp=About PBRP}</text>
-			</text>
-			
-		   <button style="special_button_black">
-				<placement x="45" y="277"/>
-				<action function="page">thanksto</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="313"/>
-				<image resource="special_button_thanksto"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="327"/>
-				<text>{@thanksto=Thanks to}</text>
-			</text>
-			
-		   	<button style="special_button_black">
-				<placement x="45" y="449"/>
-				<action function="page">toolscr</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="485"/>
-				<image resource="special_button_toolcredit"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="499"/>
-				<text>{@toolscr=Tools Credit}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="621"/>
-				<action function="page">contributors</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="657"/>
-				<image resource="special_button_contributors"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="671"/>
-				<text>Official Maintainers</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="793"/>
-				<action function="page">SETTINGOTA</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="829"/>
-				<image resource="special_button_settingota"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="843"/>
-				<text>{@SETTINGOTA=Setting OTA}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="965"/>
-				<action function="page">changelog</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="1001"/>
-				<image resource="special_button_changelog"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="1015"/>
-				<text>Changelog</text>
-			</text>
-			
-			<fill color="#212121">
-				<placement x="3" y="1179" w="1074" h="5"/>
-			</fill>
-			
-			<listbox style="about">
-				<placement x="58" y="1204" w="964" h="534"/>
-				<listitem name="*   Please make your internal space 5GB"/>
-				<listitem name=""/>
-				<listitem name="*   Reboot to PBRP then Checklist incremental"/>
-				<listitem name="     OTA signature verification, include system in OTA"/>
-				<listitem name="     survival, support MIUI incremental OTA,"/>
-				<listitem name="     aggresive stock recovery deactivation,"/>
-				<listitem name="     disable DM Verity"/>
-				<listitem name=""/>
-				<listitem name="*   Install full rom MIUI, it will automatic backup"/>
-				<listitem name="     boot and system for the OTA survival."/>
-				<listitem name="     example miui 8.3.15"/>
-				<listitem name=""/>
-				<listitem name="*   Check OTA survival in folder PB internal storage"/>
-				<listitem name="     you can found boot and system"/>
-				<listitem name=""/>
-				<listitem name="*   Open updater app and when update releases,"/>
-				<listitem name="     download it and press update. example miui"/>
-				<listitem name="     8.3.15 - 8.3.29 Automatically device will"/>
-				<listitem name="     reboot to PBRP then OTA flashing will start,"/>
-				<listitem name="     this time the backed up boot and system"/>
-				<listitem name="     will be flashed and thus patching"/>
-				<listitem name="     will happen and your device will be updated"/>
-				<listitem name=""/>
-				<listitem name="!    Pre-requisite unlock bootloader"/>
-				<listitem name=""/>
-				<listitem name=""/>
-				<listitem name="?   Note: for those who do not use OTA,"/>
-                                <listitem name="     please checklist aggressive stock recovery"/>                                                                                                       
-                                <listitem name="     deactivation and disable dm verity,"/>
-                                <listitem name="     thus preventing recovery returning to stock."/>
-			</listbox>
-			
-			<action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">tools1</action>
-			</action>
-			</page>
-			
-		<page name="changelog">
-		<template name="about"/>
-		   
-		   <button style="special_button_black">
-				<placement x="45" y="105"/>
-				<action function="page">about</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="141"/>
-				<image resource="special_button_info"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="155"/>
-				<text>{@about_pbrp=About PBRP}</text>
-			</text>
-			
-		   <button style="special_button_black">
-				<placement x="45" y="277"/>
-				<action function="page">thanksto</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="313"/>
-				<image resource="special_button_thanksto"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="327"/>
-				<text>{@thanksto=Thanks to}</text>
-			</text>
-			
-		   	<button style="special_button_black">
-				<placement x="45" y="449"/>
-				<action function="page">toolscr</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="485"/>
-				<image resource="special_button_toolcredit"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="499"/>
-				<text>{@toolscr=Tools Credit}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="621"/>
-				<action function="page">contributors</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="657"/>
-				<image resource="special_button_contributors"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="671"/>
-				<text>Official Maintainers</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="793"/>
-				<action function="page">SETTINGOTA</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="829"/>
-				<image resource="special_button_settingota"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="843"/>
-				<text>{@SETTINGOTA=Setting OTA}</text>
-			</text>
-			
-			<button style="special_button_black">
-				<placement x="45" y="965"/>
-				<action function="page">changelog</action>
-			</button>
-			
-			<image>
-				<placement x="63" y="1001"/>
-				<image resource="special_button_changelog"/>
-			</image>
-			
-			<text style="text_pb_small">
-				<placement x="190" y="1015"/>
-				<text>Changelog</text>
-			</text>
-			
-			<fill color="#212121">
-				<placement x="3" y="1179" w="1074" h="5"/>
-			</fill>
-			
-			<listbox style="about">
-				<placement x="58" y="1204" w="964" h="534"/>
-				<listitem name="PB v2.9.0"/>
-                                <listitem name="-----------------"/>
-                                <listitem name="Theme Updated added new"/>
-                                <listitem name="Theme 18:9 and other issue fixed"/>
-                                <listitem name="Fixed MiUI Treble OTA"/>
-                                <listitem name="etc"/>
-                                <listitem name="-----------------"/>
-				<listitem name="PB v2.8.0"/>
-				<listitem name="-----------------"/>
-				<listitem name="Theme Updated"/>
-				<listitem name="Custom Theme Color"/>
-				<listitem name="Custom Text Color"/>
-				<listitem name="Enable and Disable Rounded"/>
-				<listitem name="Magisk (Treble and Non Treble)"/>
-				<listitem name="etc"/>
-				<listitem name="-----------------"/>
-				<listitem name="PB v2.7.4"/>
-				<listitem name="-----------------"/>
-				<listitem name="Theme Updated"/>
-				<listitem name="Custom Color"/>
-				<listitem name="Enable and Disable Rounded"/>
-				<listitem name="Added exFAT & NTFS Support"/>
-				<listitem name="etc"/>
-				<listitem name="-----------------"/>
-				<listitem name="PB v2.7.3"/>
-				<listitem name="-----------------"/>
-				<listitem name="Theme Updated"/>
-				<listitem name="Fix Lag"/>
-				<listitem name="etc"/>
-				<listitem name="-----------------"/>
-				<listitem name="PB v2.7.2"/>
-				<listitem name="-----------------"/>
-				<listitem name="Theme Updated"/>
-				<listitem name="F2FS Added"/>
-				<listitem name="etc"/>
-				<listitem name="-----------------"/>
-				<listitem name="PB v2.7"/>
-				<listitem name="-----------------"/>
-				<listitem name="Update Magisk"/>
-				<listitem name="Added feature to not remove PB tools while wiping internal "/>
-				<listitem name="storage"/>
-				<listitem name="MIUI Incremental OTA Support "/>
-				<listitem name="(Read the OTA Section in About Menu of Recovery)"/>
-				<listitem name="Added themes Rainbow"/>
-				<listitem name="Moved all themes to Internal Storage"/>
-				<listitem name="More Fix"/>
-				<listitem name="-----------------"/>
-				<listitem name="PB v2.6"/>
-				<listitem name="-----------------"/>
-				<listitem name="Update Magisk"/>
-				<listitem name="Added Magisk Treble"/>
-				<listitem name="Added themes Yellow"/>
-				<listitem name="Support Treble And Non Treble"/>
-				<listitem name="More Fix"/>
-				<listitem name="-----------------"/>
-				<listitem name="PB v2.5"/>
-				<listitem name="-----------------"/>
-				<listitem name="Splash updated"/>
-				<listitem name="Reworked advanced, tools, about menu"/>
-				<listitem name="Added built in themes (Neon R/G/B & Just Black for now!)"/>
-				<listitem name="Updated magisk"/>
-				<listitem name="-----------------"/>
-				<listitem name="PB v2.2.5"/>
-				<listitem name="-----------------"/>
-				<listitem name="Camera OldBlobs"/>
-				<listitem name="Camera NewBlobs"/>
-				<listitem name="Disable Button Light"/>
-				<listitem name="Camera Feature Miui"/>
-				<listitem name="Fix RW Sdcard (oreo rom)"/>
-				<listitem name="Thermal"/>
-				<listitem name="Thermal Uninstall"/>
-				<listitem name="-----------------"/>
-				<listitem name="PB v2.2"/>
-				<listitem name="-----------------"/>
-				<listitem name="AromaFM"/>
-				<listitem name="SuperSU Installer "/>
-				<listitem name="Uninstall SuperSU"/>
-				<listitem name="Magisk Installer"/>
-				<listitem name="Uninstall Magisk"/>
-				<listitem name="Remove Subs Overlay"/>
-				<listitem name="Remove All Subs Overlay"/>
-				<listitem name="Remove ROM security"/>
-				<listitem name="Remove saved FP"/>
-				<listitem name="Remove Dm-verity"/>
-				<listitem name="Network Mode patcher for N"/>
-				<listitem name="Stock Splash"/>
-				<listitem name="Fix 4G MIUI"/>
-				<listitem name="Enable Hal3"/>
-				<listitem name="App Uninstaller"/>
-				<listitem name="Ramdisk Cleaner"/>
-				<listitem name="MTP Fix"/>
-				<listitem name="Aboot mod"/>
-				<listitem name="Theme full black with white & blue accent"/>
-			</listbox>
-			
-			<action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">tools1</action>
 			</action>
 		</page>
 		
@@ -6091,7 +4461,9 @@
 				<action function="page">advanced</action>
 			</action>
 		</page>
-
+		
+		
+		
 		<page name="repackselect">
 			<template name="page"/>
 
@@ -6227,31 +4599,12 @@
 		</page>
 
 		<page name="lock">
-			<background color="%background_color2%"/>
+			<background color="%semi_transparent%"/>
 			
-			<fill color="#000000">
-				<placement x="3" y="3" w="1074" h="1914"/>
-			</fill>
-			
- <image>
+			<image>
 				<image resource="splashlogo"/>
-				<placement x="540" y="900" placement="4"/>
+				<placement x="540" y="456" placement="4"/>
 			</image>
-			
-            <text style="text_exl">
-				<placement x="540" y="150" placement="4"/>
-				<text>TIME: %tw_time%</text>
-			</text>
-			
-			<text style="text_exl">
-				<placement x="540" y="300" placement="4"/>
-				<text>BATTERY: %tw_battery%</text>
-			</text>
-			
-			<text style="text_exl">
-				<placement x="540" y="450" placement="4"/>
-				<text>CPU: %tw_cpu_temp% &#xB0;C</text>
-			</text>
 			
 			<slider>
 				<text>{@swipe_to_unlock=Swipe to Unlock}</text>
@@ -6267,10 +4620,11 @@
 				<touch key="power+voldown" />
 				<action function="screenshot" />
 			</action>
+			
 			<action>
-				<touch key="volup" />
-				<action function="flashlight" />
-			</action>
+			    <touch key="volup" />
+			    <action function="flashlight" />
+		   </action>
 		</page>
 
 		<page name="filemanagerlist">
@@ -6368,7 +4722,7 @@
 					<action function="page">readfile</action>
 				</actions>
 			</button>
-
+			
 			<button style="main_button_half_height">
 				<conditions>
 					<condition var1="tw_fm_isfolder" var2="0"/>
@@ -6383,7 +4737,7 @@
 					<action function="page">choosedestinationfolderforunzip</action>
 				</actions>
 			</button>
-
+			
 			<button style="main_button_half_height">
 				<conditions>
 					<condition var1="tw_fm_isfolder" var2="1"/>
@@ -6481,8 +4835,8 @@
 				<actions>
 					<action function="set">tw_filemanager_command=rm -rf</action>
 					<action function="set">tw_fm_text1={@fm_deleting=Deleting}</action>
-					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text2=</action>
+					<action function="set">pb_filemanager_unzip=0</action>
 					<action function="set">tw_fm_text3=</action>
 					<action function="set">tw_include_text3=0</action>
 					<action function="set">tw_back=filemanageroptions</action>
@@ -6559,8 +4913,8 @@
 			</action>
 			
 			<action>
-				<touch key="volup" />
-				<action function="flashlight" />
+					<touch key="volup" />
+					<action function="flashlight" />
 			</action>
 
 			<action>
@@ -6575,7 +4929,7 @@
 				<action function="flush_up_console"></action>
 			</action>
 		</page>
-
+		
 		<page name="choosedestinationfolder">
 			<template name="page"/>
 
@@ -6599,7 +4953,7 @@
 				<data name="tw_filename2"/>
 				<selection name="tw_selection2"/>
 			</fileselector>
-
+			
 			<button style="fab">
 				<image resource="fab_selectfolder"/>
 				<actions>
@@ -6947,7 +5301,7 @@
 				</conditions>
 				<action function="cmd">%tw_filemanager_command% "%tw_filename1%" "%tw_fm_text3%"</action>
 			</action>
-
+			
 			<action>
 				<conditions>
 					<condition var1="tw_include_text3" var2="1"/>
@@ -6963,7 +5317,7 @@
 				</conditions>
 				<action function="cmd">%tw_filemanager_command% zip -r %tw_file_location2%/%pb_zip_new_name% *</action>
 			</action>
-
+			
 			<action>
 				<conditions>
 					<condition var1="tw_include_text3" var2="0"/>
@@ -7027,7 +5381,7 @@
 				<action function="page">filemanageroptions</action>
 			</action>
 		</page>
-
+		
 		<page name="mkd">
 			<template name="page"/>
 
@@ -7266,7 +5620,7 @@
 		<page name="terminalcommand">
 			<template name="page_terminal"/>
 
-			<fill color="%background_color%">
+			<fill color="%background_color2%">
 				<placement x="0" y="%row2_header_y%" w="%screen_width%" h="%slideout_bg_height%"/>
 			</fill>
 
@@ -7284,7 +5638,7 @@
 
 			<template name="keyboardtemplate"/>
 
-			<fill color="#000000">
+			<fill color="%background_color2%">
 				<placement x="0" y="%navbar_y%" w="%screen_width%" h="%navbar_height%" />
 			</fill>
 
@@ -7390,9 +5744,9 @@
 			</action>
 			
 			<action>
-				<touch key="volup" />
-				<action function="flashlight" />
-			</action>
+					<touch key="volup" />
+					<action function="flashlight" />
+				</action>
 		</page>
 
 		<page name="sideload">
@@ -7509,7 +5863,7 @@
 			<text style="text_m">
 				<condition var1="tw_no_cpu_temp" var2="0"/>
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
-				<text>%tw_version% </text>
+				<text>%tw_version%</text>
 			</text>
 
 			<console>
@@ -7533,9 +5887,9 @@
 			</action>
 			
 			<action>
-				<touch key="volup" />
-				<action function="flashlight" />
-			</action>
+					<touch key="volup" />
+					<action function="flashlight" />
+				</action>
 		</page>
 
 		<page name="select_storage">
@@ -7623,639 +5977,6 @@
 			<action>
 				<touch key="volup" />
 				<action function="flashlight" />
-			</action>
-		</page>
-
-		<page name="select_language">
-			<fill color="%semi_transparent%">
-				<placement x="0" y="0" w="%screen_width%" h="%screen_height%"/>
-			</fill>
-
-			<fill color="%background_color%">
-				<placement x="%indent%" y="row5_y" w="%content_width%" h="%dialog_height%"/>
-			</fill>
-
-			<listbox>
-				<placement x="%col1_x_left%" y="%row5_y%" w="%content_overlay_width%" h="%partitionlist_storage_height%"/>
-				<text>{@select_language=Select Language:}</text>
-				<icon selected="radio_true" unselected="radio_false" />
-				<data name="tw_language" />
-			</listbox>
-
-			<button style="button_third_width">
-				<placement x="%dialog_button_x%" y="%row14_y%"/>
-				<text>{@ok_btn=OK}</text>
-				<actions>
-					<action function="overlay"/>
-					<action function="setlanguage"></action>
-				</actions>
-			</button>
-
-			<fill color="#000000">
-				<placement x="0" y="row25_y" w="%screen_width%" h="%navbar_height"/>
-			</fill>
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
-				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="back"/>
-				<condition var1="tw_busy" var2="0"/>
-				<actions>
-					<action function="overlay"/>
-					<action function="key">%tw_back%</action>
-				</actions>
-			</button>
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
-				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="console"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="overlay">slideout</action>
-			</button>
-
-			<button>
-				<placement x="%center_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="home"/>
-				<condition var1="tw_busy" var2="0"/>
-				<actions>
-					<action function="overlay"/>
-					<action function="key">home</action>
-				</actions>
-			</button>
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
-				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="console"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="overlay">slideout</action>
-			</button>
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
-				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="back"/>
-				<condition var1="tw_busy" var2="0"/>
-				<actions>
-					<action function="overlay"/>
-					<action function="key">%tw_back%</action>
-				</actions>
-			</button>
-
-			<action>
-				<touch key="power+voldown"/>
-				<action function="screenshot"/>
-			</action>
-			
-			<action>
-				<touch key="volup" />
-				<action function="flashlight" />
-			</action>
-		</page>
-		
-		<page name="color_changer">
-			<template name="page"/>
-			
-			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3_header_y%"/>
-				<text>Change Theme Color</text>
-			</text>
-			
-			<image>
-				<placement x="0" y="275"/>
-				<image resource="pb_image"/>
-			</image>
-			
-			<button style="pb_theme_button">
-				<placement x="95" y="283"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Red</action>
-					<action function="set">tw_folder=pb_red</action>
-					<action function="set">tw_background_color2=FD0000</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="283"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Green</action>
-					<action function="set">tw_folder=pb_green</action>
-					<action function="set">tw_background_color2=2AFD00</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="283"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Blue</action>
-					<action function="set">tw_folder=pb_blue</action>
-					<action function="set">tw_background_color2=0058FB</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="95" y="716"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Yello</action>
-					<action function="set">tw_folder=pb_yello</action>
-					<action function="set">tw_background_color2=F9FD00</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="716"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Violet</action>
-					<action function="set">tw_folder=pb_violet</action>
-					<action function="set">tw_background_color2=8B00FD</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="716"/>
-				<actions>
-					<action function="set">tw_theme_name=PB LightBlue</action>
-					<action function="set">tw_folder=pb_lightblue</action>
-					<action function="set">tw_background_color2=00A0FD</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="95" y="1151"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Brown</action>
-					<action function="set">tw_folder=pb_brown</action>
-					<action function="set">tw_background_color2=4B3829</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="1151"/>
-				<actions>
-					<action function="set">tw_theme_name=PB White</action>
-					<action function="set">tw_folder=pb_white</action>
-					<action function="set">tw_background_color2=FDFDFD</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="1151"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Cyan</action>
-					<action function="set">tw_folder=pb_cyan</action>
-					<action function="set">tw_background_color2=30E6F1</action>
-					<action function="page">change_theme</action>
-				</actions>
-			</button>
-			
-			<button style="main_button_half_height">
-				<placement x="%indent%" y="1584"/>
-				<text>Black Fill</text>
-				<action function="page">color_changer_black</action>
-			</button>
-			
-			<button style="main_button_half_height">
-				<placement x="%center_x%" y="1584"/>
-				<text>Text Color</text>
-				<action function="page">text_color</action>
-			</button>
-			
-		<action>
-				<touch key="home"/>
-				<action function="page">main2</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">tools1</action>
-			</action>
-		</page>
-		
-		<page name="color_changer_black">
-			<template name="page"/>
-			
-			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3_header_y%"/>
-				<text>Change Theme Color</text>
-			</text>
-			
-			<image>
-				<placement x="0" y="275"/>
-				<image resource="pb_image_black"/>
-			</image>
-			
-			<button style="pb_theme_button">
-				<placement x="95" y="283"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Red</action>
-					<action function="set">tw_folder=pb_red</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="283"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Green</action>
-					<action function="set">tw_folder=pb_green</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="283"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Blue</action>
-					<action function="set">tw_folder=pb_blue</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="95" y="716"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Yello</action>
-					<action function="set">tw_folder=pb_yello</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="716"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Violet</action>
-					<action function="set">tw_folder=pb_violet</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="716"/>
-				<actions>
-					<action function="set">tw_theme_name=PB LightBlue</action>
-					<action function="set">tw_folder=pb_lightblue</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="95" y="1151"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Brown</action>
-					<action function="set">tw_folder=pb_brown</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="424" y="1151"/>
-				<actions>
-					<action function="set">tw_theme_name=PB White</action>
-					<action function="set">tw_folder=pb_white</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="pb_theme_button">
-				<placement x="753" y="1151"/>
-				<actions>
-					<action function="set">tw_theme_name=PB Cyan</action>
-					<action function="set">tw_folder=pb_cyan</action>
-					<action function="set">tw_background_color2=010100</action>
-					<action function="page">change_theme_black</action>
-				</actions>
-			</button>
-			
-			<button style="main_button_half_height">
-				<placement x="%indent%" y="1584"/>
-				<text>Color Fill</text>
-				<action function="page">color_changer</action>
-			</button>
-			
-			<button style="main_button_half_height">
-				<placement x="%center_x%" y="1584"/>
-				<text>Text Color</text>
-				<action function="page">text_color</action>
-			</button>
-			
-		<action>
-				<touch key="home"/>
-				<action function="page">main2</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">tools1</action>
-			</action>
-		</page>
-		
-		<page name="change_theme">
-			<action>
-				<condition var1="color_theme_change" var2="0"/>
-				<action function="page">color_changer</action>
-			</action>
-
-			<action>
-				<actions>
-					<action function="unpack" />
-					<action function="cmd">
-					cd "/twres";
-					cp -r %tw_folder%/* "images";
-                    cp -r %tw_folder%/* "/tmp/pb/ramdisk/twres/images";
-                    mv "/twres/ui.xml" "/twres/ui_temp.xml";
-					sed "s/%background_color2%/#%tw_background_color2%/g" "/twres/ui_temp.xml" &gt; "/twres/ui.xml";
-					rm -f "/twres/ui_temp.xml";
-                    cp "/twres/ui.xml"  "/tmp/pb/ramdisk/twres/";
-					cd /;
-					</action>
-					<action function="repack" />
-					<action function="set">theme_name=%tw_theme_name%</action>
-					<action function="reload"/>
-				</actions>
-			</action>
-		</page>
-		
-		<page name="change_theme_black">
-			<action>
-				<condition var1="color_theme_change" var2="0"/>
-				<action function="page">color_changer_black</action>
-			</action>
-			
-			<action>
-				<actions>
-					<action function="unpack" />
-					<action function="cmd">
-					cd "/twres";
-					cp -r %tw_folder%/* "images";
-                    cp -r %tw_folder%/* "/tmp/pb/ramdisk/twres/images";
-                    mv "/twres/ui.xml" "/twres/ui_temp.xml";
-					sed "s/%background_color2%/#%tw_background_color2%/g" "/twres/ui_temp.xml" &gt; "/twres/ui.xml";
-					rm -f "/twres/ui_temp.xml";
-                    cp "/twres/ui.xml"  "/tmp/pb/ramdisk/twres/";
-					cd /;
-					</action>
-					<action function="repack" />
-					<action function="set">theme_name=%tw_theme_name%</action>
-					<action function="reload"/>
-				</actions>
-			</action>
-		</page>
-		
-		<page name="text_color">
-			<template name="page"/>
-			
-			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3_header_y%"/>
-				<text>Change Text Color</text>
-			</text>
-			
-			<text style="text_l">
-				<placement x="48" y="390"/>
-				<text>Theme will reload it automatically</text>
-			</text>
-			
-			<text style="text_l">
-				<placement x="48" y="460"/>
-				<text>with your new selected theme text color.</text>
-			</text>
-			
-			<fill color="#FF0000">
-				<placement x="48" y="700" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="48" y="700"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=FF0000</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#000DFF">
-				<placement x="386" y="700" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="386" y="700"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=000DFF</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#FFFF00">
-				<placement x="724" y="700" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="724" y="700"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=FFFF00</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#F9740B">
-				<placement x="48" y="910" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="48" y="910"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=F9740B</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#09A9FF">
-				<placement x="386" y="910" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="386" y="910"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=09A9FF</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#5133B0">
-				<placement x="724" y="910" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="724" y="910"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=5133B0</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#00E9E9">
-				<placement x="48" y="1120" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="48" y="1120"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=00E9E9</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#0CE900">
-				<placement x="386" y="1120" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="386" y="1120"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=0CE900</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#FDFCFC">
-				<placement x="724" y="1120" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="724" y="1120"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=FDFCFC</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#0E4744">
-				<placement x="48" y="1330" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="48" y="1330"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=0E4744</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#646464">
-				<placement x="386" y="1330" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="386" y="1330"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=646464</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#3D0042">
-				<placement x="724" y="1330" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="724" y="1330"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=3D0042</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#005A9D">
-				<placement x="48" y="1540" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="48" y="1540"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=005A9D</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#FF5AD2">
-				<placement x="386" y="1540" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="386" y="1540"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=FF5AD2</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<fill color="#532F0C">
-				<placement x="724" y="1540" w="308" h="180"/>
-			</fill>
-			
-			<button style="navbutt_tr">
-				<placement x="724" y="1540"/>
-				<actions>
-					<action function="set">tw_main_buttons_color=532F0C</action>
-					<action function="page">change_text_color</action>
-				</actions>
-			</button>
-			
-			<action>
-				<touch key="power+voldown"/>
-				<action function="screenshot"/>
-			</action>
-			
-			<action>
-				<touch key="volup" />
-				<action function="flashlight" />
-			</action>
-			
-			<action>
-				<touch key="back"/>
-				<action function="page">color_changer</action>
-			</action>
-
-			<action>
-				<touch key="home"/>
-				<action function="page">main2</action>
-			</action>
-		</page>
-		
-		<page name="change_text_color">
-			<action>
-				<action function="page">text_color</action>
-			</action>
-
-			<action>
-				<actions>
-					<action function="unpack" />
-					<action function="cmd">
-					cd "/twres";
-					mv "/twres/ui.xml" "/twres/ui_temp.xml";
-					sed "s/%text_main_button_color%/#%tw_main_buttons_color%/g" "/twres/ui_temp.xml" &gt; "/twres/ui.xml";
-					rm -f "/twres/ui_temp.xml";
-                    cp "/twres/ui.xml"  "/tmp/pb/ramdisk/twres/";
-					cd /;
-					</action>
-					<action function="repack" />
-					<action function="reload"/>
-				</actions>
 			</action>
 		</page>
 	</pages>

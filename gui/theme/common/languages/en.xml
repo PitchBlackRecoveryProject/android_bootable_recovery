@@ -5,10 +5,10 @@
 
 	<resources>
 		<!-- Font overrides - only change these if your language requires special characters -->
-		<resource name="font_l" type="fontoverride" filename="RobotoCondensed-Regular.ttf" scale="100" />
-		<resource name="font_m" type="fontoverride" filename="RobotoCondensed-Regular.ttf" scale="100" />
-		<resource name="font_s" type="fontoverride" filename="RobotoCondensed-Regular.ttf" scale="100" />
-		<resource name="fixed" type="fontoverride" filename="DroidSansMono.ttf" scale="100" />
+		<resource name="font_l" type="fontoverride" filename="pb.ttf" scale="100" />
+		<resource name="font_m" type="fontoverride" filename="pb.ttf" scale="100" />
+		<resource name="font_s" type="fontoverride" filename="pb.ttf" scale="100" />
+		<resource name="fixed" type="fontoverride" filename="pb.ttf" scale="100" />
 
 		<!-- Partition display names -->
 		<string name="system">System</string>
@@ -111,7 +111,7 @@
 		<string name="wipe_cache_dalvik_confirm">Wipe Cache &amp; Dalvik?</string>
 		<string name="wipe_dalvik_confirm">Wipe Dalvik?</string>
 		<string name="wiping_cache_dalvik">Wiping Cache &amp; Dalvik...</string>
-		<string name="wiping_dalvik">Wiping Dalvik...</string>
+	        <string name="wiping_dalvik">Wiping Dalvik...</string>
 		<string name="wipe_cache_dalvik_complete">Cache &amp; Dalvik Wipe Complete</string>
 		<string name="wipe_dalvik_complete">Dalvik Wipe Complete</string>
 		<string name="swipe_wipe">Swipe to Wipe</string>
@@ -728,11 +728,12 @@
 		<string name="unable_set_boot_slot">Error changing bootloader boot slot to {1}</string>
 		<string name="ozip_decrypt_decryption">Starting Ozip Decryption...</string>
 		<string name="ozip_decrypt_finish">Ozip Decryption Finished!</string>
+		
 		<!--mod tools-->
 		<string name="additional_hdr">Additional</string>
 		<string name="additional">Additional</string>
-		<string name="tools_hdr">Tools</string>
-		<string name="tools">Tools</string>
+		<string name="tools_hdr">Tools Options</string>
+		<string name="tools">Tools Options</string>
 		<string name="SuperSU_btn">SuperSU</string>
 		<string name="SuperSU_text">SuperSU will be installed.</string>
 		<string name="SuperSU_confirm">Try to install it?</string>
@@ -769,9 +770,9 @@
 		<string name="MTP_Fix_btn">MTP Fix</string>
 		<string name="MTP_Fix_text">MTP Fix will be installed.</string>
 		<string name="MTP_Fix_confirm">Try to install it?</string>
-		<string name="DFE_btn">DFE</string>
-		<string name="Dfe_text">DFE will be installed.</string>
-		<string name="Dfe_confirm">Try to install it?</string>
+		<string name="MMR_btn">Magisk Manager</string>
+		<string name="MMR_text">Magisk Manager Recovery will be installed.</string>
+		<string name="MMR_confirm">Try to install it?</string>
 		<string name="Dm_Verity_btn">Dm Verity</string>
 		<string name="Dm_Verity_text">Dm Verity will be installed.</string>
 		<string name="Dm_Verity_confirm">Try to install it?</string>
@@ -779,12 +780,7 @@
 		
 		<!--PBRP Themes-->
 		<string name="pbthemes">Themes</string>
-	    <string name="pbthemes_hdr">Themes</string>
-		
-		<string name="yellow_btn">yellow</string>
-		<string name="yellow_text">yellow PBRP theme will be installed</string>			
-		<string name="yellow_confirm">Sure?</string>
-		
+	        <string name="pbthemes_hdr">Themes</string>
 		
 		<!--PBRP about-->
 		<string name="special">Special</string>
@@ -794,8 +790,8 @@
 		<string name="toolscr">Tools Credit</string>
 		<string name="contributors">Contributors</string>
 		<string name="SETTINGOTA">Setting OTA</string>
-		<string name="surprise">Surprise</string>
-		<string name="eta">Eta</string>
+		
+		<string name="miscellaneous">Miscellaneous</string>
 
 		<!-- Settings -->
 		<string name="pb_support_miui_ota_chk">Support MIUI Incremental OTA</string>
@@ -817,8 +813,7 @@
 		<string name="pb_incremental_ota_compatibility_true">Incremental package is compatible</string>
 		<string name="pb_zip_have_bootloader">Warning: Detected reinstallation of the bootloader which was called by '{1}'.</string>
 		<string name="pb_no_space_ota_survival">Not enough free space on internal storage for creating the OTA survival.</string>
-		<string name="pb_flash_controller">Flashlight Brightness</string>
-		<string name="sel_br_val">Select Brightness Value:</string>
+
 		<string name="pb_incremental_ota_res">OTA_RES -- done!</string>		
 		<string name="pb_incremental_ota_res_run">Running OTA_RES process...</string>
 		<string name="pb_incremental_ota_bak_run">Running OTA_BAK process...</string>
@@ -842,28 +837,29 @@
 		<string name="pb_unlink">Unlinking: '{1}'</string>
 		<string name="pb_patching">Patching: '{1}'</string>
 		<string name="pb_end_read">Ended Process Read {1}</string>
-		<string name="pb_start_read">Started Process Read {1}</string>
+                <string name="pb_start_read">Started Process Read {1}</string>
 		<string name="pb_dm_verity">Successfully patched DM-Verity</string>
 		<string name="pb_dm_verity_off">DM-Verity is not enabled</string>
 		<string name="pb_bk">Creating Backup of PB Files -- /tmp/pb/backup_wip...</string>
 		<string name="pb_bk_no">No Tools of PBRP are detecting Reflash the PBRP Package</string>
-		<string name="pb_wipe_substratum_overlays">Substratum Overlays</string>
 		<string name="zip_err_compatibility">Bypass Treble Compatibility</string>
+		<string name="pb_wipe_substratum_overlays">Substratum Overlays</string>
 		<string name="substratum_done">-- Substratum Overlays Wipe Complete!</string>
 		<string name="show_free_sdmb">Show Free SD Mb</string>
 		<string name="assert_failed_hint">An assert failed. Please check the output above for more details.</string>
 		<string name="pb_wipe_magisk_modules">Magisk Modules</string>
-		<string name="pb_dev_name_change">Wanna Change Your device Codename?</string>
-		<string name="pb_dev_change">Changing Device Codename from %pb_prop_value% to %pb_codename_change%</string>
+		<string name="magisk_done">-- Magisk Modules Wipe Complete!</string>
 		<string name="pb_saving_log">Saving Taking log...</string>
 		<string name="pb_enable_dmesg_logging">Enable Dmesg logging after Flash</string>
 		<string name="pb_copy_log_cache">Copying Logs to Cache as well.</string>
+		<string name="pb_dev_name_change">Wanna Change Your device Codename?</string>
+		<string name="pb_dev_change">Changing Device Codename from %pb_prop_value% to %pb_codename_change%</string>
 		<string name="pb_dev_changed">Device Codename Changed to %pb_codename_change%</string>
 		<string name="pb_dev_reboot">A Reboot is mandatory After switching Codenames</string>
 		<string name="pb_dev_name">PBRP Device Codename Changer</string>
 		<string name="magisk_done">-- Magisk Modules Wipe Complete!</string>
 		<string name="pb_wipe_fbe_cache">FBE Cache</string>
 		<string name="fbe_done">-- FBE Cache Wipe Complete!</string>
+		<string name="sel_br_val">Flashlight Brightness Value: %pb_bright_value%%</string>
 	</resources>
 </language>
-
