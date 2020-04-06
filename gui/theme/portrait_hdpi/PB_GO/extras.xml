@@ -2361,6 +2361,26 @@
                 		<listitem name="Theme 18:9 and other issue fixed"/>
                 		<listitem name="Fixed MiUI Treble OTA"/>
                 		<listitem name="etc"/>
+                                <listitem name="-----------------"/>
+                                <listitem name="PB v2.9.1"/>
+                                <listitem name="-----------------"/>
+                                <listitem name="Update new themes"/>
+                                <listitem name="Improve Backup & restore"/>
+                                <listitem name="Implement System As Root"/>
+                                <listitem name="Update dm verity"/>
+                                <listitem name="Rework Crypto"/>
+                                <listitem name="Block based flashing"/>
+                                <listitem name="Add wipe fbe cache (fbe devices only)"/>
+                                <listitem name="Add wipe magisk module"/>
+                                <listitem name="Add wipe subs overlay"/>
+                                <listitem name="Encrypt status update"/>
+                                <listitem name="Add codename changer"/>
+                                <listitem name="Adjustable flashlight"/>
+                                <listitem name="Bypass Treble Compatibillity"/>
+                                <listitem name="Auto generate log after flash"/>
+                                <listitem name="Read file, extract, zipping in file manager"/>
+                                <listitem name="Use double digit display partition size"/>
+                                <listitem name="etc"/>
 			</listbox>
 			
 			<action>
