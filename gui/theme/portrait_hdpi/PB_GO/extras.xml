@@ -2756,7 +2756,7 @@
 				<condition var1="tw_selectttf" var2="0"/>
 				<placement x="%indent%" y="%row3_y%" w="%content_width%" h="%fileselector_install_height%"/>
 				<text>%tw_zip_location%</text>
-				<filter extn=".ttf" folders="1" files="1"/>
+				<filter extn=".ttf,.otf" folders="1" files="1"/>
 				<path name="tw_zip_location" default="/sdcard"/>
 				<data name="tw_filename"/>
 				<selection name="tw_file"/>
@@ -2766,7 +2766,7 @@
 				<condition var1="tw_selectttf" var2="1"/>
 				<placement x="%indent%" y="%row3_y%" w="%content_width%" h="%fileselector_install_height%"/>
 				<text>%tw_zip_location%</text>
-				<filter extn=".ttf" folders="1" files="1"/>
+				<filter extn=".ttf,.otf" folders="1" files="1"/>
 				<path name="tw_zip_location" default="/sdcard"/>
 				<data name="tw_filename"/>
 				<selection name="tw_file"/>

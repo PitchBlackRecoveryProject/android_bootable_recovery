@@ -230,7 +230,7 @@ int GUIFileSelector::GetFileList(const std::string folder)
 	DIR* d;
 	struct dirent* de;
 	struct stat st;
-	size_t start_pos = 0, end_pos = 0, pos = 0 ;
+	size_t start_pos = 0, end_pos = 0;
 	vector<string> XTN;
 	string mExtns = mExtn + ",";
 	end_pos = mExtns.find(",", start_pos);
