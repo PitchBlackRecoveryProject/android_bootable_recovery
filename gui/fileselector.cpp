@@ -20,6 +20,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <algorithm>
+#include <vector>
 
 extern "C" {
 #include "../twcommon.h"
@@ -229,6 +230,15 @@ int GUIFileSelector::GetFileList(const std::string folder)
 	DIR* d;
 	struct dirent* de;
 	struct stat st;
+	size_t start_pos = 0, end_pos = 0, pos = 0 ;
+	vector<string> XTN;
+	string mExtns = mExtn + ",";
+	end_pos = mExtns.find(",", start_pos);
+	while (end_pos != string::npos && start_pos < mExtns.size()) {
+		XTN.push_back(mExtns.substr(start_pos, end_pos - start_pos));
+		start_pos = end_pos + 1;
+		end_pos = mExtns.find(",", start_pos);
+	}
 
 	// Clear all data
 	mFolderList.clear();
@@ -279,11 +289,14 @@ int GUIFileSelector::GetFileList(const std::string folder)
 			if (mShowNavFolders || (data.fileName != "." && data.fileName != ".."))
 				mFolderList.push_back(data);
 		} else if (data.fileType == DT_REG || data.fileType == DT_LNK || data.fileType == DT_BLK) {
-			if (mExtn.empty() || (data.fileName.length() > mExtn.length() && data.fileName.substr(data.fileName.length() - mExtn.length()) == mExtn)) {
-				if (mExtn == ".ab" && twadbbu::Check_ADB_Backup_File(path))
-					mFolderList.push_back(data);
-				else
-					mFileList.push_back(data);
+			for (size_t i = 0; i < XTN.size(); i++)
+			{
+				if (XTN[i].empty() || (data.fileName.length() > XTN[i].length() && data.fileName.substr(data.fileName.length() - XTN[i].length()) == XTN[i])) {
+					if (XTN[i] == ".ab" && twadbbu::Check_ADB_Backup_File(path))
+						mFolderList.push_back(data);
+					else
+						mFileList.push_back(data);
+				}
 			}
 		}
 	}
