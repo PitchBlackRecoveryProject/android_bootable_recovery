@@ -1,9 +1,12 @@
 /*
 	Copyright 2012 to 2017 bigbiff/Dees_Troy TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
-	
-	Copyright 2018 ATG Droid  
+
+	Copyright 2018 ATG Droid
 	This file is part of RWRP/RedWolf Recovery Project
+
+	Copyright 2018-2020 androiabledroid/rezaadipangestu/manjotsidhu
+	This file is part of PBRP/PitchBlack Recovery Project
 
 	TWRP is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -536,7 +539,7 @@ static int Run_Update_Binary(const char *path, ZipWrap *Zip, int* wipe_cache, zi
 		Write_MIUI_Install_Status(OTA_CORRUPT, false);
 		return INSTALL_ERROR;
         }
-        
+
 	return INSTALL_SUCCESS;
 }
 
@@ -549,11 +552,11 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 	}
 
 
-	
+
     if (DataManager::GetIntValue(PB_INSTALL_PREBUILT_ZIP) != 1) {
 
 	/* First delink all our symlinks to /system, coz we donno the behaviour of the flashing zip */
-	if (PartitionManager.Is_Mounted_By_Path("/system_root"))
+	if (PartitionManager.Is_Mounted_By_Path("/system_root") || TWFunc::Path_Exists("/system/system"))
 	{
 		string UM ="/system";
 		umount(UM.c_str());
