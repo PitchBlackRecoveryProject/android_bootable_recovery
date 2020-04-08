@@ -18,6 +18,7 @@
 	<resources>
 	    <font name="font_exl" filename="pb.ttf" size="59"/>
 		<font name="font_l" filename="pb.ttf" size="45"/>
+		<font name="cons" filename="DroidSansMono.ttf" size="30"/>
 		<font name="font_about" filename="pb.ttf" size="37"/>
 		<font name="font_m" filename="pb.ttf" size="30"/>
 		<font name="font_n" filename="pb.ttf" size="20"/>

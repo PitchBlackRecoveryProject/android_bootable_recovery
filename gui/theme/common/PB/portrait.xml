@@ -430,7 +430,7 @@
 		<style name="console">
 			<fastscroll rectcolor="%accent_color2%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<color foreground="%text_color%" background="%background_color2%" scroll="%background_color2%"/>
-			<font resource="font_m"/>
+			<font resource="cons"/>
 		</style>
 		
 		<style name="about">
@@ -442,7 +442,7 @@
 		<style name="terminal">
 			<fastscroll linecolor="%transparent%" rectcolor="%accent_color2%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<background color="%background_color2%"/>
-			<font resource="font_m" spacing="3" color="%text_color%"/>
+			<font resource="cons" spacing="3" color="%text_color%"/>
 		</style>
 
 		<style name="fileselector">
