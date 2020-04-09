@@ -667,6 +667,15 @@
 			</animation>
 		</template>
 
+		<template name="progress_bar_lk">
+			<progressbar>
+				<condition var1="tw_busy" op="!=" var2="0"/>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource empty="progress_empty" full="progress_full"/>
+				<data name="ui_progress"/>
+			</progressbar>
+		</template>
+
 		<template name="sort_options">
 			<image>
 				<placement x="%indent%" y="%row1a_y%"/>

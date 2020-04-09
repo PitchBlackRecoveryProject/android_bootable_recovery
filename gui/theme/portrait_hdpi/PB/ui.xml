@@ -24,6 +24,7 @@
 		<font name="font_n" filename="pb.ttf" size="20"/>
 		<font name="font_s" filename="pb.ttf" size="32"/>
 		<font name="font_xl" filename="pb.ttf" size="75"/>
+		<font name="font_xxl" filename="pb.ttf" size="100"/>
 		<font name="fixed" filename="pb.ttf" size="35"/>
 		<font name="font_pb" filename="pb.ttf" size="65"/>
 		<font name="font_pb_small" filename="pb.ttf" size="50"/>
@@ -63,6 +64,9 @@
 		<image name="sort_empty" filename="sort_empty" retainaspect="1"/>
 		<animation name="progress" filename="indeterminate" retainaspect="1"/>
 		<image name="progress_empty" filename="progress_empty" retainaspect="1"/>
+		<image name="bar1" filename="bar1" retainaspect="1"/>
+		<image name="bar2" filename="bar2" retainaspect="1"/>
+		<image name="batt" filename="batt" retainaspect="1"/>
 		<image name="progress_full" filename="progress_fill" retainaspect="1"/>
 		<image name="slider" filename="slider" retainaspect="1"/>
 		<image name="slider_used" filename="slider_used" retainaspect="1"/>
@@ -665,6 +669,15 @@
 				<speed fps="150" render="2"/>
 				<loop frame="1"/>
 			</animation>
+		</template>
+
+		<template name="progress_bar_lk">
+			<progressbar>
+				<condition var1="tw_busy" op="!=" var2="0"/>
+				<placement x="%indent%" y="%row17a_y%"/>
+				<resource empty="progress_empty" full="progress_full"/>
+				<data name="ui_progress"/>
+			</progressbar>
 		</template>
 
 		<template name="sort_options">

@@ -4599,12 +4599,58 @@
 		</page>
 
 		<page name="lock">
-			<background color="%semi_transparent%"/>
+			<background color="#000000"/>
 			
 			<image>
 				<image resource="splashlogo"/>
-				<placement x="540" y="456" placement="4"/>
+				<placement x="540" y="430" placement="4"/>
 			</image>
+
+			<image>
+				<image resource="bar1"/>
+				<placement x="450" y="900" placement="4"/>
+			</image>
+
+			<image>
+				<image resource="batt"/>
+				<placement x="960" y="700" placement="4"/>
+			</image>
+
+			<image>
+				<image resource="bar2"/>
+				<placement x="800" y="750" placement="4"/>
+			</image>
+
+			<text style="text_m">
+				<condition var1="tw_busy" op="!=" var2="0"/>
+				<placement x="%indent%" y="%row19_y%"/>
+				<text>%tw_size_progress%</text>
+			</text>
+
+			<template name="progress_bar_lk"/>
+
+			<text color="%text_color%">
+				<font resource="font_xl"/>
+				<placement x="170" y="%row7a_y%" placement="5"/>
+				<text>Time</text>
+			</text>
+
+			<text color="%process%">
+				<font resource="font_xxl"/>
+				<placement x="630" y="%row11_y%" placement="5"/>
+				<text>%tw_time%</text>
+			</text>
+
+			<text color="%process%">
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="0"/>
+					<condition var1="tw_battery" op="&lt;" var2="101"/>
+				</conditions>
+				<font resource="font_l"/>
+				<placement x="804" y="725" placement="1"/>
+				<text>%tw_battery%</text>
+			</text>
 			
 			<slider>
 				<text>{@swipe_to_unlock=Swipe to Unlock}</text>
