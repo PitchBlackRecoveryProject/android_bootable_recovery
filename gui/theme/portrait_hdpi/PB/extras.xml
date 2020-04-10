@@ -657,22 +657,6 @@
 			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="296"/>
 				<action function="page">change_fonts1</action>
-				<action function="set">fonts_folder=fonts_malaga</action>
-			</button>
-			
-			<image>
-				<placement x="93" y="310"/>
-				<image resource="main_button_fonts"/>
-			</image>
-			
-			<text style="text_pb">
-				<placement x="250" y="320"/>
-				<text>Malaga</text>
-			</text>
-			
-			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="436"/>
-				<action function="page">change_fonts1</action>
 				<action function="set">fonts_folder=fonts_choco</action>
 			</button>
 			
@@ -684,22 +668,6 @@
 			<text style="text_pb">
 				<placement x="250" y="460"/>
 				<text>Choco Cooky</text>
-			</text>
-			
-			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="576"/>
-				<action function="page">change_fonts1</action>
-				<action function="set">fonts_folder=fonts_samsung</action>
-			</button>
-			
-			<image>
-				<placement x="93" y="590"/>
-				<image resource="main_button_fonts"/>
-			</image>
-			
-			<text style="text_pb">
-				<placement x="250" y="600"/>
-				<text>Samsung Sans</text>
 			</text>
 			
 			<button style="main_button_black">
@@ -736,22 +704,6 @@
 			
 			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="996"/>
-				<action function="page">change_fonts1</action>
-				<action function="set">fonts_folder=fonts_dancing</action>
-			</button>
-			
-			<image>
-				<placement x="93" y="1010"/>
-				<image resource="main_button_fonts"/>
-			</image>
-			
-			<text style="text_pb">
-				<placement x="250" y="1020"/>
-				<text>Dancing Script</text>
-			</text>
-			
-			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="1136"/>
 				<action function="page">text_custom_font</action>
 			</button>
 			

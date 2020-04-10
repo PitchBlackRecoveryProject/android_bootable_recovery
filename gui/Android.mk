@@ -144,11 +144,8 @@ TWRP_RES := $(LOCAL_PATH)/theme/common/fonts
 else
 TWRP_RES := $(LOCAL_PATH)/theme/common/fonts
 TWRP_RES += $(LOCAL_PATH)/theme/common/fonts_choco
-TWRP_RES += $(LOCAL_PATH)/theme/common/fonts_dancing
 TWRP_RES += $(LOCAL_PATH)/theme/common/fonts_google
 TWRP_RES += $(LOCAL_PATH)/theme/common/fonts_kraken
-TWRP_RES += $(LOCAL_PATH)/theme/common/fonts_malaga
-TWRP_RES += $(LOCAL_PATH)/theme/common/fonts_samsung
 endif
 
 ifeq ($(PB_ENGLISH), true)
