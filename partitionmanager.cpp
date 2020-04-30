@@ -759,6 +759,9 @@ TWPartitionManager::Find_Partition_By_Path (const string & Path)
   std::vector < TWPartition * >::iterator iter;
   string Local_Path = TWFunc::Get_Root_Path (Path);
 
+    if (Local_Path == "/system")
+      Local_Path = Get_Android_Root_Path();
+
   for (iter = Partitions.begin (); iter != Partitions.end (); iter++)
     {
       if ((*iter)->Mount_Point == Local_Path
@@ -1645,8 +1648,12 @@ TWPartitionManager::Set_Restore_Files (string Restore_Name)
 					    strlen (extn) + 3);
 	    }
 
-	  if (!Part->Is_SubPartition)
-	    Restore_List += Part->Backup_Path + ";";
+          if (!Part->Is_SubPartition) {
+            if (Part->Backup_Path == Get_Android_Root_Path())
+              Restore_List += "/system;";
+            else
+              Restore_List += Part->Backup_Path + ";";
+          }
 	}
       closedir (d);
     }
@@ -1809,6 +1816,9 @@ TWPartitionManager::Wipe_By_Path (string Path, string New_File_System)
   int ret = false;
   bool found = false;
   string Local_Path = TWFunc::Get_Root_Path (Path);
+
+  if (Local_Path == "/system")
+    Local_Path = Get_Android_Root_Path();
 
   // Iterate through all partitions
   for (iter = Partitions.begin (); iter != Partitions.end (); iter++)

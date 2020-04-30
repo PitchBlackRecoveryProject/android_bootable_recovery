@@ -421,12 +421,10 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 		else
 			return true;
 	} else if (Mount_Point == "auto") {
-		Mount_Point = "/auto";
-		char autoi[5];
-		sprintf(autoi, "%i", auto_index);
-		Mount_Point += autoi;
+		Mount_Point = "/auto" + to_string(auto_index);
 		Backup_Path = Mount_Point;
 		Storage_Path = Mount_Point;
+		Backup_Name = Mount_Point.substr(1);
 		auto_index++;
 		Setup_File_System(Display_Error);
 		Display_Name = "Storage";
@@ -446,8 +444,10 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 	} else if (Is_File_System(Fstab_File_System)) {
 		Find_Actual_Block_Device();
 		Setup_File_System(Display_Error);
+		Backup_Name = Display_Name = Mount_Point.substr(1, Mount_Point.size() - 1);
 		if (Mount_Point == "/" || Mount_Point == "/system" || Mount_Point == "/system_root") {
 			Display_Name = "System";
+			Backup_Name = "system";
 			Backup_Display_Name = Display_Name;
 			Storage_Name = Display_Name;
 			Wipe_Available_in_GUI = true;
@@ -1099,8 +1099,6 @@ void TWPartition::Setup_File_System(bool Display_Error) {
 
 	// Make the mount point folder if it doesn't exist
 	Make_Dir(Mount_Point, Display_Error);
-	Display_Name = Mount_Point.substr(1, Mount_Point.size() - 1);
-	Backup_Name = Display_Name;
 	Backup_Method = BM_FILES;
 }
 
