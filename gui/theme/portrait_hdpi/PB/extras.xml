@@ -661,19 +661,50 @@
 			</button>
 			
 			<image>
+				<placement x="93" y="310"/>
+				<image resource="main_button_fonts"/>
+			</image>
+			
+			<text style="text_pb">
+				<placement x="250" y="320"/>
+				<text>Choco Cooky</text>
+			</text>
+			
+			<button style="main_button_black">
+				<placement x="%indent_main_button%" y="436"/>
+				<action function="page">change_fonts1</action>
+				<action function="set">fonts_folder=fonts_google</action>
+			</button>
+			
+			<image>
 				<placement x="93" y="450"/>
 				<image resource="main_button_fonts"/>
 			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="460"/>
-				<text>Choco Cooky</text>
+				<text>Google Sans</text>
+			</text>
+			
+			<button style="main_button_black">
+				<placement x="%indent_main_button%" y="576"/>
+				<action function="page">change_fonts1</action>
+				<action function="set">fonts_folder=fonts_kraken</action>
+			</button>
+			
+			<image>
+				<placement x="93" y="590"/>
+				<image resource="main_button_fonts"/>
+			</image>
+			
+			<text style="text_pb">
+				<placement x="250" y="600"/>
+				<text>Kraken</text>
 			</text>
 			
 			<button style="main_button_black">
 				<placement x="%indent_main_button%" y="716"/>
-				<action function="page">change_fonts1</action>
-				<action function="set">fonts_folder=fonts_google</action>
+				<action function="page">text_custom_font</action>
 			</button>
 			
 			<image>
@@ -683,46 +714,15 @@
 			
 			<text style="text_pb">
 				<placement x="250" y="740"/>
-				<text>Google Sans</text>
-			</text>
-			
-			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="856"/>
-				<action function="page">change_fonts1</action>
-				<action function="set">fonts_folder=fonts_kraken</action>
-			</button>
-			
-			<image>
-				<placement x="93" y="870"/>
-				<image resource="main_button_fonts"/>
-			</image>
-			
-			<text style="text_pb">
-				<placement x="250" y="880"/>
-				<text>Kraken</text>
-			</text>
-			
-			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="996"/>
-				<action function="page">text_custom_font</action>
-			</button>
-			
-			<image>
-				<placement x="93" y="1150"/>
-				<image resource="main_button_fonts"/>
-			</image>
-			
-			<text style="text_pb">
-				<placement x="250" y="1160"/>
 				<text>Custom Fonts</text>
 			</text>
 			
 			<fill color="#212121">
-				<placement x="3" y="1379" w="1404" h="5"/>
+				<placement x="3" y="1179" w="1204" h="5"/>
 			</fill>
 			
 			<listbox style="about">
-				<placement x="58" y="1404" w="964" h="334"/>
+				<placement x="58" y="1204" w="964" h="534"/>
 				<listitem name="Procedure Custom Fonts"/>
 				<listitem name=""/>
 				<listitem name="1. Download fonts from google or other with format ttf"/>
