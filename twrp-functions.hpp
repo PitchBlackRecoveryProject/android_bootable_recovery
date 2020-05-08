@@ -24,8 +24,10 @@
 
 #include <string>
 #include <vector>
+#include <ext4_utils/ext4_crypt.h>
 
 #include "twrpDigest/twrpDigest.hpp"
+#include "ext4crypt_tar.h"
 
 #ifndef BUILD_TWRPTAR_MAIN
 #include "partitions.hpp"
@@ -54,6 +56,7 @@ enum Archive_Type {
 	ENCRYPTED,
 	COMPRESSED_ENCRYPTED
 };
+
 
 // Partition class
 class TWFunc
@@ -133,6 +136,9 @@ public:
 	static bool check_system_root(); // return whether device is system-as-root or not
 	static int check_encrypt_status(); // return 1,2,3,0 on FDE, FBE, On some confusion & unencryptred respectively
 	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
+	static bool Get_Encryption_Policy(ext4_encryption_policy &policy, std::string path); // return encryption policy for path
+	static bool Set_Encryption_Policy(std::string path, const ext4_encryption_policy &policy); // set encryption policy for path
+	static bool Is_Data_Wiped(std::string path); // check if directory has been wiped
 
 private:
 	static void Copy_Log(string Source, string Destination);
