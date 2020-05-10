@@ -378,7 +378,11 @@ ifeq ($(TARGET_USERIMAGES_USE_F2FS), true)
     RELINK_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/fsck.f2fs
 endif
 ifneq ($(wildcard system/core/reboot/Android.*),)
-    RELINK_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/reboot
+    ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 29; echo $$?),0)
+        RELINK_SOURCE_FILES += $(TARGET_RECOVERY_ROOT_OUT)/sbin/reboot
+    else
+        RELINK_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/reboot
+    endif
 endif
 ifneq ($(TW_DISABLE_TTF), true)
     RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libft2.so
@@ -498,7 +502,7 @@ LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)
 RELINK_INIT := $(TARGET_RECOVERY_ROOT_OUT)/sbin/init
 LOCAL_POST_INSTALL_CMD += $(RELINK) $(TARGET_RECOVERY_ROOT_OUT)/ $(RELINK_INIT) && \
     ln -sf /init $(TARGET_RECOVERY_ROOT_OUT)/system/bin/init
-LOCAL_REQUIRED_MODULES := init_second_stage.recovery
+LOCAL_REQUIRED_MODULES := init_second_stage.recovery reboot.recovery
 include $(BUILD_PHONY_PACKAGE)
 
 #mke2fs.conf
