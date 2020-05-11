@@ -440,7 +440,7 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 	} else if (Is_File_System(Fstab_File_System)) {
 		Find_Actual_Block_Device();
 		Setup_File_System(Display_Error);
-		if (Mount_Point == PartitionManager.Get_Android_Root_Path() || Mount_Point == "/system_root") {
+		if (Mount_Point == PartitionManager.Get_Android_Root_Path()) {
 			Display_Name = "System";
 			Backup_Display_Name = Display_Name;
 			Storage_Name = Display_Name;
@@ -1533,11 +1533,6 @@ bool TWPartition::Mount(bool Display_Error) {
 		string Command = "mount -o bind '" + Symlink_Path + "' '" + Symlink_Mount_Point + "'";
 		TWFunc::Exec_Cmd(Command);
 	}
-	if (Mount_Point == "/system_root" && TWFunc::Path_Exists("/system_root/system"))
-	{
-		string Command = "mount -o bind " + Mount_Point + " /system";
-		TWFunc::Exec_Cmd(Command);
-	}
 	return true;
 }
 
@@ -1546,7 +1541,7 @@ bool TWPartition::UnMount(bool Display_Error) {
 		int never_unmount_system;
 
 		DataManager::GetValue(TW_DONT_UNMOUNT_SYSTEM, never_unmount_system);
-		if (never_unmount_system == 1 && (Mount_Point == PartitionManager.Get_Android_Root_Path() || Mount_Point == "/system_root"))
+		if (never_unmount_system == 1 && Mount_Point == PartitionManager.Get_Android_Root_Path())
 			return true; // Never unmount system if you're not supposed to unmount it
 
 		if (Is_Storage && MTP_Storage_ID > 0)
@@ -1554,10 +1549,6 @@ bool TWPartition::UnMount(bool Display_Error) {
 
 		if (!Symlink_Mount_Point.empty())
 			umount(Symlink_Mount_Point.c_str());
-
-		string UM = "/system";
-		if (Mount_Point == "/system_root")
-			umount(UM.c_str());
 
 		umount(Mount_Point.c_str());
 		if (Is_Mounted()) {
