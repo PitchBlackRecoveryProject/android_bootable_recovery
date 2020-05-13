@@ -2226,7 +2226,7 @@ TWPartitionManager::Update_System_Details (void)
       (*iter)->Update_Size (true);
       if ((*iter)->Can_Be_Mounted)
 	{
-	  if ((*iter)->Mount_Point == "/system")
+	  if ((*iter)->Mount_Point == PartitionManager.Get_Android_Root_Path())
 	    {
 	      int backup_display_size =
 		(int) ((*iter)->Backup_Size / 1048576LLU);
