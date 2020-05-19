@@ -344,9 +344,6 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
             LOCAL_CFLAGS += -DTW_INCLUDE_FBE_METADATA_DECRYPT
         endif
     endif
-    ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 24; echo $$?),0)
-        LOCAL_SHARED_LIBRARIES += android.hardware.weaver@1.0
-    endif
     ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),)
     ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),false)
         LOCAL_CFLAGS += -DTW_CRYPTO_USE_SYSTEM_VOLD
