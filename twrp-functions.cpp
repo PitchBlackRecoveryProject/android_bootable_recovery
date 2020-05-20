@@ -2197,6 +2197,7 @@ int TWFunc::Property_Override(string Prop_Name, string Prop_Value) {
 }
 
 bool TWFunc::Get_Encryption_Policy(ext4_encryption_policy &policy, std::string path) {
+#ifdef TW_INCLUDE_FBE
 	if (!TWFunc::Path_Exists(path)) {
 		LOGERR("Unable to find %s to get policy\n", path.c_str());
 		return false;
@@ -2205,10 +2206,12 @@ bool TWFunc::Get_Encryption_Policy(ext4_encryption_policy &policy, std::string p
 		LOGERR("No policy set for path %s\n", path.c_str());
 		return false;
 	}
+#endif
 	return true;
 }
 
 bool TWFunc::Set_Encryption_Policy(std::string path, const ext4_encryption_policy &policy) {
+#ifdef TW_INCLUDE_FBE
 	if (!TWFunc::Path_Exists(path)) {
 		LOGERR("unable to find %s to set policy\n", path.c_str());
 		return false;
@@ -2220,10 +2223,12 @@ bool TWFunc::Set_Encryption_Policy(std::string path, const ext4_encryption_polic
 		LOGERR("unable to set policy for path: %s\n", path.c_str());
 		return false;
 	}
+#endif
 	return true;
 }
 
 bool TWFunc::Is_Data_Wiped(std::string path) {
+#ifdef TW_INCLUDE_FBE
 	DIR* d = opendir(path.c_str());
 	size_t file_count = 0;
 	if (d != NULL) {
@@ -2241,5 +2246,8 @@ bool TWFunc::Is_Data_Wiped(std::string path) {
 	}
 	LOGINFO("file_count: %zu\n", file_count);
 	return file_count == 0;
+#else
+	return true;
+#endif
 }
 #endif // ndef BUILD_TWRPTAR_MAIN

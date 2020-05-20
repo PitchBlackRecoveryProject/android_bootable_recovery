@@ -2467,6 +2467,7 @@ bool TWPartition::Wipe_Data_Without_Wiping_Media() {
 }
 
 bool TWPartition::Recreate_AB_Cache_Dir(const ext4_encryption_policy &policy) {
+#ifdef TW_INCLUDE_FBE
 	struct passwd pd;
 	struct passwd *pwdptr = &pd;
 	struct passwd *tempPd;
@@ -2516,6 +2517,7 @@ bool TWPartition::Recreate_AB_Cache_Dir(const ext4_encryption_policy &policy) {
 			}
 		}
 	}
+#endif
 	return true;
 }
 
