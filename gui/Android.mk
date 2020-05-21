@@ -203,11 +203,10 @@ ifeq ($(TW_CUSTOM_THEME),)
 
     ifeq ($(PB_GO), true)
 	    TWRP_THEME_LOC := $(LOCAL_PATH)/theme/$(TW_THEME)/PB_GO
-	    TWRP_RES += $(LOCAL_PATH)/theme/common/PB_GO/$(word 1,$(subst _, ,$(TW_THEME))).xml
     else
 	    TWRP_THEME_LOC := $(LOCAL_PATH)/theme/$(TW_THEME)/PB
-            TWRP_RES += $(LOCAL_PATH)/theme/common/PB/$(word 1,$(subst _, ,$(TW_THEME))).xml
     endif
+    TWRP_RES += $(LOCAL_PATH)/theme/common/PB/$(word 1,$(subst _, ,$(TW_THEME))).xml
     ifeq ($(wildcard $(TWRP_THEME_LOC)/ui.xml),)
         $(warning $(TW_THEME_WARNING_MSG))
         $(error Theme selection failed; exiting)
