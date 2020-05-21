@@ -439,6 +439,11 @@ int DataManager::GetIntValue(const string& varName)
 	string retVal;
 
 	GetValue(varName, retVal);
+
+	if (retVal == "true")
+		return 1;
+	else if (retVal == "false")
+		return 0;
 	return atoi(retVal.c_str());
 }
 
