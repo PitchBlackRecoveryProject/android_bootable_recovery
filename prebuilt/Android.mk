@@ -669,16 +669,6 @@ ifneq (,$(filter $(TW_INCLUDE_REPACKTOOLS) $(TW_INCLUDE_RESETPROP) $(TW_INCLUDE_
     endif
 endif
 
-#zip
-ifeq ($(TARGET_ARCH), arm64)
-include $(CLEAR_VARS)
-LOCAL_MODULE := zip
-LOCAL_MODULE_TAGS := eng
-LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
-LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
-LOCAL_SRC_FILES := zip_64
-include $(BUILD_PREBUILT)
-
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),)
         ifneq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
