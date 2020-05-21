@@ -333,6 +333,8 @@ protected:
 
 	// (originally) threaded actions
 	int fileexists(std::string arg);
+	int keypressed();
+	int keycheck(std::string zip);
 	int flash(std::string arg);
 	int wipe(std::string arg);
 	int refreshsizes(std::string arg);

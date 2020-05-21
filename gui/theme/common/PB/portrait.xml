@@ -1020,7 +1020,10 @@
 			<template name="progress_bar"/>
 
 			<button style="main_button_half_height">
-				<condition var1="tw_sleep" op="&gt;" var2="0"/>
+				<conditions>
+					<condition var1="tw_sleep" op="&gt;" var2="0"/>
+					<condition var1="tw_install_reboot_recovery" var2="0"/>
+				</conditions>
 				<placement x="%center_x%" y="%row21a_y%"/>
 				<text>{@cancel_btn=Cancel}</text>
 				<actions>
@@ -1046,6 +1049,26 @@
 					<action function="sleep">50000</action>
 					<action function="set">tw_back=main2</action>
 					<action function="page">reboot_system_routine</action>
+				</actions>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_sleep" var2="tw_sleep_total"/>
+					<condition var1="tw_install_reboot_recovery" var2="1"/>
+				</conditions>
+				<action function="sleepcounter">%tw_sleep_total%</action>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_sleep" var2="0"/>
+					<condition var1="tw_install_reboot_recovery" var2="1"/>
+				</conditions>
+				<actions>
+					<action function="sleep">50000</action>
+					<action function="set">tw_back=main2</action>
+					<action function="page">reboot_recovery_routine</action>
 				</actions>
 			</action>
 		</page>
@@ -5973,11 +5996,6 @@
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
 			</action>
-			
-			<action>
-					<touch key="volup" />
-					<action function="flashlight" />
-				</action>
 		</page>
 
 		<page name="select_storage">

@@ -1175,6 +1175,69 @@ int GUIAction::ozip_decrypt(string zip_path)
 	return 0;
 }
 
+int GUIAction::keypressed()
+{
+	return TWFunc::Exec_Cmd("/sbin/keycheck", false, true);
+}
+
+int GUIAction::keycheck(std::string zip)
+{
+	string insf, pb_installed;
+	insf = "/tmp/pb/installed";
+	int pbRet;
+
+	if (!TWFunc::Path_Exists(insf))
+		return -2;
+
+	pb_installed = TWFunc::File_Property_Get(insf, "installed");
+#ifdef AB_OTA_UPDATER
+	int ramdisk_patched[2], slot = PartitionManager.Get_Active_Slot_Display() == "A" ? 0 : 1;
+	ramdisk_patched[0] = atoi(TWFunc::File_Property_Get(insf, "boot_a").c_str());
+	ramdisk_patched[1] = atoi(TWFunc::File_Property_Get(insf, "boot_b").c_str());
+#endif
+	pbRet = atoi(pb_installed.c_str());
+	if (pbRet && TWFunc::Path_Exists("/sbin/keycheck"))
+	{
+#ifdef AB_OTA_UPDATER
+		if (ramdisk_patched[slot])
+		{
+			gui_print_color("normal", "* * * * * * * * * * * * * * * * * *\n");
+			gui_highlight("pb_flashed_=* Magisk Patched Ramdisk Detected!!!");
+			gui_msg(Msg(msg::kHighlight, "pb_flashed=* New PBRP Flashed, press Volume {1}")("Up For Flashing Magisk."));
+			gui_msg(Msg(msg::kHighlight, "pb_rb_msg=*Volume {1} to Finish")("Down"));
+			gui_print_color("normal", "* * * * * * * * * * * * * * * * * *\n");
+			pbRet = keypressed();
+			if (pbRet == 42) {
+				TWFunc::SetPerformanceMode(true);
+				if (TWFunc::Path_Exists(pb_installed = DataManager::GetCurrentStoragePath() + "/PBRP/tools/magisk.zip"))
+					flash_zip(pb_installed, &w);
+				else
+					flash_zip("/sdcard/PBRP/tools/magisk.zip", &w);
+				TWFunc::SetPerformanceMode(false);
+			}
+		}
+#endif
+		usleep(50000);
+		gui_print_color("normal", "* * * * * * * * * * * * * * * * * *\n");
+		gui_msg(Msg(msg::kHighlight, "pb_flashed=* New PBRP Flashed, press Volume {1}")("Down to Reboot to Recovery."));
+		gui_msg(Msg(msg::kHighlight, "pb_rb_msg=*Volume {1} to Finish")("Up"));
+		gui_print_color("normal", "* * * * * * * * * * * * * * * * * *\n");
+		pbRet = keypressed();
+		if (pbRet == 41) {
+			gui_highlight("pb_saving_log=Preserving Logs...\n");
+			copylog(zip);
+			operation_end(0);
+			DataManager::SetValue("tw_sleep","5");
+			DataManager::SetValue("tw_install_reboot_recovery", "1");
+			gui_changePage(gui_parse_text("flash_sleep_and_reboot"));
+		}
+	}
+
+	unlink(insf.c_str());
+
+	return pbRet;
+}
+
 int GUIAction::flash(std::string arg)
 {
 	backup_before_flash();
@@ -1208,11 +1271,13 @@ int GUIAction::flash(std::string arg)
 		TWFunc::SetPerformanceMode(true);
 		ret_val = flash_zip(zip_path, &wipe_cache);
 		TWFunc::SetPerformanceMode(false);
+
 		if (ret_val != 0) {
 			gui_msg(Msg(msg::kError, "zip_err=Error installing zip file '{1}'")(zip_path));
 			ret_val = 1;
 			break;
 		}
+		keycheck(zip_filename);
 	}
 	zip_queue_index = 0;
 
@@ -1232,7 +1297,7 @@ int GUIAction::flash(std::string arg)
 		}
 		DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
 	}
-	gui_highlight("pb_saving_log=Saving Taking log...\n");
+	gui_highlight("pb_saving_log=Preserving Logs...\n");
 	copylog(zip_filename);
 	DataManager::SetValue(TRB_EN, 0); //Reset At end
 	operation_end(ret_val);
