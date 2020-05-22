@@ -65,8 +65,8 @@ public:
 	static string Get_output(const string& cmd);
 
 	static int Exec_Cmd(const string& cmd, string &result);                     //execute a command and return the result as a string by reference
-	static int Exec_Cmd(const string& cmd, bool Show_Errors = true);                   //execute a command, displays an error to the GUI if Show_Errors is true, Show_Errors is true by default
-	static int Wait_For_Child(pid_t pid, int *status, string Child_Name, bool Show_Errors = true); // Waits for pid to exit and checks exit status, displays an error to the GUI if Show_Errors is true which is the default
+	static int Exec_Cmd(const string& cmd, bool Show_Errors = true, bool retn = false); //execute a command, displays an error to the GUI if Show_Errors is true, Show_Errors is true by default, also return exit code when required
+	static int Wait_For_Child(pid_t pid, int *status, string Child_Name, bool Show_Errors = true, bool retn = false); // Waits for pid to exit and checks exit status, displays an error to the GUI if Show_Errors is true which is the default, also return exitcode if required
 	static int Wait_For_Child_Timeout(pid_t pid, int *status, const string& Child_Name, int timeout); // Waits for a pid to exit until the timeout is hit. If timeout is hit, kill the chilld.
 	static bool Path_Exists(string Path);                                       // Returns true if the path exists
 	static Archive_Type Get_File_Type(string fn);                               // Determines file type, 0 for unknown, 1 for gzip, 2 for OAES encrypted
