@@ -89,7 +89,7 @@ int TWFunc::Exec_Cmd(const string& cmd, string &result) {
 	return ret;
 }
 
-int TWFunc::Exec_Cmd(const string& cmd, bool Show_Errors) {
+int TWFunc::Exec_Cmd(const string& cmd, bool Show_Errors, bool retn) {
 	pid_t pid;
 	int status;
 	switch(pid = fork())
@@ -103,7 +103,12 @@ int TWFunc::Exec_Cmd(const string& cmd, bool Show_Errors) {
 			break;
 		default:
 		{
-			if (TWFunc::Wait_For_Child(pid, &status, cmd, Show_Errors) != 0)
+			int ret = TWFunc::Wait_For_Child(pid, &status, cmd, Show_Errors, retn);
+
+			if (retn)
+				return ret;
+
+			if (ret != 0)
 				return -1;
 			else
 				return 0;
@@ -149,7 +154,7 @@ string TWFunc::Get_output(const string& cmd) {
 	return data;
 }
 
-int TWFunc::Wait_For_Child(pid_t pid, int *status, string Child_Name, bool Show_Errors) {
+int TWFunc::Wait_For_Child(pid_t pid, int *status, string Child_Name, bool Show_Errors, bool retn) {
 	pid_t rc_pid;
 
 	rc_pid = waitpid(pid, status, 0);
@@ -163,6 +168,9 @@ int TWFunc::Wait_For_Child(pid_t pid, int *status, string Child_Name, bool Show_
 		} else {
 			if (Show_Errors)
 				gui_msg(Msg(msg::kError, "pid_error={1} process ended with ERROR: {2}")(Child_Name)(WEXITSTATUS(*status))); // Graceful exit, but there was an error
+
+			if (retn)
+				return WEXITSTATUS(*status);
 			return -1;
 		}
 	} else { // no PID returned
