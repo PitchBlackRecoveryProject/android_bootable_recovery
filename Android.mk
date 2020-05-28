@@ -432,6 +432,8 @@ endif
 ifneq ($(TW_INCLUDE_LIBRESETPROP),)
     ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 24; echo $$?),0)
         $(warning libresetprop is not available for android < 7)
+        TW_INCLUDE_RESETPROP_PREBUILT := true
+        TWRP_REQUIRED_MODULES += resetprop
     else
         LOCAL_SHARED_LIBRARIES += libresetprop
         LOCAL_C_INCLUDES += external/magisk-prebuilt/include
