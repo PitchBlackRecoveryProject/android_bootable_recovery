@@ -354,14 +354,14 @@ static int verify_and_update_hw_fde_passwd(const char *passwd,
                 new_passwd = (char*)malloc(strlen(DEFAULT_HEX_PASSWORD) + 1);
                 if (new_passwd == NULL) {
                     SLOGE("System out of memory. Password verification  incomplete");
-                    return key_index;
+                    goto out;
                 }
                 strlcpy(new_passwd, DEFAULT_HEX_PASSWORD, strlen(DEFAULT_HEX_PASSWORD) + 1);
             } else {
                 new_passwd = (char*)malloc(strlen(passwd) * 2 + 1);
                 if (new_passwd == NULL) {
                     SLOGE("System out of memory. Password verification  incomplete");
-                    return key_index;
+                    goto out;
                 }
                 convert_key_to_hex_ascii_for_upgrade((const unsigned char*)passwd,
                                        strlen(passwd), new_passwd);
@@ -397,6 +397,7 @@ static int verify_and_update_hw_fde_passwd(const char *passwd,
         if (!ascii_passwd_updated)
             crypt_ftr->flags |= CRYPT_ASCII_PASSWORD_UPDATED;
     }
+out:
     // update footer before leaving
     //put_crypt_ftr_and_key(crypt_ftr);
     return key_index;

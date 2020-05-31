@@ -50,7 +50,7 @@ extern "C" {
 #include "variables.h"
 #include "twrpAdbBuFifo.hpp"
 #ifdef TW_USE_NEW_MINADBD
-#include "minadbd/minadbd.h"
+// #include "minadbd/minadbd.h"
 #else
 extern "C" {
 #include "minadbd21/adb.h"
@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
 		property_set("ctl.stop", "adbd");
 #ifdef TW_USE_NEW_MINADBD
 		//adb_server_main(0, DEFAULT_ADB_PORT, -1); TODO fix this for android8
-		minadbd_main();
+		// minadbd_main();
 #else
 		adb_main(argv[2]);
 #endif
@@ -231,9 +231,14 @@ int main(int argc, char **argv) {
 		if (gui_startPage("decrypt", 1, 1) != 0) {
 			LOGERR("Failed to start decrypt GUI page.\n");
 		} else {
-			// Check for and load custom theme if present
-			TWFunc::check_selinux_support();
-			gui_loadCustomResources();
+			LOGINFO("Is encrypted, do decrypt page first\n");
+			if (gui_startPage("decrypt", 1, 1) != 0) {
+				LOGERR("Failed to start decrypt GUI page.\n");
+			} else {
+				// Check for and load custom theme if present
+				TWFunc::check_selinux_support();
+				gui_loadCustomResources();
+			}
 		}
 	} else if (datamedia) {
 		TWFunc::check_selinux_support();
@@ -257,7 +262,6 @@ int main(int argc, char **argv) {
 	// Run any outstanding OpenRecoveryScript
 	std::string cacheDir = TWFunc::get_cache_dir();
 	std::string orsFile = cacheDir + "/recovery/openrecoveryscript";
-
 	if (TWFunc::Path_Exists(SCRIPT_FILE_TMP) || (DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0 && TWFunc::Path_Exists(orsFile))) {
 		OpenRecoveryScript::Run_OpenRecoveryScript();
 	}

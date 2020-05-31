@@ -1028,7 +1028,6 @@ TWPartitionManager::Run_Backup (bool adbbackup)
   string Backup_Name, Backup_List, backup_path;
   unsigned long long total_bytes = 0, free_space = 0;
   TWPartition *storage = NULL;
-  std::vector < TWPartition * >::iterator subpart;
   struct tm *t;
   time_t seconds, total_start, total_stop;
   size_t start_pos = 0, end_pos = 0;
@@ -4468,7 +4467,6 @@ TWPartitionManager::Run_OTA_Survival_Backup (bool adbbackup)
   string Backup_Name, backup_path, Backup_List;
   unsigned long long total_bytes = 0, free_space = 0;
   TWPartition *storage = NULL;
-  std::vector < TWPartition * >::iterator subpart;
   struct tm *t;
   time_t seconds, total_start, total_stop;
   size_t start_pos = 0, end_pos = 0;

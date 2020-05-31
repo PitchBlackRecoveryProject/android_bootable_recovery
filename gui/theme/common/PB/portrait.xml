@@ -495,6 +495,16 @@
 			<font resource="font_m" spacing="%partitionlist_spacing%" color="%text_color%" highlightcolor="%fileselector_highlight_font_color%"/>
 		</style>
 
+		<style name="advanced_listbox">
+			<highlight color="%fileselector_highlight_color%"/>
+			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
+			<dimensions lineh="%slidervalue_lineh%" linepadding="%slidervalue_padding%" sliderw="%slidervalue_sliderw%" sliderh="%slidervalue_sliderh%"/>
+			<icon selected="handle" unselected="handle"/>
+			<background color="%background_color%"/>
+			<font resource="font_m" spacing="%fileselector_spacing%" color="%text_color%" highlightcolor="%accent_color%"/>
+		</style>
+
 		<style name="slider">
 			<placement x="%center_x%" y="%row23_y%" placement="4"/>
 			<font resource="font_s" color="%text_color%"/>
@@ -2229,7 +2239,7 @@
 
 			<text style="text_m">
 				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="%center_x%" y="%row17_y%" placement="5"/>
+				<placement x="%center_x%" y="%row18_y%" placement="5"/>
 				<text>{@current_boot_slot=Current Slot: %tw_active_slot%}</text>
 			</text>
 
@@ -3428,9 +3438,28 @@
 				<text>{@rb_edl_btn=Edl}</text>
 			</text>
 
+			<button style="main_button">
+				<condition var1="tw_edl_mode" var2="1"/>
+				<placement x="%center_x%" y="%row13a_y%"/>
+				<text>{@rb_edl_btn=Edl}</text>
+				<actions>
+					<action function="set">tw_back=reboot</action>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=edl</action>
+					<action function="set">tw_reboot_param=edl</action>
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_text1={@no_os1=No OS Installed! Are you}</action>
+					<action function="set">tw_text2={@no_osrb=sure you wish to reboot?}</action>
+					<action function="set">tw_action_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_complete_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_slider_text={@swipe_reboot=Swipe to Reboot}</action>
+					<action function="page">rebootcheck</action>
+				</actions>
+			</button>
+
 			<text style="text_m">
 				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="%center_x%" y="%row17_y%" placement="5"/>
+				<placement x="%center_x%" y="%row18_y%" placement="5"/>
 				<text>{@current_boot_slot=Current Slot: %tw_active_slot%}</text>
 			</text>
 

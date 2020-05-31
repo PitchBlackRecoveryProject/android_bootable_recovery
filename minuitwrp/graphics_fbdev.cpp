@@ -286,7 +286,6 @@ static GRSurface* fbdev_flip(minui_backend* backend __unused) {
 #if defined(RECOVERY_BGRA)
     // In case of BGRA, do some byte swapping
     unsigned char* ucfb_vaddr = (unsigned char*)gr_draw->data;
-
     for (int idx = 0 ; idx < (gr_draw->height * gr_draw->row_bytes);
             idx += 4) {
         unsigned char tmp = ucfb_vaddr[idx];

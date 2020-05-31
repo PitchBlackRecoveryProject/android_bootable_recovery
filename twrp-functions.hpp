@@ -41,7 +41,7 @@ typedef enum
 	rb_poweroff,
 	rb_bootloader,     // May also be fastboot
 	rb_download,
-    rb_edl,
+	rb_edl,
 } RebootCommand;
 
 enum Archive_Type {

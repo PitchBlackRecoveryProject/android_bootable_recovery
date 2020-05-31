@@ -38,13 +38,7 @@ else
   LOCAL_C_INCLUDES += $(commands_recovery_local_path)/minuitwrp/include
   # The header files required for adf graphics can cause compile errors
   # with adf graphics.
-  ifneq ($(wildcard system/core/adf/Android.mk),)
-    TWRP_HAS_ADF := true
-  endif
-  ifneq ($(wildcard system/core/adf/Android.bp),)
-    TWRP_HAS_ADF := true
-  endif
-  ifeq ($(TWRP_HAS_ADF), true)
+  ifneq ($(wildcard system/core/adf/Android.*),)
     LOCAL_CFLAGS += -DHAS_ADF
     LOCAL_SRC_FILES += graphics_adf.cpp
     LOCAL_WHOLE_STATIC_LIBRARIES += libadf
@@ -55,7 +49,7 @@ ifeq ($(TW_NEW_ION_HEAP), true)
   LOCAL_CFLAGS += -DNEW_ION_HEAP
 endif
 
-ifneq ($(wildcard external/libdrm/Android.mk),)
+ifneq ($(wildcard external/libdrm/Android.*),)
   LOCAL_CFLAGS += -DHAS_DRM
   LOCAL_SRC_FILES += graphics_drm.cpp
   ifneq ($(wildcard external/libdrm/Android.common.mk),)
@@ -63,11 +57,6 @@ ifneq ($(wildcard external/libdrm/Android.mk),)
   else
     LOCAL_WHOLE_STATIC_LIBRARIES += libdrm
   endif
-endif
-ifneq ($(wildcard external/libdrm/Android.bp),)
-  LOCAL_CFLAGS += -DHAS_DRM
-  LOCAL_SRC_FILES += graphics_drm.cpp
-  LOCAL_WHOLE_STATIC_LIBRARIES += libdrm
 endif
 
 LOCAL_C_INCLUDES += \
@@ -209,7 +198,7 @@ LOCAL_STATIC_LIBRARIES += libpixelflinger_twrp
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -gt 25; echo $$?),0)
 LOCAL_SHARED_LIBRARIES += libcutils liblog libutils
 endif
-LOCAL_MODULE_TAGS := eng
+LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libminuitwrp
 
 include $(BUILD_SHARED_LIBRARY)

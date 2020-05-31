@@ -939,6 +939,7 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 			break;
 		case TWFLAG_KEYDIRECTORY:
 			Key_Directory = str;
+			break;
 		default:
 			// Should not get here
 			LOGINFO("Flag identified for processing, but later unmatched: %i\n", flag);
