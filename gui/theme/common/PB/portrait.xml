@@ -495,6 +495,16 @@
 			<font resource="font_m" spacing="%partitionlist_spacing%" color="%text_color%" highlightcolor="%fileselector_highlight_font_color%"/>
 		</style>
 
+		<style name="advanced_listbox">
+			<highlight color="%accent_color%"/>
+			<fastscroll linecolor="%fileselector_linecolor%" rectcolor="%accent_color%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<separator color="%fileselector_linecolor%" height="%fileselector_separatorheight%"/>
+			<dimensions lineh="%slidervalue_lineh%" linepadding="%slidervalue_padding%" sliderw="%slidervalue_sliderw%" sliderh="%slidervalue_sliderh%"/>
+			<icon selected="handle" unselected="handle"/>
+			<background color="%background_color%"/>
+			<font resource="font_pb_small" spacing="%fileselector_spacing%" color="%text_color%" highlightcolor="%accent_color%"/>
+		</style>
+
 		<style name="slider">
 			<placement x="%center_x%" y="%row23_y%" placement="4"/>
 			<font resource="font_s" color="%text_color%"/>
@@ -4088,29 +4098,13 @@
 			</text>
 
 			<button style="main_button_black">
-				<condition var1="tw_has_data_media" var2="1"/>
-				<placement x="%indent_main_button%" y="481"/>
-				<action function="page">fixcontexts</action>
-			</button>
-			
-			<image>
-				<placement x="93" y="495"/>
-				<image resource="main_button_fixcontexts"/>
-			</image>
-			
-			<text style="text_pb">
-				<placement x="250" y="505"/>
-				<text>{@fix_context_btn=Fix Contexts}</text>
-			</text>
-
-			<button style="main_button_black">
 				<condition var1="aromafm" op="!=" var2="1"/>
-				<placement x="%indent_main_button%" y="666"/>
+				<placement x="%indent_main_button%" y="481"/>
 				<action function="page">filemanagerlist</action>
 			</button>
 			
 			<image>
-				<placement x="93" y="680"/>
+				<placement x="93" y="495"/>
 				<image resource="main_button_explorer"/>
 			</image>
 			
@@ -4132,114 +4126,119 @@
 				</actions>
 			</button>
 			
-			<image>
-				<placement x="93" y="680"/>
-				<image resource="main_button_explorer"/>
-			</image>
-			
 			<text style="text_pb">
-				<placement x="250" y="690"/>
+				<placement x="250" y="505"/>
 				<text>{@file_manager_btn=File Manager}</text>
 			</text>
 
 			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="851"/>
+				<placement x="%indent_main_button%" y="666"/>
 				<action function="page">terminalcommand</action>
 			</button>
 			
 			<image>
-				<placement x="93" y="865"/>
+				<placement x="93" y="680"/>
 				<image resource="main_button_terminal"/>
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="875"/>
+				<placement x="250" y="690"/>
 				<text>{@terminal_btn=Terminal}</text>
 			</text>
 			
 			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="1036"/>
+				<placement x="%indent_main_button%" y="851"/>
 				<action function="page">sideload</action>
 			</button>
 			
 			<image>
-				<placement x="93" y="1050"/>
+				<placement x="93" y="865"/>
 				<image resource="main_button_adb"/>
 			</image>
 			
 			<text style="text_pb">
-				<placement x="250" y="1060"/>
+				<placement x="250" y="875"/>
 				<text>{@adb_sideload_btn=ADB Sideload}</text>
 			</text>
 					
-			<button style="main_button_black">
-				<placement x="%indent_main_button%" y="1221"/>
-				<action function="reload"/>
-			</button>
-			
-			<image>
-				<placement x="93" y="1235"/>
-				<image resource="main_button_reloadtheme"/>
-			</image>
-			
-			<text style="text_pb">
-				<placement x="250" y="1245"/>
-				<text>{@reload_theme_btn=Reload Theme}</text>
-			</text>
-			
-			<button style="main_button_black">
-				<condition var1="tw_allow_partition_sdcard" var2="1"/>
-				<placement x="%indent_main_button%" y="1406"/>
-				<actions>
-					<action function="set">partitionlisterror=0</action>
-					<action function="page">partsdcardsel</action>
-				</actions>
-			</button>
-			
-			<image>
-				<condition var1="tw_allow_partition_sdcard" var2="1"/>
-				<placement x="93" y="1420"/>
-				<image resource="main_button_partitionsd"/>
-			</image>
-			
-			<text style="text_pb">
-				<condition var1="tw_allow_partition_sdcard" var2="1"/>
-				<placement x="250" y="1430"/>
-				<text>{@part_sd_btn=Partition SD Card}</text>
-			</text>
-			
-			<button style="main_button">
-				<condition var1="tw_show_dumlock" var2="1"/>
-				<placement x="%center_x%" y="%row19_y%"/>
-				<text>{@dumlock_btn=HTC Dumlock}</text>
-				<action function="page">htcdumlock</action>
-			</button>
-
-			<button style="main_button">
-				<conditions>
+			<listbox style="advanced_listbox">
+				<placement x="93" y="%row13a_y%" w="%content_width%" h="%listbox_advanced_height%"/>
+				<listitem name="{@decrypt_users=Decrypt Users}">
+					<conditions>
+						<condition var1="tw_is_fbe" var2="1"/>
+						<condition var1="tw_all_users_decrypted" var2="0"/>
+					</conditions>
+					<actions>
+						<action function="set">tw_crypto_user_id=</action>
+						<action function="page">decrypt_users</action>
+					</actions>
+				</listitem>
+				<listitem name="{@reload_theme_btn=Reload Theme}">
+					<action function="reload"/>
+				</listitem>
+				<listitem name="{@part_sd_btn=Partition SD Card}">
+					<condition var1="tw_allow_partition_sdcard" var2="1"/>
+					<actions>
+						<action function="set">partitionlisterror=0</action>
+						<action function="page">partsdcardsel</action>
+					</actions>
+				</listitem>
+				<listitem name="{@fix_context_btn=Fix Contexts}">
+					<condition var1="tw_has_data_media" var2="1"/>
+					<action function="page">fixcontexts</action>
+				</listitem>
+				<listitem name="{@dumlock_btn=HTC Dumlock}">
 					<condition var1="tw_show_dumlock" var2="1"/>
-					<condition var1="tw_is_fbe" var2="1"/>
-					<condition var1="tw_all_users_decrypted" var2="0"/>
-				</conditions>
-				<placement x="250" y="1450"/>
-				<actions>
-					<action function="set">tw_crypto_user_id=</action>
-					<action function="page">decrypt_users</action>
-				</actions>
-			</button>
-
-			<button style="main_button">
-				<conditions>
-					<condition var1="tw_show_dumlock" op ="!=" var2="1"/>
-					<condition var1="tw_is_fbe" var2="1"/>
-					<condition var1="tw_all_users_decrypted" var2="0"/>
-				</conditions>
-				<placement x="250" y="1440"/>
-				<actions>
-					<action function="set">tw_crypto_user_id=</action>
-					<action function="page">decrypt_users</action>
-				</actions>
-			</button>			
+					<action function="page">htcdumlock</action>
+				</listitem>
+				<listitem name="{@install_twrp_ramdisk=Install Recovery Ramdisk}">
+					<conditions>
+						<condition var1="tw_has_boot_slots" var2="1"/>
+						<condition var1="tw_has_repack_tools" var2="1"/>
+					</conditions>
+					<actions>
+						<action function="set">tw_repack_kernel=0</action>
+						<action function="page">repackselect</action>
+					</actions>
+				</listitem>
+				<listitem name="{@install_kernel=Install Kernel}">
+					<conditions>
+						<condition var1="tw_has_boot_slots" var2="1"/>
+						<condition var1="tw_has_repack_tools" var2="1"/>
+					</conditions>
+					<actions>
+						<action function="set">tw_repack_kernel=1</action>
+						<action function="page">repackselect</action>
+					</actions>
+				</listitem>
+				<listitem name="{@fix_recovery_loop=Fix Recovery Bootloop}">
+					<conditions>
+						<condition var1="tw_has_boot_slots" var2="1"/>
+						<condition var1="tw_has_repack_tools" var2="1"/>
+					</conditions>
+					<actions>
+						<action function="set">tw_back=advanced</action>
+						<action function="set">tw_action=fixabrecoverybootloop</action>
+						<action function="set">tw_text1={@fix_recovery_loop_confirm=Fix Recovery Bootloop?}</action>
+						<action function="set">tw_action_text1={@fixing_recovery_loop=Fixing Recovery Bootloop...}</action>
+						<action function="set">tw_complete_text1={@fix_recovery_loop_complete=Fix Recovery Bootloop Complete}</action>
+						<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+						<action function="page">confirm_action</action>
+					</actions>
+				</listitem>
+				<listitem name="{@uninstall_twrp_system_app=Uninstall TWRP App from System}">
+					<condition var1="tw_app_installed_in_system" var2="1"/>
+					<actions>
+						<action function="set">tw_back=advanced</action>
+						<action function="set">tw_action=uninstalltwrpsystemapp</action>
+						<action function="set">tw_text1={@uninstall_twrp_system_app_confirm=Uninstall TWRP App from System?}</action>
+						<action function="set">tw_action_text1={@uninstalling_twrp_system_app=Uninstalling TWRP App from System...}</action>
+						<action function="set">tw_complete_text1={@uninstall_twrp_system_app_complete=Uninstall TWRP App from System Complete}</action>
+						<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+						<action function="page">confirm_action</action>
+					</actions>
+				</listitem>
+			</listbox>
 			
 			<action>
 				<touch key="home"/>
