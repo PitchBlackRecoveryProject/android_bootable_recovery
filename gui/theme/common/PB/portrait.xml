@@ -4116,7 +4116,7 @@
 			
 			<button style="main_button_black">
 				<condition var1="aromafm" var2="1"/>
-				<placement x="%indent_main_button%" y="666"/>
+				<placement x="%indent_main_button%" y="481"/>
 				<actions>
 					<action function="set">tw_back=filemanagerlist</action>
 					<action function="set">tw_filename=/sdcard/PBRP/tools/aromafm/aromafm.zip</action>
@@ -4131,6 +4131,11 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
+
+			<image>
+				<placement x="93" y="495"/>
+				<image resource="main_button_explorer"/>
+			</image>
 			
 			<text style="text_pb">
 				<placement x="250" y="505"/>
