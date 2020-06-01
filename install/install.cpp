@@ -615,7 +615,7 @@ static int really_install_package(const std::string& path, bool* wipe_cache, boo
   }
 
   // Additionally verify the compatibility of the package if it's a fresh install.
-  if (retry_count == 0 && !verify_package_compatibility(zip) && DataManager::GetIntValue(PB_TREBLE_COMP) == 0) {
+  if (retry_count == 0 && !verify_package_compatibility(zip)) {
     log_buffer->push_back(android::base::StringPrintf("error: %d", kPackageCompatibilityFailure));
     return INSTALL_CORRUPT;
   }
