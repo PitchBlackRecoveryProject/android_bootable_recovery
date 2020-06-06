@@ -1151,6 +1151,14 @@ void DataManager::Output_Version(void)
 			LOGINFO("Unable to mount '%s' to write version number.\n", Path.c_str());
 			return;
 		}
+
+		if (!TWFunc::Path_Exists(recoveryLogDir)) {
+			LOGINFO("Recreating %s folder.\n", recoveryLogDir.c_str());
+			if (!TWFunc::Create_Dir_Recursive(recoveryLogDir.c_str(), S_IRWXU | S_IRWXG | S_IWGRP | S_IXGRP, 0, 0)) {
+				LOGERR("DataManager::Output_Version -- Unable to make %s: %s\n", recoveryLogDir.c_str(), strerror(errno));
+				return;
+			}
+		}
 	}
 
 	std::string verPath = recoveryLogDir + ".version";
