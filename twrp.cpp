@@ -48,7 +48,7 @@ extern "C" {
 #include "partitions.hpp"
 
 #ifdef USE_OLD_BASE_INCLUDE
-#include <base/strings.h>
+#include <strings.h>
 #else
 #include <android-base/strings.h>
 #endif
