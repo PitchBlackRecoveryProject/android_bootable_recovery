@@ -2357,18 +2357,15 @@ int GUIAction::repack(std::string arg __unused)
 
 int GUIAction::flashlight(std::string arg __unused)
 {
-	fstream File;
-	int val=0, max_val=0, br_value = DataManager::GetIntValue("pb_bright_value");
-	string str_val,null, file, flashp1 = "/sys/class/leds", flashp2 = "/flashlight", flashpath;
-	string bright = "/brightness", maxpath, max = "/max_brightness";
-	string switch_path = flashp1 + "/led:switch" + bright;
+	int br_value = DataManager::GetIntValue("pb_bright_value");
+	string str_val, file, flashp1 = "/sys/class/leds", flashp2 = "/flashlight", flashpath;
+	string bright = "/brightness";
+	string switch_path = TWFunc::Path_Exists(flashp1 + "/led:switch" + bright) ? (flashp1 + "/led:switch") : (flashp1 + "/led:switch_0");
 #ifdef PB_TORCH_PATH
 	flashpath = PB_TORCH_PATH + bright;
-	maxpath = PB_TORCH_PATH + max;
 	LOGINFO("flashlight: Custom Node located at '%s'\n", flashpath.c_str());
 #else
 	flashpath = flashp1 + flashp2 + bright;
-	maxpath = flashp1 + flashp2 + max;
 	DIR* d;
 	struct dirent* de;
 	if (!TWFunc::Path_Exists(flashpath))
@@ -2382,9 +2379,8 @@ int GUIAction::flashlight(std::string arg __unused)
 		while ((de = readdir(d)) != NULL)
 		{
 			file = de->d_name;
-			if(file.find("torch-") != string::npos)
+			if(file.find("torch-") != string::npos || file.find("torch_"))
 			{
-				maxpath= flashp1 + "/" + file + max;
 				flashpath = flashp1 + "/" + file + bright;
 				break;
 			}
@@ -2393,51 +2389,26 @@ int GUIAction::flashlight(std::string arg __unused)
 		LOGINFO("Detected Node located at  '%s'\n", flashpath.c_str());
 	}
 #endif
-	if (TWFunc::Path_Exists(maxpath))
-	{
-		File.open(maxpath, ios::in);
-		if (File.is_open())
-		{
-			getline (File, str_val);
-			max_val = std::stoi (str_val);
-		}
-		File.close();
-	}
 	str_val="";
-	File.open(flashpath, ios::in | ios::out);
-	if(File.is_open())
-	{
+	if (TWFunc::Path_Exists(flashpath)) {
 		LOGINFO("Flashlight Node Located at '%s'\n", flashpath.c_str());
-		getline (File, str_val);
-		val = std::stoi (str_val);
-		if (val > 0)
+		TWFunc::read_file(flashpath, str_val);
+		if (std::stoi(str_val) > 0)
 		{
 			LOGINFO("Flashlight Turning Off\n");
 			if (TWFunc::Path_Exists(switch_path))
-				TWFunc::write_to_file(switch_path, "0");
-			File << "0";
+				TWFunc::write_to_file(switch_path + bright, "0");
+			TWFunc::write_to_file(flashpath, "0");
 		}
 		else
 		{
 			LOGINFO("Flashlight Turning On\n");
-			if (TWFunc::Path_Exists(switch_path))
-				TWFunc::write_to_file(switch_path, "1");
-			if (br_value == 0 || br_value == 255)
-			{
-				LOGINFO("Flashlight: Brightening with Maximum Brightness\n");
-				if (TWFunc::Path_Exists(maxpath))
-					File << max_val;
-				else
-					File << "1";
-			}
-			else {
-				LOGINFO("Flashlight: Brightning value '%d'\n", br_value);
-				File << br_value;
-			}
-				
+			LOGINFO("Flashlight: Brightning value '%d'\n", br_value);
+			TWFunc::write_to_file(flashpath, std::to_string(br_value));
+			TWFunc::write_to_file(switch_path + bright, "1");
 		}
-	}
-	File.close();
+	} else
+		LOGINFO("Incorrect Flashlight Path\n");
 	return 0;
 }
 
