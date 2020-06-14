@@ -826,38 +826,29 @@
 				<text>%tw_file%</text>
 			</text>
 
-			<checkbox>
-				<placement x="%indent%" y="%row12_y%"/>
-				<text>{@zip_sig_chk=Zip signature verification}</text>
-				<data variable="tw_signed_zip_verify"/>
-			</checkbox>
-
-			<checkbox>
-				<placement x="%indent%" y="%row13a_y%"/>
-				<text>{@install_reboot_chk=Reboot after installation is complete}</text>
-				<data variable="tw_install_reboot"/>
-			</checkbox>
-
-			<checkbox>
-				<condition var1="tw_has_injecttwrp" var2="1"/>
-				<placement x="%indent%" y="%row15_y%"/>
-				<text>{@inject_twrp_chk=Flash PBRP after install}</text>
-				<data variable="tw_inject_after_zip"/>
-			</checkbox>
-			
-			<checkbox>
-				<condition var1="tw_has_injecttwrp" op="!=" var2="1"/>
-				<placement x="%indent%" y="%row15_y%"/>
-				<text>{@pb_enable_dmesg_logging=Enable Dmesg logging after Flash}</text>
-				<data variable="pb_inlclude_dmesg_logging"/>
-			</checkbox>
-			
-			<checkbox>
-				<condition var1="tw_has_injecttwrp" var2="1"/>
-				<placement x="%indent%" y="%row16a_y%"/>
-				<text>{@pb_enable_dmesg_logging=Enable Dmesg logging after Flash}</text>
-				<data variable="pb_inlclude_dmesg_logging"/>
-			</checkbox>
+			<listbox style="scrolllist">
+				<placement x="18" y="950" w="964" h="400"/>
+				<icon selected="checkbox_true" unselected="checkbox_false"/>
+               			<listitem name="{@zip_sig_chk=Zip signature verification}">
+					<data variable="tw_signed_zip_verify"/>
+				</listitem>
+				<listitem name="{@install_reboot_chk=Reboot after installation is complete}">
+					<data variable="tw_install_reboot"/>
+				</listitem>
+				<listitem name="{@inject_twrp_chk=Flash PBRP after install}">
+					<condition var1="tw_has_injecttwrp" var2="1"/>
+					<data variable="tw_inject_after_zip"/>
+				</listitem>
+				<listitem name="{@pb_enable_dmesg_logging=Enable Dmesg logging after Flash}">
+					<data variable="pb_inlclude_dmesg_logging"/>
+				</listitem>
+				<listitem name="{@pb_dmverity_chk=Deactivation (Patch DM-Verity)}">
+					<data variable="pb_reboot_dm_verity_check"/>
+				</listitem>
+				<listitem name="{@pb_for_en_chk=Advance Disable Forced Encryption}">
+					<data variable="pb_force_enc"/>
+				</listitem>
+			</listbox>
 
 			<button style="main_button_half_height">
 				<placement x="%indent%" y="%row18a_y%"/>

@@ -834,7 +834,8 @@
 		<string name="pb_incremental_ota_bak">OTA_BAK -- done!</string>
 		<string name="pb_advanced_stock_recovery">Aggressive stock recovery deactivation</string>
 		<string name="pb_reboot_dont_disable_stock_recovery_chk">Don't disable stock recovery replace</string>
-		<string name="pb_dmverity_chk">Deactivation After Flashing</string>
+		<string name="pb_dmverity_chk">Deactivation (Patch DM-Verity)</string>
+		<string name="pb_for_en_chk">Advance Disable Forced Encryption</string>
 		<string name="pb_forced_encryption_chk">Disable Forced Encryption</string>
 		<string name="pb_disable_reboot_ota_check">Disable Rebooting after OTA</string>
 		<string name="pb_run_process">Starting '{1}' process</string>
