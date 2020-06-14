@@ -2002,13 +2002,10 @@
 					<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
 					<data variable="pb_reboot_dont_disable_stock_recovery"/>
 				</listitem>
-				<listitem name="{@pb_dmverity_chk=Deactivation After Flashing}">
-					<data variable="pb_reboot_dm_verity_check"/>
-				</listitem>
 				<listitem name="{@pb_disable_reboot_ota_check=Disable Rebooting After OTA}">
 	            			<data variable="pb_disable_reboot_ota"/>
 	            		</listitem>
-				</listbox>
+			</listbox>
 				
 			<button style="settingsota_info">
 				<placement x="820" y="1544"/>
