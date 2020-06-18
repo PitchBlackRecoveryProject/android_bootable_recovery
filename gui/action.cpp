@@ -1169,10 +1169,10 @@ int GUIAction::ozip_decrypt(string zip_path)
 	if (!TWFunc::Path_Exists("/sbin/ozip_decrypt")) {            
             return 1;
         }
-    gui_msg("ozip_decrypt_decryption=Starting Ozip Decryption...");
-	TWFunc::Exec_Cmd("ozip_decrypt " + (string)TW_OZIP_DECRYPT_KEY + " " + zip_path);
-    gui_msg("ozip_decrypt_finish=Ozip Decryption Finished!");
-	return 0;
+	gui_msg("ozip_decrypt_decryption=Starting Ozip Decryption...");
+	int ret = TWFunc::Exec_Cmd("ozip_decrypt " + (string)TW_OZIP_DECRYPT_KEY + " '" + zip_path + "'");
+	gui_msg("ozip_decrypt_finish=Ozip Decryption Finished!");
+	return ret;
 }
 
 int GUIAction::flash(std::string arg)
@@ -1187,18 +1187,22 @@ int GUIAction::flash(std::string arg)
 		size_t slashpos = zip_path.find_last_of('/');
 		zip_filename = (slashpos == string::npos) ? zip_path : zip_path.substr(slashpos + 1);
 		operation_start("Flashing");
-        if((zip_path.substr(zip_path.size() - 4, 4))=="ozip")
+		if((zip_path.substr(zip_path.size() - 4, 4))=="ozip")
 		{
-			if((ozip_decrypt(zip_path)) != 0)
+			int ret = ozip_decrypt(zip_path);
+			if (ret == -2)
 			{
-                LOGERR("Unable to find ozip_decrypt!");
+				LOGERR("Key is not compatibile\n");
 				break;
 			}
-			zip_filename = (zip_filename.substr(0, zip_filename.size() - 4)).append("zip");
-            zip_path = (zip_path.substr(0, zip_path.size() - 4)).append("zip");
-			if (!TWFunc::Path_Exists(zip_path)) {
-				LOGERR("Unable to find decrypted zip");
-				break;
+			else if (ret != -1)
+			{
+				zip_filename = (zip_filename.substr(0, zip_filename.size() - 4)).append("zip");
+				zip_path = (zip_path.substr(0, zip_path.size() - 4)).append("zip");
+				if (!TWFunc::Path_Exists(zip_path)) {
+					LOGERR("Unable to find decrypted zip\n");
+					break;
+				}
 			}
 		}
 		DataManager::SetValue("tw_filename", zip_path);
