@@ -509,7 +509,7 @@ void GUIAction::operation_start(const string operation_name)
 	DataManager::SetValue("tw_operation", operation_name);
 	DataManager::SetValue("tw_operation_state", 0);
 	DataManager::SetValue("tw_operation_status", 0);
-	bool tw_ab_device = TWFunc::get_cache_dir() != NON_AB_CACHE_DIR;
+	bool tw_ab_device = TWFunc::get_log_dir() != CACHE_LOGS_DIR;
 	DataManager::SetValue("tw_ab_device", tw_ab_device);
 }
 
@@ -694,7 +694,7 @@ int GUIAction::copylog(std::string arg __unused)
 		DataManager::GetValue("tw_include_kernel_log", copy_kernel_log);
 		PartitionManager.Mount_Current_Storage(true);
 		curr_storage = DataManager::GetCurrentStoragePath();
-		cache_strg = TWFunc::get_cache_dir() + "/PBRP/logs/";
+		cache_strg = TWFunc::get_log_dir() + "/PBRP/logs/";
 
 		snprintf(path, sizeof(path), "%s/PBRP/logs/recovery_%s", curr_storage.c_str(), arg.c_str());
 		curr_storage += "/PBRP/logs";

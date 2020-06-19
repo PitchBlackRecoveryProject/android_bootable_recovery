@@ -39,9 +39,9 @@
 
 using namespace std;
 
-#define NON_AB_CACHE_DIR "/cache/"
-#define AB_CACHE_DIR "/data/cache/"
-#define PERSIST_CACHE_DIR "/persist/cache/"
+#define CACHE_LOGS_DIR "/cache/"		// For devices with a dedicated cache partition
+#define DATA_LOGS_DIR "/data/"			// For devices that do not have a dedicated cache partition
+#define PERSIST_LOGS_DIR "/persist/"	// For devices with neither cache or dedicated data partition
 
 typedef enum
 {
@@ -136,14 +136,13 @@ public:
 	static bool Verify_Loaded_OTA_Signature(std::string loadedfp, std::string ota_folder); // Verify loaded fingerprint from our OTA folder
 	static bool isNumber(string strtocheck); // return true if number, false if not a number
 	static int stream_adb_backup(string &Restore_Name); // Tell ADB Backup to Stream to TWRP from GUI selection
-	static std::string get_cache_dir(); // return the cache partition existence
+	static std::string get_log_dir(); // return recovery log storage directory
 	static void check_selinux_support(); // print whether selinux support is enabled to console
 	static bool check_system_root(); // return whether device is system-as-root or not
 	static int check_encrypt_status(); // return 1,2,3,0 on FDE, FBE, On some confusion & unencryptred respectively
 	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
 	static bool Get_Encryption_Policy(ext4_encryption_policy &policy, std::string path); // return encryption policy for path
 	static bool Set_Encryption_Policy(std::string path, const ext4_encryption_policy &policy); // set encryption policy for path
-	static bool Is_Data_Wiped(); // check if directory has been wiped
 
 private:
 	static void Copy_Log(string Source, string Destination);
