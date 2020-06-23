@@ -176,7 +176,6 @@
 #define PB_TMP_SCRIPT_DIR       "pb_tmp_script_directory"
 #define PB_COMPATIBILITY_DEVICE         "pb_compatibility_pb_device"
 #define PB_ADVANCED_STOCK_REPLACE           "pb_reboot_advanced_stock_recovery_check"
-#define PB_DISABLE_FORCED_ENCRYPTION           "pb_reboot_forced_encryption_check"
 #define PB_DISABLE_REBOOT_OTA	"pb_disable_reboot_ota"
 #define TRB_EN "0"
 #define STD "0"

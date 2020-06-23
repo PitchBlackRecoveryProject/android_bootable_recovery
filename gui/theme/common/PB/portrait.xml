@@ -846,7 +846,7 @@
 					<data variable="pb_reboot_dm_verity_check"/>
 				</listitem>
 				<listitem name="{@pb_for_en_chk=Advance Disable Forced Encryption}">
-					<data variable="pb_force_enc"/>
+					<data variable="pb_reboot_forced_encryption_check"/>
 				</listitem>
 			</listbox>
 
