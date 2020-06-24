@@ -1858,7 +1858,7 @@ void TWFunc::Deactivation_Process(void)
 		}
 		gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
 		DataManager::GetValue(TRB_EN, trb_en);
-		if (TWFunc::check_encrypt_status() != 0 && DataManager::GetIntValue("pb_force_enc") == 0) {
+		if (TWFunc::check_encrypt_status() != 0 && DataManager::GetIntValue(PB_ENABLE_ADVANCE_ENCRY) == 0) {
 			gui_msg(Msg(msg::kHighlight, "pb_ecryption_leave=Device Encrypted Leaving Forceencrypt"));
 			setenv("KEEPFORCEENCRYPT", "true", true);
 			DataManager::SetValue(PB_DISABLE_FORCED_ENCRYPTION, 0);

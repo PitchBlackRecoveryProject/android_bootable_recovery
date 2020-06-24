@@ -800,6 +800,7 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue("pb_verify_incremental_ota_signature", "1");
 	mPersist.SetValue(PB_INCREMENTAL_PACKAGE, "0");
 	mPersist.SetValue(PB_DISABLE_FORCED_ENCRYPTION, "0");
+	mPersist.SetValue(PB_ENABLE_ADVANCE_ENCRY, "0");
 #ifdef PB_DISABLE_DEFAULT_DM_VERITY
 	mPersist.SetValue(PB_DISABLE_DM_VERITY, "0");
 #else

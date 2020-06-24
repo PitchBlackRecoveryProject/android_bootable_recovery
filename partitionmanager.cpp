@@ -3673,7 +3673,7 @@ TWPartitionManager::Flash_Image (string & path, string & filename)
       return false;
     }
   gui_highlight ("flash_done=IMAGE FLASH COMPLETED]");
-	if (deactivation)
+	if (deactivation && DataManager::GetIntValue(PB_DISABLE_DM_VERITY))
 		DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
   return true;
 }
