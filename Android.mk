@@ -224,6 +224,7 @@ LOCAL_C_INCLUDES += external/libselinux/include
 LOCAL_SHARED_LIBRARIES += libselinux
 
 ifeq ($(AB_OTA_UPDATER),true)
+    LOCAL_CFLAGS += -DTW_INCLUDE_INJECTTWRP
     LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
     LOCAL_SHARED_LIBRARIES += libhardware android.hardware.boot@1.0
     TWRP_REQUIRED_MODULES += libhardware
@@ -318,9 +319,6 @@ ifeq ($(TW_NEVER_UNMOUNT_SYSTEM), true)
 endif
 ifeq ($(TW_NO_USB_STORAGE), true)
     LOCAL_CFLAGS += -DTW_NO_USB_STORAGE
-endif
-ifeq ($(AB_OTA_UPDATER),true)
-	LOCAL_CFLAGS += -DTW_INCLUDE_INJECTTWRP
 endif
 ifeq ($(TW_INCLUDE_BLOBPACK), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_BLOBPACK
