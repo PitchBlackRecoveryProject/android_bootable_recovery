@@ -74,12 +74,15 @@ static string dtb = "", ram = "";
 struct selabel_handle *selinux_handle;
 
 /* Execute a command */
-int TWFunc::Exec_Cmd(const string& cmd, string &result) {
+int TWFunc::Exec_Cmd(const string& cmd, string &result, bool combine_stderr) {
 	FILE* exec;
 	char buffer[512];
 	int ret = 0;
-	exec = popen(cmd.c_str(), "r");
-	if (!exec) return -1;
+	std::string popen_cmd = cmd;
+	if (combine_stderr)
+		popen_cmd = cmd + " 2>&1";
+	exec = __popen(popen_cmd.c_str(), "r");
+
 	while (!feof(exec)) {
 		if (fgets(buffer, 512, exec) != NULL) {
 			result += buffer;
@@ -553,7 +556,7 @@ void TWFunc::Copy_Log(string Source, string Destination) {
 		if (type == COMPRESSED) {
 			std::string destFileBuffer;
 			std::string getCompressedContents = "pigz -c -d " + Destination;
-			if (Exec_Cmd(getCompressedContents, destFileBuffer) < 0) {
+			if (Exec_Cmd(getCompressedContents, destFileBuffer, false) < 0) {
 				LOGINFO("Unable to get destination logfile contents.\n");
 				return;
 			}
@@ -1947,7 +1950,7 @@ void TWFunc::copy_kernel_log(string curr_storage) {
 	std::string dmesgCmd = "/sbin/dmesg";
 
 	std::string result;
-	Exec_Cmd(dmesgCmd, result);
+	Exec_Cmd(dmesgCmd, result, false);
 	write_to_file(dmesgDst, result);
 	gui_msg(Msg("copy_kernel_log=Copied kernel log to {1}")(dmesgDst));
 	tw_set_default_metadata(dmesgDst.c_str());

@@ -40,6 +40,7 @@
 #include <sstream>
 #include "../partitions.hpp"
 #include "../twrp-functions.hpp"
+#include "../twrpRepacker.hpp"
 #include "../openrecoveryscript.hpp"
 
 #include "../adb_install.h"
@@ -1159,6 +1160,8 @@ int GUIAction::reinject_after_flash()
         }
 		gui_msg("injecttwrp=Restoring TWRP in boot image...");
 		int op_status = 1;
+		twrpRepacker repacker;
+
 		operation_start("Repack Image");
 		if (!simulate)
 		{
@@ -1168,7 +1171,7 @@ int GUIAction::reinject_after_flash()
 			Repack_Options.Disable_Force_Encrypt = false;
 			Repack_Options.Backup_First = false;
 			Repack_Options.Type = REPLACE_RAMDISK;
-			if (!PartitionManager.Repack_Images(path, Repack_Options))
+			if (!repacker.Repack_Image_And_Flash(path, Repack_Options))
 				return 0;
             string cmd = "rm -f " + path;
 		    TWFunc::Exec_Cmd(cmd);
@@ -2524,6 +2527,8 @@ int GUIAction::flashlight(std::string arg __unused)
 int GUIAction::repackimage(std::string arg __unused)
 {
 	int op_status = 1;
+	twrpRepacker repacker;
+
 	operation_start("Repack Image");
 	if (!simulate)
 	{
@@ -2536,7 +2541,7 @@ int GUIAction::repackimage(std::string arg __unused)
 			Repack_Options.Type = REPLACE_KERNEL;
 		else
 			Repack_Options.Type = REPLACE_RAMDISK;
-		if (!PartitionManager.Repack_Images(path, Repack_Options))
+		if (!repacker.Repack_Image_And_Flash(path, Repack_Options))
 			goto exit;
 	} else
 		simulate_progress_bar();
@@ -2549,6 +2554,8 @@ exit:
 int GUIAction::fixabrecoverybootloop(std::string arg __unused)
 {
 	int op_status = 1;
+	twrpRepacker repacker;
+
 	operation_start("Repack Image");
 	if (!simulate)
 	{
@@ -2564,7 +2571,7 @@ int GUIAction::fixabrecoverybootloop(std::string arg __unused)
 			gui_msg(Msg(msg::kError, "unable_to_locate=Unable to locate {1}.")("/boot"));
 			goto exit;
 		}
-		if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, DataManager::GetIntValue("tw_repack_backup_first") != 0, gui_lookup("repack", "Repack")))
+		if (!repacker.Backup_Image_For_Repack(part, REPACK_ORIG_DIR, DataManager::GetIntValue("tw_repack_backup_first") != 0, gui_lookup("repack", "Repack")))
 			goto exit;
 		DataManager::SetProgress(.25);
 		gui_msg("fixing_recovery_loop_patch=Patching kernel...");
