@@ -2382,9 +2382,6 @@ void
 TWPartitionManager::Post_Decrypt (const string & Block_Device)
 {
 	TWPartition *dat = Find_Partition_By_Path ("/data");
-#ifdef USE_FSCRYPT
-	dat->Set_Block_Device("/dev/block/mapper/userdata");
-#endif
 	if (dat != NULL)
 	{
 		DataManager::SetValue (TW_IS_DECRYPTED, 1);
