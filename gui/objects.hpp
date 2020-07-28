@@ -333,6 +333,8 @@ protected:
 
 	// (originally) threaded actions
 	int fileexists(std::string arg);
+	int keypressed();
+	int keycheck(std::string zip, int w = 0);
 	int flash(std::string arg);
 	int wipe(std::string arg);
 	int refreshsizes(std::string arg);
@@ -418,6 +420,7 @@ protected:
 	bool hasFill;
 	COLOR mFillColor;
 	COLOR mHighlightColor;
+	Placement LText;
 	Placement TextPlacement;
 };
 
@@ -494,7 +497,7 @@ protected:
 	virtual void NotifySelect(size_t item_selected __unused) {}
 
 	// render a standard-layout list item with optional icon and text
-	void RenderStdItem(int yPos, bool selected, ImageResource* icon, const char* text, int iconAndTextH = 0);
+	void RenderStdItem(int yPos, bool selected, ImageResource* icon, const char* text, const char* textDesc = "", int iconAndTextH = 0);
 
 	enum { NO_ITEM = (size_t)-1 };
 	// returns item index at coordinates or NO_ITEM if there is no item there
@@ -534,11 +537,15 @@ protected:
 
 	// Per-item layout
 	FontResource* mFont;
+	FontResource* mDescFont;
 	COLOR mFontColor;
+	COLOR mDescFontColor;
 	bool hasHighlightColor; // indicates if a highlight color was set
 	COLOR mHighlightColor; // background row highlight color
 	COLOR mFontHighlightColor;
 	int mFontHeight;
+	int mDescFontHeight;
+	int mDescSpacing;
 	int actualItemHeight; // Actual height of each item in pixels including max icon size, font size, and padding
 	int maxIconWidth, maxIconHeight; // max icon width and height for the list, set by derived class in SetMaxIconSize
 	int mItemSpacing; // stores the spacing or padding on the y axis, part of the actualItemHeight
@@ -621,7 +628,10 @@ protected:
 	int mShowNavFolders; // indicates if the list should include the "up a level" item and allow you to traverse folders (nav folders are disabled for the restore list, for instance)
 	static int mSortOrder; // must be static because it is used by the static function fileSort
 	ImageResource* mFolderIcon;
+	ImageResource* mFolderUpIcon;
 	ImageResource* mFileIcon;
+	ImageResource* mImgIcon;
+	ImageResource* mZipIcon;
 	bool updateFileList;
 };
 
@@ -653,6 +663,8 @@ protected:
 		std::string variableValue;
 		unsigned int selected;
 		GUIAction* action;
+		std::string textDesc;
+		ImageResource* mIconSelected;
 		std::vector<Condition> mConditions;
 	};
 

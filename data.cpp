@@ -632,7 +632,7 @@ void DataManager::SetDefaultValues()
 	mConst.SetValue("true", "1");
 	mConst.SetValue("false", "0");
 
-	mConst.SetValue(TW_VERSION_VAR, TW_VERSION_STR);
+	mConst.SetValue(TW_VERSION_VAR, PB_BUILD);
 
 #ifndef TW_NO_HAPTICS
 	mPersist.SetValue("tw_button_vibrate", "80");
@@ -806,7 +806,6 @@ void DataManager::SetDefaultValues()
 #else
 	mPersist.SetValue(PB_DISABLE_DM_VERITY, "1");
 #endif
-	
 #ifdef PB_DISABLE_DEFAULT_TREBLE_COMP
 	mPersist.SetValue(PB_TREBLE_COMP, "1");
 #else
@@ -823,6 +822,9 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue(PB_DISABLE_SECURE_BOOT, "0");
 	mPersist.SetValue(PB_ADVANCED_STOCK_REPLACE, "1");
 	mPersist.SetValue("pb_bright_value", "255");
+	mData.SetValue("pb_torch_on", "0");
+	mPersist.SetValue("pb_enable_dmesg_logging", "0");
+	mPersist.SetValue("inject_twrp_chk", "0");
 
 	mPersist.SetValue(TW_HAS_INJECTTWRP, "0");
 	mPersist.SetValue(TW_INSTALL_REBOOT_VAR, "0");

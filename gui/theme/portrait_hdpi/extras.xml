@@ -1,0 +1,665 @@
+<description>Copyright 2018-2020 PitchBlackRecoveryProject</description>
+<?xml version="1.0"?>
+<recovery>
+    <pages>
+	<page name="rename_c">
+		<template name="page"/>
+		
+		<text style="text_l">
+			<placement x="%col1_x_header%" y="%row3_header_y%"/>
+			<text>{@pb_dev_name=PBRP Device Codename Changer}</text>
+		</text>
+
+		<text style="text_sub_header">
+			<placement x="%col1_x_header%" y="%row4_header_y%"/>
+			<text>{@fm_rename_hdr=Rename} %tw_fm_type%</text>
+		</text>
+
+		<text style="text_pb">
+			<placement x="90" y="%row2_y%"/>
+			<text>{@name=Name:}</text>
+		</text>
+
+		<input>
+			<placement x="90" y="%row2_input_y%" w="%content_width%" h="%input_height%"/>
+			<text>%pb_codename_change%</text>
+			<data name="pb_codename_change"/>
+			<restrict minlen="1" maxlen="128"/>
+			<actions>
+				<action function="set">tw_back=tools</action>
+				<action function="set">tw_action=change_codename</action>
+				<action function="set">tw_text1={@pb_dev_name_change=Wanna Change Your device Codename?}</action>
+				<action function="set">tw_action_text1={@pb_dev_change=Changing Device Codename from %pb_prop_value% to %pb_codename_change%}</action>
+				<action function="set">pb_reboot_recovery=1</action>
+				<action function="set">tw_complete_text1={@pb_dev_changed=Device Codename Changed to %pb_codename_change%}</action>
+				<action function="set">tw_text4={@pb_dev_reboot=A Reboot is mandatory After switching Codenames}</action>
+				<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+				<action function="page">confirm_action</action>
+			</actions>
+		</input>
+
+		<fill color="%accent_color%">
+			<placement x="%indent%" y="row4_y" w="%content_width%" h="input_line_width" placement="1"/>
+		</fill>
+
+		<button style="main_button_half_height_new">
+			<placement x="%indent%" y="%row9_y%"/>
+			<text>{@cancel_btn=Cancel}</text>
+			<action function="page">tools</action>
+		</button>
+
+		<template name="keyboardtemplate"/>
+
+		<action>
+			<touch key="back"/>
+			<action function="page">tools</action>
+		</action>
+			
+		<action>
+			<touch key="home"/>
+			<action function="page">main2</action>
+		</action>
+	</page>
+
+       	<page name="tools">
+		<template name="page_without_logo"/>
+
+		<image>
+			<image resource="main_button_black3"/>
+			<placement x="%indent%" y="%upper_header%"/>
+		</image>
+			
+			<image>
+				<image resource="main_button_fixcontexts"/>
+				<placement x="45" y="%row3_header_y%"/>
+			</image>			
+		
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
+				<text>{@tools1=Tools}</text>
+			</text>
+
+			<text style="text_sub_header">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@pbrpspecial_btn=Fix Contexts}</text>
+			</text>			
+			
+			<button style="main_button_tools">
+				<placement x="56" y="324" textplacementmain="3"/>
+				<icon resource="su"/>
+				<text>{@SuperSU_btn=SuperSU}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/supersu.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@SuperSU_text=SuperSU will be installed.}</action>
+					<action function="set">tw_text2={@SuperSU_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="main_button_tools">
+				<placement x="56" y="489" textplacementmain="3"/>
+				<icon resource="su"/>
+				<text>{@Unroot_SuperSU_btn=Unroot SuperSU}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/unrootsupersu.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Unroot_SuperSU_text=Unroot SuperSU.}</action>
+					<action function="set">tw_text2={@Unroot_SuperSU_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="main_button_tools">
+				<placement x="56" y="654" textplacementmain="3"/>
+				<icon resource="magisk"/>
+				<text>{@Magisk_btn=Magisk}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/magisk.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">_install_built_in_zip=1</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Magisk_text=Magisk will be installed.}</action>
+					<action function="set">tw_text2={@Magisk_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="main_button_tools">
+				<placement x="56" y="819" textplacementmain="3"/>
+				<icon resource="magisk"/>
+				<text>{@Unroot_Magisk_btn=Unroot Magisk}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/unrootmagisk.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Unroot_Magisk_text=Unroot Magisk will be installed.}</action>
+					<action function="set">tw_text2={@Unroot_Magisk_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+				
+			<button style="main_button_tools">
+				<placement x="56" y="984" textplacementmain="3"/>
+				<icon resource="mtp"/>
+				<text>{@MTP_Fix_btn=MTP Fix}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/mtp.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@MTP_Fix_text=MTP Fix will be installed.}</action>
+					<action function="set">tw_text2={@MTP_Fix_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+				
+			<button style="main_button_tools">
+				<placement x="56" y="1149" textplacementmain="3"/>
+				<icon resource="overlays"/>
+				<text>{@RM_Subs_Overlays_btn=RM Overlays}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/overlays.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@RM_Subs_Overlays_text=RM Subs Overlays will be installed.}</action>
+					<action function="set">tw_text2={@RM_Subs_Overlays_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="main_button_tools">
+				<placement x="56" y="1314" textplacementmain="3"/>
+				<icon resource="magisk"/>
+				<text>{@MMR_btn=Magisk Manager}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/magiskmanagerrecovery.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@MMR_text=Magisk Manager Recovery will be installed.}</action>
+					<action function="set">tw_text2={@MMR_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="main_button_tools">
+				<placement x="557" y="1314" textplacementmain="3"/>
+				<icon resource="overlays"/>
+				<text>{@RM_All_Subs_Overlays_btn=RM All Overlays}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/alloverlays.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@RM_All_Subs_Overlays_text=RM All Subs Overlays will be installed.}</action>
+					<action function="set">tw_text2={@RM_All_Subs_Overlays_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="main_button_tools">
+				<placement x="557" y="489" textplacementmain="3"/>
+				<icon resource="fingerprint"/>
+				<text>{@FP_Scanner_btn=FP Scanner}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/fpscan.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@FP_Scanner_text=FP Scanner will be installed.}</action>
+					<action function="set">tw_text2={@FP_Scanner_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+	
+			<button style="main_button_tools">
+				<placement x="557" y="654" textplacementmain="3"/>
+				<icon resource="pin_pass_remover"/>
+				<text>{@Pin/Pass_Remover_btn=Pin/Pass Remover}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/rmpass.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Pin/Pass_Remover_text=Pin/Pass Remover will be installed.}</action>
+					<action function="set">tw_text2={@Pin/Pass_Remover_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="main_button_tools">
+				<placement x="557" y="819" textplacementmain="3"/>
+				<icon resource="camera2"/>
+				<text>{@Camera2API_Enabler_btn=Camera2API Enabler}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/enablehal3.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Camera2API_Enabler_text=Camera2API Enabler will be installed.}</action>
+					<action function="set">tw_text2={@Camera2API_Enabler_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="main_button_tools">
+				<placement x="557" y="984" textplacementmain="3"/>
+				<icon resource="trash"/>
+				<text>{@App_Delete_btn=App Delete}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/appdel.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@App_Delete_text=App Delete will be installed.}</action>
+					<action function="set">tw_text2={@App_Delete_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="main_button_tools">
+				<placement x="557" y="1149" textplacementmain="3"/>
+				<icon resource="dm_verity"/>
+				<text>{@Dm_Verity_btn=Dm Verity}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/noverity.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@Dm_Verity_text=Dm Verity will be installed.}</action>
+					<action function="set">tw_text2={@Dm_Verity_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			
+			<button style="main_button_tools">
+				<placement x="557" y="324" textplacementmain="3"/>
+				<icon resource="codename_changer"/>
+				<text>Codename Changer</text>
+				<actions>
+					<action function="page">rename_c</action>
+					<action function="getprop">"ro.product.device"</action>
+					<action function="set">pb_codename_change=%pb_prop_value%</action>
+				</actions>	
+			</button>
+
+			<image>
+				<image resource="i_icon"/>
+				<placement x="80" y="%row22a_y%"/>
+			</image>
+						
+			<text style="text_sub_header">
+				<placement x="140" y="%row22a_y%"/>
+				<text>Tools information can be found at pbrp.ml/docs/tools</text>
+			</text>
+			
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">%tw_back%</action>
+			</action>
+		  </page>
+		
+		<page name="special_setting">
+			<template name="page_without_logo"/>
+		
+			<image>
+				<image resource="main_button_black3"/>
+				<placement x="%indent%" y="%upper_header%"/>
+			</image>
+
+			<image>
+				<image resource="main_button_settings"/>
+				<placement x="75" y="135"/>
+			</image>
+			
+			<text style="text_pb">
+				<font resource="font_pb" color="%sub_header_color%"/>
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@SETTING=Special Setting}</text>
+			</text>
+
+			<text style="text_install_subheader">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@pbrpspecial_btn=PBRP Special}</text>
+			</text>		
+		
+			<text>
+				<font resource="font_roboto" color="%sub_header_color%"/>
+				<placement x="90" y="%row2a_y%"/>
+				<text>{@SETTINGOTA=OTA Setting}</text>
+			</text>		
+		
+			<listbox style="scrolllist">
+				<placement x="90" y="%row4a_y%" w="964" h="534"/>
+				<icon selected="checkbox_true" unselected="checkbox_false"/>
+               			<listitem name="{@pb_verify_incremental_ota_signature_chk=Incremental OTA signature verification}">
+					<data variable="pb_verify_incremental_ota_signature"/>
+				</listitem>
+				<listitem name="{@pb_include_system_survival_chk=Include system in OTA survival}">
+					<data variable="pb_include_system_survival"/>
+					</listitem>
+				<listitem name="{@pb_support_miui_ota_chk=Support MIUI Incremental OTA}">
+					<data variable="pb_support_miui_ota"/>
+				</listitem>
+				<listitem name="{@pb_advanced_stock_recovery=Simulate failure for actions}">
+					<data variable="pb_reboot_advanced_stock_recovery_check"/>
+				</listitem>
+				<listitem name="{@pb_reboot_dont_disable_stock_recovery_chk=}">
+					<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
+					<data variable="pb_reboot_dont_disable_stock_recovery"/>
+				</listitem>
+				<listitem name="{@pb_disable_reboot_ota_check=Disable Rebooting After OTA}">
+					<data variable="pb_disable_reboot_ota"/>
+				</listitem>
+			</listbox>		
+
+			<image>
+				<image resource="i_icon"/>
+				<placement x="75" y="880"/>
+			</image>
+
+			<text style="text_sub_header">
+				<placement x="140" y="%row10a_y%"/>
+				<text>Please check instructions for OTA Updates on</text>
+			</text>			
+
+			<text style="text_sub_header">
+				<placement x="140" y="910"/>
+				<text>pbrp.ml/docs/OTA</text>
+			</text>
+
+			<text>
+				<font resource="font_roboto" color="%sub_header_color%"/>
+				<condition var1="tw_has_boot_slots" var2="1"/>
+				<placement x="90" y="%row12a_y%"/>
+				<text>Settings for A/B Devices</text>
+			</text>
+			<button style="main_button_install_done">
+				<condition var1="tw_has_boot_slots" var2="1"/>
+				<placement x="90" y="%row14a_y%"/>
+				<text>{@install_twrp_ramdisk=Install Recovery Ramdisk}</text>
+				<action function="set">tw_repack_kernel=0</action>
+				<action function="page">repackselect</action>
+			</button>
+
+			<button style="main_button_half_height_new">
+				<condition var1="tw_has_boot_slots" var2="1"/>
+				<placement x="35" y="%row16_y%"/>
+				<text>{@install_kernel=Install Kernel}</text>
+				<action function="set">tw_repack_kernel=1</action>
+				<action function="page">repackselect</action>
+			</button>
+
+			<button style="main_button_install_done">
+				<condition var1="tw_has_boot_slots" var2="1"/>
+				<placement x="90" y="%row19a_y%"/>
+				<text>{@fix_recovery_loop=Fix Recovery Bootloop}</text>
+				<actions>
+					<action function="set">tw_back=advanced</action>
+					<action function="set">tw_action=fixabrecoverybootloop</action>
+					<action function="set">tw_text1={@fix_recovery_loop_confirm=Fix Recovery Bootloop?}</action>
+					<action function="set">tw_action_text1={@fixing_recovery_loop=Fixing Recovery Bootloop...}</action>
+					<action function="set">tw_complete_text1={@fix_recovery_loop_complete=Fix Recovery Bootloop Complete}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">pbrp_special</action>
+			</action>			
+
+		</page>
+		
+		<page name="about">
+			<template name="page_without_logo"/>
+		
+			<image>
+				<image resource="main_button_black3"/>
+				<placement x="%indent%" y="%upper_header%"/>
+			</image>
+
+			<image>
+				<image resource="main_button_specials_info"/>
+				<placement x="90" y="135"/>
+			</image>
+			
+			<text style="text_pb">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@about_pbrp=About PBRP}</text>
+			</text>
+
+			<text style="text_install_subheader">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@pbrpspecial_btn=PBRP Special}</text>		   
+			</text>
+	
+			<image>
+				<image resource="power_logo"/>
+				<placement x="90" y="%row1a_y%"/>
+			</image>	
+
+			<text>
+				<font resource="font_pb_tools" color="%sub_header_color%"/>
+				<placement x="350" y="%row8_y%"/>
+				<text>{@device_info=Device Information}</text>
+			</text>			
+			
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="180" y="%row9a_y%"/>
+				<text>{@device_name=Device Name}</text>		   
+			</text>
+
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="180" y="%row10a_y%"/>
+				<text>{@device_codename=Device Codename}</text>		   
+			</text>
+			
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="180" y="%row11a_y%"/>
+				<text>{@pb_version=PitchBlack Version}</text>		   
+			</text>
+
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="180" y="%row12a_y%"/>
+				<text>{@build_date=Build Date}</text>		   
+			</text>			
+
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<condition var1="pb_info" var2="OFFICIAL"/>
+				<placement x="180" y="%row13a_y%"/>
+				<text>{@device_maintainer1=Device Maintainer}</text>		   
+			</text>
+			
+			<text>
+				<font resource="font_pb_tools" color="%sub_header_color%"/>
+				<placement x="350" y="%row15_y%"/>
+				<text>{@core_contributors=Core Contributors}</text>
+			</text>
+
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="%row16a_y%" placement="5"/>
+				<text>Mohd Faraz (@androiabledroid)</text>		   
+			</text>
+
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="1298" placement="5"/>
+				<text>Reza Adi Pangestu (@Reza_Adi_Pangestu)</text>		   
+			</text>
+			
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="1348" placement="5"/>
+				<text>Manjot Singh Sidhu (@manjotsidhu)</text>		   
+			</text>
+
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="1398" placement="5"/>
+				<text>Rokib Hasan Sagar (@fr3akphantom)</text>		   
+			</text>			
+
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="1448" placement="5"/>
+				<text>Shovon (@shovon668)</text>		   
+			</text>
+
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="1498" placement="5"/>
+				<text>ImranPopz (@imranpopz)</text>		   
+			</text>			
+
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="1548" placement="5"/>
+				<text>Alex Besida (@AlexBesida)</text>		   
+			</text>
+
+			<text>
+				<font resource="font_sub_header" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="1598" placement="5"/>
+				<text>MD RAZA (@raza231198)</text>		   
+			</text>
+			
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">pbrp_special</action>
+			</action>
+			
+			</page>
+
+		<page name="customizations">
+			<template name="page"/>
+		
+			<image>
+				<image resource="main_button_black3"/>
+				<placement x="%indent%" y="%upper_header%"/>
+			</image>
+
+			<image>
+				<image resource="customizations_icon"/>
+				<placement x="90" y="130"/>
+			</image>
+			
+			<text style="text_pb">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@customizations=Customizations}</text>
+			</text>
+
+			<text style="text_install_subheader">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@pbrpspecial_btn=PBRP Special}</text>		   
+			</text>
+	
+			<image>
+				<image resource="power_logo"/>
+				<placement x="90" y="%row1a_y%"/>
+			</image>	
+
+			<text>
+				<font resource="font_roboto" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="%row11_y%" placement="5"/>
+				<text>We are sorry but it's coming soon!</text>		   
+			</text>
+
+			<text>
+				<font resource="font_roboto" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="%row12a_y%" placement="5"/>
+				<text>Feel free to send your custom made themes to</text>		   
+			</text>
+			
+			<text>
+				<font resource="font_roboto" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="%row14_y%" placement="5"/>
+				<text>us on</text>		   
+			</text>
+
+			<text>
+				<font resource="font_roboto" color="%sub_header_color%"/>
+				<placement x="%center_x%" y="%row15a_y%" placement="5"/>
+				<text>pitchblackrecovery.com</text>		   
+			</text>			
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">%tw_back%</action>
+			</action>
+		</page>
+	</pages>
+</recovery>

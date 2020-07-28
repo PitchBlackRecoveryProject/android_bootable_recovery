@@ -116,8 +116,13 @@ int main(int argc, char **argv) {
 	property_set("ro.twrp.version", TW_VERSION_STR);
 
 	time_t StartupTime = time(NULL);
-	printf("Starting PitchBlackTWRP %s-%s on %s (pid %s)\n", TW_VERSION_STR, PB_BUILD, TW_GIT_REVISION, ctime(&StartupTime));
-
+	printf("Starting PitchBlackRecovery %s (pid %s)\n", PB_BUILD, ctime(&StartupTime));
+	std::string ver = std::string(PB_BUILD);
+	DataManager::SetValue("pb_ver", ver.substr(0, ver.find("-")) );
+	DataManager::SetValue("pb_info", ver.substr(ver.find("-") + 1));
+#ifdef MTAINER
+	DataManager::SetValue("pb_maintainer", std::string(MTAINER));
+#endif
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
 	printf("Starting the UI...\n");
@@ -364,6 +369,14 @@ int main(int argc, char **argv) {
 	else if (strncmp(encrypt_status, "encrypted", 9) == 0 && TWFunc::check_encrypt_status() == 0)
 		strcpy(encrypt_status, "unencrypted");
 	gui_msg(Msg(msg::kProcess,"pb_encrypt_st=Encryption Status : {1}")(encrypt_status));
+
+	property_get("ro.product.brand", encrypt_status, "");
+	DataManager::SetValue("pb_device_manufacturer", std::string(encrypt_status));
+	property_get("ro.product.device", encrypt_status, "");
+	DataManager::SetValue("pb_device", std::string(encrypt_status));
+	property_get("ro.product.model", encrypt_status, "");
+	DataManager::SetValue("pb_device_name", std::string(encrypt_status));
+	DataManager::SetValue("pb_build", string(BUILD));
 
 #ifdef TW_HAS_MTP
 	char mtp_crash_check[PROPERTY_VALUE_MAX];
