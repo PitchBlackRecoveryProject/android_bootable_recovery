@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<recovery>
+	<details>
+		<resolution width="1080" height="1920"/>
+		<author>TeamWin & Reza Adi</author>
+		<title>PitchBlack Recovery Project</title>
+		<description>splash screen</description>
+		<themeversion>3</themeversion>
+	</details>
+
+	<resources>
+		<font name="font_l" filename="pb.ttf" size="91"/>
+		<font name="font_2" filename="pb.ttf" size="50"/>
+		<image name="splashlogo" filename="splashlogo" retainaspect="1"/>
+		<image name="splashteamwin" filename="splashteamwin" retainaspect="1"/>
+	</resources>
+
+	<variables>
+		<variable name="screen_width" value="1080"/>
+		<variable name="screen_height" value="1920"/>
+		<variable name="background_color" value="#191919"/>
+		<variable name="header_color" value="#00000000"/>
+		<variable name="accent_color" value="#00000000"/>
+	</variables>
+
+	<pages>
+		<page name="splash">
+			<background color="%background_color2%"/>
+
+			<fill color="#191919">
+				<placement x="3" y="3" w="1074" h="1914"/>
+			</fill>
+            
+			<image>
+				<image resource="splashteamwin"/>
+				<placement x="540" y="600" placement="4"/>
+			</image>
+
+			<text color="#FFFFFF">
+				<font resource="font_l"/>
+				<placement x="100" y="1300"/>
+				<text>PitchBlack Recovery</text>
+			</text>
+			
+			<text color="#FFFFFF">
+				<font resource="font_l"/>
+				<placement x="400" y="1430"/>
+				<text>Project</text>
+			</text>
+			
+			<text color="#303030">
+				<font resource="font_2"/>
+				<placement x="280" y="1700"/>
+				<text>Design by @AlexBesida</text>
+			</text>
+			
+		</page>
+	</pages>
+</recovery>
+

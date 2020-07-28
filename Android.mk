@@ -57,17 +57,9 @@ LOCAL_STATIC_LIBRARIES :=
 LOCAL_SHARED_LIBRARIES :=
 
 ifeq ($(PB_OFFICIAL),true)
-	ifeq ($(PB_GO),true)
-	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.9.1-Official"'
-	else
-	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.9.1-Official"'
-	endif
+    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"3.0.0-OFFICIAL"'
 else
-	ifeq ($(PB_GO),true)
-	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-GO-v2.9.1-Unofficial"'
-	else
-	    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"-PB-v2.9.1-Unofficial"'
-	endif
+    LOCAL_CFLAGS += -DTW_DEVICE_VERSION='"3.0.0-UNOFFICIAL"'
 endif
 
 DEVICE := $(subst omni_,,$(TARGET_PRODUCT))
@@ -76,7 +68,10 @@ ifeq ($(PB_DEVICE_MODEL),)
     LOCAL_CFLAGS += -DPB_DEVICE_MODEL='"$(DEVICE)"'
 endif
 LOCAL_CFLAGS += -DPLATFORM_SDK_VERSION=$(PLATFORM_SDK_VERSION)
-
+LOCAL_CFLAGS += -DBUILD='"$(shell date -u +%d/%m/%Y)"'
+ifneq ($(MAINTAINER),)
+    LOCAL_CFLAGS += -DMTAINER='"$(MAINTAINER)"'
+endif
 
 ifeq ($(PB_FORCE_DD_FLASH),true)
     LOCAL_CFLAGS += -DPB_FORCE_DD_FLASH='true'

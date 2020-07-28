@@ -272,13 +272,14 @@ GUIAction::GUIAction(xml_node<>* node)
 	if (child)
 	{
 		attr = child->first_attribute("key");
+		if (!attr) attr = child->first_attribute("hkey");
 		if (attr)
 		{
 			std::vector<std::string> keys = TWFunc::Split_String(attr->value(), "+");
 			for (size_t i = 0; i < keys.size(); ++i)
 			{
 				const int key = getKeyByName(keys[i]);
-				mKeys[key] = false;
+				mKeys[std::string(attr->name()) == "hkey" ? key + 200 : key] = false;
 			}
 		}
 		else
@@ -321,8 +322,14 @@ int GUIAction::NotifyKey(int key, bool down)
 	// Else, check if all buttons are pressed, then consume their release events
 	// so they don't trigger one-button actions and reset mKeys pressed status
 	if (mKeys.size() == 1) {
-		if (!down && prevState) {
+		if ((!down && prevState) || mime > 500) {
 			doActions();
+			if (mime) {
+#ifndef TW_NO_HAPTICS
+				DataManager::Vibrate("tw_button_vibrate");
+#endif
+				mime = 0;
+			}
 			return 0;
 		}
 	} else if (down) {
@@ -339,6 +346,12 @@ int GUIAction::NotifyKey(int key, bool down)
 		}
 
 		doActions();
+		if (mime) {
+#ifndef TW_NO_HAPTICS
+			DataManager::Vibrate("tw_button_vibrate");
+#endif
+			mime = 0;
+		}
 		return 0;
 	}
 
@@ -573,12 +586,12 @@ int GUIAction::page(std::string arg)
 {
 	property_set("twrp.action_complete", "0");
 	std::string page_name = gui_parse_text(arg);
+	DataManager::SetValue("pb_current_page", PageManager::GetCurrentPage());
 	return gui_changePage(page_name);
 }
 
 int GUIAction::reload(std::string arg __unused)
 {
-	property_set("twrp.crash_counter", "-1");
 	PageManager::RequestReload();
 	// The actual reload is handled in pages.cpp in PageManager::RunReload()
 	// The reload will occur on the next Update or Render call and will
@@ -1175,6 +1188,71 @@ int GUIAction::ozip_decrypt(string zip_path)
 	return ret;
 }
 
+int GUIAction::keypressed()
+{
+	return TWFunc::Exec_Cmd("/sbin/keycheck", false, true);
+}
+
+int GUIAction::keycheck(std::string zip, int w __unused)
+{
+	string insf, pb_installed;
+	insf = "/tmp/pb/installed";
+	int pbRet;
+
+	if (!TWFunc::Path_Exists(insf) && zip != "recovery.img")
+		return -2;
+
+	pb_installed = zip != "recovery.img" ? TWFunc::File_Property_Get(insf, "installed") : "1";
+#ifdef AB_OTA_UPDATER
+	int ramdisk_patched[2], slot = PartitionManager.Get_Active_Slot_Display() == "A" ? 0 : 1;
+	ramdisk_patched[0] = zip != "recovery.img" ? atoi(TWFunc::File_Property_Get(insf, "boot_a").c_str()) : 1;
+	ramdisk_patched[1] = zip != "recovery.img" ? atoi(TWFunc::File_Property_Get(insf, "boot_b").c_str()) : 1;
+#endif
+	pbRet = atoi(pb_installed.c_str());
+	if (pbRet && TWFunc::Path_Exists("/sbin/keycheck"))
+	{
+#ifdef AB_OTA_UPDATER
+		if (ramdisk_patched[slot])
+		{
+			gui_print_color("normal", "* * * * * * * * * * * * * * * * * *\n");
+			if (zip != "recovery.img")
+				gui_highlight("pb_flashed_=* Magisk Patched Ramdisk Detected!!!");
+			gui_msg(Msg(msg::kHighlight, "pb_flashed=* New PBRP Flashed, press Volume {1}")("Up For Flashing Magisk."));
+			gui_msg(Msg(msg::kHighlight, "pb_rb_msg=*Volume {1} to Finish")("Down"));
+			gui_print_color("normal", "* * * * * * * * * * * * * * * * * *\n");
+			pbRet = keypressed();
+			if (pbRet == 42) {
+				TWFunc::SetPerformanceMode(true);
+				if (TWFunc::Path_Exists(pb_installed = DataManager::GetCurrentStoragePath() + "/PBRP/tools/magisk.zip"))
+					flash_zip(pb_installed, &w);
+				else
+					flash_zip("/sdcard/PBRP/tools/magisk.zip", &w);
+				TWFunc::SetPerformanceMode(false);
+			}
+		}
+#endif
+		usleep(50000);
+		gui_print_color("normal", "* * * * * * * * * * * * * * * * * *\n");
+		gui_msg(Msg(msg::kHighlight, "pb_flashed=* New PBRP Flashed, press Volume {1}")("Down to Reboot to Recovery."));
+		gui_msg(Msg(msg::kHighlight, "pb_rb_msg=*Volume {1} to Finish")("Up"));
+		gui_print_color("normal", "* * * * * * * * * * * * * * * * * *\n");
+		pbRet = keypressed();
+		if (pbRet == 41) {
+			gui_highlight("pb_saving_log=Preserving Logs...\n");
+			copylog(zip);
+			operation_end(0);
+			DataManager::SetValue("tw_sleep","5");
+			DataManager::SetValue("tw_install_reboot_recovery", "1");
+			gui_changePage(gui_parse_text("flash_sleep_and_reboot"));
+		}
+	}
+
+	if (zip != "recovery.img")
+		unlink(insf.c_str());
+
+	return pbRet;
+}
+
 int GUIAction::flash(std::string arg)
 {
 	backup_before_flash();
@@ -1212,11 +1290,13 @@ int GUIAction::flash(std::string arg)
 		TWFunc::SetPerformanceMode(true);
 		ret_val = flash_zip(zip_path, &wipe_cache);
 		TWFunc::SetPerformanceMode(false);
+
 		if (ret_val != 0) {
 			gui_msg(Msg(msg::kError, "zip_err=Error installing zip file '{1}'")(zip_path));
 			ret_val = 1;
 			break;
 		}
+		keycheck(zip_filename, wipe_cache);
 	}
 	zip_queue_index = 0;
 
@@ -1236,7 +1316,7 @@ int GUIAction::flash(std::string arg)
 		}
 		DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
 	}
-	gui_highlight("pb_saving_log=Saving Taking log...\n");
+	gui_highlight("pb_saving_log=Preserving Logs...\n");
 	copylog(zip_filename);
 	DataManager::SetValue(TRB_EN, 0); //Reset At end
 	operation_end(ret_val);
@@ -1957,7 +2037,7 @@ int GUIAction::flashimage(std::string arg __unused)
 	int op_status = 0;
 
 	operation_start("Flash Image");
-	string path, filename;
+	string path, filename, partition;
 	DataManager::GetValue("tw_zip_location", path);
 	DataManager::GetValue("tw_file", filename);
 	if (simulate) {
@@ -1974,6 +2054,9 @@ int GUIAction::flashimage(std::string arg __unused)
 		TWFunc::Deactivation_Process();
 	}
 	DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
+	DataManager::GetValue("tw_flash_partition", partition);
+	if (partition == "/repack_ramdisk;" || partition == "/repack_kernel;" || partition == "/recovery;")
+		keycheck("recovery.img");
 	operation_end(op_status);
 	DataManager::SetValue("ui_progress", 100);
 	DataManager::SetValue("ui_progress", 0);
@@ -2093,7 +2176,8 @@ int GUIAction::setlanguage(std::string arg __unused)
 
 int GUIAction::togglebacklight(std::string arg __unused)
 {
-	blankTimer.toggleBlank();
+	if (!mime)
+		blankTimer.toggleBlank();
 	return 0;
 }
 
@@ -2371,6 +2455,7 @@ int GUIAction::flashlight(std::string arg __unused)
 			if (TWFunc::Path_Exists(switch_path))
 				TWFunc::write_to_file(switch_path + bright, "0");
 			TWFunc::write_to_file(flashpath, "0");
+			DataManager::SetValue("pb_torch_on", "0");
 		}
 		else
 		{
@@ -2378,6 +2463,7 @@ int GUIAction::flashlight(std::string arg __unused)
 			LOGINFO("Flashlight: Brightning value '%d'\n", br_value);
 			TWFunc::write_to_file(flashpath, std::to_string(br_value));
 			TWFunc::write_to_file(switch_path + bright, "1");
+			DataManager::SetValue("pb_torch_on", "1");
 		}
 	} else
 		LOGINFO("Incorrect Flashlight Path\n");

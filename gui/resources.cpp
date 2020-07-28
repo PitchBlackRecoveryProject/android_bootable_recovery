@@ -164,7 +164,6 @@ void FontResource::LoadFont(xml_node<>* node, ZipWrap* pZip)
 			file = std::string(TWRES "fonts/") + file;
 			mFont = twrpTruetype::gr_ttf_loadFont(file.c_str(), font_size, dpi);
 		}
-		origFont = mFont;
 	}
 	else
 	{

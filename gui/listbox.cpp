@@ -100,6 +100,21 @@ GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
 		item.displayName = attr->value();
 		item.variableValue = gui_parse_text(child->value());
 		item.selected = (child->value() == currentValue);
+		item.mIconSelected = NULL;
+		xml_node<>* icon = child->first_node("icon");
+		if (icon) {
+			item.mIconSelected = LoadAttrImage(icon, "icon");
+			if (item.mIconSelected && item.mIconSelected->GetResource()) {
+				iconWidth = item.mIconSelected->GetWidth();
+				iconHeight = item.mIconSelected->GetHeight();
+			}
+			SetMaxIconSize(iconWidth, iconHeight);
+		}
+		item.textDesc = "";
+		icon = child->first_node("text");
+		if (icon) {
+			item.textDesc = icon->value();
+		}
 		item.action = NULL;
 		xml_node<>* action = child->first_node("action");
 		if (!action)
@@ -136,7 +151,6 @@ int GUIListBox::Update(void)
 {
 	if (!isConditionTrue())
 		return 0;
-
 	GUIScrollList::Update();
 
 	if (mUpdate) {
@@ -195,6 +209,7 @@ int GUIListBox::NotifyVarChange(const std::string& varName, const std::string& v
 			SetVisibleListLocation(mVisibleItems.empty() ? 0 : mVisibleItems.size()-1);
 		}
 	}
+	SetVisibleListLocation(0);
 
 	return 0;
 }
@@ -208,6 +223,7 @@ void GUIListBox::SetPageFocus(int inFocus)
 			for (size_t i = 0; i < mListItems.size(); i++) {
 				ListItem& item = mListItems[i];
 				item.displayName = gui_parse_text(item.displayName);
+				item.textDesc = gui_parse_text(item.textDesc);
 			}
 		}
 		DataManager::GetValue(mVariable, currentValue);
@@ -226,9 +242,12 @@ void GUIListBox::RenderItem(size_t itemindex, int yPos, bool selected)
 	// don't confuse it with the more persistent "selected" flag per list item used below
 	ListItem& item = mListItems[mVisibleItems[itemindex]];
 	ImageResource* icon = item.selected ? mIconSelected : mIconUnselected;
+	if (!icon && item.mIconSelected)
+		icon = item.mIconSelected;
 	const std::string& text = item.displayName;
+	std::string& textDesc = item.textDesc;
 
-	RenderStdItem(yPos, selected, icon, text.c_str());
+	RenderStdItem(yPos, selected, icon, text.c_str(), textDesc.c_str());
 }
 
 void GUIListBox::NotifySelect(size_t item_selected)

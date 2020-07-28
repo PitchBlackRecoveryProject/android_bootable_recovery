@@ -89,15 +89,20 @@ GUIButton::GUIButton(xml_node<>* node)
 	} else if (hasFill) {
 		LoadPlacement(FindNode(node, "placement"), &x, &y, &w, &h, &TextPlacement);
 	}
-	SetRenderPos(x, y, w, h);
 	if (mButtonLabel) {
+		TextPlacement = (Placement)LoadAttrInt(FindNode(node, "placement"), "textplacementmain", TOP_LEFT);
+		LText = (Placement)LoadAttrInt(FindNode(node, "placement"), "large", TOP_LEFT);
+	}
+	SetRenderPos(x, y, w, h);
+
+	if (mButtonLabel && TextPlacement == TOP_LEFT) {
 		TextPlacement = (Placement)LoadAttrInt(FindNode(node, "placement"), "textplacement", TOP_LEFT);
 		if (TextPlacement != TEXT_ONLY_RIGHT) {
 			mButtonLabel->scaleWidth = 1;
 			mButtonLabel->SetMaxWidth(w);
 			mButtonLabel->SetPlacement(CENTER);
-			mTextX = ((mRenderW / 2) + mRenderX);
-			mTextY = mRenderY + (mRenderH / 2);
+			mTextX = (mRenderW / 2) + mRenderX;
+			mTextY = mRenderY + (mRenderH / 2) + (mTextH + mIconH < mRenderH  && w == h ? 20 : 0);
 			mButtonLabel->SetRenderPos(mTextX, mTextY);
 		} else {
 			mTextX = mRenderW + mRenderX + 5;
@@ -207,8 +212,16 @@ int GUIButton::SetRenderPos(int x, int y, int w, int h)
 
 	mTextH = 0;
 	mTextW = 0;
-	mIconX = mRenderX + ((mRenderW - mIconW) / 2);
 	if (mButtonLabel)   mButtonLabel->GetCurrentBounds(mTextW, mTextH);
+	if (TextPlacement == TOP_RIGHT || TextPlacement == BOTTOM_LEFT) {
+		mIconX = mRenderX + ((mRenderW - mIconW - mTextW) / 10);
+		if (LText)
+			mIconX = mRenderX + ((mRenderW - mIconW - mTextW) / 20);
+	} else if (TextPlacement == BOTTOM_RIGHT)
+		mIconX = mRenderX + ((mRenderW - mIconW - mTextW) / 2);
+	else
+		mIconX = mRenderX + ((mRenderW - mIconW) / 2);
+
 	if (mTextW && TextPlacement == TEXT_ONLY_RIGHT)
 	{
 		mRenderW += mTextW + 5;
@@ -222,9 +235,20 @@ int GUIButton::SetRenderPos(int x, int y, int w, int h)
 	{
 		int divisor = mRenderH - (mIconH + mTextH);
 		mIconY = mRenderY + (divisor / 3);
+		if (TextPlacement == TOP_RIGHT) {
+			mIconY = mRenderY + (divisor / 5);
+			mTextY = mIconY + (mIconH > mTextH ? mIconH - mTextH : 0);
+		}
+		if (TextPlacement == BOTTOM_LEFT || TextPlacement == BOTTOM_RIGHT) {
+			divisor = mRenderH - mIconH;
+			mIconY = mRenderY + (divisor / 2);
+			mTextY = mIconY - ((divisor - mTextH) / 2);
+		}
+		mTextX = mIconX + mIconW + 10;
 	}
 
-	if (mButtonLabel)   mButtonLabel->SetRenderPos(mTextX, mTextY);
+	if (mButtonLabel)
+		mButtonLabel->SetRenderPos(mTextX, mTextY);
 	if (mAction)		mAction->SetActionPos(mRenderX, mRenderY, mRenderW, mRenderH);
 	SetActionPos(mRenderX, mRenderY, mRenderW, mRenderH);
 	return 0;

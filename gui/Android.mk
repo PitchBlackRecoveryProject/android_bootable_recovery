@@ -42,6 +42,10 @@ else
     LOCAL_SRC_FILES += hardwarekeyboard.cpp
 endif
 
+ifeq ($(AB_OTA_UPDATER),true)
+    LOCAL_CFLAGS += -DAB_OTA_UPDATER
+endif
+
 LOCAL_SHARED_LIBRARIES += libminuitwrp libc libstdc++ libaosprecovery libselinux
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../otautil/include
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
@@ -168,19 +172,10 @@ define PB_UNSUPPORTED_RESOLUTION_ERR
 ****************************************************************************
 endef
 
-ifeq ($(PB_GO), true)
 TWRP_RES := $(LOCAL_PATH)/theme/common/fonts
-else
-TWRP_RES := $(LOCAL_PATH)/theme/common/fonts
-TWRP_RES += $(LOCAL_PATH)/theme/common/fonts_choco
-TWRP_RES += $(LOCAL_PATH)/theme/common/fonts_google
-TWRP_RES += $(LOCAL_PATH)/theme/common/fonts_kraken
-endif
-
-ifeq ($(PB_ENGLISH), true)
-TWRP_RES += $(LOCAL_PATH)/theme/common/languages-eng/languages
-else
-TWRP_RES += $(LOCAL_PATH)/theme/common/languages
+TWRP_RES += $(LOCAL_PATH)/theme/common/lang_en/languages
+ifeq ($(PB_ENGLISH),)
+TWRP_RES += $(LOCAL_PATH)/theme/common/lang_full/languages
 endif
 
 ifeq ($(TW_CUSTOM_THEME),)
@@ -221,12 +216,8 @@ ifeq ($(TW_CUSTOM_THEME),)
         endif
     endif
 
-    ifeq ($(PB_GO), true)
-	    TWRP_THEME_LOC := $(LOCAL_PATH)/theme/$(TW_THEME)/PB_GO
-    else
-	    TWRP_THEME_LOC := $(LOCAL_PATH)/theme/$(TW_THEME)/PB
-    endif
-    TWRP_RES += $(LOCAL_PATH)/theme/common/PB/$(word 1,$(subst _, ,$(TW_THEME))).xml
+	TWRP_THEME_LOC := $(LOCAL_PATH)/theme/$(TW_THEME)
+    TWRP_RES += $(LOCAL_PATH)/theme/common/$(word 1,$(subst _, ,$(TW_THEME))).xml
     ifeq ($(wildcard $(TWRP_THEME_LOC)/ui.xml),)
         $(warning $(TW_THEME_WARNING_MSG))
         $(error Theme selection failed; exiting)

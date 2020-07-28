@@ -4469,6 +4469,7 @@ bool TWPartitionManager::Repack_Images(const std::string& Target_Image, const st
 		Set_Active_Slot(Current_Slot);
 	}
 	TWFunc::removeDir(REPACK_NEW_DIR, false);
+	DataManager::SetValue("tw_flash_partition", "/repack_ramdisk;");
 	return true;
 }
 

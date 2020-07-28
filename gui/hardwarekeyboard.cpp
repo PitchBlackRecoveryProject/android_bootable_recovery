@@ -429,7 +429,7 @@ int HardwareKeyboard::KeyRepeat()
 #endif
 	if (mLastKeyChar)
 		PageManager::NotifyCharInput(mLastKeyChar);
-	else if (mLastKey)
+	else if (mLastKey && mime > 500)
 		PageManager::NotifyKey(mLastKey, true);
 	return 0;
 }
