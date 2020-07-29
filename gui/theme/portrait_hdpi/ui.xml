@@ -1588,7 +1588,7 @@
 			</fill>
 
 			<fill color="%background_color%">
-				<placement x="%indent%" y="row17_y" w="%content_width%" h="input_line_width"/>
+				<placement x="%indent%" y="row21_y" w="%content_width%" h="input_line_width"/>
 			</fill>
 		</template>
 
