@@ -175,7 +175,7 @@
 		<variable name="dialog_height" value="704"/>
 		<variable name="back_button_x" value="240"/>
 		<variable name="console_button_x" value="840"/>
-		<variable name="indent" value="36"/>
+		<variable name="indent" value="45"/>
 		<variable name="indent_button" value="39"/>
 		<variable name="status_bar_time" value="50"/>
 		<variable name="y_sort" value="776"/>
@@ -1566,7 +1566,7 @@
 			</button>
 
 			<button style="tab">
-				<placement x="745" y="330" placement="4"/>
+				<placement x="750" y="330" placement="4"/>
 				<image resource="tab_vibration"/>
 				<action function="page">settings_vibration</action>
 			</button>
