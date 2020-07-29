@@ -3301,7 +3301,7 @@
 				<icon resource="main_button_restore"/>
 				<fill color="%transparent%"/>
 				<highlight color="#1A1A1A80"/>
-				<text>Recovey</text>
+				<text>Recovery</text>
 				<actions>
 					<action function="set">tw_back=reboot</action>
 					<action function="set">tw_action=reboot</action>
