@@ -45,6 +45,7 @@
 		<image name="splashlogo" filename="splashlogo" retainaspect="1"/>
 		<image name="splashteamwin" filename="splashteamwin" retainaspect="1"/>
 		<image name="main_button" filename="main_button" retainaspect="1"/>
+		<image name="main_slot_highlight" filename="main_slot_highlight" retainaspect="1"/>
 		<image name="main_button_half_height" filename="main_button_half_height" retainaspect="1"/>
 		<image name="main_button_half_height_new" filename="main_button_half_height_new" retainaspect="1"/>
 		<image name="main_button_half_height_full" filename="main_button_half_height_full" retainaspect="1"/>
