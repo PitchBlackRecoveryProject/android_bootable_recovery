@@ -3693,16 +3693,6 @@
 
 		<page name="settings">
 			<template name="page"/>
-
-			<image>
-				<image resource="main_button_black3"/>
-				<placement x="%indent%" y="%upper_header%"/>
-			</image>
-			
-			<image>
-				<image resource="logo"/>
-				<placement x="45" y="%row3_header_y%"/>
-			</image>				
 			
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
@@ -3793,16 +3783,6 @@
 
 		<page name="settings_timezone">
 			<template name="page"/>
-			
-			<image>
-				<image resource="main_button_black3"/>
-				<placement x="%indent%" y="%upper_header%"/>
-			</image>
-			
-			<image>
-				<image resource="logo"/>
-				<placement x="45" y="%row3_header_y%"/>
-			</image>	
 			
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
@@ -3921,16 +3901,6 @@
 		<page name="settings_screen">
 			<template name="page"/>
 
-			<image>
-				<image resource="main_button_black3"/>
-				<placement x="%indent%" y="%upper_header%"/>
-			</image>
-			
-			<image>
-				<image resource="logo"/>
-				<placement x="45" y="%row3_header_y%"/>
-			</image>
-
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@settings_hdr=Settings}</text>
@@ -4008,16 +3978,6 @@
 
 		<page name="settings_vibration">
 			<template name="page"/>
-
-			<image>
-				<image resource="main_button_black3"/>
-				<placement x="%indent%" y="%upper_header%"/>
-			</image>
-			
-			<image>
-				<image resource="logo"/>
-				<placement x="45" y="%row3_header_y%"/>
-			</image>			
 			
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
@@ -4036,11 +3996,11 @@
 				<placement x="660" y="%row3_y%"/>
 			</image>
 
-                <text style="text_m">
-					<condition var1="tw_disable_haptics" var2="1"/>
-					<placement x="indent" y="%row4_y%" w="%content_width%"/>
-					<text>{@vibration_disabled=Vibration Disabled for Device}</text>
-				</text>
+			<text style="text_m">
+				<condition var1="tw_disable_haptics" var2="1"/>
+				<placement x="indent" y="%row4_y%" w="%content_width%"/>
+				<text>{@vibration_disabled=Vibration Disabled for Device}</text>
+			</text>
 
 			<slidervalue>
 				<condition var1="tw_disable_haptics" var2="0"/>
@@ -4076,16 +4036,6 @@
 
 		<page name="settings_language">
 			<template name="page"/>
-
-			<image>
-				<image resource="main_button_black3"/>
-				<placement x="%indent%" y="%upper_header%"/>
-			</image>
-			
-			<image>
-				<image resource="logo"/>
-				<placement x="45" y="%row3_header_y%"/>
-			</image>			
 			
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
