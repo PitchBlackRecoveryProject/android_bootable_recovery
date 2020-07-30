@@ -352,11 +352,16 @@ void GUIFileSelector::RenderItem(size_t itemindex, int yPos, bool selected)
 		
 		if (text.length() >= 4) {	
 			string ext = text.substr(text.length() - 4);
-			if (ext == ".zip" || ext == ".ZIP" || ext == ".ozip" || ext == ".OZIP")
+			if (ext == ".zip" || ext == ".ZIP")
 				icon = mZipIcon;
 			if (ext == ".img" || ext == ".IMG")
 				icon = mImgIcon;
 		}
+		if (text.length() >= 5) {	
+			string ext = text.substr(text.length() - 5);
+			if (ext == ".ozip" || ext == ".OZIP")
+				icon = mZipIcon;
+		}		
 	}
 
 	RenderStdItem(yPos, selected, icon, text.c_str());
