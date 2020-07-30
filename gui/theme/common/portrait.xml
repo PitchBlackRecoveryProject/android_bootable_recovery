@@ -628,6 +628,13 @@
 					<condition var1="pb_file_extn" var2="zip"/>
 					<condition var1="tw_filename" op="modified"/>
 				</conditions>
+				<actions>
+					<action function="queuezip"/>
+					<action function="page">flash_confirm</action>
+				</actions>
+			</action>
+
+			<action>
 				<conditions>
 					<condition var1="pb_file_extn" var2="ozip"/>
 					<condition var1="tw_filename" op="modified"/>
