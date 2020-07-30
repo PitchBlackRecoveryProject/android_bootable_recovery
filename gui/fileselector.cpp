@@ -352,7 +352,7 @@ void GUIFileSelector::RenderItem(size_t itemindex, int yPos, bool selected)
 		
 		if (text.length() >= 4) {	
 			string ext = text.substr(text.length() - 4);
-			if (ext == ".zip" || ext == ".ZIP")
+			if (ext == ".zip" || ext == ".ZIP" || ext == ".ozip" || ext == ".OZIP")
 				icon = mZipIcon;
 			if (ext == ".img" || ext == ".IMG")
 				icon = mImgIcon;
