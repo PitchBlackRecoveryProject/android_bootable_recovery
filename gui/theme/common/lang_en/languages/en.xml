@@ -314,8 +314,8 @@
 		<string name="sys_rop4">replacing TWRP and will not offer to root your device.</string>
 		<string name="sys_rop5">Installing zips or performing adb operations may still</string>
 		<string name="sys_rop6">modify the system partition.</string>
-		<string name="sys_rol1">TWRP can leave your system partition unmodified to make it easier for you to take official updates.</string>
-		<string name="sys_rol2">TWRP will be unable to prevent the stock ROM from replacing TWRP and will not offer to root your device.</string>
+		<string name="sys_rol1">PBRP can leave your system partition unmodified to make it easier for you to take official updates.</string>
+		<string name="sys_rol2">PBRP will be unable to prevent the stock ROM from replacing PBRP and will not offer to root your device.</string>
 		<string name="sys_rol3">Installing zips or performing adb operations may still modify the system partition.</string>
 		<string name="sys_ro_never_show_chk">Never show this screen during boot again</string>
 		<string name="sys_ro_keep_ro_btn">Keep Read Only</string>
