@@ -1607,8 +1607,6 @@ bool TWPartition::UnMount(bool Display_Error) {
 	if (Mount_Point == "/system_root") {
 		if (umount("/system") == -1)
 			umount2("/system", MNT_DETACH);
-		rmdir("/system");
-		symlink("/system_root/system", "/system");
 	}
 	if (Is_Mounted()) {
 		int never_unmount_system;
