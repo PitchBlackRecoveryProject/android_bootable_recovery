@@ -308,10 +308,10 @@
 		<string name="swipe_power_off_s">Power Off</string>
 		<string name="sys_ro_hdr">Unmodified System Partition</string>
 		<string name="sys_ro_keep">Keep System Read only?</string>
-		<string name="sys_rop1">TWRP can leave your system partition unmodified</string>
+		<string name="sys_rop1">PBRP can leave your system partition unmodified</string>
 		<string name="sys_rop2">to make it easier for you to take official updates.</string>
-		<string name="sys_rop3">TWRP will be unable to prevent the stock ROM from</string>
-		<string name="sys_rop4">replacing TWRP and will not offer to root your device.</string>
+		<string name="sys_rop3">PBRP will be unable to prevent the stock ROM from</string>
+		<string name="sys_rop4">replacing PBRP and will not offer to root your device.</string>
 		<string name="sys_rop5">Installing zips or performing adb operations may still</string>
 		<string name="sys_rop6">modify the system partition.</string>
 		<string name="sys_rol1">PBRP can leave your system partition unmodified to make it easier for you to take official updates.</string>
