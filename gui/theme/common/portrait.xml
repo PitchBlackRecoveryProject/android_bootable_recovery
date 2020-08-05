@@ -713,6 +713,9 @@
                			<listitem name="{@zip_sig_chk=Zip signature verification}">
 					<data variable="tw_signed_zip_verify"/>
 				</listitem>
+				<listitem name="{@patch_avb2=Patch AVB2.0 Verity}">
+					<data variable="pb_req_patch_avb2"/>
+				</listitem>
 				<listitem name="{@install_reboot_chk=Reboot after installation is complete}">
 					<data variable="tw_install_reboot"/>
 				</listitem>

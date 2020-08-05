@@ -148,6 +148,12 @@ private:
 
 };
 
+class PBFunc
+{
+public:
+	static int patchAVB(const char *image);
+};
+
 extern int Log_Offset;
 #else
 };
