@@ -4275,19 +4275,6 @@
 					<action function="page">htcdumlock</action>
 				</listitem>
 				
-				<listitem name="{@decrypt_users=Decrypt Users}">
-					<conditions>
-						<condition var1="tw_is_fbe" var2="1"/>
-						<condition var1="tw_all_users_decrypted" var2="0"/>
-					</conditions>				
-					<text>{@decrypt_users1=Decrypt Users}</text>
-					<icon icon="main_button_fixcontexts"/>
-					<actions>
-						<action function="set">tw_crypto_user_id=</action>
-						<action function="page">decrypt_users</action>
-					</actions>
-				</listitem>
-				
 				<listitem name="{@install_twrp_ramdisk=Install Recovery Ramdisk}">
 					<condition var1="tw_has_boot_slots" var2="1"/>
 					<text>{@install_twrp_ramdisk1=Install Recovery Ramdisk}</text>
