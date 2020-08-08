@@ -3472,3 +3472,7 @@ void TWPartition::Set_Backup_FileName(string fname) {
 string TWPartition::Get_Backup_Name() {
 	return Backup_Name;
 }
+
+void TWPartition::Change_Mount_Point(string new_mp) {
+	Storage_Path = Backup_Path = Mount_Point = new_mp;
+}

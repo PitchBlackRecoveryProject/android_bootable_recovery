@@ -811,6 +811,12 @@ void DataManager::SetDefaultValues()
 #else
 	mPersist.SetValue(PB_TREBLE_COMP, "0");
 #endif
+
+#ifdef PB_DONT_MOUNT_SYSTEM_AS_ROOT
+	mPersist.SetValue(PB_MOUNT_SYSTEM_AS_ROOT, "0");
+#else
+	mPersist.SetValue(PB_MOUNT_SYSTEM_AS_ROOT, "1");
+#endif
 	mPersist.SetValue(PB_DISABLE_REBOOT_OTA, "0");
 	mConst.SetValue(PB_SURVIVAL_FOLDER_VAR, PB_SURVIVAL_FOLDER);
      	mConst.SetValue(PB_SURVIVAL_BACKUP_NAME, PB_SURVIVAL_BACKUP);

@@ -430,6 +430,11 @@ int main(int argc, char **argv) {
 	twrpAdbBuFifo *adb_bu_fifo = new twrpAdbBuFifo();
 	adb_bu_fifo->threadAdbBuFifo();
 
+	if (PartitionManager.Get_Android_Root_Path() == "/system_root" && !DataManager::GetIntValue(PB_MOUNT_SYSTEM_AS_ROOT))
+	{
+		PartitionManager.Change_System_Root(false);
+	}
+
 	// Launch the main GUI
 	gui_start();
 

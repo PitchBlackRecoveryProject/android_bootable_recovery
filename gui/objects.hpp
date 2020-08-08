@@ -380,6 +380,7 @@ protected:
 	int change_codename(std::string arg);
 	int getprop(std::string arg);
 	int flush_up_console(std::string arg);
+	int change_root(std::string arg);
 
 	int simulate;
 };

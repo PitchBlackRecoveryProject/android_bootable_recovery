@@ -5219,3 +5219,27 @@ TWPartitionManager::Update_System_Details_OTA_Survival (void)
     LOGERR ("Error creating fstab\n");
   return;
 }
+
+void TWPartitionManager::Change_System_Root(bool root) {
+	TWPartition *part = Find_Partition_By_Path(property_get_bool("ro.twrp.sar", false) ? "/system_root" : "/system");
+	if (part == nullptr) {
+		LOGINFO("Didn't Find any System Partition\n");
+		return;
+	}
+	bool root_required = false;
+	if (part->Is_Mounted() || part->Mount(false))
+		root_required = TWFunc::Path_Exists(part->Mount_Point + "/init") ? true : TWFunc::Path_Exists(part->Mount_Point + "/system") ? true : false;
+
+	if (!(part->Is_Mounted() && part->UnMount(false))) return;
+
+	if (root && !root_required) {
+		DataManager::SetValue(PB_MOUNT_SYSTEM_AS_ROOT, "0");
+		LOGINFO("System is not required to be mounted as SAR\n");
+		return;
+	}
+
+	part->Change_Mount_Point(root ? "/system_root" : "/system");
+	PartitionManager.Output_Partition(part);
+	TWFunc::Property_Override("ro.twrp.sar", to_string(root));
+	Write_Fstab();
+}
