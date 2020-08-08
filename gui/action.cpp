@@ -244,6 +244,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(change_codename);
 		ADD_ACTION(getprop);
 		ADD_ACTION(flush_up_console);
+		ADD_ACTION(change_root);
 	}
 
 	// First, get the action
@@ -2648,5 +2649,11 @@ int GUIAction::getprop(std::string arg)
 int GUIAction::flush_up_console(std::string arg __unused)
 {
 	GUIConsole::Clear_For_Retranslation();
+	return 0;
+}
+
+int GUIAction::change_root(std::string arg __unused)
+{
+	PartitionManager.Change_System_Root(DataManager::GetIntValue(PB_MOUNT_SYSTEM_AS_ROOT));
 	return 0;
 }

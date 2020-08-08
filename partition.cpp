@@ -3445,3 +3445,7 @@ void TWPartition::Set_Can_Be_Wiped(bool val) {
 	Can_Be_Wiped = val;
 	Wipe_Available_in_GUI = val;
 }
+
+void TWPartition::Change_Mount_Point(string new_mp) {
+	Storage_Path = Backup_Path = Mount_Point = new_mp;
+}

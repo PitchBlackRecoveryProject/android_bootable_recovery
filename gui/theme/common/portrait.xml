@@ -3770,6 +3770,10 @@
 				<listitem name="{@install_reboot_chk=Reboot after installation is complete}">
 					<data variable="tw_install_reboot"/>
 				</listitem>
+				<listitem name="{@mount_system_as_root=Mount System As Root}">
+					<data variable="pb_mount_system_as_root"/>
+					<action function="change_root"/>
+				</listitem>
 				<listitem name="{@use_rmrf_chk=Use rm -rf instead of formatting}">
 					<data variable="tw_rm_rf"/>
 				</listitem>

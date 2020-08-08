@@ -163,6 +163,7 @@ public:
 	void Partition_Post_Processing(bool Display_Error);                       // Apply partition specific settings after fstab processed
 	void Set_Backup_FileName(string fname);                                   // Set Backup_FileName for partition
 	string Get_Backup_Name();                                                 // Get Backup_Name for partition
+	void Change_Mount_Point(string new_mp);
 	bool Decrypt_FBE_DE();                                                    // If FBE is present, backup exclusions are set up and DE decrypt is attempted
 	string Get_Mount_Point();												  // Return Mount_Point or directory the current partition is mounted on
 	bool Get_Super_Status();												  // Returns true if partition is a super volume mounted partitions
@@ -404,6 +405,7 @@ public:
 	bool Get_Super_Status();												  // Return whether device has a super partition
 	void Setup_Super_Partition();											  // Setup the super partition for backup and restore
 	bool Recreate_Logs_Dir();                                                 // Recreate TWRP_AB_LOGS_DIR after wipe
+	void Change_System_Root(bool root);
 
 private:
 	void Setup_Settings_Storage_Partition(TWPartition* Part);                 // Sets up settings storage
