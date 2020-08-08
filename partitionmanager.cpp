@@ -2769,7 +2769,9 @@ TWPartitionManager::UnMount_Main_Partitions (void)
 
 	TWPartition *Boot_Partition = Find_Partition_By_Path ("/boot");
 
+	UnMount_By_Path("/vendor", false);
 	UnMount_By_Path (Get_Android_Root_Path(), true);
+	UnMount_By_Path("/product", false);
 	if (!datamedia)
 		UnMount_By_Path ("/data", true);
 
