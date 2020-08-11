@@ -824,6 +824,7 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue("pb_bright_value", "255");
 	mData.SetValue("pb_torch_on", "0");
 	mPersist.SetValue("pb_inlclude_dmesg_logging", "0");
+	mData.SetValue("tw_install_reboot_recovery", "0");
 	mPersist.SetValue("inject_twrp_chk", "0");
 
 	mPersist.SetValue(TW_HAS_INJECTTWRP, "0");

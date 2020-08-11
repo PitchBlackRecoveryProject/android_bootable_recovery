@@ -1099,6 +1099,7 @@
 			<action>
 				<action function="set">tw_action=reboot</action>
 				<action function="set">tw_action_param=system</action>
+				<action function="set">tw_reboot_param=system</action>
 				<action function="set">tw_has_action2=0</action>
 				<action function="set">tw_text1={@no_os1=No OS Installed! Are you}</action>
 				<action function="set">tw_text2={@no_osrb=sure you wish to reboot?}</action>
