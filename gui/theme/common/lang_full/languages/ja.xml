@@ -658,5 +658,295 @@
 		<string name="up_a_level">(上の階層へ)</string>
 		<string name="install_reboot">5秒後に再起動します</string>
 		<string name="show_free_sdmb">Show Free SD Mb</string>
+		
+		<!-- PBRP Auto-Translated Strings START -->
+
+		<string name="data_backup">データ（ストレージを除く）</string>
+		<string name="autostorage">ストレージ</string>
+		<string name="copy_log_btn1">SDカードにログを生成する</string>
+		<string name="adb_sideload_btn1">ADB経由でパッケージをインストールする</string>
+		<string name="zip_compatible_err">Zip Treble互換性エラー！</string>
+		<string name="wipe_dalvik_btn">ダルビクを拭く</string>
+		<string name="reboot_recovery_btn">再起動回復</string>
+		<string name="wipe_dalvik_confirm">ダルビックを拭く？</string>
+		<string name="wipe_dalvik_complete">ダルビックワイプコンプリート</string>
+		<string name="reboot_install_app_hdr">TWRPアプリをインストールしますか？</string>
+		<string name="reboot_install_app1">公式TWRPアプリをインストールしますか？</string>
+		<string name="reboot_install_app2">アプリは新しいTWRPバージョンを確認できます。</string>
+		<string name="reboot_install_app_prompt_install">インストールされていない場合はTWRPアプリのインストールを要求する</string>
+		<string name="reboot_install_app_system">システムアプリとしてインストール</string>
+		<string name="reboot_installing_app">アプリをインストールしています...</string>
+		<string name="swipe_to_install_app">スワイプしてTWRPアプリをインストール</string>
+		<string name="reset">リセット</string>
+		<string name="factory_reset5">（ユーザー/ロック画面を含まない）</string>
+		<string name="part_present">現在：</string>
+		<string name="part_removable">取り外し可能：</string>
+		<string name="destination_storage">宛先ストレージ</string>
+		<string name="skip_digest_backup_chk" version="2">バックアップ中にダイジェスト生成をスキップ</string>
+		<string name="check_digest_after_backup">バックアップ後にダイジェストを確認する</string>
+		<string name="disable_backup_space_chk" version="2">バックアップ前の空き容量チェックを無効にする</string>
+		<string name="current_boot_slot">現在のスロット：％tw_active_slot％</string>
+		<string name="boot_slot_a">スロットA</string>
+		<string name="boot_slot_b">スロットB</string>
+		<string name="changing_boot_slot">ブートスロットの変更</string>
+		<string name="changing_boot_slot_complete">ブートスロットの変更が完了しました</string>
+		<string name="backup_options">バックアップオプション</string>
+		<string name="restore_enable_digest_chk" version="2">バックアップファイルのダイジェスト検証を有効にする</string>
+		<string name="rb_recovery_btn1">再起動してリカバリ</string>
+		<string name="rb_bootloader_btn1">ブートローダーで再起動</string>
+		<string name="vibration_disabled">このデバイスではバイブレーションが無効になっています</string>
+		<string name="copying_log" version="2">ログをSDカードにコピー</string>
+		<string name="copy_log_complete" version="2">ログのコピーが完了しました</string>
+		<string name="fix_context_btn1">SELinuxコンテキストを修正</string>
+		<string name="part_sd_btn1">SDカード/内部ストレージをパーティション分割する</string>
+		<string name="file_manager_btn1">デバイス上のファイル、フォルダーを管理する</string>
+		<string name="terminal_btn1">昇格した端末コンソールを起動します</string>
+		<string name="reload_theme_btn1">問題がある場合は回復テーマを再読み込みします</string>
+		<string name="dumlock_hdr1">リカバリーからHTCのブートをフラッシュする</string>
+		<string name="fm_open_file_btn">ファイルを読む</string>
+		<string name="fm_reading">読書</string>
+		<string name="fm_unzipping">解凍</string>
+		<string name="fm_zipping">圧縮</string>
+		<string name="fm_unzip_btn">解凍</string>
+		<string name="fm_zip_btn">郵便番号</string>
+		<string name="pb_zip_name">圧縮</string>
+		<string name="decrypt_data_vold_os_missing">vold復号化に必要なファイルがありません：{1}</string>
+		<string name="install_twrp_ramdisk">Recovery Ramdiskをインストールする</string>
+		<string name="install_twrp_ramdisk1">フラッシュリカバリRAMディスク（A / Bのみ）</string>
+		<string name="install_kernel">カーネルをインストールする</string>
+		<string name="repack_kernel_confirm_hdr">カーネルをインストールする</string>
+		<string name="repack_kernel_confirm_hdr1">フラッシュカスタムカーネル（A / Bのみ）</string>
+		<string name="repack_ramdisk_confirm_hdr">リカバリをインストール</string>
+		<string name="repack_kernel_confirm">カーネルをインストールしますか？</string>
+		<string name="repack_ramdisk_confirm">リカバリをインストールしますか？</string>
+		<string name="repack_backup_first">最初に既存のイメージをバックアップ</string>
+		<string name="repack">再梱包</string>
+		<string name="swipe_to_install">インストールするためにスワイプ</string>
+		<string name="installing">インストールしています...</string>
+		<string name="install_complete">インストール完了</string>
+		<string name="unpack_error">画像の解凍中にエラーが発生しました。</string>
+		<string name="repack_error">画像の再パック中にエラーが発生しました。</string>
+		<string name="unpacking_image">{1}を開梱しています...</string>
+		<string name="repacking_image">{1}を再梱包しています...</string>
+		<string name="repack_image_hdr">画像を選択</string>
+		<string name="fix_recovery_loop">リカバリーブートループを修正</string>
+		<string name="fix_recovery_loop1">再起動後の回復を修正するための回避策</string>
+		<string name="fix_recovery_loop_confirm">リカバリブートループを修正しますか？</string>
+		<string name="fixing_recovery_loop">リカバリブートループを修正しています...</string>
+		<string name="fix_recovery_loop_complete">リカバリブートループの修正の完了</string>
+		<string name="fixing_recovery_loop_patch">カーネルにパッチを適用しています...</string>
+		<string name="fix_recovery_loop_patch_error">カーネルのパッチ中にエラーが発生しました。</string>
+		<string name="decrypt_users">ユーザーの復号化</string>
+		<string name="decrypt_users1">マルチユーザー復号化</string>
+		<string name="decrypt_users_selection">復号化するユーザーIDを選択します</string>
+		<string name="select_user">ユーザーを選択</string>
+		<string name="backup_storage_undecrypt_warning">ユーザーは復号化されていないため、バックアップにはユーザー{1}の一部のファイルが含まれていません。</string>
+		<string name="decrypting_user_fbe">ユーザー{1}のFBEを復号化しようとしています...</string>
+		<string name="decrypt_user_success_fbe">ユーザー{1}は正常に復号化されました</string>
+		<string name="decrypt_user_fail_fbe">ユーザー{1}を復号化できませんでした</string>
+		<string name="decrypt_data_enter_pass_fbe">ユーザーのパスワードを入力[％tw_crypto_user_id％]</string>
+		<string name="decrypt_data_enter_pattern_fbe">ユーザーのパターンを入力[％tw_crypto_user_id％]</string>
+		<string name="generating_digest1" version="2">ダイジェストを生成する</string>
+		<string name="generating_digest2" version="2">*ダイジェストを生成しています...</string>
+		<string name="digest_created" version="2">*ダイジェストが作成されました。</string>
+		<string name="digest_error" version="2">*ダイジェストエラー！</string>
+		<string name="digest_compute_error" version="2">*ダイジェストの計算中にエラーが発生しました。</string>
+		<string name="verifying_digest" version="2">ダイジェストの確認</string>
+		<string name="skip_digest" version="2">ユーザー設定に基づいてダイジェストチェックをスキップします。</string>
+		<string name="cache_dalvik_done">-Dalvikキャッシュディレクトリのワイプの完了！</string>
+		<string name="decrypt_success_nodev">データの復号化に成功しました</string>
+		<string name="no_digest_found" version="2">'{1}'のダイジェストファイルが見つかりません。復元するには、ダイジェスト検証を有効にするの選択を解除してください。</string>
+		<string name="digest_fail_match" version="2">ダイジェストは '{1}'で一致しませんでした。</string>
+		<string name="digest_matched" version="2">「{1}」に一致するダイジェスト。</string>
+		<string name="backup_storage_warning">{1}のバックアップには、画像やダウンロードなどの内部ストレージ内のファイルは含まれません。</string>
+		<string name="digest_check_skip" version="2">ダイジェストチェックのスキップがオンです</string>
+		<string name="digest_off" version="2">ダイジェスト生成はオフです</string>
+		<string name="check_for_digest" version="2">ダイジェストファイルを確認しています...</string>
+		<string name="invalid_zip_format">無効なzipファイル形式です！</string>
+		<string name="no_digest" version="2">ダイジェストチェックをスキップ：ダイジェストファイルが見つかりません</string>
+		<string name="digest_fail" version="2">ダイジェストが一致しません</string>
+		<string name="digest_match" version="2">一致したダイジェスト</string>
+		<string name="decrypt_cmd" version="2">コマンドラインからデータパーティションまたはユーザーデータを復号化しようとしています。</string>
+		<string name="install_reboot" version="2">％tw_sleep％秒後に再起動します</string>
+		<string name="pb_flashed">*新しいPBRPが点滅し、ボリューム{1}を押します</string>
+		<string name="pb_flashed_">* MagiskパッチされたRamdiskが検出されました!!!</string>
+		<string name="pb_rb_msg">*ボリューム{1}で終了</string>
+		<string name="adbbackup_error">ADBバックアップのエラー。終了しています...」</string>
+		<string name="adbbackup_control_error">adbコントロールチャネルに書き込めません</string>
+		<string name="twrp_adbbu_option">twrp adbバックアップを有効にするには--twrpオプションが必要です</string>
+		<string name="partition_not_found">パス：{1}がパーティションリストに見つかりません</string>
+		<string name="copy_logcat_log">logcatログを{1}にコピーしました</string>
+		<string name="copy_kernel_log">カーネルログを{1}にコピーしました</string>
+		<string name="include_logcat_log">Logcatログを含める</string>
+		<string name="include_kernel_log">カーネルログを含める</string>
+		<string name="sha2_chk">ハッシュにSHA2を使用する</string>
+		<string name="unable_set_boot_slot">ブートローダーのブートスロットを{1}に変更するときにエラーが発生しました</string>
+		<string name="device_ab">A / Bデバイス設定</string>
+		<string name="flash_ab_inactive">非アクティブなスロットへのA / B zipの点滅：{1}</string>
+		<string name="flash_ab_reboot">追加のzipをフラッシュするには、リカバリを再起動して更新されたスロットに切り替えてください。</string>
+		<string name="ozip_decrypt_decryption">Ozip復号化を開始しています...</string>
+		<string name="ozip_decrypt_finish">Ozip復号化が完了しました！</string>
+		<string name="additional_hdr">追加</string>
+		<string name="additional">追加</string>
+		<string name="tools_hdr">ツールオプション</string>
+		<string name="tools">ツールオプション</string>
+		<string name="tools1">ツール</string>
+		<string name="SuperSU_btn">SuperSU</string>
+		<string name="SuperSU_text">SuperSUがインストールされます。</string>
+		<string name="SuperSU_confirm">インストールしてみますか？</string>
+		<string name="Unroot_SuperSU_btn">ルート解除SuperSU</string>
+		<string name="Unroot_SuperSU_text">ルート解除SuperSUがインストールされます。</string>
+		<string name="Unroot_SuperSU_confirm">インストールしてみますか？</string>
+		<string name="Magisk_btn">魔法の</string>
+		<string name="Magisk_text">Magiskがインストールされます。</string>
+		<string name="Magisk_confirm">インストールしてみますか？</string>
+		<string name="Unroot_Magisk_btn">Unroot Magic</string>
+		<string name="Unroot_Magisk_text">Unroot Magiskがインストールされます。</string>
+		<string name="Unroot_Magisk_confirm">インストールしてみますか？</string>
+		<string name="Aroma_FM_btn">アロマFM</string>
+		<string name="Aroma_FM_text">アロマFMがインストールされます。</string>
+		<string name="Aroma_FM_confirm">インストールしてみますか？</string>
+		<string name="FP_Scanner_btn">FPスキャナー</string>
+		<string name="FP_Scanner_text">FPスキャナーがインストールされます。</string>
+		<string name="FP_Scanner_confirm">インストールしてみますか？</string>
+		<string name="Pin/Pass_Remover_btn">ピン/パスリムーバー</string>
+		<string name="Pin/Pass_Remover_text">ピン/パスリムーバーがインストールされます。</string>
+		<string name="Pin/Pass_Remover_confirm">インストールしてみますか？</string>
+		<string name="RM_Subs_Overlays_btn">RMオーバーレイ</string>
+		<string name="RM_Subs_Overlays_text">RM Subs Overlaysがインストールされます。</string>
+		<string name="RM_Subs_Overlays_confirm">インストールしてみますか？</string>
+		<string name="RM_All_Subs_Overlays_btn">RMすべてのオーバーレイ</string>
+		<string name="RM_All_Subs_Overlays_text">RM All Subs Overlaysがインストールされます。</string>
+		<string name="RM_All_Subs_Overlays_confirm">インストールしてみますか？</string>
+		<string name="Camera2API_Enabler_btn">Camera2APIイネーブラー</string>
+		<string name="Camera2API_Enabler_text">Camera2API Enablerがインストールされます。</string>
+		<string name="Camera2API_Enabler_confirm">インストールしてみますか？</string>
+		<string name="App_Delete_btn">アプリの削除</string>
+		<string name="App_Delete_text">アプリの削除がインストールされます。</string>
+		<string name="App_Delete_confirm">インストールしてみますか？</string>
+		<string name="MTP_Fix_btn">MTP修正</string>
+		<string name="MTP_Fix_text">MTP Fixがインストールされます。</string>
+		<string name="MTP_Fix_confirm">インストールしてみますか？</string>
+		<string name="MMR_btn">マジックマネージャー</string>
+		<string name="MMR_text">Magisk Manager Recoveryがインストールされます。</string>
+		<string name="MMR_confirm">インストールしてみますか？</string>
+		<string name="Dm_Verity_btn">Dm Verity</string>
+		<string name="Dm_Verity_text">Dm Verityがインストールされます。</string>
+		<string name="Dm_Verity_confirm">インストールしてみますか？</string>
+		<string name="use_aromafm">Aroma File Managerを使用する</string>
+		<string name="pbthemes">テーマ</string>
+		<string name="pbthemes_hdr">テーマ</string>
+		<string name="special">特殊な</string>
+		<string name="special_hdr">特殊な</string>
+		<string name="about_pbrp">PBRPについて</string>
+		<string name="device_info">デバイス情報</string>
+		<string name="device_maintainer">デバイスメンテナー</string>
+		<string name="thanksto">のおかげで</string>
+		<string name="toolscr">ツールクレジット</string>
+		<string name="contributors">寄稿者</string>
+		<string name="contributors1">貢献者とPatreon</string>
+		<string name="SETTING">特別な設定</string>
+		<string name="SETTINGOTA">OTA設定</string>
+		<string name="device_name">デバイス名：％pb_device_manufacturer％％pb_device_name％</string>
+		<string name="device_codename">デバイスコード名：％pb_device％</string>
+		<string name="build_date">ビルド日：％pb_build％</string>
+		<string name="pb_version">PitchBlackバージョン：％pb_ver％</string>
+		<string name="device_maintainer1">デバイスメンテナ：％pb_maintainer％</string>
+		<string name="core_contributors">コアコントリビューター</string>
+		<string name="miscellaneous">雑多</string>
+		<string name="pbrpspecial_btn">PBRPスペシャル</string>
+		<string name="install_txt">変更を追加したい</string>
+		<string name="install2_txt">ジップまたはImgの形式</string>
+		<string name="wipe_txt">デバイスのリリース</string>
+		<string name="wipe2_txt">ストレス</string>
+		<string name="backup_txt">大切な人を救う</string>
+		<string name="backup2_txt">安全な場所での宝石</string>
+		<string name="restore_txt">プレシャスを取り戻す</string>
+		<string name="restore2_txt">宝石。保存しましたか？</string>
+		<string name="mount_txt">デバイスを入手</string>
+		<string name="mount2_txt">マウントされたパーティション</string>
+		<string name="advanced_txt">このページは十分ではありません</string>
+		<string name="advanced2_txt">あなたのために？切り替える</string>
+		<string name="settings_txt">PitchBlackリカバリーをカスタマイズ！</string>
+		<string name="customizations">カスタマイズ</string>
+		<string name="themes_txt">テーマ</string>
+		<string name="bg_color">背景色</string>
+		<string name="font_options">フォントオプション</string>
+		<string name="features_txt">特徴</string>
+		<string name="logs_btn">コンソールを開く</string>
+		<string name="pb_support_miui_ota_chk">MIUIインクリメンタルOTAをサポート</string>
+		<string name="pb_incremental_ota_status_enabled">MIUIインクリメンタルパッケージステータスのサポート：有効</string>
+		<string name="pb_incremental_ota_status_disabled">MIUIインクリメンタルパッケージステータスのサポート：無効</string>
+		<string name="pb_incremental_package_detected">検出された増分パッケージ '{1}'</string>
+		<string name="pb_survival_does_not_exist">OTAサバイバルは存在しません！最初にフルROMをフラッシュしてください！</string>
+		<string name="pb_install_detecting">現在のパッケージの検出</string>
+		<string name="pb_install_standard_detected">-検出された標準パッケージ</string>
+		<string name="pb_install_miui_detected">-検出されたMIUI更新パッケージ</string>
+		<string name="pb_install_miui_oreo_detected">-検出されたTreble MIUI更新パッケージ</string>
+		<string name="pb_install_miui_10_detected">-検出されたMIUI 10非トレブル更新パッケージ</string>
+		<string name="pb_install_patch_detected">-パッチまたは修正パッケージのいずれかが検出されました</string>
+		<string name="pb_disable_boot_chk">ブートチェックを無効にする</string>
+		<string name="pb_include_system_survival_chk">OTAサバイバルにシステムを含める</string>
+		<string name="pb_verify_incremental_ota_signature_chk">増分OTA署名検証</string>
+		<string name="pb_incremental_ota_compatibility_chk">インクリメンタルパッケージの署名を確認しています...</string>
+		<string name="pb_incremental_ota_compatibility_false">インクリメンタルパッケージはこのROMと互換性がありません！</string>
+		<string name="pb_incremental_ota_compatibility_true">インクリメンタルパッケージは互換性があります</string>
+		<string name="pb_zip_have_bootloader">警告： '{1}'によって呼び出されたブートローダーの再インストールが検出されました。</string>
+		<string name="pb_no_space_ota_survival">内部ストレージにOTAサバイバルを作成するための十分な空き領域がありません。</string>
+		<string name="exp">エクスプローラオプション</string>
+		<string name="pb_incremental_ota_res">OTA_RES-完了しました！</string>
+		<string name="pb_incremental_ota_res_run">OTA_RESプロセスを実行しています...</string>
+		<string name="pb_incremental_ota_bak_run">OTA_BAKプロセスを実行しています...</string>
+		<string name="pb_incremental_ota_bak">OTA_BAK-完了！</string>
+		<string name="pb_advanced_stock_recovery">積極的な在庫回復の無効化</string>
+		<string name="pb_reboot_dont_disable_stock_recovery_chk">在庫回復交換を無効にしないでください</string>
+		<string name="pb_dmverity_chk">非アクティブ化（パッチDM-Verity）</string>
+		<string name="pb_for_en_chk">強制暗号化を無効にする</string>
+		<string name="pb_forced_encryption_chk">強制暗号化を無効にする</string>
+		<string name="pb_disable_reboot_ota_check">OTA後の再起動を無効にする</string>
+		<string name="pb_run_process">'{1}'プロセスの開始</string>
+		<string name="pb_encrypt_cn">キャッシュされた複数の暗号化の詳細</string>
+		<string name="pb_encrypt_st">暗号化ステータス：{1}</string>
+		<string name="pb_run_process_fail">'{1}'プロセスを完了できません</string>
+		<string name="fm_pb_make">フォルダを作成</string>
+		<string name="fm_pb_mk">フォルダを作成しています</string>
+		<string name="pb_run_process_done">「{1}」プロセスが終了しました</string>
+		<string name="pb_encryption">強制暗号化にパッチを適用しました</string>
+		<string name="pb_ecryption_leave">デバイスを暗号化したままForceencrypt</string>
+		<string name="pb_encryption_off">強制暗号化が有効になっていません</string>
+		<string name="pb_fstab">検出されたfstab： '{1}'</string>
+		<string name="pb_unlink">リンク解除：「{1}」</string>
+		<string name="pb_patching">パッチ： '{1}'</string>
+		<string name="pb_end_read">終了したプロセスの読み取り{1}</string>
+		<string name="pb_start_read">開始されたプロセスの読み取り{1}</string>
+		<string name="pb_dm_verity">正常にパッチされたDM-Verity</string>
+		<string name="pb_dm_verity_off">DM-Verityが有効になっていません</string>
+		<string name="pb_bk">PBファイルのバックアップの作成-/ tmp / pb / backup_wip ...</string>
+		<string name="pb_bk_no">PBRPのツールがPBRPパッケージの再フラッシュを検出していない</string>
+		<string name="zip_err_compatibility">トレブルの互換性をバイパス</string>
+		<string name="pb_wipe_substratum_overlays">基層オーバーレイ</string>
+		<string name="substratum_done">-基板オーバーレイワイプの完了！</string>
+		<string name="assert_failed_hint">アサートが失敗しました。詳細については、上記の出力を確認してください。</string>
+		<string name="pb_wipe_magisk_modules">魔法のモジュール</string>
+		<string name="magisk_done">-Magisk Modules Wipe Complete！</string>
+		<string name="pb_saving_log">ログを保存しています...</string>
+		<string name="pb_enable_dmesg_logging">Flash後にDmesgロギングを有効にする</string>
+		<string name="pb_copy_log_cache">ログをキャッシュにコピーすることもできます。</string>
+		<string name="pb_dev_name_change">デバイスのコードネームを変更しますか？</string>
+		<string name="img">IMG</string>
+		<string name="zip">ZIP</string>
+		<string name="pb_dev_change">デバイスコード名を％pb_prop_value％から％pb_codename_change％に変更</string>
+		<string name="pb_dev_changed">デバイスコード名が％pb_codename_change％に変更されました</string>
+		<string name="pb_dev_reboot">コードネームを切り替えた後の再起動は必須です</string>
+		<string name="pb_dev_name">PBRPデバイスコードネームチェンジャー</string>
+		<string name="codename_changer">コードネームチェンジャー</string>
+		<string name="pb_wipe_fbe_cache">FBEキャッシュ</string>
+		<string name="fbe_done">-FBEキャッシュワイプの完了！</string>
+		<string name="sel_br_val">懐中電灯の明るさの値：％pb_bright_value %%</string>
+		<string name="unmount_sys_install">ZIPをインストールする前にシステムをアンマウントする</string>
+		<string name="unmount_system">システムのマウントを解除しています...</string>
+		<string name="unmount_system_err">システムのアンマウントに失敗しました</string>
+		
+		<!-- PBRP Auto-Translated Strings END -->
 	</resources>
 </language>
