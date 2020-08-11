@@ -769,6 +769,213 @@
 		<string name="pb_dm_verity">Sukses menerapkan DM-Verity</string>
 		<string name="pb_dm_verity_off">DM-Verity tidak diaktifkan</string>
 		<string name="show_free_sdmb">Tampilkan Memory Bebas</string>
+		
+		<!-- PBRP Auto-Translated Strings START -->
+
+		<string name="data_backup">Data (tidak termasuk penyimpanan)</string>
+		<string name="autostorage">Penyimpanan</string>
+		<string name="copy_log_btn1">Hasilkan log ke sdcard</string>
+		<string name="adb_sideload_btn1">Instal paket Anda melalui ADB</string>
+		<string name="zip_compatible_err">Kesalahan kompatibilitas Zip Treble!</string>
+		<string name="wipe_dalvik_btn">Seka Dalvik</string>
+		<string name="reboot_recovery_btn">Mulai Ulang Pemulihan</string>
+		<string name="wipe_dalvik_confirm">Seka Dalvik?</string>
+		<string name="wipe_dalvik_complete">Dalvik Wipe Selesai</string>
+		<string name="reboot_install_app_hdr">Instal Aplikasi TWRP?</string>
+		<string name="reboot_install_app1">Apakah Anda ingin memasang Aplikasi TWRP Resmi?</string>
+		<string name="reboot_install_app2">Aplikasi dapat memeriksa versi TWRP baru.</string>
+		<string name="reboot_install_app_prompt_install">Prompt untuk menginstal aplikasi TWRP jika tidak diinstal</string>
+		<string name="reboot_install_app_system">Instal sebagai Aplikasi Sistem</string>
+		<string name="reboot_installing_app">Menginstal Aplikasi ...</string>
+		<string name="swipe_to_install_app">Geser untuk Menginstal Aplikasi TWRP</string>
+		<string name="reset">Setel ulang</string>
+		<string name="factory_reset5">(tidak termasuk pengguna / layar kunci)</string>
+		<string name="part_present">Menyajikan:</string>
+		<string name="part_removable">Dapat dilepas:</string>
+		<string name="destination_storage">Penyimpanan Tujuan</string>
+		<string name="skip_digest_backup_chk" version="2">Lewati pembuatan Digest selama pencadangan</string>
+		<string name="check_digest_after_backup">Periksa Digest After Backup</string>
+		<string name="current_boot_slot">Slot Saat Ini: %tw_active_slot%</string>
+		<string name="boot_slot_a">Slot A</string>
+		<string name="boot_slot_b">Slot B</string>
+		<string name="changing_boot_slot">Mengubah Slot Boot</string>
+		<string name="changing_boot_slot_complete">Mengganti Slot Boot Selesai</string>
+		<string name="backup_options">Opsi Pencadangan</string>
+		<string name="restore_enable_digest_chk" version="2">Aktifkan Verifikasi Intisari dari File Cadangan</string>
+		<string name="rb_recovery_btn1">Mulai ulang ke Pemulihan</string>
+		<string name="rb_bootloader_btn1">Mulai ulang ke Bootloader</string>
+		<string name="rb_edl_btn">Reboot ke Edl</string>
+		<string name="vibration_disabled">Getaran dinonaktifkan untuk perangkat ini</string>
+		<string name="fix_context_btn1">Perbaiki Konteks SELinux</string>
+		<string name="part_sd_btn1">Partisi kartu SD / Penyimpanan Internal Anda</string>
+		<string name="file_manager_btn1">Kelola file Anda, folder di perangkat Anda</string>
+		<string name="terminal_btn1">Meluncurkan konsol terminal yang ditinggikan</string>
+		<string name="reload_theme_btn1">Muat ulang tema pemulihan jika ada masalah</string>
+		<string name="dumlock_hdr1">Flash boot HTC Anda dari pemulihan</string>
+		<string name="fm_open_file_btn">Baca File</string>
+		<string name="fm_reading">Bacaan</string>
+		<string name="fm_unzipping">Buka ritsleting</string>
+		<string name="fm_zipping">Membuat zip</string>
+		<string name="fm_unzip_btn">Buka zip</string>
+		<string name="fm_zip_btn">Zip</string>
+		<string name="pb_zip_name">Membuat zip</string>
+		<string name="decrypt_data_vold_os_missing">Berkas hilang yang diperlukan untuk dekripsi vold: {1}</string>
+		<string name="install_cancel">Jangan Instal</string>
+		<string name="install_twrp_ramdisk">Instal Recovery Ramdisk</string>
+		<string name="install_twrp_ramdisk1">Ramdisk pemulihan flash (hanya A / B)</string>
+		<string name="install_kernel">Instal Kernel</string>
+		<string name="repack_kernel_confirm_hdr">Instal Kernel</string>
+		<string name="repack_kernel_confirm_hdr1">Kernel kustom flash (khusus A / B)</string>
+		<string name="repack_ramdisk_confirm_hdr">Instal Pemulihan</string>
+		<string name="repack_kernel_confirm">Instal Kernel?</string>
+		<string name="repack_ramdisk_confirm">Instal Pemulihan?</string>
+		<string name="repack_backup_first">Buat cadangan gambar yang ada terlebih dahulu</string>
+		<string name="repack">Kemas ulang</string>
+		<string name="swipe_to_install">Geser untuk Menginstal</string>
+		<string name="installing">Menginstal ...</string>
+		<string name="install_complete">Instal Selesai</string>
+		<string name="unpack_error">Terjadi kesalahan saat membuka gambar.</string>
+		<string name="repack_error">Terjadi kesalahan saat mengemas ulang gambar.</string>
+		<string name="unpacking_image">Membuka kemasan {1} ...</string>
+		<string name="repacking_image">Mengemas ulang {1} ...</string>
+		<string name="repack_image_hdr">Pilih gambar</string>
+		<string name="fix_recovery_loop">Perbaiki Recovery Bootloop</string>
+		<string name="fix_recovery_loop1">Solusi untuk memperbaiki pemulihan setelah boot ulang</string>
+		<string name="fix_recovery_loop_confirm">Perbaiki Recovery Bootloop?</string>
+		<string name="fixing_recovery_loop">Memperbaiki Recovery Bootloop ...</string>
+		<string name="fix_recovery_loop_complete">Perbaiki Recovery Bootloop Selesai</string>
+		<string name="fixing_recovery_loop_patch">Menambal kernel ...</string>
+		<string name="fix_recovery_loop_patch_error">Terjadi kesalahan saat menambal kernel.</string>
+		<string name="decrypt_users">Dekripsi Pengguna</string>
+		<string name="decrypt_users1">Dekripsi Multi-Pengguna</string>
+		<string name="decrypt_users_selection">Pilih ID pengguna untuk didekripsi</string>
+		<string name="select_user">Pilih Pengguna</string>
+		<string name="backup_storage_undecrypt_warning">Cadangan tidak menyertakan beberapa file pengguna {1}, karena pengguna tidak didekripsi.</string>
+		<string name="decrypting_user_fbe">Mencoba mendekripsi FBE untuk pengguna {1} ...</string>
+		<string name="decrypt_user_success_fbe">Pengguna {1} Berhasil Mendekripsi</string>
+		<string name="decrypt_user_fail_fbe">Gagal mendekripsi pengguna {1}</string>
+		<string name="decrypt_data_enter_pass_fbe">Masukkan Kata Sandi untuk Pengguna [%tw_crypto_user_id%]</string>
+		<string name="decrypt_data_enter_pattern_fbe">Masukkan Pola untuk Pengguna [%tw_crypto_user_id%]</string>
+		<string name="generating_digest1" version="2">Menghasilkan Intisari</string>
+		<string name="generating_digest2" version="2">* Menghasilkan intisari ...</string>
+		<string name="digest_created" version="2">* Digest Dibuat.</string>
+		<string name="digest_error" version="2">* Kesalahan Intisari!</string>
+		<string name="digest_compute_error" version="2">* Kesalahan menghitung Intisari.</string>
+		<string name="verifying_digest" version="2">Memverifikasi Intisari</string>
+		<string name="skip_digest" version="2">Melewati pemeriksaan Intisari berdasarkan pengaturan pengguna.</string>
+		<string name="cache_dalvik_done">- Direktori Cache Dalvik Menghapus Selesai!</string>
+		<string name="decrypt_success_nodev">Data berhasil didekripsi</string>
+		<string name="no_digest_found" version="2">Tidak ada berkas intisari yang ditemukan untuk '{1}'. Harap batalkan pilihan Aktifkan verifikasi Intisari untuk memulihkan.</string>
+		<string name="digest_fail_match" version="2">Intisari gagal cocok dengan '{1}'.</string>
+		<string name="digest_matched" version="2">Intisari cocok untuk '{1}'.</string>
+		<string name="backup_storage_warning">Cadangan dari {1} tidak menyertakan berkas apa pun di penyimpanan internal seperti gambar atau unduhan.</string>
+		<string name="digest_check_skip" version="2">Pengabaian pemeriksaan intisari aktif</string>
+		<string name="digest_off" version="2">Digest Generation tidak aktif</string>
+		<string name="check_for_digest" version="2">Memeriksa file Intisari ...</string>
+		<string name="invalid_zip_format">Format file zip tidak valid!</string>
+		<string name="no_digest" version="2">Melewati pemeriksaan Intisari: tidak ada file Intisari yang ditemukan</string>
+		<string name="digest_fail" version="2">Intisari tidak cocok</string>
+		<string name="digest_match" version="2">Intisari cocok</string>
+		<string name="decrypt_cmd" version="2">Mencoba mendekripsi partisi data atau data pengguna melalui baris perintah.</string>
+		<string name="pb_flashed">* PBRP Baru Berkedip, tekan Volume {1}</string>
+		<string name="pb_flashed_">* Magisk Patched Ramdisk Terdeteksi !!!</string>
+		<string name="pb_rb_msg">* Volume {1} untuk Selesai</string>
+		<string name="copy_logcat_log">Log logcat disalin ke {1}</string>
+		<string name="include_logcat_log">Sertakan Logcat Log</string>
+		<string name="sha2_chk">Gunakan SHA2 untuk mencirikan</string>
+		<string name="unable_set_boot_slot">Galat mengubah slot boot bootloader menjadi {1}</string>
+		<string name="device_ab">Pengaturan Perangkat A / B</string>
+		<string name="flash_ab_inactive">Mem-flash zip A / B ke slot tidak aktif: {1}</string>
+		<string name="flash_ab_reboot">Untuk mem-flash ritsleting tambahan, silakan reboot pemulihan untuk beralih ke slot yang diperbarui.</string>
+		<string name="ozip_decrypt_decryption">Memulai Dekripsi Ozip ...</string>
+		<string name="ozip_decrypt_finish">Dekripsi Ozip Selesai!</string>
+		<string name="tools1">Alat</string>
+		<string name="Pin/Pass_Remover_btn">Penghilang Pin / Lulus</string>
+		<string name="Pin/Pass_Remover_text">Pin / Pass Remover akan dipasang.</string>
+		<string name="Pin/Pass_Remover_confirm">Coba instal?</string>
+		<string name="RM_Subs_Overlays_btn">RM Overlay</string>
+		<string name="RM_Subs_Overlays_text">RM Subs Overlay akan dipasang.</string>
+		<string name="RM_Subs_Overlays_confirm">Coba instal?</string>
+		<string name="RM_All_Subs_Overlays_btn">RM Semua Overlay</string>
+		<string name="RM_All_Subs_Overlays_text">RM All Subs Overlay akan dipasang.</string>
+		<string name="RM_All_Subs_Overlays_confirm">Coba instal?</string>
+		<string name="MMR_btn">Manajer Ajaib</string>
+		<string name="MMR_text">Magisk Manager Recovery akan dipasang.</string>
+		<string name="MMR_confirm">Coba instal?</string>
+		<string name="use_aromafm">Gunakan Aroma File Manager</string>
+		<string name="pbthemes">Tema</string>
+		<string name="pbthemes_hdr">Tema</string>
+		<string name="device_info">Informasi Perangkat</string>
+		<string name="device_maintainer">Pemelihara Perangkat</string>
+		<string name="contributors1">Kontributor dan Patreon</string>
+		<string name="SETTING">Pengaturan Khusus</string>
+		<string name="device_name">Nama Perangkat:    %pb_device_manufacturer%%pb_device_name%</string>
+		<string name="device_codename">Nama Kode Perangkat:    %pb_device%</string>
+		<string name="build_date">Tanggal Dibangun:    %pb_build%</string>
+		<string name="pb_version">Versi PitchBlack:    %pb_ver%</string>
+		<string name="device_maintainer1">Pemelihara Perangkat:    %pb_maintainer%</string>
+		<string name="core_contributors">Kontributor Inti</string>
+		<string name="miscellaneous">Miscellaneous</string>
+		<string name="pbrpspecial_btn">Spesial PBRP</string>
+		<string name="install_txt">Ingin Menambahkan perubahan</string>
+		<string name="install2_txt">dalam bentuk Zip atau Img</string>
+		<string name="wipe_txt">Lepaskan perangkat Anda</string>
+		<string name="wipe2_txt">Menekankan</string>
+		<string name="backup_txt">Simpan Berharga Anda</string>
+		<string name="backup2_txt">Permata di Tempat yang Lebih Aman</string>
+		<string name="restore_txt">Dapatkan kembali Precious Anda</string>
+		<string name="restore2_txt">Permata. Apakah kamu sudah menabung</string>
+		<string name="mount_txt">Dapatkan perangkat Anda</string>
+		<string name="mount2_txt">Partisi Terpasang</string>
+		<string name="advanced_txt">Halaman ini tidak cukup</string>
+		<string name="advanced2_txt">untukmu? Beralih ke</string>
+		<string name="settings_txt">Sesuaikan Pemulihan PitchBlack!</string>
+		<string name="customizations">Kustomisasi</string>
+		<string name="themes_txt">Tema</string>
+		<string name="bg_color">Warna latar belakang</string>
+		<string name="font_options">Opsi font</string>
+		<string name="features_txt">fitur</string>
+		<string name="logs_btn">BUKA KONSOL</string>
+		<string name="pb_install_patch_detected">- Terdeteksi Paket Patch atau Fix</string>
+		<string name="exp">Opsi Explorer</string>
+		<string name="pb_for_en_chk">Enkripsi Paksa Nonaktifkan Lanjutan</string>
+		<string name="pb_disable_reboot_ota_check">Nonaktifkan Reboot setelah OTA</string>
+		<string name="pb_encrypt_cn">Beberapa Detail Enkripsi Cache</string>
+		<string name="pb_encrypt_st">Status Enkripsi: {1}</string>
+		<string name="fm_pb_make">Buat Folder</string>
+		<string name="fm_pb_mk">Membuat Folder</string>
+		<string name="pb_ecryption_leave">Perangkat Dienkripsi Meninggalkan Forceencrypt</string>
+		<string name="pb_unlink">Membatalkan tautan: '{1}'</string>
+		<string name="pb_patching">Menambal: '{1}'</string>
+		<string name="pb_end_read">Proses yang Berakhir Baca {1}</string>
+		<string name="pb_start_read">Proses Mulai Baca {1}</string>
+		<string name="pb_bk">Membuat Cadangan File PB - / tmp / pb / backup_wip ...</string>
+		<string name="pb_bk_no">Tidak ada Alat PBRP yang mendeteksi Reflash Paket PBRP</string>
+		<string name="zip_err_compatibility">Kompatibilitas Bypass Treble</string>
+		<string name="pb_wipe_substratum_overlays">Hamparan Substratum</string>
+		<string name="substratum_done">- Lapisan Substratum Hapus Selesai!</string>
+		<string name="assert_failed_hint">Penegasan gagal. Silakan periksa output di atas untuk lebih jelasnya.</string>
+		<string name="pb_wipe_magisk_modules">Modul Ajaib</string>
+		<string name="magisk_done">- Modul Magisk Menghapus Selesai!</string>
+		<string name="pb_saving_log">Melestarikan Log ...</string>
+		<string name="pb_enable_dmesg_logging">Aktifkan Dmesg logging setelah Flash</string>
+		<string name="pb_copy_log_cache">Menyalin Log ke Cache juga.</string>
+		<string name="pb_dev_name_change">Ingin Mengubah Nama Kode perangkat Anda?</string>
+		<string name="img">IMG</string>
+		<string name="zip">zip</string>
+		<string name="pb_dev_change">Mengubah Nama Kode Perangkat dari %pb_prop_value% menjadi %pb_codename_change%</string>
+		<string name="pb_dev_changed">Nama Kode Perangkat Berubah menjadi %pb_codename_change%</string>
+		<string name="pb_dev_reboot">Reboot adalah wajib Setelah mengganti Nama Kode</string>
+		<string name="pb_dev_name">Pengubah Nama Kode Perangkat PBRP</string>
+		<string name="codename_changer">Codename Changer</string>
+		<string name="pb_wipe_fbe_cache">Cache FBE</string>
+		<string name="fbe_done">- Penghapusan Cache FBE Selesai!</string>
+		<string name="sel_br_val">Nilai Kecerahan Senter: %pb_bright_value%%</string>
+		<string name="unmount_sys_install">Lepaskan Sistem sebelum menginstal ZIP</string>
+		<string name="unmount_system">Melepas Sistem ...</string>
+		<string name="unmount_system_err">Gagal melepas Sistem</string>
+		
+		<!-- PBRP Auto-Translated Strings END -->
 	</resources>
 </language>
 
