@@ -911,6 +911,7 @@
 				</conditions>
 				<actions>
 					<action function="set">tw_sleep=%tw_sleep_total%</action>
+					<action function="set">tw_install_reboot_recovery=0</action>
 					<action function="page">flash_sleep_and_reboot</action>
 				</actions>
 			</action>
