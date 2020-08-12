@@ -4954,6 +4954,16 @@
 				</actions>
 			</button>
 
+			<button style="main_button_half_height_full">
+				<condition var1="tw_fm_isfolder" var2="1"/>
+				<placement x="%indent%" y="%row6_y%"/>
+				<text>{@open_terminal_btn=Open Terminal Here}</text>
+				<actions>
+					<action function="change_terminal">cd %tw_filename1%</action>
+					<action function="page">terminalcommand</action>
+				</actions>
+			</button>
+
 			<button style="main_button_half_height_new">
 				<conditions>
 					<condition var1="tw_fm_isfolder" var2="0"/>
