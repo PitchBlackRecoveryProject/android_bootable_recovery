@@ -96,9 +96,9 @@ GUISlider::GUISlider(xml_node<>* node) : GUIObject(node)
 		}
 	}
 	if (sSliderLabel) {
-		int sTextX = mRenderX + (mRenderW / 2);
 		int w, h;
 		sSliderLabel->GetCurrentBounds(w, h);
+		int sTextX = mRenderX + (mRenderW / 2) > w ? (mRenderW / 2) : (mRenderW / 3);
 		int sTextY = mRenderY + ((mRenderH - h) / 2);
 		sSliderLabel->SetRenderPos(sTextX, sTextY);
 		sSliderLabel->SetMaxWidth(mRenderW);

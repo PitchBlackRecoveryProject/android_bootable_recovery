@@ -338,7 +338,7 @@
 		</style>
 
 		<style name="slider">
-			<placement x="%center_x%" y="%row22_y%"/>
+			<placement x="%center_x%" y="%row22_y%" textplacement="5"/>
 			<font resource="font_roboto" color="#353434"/>
 			<resource base="slider_used" used="slider_used" touch="slider_touch"/>
 		</style>
@@ -3667,7 +3667,7 @@
 			</checkbox>
 
 			<button style="main_button_half_height_new">
-				<placement x="%indent%" y="%row18a_y%"/>
+				<placement x="%indent%" y="%row17_y%"/>
 				<text>{@sys_ro_keep_ro_btn=Keep Read Only}</text>
 				<actions>
 					<action function="mountsystemtoggle">1</action>
@@ -3677,7 +3677,7 @@
 			</button>
 
 			<button style="main_button_half_height_new">
-				<placement x="%center_x%" y="%row18a_y%"/>
+				<placement x="%center_x%" y="%row17_y%"/>
 				<text>{@sel_lang_btn=Select Language}</text>
 				<action function="overlay">select_language</action>
 			</button>
