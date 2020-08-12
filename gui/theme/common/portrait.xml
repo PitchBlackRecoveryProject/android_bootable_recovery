@@ -2,27 +2,27 @@
 <?xml version="1.0"?>
 <recovery>
 	<styles>
-	
+
 		<style name="text_exl">
 			<font resource="font_exl" color="%text_color%"/>
 		</style>
-	
+
 		<style name="text_l">
 			<font resource="font_l" color="%text_color%"/>
 		</style>
-		
+
 		<style name="text_pb">
 			<font resource="font_pb" color="%text_main_button_color%"/>
 		</style>
-		
+
 		<style name="text_pb_small">
 			<font resource="font_pb_small" color="%text_main_button_color%"/>
 		</style>
-		
+
 		<style name="text_pb_tools">
 			<font resource="font_pb_tools" color="%text_main_button_color%"/>
 		</style>
-		
+
 		<style name="text_about">
 			<font resource="font_about" color="%text_color%"/>
 		</style>
@@ -30,7 +30,7 @@
 		<style name="text_install_subheader">
 			<font resource="font_install_subheader" color="#434243"/>
 		</style>
-		
+
 		<style name="text_m">
 			<font resource="font_m" color="%text_color%"/>
 		</style>
@@ -38,7 +38,7 @@
 		<style name="text_m_accent">
 			<font resource="font_about" color="#FFFFFF"/>
 		</style>
-		
+
 		<style name="text_l_color">
 			<font resource="font_l" color="#00CC44"/>
 		</style>
@@ -46,15 +46,15 @@
 		<style name="text_m_fail">
 			<font resource="font_m" color="%text_fail_color%"/>
 		</style>
-		
+
 		<style name="text_fail_selected">
 			<font resource="font_l" color="%text_fail_selected%"/>
 		</style>
-		
+
 		<style name="text_n">
 			<font resource="font_n" color="%text_color%"/>
 		</style>
-		
+
 		<style name="text_sub_header">
 			<font resource="font_sub_header" color="%sub_header_color%"/>
 		</style>
@@ -66,7 +66,7 @@
 		<style name="text_s">
 			<font resource="font_s" color="%text_color%"/>
 		</style>
-		
+
 		<style name="text_xl">
 			<font resource="font_xl" color="%text_color%"/>
 		</style>
@@ -77,12 +77,12 @@
 
 		<style name="text_roboto_m">
 			<font resource="font_roboto_m" color="%text_color%"/>
-		</style>		
+		</style>
 
 		<style name="text_adv">
 			<font resource="font_slider" color="%text_color%"/>
 		</style>
-		
+
 		<style name="input">
 			<background color="%background_color%"/>
 			<cursor color="%accent_color%" hasfocus="1" width="%input_line_width%"/>
@@ -99,7 +99,7 @@
 			<font resource="font_slider" color="%text_main_button_color%"/>
 			<image resource="main_button"/>
 		</style>
-		
+
 		<style name="main_button_black">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_pb" color="%text_main_button_color%" />
@@ -118,8 +118,8 @@
 			<font resource="font_pb" color="%text_button_color%" />
 			<image resource="main_button_black3_new"/>
 			<background color="%background_color%"/>
-		</style>		
-		
+		</style>
+
 		<style name="main_button_black2">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_pb" color="%text_main_button_color%" />
@@ -143,7 +143,7 @@
 			<highlight color="#1A1A1A80"/>
 			<font resource="font_pb" color="%text_button_color%"/>
 		</style>
-		
+
 		<style name="main_button_themes">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_pb" color="%text_button_color%"/>
@@ -167,7 +167,7 @@
 			<font resource="font_install_option" color="%text_main_button_color%"/>
 			<image resource="main_button_install_page"/>
 		</style>
-		
+
 		<style name="main_button_half_height">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_card" color="%text_main_button_color%"/>
@@ -178,14 +178,14 @@
 			<highlight color="%highlight_color%"/>
 			<font resource="font_card" color="%text_main_button_color%"/>
 			<image resource="main_button_tools"/>
-		</style>		
-		
+		</style>
+
 		<style name="main_button_half_height_new">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_card" color="%text_main_button_color%"/>
 			<image resource="main_button_half_height_new"/>
 		</style>
-		
+
 		<style name="main_button_half_height_full">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_card" color="%text_main_button_color%"/>
@@ -201,7 +201,7 @@
 		<style name="main_button_pbrp_about">
 			<highlight color="%highlight_color%"/>
 			<image resource="main_button_pbrp_about"/>
-		</style>		
+		</style>
 
 		<style name="main_button_pbrp_custom">
 			<highlight color="%highlight_color%"/>
@@ -212,12 +212,12 @@
 			<highlight color="%highlight_color%"/>
 			<image resource="main_button_pbrp_special_settings"/>
 		</style>
-		
+
 		<style name="main_button_pbrp_tools">
 			<highlight color="%highlight_color%"/>
 			<image resource="main_button_pbrp_tools"/>
-		</style>		
-		
+		</style>
+
 		<style name="button_third_width">
 			<highlight color="%highlight_color%"/>
 			<font resource="font_m" color="%text_button_color%"/>
@@ -247,13 +247,13 @@
 			<color foreground="%sub_header_color%" background="%background_color%" scroll="%background_color2%"/>
 			<font resource="cons"/>
 		</style>
-		
+
 		<style name="about">
 			<background color="%transparent%"/>
 			<fastscroll linecolor="%fileselector_linecolor2%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<font resource="font_s" spacing="8" color="%text_color%" />
 		</style>
-		
+
 		<style name="terminal">
 			<fastscroll linecolor="%transparent%" rectcolor="%accent_color2%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
 			<background color="%background_color%"/>
@@ -387,7 +387,7 @@
 				<image resource="main_button_settings"/>
 				<action function="page">settings</action>
 			</button>
-			
+
 			<button style="main_button_black">
 				<placement x="%indent_button%" y="%row2a_y%" textplacementmain="1"/>
 				<icon resource="main_button_install"/>
@@ -398,21 +398,21 @@
 					<action function="page">install</action>
 				</actions>
 			</button>
-			
+
 			<button style="main_button_black">
 				<placement x="%main_button_space%" y="%row2a_y%" textplacementmain="1"/>
 				<icon resource="main_button_wipe"/>
 				<text>{@wipe_btn=Wipe}</text>
 				<action function="page">wipe</action>
 			</button>
-			
+
 			<button style="main_button_black">
 				<placement x="%indent_button%" y="%row7a_y%" textplacementmain="1"/>
 				<icon resource="main_button_backup"/>
 				<text>{@backup_btn=Backup}</text>
 				<action function="page">backup</action>
 			</button>
-			
+
 			<button style="main_button_black">
 				<placement x="%main_button_space%" y="%row7a_y%" textplacementmain="1"/>
 				<icon resource="main_button_restore"/>
@@ -426,7 +426,7 @@
 				<text>{@mount_btn=Mount}</text>
 				<action function="page">mount</action>
 			</button>
-			
+
 			<button style="main_button_black">
 				<placement x="%main_button_space%" y="%row12a_y%" textplacementmain="1"/>
 				<icon resource="main_button_advanced"/>
@@ -440,12 +440,12 @@
 				<text>{@pbrpspecial_btn=PBRP Special}</text>
 				<action function="page">pbrp_special</action>
 			</button>
-			
+
 			<text style="text_header">
 				<placement x="90" y="%row19a_y%"/>
 				<text>{@settings_txt=Customize PBRP with themes, icons, more}</text>
 			</text>
-			
+
 			<button style="main_button_themes_features">
 				<placement x="90" y="%row21_y%" textplacementmain="3"/>
 				<icon resource="main_button_specials_icon" />
@@ -455,7 +455,7 @@
 					<action function="page">customizations</action>
 				</actions>
 			</button>
-			
+
 			<button style="main_button_themes_features">
 				<placement x="400" y="%row21_y%" textplacementmain="3"/>
 				<icon resource="main_button_specials_icon" />
@@ -471,7 +471,7 @@
 				<image resource="main_button_specials_info" />
 				<action function="page">about</action>
 			</button>
-			
+
 			<button style="main_button_specials_info">
 				<placement x="%row11_y%" y="1557" w="100" h="100"/>
 				<image resource="main_button_reboot"/>
@@ -488,7 +488,7 @@
 				<placement x="80" y="520"/>
 				<text>{@install2_txt=in form of Zips or Img}</text>
 			</text>
-			
+
 			<text style="text_header">
 				<placement x="600" y="470"/>
 				<text>{@wipe_txt=Release your device's}</text>
@@ -503,7 +503,7 @@
 				<placement x="80" y="790"/>
 				<text>{@backup_txt=Keep Your Precious Gems}</text>
 			</text>
-			
+
 			<text style="text_header">
 				<placement x="80" y="840"/>
 				<text>{@backup2_txt=at A Safer Place}</text>
@@ -513,7 +513,7 @@
 				<placement x="600" y="790"/>
 				<text>{@restore_txt=Get back your Precious}</text>
 			</text>
-			
+
 			<text style="text_header">
 				<placement x="600" y="840"/>
 				<text>{@restore2_txt=Gems. Have you saved?}</text>
@@ -523,7 +523,7 @@
 				<placement x="80" y="1110"/>
 				<text>{@mount_txt=Get your device's}</text>
 			</text>
-			
+
 			<text style="text_header">
 				<placement x="80" y="1160"/>
 				<text>{@mount2_txt=Partitions Mounted}</text>
@@ -568,7 +568,7 @@
 				<data name="tw_storage_path"/>
 				<listtype name="storage"/>
 			</partitionlist>
-			
+
 			<button style="filter_button">
 				<placement x="800" y="%row15_y%"/>
 				<image resource="filter"/>
@@ -578,7 +578,7 @@
 				</actions>
 			</button>
 		</page>
-		
+
 		<page name="install">
 			<template name="page_without_logo"/>
 
@@ -677,7 +677,7 @@
 				<image resource="flash"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<text style="text_pb">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@install_zip_hdr=Install Zip}</text>
@@ -744,7 +744,7 @@
 				<icon resource="main_button_specials_icon"/>
 				<action function="page">install</action>
 			</button>
-			
+
 			<button style="main_button_install_page">
 				<placement x="%col1_x_right%" y="%row17_y%" textplacementmain="3"/>
 				<icon resource="main_button_specials_icon_clear"/>
@@ -754,7 +754,7 @@
 					<action function="page">install</action>
 				</actions>
 			</button>
-			
+
 			<slider>
 				<text>{@swipe_flash=Swipe to Flash}</text>
 				<action function="flash">flash_zip</action>
@@ -809,7 +809,7 @@
 				<image resource="flash"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@install_zip_hdr=Install Zip}</text>
@@ -849,7 +849,7 @@
 				</actions>
 			</button>
 
-		
+
 			<button style="main_button_install_page">
 		    <condition var1="tw_ab_device" var2="1"/>
 				<placement x="80" y="%row21a_y%" textplacementmain="3"/>
@@ -866,7 +866,7 @@
                       <action function="page">confirm_action</action>
 					</actions>
 				</button>
-	
+
 				<button style="main_button_install_page">
 					<placement x="630" y="%row21a_y%" textplacementmain="2"/>
 					<icon resource="reboot_icon"/>
@@ -876,15 +876,15 @@
 					<action function="page">reboot_system_routine</action>
 				</actions>
 			</button>
-			
-			<button>	
+
+			<button>
 				<image resource="screenshot_icon"/>
-				<placement x="920" y="135"/>			
+				<placement x="920" y="135"/>
 				<actions>
 					<action function="screenshot"/>
 				</actions>
 			</button>
-			
+
 			<action>
 				<touch key="back"/>
 				<actions>
@@ -997,7 +997,7 @@
 				<image resource="flash"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<text style="text_pb">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@install_image_hdr=Install Image}</text>
@@ -1038,8 +1038,8 @@
 			<text style="text_pb">
 				<placement x="90" y="%row7_y%"/>
 				<text>{@flash_image_select=Select Partition to Flash Image:}</text>
-			</text>			
-			
+			</text>
+
 			<slider>
 				<text>{@swipe_flash=Swipe to Flash}</text>
 				<actions>
@@ -1112,7 +1112,7 @@
 				<action function="page">rebootcheck</action>
 			</action>
 		</page>
-		
+
 		<page name="reboot_recovery_routine">
 			<action>
 				<action function="set">tw_back=reboot</action>
@@ -1135,13 +1135,13 @@
 			<image>
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
-			</image>			
-			
+			</image>
+
 			<image>
 				<image resource="pb"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@confirm_action=Confirm Action}</text>
@@ -1290,12 +1290,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="logo"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>%tw_complete_text1%</text>
@@ -1312,7 +1312,7 @@
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
 				<text>{@successful=Successful}</text>
 			</text>
-			
+
 			<template name="console"/>
 
 			<button style="main_button_half_height_new">
@@ -1333,7 +1333,7 @@
 					<action function="page">reboot_system_routine</action>
 				</actions>
 			</button>
-			
+
 			<button style="main_button_half_height">
 				<condition var1="pb_reboot_recovery" var2="1"/>
 				<placement x="%center_x%" y="%row20a_y%"/>
@@ -1435,7 +1435,7 @@
 				<image resource="main_button_wipe"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@wipe_hdr=Wipe}</text>
@@ -1446,8 +1446,8 @@
 				<text>{@factory_reset_hdr=Factory Reset}</text>
 			</text>
 
-			<template name="tabs_wipe"/>	
-			
+			<template name="tabs_wipe"/>
+
 			<image>
 				<image resource="selected_tab"/>
 				<placement x="425" y="%row3_input_y%"/>
@@ -1457,7 +1457,7 @@
 				<image resource="alert-circle"/>
 				<placement x="340" y="%row6_y%"/>
 			</image>
-			
+
 			<text>
 				<font resource="font_pb_tools" color="%text_main_button_color%"/>
 				<placement x="%center_x%" y="%row13a_y%" placement="5"/>
@@ -1537,12 +1537,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_wipe"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<action>
 				<action function="set">tw_wipe_list=</action>
 			</action>
@@ -1558,14 +1558,14 @@
 			</text>
 
 			<template name="tabs_wipe"/>
-			
+
 			<image>
 				<image resource="selected_tab"/>
 				<placement x="120" y="%row3_input_y%"/>
 			</image>
-			
+
 			<partitionlist>
-				<placement x="90" y="%row5a_y%" w="%content_width%" h="%partitionlist_wipe_height%"/>	
+				<placement x="90" y="%row5a_y%" w="%content_width%" h="%partitionlist_wipe_height%"/>
 				<data name="tw_wipe_list"/>
 				<listtype name="wipe"/>
 			</partitionlist>
@@ -1574,7 +1574,7 @@
 				<placement x="90%" y="%row5_y%"/>
 				<text>{@sel_part_wipe=Select Partitions to Wipe:}</text>
 			</text>
-			
+
 			<text style="text_m_fail">
 				<condition var1="partitionlisterror" var2="1"/>
 				<placement x="%center_x%" y="%row16a_y%" placement="5"/>
@@ -1628,7 +1628,7 @@
 				<image resource="main_button_wipe"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@wipe_hdr=Wipe}</text>
@@ -1645,7 +1645,7 @@
 				<image resource="selected_tab"/>
 				<placement x="740" y="%row3_input_y%"/>
 			</image>
-			
+
 			<text>
 				<placement x="%center_x%" y="%row5_y%" placement="5"/>
 				<font resource="font_slider" color="%text_main_button_color%"/>
@@ -1753,12 +1753,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_wipe"/>
 				<placement x="75" y="135"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@wipe_hdr=Wipe}</text>
@@ -1789,8 +1789,8 @@
 				<condition var1="tw_partition_is_present" var2="1"/>
 				<placement x="100" y="%row7_y%"/>
 				<text>{@part_present_yes=Yes}</text>
-			</text>			
-			
+			</text>
+
 			<text style="text_pb">
 				<condition var1="tw_partition_is_present" var2="0"/>
 				<placement x="100" y="%row6_y%"/>
@@ -1801,8 +1801,8 @@
 				<condition var1="tw_partition_is_present" var2="0"/>
 				<placement x="100" y="%row7_y%"/>
 				<text>{@part_present_no=No}</text>
-			</text>			
-			
+			</text>
+
 			<text style="text_pb">
 				<condition var1="tw_partition_removable" var2="1"/>
 				<placement x="680" y="%row6_y%"/>
@@ -1813,8 +1813,8 @@
 				<condition var1="tw_partition_removable" var2="1"/>
 				<placement x="680" y="%row7_y%"/>
 				<text>{@part_removable_yes=Yes}</text>
-			</text>			
-			
+			</text>
+
 			<text style="text_pb">
 				<condition var1="tw_partition_removable" var2="0"/>
 				<placement x="680" y="%row6_y%"/>
@@ -1825,8 +1825,8 @@
 				<condition var1="tw_partition_removable" var2="0"/>
 				<placement x="680" y="%row7_y%"/>
 				<text>{@part_removable_no=No}</text>
-			</text>			
-			
+			</text>
+
 			<text style="text_pb">
 				<placement x="100" y="%row9_y%"/>
 				<text>{@part_size=Size:}</text>
@@ -1835,8 +1835,8 @@
 			<text style="text_install_subheader">
 				<placement x="100" y="%row10_y%"/>
 				<text>%tw_partition_size%MB</text>
-			</text>			
-			
+			</text>
+
 			<text style="text_pb">
 				<placement x="680" y="%row9_y%"/>
 				<text>{@part_used=Used:}</text>
@@ -1845,8 +1845,8 @@
 			<text style="text_install_subheader">
 				<placement x="680" y="%row10_y%"/>
 				<text>%tw_partition_used%MB</text>
-			</text>			
-			
+			</text>
+
 			<text style="text_pb">
 				<placement x="100" y="%row12_y%"/>
 				<text>{@part_free=Free:}</text>
@@ -1855,8 +1855,8 @@
 			<text style="text_install_subheader">
 				<placement x="100" y="%row13_y%"/>
 				<text>%tw_partition_free%MB</text>
-			</text>			
-			
+			</text>
+
 			<text style="text_pb">
 				<placement x="680" y="%row12_y%"/>
 				<text>{@part_backup_size=Backup Size:}</text>
@@ -1865,8 +1865,8 @@
 			<text style="text_install_subheader">
 				<placement x="680" y="%row13_y%"/>
 				<text>%tw_partition_backup_size%MB</text>
-			</text>			
-			
+			</text>
+
 			<button style="main_button_half_height_new">
 				<condition var1="tw_partition_can_resize" op="=" var2="1"/>
 				<placement x="%indent%" y="%row16a_y%"/>
@@ -2107,11 +2107,11 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_backup"/>
 				<placement x="75" y="135"/>
-			</image>			
+			</image>
 
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
@@ -2162,7 +2162,7 @@
 					<action function="page">backupencryption</action>
 				</actions>
 			</button>
-			
+
 			<button style="main_button_half_height_new">
 				<condition var1="tw_enable_adb_backup" op="!=" var2="1"/>
 				<placement x="%indent%" y="%row17_y%"/>
@@ -2176,12 +2176,12 @@
 			<button style="filter_button">
 				<placement x="800" y="%row15_y%"/>
 				<image resource="filter"/>
-				<actions>					
+				<actions>
 					<action function="set">pb_back=backup</action>
 					<action function="overlay">filter_backup</action>
 				</actions>
-			</button>			
-			
+			</button>
+
 			<slider>
 				<text>{@swipe_backup=Swipe to Backup}</text>
 				<action function="page">backup_run</action>
@@ -2201,7 +2201,7 @@
 		<page name="filter_backup">
 			<template name="filter_backup"/>
 		</page>
-		
+
 		<page name="backup_options">
 			<template name="page"/>
 
@@ -2226,7 +2226,7 @@
 				<text>{@skip_digest_backup_chk=Skip Digest generation during backup}</text>
 				<data variable="tw_skip_digest_generate"/>
 			</checkbox>
-			
+
 			<checkbox>
 				<placement x="%indent%" y="%row5a_y%"/>
 				<text>{@check_digest_after_backup=Check Digest After Backup}</text>
@@ -2306,11 +2306,11 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_backup"/>
 				<placement x="75" y="135"/>
-			</image>			
+			</image>
 
 
 			<text style="text_l">
@@ -2397,12 +2397,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_backup"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<text style="text_pb">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@backup_hdr=Backup}</text>
@@ -2628,12 +2628,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_restore"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@restore_hdr=Restore}</text>
@@ -2705,12 +2705,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_restore"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@restore_hdr=Restore}</text>
@@ -2839,12 +2839,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_restore"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@restore_hdr=Restore}</text>
@@ -2885,7 +2885,7 @@
 				<placement x="90" y="%row4a_y%"/>
 				<text>{@restore_sel_part=Select Partitions to Restore:}</text>
 			</text>
-			
+
 			<checkbox>
 				<condition var1="tw_enable_adb_backup" op="=" var2="0"/>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
@@ -2934,12 +2934,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_restore"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@restore_hdr=Restore}</text>
@@ -3013,12 +3013,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_restore"/>
 				<placement x="75" y="135"/>
 			</image>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@restore_hdr=Restore}</text>
@@ -3065,7 +3065,7 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_mount"/>
 				<placement x="85" y="135"/>
@@ -3089,8 +3089,8 @@
 			<text style="text_pb">
 				<placement x="90" y="%row3_y%"/>
 				<text>{@mount_sel_part=Select Partitions to Mount:}</text>
-			</text>			
-			
+			</text>
+
 			<button style="checkbox">
 				<condition var1="tw_mount_system_ro" op="=" var2="0"/>
 				<placement x="90" y="%row15a_y%" textplacement="6"/>
@@ -3178,12 +3178,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_mount"/>
 				<placement x="85" y="135"/>
 			</image>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@mount_hdr=Mount}</text>
@@ -3365,7 +3365,7 @@
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
 			</action>
-			
+
 			<action>
 			    <touch hkey="volup" />
 			    <action function="flashlight" />
@@ -3378,8 +3378,8 @@
 			<image>
 				<image resource="power_logo"/>
 				<placement x="90" y="%row4_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_sub_header">
 				<placement x="200" y="%row7_y%"/>
 				<text>Thank you for using PitchBlack Recovery..!</text>
@@ -3388,8 +3388,8 @@
 			<text style="text_sub_header">
 				<placement x="300" y="%row8_y%"/>
 				<text>Consider donating, if you like it</text>
-			</text>			
-			
+			</text>
+
 			<button style="main_button_half_height_new">
 				<condition var1="tw_reboot_system" var2="1"/>
 				<text>{@reboot_system_btn=System}</text>
@@ -3439,7 +3439,7 @@
 			</button>
 
 			<button style="main_button_half_height_new">
-				
+
 				<condition var1="tw_reboot_bootloader" var2="1"/>
 				<text>{@rb_bootloader_btn1=Bootloader}</text>
 				<placement x="520" y="%row13_y%"/>
@@ -3459,7 +3459,7 @@
 			</button>
 
 			<button style="main_button_half_height_new">
-				
+
 				<condition var1="tw_download_mode" var2="1"/>
 				<text>{@rb_download_btn=Download}</text>
 				<placement x="520" y="%row16_y%"/>
@@ -3479,7 +3479,7 @@
 			</button>
 
 			<button style="main_button_half_height_new">
-				
+
 				<condition var1="tw_edl_mode" var2="1"/>
 				<text>{@rb_edl_btn=Edl}</text>
 				<placement x="20" y="%row16_y%"/>
@@ -3694,7 +3694,7 @@
 
 		<page name="settings">
 			<template name="page"/>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@settings_hdr=Settings}</text>
@@ -3711,7 +3711,7 @@
 				<image resource="selected_bar"/>
 				<placement x="50" y="%row3_y%"/>
 			</image>
-			
+
 			<listbox style="scrolllist">
 				<placement x="90" y="%row4a_y%" w="%content_width%" h="1140"/>
 				<icon selected="checkbox_true" unselected="checkbox_false"/>
@@ -3788,7 +3788,7 @@
 
 		<page name="settings_timezone">
 			<template name="page"/>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@settings_hdr=Settings}</text>
@@ -3983,7 +3983,7 @@
 
 		<page name="settings_vibration">
 			<template name="page"/>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@settings_hdr=Settings}</text>
@@ -4041,7 +4041,7 @@
 
 		<page name="settings_language">
 			<template name="page"/>
-			
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@settings_hdr=Settings}</text>
@@ -4058,12 +4058,12 @@
 				<image resource="selected_bar"/>
 				<placement x="860" y="%row3_y%"/>
 			</image>
-			
+
 			<text style="text_pb">
 				<placement x="90" y="450"/>
 				<text>{@select_language=Select Language:}</text>
 			</text>
-			
+
 			<listbox>
 				<placement x="90" y="%row5_y%" w="%content_width%" h="1040"/>
 				<icon selected="radio_true" unselected="radio_false" />
@@ -4094,7 +4094,7 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_log"/>
 				<placement x="45" y="%row3_header_y%"/>
@@ -4158,7 +4158,7 @@
 				<image resource="scrolling_notice"/>
 				<placement x="%indent%" y="%row4_y%"/>
 			</image>
-			
+
 			<text style="text_l">
 				<placement x="220" y="135"/>
 				<text>{@advanced_hdr=Advanced}</text>
@@ -4236,12 +4236,12 @@
 					<icon icon="main_button_fixcontexts"/>
 					<action function="page">htcdumlock</action>
 				</listitem>
-				
+
 				<listitem name="{@decrypt_users=Decrypt Users}">
 					<conditions>
 						<condition var1="tw_is_fbe" var2="1"/>
 						<condition var1="tw_all_users_decrypted" var2="0"/>
-					</conditions>				
+					</conditions>
 					<text>{@decrypt_users1=Decrypt Users}</text>
 					<icon icon="main_button_fixcontexts"/>
 					<actions>
@@ -4249,7 +4249,7 @@
 						<action function="page">decrypt_users</action>
 					</actions>
 				</listitem>
-				
+
 				<listitem name="{@install_twrp_ramdisk=Install Recovery Ramdisk}">
 					<condition var1="tw_has_boot_slots" var2="1"/>
 					<text>{@install_twrp_ramdisk1=Install Recovery Ramdisk}</text>
@@ -4282,8 +4282,8 @@
 						<action function="page">confirm_action</action>
 					</actions>
 				</listitem>
-			</listbox>			
-			
+			</listbox>
+
 			<action>
 				<touch key="home"/>
 				<action function="page">main</action>
@@ -4294,7 +4294,7 @@
 				<action function="page">main</action>
 			</action>
 		</page>
-		
+
 		<page name="partsdcardsel">
 			<template name="page"/>
 
@@ -4302,12 +4302,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_partitionsd"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
 				<text>{@advanced_hdr=Advanced}</text>
@@ -4328,7 +4328,7 @@
 				<placement x="90" y="%row2_y%"/>
 				<text>{@sel_storage_list=Select Storage}</text>
 			</text>
-			
+
 			<text style="text_m_fail">
 				<condition var1="partitionlisterror" var2="1"/>
 				<placement x="%center_x%" y="%row18a_y%" placement="5"/>
@@ -4372,7 +4372,7 @@
 				</actions>
 			</action>
 		</page>
-		
+
 		<page name="partsdcard">
 			<template name="page"/>
 
@@ -4499,12 +4499,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="pb"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@advanced_hdr=Advanced}</text>
@@ -4567,9 +4567,9 @@
 				<action function="page">advanced</action>
 			</action>
 		</page>
-		
-		
-		
+
+
+
 		<page name="repackselect">
 			<template name="page"/>
 
@@ -4636,13 +4636,13 @@
 			<image>
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
-			</image>			
-			
+			</image>
+
 			<image>
 				<image resource="pb"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<condition var1="tw_repack_kernel" var2="1"/>
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
@@ -4725,7 +4725,7 @@
 
 		<page name="lock">
 			<background color="#191919"/>
-			
+
 			<image>
 				<image resource="splashlogo"/>
 				<placement x="540" y="750" placement="4"/>
@@ -4782,17 +4782,17 @@
 				<text>{@swipe_to_unlock=Swipe to Unlock}</text>
 				<action function="overlay"/>
 			</slider>
-			
+
 			<action>
 				<touch key="power"/>
 				<action function="togglebacklight"/>
 			</action>
-			
+
 			<action>
 				<touch key="power+voldown" />
 				<action function="screenshot" />
 			</action>
-			
+
 			<action>
 			    <touch hkey="volup" />
 			    <action function="flashlight" />
@@ -4806,12 +4806,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_explorer"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@fm_hdr=File Manager}</text>
@@ -4881,12 +4881,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_explorer"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@fm_hdr=File Manager}</text>
@@ -4906,7 +4906,7 @@
 				<placement x="90" y="%row3_y%"/>
 				<text>%tw_filename1%</text>
 			</text>
-			
+
 			<button style="main_button_half_height_full">
 				<contitions>
 					<condition var1="tw_fm_isfolder" var2="0"/>
@@ -4921,7 +4921,7 @@
 					<action function="page">readfile</action>
 				</actions>
 			</button>
-			
+
 			<button style="main_button_half_height_new">
 				<conditions>
 					<condition var1="tw_fm_isfolder" var2="0"/>
@@ -4936,7 +4936,7 @@
 					<action function="page">choosedestinationfolderforunzip</action>
 				</actions>
 			</button>
-			
+
 			<button style="main_button_half_height_new">
 				<conditions>
 					<condition var1="tw_fm_isfolder" var2="1"/>
@@ -5079,20 +5079,20 @@
 				<action function="page">filemanagerlist</action>
 			</action>
 		</page>
-		
+
 		<page name="readfile">
 			<template name="page"/>
-		
+
 			<image>
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_explorer"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>		
-		
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@fm_hdr=File Manager}</text>
@@ -5102,7 +5102,7 @@
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
 				<text>{@fm_reading=Reading File}</text>
 			</text>
-			
+
 			<console>
 				<placement x="%indent%" y="285" w="%content_width%" h="1450"/>
 			</console>
@@ -5120,7 +5120,7 @@
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
 			</action>
-			
+
 			<action>
 					<touch hkey="volup" />
 					<action function="flashlight" />
@@ -5138,7 +5138,7 @@
 				<action function="flush_up_console"></action>
 			</action>
 		</page>
-		
+
 		<page name="choosedestinationfolder">
 			<template name="page"/>
 
@@ -5146,12 +5146,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_explorer"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@fm_hdr=File Manager}</text>
@@ -5190,7 +5190,7 @@
 					<action function="overlay">filter_</action>
 				</actions>
 			</button>
-			
+
 			<button style="fab">
 				<image resource="fab_selectfolder"/>
 				<actions>
@@ -5221,12 +5221,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_explorer"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@fm_hdr=File Manager}</text>
@@ -5300,12 +5300,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_explorer"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@fm_hdr=File Manager}</text>
@@ -5365,12 +5365,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_explorer"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@fm_hdr=File Manager}</text>
@@ -5430,12 +5430,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_explorer"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@fm_hdr=File Manager}</text>
@@ -5494,12 +5494,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_explorer"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@fm_hdr=File Manager}</text>
@@ -5606,7 +5606,7 @@
 				</conditions>
 				<action function="cmd">%tw_filemanager_command% "%tw_filename1%" "%tw_fm_text3%"</action>
 			</action>
-			
+
 			<action>
 				<conditions>
 					<condition var1="tw_include_text3" var2="1"/>
@@ -5622,7 +5622,7 @@
 				</conditions>
 				<action function="cmd">%tw_filemanager_command% zip -r %tw_file_location2%/%pb_zip_new_name% *</action>
 			</action>
-			
+
 			<action>
 				<conditions>
 					<condition var1="tw_include_text3" var2="0"/>
@@ -5639,12 +5639,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_explorer"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@fm_hdr=File Manager}</text>
@@ -5696,7 +5696,7 @@
 				<action function="page">filemanageroptions</action>
 			</action>
 		</page>
-		
+
 		<page name="mkd">
 			<template name="page"/>
 
@@ -5704,12 +5704,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_explorer"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@fm_hdr=File Manager}</text>
@@ -6099,7 +6099,7 @@
 				<touch key="power+voldown" />
 				<action function="screenshot" />
 			</action>
-			
+
 			<action>
 				<touch hkey="volup" />
 				<action function="flashlight" />
@@ -6113,12 +6113,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_adb"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@advanced_hdr=Advanced}</text>
@@ -6174,12 +6174,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="main_button_fixcontexts"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@advanced_hdr=Advanced}</text>
@@ -6351,7 +6351,7 @@
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
 			</action>
-			
+
 			<action>
 				<touch hkey="volup" />
 				<action function="flashlight" />
@@ -6365,12 +6365,12 @@
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-			
+
 			<image>
 				<image resource="pb"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-			
+			</image>
+
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@decrypt_users=Decrypt Users}</text>
@@ -6407,7 +6407,7 @@
 				<action function="page">advanced</action>
 			</action>
 		</page>
-		
+
 		<page name="pbrp_special">
 			<template name="page_without_logo"/>
 
@@ -6430,20 +6430,20 @@
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
 				<text>%tw_version%</text>
 			</text>
-			
+
 			<button style="main_button_pbrp_about">
 				<placement x="0" y="240"/>
-				<actions>	
+				<actions>
 					<action function="set">tw_back=pbrp_special</action>
 					<action function="page">about</action>
-				</actions>					
+				</actions>
 			</button>
 
 			<text style="text_pb">
 				<placement x="350" y="350"/>
 				<text>{@about_pbrp=About PBRP}</text>
 			</text>
-			
+
 			<text style="text_header">
 				<placement x="350" y="425"/>
 				<text>{@device_info=Device Info}</text>
@@ -6452,26 +6452,26 @@
 			<text style="text_header">
 				<placement x="350" y="475"/>
 				<text>{@device_maintainer=Device Maintainer}</text>
-			</text>			
-			
+			</text>
+
 			<text style="text_header">
 				<placement x="350" y="525"/>
 				<text>{@contributors=Contributors}</text>
-			</text>			
-			
+			</text>
+
 			<button style="main_button_pbrp_custom">
 				<placement x="0" y="600"/>
 				<actions>
 					<action function="set">tw_back=pbrp_special</action>
 					<action function="page">customizations</action>
-				</actions>					
-			</button>			
+				</actions>
+			</button>
 
 			<text style="text_pb">
 				<placement x="350" y="710"/>
 				<text>{@customizations=Customizations}</text>
 			</text>
-			
+
 			<text style="text_header">
 				<placement x="350" y="785"/>
 				<text>Coming Soon....!</text>
@@ -6479,17 +6479,17 @@
 
 			<button style="main_button_pbrp_tools">
 				<placement x="0" y="960"/>
-				<actions>	
+				<actions>
 					<action function="set">tw_back=pbrp_special</action>
 					<action function="page">tools</action>
-				</actions>	
+				</actions>
 			</button>
 
 			<text style="text_pb">
 				<placement x="350" y="1070"/>
 				<text>{@tools1=Tools}</text>
 			</text>
-			
+
 			<text style="text_header">
 				<placement x="350" y="1145"/>
 				<text>{@codename_changer=Codename Changer}</text>
@@ -6498,26 +6498,26 @@
 			<text style="text_header">
 				<placement x="350" y="1195"/>
 				<text>{@SuperSU_btn=SuperSU}</text>
-			</text>			
+			</text>
 
 			<text style="text_header">
 				<placement x="350" y="1245"/>
 				<text>{@Magisk_btn=Magisk}</text>
-			</text>	
-			
+			</text>
+
 			<button style="main_button_pbrp_special_settings">
 				<placement x="0" y="1320"/>
-				<actions>	
+				<actions>
 					<action function="set">tw_back=pbrp_special</action>
 					<action function="page">special_setting</action>
-				</actions>	
-			</button>			
-			
+				</actions>
+			</button>
+
 			<text style="text_pb">
 				<placement x="350" y="1430"/>
 				<text>{@SETTING=Special Setting}</text>
 			</text>
-			
+
 			<text style="text_header">
 				<placement x="350" y="1505"/>
 				<text>{@SETTINGOTA=OTA Setting}</text>
@@ -6526,13 +6526,13 @@
 			<text style="text_header">
 				<placement x="350" y="1555"/>
 				<text>{@device_ab=A/B Device Settings}</text>
-			</text>			
+			</text>
 
 			<text style="text_header">
 				<placement x="350" y="1605"/>
 				<text>{@tools_hdr=Tools Options}</text>
-			</text>				
-			
+			</text>
+
 			<action>
 				<touch key="home"/>
 				<action function="page">main</action>
@@ -6541,8 +6541,7 @@
 			<action>
 				<touch key="back"/>
 				<action function="page">main</action>
-			</action>		
-			
-		</pages>	
+			</action>
+		</pages>
 	</pages>
 </recovery>
