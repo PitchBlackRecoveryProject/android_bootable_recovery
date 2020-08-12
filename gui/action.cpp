@@ -67,6 +67,7 @@ static string zip_queue[10];
 static int zip_queue_index;
 pid_t sideload_child_pid;
 extern std::vector<users_struct> Users_List;
+extern GUITerminal* term;
 
 static void *ActionThread_work_wrapper(void *data);
 
@@ -245,6 +246,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(getprop);
 		ADD_ACTION(flush_up_console);
 		ADD_ACTION(change_root);
+		ADD_ACTION(change_terminal);
 	}
 
 	// First, get the action
@@ -2685,5 +2687,18 @@ int GUIAction::flush_up_console(std::string arg __unused)
 int GUIAction::change_root(std::string arg __unused)
 {
 	PartitionManager.Change_System_Root(DataManager::GetIntValue(PB_MOUNT_SYSTEM_AS_ROOT));
+	return 0;
+}
+
+int GUIAction::change_terminal(std::string arg) {
+//	uint8_t argc[] = new uint8_t[arg.size()];
+
+	if (term != NULL) {
+		for (uint8_t iter = 0; iter < arg.size(); iter++)
+			term->NotifyCharInput(arg.at(iter));
+		term->NotifyCharInput(13);
+	}
+	else
+		LOGINFO("error\n");
 	return 0;
 }
