@@ -1293,6 +1293,11 @@ void PageManager::LoadLanguageListDir(string dir) {
 				LOGERR("No display value for '%s'\n", language_entry.filename.c_str());
 				language_entry.displayvalue = language_entry.filename;
 			}
+			child = parent->first_node("font");
+			if (child)
+				language_entry.font = child->value();
+			else
+				language_entry.font = "eng";
 			Language_List.push_back(language_entry);
 		}
 		doc->clear();

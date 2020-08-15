@@ -81,6 +81,9 @@ GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
 					DataManager::SetValue("tw_language_display", (*iter).displayvalue);
 				} else
 					data.selected = 0;
+				if(!(*iter).font.empty()) {
+					data.mFont = PageManager::GetResources()->FindFont((*iter).font);
+				}
 				mListItems.push_back(data);
 			}
 		} else if (mVariable == "tw_crypto_user_id") {
@@ -128,6 +131,7 @@ GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
 			}
 			SetMaxIconSize(iconWidth, iconHeight);
 		}
+		item.mFont = NULL;
 		item.textDesc = "";
 		icon = child->first_node("text");
 		if (icon) {
@@ -180,6 +184,7 @@ int GUIListBox::Update(void)
 				data.variableValue = (*iter).userId;
 				data.action = NULL;
 				data.textDesc = "";
+				data.mFont = NULL;
 				DataManager::GetValue("tw_crypto_user_id", currentValue);
 				if (currentValue == (*iter).userId || currentValue == "") {
 					data.selected = 1;
@@ -292,8 +297,7 @@ void GUIListBox::RenderItem(size_t itemindex, int yPos, bool selected)
 		icon = item.mIconSelected;
 	const std::string& text = item.displayName;
 	std::string& textDesc = item.textDesc;
-
-	RenderStdItem(yPos, selected, icon, text.c_str(), textDesc.c_str());
+	RenderStdItem(yPos, selected, icon, text.c_str(), textDesc.c_str(), 0, item.mFont);
 }
 
 void GUIListBox::NotifySelect(size_t item_selected)

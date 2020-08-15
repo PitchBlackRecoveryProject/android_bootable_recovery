@@ -499,7 +499,7 @@ protected:
 	virtual void NotifySelect(size_t item_selected __unused) {}
 
 	// render a standard-layout list item with optional icon and text
-	void RenderStdItem(int yPos, bool selected, ImageResource* icon, const char* text, const char* textDesc = "", int iconAndTextH = 0);
+	void RenderStdItem(int yPos, bool selected, ImageResource* icon, const char* text, const char* textDesc = "", int iconAndTextH = 0, FontResource* nFont = NULL);
 
 	enum { NO_ITEM = (size_t)-1 };
 	// returns item index at coordinates or NO_ITEM if there is no item there
@@ -667,6 +667,7 @@ protected:
 		GUIAction* action;
 		std::string textDesc;
 		ImageResource* mIconSelected;
+		FontResource* mFont;
 		std::vector<Condition> mConditions;
 	};
 
