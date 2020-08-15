@@ -5,10 +5,31 @@
 
 	<resources>
 		<!-- Font overrides - only change these if your language requires special characters -->
-		<resource name="font_l" type="fontoverride" filename="pb.ttf" scale="100" />
-		<resource name="font_m" type="fontoverride" filename="pb.ttf" scale="100" />
-		<resource name="font_s" type="fontoverride" filename="pb.ttf" scale="100" />
-		<resource name="fixed" type="fontoverride" filename="pb.ttf" scale="100" />
+		<resource name="font_l" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="font_m" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="font_s" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="fixed" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="font_n" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_o" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_s" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_xl" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_xxl" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="fixed" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_pb" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_pb_small" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_pb_tools" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_exl" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_l" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="cons" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_about" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_install_subheader" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_install_option" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_m" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_card" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_sub_header" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_slider" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_roboto_m" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_roboto" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
 
 		<!-- Partition display names -->
 		<string name="system">System</string>
