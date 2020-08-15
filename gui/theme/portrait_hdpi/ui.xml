@@ -23,11 +23,14 @@
 		<font name="font_m" filename="Roboto_Medium.ttf" size="34"/>
 		<font name="font_card" filename="Roboto_Regular.ttf" size="38"/>
 		<font name="font_sub_header" filename="Roboto_Regular.ttf" size="35"/>
-		<font name="font_slider" filename="Roboto_Medium.ttf" size="40"/>
+		<font name="font_slider" filename="pb.ttf" size="40"/>
 		<font name="font_roboto_m" filename="Roboto_Medium.ttf" size="39"/>
 		<font name="font_roboto" filename="Roboto_Medium.ttf" size="45"/>
 		<font name="font_n" filename="pb.ttf" size="20"/>
 		<font name="font_o" filename="pb.ttf" size="30"/>
+		<font name="chin" filename="DroidSansFallback.ttf" size="30"/>
+		<font name="ja" filename="NotoSansCJKjp-Regular.ttf" size="30"/>
+		<font name="eng" filename="pb.ttf" size="30"/>
 		<font name="font_s" filename="pb.ttf" size="32"/>
 		<font name="font_xl" filename="pb.ttf" size="75"/>
 		<font name="font_xxl" filename="pb.ttf" size="100"/>
