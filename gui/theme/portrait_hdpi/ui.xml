@@ -89,7 +89,7 @@
 		<image name="space" filename="space" retainaspect="1"/>
 		<image name="kb_arrow_left" filename="kb_arrow_left" retainaspect="1"/>
 		<image name="kb_arrow_right" filename="kb_arrow_right" retainaspect="1"/>
-		<image name="filter" filename="install_filter_FAB"/>
+		<image name="filter" filename="install_filter_FAB" retainaspect="1"/>
 		<image name="kb_arrow_up" filename="kb_arrow_up" retainaspect="1"/>
 		<image name="kb_arrow_down" filename="kb_arrow_down" retainaspect="1"/>
 		<image name="main_button_black" filename="main_button_black"/>
