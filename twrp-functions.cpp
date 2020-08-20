@@ -1560,10 +1560,18 @@ bool TWFunc::check_system_root() {
 int TWFunc::check_encrypt_status() {
 	string out;
 	int status = 0;
+	TWPartition *part = PartitionManager.Find_Partition_By_Path("/data");
+	if (DataManager::GetIntValue(TW_IS_DECRYPTED)) {
+		if (part != NULL)
+			part->Mount(false);
+	}
 	if (TWFunc::Exec_Cmd("grep /data /proc/mounts | grep -q dm-", out) == 0)
 		status += 1;
-	if (TWFunc::Path_Exists("/data/unencrypted"))
+	if (TWFunc::Path_Exists("/data/unencrypted") || DataManager::GetIntValue(TW_IS_FBE))
 		status += 2;
+	if ((DataManager::GetIntValue(TW_IS_FBE) && (status == 1 || status == 3)) || (status == 3 && TWFunc::Exec_Cmd("grep /data /proc/mounts | grep -i f2fs", out) == 0))
+		status = 2;
+	part->UnMount(false);
 	return status;
 }
 
