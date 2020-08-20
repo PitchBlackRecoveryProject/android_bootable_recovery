@@ -161,14 +161,26 @@ bool retrieveAndInstallKey(bool create_if_absent, const KeyAuthentication& key_a
                            std::string* key_ref, bool wrapped_key_supported) {
     KeyBuffer key;
     if (pathExists(key_path)) {
+#ifdef DEBUG
+        printf("Key exists, using: %s\n", key_path.c_str());
+#else
         LOG(DEBUG) << "Key exists, using: " << key_path;
+#endif
         if (!retrieveKey(key_path, key_authentication, &key)) return false;
     } else {
         if (!create_if_absent) {
+#ifdef DEBUG
+            printf("No key found in %s\n", key_path.c_str());
+#else
             LOG(ERROR) << "No key found in " << key_path;
+#endif
             return false;
         }
+#ifdef DEBUG
+        printf("Creating new key in %s\n", key_path.c_str());
+#else
         LOG(INFO) << "Creating new key in " << key_path;
+#endif
         if (wrapped_key_supported) {
             if(!generateWrappedKey(MAX_USER_ID, KeyType::DE_SYS, &key)) return false;
         } else {
@@ -180,14 +192,22 @@ bool retrieveAndInstallKey(bool create_if_absent, const KeyAuthentication& key_a
     if (wrapped_key_supported) {
         KeyBuffer ephemeral_wrapped_key;
         if (!getEphemeralWrappedKey(KeyFormat::RAW, key, &ephemeral_wrapped_key)) {
+#ifdef DEBUG
+            printf("Failed to export key in retrieveAndInstallKey");
+#else
             LOG(ERROR) << "Failed to export key in retrieveAndInstallKey";
+#endif
             return false;
         }
         key = std::move(ephemeral_wrapped_key);
     }
 
     if (!installKey(key, key_ref)) {
+#ifdef DEBUG
+        printf("Failed to install key in %s\n", key_path.c_str());
+#else
         LOG(ERROR) << "Failed to install key in " << key_path;
+#endif
         return false;
     }
     return true;
@@ -195,36 +215,64 @@ bool retrieveAndInstallKey(bool create_if_absent, const KeyAuthentication& key_a
 
 bool retrieveKey(bool create_if_absent, const std::string& key_path, const std::string& tmp_path,
                  KeyBuffer* key, bool keepOld) {
+#ifdef DEBUG
+    printf("retreiveKey1\n");
+#else
     LOG(ERROR) << "retreiveKey1";
+#endif
     if (pathExists(key_path)) {
+#ifdef DEBUG
+        printf("Key exists, using: %s\n", key_path.c_str());
+#else
         LOG(ERROR) << "Key exists, using: " << key_path;
+#endif
         if (!retrieveKey(key_path, kEmptyAuthentication, key, keepOld)) return false;
 			if (is_metadata_wrapped_key_supported()) {
 				KeyBuffer ephemeral_wrapped_key;
 				if (!getEphemeralWrappedKey(KeyFormat::RAW, *key, &ephemeral_wrapped_key)) {
+#ifdef DEBUG
+					printf("Failed to export key for retrieved key");
+#else
 					LOG(ERROR) << "Failed to export key for retrieved key";
+#endif
 					return false;
 				}
 				*key = std::move(ephemeral_wrapped_key);
 			}
     } else {
         if (!create_if_absent) {
+#ifdef DEBUG
+            printf("No key found in %s\n", key_path.c_str());
+#else
             LOG(ERROR) << "No key found in " << key_path;
+#endif
             return false;
         }
+#ifdef DEBUG
+        printf("Creating new key in %s\n", key_path.c_str());
+#else
         LOG(ERROR) << "Creating new key in " << key_path;
+#endif
         if (is_metadata_wrapped_key_supported()) {
             if(!generateWrappedKey(MAX_USER_ID, KeyType::ME, key)) return false;
         } else {
             if (!randomKey(key)) return false;
         }
+#ifdef DEBUG
+		printf("retrieveKey1");
+#else
 		LOG(ERROR) << "retrieveKey1";
+#endif
         if (!storeKeyAtomically(key_path, tmp_path,
                 kEmptyAuthentication, *key)) return false;
 	if (is_metadata_wrapped_key_supported()) {
             KeyBuffer ephemeral_wrapped_key;
             if (!getEphemeralWrappedKey(KeyFormat::RAW, *key, &ephemeral_wrapped_key)) {
+#ifdef DEBUG
+                printf("Failed to export key for generated key");
+#else
                 LOG(ERROR) << "Failed to export key for generated key";
+#endif
                 return false;
             }
             *key = std::move(ephemeral_wrapped_key);

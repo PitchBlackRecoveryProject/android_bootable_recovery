@@ -34,6 +34,10 @@ LOCAL_C_INCLUDES := system/extras/ext4_utils \
     system/vold/ \
     system/extras/f2fs_utils/
 
+ifeq ($(PB_IS_DEBUG), true)
+    LOCAL_CFLAGS += -DDEBUG
+endif
+
 ifneq ($(wildcard hardware/libhardware/include/hardware/keymaster0.h),)
     LOCAL_CFLAGS += -DTW_CRYPTO_HAVE_KEYMASTERX
     LOCAL_C_INCLUDES +=  external/boringssl/src/include
