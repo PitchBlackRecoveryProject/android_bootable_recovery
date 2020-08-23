@@ -1213,6 +1213,14 @@ void TWPartition::Setup_Data_Media() {
 		backup_exclusions.add_absolute_dir("/data/data/com.google.android.music/files");
 		backup_exclusions.add_absolute_dir("/data/per_boot"); // DJ9,14Jan2020 - exclude this dir to prevent "error 255" on AOSP ROMs that create and lock it
 		backup_exclusions.add_absolute_dir("/data/vendor/dumpsys");
+		backup_exclusions.add_absolute_dir("/data/vendor_ce/10");
+		backup_exclusions.add_absolute_dir("/data/vendor_ce/999");
+		backup_exclusions.add_absolute_dir("/data/system_ce/10");
+		backup_exclusions.add_absolute_dir("/data/system_ce/999");
+		backup_exclusions.add_absolute_dir("/data/misc_ce/10");
+		backup_exclusions.add_absolute_dir("/data/misc_ce/999");
+		backup_exclusions.add_absolute_dir("/data/user/10");
+		backup_exclusions.add_absolute_dir("/data/user/999");
 		backup_exclusions.add_absolute_dir("/data/cache");
 		wipe_exclusions.add_absolute_dir(Mount_Point + "/misc/vold"); // adopted storage keys
 		ExcludeAll(Mount_Point + "/system/storage.xml");
