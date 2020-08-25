@@ -226,6 +226,12 @@ TWRP_RES_GEN := $(intermediates)/twrp
 $(TWRP_RES_GEN):
 	mkdir -p $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)
 	cp -fr $(TWRP_RES) $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)
+	test $(BOARD_RECOVERYIMAGE_PARTITION_SIZE) -le 16777216
+	if [ "$$?" == "0" ]; then \
+	    rm -rf $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)/fonts/DroidSansFallback.ttf; \
+	    rm -rf $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)/fonts/NotoSansCJKjp-Regular.ttf; \
+	    rm -rf $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)/fonts/OFL.txt; \
+	fi;
 	cp -fr $(TWRP_THEME_LOC)/* $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)
 
 LOCAL_GENERATED_SOURCES := $(TWRP_RES_GEN)
