@@ -2575,17 +2575,17 @@
 			<template name="progress_bar"/>
 
 			<text style="text_m_accent">
-				<placement x="%indent%" y="%row19_y%"/>
+				<placement x="%indent%" y="%row21a_y%"/>
 				<text>{@progress=Progress:}</text>
 			</text>
 
 			<text style="text_m">
-				<placement x="%indent%" y="%row20_y%"/>
+				<placement x="%indent%" y="1620"/>
 				<text>%tw_file_progress%</text>
 			</text>
 
 			<text style="text_m">
-				<placement x="%indent%" y="%row21_y%"/>
+				<placement x="%indent%" y="1670"/>
 				<text>%tw_size_progress%</text>
 			</text>
 
@@ -3035,12 +3035,12 @@
 			<template name="progress_bar"/>
 
 			<text style="text_m_accent">
-				<placement x="%indent%" y="%row19_y%"/>
+				<placement x="%indent%" y="%row21a_y%"/>
 				<text>{@progress=Progress:}</text>
 			</text>
 
 			<text style="text_m">
-				<placement x="%indent%" y="%row20_y%"/>
+				<placement x="%indent%" y="%row22a_y%"/>
 				<text>%tw_size_progress%</text>
 			</text>
 
