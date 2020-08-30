@@ -317,6 +317,7 @@ TWPartitionManager::Process_Fstab (string Fstab_Filename, bool Display_Error, bo
 			andsec_partition = (*iter);
 		else
 			(*iter)->Has_Android_Secure = false;
+
 		if (Is_Super_Partition(TWFunc::Remove_Beginning_Slash((*iter)->Get_Mount_Point()).c_str()))
 			Prepare_Super_Volume((*iter));
 	}
@@ -5221,7 +5222,12 @@ void TWPartitionManager::Setup_Super_Partition() {
 }
 
 bool TWPartitionManager::Get_Super_Status() {
-	return access(Get_Super_Partition().c_str(), F_OK) == 0;
+	std::string fastboot_mode = android::base::GetProperty("sys.usb.config", "");
+	if (fastboot_mode == "fastboot") {
+		return false;
+	}
+	else
+		return access(Get_Super_Partition().c_str(), F_OK) == 0;
 }
 
 bool TWPartitionManager::Recreate_Logs_Dir() {

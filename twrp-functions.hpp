@@ -42,9 +42,10 @@ typedef enum
 	rb_system,
 	rb_recovery,
 	rb_poweroff,
-	rb_bootloader,     // May also be fastboot
+	rb_bootloader,
 	rb_download,
 	rb_edl,
+	rb_fastboot
 } RebootCommand;
 
 enum Archive_Type {
@@ -138,6 +139,7 @@ public:
 	static std::string getprop(std::string arg); //set the arg value to PB_PROP_VALUE
 	static bool Set_Encryption_Policy(std::string path, const fscrypt_encryption_policy &policy); // set encryption policy for path
 	static void List_Mounts();
+	static void Clear_Bootloader_Message();
 
 private:
 	static void Copy_Log(string Source, string Destination);
