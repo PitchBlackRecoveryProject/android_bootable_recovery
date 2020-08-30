@@ -23,8 +23,6 @@
 #include <pthread.h>
 #include "infomanager.hpp"
 
-#define PERSIST_SETTINGS_FILE  "/persist/.pbrps"
-
 using namespace std;
 
 class DataManager

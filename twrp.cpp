@@ -349,9 +349,6 @@ int main(int argc, char **argv) {
 	if (crash_counter == 0)
 		TWFunc::Fixup_Time_On_Boot();
 
-	// Read the settings file
-	TWFunc::Update_Log_File();
-
 	DataManager::ReadSettingsFile();
 	PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
 	GUIConsole::Translate_Now();
@@ -454,6 +451,8 @@ int main(int argc, char **argv) {
 		}
 	}
 #endif
+
+	TWFunc::Update_Log_File();
 
 	twrpAdbBuFifo *adb_bu_fifo = new twrpAdbBuFifo();
 	adb_bu_fifo->threadAdbBuFifo();
