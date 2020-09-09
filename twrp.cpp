@@ -54,7 +54,6 @@ extern "C" {
 #include "openrecoveryscript.hpp"
 #include "variables.h"
 #include "twrpAdbBuFifo.hpp"
-#include "twrpApex.hpp"
 #ifdef TW_USE_NEW_MINADBD
 // #include "minadbd/minadbd.h"
 #else
@@ -419,15 +418,6 @@ int main(int argc, char **argv) {
 	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
 	if (sys) {
 		if (sys->Get_Super_Status()) {
-			sys->Mount(true);
-			if (ven) {
-				ven->Mount(true);
-			}
-			twrpApex apex;
-			if (!apex.loadApexImages()) {
-				LOGERR("Unable to load apex images from %s\n", APEX_DIR);
-			}
-			property_set("twrp.apex.loaded", "true");
 #ifdef TW_INCLUDE_CRYPTO
 			std::string recoveryLogDir(DATA_LOGS_DIR);
 			recoveryLogDir += "/recovery";
