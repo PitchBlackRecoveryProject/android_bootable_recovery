@@ -1288,6 +1288,8 @@ int GUIAction::flash(std::string arg)
 		DataManager::SetValue(TW_ZIP_INDEX, (i + 1));
 
 		TWFunc::SetPerformanceMode(true);
+		if (PartitionManager.Get_Super_Status())
+			PartitionManager.UnMount_Main_Partitions();
 		ret_val = flash_zip(zip_path, &wipe_cache);
 		TWFunc::SetPerformanceMode(false);
 		PartitionManager.Prepare_All_Super_Volumes();
