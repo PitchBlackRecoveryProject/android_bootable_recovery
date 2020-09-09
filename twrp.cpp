@@ -352,8 +352,7 @@ int main(int argc, char **argv) {
 	// Read the settings file
 	TWFunc::Update_Log_File();
 
-	if (!PartitionManager.Get_Super_Status())
-		DataManager::ReadSettingsFile();
+	DataManager::ReadSettingsFile();
 	PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
 	GUIConsole::Translate_Now();
 
