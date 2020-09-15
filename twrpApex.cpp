@@ -14,8 +14,17 @@ bool twrpApex::loadApexImages() {
 	   }
 	}
 
+	if (apexFiles.size() == 0) {
+		// flattened apex directory
+		LOGINFO("Bind mounting flattened apex directory\n");
+		if (mount(APEX_DIR, APEX_BASE, "", MS_BIND, NULL) < 0) {
+			LOGERR("Unable to bind mount flattened apex directory\n");
+			return false;
+		}
+		return true;
+	}
 	if (!createLoopBackDevices(apexFiles.size())) {
-		LOGERR("unable to create loop devices to mount apex files\n");
+		LOGERR("Unable to create loop devices to mount apex files\n");
 		return false;
 	}
 
@@ -46,7 +55,8 @@ std::string twrpApex::unzipImage(std::string file) {
 	}
 
 	std::string baseFile = basename(file.c_str());
-	std::string path = "/sbin/" + baseFile;
+	std::string path("/tmp/");
+	path = path + baseFile;
 	int fd = open(path.c_str(), O_WRONLY|O_CREAT|O_TRUNC, 0666);
 	ret = ExtractEntryToFile(handle, &entry, fd);
 	if (ret != 0) {
@@ -118,10 +128,11 @@ bool twrpApex::loadApexImage(std::string fileToMount, size_t loop_device_number)
 		return false;
 	}
 	close(loop_fd);
-	std::string bind_mount = fileToMount + "-mount";
+	std::string bind_mount(APEX_BASE);
+	bind_mount = bind_mount + basename(fileToMount.c_str());
 	int ret = mkdir(bind_mount.c_str(), 0666);
 	if (ret != 0) {
-		LOGERR("unable to create mount directory: %s\n", bind_mount.c_str());
+		LOGERR("Unable to create mount directory: %s\n", bind_mount.c_str());
 		return false;
 	}
 
