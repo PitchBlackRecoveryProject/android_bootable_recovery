@@ -1,7 +1,8 @@
-# WE DO NOT MERGE PULL REQUESTS SUBMITTED HERE
+# WE MERGE PULL REQUESTS SUBMITTED HERE AFTER REVIEWED BY CORE DEVELOPER
 
-You will need to submit it through [OmniRom Gerrit](https://gerrit.omnirom.org/#/admin/projects/android_bootable_recovery/)
+If you are submitting any patches kindly wait for Core Developers to review.
 
-For changes to device trees, use [TWRP Gerrit](https://gerrit.twrp.me/)
+You can join our community on Telegram
+* [Community Group](https://t.me/pbrpcom)
 
-This guide explani how to use [Gerrit code review](https://forum.xda-developers.com/general/xda-university/guide-using-gerrit-code-review-t3720802)
+* [Test Build & Build Help Group](https://t.me/pbrp_testers)
