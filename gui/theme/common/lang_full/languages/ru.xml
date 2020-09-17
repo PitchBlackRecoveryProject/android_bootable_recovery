@@ -5,10 +5,10 @@
 
 	<resources>
 		<!-- Font overrides - only change these if your language requires special characters -->
-		<resource filename="pb.ttf" name="font_l" scale="90" type="fontoverride"/>
-		<resource filename="pb.ttf" name="font_m" scale="90" type="fontoverride"/>
-		<resource filename="pb.ttf" name="font_s" scale="90" type="fontoverride"/>
-		<resource filename="pb.ttf" name="fixed" scale="100" type="fontoverride"/>
+		<resource filename="pb.ttf" name="font_l" scale="85" type="fontoverride"/>
+		<resource filename="pb.ttf" name="font_m" scale="83" type="fontoverride"/>
+		<resource filename="pb.ttf" name="font_s" scale="83" type="fontoverride"/>
+		<resource filename="pb.ttf" name="font_pb" scale="90" type="fontoverride"/>
 
 		<!-- Partition display names -->
 		<string name="system">System</string>
@@ -53,7 +53,7 @@
 
 		<string name="install_btn">Установка</string>
 		<string name="wipe_btn">Очистка</string>
-		<string name="backup_btn">Резервное коп-ние</string>
+		<string name="backup_btn">Резервн коп-ние</string>
 		<string name="restore_btn">Восстановление</string>
 		<string name="mount_btn">Монтирование</string>
 		<string name="settings_btn">Настройки</string>
@@ -61,6 +61,7 @@
 		<string name="reboot_btn">Перезагрузка</string>
 		<string name="files_btn">Файлы</string>
 		<string name="copy_log_btn">Копировать лог</string>
+		<string name="copy_log_btn1">Скопировать логи на карту</string>
 		<string name="select_type_hdr">Выбор типа</string>
 		<string name="install_zip_hdr">Установка Zip</string>
 		<string name="install_zip_btn">Установка Zip</string>
@@ -69,7 +70,8 @@
 		<string name="install_select_file_hdr">Выбор файла</string>
 		<string name="file_selector_folders_hdr">Папки</string>
 		<string name="select_file_from_storage">Текущий накопитель: %tw_storage_display_name% (%tw_storage_free_size% МБ)</string>
-		<string name="adb_sideload_btn">ADB Sideload</string>
+		<string name="adb_sideload_btn">Запустить ADB</string>
+		<string name="adb_sideload_btn1">Установить программы через ADB</string>
 		<string name="install_hdr">Установка</string>
 		<string name="select_storage_hdr">Выберите накопитель</string>
 		<string name="select_storage_btn">Выбор накопителя</string>
@@ -84,7 +86,7 @@
 		<string name="file">Файл:</string>
 		<string name="zip_sig_chk">Проверка подписи Zip</string>
 		<string name="inject_twrp_chk">Интегрировать TWRP после установки</string>
-		<string name="install_reboot_chk">Автоматическая перезагрузка после установки</string>
+		<string name="install_reboot_chk">Автоперезагрузка после установки</string>
 		<string name="options_hdr">Опции</string>
 		<string name="confirm_flash_hdr">Подтвердите установку</string>
 		<string name="zip_queue">Очередь:</string>
@@ -132,6 +134,7 @@
 		<string name="back_cancel">Нажмите назад для отмены.</string>
 		<string name="cancel_btn">Отмена</string>
 		<string name="wipe_hdr">Очистка</string>
+		<string name="reset">Сброс</string>
 		<string name="factory_reset_hdr">Сброс до заводского состояния</string>
 		<string name="factory_reset_btn">Сброс на фабричные</string>
 		<string name="factory_reset1">Очистка Data, Cache, и Dalvik</string>
@@ -158,7 +161,7 @@
 		<string name="format_data_ptr2">резервные копии, картинки, видео, медиафайлы</string>
 		<string name="format_data_ptr3">и зашифрованные файлы во внутренней памяти,</string>
 		<string name="format_data_adopted">включая расширенное хранилище.</string>
-		<string name="format_data_lcp1">Форматирование данных удалит все приложения, резервные копии, картинки, видео, медиафайлы</string>
+		<string name="format_data_lcp1">Форматирование данных удалит все</string>
 		<string name="format_data_lcp2">и зашифрованные файлы во внутренней памяти.</string>
 		<string name="format_data_wtc1">Форматирование данных удалит все приложения,</string>
 		<string name="format_data_wtc2">резервные копии и медиа. Это не может быть отменено.</string>
@@ -208,8 +211,8 @@
 		<string name="back_btn">Назад</string>
 		<string name="wipe_enc_btn">Стереть шифрование</string>
 		<string name="swipe_factory_reset">Свайп для подтверждения</string>
-		<string name="repair_change_btn">Восстановить или изменить файловую систему</string>
-		<string name="storage_hdr">Текущий накопитель: %tw_storage_display_name% (%tw_storage_free_size% МБ)</string>
+		<string name="repair_change_btn">Восст. или изм. файловую систему</string>
+		<string name="storage_hdr">Куда сохр.: %tw_storage_display_name% (%tw_storage_free_size% МБ)</string>
 		<string name="backup_hdr">Резервное копирование</string>
 		<string name="backup_confirm_hdr">Подтверждение резервного копирования</string>
 		<string name="encryption_tab">ШИФРОВАНИЕ</string>
@@ -220,7 +223,7 @@
 		<string name="enc_disabled">выключено - установите пароль для включения</string>
 		<string name="enc_enabled">включено</string>
 		<string name="enable_backup_comp_chk">Использовать сжатие</string>
-		<string name="skip_digest_backup_chk" version="2">Пропустить вычисление контрольных сумм</string>
+		<string name="skip_digest_backup_chk" version="2">Пропустить вычисление контр. сумм</string>
 		<string name="disable_backup_space_chk" version="2">Отключить проверку свободного места</string>
 		<string name="current_boot_slot">Текущий слот: %tw_active_slot%</string>
 		<string name="boot_slot_a">Слот A</string>
@@ -258,11 +261,12 @@
 		<string name="restore_try_decrypt_s">Попытка расшифровки</string>
 		<string name="restore_backup_date">Резервная копия создана: %tw_restore_file_date%</string>
 		<string name="restore_sel_part">Выбор раздела для восстановления:</string>
-		<string name="restore_enable_digest_chk" version="2">Включить проверку контрольных сумм резервной копии</string>
+		<string name="restore_enable_digest_chk" version="2">Включить проверку контр. сумм рез. копии</string>
 		<string name="restore_complete">Восстановление завершено</string>
 		<string name="swipe_restore">Свайп для восстановления</string>
 		<string name="swipe_restore_s">   Восстановление</string>
 		<string name="rename_backup_hdr">Переименование резервной копии</string>
+		<string name="destination_storage">Место сохранения</string>	
 		<string name="rename_backup_confirm">Переименовать резервную копию?</string>
 		<string name="rename_backup_confirm2">Это не может быть отменено!</string>
 		<string name="renaming_backup">Переименование резервной копии...</string>
@@ -286,9 +290,11 @@
 		<string name="rb_system_btn">Система</string>
 		<string name="rb_poweroff_btn">Выключение</string>
 		<string name="rb_recovery_btn">Рекавери</string>
+		<string name="rb_recovery_btn1">Перегр. в рекавери</string>
 		<string name="rb_bootloader_btn">Загрузчик</string>
+		<string name="rb_bootloader_btn1">Перегр. в загрузчик</string>
 		<string name="rb_download_btn">Режим загрузки</string>
-		<string name="rb_edl_btn">Edl</string>
+		<string name="rb_edl_btn">Перегр. в Edl</string>
 		<string name="turning_off">Выключение...</string>
 		<string name="swipe_power_off">Свайп для выключения</string>
 		<string name="swipe_power_off_s">Выключение</string>
@@ -311,10 +317,10 @@
 		<string name="settings_gen_hdr">Основные</string>
 		<string name="settings_gen_s_hdr">Основные</string>
 		<string name="settings_gen_btn">Основные</string>
-		<string name="use_rmrf_chk">Использовать rm -rf вместо форматирования</string>
+		<string name="use_rmrf_chk">Использовать rm -rf вместо формата</string>
 		<string name="use24clock_chk">Использовать 24-часовой формат времени</string>
-		<string name="rev_navbar_chk">Инвертировать порядок навигационных кнопок</string>
-		<string name="simact_chk">Имитация действий для тестирования темы</string>
+		<string name="rev_navbar_chk">Поменять порядок кнопок навигации</string>
+		<string name="simact_chk">Имитация действий для теста темы</string>
 		<string name="simfail_chk">Имитация отказа для действий</string>
 		<string name="ctr_navbar_rdo">Кнопки нав.панели по центру</string>
 		<string name="lft_navbar_rdo">Выровнять кнопки нав.панели слева</string>
@@ -363,7 +369,7 @@
 		<string name="use_dst_chk">Использовать летнее время (DST)</string>
 		<string name="curr_tz">Текущий часовой пояс: %tw_time_zone%</string>
 		<string name="curr_tz_s">Текущий часовой пояс:</string>
-		<string name="set_tz_btn">Установ.часовой пояс</string>
+		<string name="set_tz_btn">Уст.часовой пояс</string>
 		<string name="settings_screen_hdr">Экран</string>
 		<string name="settings_screen_timeout_hdr">Таймаут экрана</string>
 		<string name="enable_timeout_chk">Включить таймаут экрана</string>
@@ -387,12 +393,17 @@
 		<string name="copying_log" version="2">Копирование лога на SD...</string>
 		<string name="copy_log_complete" version="2">Копирование лога завершено.</string>
 		<string name="fix_context_btn">Исправить контекст</string>
+		<string name="fix_context_btn1">Исправить SELinux контекст</string>
 		<string name="part_sd_btn">Разметка SD-карты</string>
+		<string name="part_sd_btn1">Разметка вашей SD карты / внутренней памяти</string>
 		<string name="part_sd_s_btn">Разм-ка SD</string>
 		<string name="file_manager_btn">Проводник</string>
+		<string name="file_manager_btn1">Управлять файлами и папками</string>
 		<string name="language_hdr">Язык</string>
 		<string name="terminal_btn">Терминал</string>
+		<string name="terminal_btn1">Запустить терминал</string>
 		<string name="reload_theme_btn">Перезагрузить тему</string>
+		<string name="reload_theme_btn1">Перегрузить тему, при возникновении проблем</string>
 		<string name="dumlock_btn">HTC Dumlock</string>
 		<string name="inject_twrp_btn">Интегрировать TWRP</string>
 		<string name="inject_twrp_confirm">Интегрировать TWRP заново?</string>
@@ -426,7 +437,7 @@
 		<string name="dumlock_install_confirm">Установить HTC dumlock файлы в прошивку?</string>
 		<string name="dumlock_installing">Установка HTC Dumlock...</string>
 		<string name="dumlock_install_complete">Установка HTC Dumlock завершена</string>
-		<string name="swipe_to_unlock">Свайп для разблокировки</string>
+		<string name="swipe_to_unlock">Свайпни</string>
 		<string name="swipe_unlock">   Разблокировать</string>
 		<string name="fm_hdr">Файловый менеджер</string>
 		<string name="fm_sel_file">Выбор файла или папки</string>
@@ -714,8 +725,177 @@
 		<string name="partition_not_found">путь: {1} отсутствует в списке разделов.</string>
 		<string name="copy_kernel_log">Kernel Log скопирован в {1}</string>
 		<string name="include_kernel_log">Добавить Kernel Log</string>
-		<string name="sha2_chk">Использовать SHA2 для контрольных сумм (иначе - MD5)</string>
+		<string name="sha2_chk">Исп. SHA2 вместо MD5 для контр. сумм</string>
 		<string name="unable_set_boot_slot">Ошибка смены слота загрузки bootloader на {1}</string>
 		<string name="show_free_sdmb">Show Free SD Mb</string>
+		
+		<!--mod tools-->
+		<string name="additional_hdr">Дополн.</string>
+		<string name="additional">Дополн.</string>
+		<string name="tools_hdr">Параметры инструментов</string>
+		<string name="tools">Параметры инструментов</string>
+		<string name="tools1">Инстр.</string>
+		<string name="SuperSU_btn">SuperSU</string>
+		<string name="SuperSU_text">SuperSU будет установлен.</string>
+		<string name="SuperSU_confirm">Продолжить?</string>
+		<string name="Unroot_SuperSU_btn">Удалить SuperSU</string>
+		<string name="Unroot_SuperSU_text">Будет удален SuperSU.</string>
+		<string name="Unroot_SuperSU_confirm">Продолжить?</string>
+		<string name="Magisk_btn">Уст. Magisk</string>
+		<string name="Magisk_text">Magisk будет установлен.</string>
+		<string name="Magisk_confirm">Продолжить?</string>
+		<string name="Unroot_Magisk_btn">Удалить Magisk</string>
+		<string name="Unroot_Magisk_text">Будет удален Magisk.</string>
+		<string name="Unroot_Magisk_confirm">Продолжить?</string>
+		<string name="Aroma_FM_btn">Арома FM</string>
+		<string name="Aroma_FM_text">Aroma FM будет установлен.</string>
+		<string name="Aroma_FM_confirm">Продолжить?</string>
+		<string name="FP_Scanner_btn">Сканер отпечатка</string>
+		<string name="FP_Scanner_text">Будет установлен сканер отпечатков.</string>
+		<string name="FP_Scanner_confirm">Продолжить?</string>
+		<string name="Pin/Pass_Remover_btn">Удалить пароль</string>
+		<string name="Pin/Pass_Remover_text">Будет удален пароль/пин код.</string>
+		<string name="Pin/Pass_Remover_confirm">Продолжить?</string>
+		<string name="RM_Subs_Overlays_btn">Удал.оверлеи</string>
+		<string name="RM_Subs_Overlays_text">Оверлеи будут удалены.</string>
+		<string name="RM_Subs_Overlays_confirm">Продолжить?</string>
+		<string name="RM_All_Subs_Overlays_btn">Удал все оверлеи</string>
+		<string name="RM_All_Subs_Overlays_text">Будут удалены все оверлеи.</string>
+		<string name="RM_All_Subs_Overlays_confirm">Продолжить?</string>
+		<string name="Camera2API_Enabler_btn">Вкл. Camera2API </string>
+		<string name="Camera2API_Enabler_text">Camera2API будет включен.</string>
+		<string name="Camera2API_Enabler_confirm">Продолжить?</string>
+		<string name="App_Delete_btn">Удал. прогр</string>
+		<string name="App_Delete_text">Будет удалено приложение.</string>
+		<string name="App_Delete_confirm">Продолжить?</string>
+		<string name="MTP_Fix_btn">Испр. MTP</string>
+		<string name="MTP_Fix_text">MTP Fix будет установлен.</string>
+		<string name="MTP_Fix_confirm">Продолжить?</string>
+		<string name="MMR_btn">Менеджер Magisk</string>
+		<string name="MMR_text">Magisk Manager будет установлен.</string>
+		<string name="MMR_confirm">Продолжить?</string>
+		<string name="Dm_Verity_btn">Откл.Dm Verity</string>
+		<string name="Dm_Verity_text">Dm Verity будет отключен.</string>
+		<string name="Dm_Verity_confirm">Продолжить?</string>
+		<string name="use_aromafm">Использовать файловый менеджер Aroma</string>
+
+		<!--Themes PBRP-->
+		<string name="pbthemes">Темы</string>
+		<string name="pbthemes_hdr">Темы</string>
+
+		<!--About PBRP-->
+		<string name="special">Особый</string>
+		<string name="special_hdr">Особый</string>
+		<string name="about_pbrp">О PBRP</string>
+		<string name="device_info">Информация об устройстве</string>
+		<string name="device_maintainer">Рекавери собрал</string>
+		<string name="thanksto">Спасибо</string>
+		<string name="toolscr">Использованные инструменты</string>
+		<string name="members">Участники</string>
+		<string name="members1">Авторы и патреоны</string>
+		<string name="SETTING">Специальные настройки</string>
+		<string name="SETTINGOTA">Настройки OTA</string>
+		<string name="device_name">Имя устройства:%pb_device_manufacturer% %pb_device_name%</string>
+		<string name="device_codename">Кодовое имя устройства: %pb_device%</string>
+		<string name="build_date">Дата сборки: %pb_build%</string>
+		<string name="pb_version">Версия PitchBlack: %pb_ver%</string>
+		<string name="device_maintainer1">Рекавери собрал: %pb_maintainer%</string>
+		<string name="core_contributors">Основные участники</string>
+		<string name="miscellaneous">Разное</string>
+
+		<!--Extras-->
+		<string name="pbrpspecial_btn">Расширения PBRP</string>
+		<string name="install_txt">Прошить что-то</string>
+		<string name="install2_txt">в формате Zip/Img</string>
+		<string name="wipe_txt">Семь раз отмерь -</string>
+		<string name="wipe2_txt">один раз форматни</string>
+		<string name="backup_txt">Сохрани свои файлы</string>
+		<string name="backup2_txt">в безопасном месте</string>
+		<string name="restore_txt">Верни свои файлы</string>
+		<string name="restore2_txt">Ты же их сохранил?</string>
+		<string name="mount_txt">Смонтируй разделы</string>
+		<string name="mount2_txt">своего устройства</string>
+		<string name="advanced_txt">Хочешь еще? </string>
+		<string name="advanced2_txt">Жми!</string>
+		<string name="settings_txt">Настроить PitchBlack!</string>
+		<string name="customizations">Настройки</string>
+		<string name="themes_txt">Темы</string>
+		<string name="bg_color">Цвет фона</string>
+		<string name="font_options">Параметры шрифта</string>
+		<string name="features_txt">Возможности</string>
+		<string name="logs_btn">ОТКРЫТЬ ЛОГ</string>
+
+		<!--Settings-->
+		<string name="pb_support_miui_ota_chk">Поддержка MIUI OTA</string>
+		<string name="pb_incremental_ota_status_enabled">Поддержка OTA MIUI: Включено</string>
+		<string name="pb_incremental_ota_status_disabled">Поддержка OTA MIUI: отключено</string>
+		<string name="pb_incremental_package_detected">Обнаружен OTA пакет '{1}'</string>
+		<string name="pb_survival_does_not_exist">OTA Survival нет! Сначала прошейте полную прошивку!</string>
+		<string name="pb_install_detecting">Определение текущего пакета</string>
+		<string name="pb_install_standard_detected">- Обнаруженный стандартный пакет</string>
+		<string name="pb_install_miui_detected">- Обнаружен пакет обновления MIUI</string>
+		<string name="pb_install_miui_oreo_detected">- Обнаружен пакет обновления Treble MIUI</string>
+		<string name="pb_install_miui_10_detected">- Обнаружен пакет обновления MIUI 10 Non-Treble</string>
+		<string name="pb_install_patch_detected">- Обнаружено исправление или патч</string>
+		<string name="pb_disable_boot_chk">Отключить проверку загрузки</string>
+		<string name="pb_include_system_survival_chk">Добавить system в Survival OTA</string>
+		<string name="pb_verify_incremental_ota_signature_chk">Дополнительная проверка подписи OTA</string>
+		<string name="pb_incremental_ota_compatibility_chk">Проверка дополнительной подписи пакета ...</string>
+		<string name="pb_incremental_ota_compatibility_false">Дополнительный пакет несовместим с прошивкой!</string>
+		<string name="pb_incremental_ota_compatibility_true">Дополнительный пакет совместим</string>
+		<string name="pb_zip_have_bootloader">Внимание: Обнаружена переус. загрузчика, вызвана '{1}'.</string>
+		<string name="pb_no_space_ota_survival">Недост. своб. места во внутр. памяти для создания survival OTA.</string>
+		<string name="exp">Параметры менеджера файлов</string>
+		<string name="pb_incremental_ota_res">OTA восстановление - готово!</string>
+		<string name="pb_incremental_ota_res_run">Запуск процесса OTA восстановления ...</string>
+		<string name="pb_incremental_ota_bak_run">Выполняется процесс OTA резервирования ...</string>
+		<string name="pb_incremental_ota_bak">OTA резервирование - готово!</string>
+		<string name="pb_advanced_stock_recovery">Откл. восст. стокового рекавери</string>
+		<string name="pb_reboot_dont_disable_stock_recovery_chk">Не откл. восст. стокового рекавери</string>
+		<string name="pb_dmverity_chk">Деактивация (Патч DM-Verity)</string>
+		<string name="pb_for_en_chk">Отключение принудительного шифрования</string>
+		<string name="pb_forced_encryption_chk">Отключить принудительное шифрование</string>
+		<string name="pb_disable_reboot_ota_check">Отключить перезагрузку после OTA</string>
+		<string name="pb_run_process">Запуск процесса '{1}'</string>
+		<string name="pb_encrypt_cn">Кэширование нескольких деталей шифрования</string>
+		<string name="pb_encrypt_st">Статус шифрования: {1}</string>
+		<string name="pb_run_process_fail">Невозможно завершить процесс '{1}'</string>
+		<string name="fm_pb_make">Создать папку</string>
+		<string name="fm_pb_mk">Создание папки</string>
+		<string name="pb_run_process_done">Завершенный процесс '{1}'</string>
+		<string name="pb_encryption">Принудительное шифрование успешно исправлено</string>
+		<string name="pb_ecryption_leave">Устройство зашифровано, выход из принудит шифрования</string>
+		<string name="pb_encryption_off">Принудительное шифрование не включено</string>
+		<string name="pb_fstab">Обнаружен fstab: '{1}'</string>
+		<string name="pb_unlink">Отключение: '{1}'</string>
+		<string name="pb_patching">Модификация: '{1}'</string>
+		<string name="pb_end_read">Чтение процесса завершено {1}</string>
+		<string name="pb_start_read">Процесс чтения начался {1}</string>
+		<string name="pb_dm_verity">DM-Verity успешно пропатчен</string>
+		<string name="pb_dm_verity_off">DM-Verity не включен</string>
+		<string name="pb_bk">Создание резервной копии PB - / tmp / pb / backup_wip ...</string>
+		<string name="pb_bk_no">Никакие инструменты PBRP не перепрошивают пакет PBRP</string>
+		<string name="zip_err_compatibility">Обойти совместимость treble</string>
+		<string name="pb_wipe_substratum_overlays">Оверлеи Substratum</string>
+		<string name="substratum_done">- Стирание оверлеев Substratum завершено!</string>
+		<string name="show_free_sdmb">Показать свободное место SD</string>
+		<string name="assert_failed_hint">Ошибка. Пожалуйста, проверьте инфо выше для получения информации.</string>
+		<string name="pb_wipe_magisk_modules">Модули Magisk</string>
+		<string name="magisk_done">- Удаление модулей Magisk завершено!</string>
+		<string name="pb_saving_log">Сохранение журналов ...</string>
+		<string name="pb_enable_dmesg_logging">Включить ведение журнала Dmesg после прошивки</string>
+		<string name="pb_copy_log_cache">Также копирование журналов в кэш.</string>
+		<string name="pb_dev_name_change">Хотите изменить кодовое имя устройства?</string>
+		<string name="img">IMG</string>
+		<string name="zip">ZIP</string>
+		<string name="pb_dev_change">Изм. кодового имени устройства с %pb_prop_value% на %pb_codename_change%</string>
+		<string name="pb_dev_changed">Кодовое имя устройства изменено на %pb_codename_change%</string>
+		<string name="pb_dev_reboot">Перезагрузка обязательна после переключения кодовых имен</string>
+		<string name="pb_dev_name">Смена имени</string>
+		<string name="codename_changer">Смена имени</string>
+		<string name="pb_wipe_fbe_cache">Кэш FBE</string>
+		<string name="fbe_done">- Очистка кэша FBE завершена!</string>
+		<string name="sel_br_val">Значение яркости фонарика:%pb_bright_value%%</string>
 	</resources>
 </language>
+
