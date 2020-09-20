@@ -399,7 +399,7 @@
 			<text color="%text_color%">
 				<condition var1="tw_sd_free" var2="1"/>
 				<font resource="font_m"/>
-				<placement x="%indent%" y="%row1_header_y%"/>
+				<placement x="260" y="%row1_header_y%"/>
 				<text>%tw_storage_free_size% Mb</text>
 			</text>
 			<text color="%text_color%">
@@ -518,7 +518,7 @@
 			<text color="%text_color%">
 				<condition var1="tw_sd_free" var2="1"/>
 				<font resource="font_m"/>
-				<placement x="%indent%" y="%row1_header_y%"/>
+				<placement x="260" y="%row1_header_y%"/>
 				<text>%tw_storage_free_size% Mb</text>
 			</text>
 			<text color="%text_color%">
@@ -611,7 +611,7 @@
 			<text color="%text_color%">
 				<condition var1="tw_sd_free" var2="1"/>
 				<font resource="font_m"/>
-				<placement x="%indent%" y="%row1_header_y%"/>
+				<placement x="260" y="%row1_header_y%"/>
 				<text>%tw_storage_free_size% Mb</text>
 			</text>
 			<text color="%text_color%">
@@ -675,7 +675,7 @@
 			<text color="%text_color%">
 				<condition var1="tw_sd_free" var2="1"/>
 				<font resource="font_m"/>
-				<placement x="%indent%" y="%row1_header_y%"/>
+				<placement x="260" y="%row1_header_y%"/>
 				<text>%tw_storage_free_size% Mb</text>
 			</text>
 			<text color="%text_color%">
@@ -783,7 +783,7 @@
 			<text color="%text_color%">
 				<condition var1="tw_sd_free" var2="1"/>
 				<font resource="font_m"/>
-				<placement x="%indent%" y="%row1_header_y%"/>
+				<placement x="260" y="%row1_header_y%"/>
 				<text>%tw_storage_free_size% Mb</text>
 			</text>
 			<text color="%text_color%">
@@ -854,7 +854,7 @@
 			<text color="%text_color%">
 				<condition var1="tw_sd_free" var2="1"/>
 				<font resource="font_m"/>
-				<placement x="%indent%" y="%row1_header_y%"/>
+				<placement x="260" y="%row1_header_y%"/>
 				<text>%tw_storage_free_size% Mb</text>
 			</text>
 			<text color="%text_color%">
