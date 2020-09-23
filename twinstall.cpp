@@ -556,13 +556,6 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 
 
     if (DataManager::GetIntValue(PB_INSTALL_PREBUILT_ZIP) != 1) {
-
-	/* First delink all our symlinks to /system, coz we donno the behaviour of the flashing zip */
-	if (PartitionManager.Is_Mounted_By_Path("/system_root") || TWFunc::Path_Exists("/system/system"))
-	{
-		string UM ="/system";
-		umount(UM.c_str());
-	}
 	gui_msg(Msg("installing_zip=Installing zip file '{1}'")(path));
 	if (strlen(path) < 9 || strncmp(path, "/sideload", 9) != 0) {
 		string digest_str;
@@ -635,13 +628,20 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 	}
 
 	if (unmount_system) {
+		gui_msg("unmount_vendor=Unmounting Vendor...");
+		if(!PartitionManager.UnMount_By_Path("/vendor", true)) {
+			gui_err("unmount_vendor_err=Failed unmounting Vendor");
+		} else {
+		unlink("/vendor");
+		mkdir("/vendor", 0755);
+		}
 		gui_msg("unmount_system=Unmounting System...");
 		if(!PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), true)) {
 			gui_err("unmount_system_err=Failed unmounting System");
-			return -1;
-		}
+		} else {
 		unlink("/system");
 		mkdir("/system", 0755);
+		}
 	}
 
 	time_t start, stop;

@@ -928,6 +928,8 @@
 		<string name="sel_br_val">Flashlight Brightness Value: %pb_bright_value%%</string>
 		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>
 		<string name="unmount_system">Unmounting System...</string>
+		<string name="unmount_vendor">Unmounting Vendor...</string>
 		<string name="unmount_system_err">Failed unmounting System</string>
+		<string name="unmount_vendor_err">Failed unmounting Vendor</string>
 	</resources>
 </language>
