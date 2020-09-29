@@ -331,7 +331,7 @@ void GUIScrollList::RenderItem(size_t itemindex __unused, int yPos, bool selecte
 	RenderStdItem(yPos, selected, NULL, "implement RenderItem!", "implement RenderItem!");
 }
 
-void GUIScrollList::RenderStdItem(int yPos, bool selected, ImageResource* icon, const char* text, const char* textDesc, int iconAndTextH)
+void GUIScrollList::RenderStdItem(int yPos, bool selected, ImageResource* icon, const char* text, const char* textDesc, int iconAndTextH, FontResource* nFont)
 {
 	if (hasHighlightColor && selected) {
 		// Highlight the item background of the selected item
@@ -360,12 +360,12 @@ void GUIScrollList::RenderStdItem(int yPos, bool selected, ImageResource* icon, 
 	}
 
 	// render label text
-	if (mFont && mFont->GetResource()) {
+	if ((mFont && mFont->GetResource()) || (nFont && nFont->GetResource())) {
 		int textX = mRenderX + maxIconWidth + 10;
 		int textY = yPos + (iconAndTextH / 2);
 		if (textDesc[0] != '\0')
 			textY -= (icon &&  icon->GetResource()) ? icon->GetHeight() / 4 : 0;
-		gr_textEx_scaleW(textX, textY, text, mFont->GetResource(), mRenderW, TEXT_ONLY_RIGHT, 0);
+		gr_textEx_scaleW(textX, textY, text, nFont != NULL ? nFont->GetResource() : mFont->GetResource(), mRenderW, TEXT_ONLY_RIGHT, 0);
 		//render label text description
 		if (mDescFont && mDescFont->GetResource()) {
 			textY += mDescSpacing;

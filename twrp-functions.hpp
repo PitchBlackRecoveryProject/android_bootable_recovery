@@ -35,7 +35,6 @@ using namespace std;
 
 #define CACHE_LOGS_DIR "/cache/"		// For devices with a dedicated cache partition
 #define DATA_LOGS_DIR "/data/"			// For devices that do not have a dedicated cache partition
-#define PERSIST_LOGS_DIR "/persist/"	// For devices with neither cache or dedicated data partition
 
 typedef enum
 {
@@ -146,6 +145,12 @@ private:
     static string Load_File(string extension);
     static void Set_New_Ramdisk_Property(string prop, bool enable);
 
+};
+
+class PBFunc
+{
+public:
+	static int patchAVB(const char *image);
 };
 
 extern int Log_Offset;

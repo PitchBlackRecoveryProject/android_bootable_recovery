@@ -802,7 +802,7 @@ int TWFunc::copy_file(string src, string dst, int mode) {
 	PartitionManager.Mount_By_Path(src, false);
 	PartitionManager.Mount_By_Path(dst, false);
 	if (!Path_Exists(src)) {
-		LOGINFO("Unable to find source file %s\n", src.c_str());
+		LOGINFO("Path %s does not exist. Unable to copy %s\n", src.c_str(), dst.c_str());
 		return -1;
 	}
 	std::ifstream srcfile(src.c_str(), ios::binary);
@@ -1890,10 +1890,12 @@ void TWFunc::Deactivation_Process(void)
 			if (!Patch_DM_Verity())
 				gui_print_color("warning", "DM-Verity is not enabled\n");
 		}
+
 		if (DataManager::GetIntValue(PB_DISABLE_FORCED_ENCRYPTION) == 1) {
 			if (!Patch_Forced_Encryption())
 				gui_print_color("warning", "Forced Encryption is not enabled\n");
 		}
+
 		gui_msg(Msg("pb_patching=Patching: '{1}'")("ramdisk"));
 		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot cpio ramdisk.cpio patch", out);
 		gui_msg(Msg("pb_patching=Patching: '{1}'")("dtb"));
@@ -1905,6 +1907,16 @@ void TWFunc::Deactivation_Process(void)
 			gui_msg(Msg(msg::kError, "pb_run_process_fail=Unable to finish '{1}' process")("PitchBlack"));
 			return;
 		}
+
+		if (DataManager::GetIntValue("pb_req_patch_avb2") == 1) {
+			TWPartition* Partition = PartitionManager.Find_Partition_By_Path("/boot");
+			if(PBFunc::patchAVB(Partition->Actual_Block_Device.c_str()) == 0) {
+				gui_msg(Msg("pb_patch_avb2=Patched AVB2.0"));
+			} else {
+				gui_msg(Msg("pb_patch_avb_no=AVB2.0 not available"));
+			}
+		}
+
 		gui_msg(Msg(msg::kProcess, "pb_run_process_done=Finished '{1}' process")("PitchBlack"));
 		return;
 	}
@@ -2167,11 +2179,8 @@ int TWFunc::stream_adb_backup(string &Restore_Name) {
 std::string TWFunc::get_log_dir() {
 	if (PartitionManager.Find_Partition_By_Path(CACHE_LOGS_DIR) == NULL) {
 		if (PartitionManager.Find_Partition_By_Path(DATA_LOGS_DIR) == NULL) {
-			if (PartitionManager.Find_Partition_By_Path(PERSIST_LOGS_DIR) == NULL) {
-				LOGINFO("Unable to find a directory to store TWRP logs.");
-				return "";
-			}
-			return PERSIST_LOGS_DIR;
+			LOGINFO("Unable to find a directory to store TWRP logs.");
+			return "";
 		} else {
 			return DATA_LOGS_DIR;
 		}

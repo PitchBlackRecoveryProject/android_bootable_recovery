@@ -54,7 +54,6 @@ extern "C" {
 #include "openrecoveryscript.hpp"
 #include "variables.h"
 #include "twrpAdbBuFifo.hpp"
-#include "twrpApex.hpp"
 #ifdef TW_USE_NEW_MINADBD
 // #include "minadbd/minadbd.h"
 #else
@@ -78,7 +77,7 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
 		if (SkipDecryption) {
 			LOGINFO("Skipping decryption\n");
-		} else {
+		} else if (DataManager::GetIntValue(TW_CRYPTO_PWTYPE) != 0) {
 			LOGINFO("Is encrypted, do decrypt page first\n");
 			if (DataManager::GetIntValue(TW_IS_FBE))
 				DataManager::SetValue("tw_crypto_user_id", "0");
@@ -189,33 +188,6 @@ int main(int argc, char **argv) {
 				property_set("ro.twrp.sar", fallback_sar ? "1" : "0");
 			}
 
-// We are doing this here during SAR-detection, since we are mounting the system-partition anyway
-// This way we don't need to remount it later, just for overriding properties
-#ifdef TW_OVERRIDE_SYSTEM_PROPS
-			stringstream override_props(EXPAND(TW_OVERRIDE_SYSTEM_PROPS));
-			string current_prop;
-			while (getline(override_props, current_prop, ';')) {
-				string other_prop;
-				if (current_prop.find("=") != string::npos) {
-					other_prop = current_prop.substr(current_prop.find("=") + 1);
-					current_prop = current_prop.substr(0, current_prop.find("="));
-				} else {
-					other_prop = current_prop;
-				}
-				other_prop = android::base::Trim(other_prop);
-				current_prop = android::base::Trim(current_prop);
-				string sys_val = TWFunc::System_Property_Get(other_prop, SarPartitionManager, "/s");
-				if (!sys_val.empty()) {
-					LOGINFO("Overriding %s with value: \"%s\" from system property %s\n", current_prop.c_str(), sys_val.c_str(), other_prop.c_str());
-					int error = TWFunc::Property_Override(current_prop, sys_val);
-					if (error) {
-						LOGERR("Failed overriding property %s, error_code: %d\n", current_prop.c_str(), error);
-					}
-				} else {
-					LOGINFO("Not overriding %s with empty value from system property %s\n", current_prop.c_str(), other_prop.c_str());
-				}
-			}
-#endif
 			SarPartitionManager.UnMount_By_Path("/s", false);
 		} else {
 			LOGINFO("SAR-DETECT: Could not mount system partition, falling back to %s\n", fallback_sar ? "SAR":"Non-SAR");
@@ -235,6 +207,38 @@ int main(int argc, char **argv) {
 	}
 
 	PartitionManager.Output_Partition_Logging();
+
+// We are doing this here to allow super partition to be set up prior to overriding properties
+#if defined(TW_INCLUDE_LIBRESETPROP) && defined(TW_OVERRIDE_SYSTEM_PROPS)
+	if (!PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), true)) {
+		LOGERR("Unable to mount %s\n", PartitionManager.Get_Android_Root_Path().c_str());
+	} else {
+		stringstream override_props(EXPAND(TW_OVERRIDE_SYSTEM_PROPS));
+		string current_prop;
+		while (getline(override_props, current_prop, ';')) {
+			string other_prop;
+			if (current_prop.find("=") != string::npos) {
+				other_prop = current_prop.substr(current_prop.find("=") + 1);
+				current_prop = current_prop.substr(0, current_prop.find("="));
+			} else {
+				other_prop = current_prop;
+			}
+			other_prop = android::base::Trim(other_prop);
+			current_prop = android::base::Trim(current_prop);
+			string sys_val = TWFunc::System_Property_Get(other_prop, PartitionManager, PartitionManager.Get_Android_Root_Path().c_str());
+			if (!sys_val.empty()) {
+				LOGINFO("Overriding %s with value: \"%s\" from system property %s\n", current_prop.c_str(), sys_val.c_str(), other_prop.c_str());
+				int error = TWFunc::Property_Override(current_prop, sys_val);
+				if (error) {
+					LOGERR("Failed overriding property %s, error_code: %d\n", current_prop.c_str(), error);
+				}
+			} else {
+				LOGINFO("Not overriding %s with empty value from system property %s\n", current_prop.c_str(), other_prop.c_str());
+			}
+		}
+		PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
+	}
+#endif
 
 	// Load up all the resources
 	gui_loadResources();
@@ -345,11 +349,7 @@ int main(int argc, char **argv) {
 	if (crash_counter == 0)
 		TWFunc::Fixup_Time_On_Boot();
 
-	// Read the settings file
-	TWFunc::Update_Log_File();
-
-	if (!PartitionManager.Get_Super_Status())
-		DataManager::ReadSettingsFile();
+	DataManager::ReadSettingsFile();
 	PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
 	GUIConsole::Translate_Now();
 
@@ -419,15 +419,6 @@ int main(int argc, char **argv) {
 	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
 	if (sys) {
 		if (sys->Get_Super_Status()) {
-			sys->Mount(true);
-			if (ven) {
-				ven->Mount(true);
-			}
-			twrpApex apex;
-			if (!apex.loadApexImages()) {
-				LOGERR("Unable to load apex images from %s\n", APEX_DIR);
-			}
-			property_set("twrp.apex.loaded", "true");
 #ifdef TW_INCLUDE_CRYPTO
 			std::string recoveryLogDir(DATA_LOGS_DIR);
 			recoveryLogDir += "/recovery";
@@ -460,6 +451,8 @@ int main(int argc, char **argv) {
 		}
 	}
 #endif
+
+	TWFunc::Update_Log_File();
 
 	twrpAdbBuFifo *adb_bu_fifo = new twrpAdbBuFifo();
 	adb_bu_fifo->threadAdbBuFifo();

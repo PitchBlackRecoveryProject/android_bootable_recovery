@@ -1,10 +1,10 @@
-- [ ] I am running an official build of TWRP, downloaded from https://twrp.me/Devices/
-- [ ] I am running the latest version of TWRP
-- [ ] I have read the FAQ (https://twrp.me/FAQ/)
+- [ ] I am running an official build of PBRP, downloaded from https://pitchblackrecovery.com/#downloads
+- [ ] I am running the latest version of PBRP
+- [ ] I have read the Wiki (https://pitchblackrecovery.com/docs)
 - [ ] I have searched for my issue and it does not already exist
 
 **Device codename**: <!-- Device codename -->
-**TWRP version**: <!-- TWRP version installed -->
+**PBRP version**: <!-- PBRP version installed -->
 
 #### WHAT STEPS WILL REPRODUCE THE PROBLEM?
 <!-- Explain the steps necessary to reproduce the problem, as completely as possible -->
@@ -21,3 +21,8 @@
 <!-- Use https://paste.omnirom.org/ and upload `/tmp/recovery.log` and the output of `dmesg` -->
 `/tmp/recovery.log`: <!-- Link here -->
 `dmesg`: <!-- Link here -->
+
+You can join our community on Telegram
+* [Community Group](https://t.me/pbrpcom)
+
+* [Test Build & Build Help Group](https://t.me/pbrp_testers)

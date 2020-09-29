@@ -1,14 +1,36 @@
 <?xml version="1.0"?>
 
 <language>
-	<display>Chinese (Traditional)</display>
+	<display>繁體中文</display>
+	<font>chin</font>
 
 	<resources>
 		<!-- Font overrides - only change these if your language requires special characters -->
-		<resource name="font_l" type="fontoverride" filename="pb.ttf" scale="100" />
-		<resource name="font_m" type="fontoverride" filename="pb.ttf" scale="100" />
-		<resource name="font_s" type="fontoverride" filename="pb.ttf" scale="100" />
-		<resource name="fixed" type="fontoverride" filename="pb.ttf" scale="100" />
+		<resource name="font_l" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="font_m" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="font_s" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="fixed" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="font_n" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_o" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_s" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_xl" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_xxl" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="fixed" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_pb" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_pb_small" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_pb_tools" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_exl" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_l" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="cons" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_about" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_install_subheader" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_install_option" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_m" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_card" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_sub_header" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_slider" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_roboto_m" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
+		<resource name="font_roboto" type="fontoverride" filename="DroidSansFallback.ttf" scale="100"/>
 
 		<!-- Partition display names -->
 		<string name="system">System</string>
@@ -716,5 +738,220 @@
 		<string name="sha2_chk">使用 SHA2 進行散列校驗</string>
 		<string name="unable_set_boot_slot">更改 bootloader 啟動分區至 {1} 錯誤</string>
 		<string name="show_free_sdmb">Show Free SD Mb</string>
+		
+		<!-- PBRP Auto-Translated Strings START -->
+
+		<string name="copy_log_btn1">生成日誌到SD卡</string>
+		<string name="adb_sideload_btn1">通過ADB安裝軟件包</string>
+		<string name="zip_compatible_err">拉鍊高音兼容性錯誤！</string>
+		<string name="reboot_recovery_btn">重啟恢復</string>
+		<string name="reset">重啟</string>
+		<string name="factory_reset5">（不包括用戶/鎖屏）</string>
+		<string name="part_present">當下：</string>
+		<string name="part_removable">可移動的：</string>
+		<string name="destination_storage">目標存儲</string>
+		<string name="check_digest_after_backup">備份後檢查摘要</string>
+		<string name="backup_options">備份選項</string>
+		<string name="rb_recovery_btn1">重新啟動以恢復</string>
+		<string name="rb_bootloader_btn1">重新啟動到Bootloader</string>
+		<string name="fix_context_btn1">修復SELinux上下文</string>
+		<string name="part_sd_btn1">分區SD卡/內部存儲</string>
+		<string name="file_manager_btn1">管理文件，設備上的文件夾</string>
+		<string name="terminal_btn1">啟動提升的終端控制台</string>
+		<string name="reload_theme_btn1">如果有問題，請重新加載恢復主題</string>
+		<string name="dumlock_hdr1">從恢復中刷新HTC的啟動</string>
+		<string name="fm_open_file_btn">讀取檔案</string>
+		<string name="fm_reading">讀</string>
+		<string name="fm_unzipping">解壓縮</string>
+		<string name="fm_zipping">壓縮</string>
+		<string name="fm_unzip_btn">解壓縮</string>
+		<string name="fm_zip_btn">壓縮</string>
+		<string name="pb_zip_name">壓縮</string>
+		<string name="install_twrp_ramdisk1">Flash Recovery ramdisk（僅限A / B）</string>
+		<string name="repack_kernel_confirm_hdr1">Flash自定義內核（僅A / B）</string>
+		<string name="fix_recovery_loop1">重新啟動後修復恢復的解決方法</string>
+		<string name="decrypt_users">解密用戶</string>
+		<string name="decrypt_users1">多用戶解密</string>
+		<string name="decrypt_users_selection">選擇要解密的用戶標識</string>
+		<string name="select_user">選擇用戶</string>
+		<string name="backup_storage_undecrypt_warning">備份不包括用戶{1}的某些文件，因為該用戶未解密。</string>
+		<string name="decrypting_user_fbe">嘗試為用戶{1}解密FBE ...</string>
+		<string name="decrypt_user_success_fbe">用戶{1}成功解密</string>
+		<string name="decrypt_user_fail_fbe">解密用戶{1}失敗</string>
+		<string name="decrypt_data_enter_pass_fbe">輸入用戶[％tw_crypto_user_id％]的密碼</string>
+		<string name="decrypt_data_enter_pattern_fbe">輸入用戶[％tw_crypto_user_id％]的模式</string>
+		<string name="decrypt_cmd" version="2">嘗試通過命令行解密數據分區或用戶數據。</string>
+		<string name="pb_flashed">*新的PBRP閃爍，按音量{1}</string>
+		<string name="pb_flashed_">*檢測到Magisk修補的Ramdisk ！！！</string>
+		<string name="pb_rb_msg">*第{1}卷完成</string>
+		<string name="copy_logcat_log">將logcat日誌複製到{1}</string>
+		<string name="include_logcat_log">包括Logcat日誌</string>
+		<string name="device_ab">A / B設備設置</string>
+		<string name="flash_ab_inactive">將A / B zip閃爍到無效的插槽：{1}</string>
+		<string name="flash_ab_reboot">要刷新其他壓縮文件，請重新啟動恢復以切換到更新的插槽。</string>
+		<string name="ozip_decrypt_decryption">開始Ozip解密...</string>
+		<string name="ozip_decrypt_finish">Ozip解密完成！</string>
+		<string name="additional_hdr">額外</string>
+		<string name="additional">額外</string>
+		<string name="tools_hdr">工具選項</string>
+		<string name="tools">工具選項</string>
+		<string name="tools1">工具類</string>
+		<string name="SuperSU_btn">超級SU</string>
+		<string name="SuperSU_text">SuperSU將被安裝。</string>
+		<string name="SuperSU_confirm">嘗試安裝嗎？</string>
+		<string name="Unroot_SuperSU_btn">Unroot SuperSU</string>
+		<string name="Unroot_SuperSU_text">將安裝Unroot SuperSU。</string>
+		<string name="Unroot_SuperSU_confirm">嘗試安裝嗎？</string>
+		<string name="Magisk_btn">神奇</string>
+		<string name="Magisk_text">將安裝Magisk。</string>
+		<string name="Magisk_confirm">嘗試安裝嗎？</string>
+		<string name="Unroot_Magisk_btn">無根魔法</string>
+		<string name="Unroot_Magisk_text">Unroot Magisk將被安裝。</string>
+		<string name="Unroot_Magisk_confirm">嘗試安裝嗎？</string>
+		<string name="Aroma_FM_btn">芳香調頻</string>
+		<string name="Aroma_FM_text">將安裝Aroma FM。</string>
+		<string name="Aroma_FM_confirm">嘗試安裝嗎？</string>
+		<string name="FP_Scanner_btn">FP掃描儀</string>
+		<string name="FP_Scanner_text">FP掃描儀將被安裝。</string>
+		<string name="FP_Scanner_confirm">嘗試安裝嗎？</string>
+		<string name="Pin/Pass_Remover_btn">銷/通孔清除器</string>
+		<string name="Pin/Pass_Remover_text">將安裝銷/通孔去除器。</string>
+		<string name="Pin/Pass_Remover_confirm">嘗試安裝嗎？</string>
+		<string name="RM_Subs_Overlays_btn">RM疊加</string>
+		<string name="RM_Subs_Overlays_text">RM Subs疊加層將被安裝。</string>
+		<string name="RM_Subs_Overlays_confirm">嘗試安裝嗎？</string>
+		<string name="RM_All_Subs_Overlays_btn">RM所有覆蓋</string>
+		<string name="RM_All_Subs_Overlays_text">RM All Subs疊加層將被安裝。</string>
+		<string name="RM_All_Subs_Overlays_confirm">嘗試安裝嗎？</string>
+		<string name="Camera2API_Enabler_btn">Camera2API啟動器</string>
+		<string name="Camera2API_Enabler_text">將安裝Camera2API啟動器。</string>
+		<string name="Camera2API_Enabler_confirm">嘗試安裝嗎？</string>
+		<string name="App_Delete_btn">應用刪除</string>
+		<string name="App_Delete_text">應用程序刪除將被安裝。</string>
+		<string name="App_Delete_confirm">嘗試安裝嗎？</string>
+		<string name="MTP_Fix_btn">MTP修復</string>
+		<string name="MTP_Fix_text">將安裝MTP Fix。</string>
+		<string name="MTP_Fix_confirm">嘗試安裝嗎？</string>
+		<string name="MMR_btn">魔術經理</string>
+		<string name="MMR_text">將安裝Magisk Manager Recovery。</string>
+		<string name="MMR_confirm">嘗試安裝嗎？</string>
+		<string name="Dm_Verity_btn">Dm Verity</string>
+		<string name="Dm_Verity_text">Dm Verity將被安裝。</string>
+		<string name="Dm_Verity_confirm">嘗試安裝嗎？</string>
+		<string name="use_aromafm">使用Aroma File Manager</string>
+		<string name="pbthemes">主題</string>
+		<string name="pbthemes_hdr">主題</string>
+		<string name="special">特別</string>
+		<string name="special_hdr">特別</string>
+		<string name="about_pbrp">關於PBRP</string>
+		<string name="device_info">設備信息</string>
+		<string name="device_maintainer">設備維護者</string>
+		<string name="thanksto">謝謝</string>
+		<string name="toolscr">工具信用</string>
+		<string name="contributors">貢獻者</string>
+		<string name="contributors1">貢獻者和Patreon</string>
+		<string name="SETTING">特殊設定</string>
+		<string name="SETTINGOTA">OTA設置</string>
+		<string name="device_name">設備名稱：％pb_device_manufacturer％％pb_device_name％</string>
+		<string name="device_codename">設備代號：％pb_device％</string>
+		<string name="build_date">建立日期：％pb_build％</string>
+		<string name="pb_version">PitchBlack版本：％pb_ver％</string>
+		<string name="device_maintainer1">設備維護人員：％pb_maintainer％</string>
+		<string name="core_contributors">核心貢獻者</string>
+		<string name="miscellaneous">雜</string>
+		<string name="pbrpspecial_btn">PBRP特價</string>
+		<string name="install_txt">想要添加更改</string>
+		<string name="install2_txt">以Zips或Img形式</string>
+		<string name="wipe_txt">釋放設備的</string>
+		<string name="wipe2_txt">強調</string>
+		<string name="backup_txt">保存您的寶貴</string>
+		<string name="backup2_txt">寶石在更安全的地方</string>
+		<string name="restore_txt">找回你的珍貴</string>
+		<string name="restore2_txt">寶石你保存了嗎？</string>
+		<string name="mount_txt">獲取設備的</string>
+		<string name="mount2_txt">安裝分區</string>
+		<string name="advanced_txt">該頁面不夠用</string>
+		<string name="advanced2_txt">為了你？切換到</string>
+		<string name="settings_txt">自定義PitchBlack恢復！</string>
+		<string name="customizations">客制化</string>
+		<string name="themes_txt">主題</string>
+		<string name="bg_color">背景顏色</string>
+		<string name="font_options">字體選項</string>
+		<string name="features_txt">特徵</string>
+		<string name="logs_btn">開放式控制台</string>
+		<string name="pb_support_miui_ota_chk">支持MIUI增量OTA</string>
+		<string name="pb_incremental_ota_status_enabled">支持MIUI增量軟件包狀態：已啟用</string>
+		<string name="pb_incremental_ota_status_disabled">支持MIUI增量軟件包狀態：已禁用</string>
+		<string name="pb_incremental_package_detected">檢測到增量包“ {1}”</string>
+		<string name="pb_survival_does_not_exist">不存在OTA生存！請先刷新完整的ROM！</string>
+		<string name="pb_install_detecting">檢測當前包裹</string>
+		<string name="pb_install_standard_detected">-檢測標準包裝</string>
+		<string name="pb_install_miui_detected">-檢測到MIUI更新包</string>
+		<string name="pb_install_miui_oreo_detected">-檢測到高音MIUI更新包</string>
+		<string name="pb_install_miui_10_detected">-檢測到MIUI 10非高音更新程序包</string>
+		<string name="pb_install_patch_detected">-檢測到補丁程序或修復程序包</string>
+		<string name="pb_disable_boot_chk">禁用啟動檢查</string>
+		<string name="pb_include_system_survival_chk">在OTA生存中包含系統</string>
+		<string name="pb_verify_incremental_ota_signature_chk">增量OTA簽名驗證</string>
+		<string name="pb_incremental_ota_compatibility_chk">驗證增量軟件包簽名...</string>
+		<string name="pb_incremental_ota_compatibility_false">增量軟件包與此ROM不兼容！</string>
+		<string name="pb_incremental_ota_compatibility_true">增量包裝兼容</string>
+		<string name="pb_zip_have_bootloader">警告：檢測到重新安裝了引導加載程序，該重新加載程序由“ {1}”調用。</string>
+		<string name="pb_no_space_ota_survival">內部存儲器上沒有足夠的可用空間來創建OTA生存期。</string>
+		<string name="exp">資源管理器選項</string>
+		<string name="pb_incremental_ota_res">OTA_RES-完成！</string>
+		<string name="pb_incremental_ota_res_run">正在運行OTA_RES進程...</string>
+		<string name="pb_incremental_ota_bak_run">正在運行OTA_BAK進程...</string>
+		<string name="pb_incremental_ota_bak">OTA_BAK-完成！</string>
+		<string name="pb_advanced_stock_recovery">積極的庫存回收停用</string>
+		<string name="pb_reboot_dont_disable_stock_recovery_chk">不要禁用庫存恢復替換</string>
+		<string name="pb_dmverity_chk">停用（補丁DM版本）</string>
+		<string name="pb_for_en_chk">提前禁用強制加密</string>
+		<string name="pb_forced_encryption_chk">禁用強制加密</string>
+		<string name="pb_disable_reboot_ota_check">停用OTA後重新啟動</string>
+		<string name="pb_run_process">開始“ {1}”過程</string>
+		<string name="pb_encrypt_cn">緩存了多個加密詳細信息</string>
+		<string name="pb_encrypt_st">加密狀態：{1}</string>
+		<string name="pb_run_process_fail">無法完成“ {1}”過程</string>
+		<string name="fm_pb_make">製作文件夾</string>
+		<string name="fm_pb_mk">製作文件夾</string>
+		<string name="pb_run_process_done">完成“ {1}”過程</string>
+		<string name="pb_encryption">成功修補強制加密</string>
+		<string name="pb_ecryption_leave">設備加密離開強制加密</string>
+		<string name="pb_encryption_off">未啟用強制加密</string>
+		<string name="pb_fstab">檢測到fstab：“ {1}”</string>
+		<string name="pb_unlink">取消鏈接：“ {1}”</string>
+		<string name="pb_patching">修補：“ {1}”</string>
+		<string name="pb_end_read">結束進程讀取{1}</string>
+		<string name="pb_start_read">已開始處理讀取{1}</string>
+		<string name="pb_dm_verity">成功修補DM-Verity</string>
+		<string name="pb_dm_verity_off">未啟用DM版本</string>
+		<string name="pb_bk">創建PB文件備份-/ tmp / pb / backup_wip ...</string>
+		<string name="pb_bk_no">沒有PBRP工具檢測到重新刷新PBRP程序包</string>
+		<string name="zip_err_compatibility">繞過高音兼容性</string>
+		<string name="pb_wipe_substratum_overlays">底層疊加</string>
+		<string name="substratum_done">-基質覆蓋擦拭完成！</string>
+		<string name="assert_failed_hint">斷言失敗。請檢查上面的輸出以獲取更多詳細信息。</string>
+		<string name="pb_wipe_magisk_modules">魔術模塊</string>
+		<string name="magisk_done">-Magisk模塊擦拭完成！</string>
+		<string name="pb_saving_log">正在保存日誌...</string>
+		<string name="pb_enable_dmesg_logging">在Flash之後啟用Dmesg日誌記錄</string>
+		<string name="pb_copy_log_cache">也將日誌複製到緩存。</string>
+		<string name="pb_dev_name_change">要更改您的設備代號？</string>
+		<string name="img">IMG</string>
+		<string name="zip">壓縮</string>
+		<string name="pb_dev_change">將設備代號從％pb_prop_value％更改為％pb_codename_change％</string>
+		<string name="pb_dev_changed">設備代號已更改為％pb_codename_change％</string>
+		<string name="pb_dev_reboot">切換代號後必須重新啟動</string>
+		<string name="pb_dev_name">PBRP設備代號更改</string>
+		<string name="codename_changer">代號換</string>
+		<string name="pb_wipe_fbe_cache">FBE快取</string>
+		<string name="fbe_done">-FBE緩存擦除完成！</string>
+		<string name="sel_br_val">手電筒亮度值：％pb_bright_value %%</string>
+		<string name="unmount_sys_install">安裝ZIP之前先卸載系統</string>
+		<string name="unmount_system">卸載系統...</string>
+		<string name="unmount_system_err">失敗的卸載系統</string>
+		
+		<!-- PBRP Auto-Translated Strings END -->
 	</resources>
 </language>

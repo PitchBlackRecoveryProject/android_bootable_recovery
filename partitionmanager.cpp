@@ -319,6 +319,25 @@ TWPartitionManager::Process_Fstab (string Fstab_Filename, bool Display_Error, bo
 			Prepare_Super_Volume((*iter));
 	}
 
+	// Setup Apex before decrypt
+	TWPartition* sys = PartitionManager.Find_Partition_By_Path(PartitionManager.Get_Android_Root_Path());
+	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
+	if (sys) {
+		if (sys->Get_Super_Status()) {
+			sys->Mount(true);
+			if (ven) {
+				ven->Mount(true);
+			}
+			twrpApex apex;
+			if (!apex.loadApexImages()) {
+				LOGERR("Unable to load apex images from %s\n", APEX_DIR);
+				property_set("twrp.apex.loaded", "false");
+			} else {
+				property_set("twrp.apex.loaded", "true");
+			}
+		}
+	}
+
 	if (!datamedia && !settings_partition
 			&& Find_Partition_By_Path ("/sdcard") == NULL
 			&& Find_Partition_By_Path ("/internal_sd") == NULL
@@ -2776,22 +2795,22 @@ TWPartitionManager::Mount_All_Storage (void)
 void
 TWPartitionManager::UnMount_Main_Partitions (void)
 {
-// Unmounts system and data if data is not data/media
-// Also unmounts boot if boot is mountable
+	// Unmounts system and data if data is not data/media
+	// Also unmounts boot if boot is mountable
 	LOGINFO ("Unmounting main partitions...\n");
 
-	TWPartition *Boot_Partition = Find_Partition_By_Path ("/vendor");
+	TWPartition *Partition = Find_Partition_By_Path ("/vendor");
 
-	if (Boot_Partition != NULL) UnMount_By_Path("/vendor", false);
+	if (Partition != NULL) UnMount_By_Path("/vendor", false);
 	UnMount_By_Path (Get_Android_Root_Path(), true);
-	Boot_Partition = Find_Partition_By_Path ("/product");
-	if (Boot_Partition != NULL) UnMount_By_Path("/product", false);
+	Partition = Find_Partition_By_Path ("/product");
+	if (Partition != NULL) UnMount_By_Path("/product", false);
 	if (!datamedia)
 		UnMount_By_Path ("/data", true);
 
-	Boot_Partition = Find_Partition_By_Path ("/boot");
-	if (Boot_Partition != NULL && Boot_Partition->Can_Be_Mounted)
-		Boot_Partition->UnMount (true);
+	Partition = Find_Partition_By_Path ("/boot");
+	if (Partition != NULL && Partition->Can_Be_Mounted)
+		Partition->UnMount (true);
 }
 
 int
