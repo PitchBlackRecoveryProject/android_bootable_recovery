@@ -759,6 +759,7 @@ void TWPartition::Set_FBE_Status() {
 bool TWPartition::Decrypt_FBE_DE() {
 	if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 		DataManager::SetValue(TW_IS_FBE, 1);
+		DataManager::SetValue(TW_CRYPTO_PWTYPE, "0"); // Set initial value so that recovery will not be confused when using unencrypted data or failed to decrypt data
 		LOGINFO("File Based Encryption is present\n");
 #ifdef TW_INCLUDE_FBE
 		Is_FBE = true;
@@ -1212,6 +1213,14 @@ void TWPartition::Setup_Data_Media() {
 		backup_exclusions.add_absolute_dir("/data/data/com.google.android.music/files");
 		backup_exclusions.add_absolute_dir("/data/per_boot"); // DJ9,14Jan2020 - exclude this dir to prevent "error 255" on AOSP ROMs that create and lock it
 		backup_exclusions.add_absolute_dir("/data/vendor/dumpsys");
+		backup_exclusions.add_absolute_dir("/data/vendor_ce/10");
+		backup_exclusions.add_absolute_dir("/data/vendor_ce/999");
+		backup_exclusions.add_absolute_dir("/data/system_ce/10");
+		backup_exclusions.add_absolute_dir("/data/system_ce/999");
+		backup_exclusions.add_absolute_dir("/data/misc_ce/10");
+		backup_exclusions.add_absolute_dir("/data/misc_ce/999");
+		backup_exclusions.add_absolute_dir("/data/user/10");
+		backup_exclusions.add_absolute_dir("/data/user/999");
 		backup_exclusions.add_absolute_dir("/data/cache");
 		wipe_exclusions.add_absolute_dir(Mount_Point + "/misc/vold"); // adopted storage keys
 		ExcludeAll(Mount_Point + "/system/storage.xml");
@@ -3435,4 +3444,16 @@ void TWPartition::Set_Can_Be_Backed_Up(bool val) {
 void TWPartition::Set_Can_Be_Wiped(bool val) {
 	Can_Be_Wiped = val;
 	Wipe_Available_in_GUI = val;
+}
+
+std::string TWPartition::Get_Backup_FileName() {
+	return Backup_FileName;
+}
+
+std::string TWPartition::Get_Display_Name() {
+	return Display_Name;
+}
+
+bool TWPartition::Is_SlotSelect() {
+	return SlotSelect;
 }

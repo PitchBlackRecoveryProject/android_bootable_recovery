@@ -103,7 +103,8 @@ LOCAL_SRC_FILES := \
     openrecoveryscript.cpp \
     tarWrite.c \
     twrpAdbBuFifo.cpp \
-    twrpApex.cpp
+    twrpApex.cpp \
+    pbfun.cpp
 
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 29; echo $$?),0)
     LOCAL_STATIC_LIBRARIES += libavb

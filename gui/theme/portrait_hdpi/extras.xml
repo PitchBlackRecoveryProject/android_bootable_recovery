@@ -4,22 +4,18 @@
     <pages>
 	<page name="rename_c">
 		<template name="page"/>
-		
 		<text style="text_l">
 			<placement x="%col1_x_header%" y="%row3_header_y%"/>
 			<text>{@pb_dev_name=PBRP Device Codename Changer}</text>
 		</text>
-
 		<text style="text_sub_header">
 			<placement x="%col1_x_header%" y="%row4_header_y%"/>
 			<text>{@fm_rename_hdr=Rename} %tw_fm_type%</text>
 		</text>
-
 		<text style="text_pb">
 			<placement x="90" y="%row2_y%"/>
 			<text>{@name=Name:}</text>
 		</text>
-
 		<input>
 			<placement x="90" y="%row2_input_y%" w="%content_width%" h="%input_height%"/>
 			<text>%pb_codename_change%</text>
@@ -37,53 +33,42 @@
 				<action function="page">confirm_action</action>
 			</actions>
 		</input>
-
 		<fill color="%accent_color%">
 			<placement x="%indent%" y="row4_y" w="%content_width%" h="input_line_width" placement="1"/>
 		</fill>
-
 		<button style="main_button_half_height_new">
 			<placement x="%indent%" y="%row9_y%"/>
 			<text>{@cancel_btn=Cancel}</text>
 			<action function="page">tools</action>
 		</button>
-
 		<template name="keyboardtemplate"/>
-
 		<action>
 			<touch key="back"/>
 			<action function="page">tools</action>
 		</action>
-			
 		<action>
 			<touch key="home"/>
 			<action function="page">main2</action>
 		</action>
 	</page>
-
        	<page name="tools">
 		<template name="page_without_logo"/>
-
 		<image>
 			<image resource="main_button_black3"/>
 			<placement x="%indent%" y="%upper_header%"/>
 		</image>
-			
 			<image>
 				<image resource="main_button_fixcontexts"/>
 				<placement x="45" y="%row3_header_y%"/>
-			</image>			
-		
+			</image>
 			<text style="text_l">
 				<placement x="%col1_x_header%" y="%row3abc_header_y%"/>
 				<text>{@tools1=Tools}</text>
 			</text>
-
 			<text style="text_sub_header">
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
 				<text>{@pbrpspecial_btn=Fix Contexts}</text>
-			</text>			
-			
+			</text>
 			<button style="main_button_tools">
 				<placement x="56" y="324" textplacementmain="3"/>
 				<icon resource="su"/>
@@ -101,7 +86,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-			
 			<button style="main_button_tools">
 				<placement x="56" y="489" textplacementmain="3"/>
 				<icon resource="su"/>
@@ -119,7 +103,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-			
 			<button style="main_button_tools">
 				<placement x="56" y="654" textplacementmain="3"/>
 				<icon resource="magisk"/>
@@ -138,7 +121,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-			
 			<button style="main_button_tools">
 				<placement x="56" y="819" textplacementmain="3"/>
 				<icon resource="magisk"/>
@@ -156,7 +138,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-				
 			<button style="main_button_tools">
 				<placement x="56" y="984" textplacementmain="3"/>
 				<icon resource="mtp"/>
@@ -174,7 +155,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-				
 			<button style="main_button_tools">
 				<placement x="56" y="1149" textplacementmain="3"/>
 				<icon resource="overlays"/>
@@ -192,7 +172,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-			
 			<button style="main_button_tools">
 				<placement x="56" y="1314" textplacementmain="3"/>
 				<icon resource="magisk"/>
@@ -210,7 +189,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-			
 			<button style="main_button_tools">
 				<placement x="557" y="1314" textplacementmain="3"/>
 				<icon resource="overlays"/>
@@ -228,7 +206,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-			
 			<button style="main_button_tools">
 				<placement x="557" y="489" textplacementmain="3"/>
 				<icon resource="fingerprint"/>
@@ -246,7 +223,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-	
 			<button style="main_button_tools">
 				<placement x="557" y="654" textplacementmain="3"/>
 				<icon resource="pin_pass_remover"/>
@@ -264,7 +240,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-
 			<button style="main_button_tools">
 				<placement x="557" y="819" textplacementmain="3"/>
 				<icon resource="camera2"/>
@@ -282,7 +257,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-			
 			<button style="main_button_tools">
 				<placement x="557" y="984" textplacementmain="3"/>
 				<icon resource="trash"/>
@@ -300,7 +274,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-
 			<button style="main_button_tools">
 				<placement x="557" y="1149" textplacementmain="3"/>
 				<icon resource="dm_verity"/>
@@ -318,7 +291,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-			
 			<button style="main_button_tools">
 				<placement x="557" y="324" textplacementmain="3"/>
 				<icon resource="codename_changer"/>
@@ -327,60 +299,49 @@
 					<action function="page">rename_c</action>
 					<action function="getprop">"ro.product.device"</action>
 					<action function="set">pb_codename_change=%pb_prop_value%</action>
-				</actions>	
+				</actions>
 			</button>
-
 			<image>
 				<image resource="i_icon"/>
 				<placement x="80" y="%row22a_y%"/>
 			</image>
-						
 			<text style="text_sub_header">
 				<placement x="140" y="%row22a_y%"/>
 				<text>Tools information can be found at pbrp.ml/docs/tools</text>
 			</text>
-			
 			<action>
 				<touch key="home"/>
 				<action function="page">main</action>
 			</action>
-
 			<action>
 				<touch key="back"/>
 				<action function="page">%tw_back%</action>
 			</action>
 		  </page>
-		
 		<page name="special_setting">
 			<template name="page_without_logo"/>
-		
 			<image>
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-
 			<image>
 				<image resource="main_button_settings"/>
 				<placement x="75" y="135"/>
 			</image>
-			
 			<text style="text_pb">
 				<font resource="font_pb" color="%sub_header_color%"/>
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@SETTING=Special Setting}</text>
 			</text>
-
 			<text style="text_install_subheader">
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
 				<text>{@pbrpspecial_btn=PBRP Special}</text>
-			</text>		
-		
+			</text>
 			<text>
 				<font resource="font_roboto" color="%sub_header_color%"/>
 				<placement x="90" y="%row2a_y%"/>
 				<text>{@SETTINGOTA=OTA Setting}</text>
-			</text>		
-		
+			</text>
 			<listbox style="scrolllist">
 				<placement x="90" y="%row4a_y%" w="964" h="534"/>
 				<icon selected="checkbox_true" unselected="checkbox_false"/>
@@ -403,23 +364,19 @@
 				<listitem name="{@pb_disable_reboot_ota_check=Disable Rebooting After OTA}">
 					<data variable="pb_disable_reboot_ota"/>
 				</listitem>
-			</listbox>		
-
+			</listbox>
 			<image>
 				<image resource="i_icon"/>
 				<placement x="75" y="880"/>
 			</image>
-
 			<text style="text_sub_header">
 				<placement x="140" y="%row10a_y%"/>
 				<text>Please check instructions for OTA Updates on</text>
-			</text>			
-
+			</text>
 			<text style="text_sub_header">
 				<placement x="140" y="910"/>
 				<text>pbrp.ml/docs/OTA</text>
 			</text>
-
 			<text>
 				<font resource="font_roboto" color="%sub_header_color%"/>
 				<condition var1="tw_has_boot_slots" var2="1"/>
@@ -433,7 +390,6 @@
 				<action function="set">tw_repack_kernel=0</action>
 				<action function="page">repackselect</action>
 			</button>
-
 			<button style="main_button_half_height_new">
 				<condition var1="tw_has_boot_slots" var2="1"/>
 				<placement x="35" y="%row16_y%"/>
@@ -441,7 +397,6 @@
 				<action function="set">tw_repack_kernel=1</action>
 				<action function="page">repackselect</action>
 			</button>
-
 			<button style="main_button_install_done">
 				<condition var1="tw_has_boot_slots" var2="1"/>
 				<placement x="90" y="%row19a_y%"/>
@@ -460,202 +415,164 @@
 				<touch key="home"/>
 				<action function="page">main</action>
 			</action>
-
 			<action>
 				<touch key="back"/>
 				<action function="page">pbrp_special</action>
-			</action>			
-
+			</action>
 		</page>
-		
 		<page name="about">
 			<template name="page_without_logo"/>
-		
 			<image>
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-
 			<image>
 				<image resource="main_button_specials_info"/>
 				<placement x="90" y="135"/>
 			</image>
-			
 			<text style="text_pb">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@about_pbrp=About PBRP}</text>
 			</text>
-
 			<text style="text_install_subheader">
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
-				<text>{@pbrpspecial_btn=PBRP Special}</text>		   
+				<text>{@pbrpspecial_btn=PBRP Special}</text>
 			</text>
-	
 			<image>
 				<image resource="power_logo"/>
 				<placement x="90" y="%row1a_y%"/>
-			</image>	
-
+			</image>
 			<text>
 				<font resource="font_pb_tools" color="%sub_header_color%"/>
 				<placement x="350" y="%row8_y%"/>
 				<text>{@device_info=Device Information}</text>
-			</text>			
-			
+			</text>
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="180" y="%row9a_y%"/>
-				<text>{@device_name=Device Name}</text>		   
+				<text>{@device_name=Device Name}</text>
 			</text>
-
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="180" y="%row10a_y%"/>
-				<text>{@device_codename=Device Codename}</text>		   
+				<text>{@device_codename=Device Codename}</text>
 			</text>
-			
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="180" y="%row11a_y%"/>
-				<text>{@pb_version=PitchBlack Version}</text>		   
+				<text>{@pb_version=PitchBlack Version}</text>
 			</text>
-
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="180" y="%row12a_y%"/>
-				<text>{@build_date=Build Date}</text>		   
-			</text>			
-
+				<text>{@build_date=Build Date}</text>
+			</text>
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<condition var1="pb_info" var2="OFFICIAL"/>
 				<placement x="180" y="%row13a_y%"/>
-				<text>{@device_maintainer1=Device Maintainer}</text>		   
+				<text>{@device_maintainer1=Device Maintainer}</text>
 			</text>
-			
 			<text>
 				<font resource="font_pb_tools" color="%sub_header_color%"/>
 				<placement x="350" y="%row15_y%"/>
 				<text>{@core_contributors=Core Contributors}</text>
 			</text>
-
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="%row16a_y%" placement="5"/>
-				<text>Mohd Faraz (@androiabledroid)</text>		   
+				<text>Mohd Faraz (@androiabledroid)</text>
 			</text>
-
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="1298" placement="5"/>
-				<text>Reza Adi Pangestu (@Reza_Adi_Pangestu)</text>		   
+				<text>Reza Adi Pangestu (@Reza_Adi_Pangestu)</text>
 			</text>
-			
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="1348" placement="5"/>
-				<text>Manjot Singh Sidhu (@manjotsidhu)</text>		   
+				<text>Manjot Singh Sidhu (@manjotsidhu)</text>
 			</text>
-
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="1398" placement="5"/>
-				<text>Rokib Hasan Sagar (@fr3akphantom)</text>		   
-			</text>			
-
+				<text>Rokib Hasan Sagar (@fr3akphantom)</text>
+			</text>
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="1448" placement="5"/>
 				<text>Jubayer Ahmad Shovon (@shovon668)</text>		   
 			</text>
-
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="1498" placement="5"/>
-				<text>ImranPopz (@imranpopz)</text>		   
-			</text>			
-
+				<text>ImranPopz (@imranpopz)</text>
+			</text>
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="1548" placement="5"/>
-				<text>Alex Besida (@AlexBesida)</text>		   
+				<text>Alex Besida (@AlexBesida)</text>
 			</text>
-
 			<text>
 				<font resource="font_sub_header" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="1598" placement="5"/>
-				<text>MD RAZA (@raza231198)</text>		   
+				<text>MD RAZA (@raza231198)</text>
 			</text>
-			
 			<action>
 				<touch key="home"/>
 				<action function="page">main</action>
 			</action>
-
 			<action>
 				<touch key="back"/>
 				<action function="page">pbrp_special</action>
 			</action>
-			
 			</page>
-
 		<page name="customizations">
 			<template name="page"/>
-		
 			<image>
 				<image resource="main_button_black3"/>
 				<placement x="%indent%" y="%upper_header%"/>
 			</image>
-
 			<image>
 				<image resource="customizations_icon"/>
 				<placement x="90" y="130"/>
 			</image>
-			
 			<text style="text_pb">
 				<placement x="%col1_x_header%" y="%row3_header_y%"/>
 				<text>{@customizations=Customizations}</text>
 			</text>
-
 			<text style="text_install_subheader">
 				<placement x="%col1_x_header%" y="%row4_header_y%"/>
-				<text>{@pbrpspecial_btn=PBRP Special}</text>		   
+				<text>{@pbrpspecial_btn=PBRP Special}</text>
 			</text>
-	
 			<image>
 				<image resource="power_logo"/>
 				<placement x="90" y="%row1a_y%"/>
-			</image>	
-
+			</image>
 			<text>
 				<font resource="font_roboto" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="%row11_y%" placement="5"/>
-				<text>We are sorry but it's coming soon!</text>		   
+				<text>We are sorry but it's coming soon!</text>
 			</text>
-
 			<text>
 				<font resource="font_roboto" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="%row12a_y%" placement="5"/>
-				<text>Feel free to send your custom made themes to</text>		   
+				<text>Feel free to send your custom made themes to</text>
 			</text>
-			
 			<text>
 				<font resource="font_roboto" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="%row14_y%" placement="5"/>
-				<text>us on</text>		   
+				<text>us on</text>
 			</text>
-
 			<text>
 				<font resource="font_roboto" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="%row15a_y%" placement="5"/>
-				<text>pitchblackrecovery.com</text>		   
-			</text>			
-
+				<text>pitchblackrecovery.com</text>
+			</text>
 			<action>
 				<touch key="home"/>
 				<action function="page">main</action>
 			</action>
-
 			<action>
 				<touch key="back"/>
 				<action function="page">%tw_back%</action>
