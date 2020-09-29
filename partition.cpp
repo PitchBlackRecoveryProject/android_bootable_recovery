@@ -3445,15 +3445,3 @@ void TWPartition::Set_Can_Be_Wiped(bool val) {
 	Can_Be_Wiped = val;
 	Wipe_Available_in_GUI = val;
 }
-
-std::string TWPartition::Get_Backup_FileName() {
-	return Backup_FileName;
-}
-
-std::string TWPartition::Get_Display_Name() {
-	return Display_Name;
-}
-
-bool TWPartition::Is_SlotSelect() {
-	return SlotSelect;
-}
