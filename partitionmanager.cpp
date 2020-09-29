@@ -5077,7 +5077,11 @@ void TWPartitionManager::Setup_Super_Partition() {
 	superPartition->Mount_Point = "/super";
 	superPartition->Actual_Block_Device = superPart;
 	superPartition->Alternate_Block_Device = superPart;
-	superPartition->Backup_Display_Name = "super";
+#ifdef BOARD_DYNAMIC_PARTITIONS_PARTITION_LIST
+	superPartition->Backup_Display_Name = "Super (" BOARD_DYNAMIC_PARTITIONS_PARTITION_LIST ")";
+#else
+	superPartition->Backup_Display_Name = "Super";
+#endif
 	superPartition->Can_Flash_Img = true;
 	superPartition->Current_File_System = "emmc";
 	superPartition->Can_Be_Backed_Up = true;
