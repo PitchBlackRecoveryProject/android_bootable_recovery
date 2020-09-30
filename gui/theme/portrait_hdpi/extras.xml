@@ -294,7 +294,7 @@
 			<button style="main_button_tools">
 				<placement x="557" y="324" textplacementmain="3"/>
 				<icon resource="codename_changer"/>
-				<text>Codename Changer</text>
+				<text>{@codename_changer=Codename Changer}</text>
 				<actions>
 					<action function="page">rename_c</action>
 					<action function="getprop">"ro.product.device"</action>
@@ -307,7 +307,7 @@
 			</image>
 			<text style="text_sub_header">
 				<placement x="140" y="%row22a_y%"/>
-				<text>Tools information can be found at pbrp.ml/docs/tools</text>
+				<text>{@pb_tools_info=Tools information can be found at pbrp.ml/docs/tools}</text>
 			</text>
 			<action>
 				<touch key="home"/>
@@ -371,7 +371,7 @@
 			</image>
 			<text style="text_sub_header">
 				<placement x="140" y="%row10a_y%"/>
-				<text>Please check instructions for OTA Updates on</text>
+				<text>{@pb_ota_instruction=Please check instructions for OTA Updates on}</text>
 			</text>
 			<text style="text_sub_header">
 				<placement x="140" y="910"/>
@@ -381,7 +381,7 @@
 				<font resource="font_roboto" color="%sub_header_color%"/>
 				<condition var1="tw_has_boot_slots" var2="1"/>
 				<placement x="90" y="%row12a_y%"/>
-				<text>Settings for A/B Devices</text>
+				<text>{@pb_device_ab=Settings for A/B Devices}</text>
 			</text>
 			<button style="main_button_install_done">
 				<condition var1="tw_has_boot_slots" var2="1"/>
@@ -552,17 +552,17 @@
 			<text>
 				<font resource="font_roboto" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="%row11_y%" placement="5"/>
-				<text>We are sorry but it's coming soon!</text>
+				<text>{@pb_coming_soon2=We are sorry but it's coming soon!}</text>
 			</text>
 			<text>
 				<font resource="font_roboto" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="%row12a_y%" placement="5"/>
-				<text>Feel free to send your custom made themes to</text>
+				<text>{@pb_theme_1=Feel free to send your custom made themes to}</text>
 			</text>
 			<text>
 				<font resource="font_roboto" color="%sub_header_color%"/>
 				<placement x="%center_x%" y="%row14_y%" placement="5"/>
-				<text>us on</text>
+				<text>{@pb_theme_2=us on}</text>
 			</text>
 			<text>
 				<font resource="font_roboto" color="%sub_header_color%"/>

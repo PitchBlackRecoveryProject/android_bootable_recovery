@@ -843,8 +843,9 @@
 		<string name="restore2_txt">Gems. Have you saved?</string>
 		<string name="mount_txt">Get your device's</string>
 		<string name="mount2_txt">Partitions Mounted</string>
-		<string name="advanced_txt">This page is not Enough</string>
-		<string name="advanced2_txt">for you? Switch to</string>
+		<string name="advanced_txt">This page is not</string>
+		<string name="advanced2_txt">Enough for you?</string>
+		<string name="advanced3_txt">Switch to Advanced</string>
 		<string name="settings_txt">Customize PitchBlack Recovery!</string>
 		<string name="customizations">Customizations</string>
 		<string name="themes_txt">Themes</string>
@@ -929,5 +930,14 @@
 		<string name="patch_avb2">Patch AVB2.0 Verity</string>
 		<string name="pb_patch_avb2">Patched AVB2.0</string>
 		<string name="pb_patch_avb_no">AVB2.0 Patching not Required</string>
+		<string name="pb_tools_info">Tools information can be found at pbrp.ml/docs/tools</string>
+		<string name="pb_coming_soon2">We are sorry but it's coming soon!</string>
+		<string name="pb_theme_1">Feel free to send your custom made themes to</string>
+		<string name="pb_theme_2">us on</string>
+		<string name="pb_device_ab">Settings for A/B Devices</string>
+		<string name="pb_ota_instruction">Please check instructions for OTA Updates on</string>
+		<string name="pb_thanks">Thank you for using PitchBlack Recovery..!</string>
+		<string name="pb_donate">Consider donating, if you like it</string>
+		<string name="pb_coming_soon">Coming Soon....!</string>
 	</resources>
 </language>

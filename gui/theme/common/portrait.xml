@@ -540,7 +540,7 @@
 
 			<text style="text_header">
 				<placement x="600" y="1210"/>
-				<text>{@advanced_hdr=Switch to Advanced}</text>
+				<text>{@advanced3_txt=Switch to Advanced}</text>
 			</text>
 		</page>
 
@@ -3302,7 +3302,7 @@
 				<icon resource="main_button_restore"/>
 				<fill color="%transparent%"/>
 				<highlight color="#1A1A1A80"/>
-				<text>Recovery</text>
+				<text>{@rb_recovery_btn=Recovey}</text>
 				<actions>
 					<action function="set">tw_back=reboot</action>
 					<action function="set">tw_action=reboot</action>
@@ -3325,7 +3325,7 @@
 				<icon resource="reboot_system_icon"/>
 				<fill color="%transparent%"/>
 				<highlight color="#1A1A1A80"/>
-				<text>System</text>
+				<text>{@rb_system_btn=System}</text>
 				<actions>
 					<action function="page">reboot_system_routine</action>
 					<action function="overlay"/>
@@ -3338,7 +3338,7 @@
 				<icon resource="more_icon"/>
 				<fill color="%transparent%"/>
 				<highlight color="#1A1A1A80"/>
-				<text>Advance</text>
+				<text>{@advanced_btn=Advanced}</text>
 				<actions>
 					<action function="page">reboot</action>
 					<action function="overlay"/>
@@ -3379,12 +3379,12 @@
 
 			<text style="text_sub_header">
 				<placement x="200" y="%row7_y%"/>
-				<text>Thank you for using PitchBlack Recovery..!</text>
+				<text>{@pb_thanks=Thank you for using PitchBlack Recovery..!}</text>
 			</text>
 
 			<text style="text_sub_header">
 				<placement x="300" y="%row8_y%"/>
-				<text>Consider donating, if you like it</text>
+				<text>{@pb_donate=Consider donating, if you like it}</text>
 			</text>
 
 			<button style="main_button_half_height_new">
@@ -6388,7 +6388,7 @@
 
 			<text style="text_header">
 				<placement x="350" y="785"/>
-				<text>Coming Soon....!</text>
+				<text>{@pb_coming_soon=Coming Soon....!}</text>
 			</text>
 
 			<button style="main_button_pbrp_tools">
