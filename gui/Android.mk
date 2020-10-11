@@ -235,6 +235,7 @@ $(TWRP_RES_GEN):
 	if test $(BOARD_RECOVERYIMAGE_PARTITION_SIZE) -le 16777216; then \
 	    rm -rf $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)/fonts/DroidSansFallback.ttf; \
 	    rm -rf $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)/fonts/NotoSansCJKjp-Regular.ttf; \
+	    rm -rf $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)/fonts/RoboNoto-Medium.ttf; \
 	    rm -rf $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)/fonts/OFL.txt; \
 	fi
 	cp -fr $(TWRP_THEME_LOC)/* $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)
