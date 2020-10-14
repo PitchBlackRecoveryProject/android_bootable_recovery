@@ -408,6 +408,8 @@ TWRP_REQUIRED_MODULES += \
     libbootloader_message_twrp \
     init.recovery.hlthchrg.rc \
     init.recovery.service.rc \
+    hwservicemanager.rc \
+    servicemanager.rc \
     awk \
     toybox \
     toolbox \
