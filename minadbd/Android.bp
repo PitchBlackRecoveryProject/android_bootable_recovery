@@ -25,7 +25,7 @@ cc_defaults {
 
     include_dirs: [
         "bootable/recovery/otautil/include",
-        "system/core/adb",
+        "packages/modules/adb",
     ],
 
     header_libs: [
