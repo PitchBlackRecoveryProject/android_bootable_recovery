@@ -735,12 +735,6 @@
 		<string name="tools_hdr">Параметры инструментов</string>
 		<string name="tools">Параметры инструментов</string>
 		<string name="tools1">Инстр.</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">SuperSU будет установлен.</string>
-		<string name="SuperSU_confirm">Продолжить?</string>
-		<string name="Unroot_SuperSU_btn">Удалить SuperSU</string>
-		<string name="Unroot_SuperSU_text">Будет удален SuperSU.</string>
-		<string name="Unroot_SuperSU_confirm">Продолжить?</string>
 		<string name="Magisk_btn">Уст. Magisk</string>
 		<string name="Magisk_text">Magisk будет установлен.</string>
 		<string name="Magisk_confirm">Продолжить?</string>

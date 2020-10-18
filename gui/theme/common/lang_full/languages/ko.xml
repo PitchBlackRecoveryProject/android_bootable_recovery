@@ -784,12 +784,6 @@
 		<string name="tools_hdr">도구 옵션</string>
 		<string name="tools">도구 옵션</string>
 		<string name="tools1">도구</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">SuperSU를 설치합니다.</string>
-		<string name="SuperSU_confirm">계속할까요?</string>
-		<string name="Unroot_SuperSU_btn">SuperSU 제거</string>
-		<string name="Unroot_SuperSU_text">SuperSU를 제거합니다.</string>
-		<string name="Unroot_SuperSU_confirm">계속할까요?</string>
 		<string name="Magisk_btn">Magisk</string>
 		<string name="Magisk_text">Magisk를 설치합니다.</string>
 		<string name="Magisk_confirm">계속할까요?</string>
