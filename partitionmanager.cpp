@@ -337,6 +337,10 @@ TWPartitionManager::Process_Fstab (string Fstab_Filename, bool Display_Error, bo
 			}
 		}
 	}
+	if (ven)
+		ven->UnMount(true);
+	if (sys)
+		sys->UnMount(true);
 
 	if (!datamedia && !settings_partition
 			&& Find_Partition_By_Path ("/sdcard") == NULL
