@@ -71,40 +71,6 @@
 			</text>
 			<button style="main_button_tools">
 				<placement x="56" y="324" textplacementmain="3"/>
-				<icon resource="overlays"/>
-				<text>{@RM_All_Subs_Overlays_btn=RM All Overlays}</text>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/alloverlays.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@RM_All_Subs_Overlays_text=RM All Subs Overlays will be installed.}</action>
-					<action function="set">tw_text2={@RM_All_Subs_Overlays_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			<button style="main_button_tools">
-				<placement x="56" y="489" textplacementmain="3"/>
-				<icon resource="magisk"/>
-				<text>{@MMR_btn=Magisk Manager}</text>
-				<actions>
-					<action function="set">tw_back=tools</action>
-					<action function="set">tw_filename=/sdcard/PBRP/tools/magiskmanagerrecovery.zip</action>
-					<action function="set">tw_action=queuezip</action>
-					<action function="set">tw_has_action2=1</action>
-					<action function="set">tw_action2=flash</action>
-					<action function="set">tw_action2_param=flash_zip</action>
-					<action function="set">tw_text1={@MMR_text=Magisk Manager Recovery will be installed.}</action>
-					<action function="set">tw_text2={@MMR_confirm=Try to install it?}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			<button style="main_button_tools">
-				<placement x="56" y="654" textplacementmain="3"/>
 				<icon resource="magisk"/>
 				<text>{@Magisk_btn=Magisk}</text>
 				<actions>
@@ -122,7 +88,7 @@
 				</actions>
 			</button>
 			<button style="main_button_tools">
-				<placement x="56" y="819" textplacementmain="3"/>
+				<placement x="56" y="489" textplacementmain="3"/>
 				<icon resource="magisk"/>
 				<text>{@Unroot_Magisk_btn=Unroot Magisk}</text>
 				<actions>
@@ -139,7 +105,24 @@
 				</actions>
 			</button>
 			<button style="main_button_tools">
-				<placement x="56" y="984" textplacementmain="3"/>
+				<placement x="56" y="654" textplacementmain="3"/>
+				<icon resource="magisk"/>
+				<text>{@MMR_btn=Magisk Manager}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/magiskmanagerrecovery.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@MMR_text=Magisk Manager Recovery will be installed.}</action>
+					<action function="set">tw_text2={@MMR_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			<button style="main_button_tools">
+				<placement x="56" y="819" textplacementmain="3"/>
 				<icon resource="mtp"/>
 				<text>{@MTP_Fix_btn=MTP Fix}</text>
 				<actions>
@@ -151,6 +134,23 @@
 					<action function="set">tw_action2_param=flash_zip</action>
 					<action function="set">tw_text1={@MTP_Fix_text=MTP Fix will be installed.}</action>
 					<action function="set">tw_text2={@MTP_Fix_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			<button style="main_button_tools">
+				<placement x="56" y="984" textplacementmain="3"/>
+				<icon resource="overlays"/>
+				<text>{@RM_All_Subs_Overlays_btn=RM All Overlays}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/alloverlays.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@RM_All_Subs_Overlays_text=RM All Subs Overlays will be installed.}</action>
+					<action function="set">tw_text2={@RM_All_Subs_Overlays_confirm=Try to install it?}</action>
 					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
 					<action function="page">confirm_action</action>
 				</actions>
