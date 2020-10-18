@@ -159,7 +159,6 @@
 		<image name="mtp" filename="mtp" retainaspect="1" />
 		<image name="overlays" filename="overlays" retainaspect="1" />
 		<image name="pin_pass_remover" filename="pin_pass_remover" retainaspect="1" />
-		<image name="su" filename="su" retainaspect="1" />
 		<image name="unroot" filename="unroot" retainaspect="1" />
 		<image name="pb" filename="pb" retainaspect="1" />
 	</resources>

@@ -786,12 +786,6 @@
 		<string name="tools_hdr">Eszközök beállításai</string>
 		<string name="tools">Eszközök beállításai</string>
 		<string name="tools1">Eszközök</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">A SuperSU telepítésre kerül.</string>
-		<string name="SuperSU_confirm">Megpróbálja telepíteni?</string>
-		<string name="Unroot_SuperSU_btn">Root SuperSU</string>
-		<string name="Unroot_SuperSU_text">A Unroot SuperSU telepítésre kerül.</string>
-		<string name="Unroot_SuperSU_confirm">Megpróbálja telepíteni?</string>
 		<string name="Magisk_btn">Mágikus</string>
 		<string name="Magisk_text">A Magisk telepítésre kerül.</string>
 		<string name="Magisk_confirm">Megpróbálja telepíteni?</string>

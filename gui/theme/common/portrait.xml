@@ -6556,12 +6556,12 @@
 
 			<text style="text_header">
 				<placement x="350" y="1195"/>
-				<text>{@SuperSU_btn=SuperSU}</text>
+				<text>{@Magisk_btn=Magisk}</text>
 			</text>
 
 			<text style="text_header">
 				<placement x="350" y="1245"/>
-				<text>{@Magisk_btn=Magisk}</text>
+				<text>{@Pin/Pass_Remover_btn=Pin/Pass Remover}</text>
 			</text>
 
 			<button style="main_button_pbrp_special_settings">
