@@ -753,12 +753,6 @@
 		<string name="tools_hdr">Επιλογές εργαλείων</string>
 		<string name="tools">Επιλογές εργαλείων</string>
 		<string name="tools1">Εργαλεία</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">Θα εγκατασταθεί το SuperSU.</string>
-		<string name="SuperSU_confirm">Θέλετε να το εγκαταστήσετε;</string>
-		<string name="Unroot_SuperSU_btn">Ξεβιδώστε το SuperSU</string>
-		<string name="Unroot_SuperSU_text">Θα εγκατασταθεί το Unroot SuperSU.</string>
-		<string name="Unroot_SuperSU_confirm">Θέλετε να το εγκαταστήσετε;</string>
 		<string name="Magisk_btn">Μαγικός</string>
 		<string name="Magisk_text">Το Magisk θα εγκατασταθεί.</string>
 		<string name="Magisk_confirm">Θέλετε να το εγκαταστήσετε;</string>

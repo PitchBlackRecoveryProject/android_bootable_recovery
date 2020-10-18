@@ -779,12 +779,6 @@
 		<string name="tools_hdr">Tools Opties</string>
 		<string name="tools">Tools Opties</string>
 		<string name="tools1">Gereedschap</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">SuperSU wordt geïnstalleerd.</string>
-		<string name="SuperSU_confirm">Probeer het te installeren?</string>
-		<string name="Unroot_SuperSU_btn">Verwijder SuperSU</string>
-		<string name="Unroot_SuperSU_text">Unroot SuperSU wordt geïnstalleerd.</string>
-		<string name="Unroot_SuperSU_confirm">Probeer het te installeren?</string>
 		<string name="Magisk_btn">Magisch</string>
 		<string name="Magisk_text">Magisk wordt geïnstalleerd.</string>
 		<string name="Magisk_confirm">Probeer het te installeren?</string>

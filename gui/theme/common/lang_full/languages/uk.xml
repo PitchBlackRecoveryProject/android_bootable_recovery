@@ -777,12 +777,6 @@
 		<string name="tools_hdr">Параметри інструментів</string>
 		<string name="tools">Параметри інструментів</string>
 		<string name="tools1">Інструменти</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">SuperSU буде встановлено.</string>
-		<string name="SuperSU_confirm">Спробуйте його встановити?</string>
-		<string name="Unroot_SuperSU_btn">Знищити SuperSU</string>
-		<string name="Unroot_SuperSU_text">Знищити SuperSU буде встановлено.</string>
-		<string name="Unroot_SuperSU_confirm">Спробуйте його встановити?</string>
 		<string name="Magisk_btn">Чарівний</string>
 		<string name="Magisk_text">Magisk буде встановлено.</string>
 		<string name="Magisk_confirm">Спробуйте його встановити?</string>

@@ -773,12 +773,6 @@
 		<string name="tools_hdr">Araç seçenekleri</string>
 		<string name="tools">Araç seçenekleri</string>
 		<string name="tools1">Araçlar</string>
-		<string name="SuperSU_btn">SuperSu</string>
-		<string name="SuperSU_text">SuperSU kurulacaktır.</string>
-		<string name="SuperSU_confirm">Yüklemeyi dene?</string>
-		<string name="Unroot_SuperSU_btn">SuperSU'yu kaldırın</string>
-		<string name="Unroot_SuperSU_text">Unroot SuperSU kurulacaktır.</string>
-		<string name="Unroot_SuperSU_confirm">Yüklemeyi dene?</string>
 		<string name="Magisk_btn">Büyülü</string>
 		<string name="Magisk_text">Magisk kurulacak.</string>
 		<string name="Magisk_confirm">Yüklemeyi dene?</string>
