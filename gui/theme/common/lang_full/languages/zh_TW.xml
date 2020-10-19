@@ -796,12 +796,6 @@
 		<string name="tools_hdr">工具選項</string>
 		<string name="tools">工具選項</string>
 		<string name="tools1">工具類</string>
-		<string name="SuperSU_btn">超級SU</string>
-		<string name="SuperSU_text">SuperSU將被安裝。</string>
-		<string name="SuperSU_confirm">嘗試安裝嗎？</string>
-		<string name="Unroot_SuperSU_btn">Unroot SuperSU</string>
-		<string name="Unroot_SuperSU_text">將安裝Unroot SuperSU。</string>
-		<string name="Unroot_SuperSU_confirm">嘗試安裝嗎？</string>
 		<string name="Magisk_btn">神奇</string>
 		<string name="Magisk_text">將安裝Magisk。</string>
 		<string name="Magisk_confirm">嘗試安裝嗎？</string>

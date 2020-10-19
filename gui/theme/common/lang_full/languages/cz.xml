@@ -763,12 +763,6 @@
 		<string name="tools_hdr">Možnosti nástrojů</string>
 		<string name="tools">Možnosti nástrojů</string>
 		<string name="tools1">Nástroje</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">Nainstaluje se SuperSU.</string>
-		<string name="SuperSU_confirm">Zkuste to nainstalovat?</string>
-		<string name="Unroot_SuperSU_btn">Unroot SuperSU</string>
-		<string name="Unroot_SuperSU_text">Nainstaluje se Unroot SuperSU.</string>
-		<string name="Unroot_SuperSU_confirm">Zkuste to nainstalovat?</string>
 		<string name="Magisk_btn">Magický</string>
 		<string name="Magisk_text">Magisk bude nainstalován.</string>
 		<string name="Magisk_confirm">Zkuste to nainstalovat?</string>

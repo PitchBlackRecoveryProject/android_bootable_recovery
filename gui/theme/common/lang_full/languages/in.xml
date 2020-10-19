@@ -681,12 +681,6 @@
 		<string name="additional">Tambahan</string>
 		<string name="tools_hdr">Pilihan Alat</string>
 		<string name="tools">Pilihan Alat</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">SuperSU akan di pasang.</string>
-		<string name="SuperSU_confirm">Coba untuk memasang?</string>
-		<string name="Unroot_SuperSU_btn">Unroot SuperSU</string>
-		<string name="Unroot_SuperSU_text">Unroot SuperSU will akan di pasang.</string>
-		<string name="Unroot_SuperSU_confirm">Coba untuk memasang?</string>
 		<string name="Magisk_btn">Magisk</string>
 		<string name="Magisk_text">Magisk akan di pasang.</string>
 		<string name="Magisk_confirm">Coba untuk memasang?</string>

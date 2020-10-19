@@ -760,12 +760,6 @@
 		<string name="tools_hdr">Možnosti orodij</string>
 		<string name="tools">Možnosti orodij</string>
 		<string name="tools1">Orodja</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">SuperSU bo nameščen.</string>
-		<string name="SuperSU_confirm">Poskusite ga namestiti?</string>
-		<string name="Unroot_SuperSU_btn">Odstranite SuperSU</string>
-		<string name="Unroot_SuperSU_text">Odstrani se SuperSU.</string>
-		<string name="Unroot_SuperSU_confirm">Poskusite ga namestiti?</string>
 		<string name="Magisk_btn">Čarobno</string>
 		<string name="Magisk_text">Magisk bo nameščen.</string>
 		<string name="Magisk_confirm">Poskusite ga namestiti?</string>

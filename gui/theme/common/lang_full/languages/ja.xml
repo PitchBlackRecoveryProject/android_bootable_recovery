@@ -814,12 +814,6 @@
 		<string name="tools_hdr">ツールオプション</string>
 		<string name="tools">ツールオプション</string>
 		<string name="tools1">ツール</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">SuperSUがインストールされます。</string>
-		<string name="SuperSU_confirm">インストールしてみますか？</string>
-		<string name="Unroot_SuperSU_btn">ルート解除SuperSU</string>
-		<string name="Unroot_SuperSU_text">ルート解除SuperSUがインストールされます。</string>
-		<string name="Unroot_SuperSU_confirm">インストールしてみますか？</string>
 		<string name="Magisk_btn">魔法の</string>
 		<string name="Magisk_text">Magiskがインストールされます。</string>
 		<string name="Magisk_confirm">インストールしてみますか？</string>

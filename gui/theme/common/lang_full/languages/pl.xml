@@ -779,12 +779,6 @@
 		<string name="tools_hdr">Narzędzia Opcje</string>
 		<string name="tools">Narzędzia Opcje</string>
 		<string name="tools1">Przybory</string>
-		<string name="SuperSU_btn">SuperSU</string>
-		<string name="SuperSU_text">SuperSU zostanie zainstalowane.</string>
-		<string name="SuperSU_confirm">Chcesz go zainstalować?</string>
-		<string name="Unroot_SuperSU_btn">Unroot SuperSU</string>
-		<string name="Unroot_SuperSU_text">Unroot SuperSU zostanie zainstalowany.</string>
-		<string name="Unroot_SuperSU_confirm">Chcesz go zainstalować?</string>
 		<string name="Magisk_btn">Magiczny</string>
 		<string name="Magisk_text">Magisk zostanie zainstalowany.</string>
 		<string name="Magisk_confirm">Chcesz go zainstalować?</string>
