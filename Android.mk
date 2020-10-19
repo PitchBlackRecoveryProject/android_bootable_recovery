@@ -172,7 +172,7 @@ ifeq ($(AB_OTA_UPDATER),true)
     LOCAL_CFLAGS += -DTW_INCLUDE_INJECTTWRP
     LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
     LOCAL_SHARED_LIBRARIES += libhardware android.hardware.boot@1.0
-    TWRP_REQUIRED_MODULES += libhardware
+    TWRP_REQUIRED_MODULES += libhardware android.hardware.boot@1.0-service android.hardware.boot@1.0-service.rc
 endif
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
@@ -417,22 +417,25 @@ TWRP_REQUIRED_MODULES += \
     libbootloader_message_twrp \
     init.recovery.hlthchrg.rc \
     init.recovery.service.rc \
+    init.recovery.ldconfig.rc \
+    hwservicemanager \
     hwservicemanager.rc \
+    servicemanager \
     servicemanager.rc \
     awk \
     toybox \
     toolbox \
     mkshrc_twrp \
-    ld.config.txt
+    android.hardware.health@2.0-service \
+    android.hardware.health@2.0-service.rc
 
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
     plat_service_contexts \
     plat_hwservice_contexts \
     vendor_hwservice_contexts \
-    hwservicemanager \
-    servicemanager \
     vndservicemanager \
+    vndservicemanager.rc \
     vold_prepare_subdirs \
     task_recovery_profiles.json \
     fscryptpolicyget
