@@ -773,6 +773,13 @@ public:
 
 	static void Translate_Now();
 	static void Clear_For_Retranslation();
+    static pthread_mutex_t console_lock;
+    static size_t last_message_count = 0;
+    static std::vector<Message> gMessages;
+
+    static std::vector<std::string> gConsole;
+    static std::vector<std::string> gConsoleColor;
+    static FILE* ors_file = NULL;
 protected:
 	enum SlideoutState
 	{

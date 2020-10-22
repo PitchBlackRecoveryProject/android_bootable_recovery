@@ -89,6 +89,17 @@ public:
 	msg::Kind GetKind() {return kind;};
 };
 
+class GUIMsg{
+    public:
+        void gui_msg(Message msg);
+        void gui_highlight(const char* text);
+        void gui_err(const char* text);
+        void gui_process(const char* text);
+        void gui_warn(const char* text);
+        void gui_msg(const char* text);
+        void internal_gui_print(const char *color, char *buf);
+}
+
 
 // Utility functions to create messages with standard resource and data manager lookups.
 // Short names to make usage convenient.

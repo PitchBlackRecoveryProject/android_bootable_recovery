@@ -10,7 +10,7 @@ LOCAL_SRC_FILES := \
     text.cpp \
     image.cpp \
     action.cpp \
-    console.cpp \
+    console_ui.cpp \
     fill.cpp \
     button.cpp \
     checkbox.cpp \
