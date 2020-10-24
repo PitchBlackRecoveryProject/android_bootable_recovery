@@ -2570,7 +2570,8 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 	if (strcmp (crypto_state, "error") == 0)
 	{
 		property_set ("ro.crypto.state", "encrypted");
-// Sleep for a bit so that services can start if needed
+		property_set("ro.crypto.type", "block");
+		// Sleep for a bit so that services can start if needed
 		sleep (1);
 	}
 
