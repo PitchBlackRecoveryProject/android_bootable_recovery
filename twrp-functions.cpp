@@ -74,18 +74,21 @@ static string dtb = "", ram = "";
 struct selabel_handle *selinux_handle;
 
 /* Execute a command */
-int TWFunc::Exec_Cmd(const string& cmd, string &result) {
+int TWFunc::Exec_Cmd(const string& cmd, string &result, bool combine_stderr) {
 	FILE* exec;
-	char buffer[512];
+	char buffer[130];
 	int ret = 0;
-	exec = popen(cmd.c_str(), "r");
-	if (!exec) return -1;
+	std::string popen_cmd = cmd;
+	if (combine_stderr)
+		popen_cmd = cmd + " 2>&1";
+	exec = __popen(popen_cmd.c_str(), "r");
+
 	while (!feof(exec)) {
-		if (fgets(buffer, 512, exec) != NULL) {
+		if (fgets(buffer, 128, exec) != NULL) {
 			result += buffer;
 		}
 	}
-	ret = pclose(exec);
+	ret = __pclose(exec);
 	return ret;
 }
 

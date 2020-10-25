@@ -3449,3 +3449,15 @@ void TWPartition::Set_Can_Be_Wiped(bool val) {
 void TWPartition::Change_Mount_Point(string new_mp) {
 	Storage_Path = Backup_Path = Mount_Point = new_mp;
 }
+
+std::string TWPartition::Get_Backup_FileName() {
+	return Backup_FileName;
+}
+
+std::string TWPartition::Get_Display_Name() {
+	return Display_Name;
+}
+
+bool TWPartition::Is_SlotSelect() {
+	return SlotSelect;
+}
