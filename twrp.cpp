@@ -410,9 +410,6 @@ int main(int argc, char **argv) {
 	if(!null.empty())
 		LOGERR("Failed To Copy prop.info\n");
 
-	PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
-	GUIConsole::Translate_Now();
-
 	startupArgs startup;
 	startup.parse(&argc, &argv);
 	twrpAdbBuFifo *adb_bu_fifo = new twrpAdbBuFifo();
@@ -432,6 +429,9 @@ int main(int argc, char **argv) {
 	} else {
 		process_recovery_mode(adb_bu_fifo, startup.Should_Skip_Decryption());
 	}
+
+	PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
+	GUIConsole::Translate_Now();
 
 	// Launch the main GUI
 	gui_start();
