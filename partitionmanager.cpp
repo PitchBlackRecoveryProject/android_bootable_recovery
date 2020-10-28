@@ -335,6 +335,7 @@ TWPartitionManager::Process_Fstab (string Fstab_Filename, bool Display_Error, bo
 			} else {
 				property_set("twrp.apex.loaded", "true");
 			}
+			TWFunc::check_and_run_script("/sbin/resyncapex.sh", "apex");
 		}
 	}
 	if (ven)
