@@ -3,6 +3,7 @@
 namespace fs = std::filesystem;
 
 bool twrpApex::loadApexImages() {
+	std::vector<std::string> apexFiles;
 	if (access(APEX_DIR, F_OK) != 0) {
 		LOGERR("Unable to open %s\n", APEX_DIR);
 		return false;
@@ -27,47 +28,10 @@ bool twrpApex::loadApexImages() {
 		return false;
 	}
 
-	apexFileCount = 0;
+	size_t apexFileCount = 0;
 	for (auto&& apexFile : apexFiles) {
 		std::string fileToMount = unzipImage(apexFile);
 		loadApexImage(fileToMount, apexFileCount++);
-	}
-	return true;
-}
-
-bool twrpApex::unloadApexImages() {
-	if (apexFiles.size() == 0) {
-		if (umount2(APEX_BASE, MNT_FORCE) < 0) {
-			LOGERR("Failed to Unmount Flatten Apex\n");
-			return false;
-		}
-	}
-	for (auto&& apexFile : apexFiles) {
-		std::string fileToUnMount = std::string(APEX_BASE) + basename(apexFile.c_str());
-		if (umount2(fileToUnMount.c_str(), MNT_FORCE) < 0) {
-			LOGERR("Failed to Unmount apex %s\n", fileToUnMount.c_str());
-			return false;
-		}
-	}
-	return true;
-}
-
-bool twrpApex::reloadApexImages() {
-	size_t loop_number = apexFileCount - 1;
-	if (apexFiles.size() == 0) {
-		LOGINFO("Binding flatten apex directory\n");
-		if (mount(APEX_DIR, APEX_BASE, "", MS_BIND, NULL) < 0) {
-			LOGERR("Failed to Mount Flatten Apex\n");
-			return false;
-		}
-	}
-	for (auto&& apexFile : apexFiles) {
-		std::string fileToMount = "/dev/block/loop" + std::to_string(loop_number--);
-		std::string _mount = std::string(APEX_BASE) + basename(apexFile.c_str());
-		if (mount(fileToMount.c_str(), _mount.c_str(), "ext4", MS_RDONLY, nullptr) < 0) {
-			LOGERR("Failed to Mount apex %s\n", fileToMount.c_str());
-			return false;
-		}
 	}
 	return true;
 }
