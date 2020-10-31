@@ -3763,8 +3763,10 @@ TWPartitionManager::Flash_Image (string & path, string & filename)
 
 	full_filename = path + "/" + filename;
 
-	gui_msg ("image_flash_start=[IMAGE FLASH STARTED]");
-	gui_msg (Msg ("img_to_flash=Image to flash: '{1}'") (full_filename));
+	Unlock_Block_Partitions();
+
+	gui_msg("image_flash_start=[IMAGE FLASH STARTED]");
+	gui_msg(Msg("img_to_flash=Image to flash: '{1}'")(full_filename));
 
 	if (!TWFunc::Path_Exists (full_filename))
 	{
@@ -5302,4 +5304,30 @@ void TWPartitionManager::Change_System_Root(bool root) {
 	PartitionManager.Output_Partition(part);
 	TWFunc::Property_Override("ro.twrp.sar", to_string(root));
 	Write_Fstab();
+}
+
+void TWPartitionManager::Unlock_Block_Partitions() {
+	int fd, OFF = 0;
+
+	const std::string block_path = "/dev/block/";
+	DIR* d = opendir(block_path.c_str());
+	if (d != NULL) {
+		struct dirent* de;
+		while ((de = readdir(d)) != NULL) {
+			if (de->d_type == DT_BLK) {
+				std::string block_device = block_path + de->d_name;
+				LOGINFO("block_Device: %s\n", block_device.c_str());
+				if ((fd = open(block_device.c_str(), O_RDONLY | O_CLOEXEC)) < 0) {
+					LOGERR("unable to open block device %s: %s\n", block_device.c_str(), strerror(errno));
+					continue;
+				}
+				if (ioctl(fd, BLKROSET, &OFF) == -1) {
+					LOGERR("Unable to unlock %s for flashing: %s\n", block_device.c_str());
+					continue;
+				}
+				close(fd);
+			}
+		}
+		closedir(d);
+	}
 }

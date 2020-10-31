@@ -403,6 +403,7 @@ public:
 	void Change_System_Root(bool root);
 	std::vector<users_struct>* Get_Users_List();                              // Returns pointer to list of users
 	int Set_FDE_Encrypt_Status();                                             // Sets encryption state for FDE devices (ro.crypto.state and ro.crypto.type)
+	void Unlock_Block_Partitions();                                           // Unlock all block devices after update_engine runs
 
 private:
 	void Setup_Settings_Storage_Partition(TWPartition* Part);                 // Sets up settings storage
