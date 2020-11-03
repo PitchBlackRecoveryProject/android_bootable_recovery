@@ -1,8 +1,18 @@
-# WE MERGE PULL REQUESTS SUBMITTED HERE AFTER REVIEWED BY CORE DEVELOPER
+## We Merge Pull Requests Submitted Here After Reviewed By Core Developers
 
-If you are submitting any patches kindly wait for Core Developers to review.
+If you are submitting any patches, Tell us a little about it.
+<!--
+Fixes:
+- 
+- 
+Improvements:
+- 
+etc.
+-->
 
-You can join our community on Telegram
-* [Community Group](https://t.me/pbrpcom)
+Kindly wait for Core Developers to review.
 
-* [Test Build & Build Help Group](https://t.me/pbrp_testers)
+### You can join our community on Telegram
+
+- [Community Group](https://t.me/pbrpcom)
+- [Test Build & Build Help Group](https://t.me/pbrp_testers)
