@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Telegram Community Chat
+    url: https://t.me/pbrpcom
+    about: Please ask and answer questions here.
+  - name: Telegram PBRP Beta Tester Chat
+    url: https://t.me/pbrp_testers
+    about: Please test and report anything about beta builds here.
