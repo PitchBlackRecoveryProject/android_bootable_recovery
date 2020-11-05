@@ -314,7 +314,7 @@
 		<variable name="partitionlist_storage_height" value="544"/>
 		<variable name="partitionlist_flashimage_height" value="544"/>
 		<variable name="partitionlist_wipe_height" value="1088"/>
-		<variable name="partitionlist_mount_height" value="832"/>
+		<variable name="partitionlist_mount_height" value="800"/>
 		<variable name="partitionlist_backup_height" value="768"/>
 		<variable name="listbox_timezone_height" value="756"/>
 		<variable name="listbox_settings_height" value="960"/>

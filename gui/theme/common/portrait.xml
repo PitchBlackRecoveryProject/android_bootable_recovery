@@ -3108,7 +3108,7 @@
 
 			<button style="checkbox">
 				<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
-				<placement x="90" y="%row15a_y%" textplacement="6"/>
+				<placement x="90" y="%row16_y%" textplacement="6"/>
 				<text>{@mount_sys_ro_chk=Mount system partition read-only}</text>
 				<image resource="checkbox_true"/>
 				<actions>
