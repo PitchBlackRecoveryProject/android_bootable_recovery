@@ -1096,7 +1096,7 @@
 				<action function="set">tw_show_exclamation=0</action>
 				<action function="set">tw_show_reboot=0</action>
 				<action function="set">tw_crypto_user_id=</action>
-				<action function="set">pb_install_built_in_zip=0</action>
+				<action function="set">pb_reboot_recovery=</action>
 				<action function="page">%tw_clear_destination%</action>
 			</action>
 		</page>
@@ -1182,6 +1182,12 @@
 				<placement x="%center_x%" y="%row7_y%" placement="5"/>
 				<text>{@back_cancel=Press back button to cancel.}</text>
 			</text>
+
+			<image>
+				<image resource="alert-circle"/>
+				<condition var1="pb_reboot_recovery" var2="1" />
+				<placement x="340" y="%row10_y%"/>
+			</image>
 
 			<slider>
 				<text>%tw_slider_text%</text>
@@ -1341,7 +1347,7 @@
 			</button>
 
 			<button style="main_button_half_height">
-				<condition var1="pb_reboot_recovery" var2="1"/>
+				<condition var1="pb_reboot_recovery" var2="2"/>
 				<placement x="%center_x%" y="%row20a_y%"/>
 				<text>{@reboot_recovery_btn=Reboot Recovery}</text>
 				<actions>

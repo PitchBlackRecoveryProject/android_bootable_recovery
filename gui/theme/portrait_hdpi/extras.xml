@@ -24,11 +24,12 @@
 			<actions>
 				<action function="set">tw_back=tools</action>
 				<action function="set">tw_action=change_codename</action>
+				<action function="set">tw_action_param=%pb_codename_change%</action>
 				<action function="set">tw_text1={@pb_dev_name_change=Wanna Change Your device Codename?}</action>
 				<action function="set">tw_action_text1={@pb_dev_change=Changing Device Codename from %pb_prop_value% to %pb_codename_change%}</action>
 				<action function="set">pb_reboot_recovery=1</action>
 				<action function="set">tw_complete_text1={@pb_dev_changed=Device Codename Changed to %pb_codename_change%}</action>
-				<action function="set">tw_text4={@pb_dev_reboot=A Reboot is mandatory After switching Codenames}</action>
+				<action function="set">tw_text4={@pb_dev_msg=! This is A Temporary Change will be Restored after Restart}</action>
 				<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
 				<action function="page">confirm_action</action>
 			</actions>
@@ -39,7 +40,7 @@
 		<button style="main_button_half_height_new">
 			<placement x="%indent%" y="%row9_y%"/>
 			<text>{@cancel_btn=Cancel}</text>
-			<action function="page">tools</action>
+			<action function="page">main</action>
 		</button>
 		<template name="keyboardtemplate"/>
 		<action>
@@ -48,7 +49,7 @@
 		</action>
 		<action>
 			<touch key="home"/>
-			<action function="page">main2</action>
+			<action function="page">main</action>
 		</action>
 	</page>
        	<page name="tools">
@@ -262,9 +263,9 @@
 				<icon resource="codename_changer"/>
 				<text>{@codename_changer=Codename Changer}</text>
 				<actions>
-					<action function="page">rename_c</action>
 					<action function="getprop">"ro.product.device"</action>
 					<action function="set">pb_codename_change=%pb_prop_value%</action>
+					<action function="page">rename_c</action>
 				</actions>
 			</button>
 			<image>
@@ -281,7 +282,7 @@
 			</action>
 			<action>
 				<touch key="back"/>
-				<action function="page">%tw_back%</action>
+				<action function="page">main</action>
 			</action>
 		  </page>
 		<page name="special_setting">

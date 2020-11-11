@@ -2594,87 +2594,22 @@ exit:
 
 int GUIAction::change_codename(std::string arg __unused)
 {
-	int op_status = 1;
 	operation_start("Codename Changing");
-	string codename, new_codename, part_name, null;
-	int values = 1;
-	DataManager::GetValue(PB_PROP_VALUE, codename);
+	string new_codename = arg;
 	DataManager::SetProgress(0);
-	DataManager::GetValue("pb_codename_change", new_codename);
 	//Removal of Newlines from values
-	codename.erase(std::remove(codename.begin(), codename.end(), '\n'), codename.end());
 	new_codename.erase(std::remove(new_codename.begin(), new_codename.end(), '\n'), new_codename.end());
-	if (!DataManager::GetIntValue("tw_has_boot_slots"))
-	{
-		part_name = "/recovery";
-		values = 1;
-	}
-	else {
-		part_name = "/boot";
-		values = 2;
-	}
-	DataManager::SetProgress(.10);
-	for(int i=1; i<=values; i++)
-	{
-		if (values == 2)
-		{
-			string Current_Slot = PartitionManager.Get_Active_Slot_Display();
-			if (Current_Slot == "A")
-				PartitionManager.Set_Active_Slot("B");
-			else
-				PartitionManager.Set_Active_Slot("A");
-			if (i==1)
-			DataManager::SetProgress(.15);
-			else
-			DataManager::SetProgress(.50);
-		}
-		else
-			DataManager::SetProgress(.50);
-		TWFunc::Unpack_Image(part_name);
-		string name, split_img = "/tmp/pb/ramdisk";
-		if (TWFunc::Path_Exists(split_img))
-		{
-			DIR* dir;
-			struct dirent* der;
-			dir = opendir(split_img.c_str());
-			while((der = readdir(dir)) != NULL)
-			{
-				name = der->d_name;
-				if (name == "default.prop")
-				{
-					string command = "sed -i \'s|ro.product.device="+codename+"|ro.product.device="+new_codename+"|g\' "+ split_img + "/" + name;
-					TWFunc::Exec_Cmd(command, null);
-				}
-			}
-			closedir(dir);
-		}
-		else
-		{
-			LOGINFO("PBRP: Ramdisk Doesnt Exists \n");
-			goto exit;
-		}
-		TWFunc::Repack_Image(part_name);
-		if (values == 1)
-			DataManager::SetProgress(1);
-		else {
-			if (i==1 && values == 2)
-				DataManager::SetProgress(.25);
-			else
-				DataManager::SetProgress(1);
-		}
-
-	}
-	op_status = 0;
-exit:
-	operation_end(op_status);
+	DataManager::SetProgress(50);
+	TWFunc::Property_Override(PB_PROP_DEVICE, new_codename);
+	DataManager::SetValue("pb_device", new_codename);
+	DataManager::SetProgress(100);
+	operation_end(0);
 	return 0;
 }
 
 int GUIAction::getprop(std::string arg)
 {
-	string value;
-	TWFunc::Exec_Cmd("getprop " + arg, value);
-	DataManager::SetValue(PB_PROP_VALUE, value);
+	DataManager::SetValue(PB_PROP_VALUE, TWFunc::getprop(arg));
 	return 0;
 }
 

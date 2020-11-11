@@ -926,7 +926,7 @@
 		<string name="zip">ZIP</string>
 		<string name="pb_dev_change">Changing Device Codename from %pb_prop_value% to %pb_codename_change%</string>
 		<string name="pb_dev_changed">Device Codename Changed to %pb_codename_change%</string>
-		<string name="pb_dev_reboot">A Reboot is mandatory After switching Codenames</string>
+		<string name="pb_dev_msg">! This is A Temporary Change will be Restored after Restart</string>
 		<string name="pb_dev_name">PBRP Device Codename Changer</string>
 		<string name="codename_changer">Codename Changer</string>
 		<string name="magisk_done">-- Magisk Modules Wipe Complete!</string>
