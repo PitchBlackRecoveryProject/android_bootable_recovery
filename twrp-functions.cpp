@@ -2275,4 +2275,13 @@ bool TWFunc::Set_Encryption_Policy(std::string path, const fscrypt_encryption_po
 	}
 	return true;
 }
+
+std::string TWFunc::getprop(std::string arg)
+{
+	string value;
+	TWFunc::Exec_Cmd("getprop " + arg, value);
+	value.erase(std::remove(value.begin(), value.end(), '\n'), value.end());
+	return value;
+}
+
 #endif // ndef BUILD_TWRPTAR_MAIN

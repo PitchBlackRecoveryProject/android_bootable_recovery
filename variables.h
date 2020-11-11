@@ -184,6 +184,7 @@
 #define NON_STD "0"
 #define PB_TREBLE_COMP "pb_error_treble"
 #define PB_PROP_VALUE "pb_prop_value"
+#define PB_PROP_DEVICE "ro.product.device"
 
 // Also used:
 //   tw_boot_is_mountable
