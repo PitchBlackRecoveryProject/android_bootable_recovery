@@ -121,6 +121,15 @@ TWPartitionManager::TWPartitionManager (void)
 }
 
 int
+TWPartitionManager::Set_FDE_Encrypt_Status(void) {
+	property_set("ro.crypto.state", "encrypted");
+	property_set("ro.crypto.type", "block");
+	// Sleep for a bit so that services can start if needed
+	sleep(1);
+	return 0;
+}
+
+int
 TWPartitionManager::Process_Fstab (string Fstab_Filename, bool Display_Error, bool Sar_Detect)
 {
   FILE *fstabFile;
@@ -407,6 +416,7 @@ TWPartitionManager::Process_Fstab (string Fstab_Filename, bool Display_Error, bo
 	}
       else
 	{
+	  Set_FDE_Encrypt_Status();
 	  int password_type = cryptfs_get_password_type ();
 	  if (password_type == CRYPT_TYPE_DEFAULT)
 	    {
@@ -2525,10 +2535,7 @@ TWPartitionManager::Decrypt_Device (string Password, int user_id)
   property_get ("ro.crypto.state", crypto_state, "error");
   if (strcmp (crypto_state, "error") == 0)
     {
-      property_set ("ro.crypto.state", "encrypted");
-      property_set ("ro.crypto.type", "block");
-      // Sleep for a bit so that services can start if needed
-      sleep (1);
+      Set_FDE_Encrypt_Status();
     }
 
   if (DataManager::GetIntValue (TW_IS_FBE))

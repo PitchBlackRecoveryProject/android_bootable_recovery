@@ -403,6 +403,7 @@ public:
 	bool Repack_Images(const std::string& Target_Image, const struct Repack_Options_struct& Repack_Options); // Repacks the boot image with a new kernel or a new ramdisk
 	void Change_System_Root(bool root);
 	std::vector<users_struct>* Get_Users_List();                              // Returns pointer to list of users
+	int Set_FDE_Encrypt_Status();                                             // Sets encryption state for FDE devices (ro.crypto.state and ro.crypto.type)
 
 private:
 	void Setup_Settings_Storage_Partition(TWPartition* Part);                 // Sets up settings storage
