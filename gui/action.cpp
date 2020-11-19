@@ -1295,7 +1295,6 @@ int GUIAction::flash(std::string arg)
 			PartitionManager.UnMount_Main_Partitions();
 		ret_val = flash_zip(zip_path, &wipe_cache);
 		TWFunc::SetPerformanceMode(false);
-		PartitionManager.Prepare_All_Super_Volumes();
 
 		if (ret_val != 0) {
 			gui_msg(Msg(msg::kError, "zip_err=Error installing zip file '{1}'")(zip_path));
