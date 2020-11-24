@@ -2,7 +2,6 @@
 <?xml version="1.0"?>
 <recovery>
 	<styles>
-
 		<style name="text_exl">
 			<font resource="font_exl" color="%text_color%"/>
 		</style>
@@ -838,10 +837,10 @@
 			<template name="console"/>
 
 			<button style="main_button_install_page">
-			<condition var1="tw_ab_device" var2="0"/>
-					<placement x="80" y="%row21a_y%" textplacementmain="3"/>
-					<icon resource="trash"/>
-					<text>{@sideload_wipe_cache_chk=Wipe Cache}</text>
+				<condition var1="tw_ab_device" var2="0"/>
+				<placement x="80" y="%row21a_y%" textplacementmain="3"/>
+				<icon resource="trash"/>
+				<text>{@sideload_wipe_cache_chk=Wipe Cache}</text>
 				<actions>
 					<action function="set">tw_back=flash_done</action>
 					<action function="set">tw_action=wipe</action>
@@ -859,29 +858,29 @@
 
 
 			<button style="main_button_install_page">
-		    <condition var1="tw_ab_device" var2="1"/>
+				<condition var1="tw_ab_device" var2="1"/>
 				<placement x="80" y="%row21a_y%" textplacementmain="3"/>
 				<icon resource="trash"/>
 				<text>{@wipe_dalvik_btn=Wipe Dalvik}</text>
-					<actions>
-                      <action function="set">tw_back=flash_done</action>
-	                  <action function="set">tw_action=wipe</action>
-	                  <action function="set">tw_action_param=dalvik</action>
-	                  <action function="set">tw_text1={@wipe_dalvik_confirm=Wipe Dalvik?}</action>
-	                  <action function="set">tw_action_text1={@wiping_cache_dalvik=Wiping Dalvik...}</action>
-                      <action function="set">tw_complete_text1={@wipe_dalvik_complete=Dalvik Wipe Complete}</action>
-	                  <action function="set">tw_slider_text={@swipe_wipe=Swipe to Wipe}</action>
-                      <action function="page">confirm_action</action>
-					</actions>
-				</button>
+				<actions>
+					<action function="set">tw_back=flash_done</action>
+					<action function="set">tw_action=wipe</action>
+					<action function="set">tw_action_param=dalvik</action>
+					<action function="set">tw_text1={@wipe_dalvik_confirm=Wipe Dalvik?}</action>
+					<action function="set">tw_action_text1={@wiping_cache_dalvik=Wiping Dalvik...}</action>
+					<action function="set">tw_complete_text1={@wipe_dalvik_complete=Dalvik Wipe Complete}</action>
+					<action function="set">tw_slider_text={@swipe_wipe=Swipe to Wipe}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
 
-				<button style="main_button_install_page">
-					<placement x="630" y="%row21a_y%" textplacementmain="2"/>
-					<icon resource="reboot_icon"/>
-					<text>{@reboot_system_btn=Reboot System}</text>
+			<button style="main_button_install_page">
+				<placement x="630" y="%row21a_y%" textplacementmain="3"/>
+				<icon resource="reboot_icon"/>
+				<text>{@reboot_hdr=Reboot}</text>
 				<actions>
 					<action function="set">tw_back=main2</action>
-					<action function="page">reboot_system_routine</action>
+					<action function="overlay">reboot_secondary</action>
 				</actions>
 			</button>
 
