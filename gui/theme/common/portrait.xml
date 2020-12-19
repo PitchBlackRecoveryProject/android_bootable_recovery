@@ -2345,7 +2345,9 @@
 				<placement x="340" y="%row10_y%"/>
 			</image>
 
-			<button style="main_button_m">
+			<button style="main_button_half_height_new">
+				<placement x="%center_x%" y="%row19a_y%"/>
+				<image resource="main_button_tools"/>
 				<placement x="%col1_x_left%" y="%row15a_y%"/>
 				<text>{@decrypt_users=Decrypt Users}</text>
 				<action function="page">decrypt_users</action>
