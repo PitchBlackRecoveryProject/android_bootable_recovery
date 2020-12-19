@@ -2084,6 +2084,7 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 	src_ar_m = src_t + "/aromafm";
 	dest_t = dest + "/tools";
 	dst_ar_m = dest_t + "/aromafm";
+	bool backed_up=false;
 
 	if (dat != NULL)
 	{
@@ -2096,8 +2097,7 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 			return false;
 		gui_msg ("wiping_datamedia=Wiping internal storage -- /data/media...");
 		Remove_MTP_Storage (dat->MTP_Storage_ID);
-		if (TWFunc::Path_Exists ("/sdcard/PBRP")
-				&& TWFunc::Path_Exists ("/sdcard/PBRP/tools"))
+		if (TWFunc::Path_Exists ("/sdcard/PBRP/tools"))
 		{
 			gui_msg ("pb_bk=Creating Backup of PB Files -- /tmp/pb/backup_wip...");
 			if (TWFunc::Path_Exists (dest))
@@ -2122,6 +2122,7 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 					TWFunc::copy_file (o_file, c_file, 0777);
 				}
 				closedir (pdir);
+				backed_up=true;
 			}
 
 			pdir = opendir (src_ar_m.c_str ());
@@ -2137,18 +2138,20 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 					TWFunc::copy_file (o_file, c_file, 0777);
 				}
 				closedir (pdir);
+				backed_up=true;
 			}
 		}
 		else
 		{
 			gui_msg
 			("pb_bk_no=No Tools of PBRP are detecting reflash the PBRP Package");
+			backed_up=false;
 		}
-		TWFunc::removeDir ("/data/media", false);
+		TWFunc::removeDir("/data/media", false);
 		dat->Recreate_Media_Folder ();
 		Add_MTP_Storage (dat->MTP_Storage_ID);
 
-		if (!TWFunc::Path_Exists (src_t))
+		if (!TWFunc::Path_Exists (src_t) && backed_up)
 		{
 			TWFunc::Recursive_Mkdir (src_ar_m);
 			TWFunc::Recursive_Mkdir (src_t);
