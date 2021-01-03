@@ -4,6 +4,3 @@ on boot
 service recovery /sbin/recovery
     socket recovery stream 422 system system
     seclabel u:r:recovery:s0
-
-on early-init
-    write /sys/fs/selinux/enforce 0

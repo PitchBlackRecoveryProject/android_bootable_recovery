@@ -33,10 +33,10 @@ cc_library_static {
         "bootable/recovery/fuse_sideload/include",
         "bootable/recovery/twrpinstall",
         "bootable/recovery/twrpinstall/include",
+        "bootable/recovery/libpixelflinger/include",
         "bionic",
         "system/core/base/include",
         "system/core/include",
-        "system/core/libpixelflinger/include",
         "external/freetype/include"
 
     ],

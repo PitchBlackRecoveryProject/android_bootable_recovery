@@ -139,7 +139,6 @@ LOCAL_C_INCLUDES += \
     system/core/adb \
     system/core/libsparse \
     external/zlib \
-    system/core/libpixelflinger/include \
     system/core/libziparchive/include \
     external/freetype/include \
     external/boringssl/include \
@@ -151,12 +150,13 @@ LOCAL_C_INCLUDES += \
     $(LOCAL_PATH)/fuse_sideload/include \
     $(LOCAL_PATH)/install/include \
     $(LOCAL_PATH)/twrpinstall/include \
-    $(LOCAL_PATH)/recovery_utils/include
+    $(LOCAL_PATH)/recovery_utils/include \
+    $(LOCAL_PATH)/libpixelflinger/include
 
 LOCAL_STATIC_LIBRARIES += libguitwrp
 LOCAL_SHARED_LIBRARIES += libz libc libcutils libstdc++ libtar libblkid libminuitwrp libmtdutils libtwadbbu 
 LOCAL_SHARED_LIBRARIES += libbootloader_message libcrecovery libtwrpdigest libc++ libaosprecovery libcrypto libbase 
-LOCAL_SHARED_LIBRARIES += libziparchive libselinux
+LOCAL_SHARED_LIBRARIES += libziparchive libselinux libdl_android.bootstrap
 
 ifneq ($(wildcard system/core/libsparse/Android.mk),)
 LOCAL_SHARED_LIBRARIES += libsparse
@@ -430,7 +430,8 @@ TWRP_REQUIRED_MODULES += \
     plat_hwservice_contexts \
     vendor_hwservice_contexts \
     minadbd \
-    twrpbu
+    twrpbu \
+    adbd_system_api_recovery
 
 ifneq ($(TW_EXCLUDE_TZDATA), true)
 TWRP_REQUIRED_MODULES += \

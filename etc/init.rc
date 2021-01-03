@@ -19,6 +19,8 @@ on early-init
 
     start ueventd
 
+    setprop sys.usb.configfs 0
+
 on init
     export PATH /sbin:/system/bin
     export LD_LIBRARY_PATH /sbin
@@ -77,9 +79,6 @@ on late-init
     trigger early-boot
     trigger boot
 
-on property:sys.powerctl=*
-   powerctl ${sys.powerctl}
-
 service ueventd /sbin/ueventd
     critical
     seclabel u:r:ueventd:s0
@@ -94,6 +93,10 @@ on property:ro.debuggable=1
     #write /sys/class/android_usb/android0/enable 1
     #start adbd
     setprop service.adb.root 1
+
+# Always start adbd on userdebug and eng builds
+on fs && property:ro.debuggable=1
+    setprop sys.usb.config adb
 
 service fastbootd /sbin/fastbootd
     disabled

@@ -44,6 +44,25 @@ cc_defaults {
 }
 
 cc_library_static {
+    name: "libpixelflingertwrp-arm",
+    defaults: ["libpixelflingertwrp_defaults"],
+
+    srcs: [
+        "fixed.cpp",
+        "picker.cpp",
+        "pixelflinger.cpp",
+        "trap.cpp",
+        "scanline.cpp",
+    ],
+
+    arch: {
+        arm: {
+            instruction_set: "arm",
+        },
+    },
+}
+
+cc_library_static {
     name: "libpixelflinger_twrp",
     defaults: ["libpixelflingertwrp_defaults"],
 
@@ -60,7 +79,7 @@ cc_library_static {
         "raster.cpp",
         "buffer.cpp",
     ],
-    whole_static_libs: ["libpixelflinger-arm"],
+    whole_static_libs: ["libpixelflingertwrp-arm"],
 
     arch: {
         arm: {

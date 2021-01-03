@@ -1,4 +1,6 @@
 recovery_only(`
   permissive recovery;
   permissive init;
+  permissive logd;
+  permissive adbd;
 ')

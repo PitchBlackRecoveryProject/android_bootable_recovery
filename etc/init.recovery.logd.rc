@@ -1,4 +1,4 @@
-on late-init
+on init
     start logd
 
 service logd /sbin/logd
