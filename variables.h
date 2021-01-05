@@ -21,7 +21,7 @@
 #ifdef PB_OFFICIAL
 #define TW_DEVICE_VERSION	   "Official"
 #endif
-#define TW_MAIN_VERSION_STR       "3.4.0"
+#define TW_MAIN_VERSION_STR       "3.5.0"
 #define TW_VERSION_STR TW_MAIN_VERSION_STR TW_DEVICE_VERSION
 
 #define TW_USE_COMPRESSION_VAR      "tw_use_compression"
