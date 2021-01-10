@@ -222,17 +222,22 @@ endif
 
 TWRP_RES += $(TW_ADDITIONAL_RES)
 
+REQUIRED_RECOVERY_SIZE := $(BOARD_RECOVERYIMAGE_PARTITION_SIZE)
+
 ifeq ($(BOARD_RECOVERYIMAGE_PARTITION_SIZE),)
-    $(error BOARD_RECOVERYIMAGE_PARTITION_SIZE is not defined)
+    ifeq ($(BOARD_BOOTIMAGE_PARTITION_SIZE),)
+        $(error BOARD_RECOVERYIMAGE_PARTITION_SIZE is not defined)
+    endif
+    REQUIRED_RECOVERY_SIZE := $(BOARD_BOOTIMAGE_PARTITION_SIZE)
 endif
-ifeq ($(shell test $(BOARD_RECOVERYIMAGE_PARTITION_SIZE) -le 1677726; echo $$?),0)
+ifeq ($(shell test $(REQUIRED_RECOVERY_SIZE) -le 21073920; echo $$?),0)
     $(warning Recovery Size is small discarding Special fonts)
 endif
 TWRP_RES_GEN := $(intermediates)/twrp
 $(TWRP_RES_GEN):
 	mkdir -p $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)
 	cp -fr $(TWRP_RES) $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)
-	if test $(BOARD_RECOVERYIMAGE_PARTITION_SIZE) -le 16777216; then \
+	if test $(REQUIRED_RECOVERY_SIZE) -le 21073920; then \
 	    rm -rf $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)/fonts/DroidSansFallback.ttf; \
 	    rm -rf $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)/fonts/NotoSansCJKjp-Regular.ttf; \
 	    rm -rf $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)/fonts/RoboNoto-Medium.ttf; \

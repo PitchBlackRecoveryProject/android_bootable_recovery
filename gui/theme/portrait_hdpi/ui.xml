@@ -28,9 +28,9 @@
 		<font name="font_roboto" filename="Roboto_Medium.ttf" size="45"/>
 		<font name="font_n" filename="pb.ttf" size="20"/>
 		<font name="font_o" filename="pb.ttf" size="30"/>
-		<font name="chin" filename="DroidSansFallback.ttf" size="30"/>
-		<font name="ja" filename="NotoSansCJKjp-Regular.ttf" size="30"/>
-		<font name="ko" filename="RoboNoto-Medium.ttf" size="30"/>
+		<font name="chin" filename="DroidSansFallback.ttf" size="30" ignorable="1"/>
+		<font name="ja" filename="NotoSansCJKjp-Regular.ttf" size="30" ignorable="1"/>
+		<font name="ko" filename="RoboNoto-Medium.ttf" size="30" ignorable="1"/>
 		<font name="eng" filename="pb.ttf" size="30"/>
 		<font name="font_s" filename="pb.ttf" size="32"/>
 		<font name="font_xl" filename="pb.ttf" size="75"/>

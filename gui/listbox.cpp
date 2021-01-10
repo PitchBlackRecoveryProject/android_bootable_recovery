@@ -83,6 +83,9 @@ GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
 					data.selected = 0;
 				if(!(*iter).font.empty()) {
 					data.mFont = PageManager::GetResources()->FindFont((*iter).font);
+					if (!data.mFont) {
+						continue;
+					}
 				}
 				mListItems.push_back(data);
 			}
