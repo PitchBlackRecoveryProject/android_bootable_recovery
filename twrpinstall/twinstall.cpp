@@ -256,13 +256,13 @@ static int Prepare_Update_Binary(ZipArchiveHandle Zip) {
 		ZipString vendor_br("system.new.dat");
 		ZipString vendor_("system.new.dat.br");
 		ZipString bootimg("boot.img");
-		ZipEntry *entries[6];
-		int update_data[] = {FindEntry(Zip, miui_sg, entries[0]),
-					FindEntry(Zip, system_, entries[1]),
-					FindEntry(Zip, system_br, entries[2]),
-					FindEntry(Zip, vendor_, entries[3]),
-					FindEntry(Zip, vendor_br, entries[4]),
-					FindEntry(Zip, bootimg, entries[5])
+		ZipEntry miui_sg_entry;
+		int update_data[] = {FindEntry(Zip, miui_sg, &miui_sg_entry),
+					FindEntry(Zip, system_, nullptr),
+					FindEntry(Zip, system_br, nullptr),
+					FindEntry(Zip, vendor_, nullptr),
+					FindEntry(Zip, vendor_br, nullptr),
+					FindEntry(Zip, bootimg, nullptr)
 				};
 		string outp = TWFunc::Get_output("grep miui.ui.version " + std::string(TMP_UPDATER_BINARY_PATH));
 		if (!update_data[3] || !update_data[4])
@@ -308,7 +308,7 @@ static int Prepare_Update_Binary(ZipArchiveHandle Zip) {
 			if (!update_data[0]) {
 				android::base::unique_fd take_out_metadata(
 							open("/tmp/build.prop", O_CREAT | O_WRONLY | O_TRUNC | O_CLOEXEC, 0644));
-				if (ExtractEntryToFile(Zip, entries[0], take_out_metadata)) {
+				if (ExtractEntryToFile(Zip, &miui_sg_entry, take_out_metadata)) {
 					string metadata_fingerprint = TWFunc::File_Property_Get("/tmp/build.prop", pre_build);
 					string metadata_device = TWFunc::File_Property_Get("/tmp/build.prop", pre_device);
 					string fingerprint = TWFunc::System_Property_Get(fingerprint_property);
