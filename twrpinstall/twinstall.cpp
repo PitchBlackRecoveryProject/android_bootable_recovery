@@ -253,8 +253,8 @@ static int Prepare_Update_Binary(ZipArchiveHandle Zip) {
 		ZipString miui_sg(miui_sg_path.c_str());
 		ZipString system_br("system.new.dat");
 		ZipString system_("system.new.dat.br");
-		ZipString vendor_br("system.new.dat");
-		ZipString vendor_("system.new.dat.br");
+		ZipString vendor_br("vendor.new.dat.br");
+		ZipString vendor_("vendor.new.dat");
 		ZipString bootimg("boot.img");
 		ZipEntry miui_sg_entry;
 		int update_data[] = {FindEntry(Zip, miui_sg, &miui_sg_entry),
