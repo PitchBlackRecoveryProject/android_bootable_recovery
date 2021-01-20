@@ -3485,7 +3485,16 @@
 
 				<condition var1="tw_download_mode" var2="1"/>
 				<text>{@rb_download_btn=Download}</text>
-				<placement x="520" y="%row16_y%"/>
+				<placement x="520" y="%row16_y%">
+					<conditions>
+						<condition var1="tw_reboot_bootloader" var2="1"/>
+					</conditions>
+				</placement>
+				<placement x="520" y="%row13_y%">
+					<conditions>
+						<condition var1="tw_reboot_bootloader" var2="0"/>
+					</conditions>
+				</placement>
 				<actions>
 					<action function="set">tw_back=reboot</action>
 					<action function="set">tw_action=reboot</action>

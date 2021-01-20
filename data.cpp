@@ -766,10 +766,14 @@ void DataManager::SetDefaultValues()
 #ifdef TW_HAS_DOWNLOAD_MODE
 	printf("TW_HAS_DOWNLOAD_MODE := true\n");
 	mConst.SetValue(TW_DOWNLOAD_MODE, "1");
+#else
+	mData.SetValue(TW_DOWNLOAD_MODE, "0");
 #endif
 #ifdef TW_HAS_EDL_MODE
 	printf("TW_HAS_EDL_MODE := true\n");
 	mConst.SetValue(TW_EDL_MODE, "1");
+#else
+	mData.SetValue(TW_EDL_MODE, "0");
 #endif
 #ifdef TW_INCLUDE_CRYPTO
 	mConst.SetValue(TW_HAS_CRYPTO, "1");

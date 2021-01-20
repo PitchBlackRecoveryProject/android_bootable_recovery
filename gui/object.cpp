@@ -169,6 +169,20 @@ int GUIObject::NotifyVarChange(const std::string& varName, const std::string& va
 	return 0;
 }
 
+bool GUIObject::UpdateAllConditions()
+{
+	bool Result=true;
+	std::vector<Condition>::iterator iter;
+	for (iter = mConditions.begin(); iter != mConditions.end(); ++iter)
+	{
+		Result=UpdateConditions(mConditions, iter->mVar1);
+		if (!Result)
+			break;
+	}
+	return Result;
+
+}
+
 bool GUIObject::UpdateConditions(std::vector<Condition>& conditions, const std::string& varName)
 {
 	bool result = true;
