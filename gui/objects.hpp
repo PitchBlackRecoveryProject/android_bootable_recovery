@@ -128,6 +128,7 @@ public:
 	// NotifyVarChange - Notify of a variable change
 	//  Returns 0 on success, <0 on error
 	virtual int NotifyVarChange(const std::string& varName, const std::string& value);
+	bool UpdateAllConditions();
 
 protected:
 	class Condition

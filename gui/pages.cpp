@@ -258,20 +258,34 @@ bool LoadPlacement(xml_node<>* node, int* x, int* y, int* w /* = NULL */, int* h
 	if (!node)
 		return false;
 
-	if (node->first_attribute("x"))
-		*x = LoadAttrIntScaleX(node, "x") + tw_x_offset;
+	xml_node<>* child = node;
+	while (child) {
+		GUIObject* plc = new GUIObject(child);
+		if (plc->isConditionValid()) {
+			if (plc->UpdateAllConditions())
+				break;
+		}
+		else
+			break;
+		child = child->next_sibling("placement");
+	}
+	if (!child)
+		return false;
 
-	if (node->first_attribute("y"))
-		*y = LoadAttrIntScaleY(node, "y") + tw_y_offset;
+	if (child->first_attribute("x"))
+		*x = LoadAttrIntScaleX(child, "x") + tw_x_offset;
 
-	if (w && node->first_attribute("w"))
-		*w = LoadAttrIntScaleX(node, "w");
+	if (child->first_attribute("y"))
+		*y = LoadAttrIntScaleY(child, "y") + tw_y_offset;
 
-	if (h && node->first_attribute("h"))
-		*h = LoadAttrIntScaleY(node, "h");
+	if (w && child->first_attribute("w"))
+		*w = LoadAttrIntScaleX(child, "w");
 
-	if (placement && node->first_attribute("placement"))
-		*placement = (Placement) LoadAttrInt(node, "placement");
+	if (h && child->first_attribute("h"))
+		*h = LoadAttrIntScaleY(child, "h");
+
+	if (placement && child->first_attribute("placement"))
+		*placement = (Placement) LoadAttrInt(child, "placement");
 
 	return true;
 }
