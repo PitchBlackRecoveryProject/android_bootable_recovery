@@ -174,6 +174,7 @@
 #define PB_DISABLE_FORCED_ENCRYPTION           "pb_forced_encryption_check"
 #define PB_ENABLE_ADVANCE_ENCRY		"pb_advance_encry"
 #define PB_DISABLE_DM_VERITY           "pb_dm_verity_check"
+#define PB_FLASHLIGHT_SUPPORT	       "pb_flashlight_support"
 #define PB_SURVIVAL_FOLDER_VAR      "pb_survival_backup_folder_path"
 #define PB_TMP_SCRIPT_DIR       "pb_tmp_script_directory"
 #define PB_COMPATIBILITY_DEVICE         "pb_compatibility_pb_device"

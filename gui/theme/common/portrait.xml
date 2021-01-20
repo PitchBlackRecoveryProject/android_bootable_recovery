@@ -5018,6 +5018,7 @@
 			</image>
 
 			<button>
+				<condition var1="pb_flashlight_support" var2="1"/>
 				<condition var1="pb_torch_on" var2="0"/>
 				<placement x="%row4_header_y%" y="%row11_y%" />
 				<!--<highlight color="#1E1E1E30" />-->
@@ -5026,6 +5027,7 @@
 			</button>
 
 			<button>
+				<condition var1="pb_flashlight_support" var2="1"/>
 				<condition var1="pb_torch_on" var2="1"/>
 				<placement x="%row4_header_y%" y="%row11_y%" />
 				<!--<highlight color="#1E1E1E30" />-->
