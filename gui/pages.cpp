@@ -39,21 +39,14 @@
 #include <string>
 #include <algorithm>
 
-#ifdef USE_MINZIP
-#include "../minzip/SysUtil.h"
-#else
-#ifdef USE_OTAUTIL_ZIPARCHIVE
-#include <otautil/SysUtil.h>
-#else
+
 #include <ziparchive/zip_archive.h>
-#endif
-#endif
+#include "ZipUtil.h"
 
 extern "C" {
 #include "../twcommon.h"
 #include "gui.h"
 }
-#include "zipwrap.hpp"
 #include "../minuitwrp/minui.h"
 
 #include "rapidxml.hpp"
@@ -691,7 +684,7 @@ int Page::NotifyVarChange(std::string varName, std::string value)
 // transient data for loading themes
 struct LoadingContext
 {
-	ZipWrap* zip; // zip to load theme from, or NULL for the stock theme
+	ZipArchiveHandle zip; // zip to load theme from, or NULL for the stock theme
 	std::set<std::string> filenames; // to detect cyclic includes
 	std::string basepath; // if zip is NULL, base path to load includes from with trailing slash, otherwise empty
 	std::vector<xml_document<>*> xmldocs; // all loaded xml docs
@@ -833,7 +826,7 @@ void PageSet::MakeEmergencyConsoleIfNeeded()
 	}
 }
 
-int PageSet::LoadLanguage(char* languageFile, ZipWrap* package)
+int PageSet::LoadLanguage(char* languageFile, ZipArchiveHandle package)
 {
 	xml_document<> lang;
 	xml_node<>* parent;
@@ -1209,11 +1202,11 @@ void PageSet::AddStringResource(std::string resource_source, std::string resourc
 	mResources->AddStringResource(resource_source, resource_name, value);
 }
 
-char* PageManager::LoadFileToBuffer(std::string filename, ZipWrap* package) {
+char* PageManager::LoadFileToBuffer(std::string filename, ZipArchiveHandle package) {
 	size_t len;
 	char* buffer = NULL;
 
-	if (!package) {
+	if (package) {
 		// We can try to load the XML directly...
 		LOGINFO("PageManager::LoadFileToBuffer loading filename: '%s' directly\n", filename.c_str());
 		struct stat st;
@@ -1246,18 +1239,24 @@ char* PageManager::LoadFileToBuffer(std::string filename, ZipWrap* package) {
 		close(fd);
 	} else {
 		LOGINFO("PageManager::LoadFileToBuffer loading filename: '%s' from zip\n", filename.c_str());
-		if (!package->EntryExists(filename)) {
+		ZipEntry binary_entry;
+		if (FindEntry(package, filename, &binary_entry) == 0) {
+		// if (!package->EntryExists(filename)) {
 			LOGERR("Unable to locate '%s' in zip file\n", filename.c_str());
 			return NULL;
 		}
 
 		// Allocate the buffer for the file
-		len = package->GetUncompressedSize(filename);
+		len = binary_entry.uncompressed_length;
+		// len = package->GetUncompressedSize(filename);
 		buffer = (char*) malloc(len + 1);
 		if (!buffer)
 			return NULL;
 
-		if (!package->ExtractToBuffer(filename, (unsigned char*) buffer)) {
+		int32_t err =
+			ExtractToMemory(package, &binary_entry, reinterpret_cast<uint8_t*>(buffer), len);
+		if (err != 0) {
+		// if (!package->ExtractToBuffer(filename, (unsigned char*) buffer)) {
 			LOGERR("Unable to extract '%s'\n", filename.c_str());
 			free(buffer);
 			return NULL;
@@ -1326,13 +1325,15 @@ void PageManager::LoadLanguageListDir(string dir) {
 	closedir(d);
 }
 
-void PageManager::LoadLanguageList(ZipWrap* package) {
+void PageManager::LoadLanguageList(ZipArchiveHandle package) {
 	Language_List.clear();
 	if (TWFunc::Path_Exists(TWRES "customlanguages"))
 		TWFunc::removeDir(TWRES "customlanguages", true);
 	if (package) {
 		TWFunc::Recursive_Mkdir(TWRES "customlanguages");
-		package->ExtractRecursive("languages", TWRES "customlanguages/");
+		ExtractPackageRecursive(package, "", TWRES "customlanguages", nullptr, nullptr);
+
+		// package->ExtractRecursive("languages", TWRES "customlanguages/");
 		LoadLanguageListDir(TWRES "customlanguages/");
 	} else {
 		LoadLanguageListDir(TWRES "languages/");
@@ -1360,12 +1361,10 @@ void PageManager::LoadLanguage(string filename) {
 int PageManager::LoadPackage(std::string name, std::string package, std::string startpage)
 {
 	std::string mainxmlfilename = package;
-	ZipWrap zip;
 	char* languageFile = NULL;
 	char* baseLanguageFile = NULL;
 	PageSet* pageSet = NULL;
 	int ret;
-	MemMapping map;
 
 	mReloadTheme = false;
 	mStartPage = startpage;
@@ -1397,22 +1396,14 @@ int PageManager::LoadPackage(std::string name, std::string package, std::string 
 		tw_h_offset = 0;
 		if (!TWFunc::Path_Exists(package))
 			return -1;
-#ifdef USE_MINZIP
-		if (sysMapFile(package.c_str(), &map) != 0) {
-#else
-		if (!map.MapFile(package)) {
-#endif
-			LOGERR("Failed to map '%s'\n", package.c_str());
-			goto error;
-		}
-		if (!zip.Open(package.c_str(), &map)) {
-			LOGERR("Unable to open zip archive '%s'\n", package.c_str());
-#ifdef USE_MINZIP
-			sysReleaseMap(&map);
-#endif
-			goto error;
-		}
-		ctx.zip = &zip;
+
+		ZipArchiveHandle Zip;
+		int err = OpenArchive(package.c_str(), &Zip);
+
+		if (err != 0)
+			return -1;
+		
+		ctx.zip = Zip;
 		mainxmlfilename = "ui.xml";
 		LoadLanguageList(ctx.zip);
 		languageFile = LoadFileToBuffer("languages/en.xml", ctx.zip);
@@ -1450,22 +1441,9 @@ int PageManager::LoadPackage(std::string name, std::string package, std::string 
 	mCurrentSet = pageSet;
 
 	if (ctx.zip) {
-		ctx.zip->Close();
-#ifdef USE_MINZIP
-		sysReleaseMap(&map);
-#endif
+		CloseArchive(ctx.zip);
 	}
 	return ret;
-
-error:
-	// Sometimes we get here without a real error
-	if (ctx.zip) {
-		ctx.zip->Close();
-#ifdef USE_MINZIP
-		sysReleaseMap(&map);
-#endif
-	}
-	return -1;
 }
 
 PageSet* PageManager::FindPackage(std::string name)

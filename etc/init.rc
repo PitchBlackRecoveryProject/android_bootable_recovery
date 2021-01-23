@@ -13,6 +13,9 @@ on early-init
     # ueventd wants to write to /acct
     mount cgroup none /acct cpuacct
     mkdir /acct/uid
+    # Copy prebuilt ld.config.txt into linkerconfig directory
+    copy /system/etc/ld.config.txt /linkerconfig/ld.config.txt
+    chmod 444 /linkerconfig/ld.config.txt
 
     start ueventd
 
@@ -58,18 +61,6 @@ on boot
     copy /init.recovery.usb.rc /license/init.pb.usb.rc
     setprop ro.miui.has_cust_partition true
     
-# Load properties, pre-Android 6.0
-on load_all_props_action
-    load_all_props
-
-# Load properties, Android 6.0+
-on load_system_props_action
-    load_system_props
-
-# Load properties, Android 6.0+, vendor init lives here
-on load_persist_props_action
-    load_persist_props
-
 on firmware_mounts_complete
     rm /dev/.booting
 
@@ -79,17 +70,6 @@ on late-init
     trigger fs
     trigger post-fs
     trigger post-fs-data
-
-    # Load properties, pre-Android 6.0
-    trigger load_all_props_action
-
-    # Load properties from /system/ + /factory after fs mount. Place
-    # this in another action so that the load will be scheduled after the prior
-    # issued fs triggers have completed.
-    trigger load_system_props_action
-
-    # Load properties, Android 6.0+, vendor init lives here
-    trigger load_persist_props_action
 
     # Remove a file to wake up anything waiting for firmware
     trigger firmware_mounts_complete
@@ -123,10 +103,6 @@ service fastbootd /sbin/fastbootd
 # Restart adbd so it can run as root
 on property:service.adb.root=1
     restart adbd
-
-# Always start adbd on userdebug and eng builds
-on fs && property:ro.debuggable=1
-    setprop sys.usb.config adb
 
 on fs && property:sys.usb.configfs=1
     mount configfs none /config
@@ -164,7 +140,7 @@ on property:sys.usb.config=fastboot
 
 on property:sys.usb.config=none && property:sys.usb.configfs=0
     stop adbd
-    stop fastboot
+    stop fastbootd
     write /sys/class/android_usb/android0/enable 0
     setprop sys.usb.state ${sys.usb.config}
 

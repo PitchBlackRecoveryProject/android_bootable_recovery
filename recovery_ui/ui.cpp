@@ -70,7 +70,6 @@ RecoveryUI::RecoveryUI()
       key_down_count(0),
       enable_reboot(true),
       consecutive_power_keys(0),
-      last_key(-1),
       has_power_key(false),
       has_up_key(false),
       has_down_key(false),
@@ -346,7 +345,7 @@ void RecoveryUI::ProcessKey(int key_code, int updown) {
   bool long_press = false;
 
   {
-    std::lock_guard<std::mutex> lg(key_queue_mutex);
+    std::lock_guard<std::mutex> lg(key_press_mutex);
     key_pressed[key_code] = updown;
     if (updown) {
       ++key_down_count;
@@ -375,10 +374,7 @@ void RecoveryUI::ProcessKey(int key_code, int updown) {
 
       case RecoveryUI::REBOOT:
         if (reboot_enabled) {
-          reboot("reboot,");
-          while (true) {
-            pause();
-          }
+          Reboot("userrequested,recovery,ui");
         }
         break;
 
@@ -393,7 +389,7 @@ void RecoveryUI::TimeKey(int key_code, int count) {
   std::this_thread::sleep_for(750ms);  // 750 ms == "long"
   bool long_press = false;
   {
-    std::lock_guard<std::mutex> lg(key_queue_mutex);
+    std::lock_guard<std::mutex> lg(key_press_mutex);
     if (key_last_down == key_code && key_down_count == count) {
       long_press = key_long_press = true;
     }
@@ -419,7 +415,7 @@ void RecoveryUI::SetScreensaverState(ScreensaverState state) {
         LOG(INFO) << "Brightness: " << brightness_normal_value_ << " (" << brightness_normal_
                   << "%)";
       } else {
-        LOG(ERROR) << "Unable to set brightness to normal";
+        LOG(WARNING) << "Unable to set brightness to normal";
       }
       break;
     case ScreensaverState::DIMMED:
@@ -429,7 +425,7 @@ void RecoveryUI::SetScreensaverState(ScreensaverState state) {
                   << "%)";
         screensaver_state_ = ScreensaverState::DIMMED;
       } else {
-        LOG(ERROR) << "Unable to set brightness to dim";
+        LOG(WARNING) << "Unable to set brightness to dim";
       }
       break;
     case ScreensaverState::OFF:
@@ -437,7 +433,7 @@ void RecoveryUI::SetScreensaverState(ScreensaverState state) {
         LOG(INFO) << "Brightness: 0 (off)";
         screensaver_state_ = ScreensaverState::OFF;
       } else {
-        LOG(ERROR) << "Unable to set brightness to off";
+        LOG(WARNING) << "Unable to set brightness to off";
       }
       break;
     default:
@@ -518,18 +514,18 @@ bool RecoveryUI::IsUsbConnected() {
 }
 
 bool RecoveryUI::IsKeyPressed(int key) {
-  std::lock_guard<std::mutex> lg(key_queue_mutex);
+  std::lock_guard<std::mutex> lg(key_press_mutex);
   int pressed = key_pressed[key];
   return pressed;
 }
 
 bool RecoveryUI::IsLongPress() {
-  std::lock_guard<std::mutex> lg(key_queue_mutex);
+  std::lock_guard<std::mutex> lg(key_press_mutex);
   bool result = key_long_press;
   return result;
 }
 
-bool RecoveryUI::HasThreeButtons() {
+bool RecoveryUI::HasThreeButtons() const {
   return has_power_key && has_up_key && has_down_key;
 }
 
@@ -548,7 +544,7 @@ void RecoveryUI::FlushKeys() {
 
 RecoveryUI::KeyAction RecoveryUI::CheckKey(int key, bool is_long_press) {
   {
-    std::lock_guard<std::mutex> lg(key_queue_mutex);
+    std::lock_guard<std::mutex> lg(key_press_mutex);
     key_long_press = false;
   }
 
@@ -585,13 +581,12 @@ RecoveryUI::KeyAction RecoveryUI::CheckKey(int key, bool is_long_press) {
     consecutive_power_keys = 0;
   }
 
-  last_key = key;
   return (IsTextVisible() || screensaver_state_ == ScreensaverState::OFF) ? ENQUEUE : IGNORE;
 }
 
 void RecoveryUI::KeyLongPress(int) {}
 
 void RecoveryUI::SetEnableReboot(bool enabled) {
-  std::lock_guard<std::mutex> lg(key_queue_mutex);
+  std::lock_guard<std::mutex> lg(key_press_mutex);
   enable_reboot = enabled;
 }

@@ -25,12 +25,15 @@
 // 0   - 2K     For bootloader_message
 // 2K  - 16K    Used by Vendor's bootloader (the 2K - 4K range may be optionally used
 //              as bootloader_message_ab struct)
-// 16K - 64K    Used by uncrypt and recovery to store wipe_package for A/B devices
+// 16K - 32K    Used by uncrypt and recovery to store wipe_package for A/B devices
+// 32K - 64K    System space, used for miscellanious AOSP features. See below.
 // Note that these offsets are admitted by bootloader,recovery and uncrypt, so they
 // are not configurable without changing all of them.
 constexpr size_t BOOTLOADER_MESSAGE_OFFSET_IN_MISC = 0;
 constexpr size_t VENDOR_SPACE_OFFSET_IN_MISC = 2 * 1024;
 constexpr size_t WIPE_PACKAGE_OFFSET_IN_MISC = 16 * 1024;
+constexpr size_t SYSTEM_SPACE_OFFSET_IN_MISC = 32 * 1024;
+constexpr size_t SYSTEM_SPACE_SIZE_IN_MISC = 32 * 1024;
 
 /* Bootloader Message (2-KiB)
  *
@@ -80,115 +83,46 @@ struct bootloader_message {
     char reserved[1184];
 };
 
-/**
- * We must be cautious when changing the bootloader_message struct size,
- * because A/B-specific fields may end up with different offsets.
- */
-#if (__STDC_VERSION__ >= 201112L) || defined(__cplusplus)
-static_assert(sizeof(struct bootloader_message) == 2048,
-              "struct bootloader_message size changes, which may break A/B devices");
-#endif
-
-/**
- * The A/B-specific bootloader message structure (4-KiB).
- *
- * We separate A/B boot control metadata from the regular bootloader
- * message struct and keep it here. Everything that's A/B-specific
- * stays after struct bootloader_message, which should be managed by
- * the A/B-bootloader or boot control HAL.
- *
- * The slot_suffix field is used for A/B implementations where the
- * bootloader does not set the androidboot.ro.boot.slot_suffix kernel
- * commandline parameter. This is used by fs_mgr to mount /system and
- * other partitions with the slotselect flag set in fstab. A/B
- * implementations are free to use all 32 bytes and may store private
- * data past the first NUL-byte in this field. It is encouraged, but
- * not mandatory, to use 'struct bootloader_control' described below.
- *
- * The update_channel field is used to store the Omaha update channel
- * if update_engine is compiled with Omaha support.
- */
-struct bootloader_message_ab {
-    struct bootloader_message message;
-    char slot_suffix[32];
-    char update_channel[128];
-
-    // Round up the entire struct to 4096-byte.
-    char reserved[1888];
-};
-
-/**
- * Be cautious about the struct size change, in case we put anything post
- * bootloader_message_ab struct (b/29159185).
- */
-#if (__STDC_VERSION__ >= 201112L) || defined(__cplusplus)
-static_assert(sizeof(struct bootloader_message_ab) == 4096,
-              "struct bootloader_message_ab size changes");
-#endif
-
-#define BOOT_CTRL_MAGIC   0x42414342 /* Bootloader Control AB */
-#define BOOT_CTRL_VERSION 1
-
-struct slot_metadata {
-    // Slot priority with 15 meaning highest priority, 1 lowest
-    // priority and 0 the slot is unbootable.
-    uint8_t priority : 4;
-    // Number of times left attempting to boot this slot.
-    uint8_t tries_remaining : 3;
-    // 1 if this slot has booted successfully, 0 otherwise.
-    uint8_t successful_boot : 1;
-    // 1 if this slot is corrupted from a dm-verity corruption, 0
-    // otherwise.
-    uint8_t verity_corrupted : 1;
-    // Reserved for further use.
-    uint8_t reserved : 7;
+// Holds Virtual A/B merge status information. Current version is 1. New fields
+// must be added to the end.
+struct misc_virtual_ab_message {
+  uint8_t version;
+  uint32_t magic;
+  uint8_t merge_status;  // IBootControl 1.1, MergeStatus enum.
+  uint8_t source_slot;   // Slot number when merge_status was written.
+  uint8_t reserved[57];
 } __attribute__((packed));
 
-/* Bootloader Control AB
- *
- * This struct can be used to manage A/B metadata. It is designed to
- * be put in the 'slot_suffix' field of the 'bootloader_message'
- * structure described above. It is encouraged to use the
- * 'bootloader_control' structure to store the A/B metadata, but not
- * mandatory.
- */
-struct bootloader_control {
-    // NUL terminated active slot suffix.
-    char slot_suffix[4];
-    // Bootloader Control AB magic number (see BOOT_CTRL_MAGIC).
-    uint32_t magic;
-    // Version of struct being used (see BOOT_CTRL_VERSION).
-    uint8_t version;
-    // Number of slots being managed.
-    uint8_t nb_slot : 3;
-    // Number of times left attempting to boot recovery.
-    uint8_t recovery_tries_remaining : 3;
-    // Ensure 4-bytes alignment for slot_info field.
-    uint8_t reserved0[2];
-    // Per-slot information.  Up to 4 slots.
-    struct slot_metadata slot_info[4];
-    // Reserved for further use.
-    uint8_t reserved1[8];
-    // CRC32 of all 28 bytes preceding this field (little endian
-    // format).
-    uint32_t crc32_le;
-} __attribute__((packed));
+#define MISC_VIRTUAL_AB_MESSAGE_VERSION 2
+#define MISC_VIRTUAL_AB_MAGIC_HEADER 0x56740AB0
 
 #if (__STDC_VERSION__ >= 201112L) || defined(__cplusplus)
-static_assert(sizeof(struct bootloader_control) ==
-              sizeof(((struct bootloader_message_ab *)0)->slot_suffix),
-              "struct bootloader_control has wrong size");
+static_assert(sizeof(struct misc_virtual_ab_message) == 64,
+              "struct misc_virtual_ab_message has wrong size");
 #endif
+
+// This struct is not meant to be used directly, rather, it is to make
+// computation of offsets easier. New fields must be added to the end.
+struct misc_system_space_layout {
+  misc_virtual_ab_message virtual_ab_message;
+} __attribute__((packed));
 
 #ifdef __cplusplus
 
 #include <string>
 #include <vector>
 
+// Gets the block device name of /misc partition.
+std::string get_misc_blk_device(std::string* err);
 // Return the block device name for the bootloader message partition and waits
 // for the device for up to 10 seconds. In case of error returns the empty
 // string.
 std::string get_bootloader_message_blk_device(std::string* err);
+
+// Writes |size| bytes of data from buffer |p| to |misc_blk_device| at |offset|. If the write fails,
+// sets the error message in |err|.
+bool write_misc_partition(const void* p, size_t size, const std::string& misc_blk_device,
+                          size_t offset, std::string* err);
 
 // Read bootloader message into boot. Error message will be set in err.
 bool read_bootloader_message(bootloader_message* boot, std::string* err);
@@ -207,6 +141,11 @@ bool write_bootloader_message_to(const bootloader_message& boot,
 // Write bootloader message (boots into recovery with the options) to BCB. Will
 // set the command and recovery fields, and reset the rest.
 bool write_bootloader_message(const std::vector<std::string>& options, std::string* err);
+
+// Write bootloader message (boots into recovery with the options) to the specific BCB device. Will
+// set the command and recovery fields, and reset the rest.
+bool write_bootloader_message_to(const std::vector<std::string>& options,
+                                 const std::string& misc_blk_device, std::string* err);
 
 // Update bootloader message (boots into recovery with the options) to BCB. Will
 // only update the command and recovery fields.
@@ -229,13 +168,9 @@ bool read_wipe_package(std::string* package_data, size_t size, std::string* err)
 // Write the wipe package into BCB (to offset WIPE_PACKAGE_OFFSET_IN_MISC).
 bool write_wipe_package(const std::string& package_data, std::string* err);
 
-// Reads data from the vendor space in /misc partition, with the given offset and size. Note that
-// offset is in relative to the start of vendor space.
-bool ReadMiscPartitionVendorSpace(void* data, size_t size, size_t offset, std::string* err);
-
-// Writes the given data to the vendor space in /misc partition, at the given offset. Note that
-// offset is in relative to the start of the vendor space.
-bool WriteMiscPartitionVendorSpace(const void* data, size_t size, size_t offset, std::string* err);
+// Read or write the Virtual A/B message from system space in /misc.
+bool ReadMiscVirtualAbMessage(misc_virtual_ab_message* message, std::string* err);
+bool WriteMiscVirtualAbMessage(const misc_virtual_ab_message& message, std::string* err);
 
 #else
 

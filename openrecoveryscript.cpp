@@ -386,7 +386,7 @@ int OpenRecoveryScript::run_script_file(void) {
 				gui_msg("start_sideload=Starting ADB sideload feature...");
 
 				Device::BuiltinAction reboot_action = Device::REBOOT_BOOTLOADER;
-				ret_val = ApplyFromAdb("/", &reboot_action);
+				ret_val = twrp_sideload("/", &reboot_action);
 				if (ret_val != 0) {
 					if (ret_val == -2)
 						gui_err("need_new_adb=You need adb 1.0.32 or newer to sideload to this device.");

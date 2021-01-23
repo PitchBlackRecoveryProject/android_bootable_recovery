@@ -199,7 +199,7 @@ int res_create_display_surface(const char* name, GRSurface** pSurface) {
   }
 
   PixelFormat pixel_format = gr_pixel_format();
-  if (pixel_format == PixelFormat::ABGR || pixel_format == PixelFormat::BGRA) {
+  if (pixel_format == PixelFormat::ARGB || pixel_format == PixelFormat::BGRA) {
     png_set_bgr(png_ptr);
   }
 
@@ -271,7 +271,7 @@ int res_create_multi_display_surface(const char* name, int* frames, int* fps,
     surface[i] = created_surface.release();
   }
 
-  if (gr_pixel_format() == PixelFormat::ABGR || gr_pixel_format() == PixelFormat::BGRA) {
+  if (gr_pixel_format() == PixelFormat::ARGB || gr_pixel_format() == PixelFormat::BGRA) {
     png_set_bgr(png_ptr);
   }
 
@@ -323,7 +323,7 @@ int res_create_alpha_surface(const char* name, GRSurface** pSurface) {
   }
 
   PixelFormat pixel_format = gr_pixel_format();
-  if (pixel_format == PixelFormat::ABGR || pixel_format == PixelFormat::BGRA) {
+  if (pixel_format == PixelFormat::ARGB || pixel_format == PixelFormat::BGRA) {
     png_set_bgr(png_ptr);
   }
 
@@ -353,8 +353,11 @@ bool matches_locale(const std::string& prefix, const std::string& locale) {
   // match the locale string without the {script} section.
   // For instance, prefix == "en" matches locale == "en-US", prefix == "sr-Latn" matches locale
   // == "sr-Latn-BA", and prefix == "zh-CN" matches locale == "zh-Hans-CN".
-  //if (android::base::StartsWith(locale, prefix)) { // does not exist in 6.0
-  if (strncmp(prefix.c_str(), locale.c_str(), prefix.length()) == 0) {
+  if (prefix.empty()) {
+    return false;
+  }
+
+  if (android::base::StartsWith(locale, prefix)) {
     return true;
   }
 
@@ -421,12 +424,18 @@ int res_create_localized_alpha_surface(const char* name,
     __unused int len = row[4];
     char* loc = reinterpret_cast<char*>(&row[5]);
 
-    if (y + 1 + h >= height || matches_locale(loc, locale)) {
+    // We need to include one additional line for the metadata of the localized image.
+    if (y + 1 + h > height) {
+      printf("Read exceeds the image boundary, y %u, h %d, height %u\n", y, h, height);
+      return -8;
+    }
+
+    if (matches_locale(loc, locale)) {
       printf("  %20s: %s (%d x %d @ %d)\n", name, loc, w, h, y);
 
       auto surface = GRSurface::Create(w, h, w, 1);
       if (!surface) {
-        return -8;
+        return -9;
       }
 
       for (int i = 0; i < h; ++i, ++y) {
@@ -435,7 +444,7 @@ int res_create_localized_alpha_surface(const char* name,
       }
 
       *pSurface = surface.release();
-      break;
+      return 0;
     }
 
     for (int i = 0; i < h; ++i, ++y) {
@@ -443,7 +452,7 @@ int res_create_localized_alpha_surface(const char* name,
     }
   }
 
-  return 0;
+  return -10;
 }
 
 void res_free_surface(GRSurface* surface) {

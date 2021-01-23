@@ -1,0 +1,52 @@
+bootstrap_go_package {
+    name: "soong-libminuitwrp_defaults",
+    pkgPath: "bootable/recovery/minuitwrp",
+    deps: [
+        "soong",
+        "soong-android",
+        "soong-cc"
+    ],
+    srcs: [
+        "libminuitwrp_defaults.go"
+    ],
+    pluginFor: ["soong_build"]
+}
+
+libminuitwrp_defaults {
+    name: "libminuitwrp_defaults"
+}
+
+cc_library_shared {
+    name: "libminuitwrp",
+    defaults: ["libminuitwrp_defaults"],
+    cflags: [],
+    include_dirs: [
+        "external/libpng",
+        "external/zlib",
+        "system/core/include",
+        "external/freetype/include",
+        "external/libcxx/include",
+        "bootable/recovery/twrpinstall/include",
+        "bootable/recovery/libpixelflinger/include"
+    ],
+    srcs: [
+        "graphics.cpp",
+        "graphics_fbdev.cpp",
+        "resources.cpp",
+        "truetype.cpp",
+        "graphics_utils.cpp",
+        "events.cpp"
+    ],
+    shared_libs: [
+        "libft2", 
+        "libz", 
+        "libc", 
+        "libcutils", 
+        "libpng", 
+        "libutils", 
+        "libc++",
+        "libcutils",
+        "liblog", 
+    ],
+    static_libs: ["libpixelflinger_twrp"]
+}

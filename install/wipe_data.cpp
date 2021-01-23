@@ -27,10 +27,11 @@
 #include <android-base/logging.h>
 #include <android-base/stringprintf.h>
 
+#include "install/snapshot_utils.h"
 #include "otautil/dirutil.h"
-#include "otautil/logging.h"
-#include "otautil/roots.h"
 #include "recovery_ui/ui.h"
+#include "recovery_utils/logging.h"
+#include "recovery_utils/roots.h"
 
 constexpr const char* CACHE_ROOT = "/cache";
 constexpr const char* DATA_ROOT = "/data";
@@ -104,6 +105,12 @@ bool WipeCache(const std::function<bool()>& confirm_func) {
 bool WipeData(Device* device, bool convert_fbe) {
   // RecoveryUI* ui = device->GetUI();
   // ui->Print("\n-- Wiping data...\n");
+
+  // if (!FinishPendingSnapshotMerges(device)) {
+  //   ui->Print("Unable to check update status or complete merge, cannot wipe partitions.\n");
+  //   return false;
+  // }
+
   bool success = device->PreWipeData();
   if (success) {
     success &= EraseVolume(DATA_ROOT, convert_fbe);

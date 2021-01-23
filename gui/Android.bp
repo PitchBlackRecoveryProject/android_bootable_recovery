@@ -1,0 +1,83 @@
+bootstrap_go_package {
+    name: "soong-libguitwrp_defaults",
+    pkgPath: "bootable/recovery/gui",
+    deps: [
+        "soong",
+        "soong-android",
+        "soong-cc"
+    ],
+    srcs: [
+        "libguitwrp_defaults.go"
+    ],
+    pluginFor: ["soong_build"]
+}
+
+libguitwrp_defaults {
+    name: "libguitwrp_defaults"
+}
+
+cc_library_static {
+    name: "libguitwrp",
+    defaults: ["libguitwrp_defaults"],
+    cflags: [
+        "-fno-strict-aliasing", 
+        "-Wno-implicit-fallthrough",
+        "-D_USE_SYSTEM_ZIPARCHIVE"
+    ],
+    include_dirs: [
+        "bootable/recovery/crypto/scrypt/lib/util",
+        "bootable/recovery/otautil/include",
+        "bootable/recovery/install/include",
+        "system/core/libziparchive/include",
+        "bootable/recovery/recovery_ui/include",
+        "bootable/recovery/fuse_sideload/include",
+        "bootable/recovery/twrpinstall",
+        "bootable/recovery/twrpinstall/include",
+        "bionic",
+        "system/core/base/include",
+        "system/core/include",
+        "system/core/libpixelflinger/include",
+        "external/freetype/include"
+
+    ],
+    srcs: [ 
+        "gui.cpp",
+        "resources.cpp",
+        "pages.cpp",
+        "text.cpp",
+        "image.cpp",
+        "action.cpp",
+        "console.cpp",
+        "fill.cpp",
+        "button.cpp",
+        "checkbox.cpp",
+        "fileselector.cpp",
+        "progressbar.cpp",
+        "animation.cpp",
+        "object.cpp",
+        "slider.cpp",
+        "slidervalue.cpp",
+        "listbox.cpp",
+        "keyboard.cpp",
+        "input.cpp",
+        "blanktimer.cpp",
+        "partitionlist.cpp",
+        "mousecursor.cpp",
+        "scrolllist.cpp",
+        "patternpassword.cpp",
+        "textbox.cpp",
+        "terminal.cpp",
+        "twmsg.cpp"
+    ],
+    shared_libs: [
+        "libminuitwrp",
+        "libc",
+        "libstdc++",
+        "libaosprecovery",
+        "libselinux",
+        "libziparchive"
+    ],
+    static_libs: [
+        "libotautil"
+    ]
+}

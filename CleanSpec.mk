@@ -51,6 +51,24 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/sbin)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/SHARED_LIBRARIES/libinstall.recovery_intermediates)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/system/lib64/libinstall.so)
 
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/data/nativetest/recovery_component_test)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/data/nativetest64/recovery_component_test)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/testcases/recovery_component_test)
+
+$(call add-clean-step, find $(OUT_DIR) -type f -name "SystemUpdaterSample*" -print0 | xargs -0 rm -f)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/SystemUpdaterSample)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libbrotli.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libbz.so)
+
+# Move recovery resources from /system to /vendor.
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/bin/applypatch)
+$(call add-clean-step, rm -r $(PRODUCT_OUT)/symbols/system/bin/applypatch)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/PACKAGING/target_files_intermediates/*-target_files-*/SYSTEM/bin/applypatch)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/PACKAGING/target_files_intermediates/*-target_files-*/SYSTEM/bin/install-recovery.sh)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/PACKAGING/target_files_intermediates/*-target_files-*/SYSTEM/etc/recovery-resource.dat)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/PACKAGING/target_files_intermediates/*-target_files-*/SYSTEM/recovery-from-boot.p)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************

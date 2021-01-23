@@ -392,8 +392,8 @@ std::unique_ptr<RSA, RSADeleter> parse_rsa_key(FILE* file, uint32_t exponent) {
 
 static std::vector<Certificate> IterateZipEntriesAndSearchForKeys(const ZipArchiveHandle& handle) {
   void* cookie;
-  ZipString suffix("x509.pem");
-  int32_t iter_status = StartIteration(handle, &cookie, nullptr, &suffix);
+  std::string suffix("x509.pem");
+  int32_t iter_status = StartIteration(handle, &cookie, nullptr, suffix);
   if (iter_status != 0) {
     LOG(ERROR) << "Failed to iterate over entries in the certificate zipfile: "
                << ErrorCodeString(iter_status);
@@ -402,14 +402,14 @@ static std::vector<Certificate> IterateZipEntriesAndSearchForKeys(const ZipArchi
 
   std::vector<Certificate> result;
 
-  ZipString name;
+  std::string name;
   ZipEntry entry;
   while ((iter_status = Next(cookie, &entry, &name)) == 0) {
     std::vector<uint8_t> pem_content(entry.uncompressed_length);
     if (int32_t extract_status =
             ExtractToMemory(handle, &entry, pem_content.data(), pem_content.size());
         extract_status != 0) {
-      LOG(ERROR) << "Failed to extract " << std::string(name.name, name.name + name.name_length);
+      LOG(ERROR) << "Failed to extract " << std::string(name.c_str(), name.c_str() + name.size());
       return {};
     }
 
@@ -417,7 +417,7 @@ static std::vector<Certificate> IterateZipEntriesAndSearchForKeys(const ZipArchi
     // Aborts the parsing if we fail to load one of the key file.
     if (!LoadCertificateFromBuffer(pem_content, &cert)) {
       LOG(ERROR) << "Failed to load keys from "
-                 << std::string(name.name, name.name + name.name_length);
+                 << std::string(name.c_str(), name.c_str() + name.size());
       return {};
     }
 

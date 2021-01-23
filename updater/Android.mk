@@ -37,8 +37,8 @@ updater_common_static_libraries := \
     libdm \
     libfec \
     libfec_rs \
+    libavb \
     libverity_tree \
-    libfs_mgr \
     libgtest_prod \
     liblog \
     liblp \
@@ -50,12 +50,27 @@ updater_common_static_libraries := \
     libziparchive \
     libz \
     libbase \
-    libcrypto \
+    libcrypto_static \
     libcrypto_utils \
     libcutils \
-    libutils \
-    libtune2fs \
-    $(tune2fs_static_libraries)
+    libutils
+
+
+# Each library in TARGET_RECOVERY_UPDATER_LIBS should have a function
+# named "Register_<libname>()".  Here we emit a little C function that
+# gets #included by updater.cpp.  It calls all those registration
+# functions.
+# $(1): the path to the register.inc file
+# $(2): a list of TARGET_RECOVERY_UPDATER_LIBS
+define generate-register-inc
+    $(hide) mkdir -p $(dir $(1))
+    $(hide) echo "" > $(1)
+    $(hide) $(foreach lib,$(2),echo "extern void Register_$(lib)(void);" >> $(1);)
+    $(hide) echo "void RegisterDeviceExtensions() {" >> $(1)
+    $(hide) $(foreach lib,$(2),echo "  Register_$(lib)();" >> $(1);)
+    $(hide) echo "}" >> $(1)
+endef
+
 
 # updater (static executable)
 # ===============================
@@ -64,7 +79,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := updater
 
 LOCAL_SRC_FILES := \
-    updater.cpp
+    updater_main.cpp
 
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/include
@@ -74,33 +89,26 @@ LOCAL_CFLAGS := \
     -Werror
 
 LOCAL_STATIC_LIBRARIES := \
-    libupdater \
+    libupdater_device \
+    libupdater_core \
     $(TARGET_RECOVERY_UPDATER_LIBS) \
     $(TARGET_RECOVERY_UPDATER_EXTRA_LIBS) \
-    $(updater_common_static_libraries)
+    $(updater_common_static_libraries) \
+    libfs_mgr \
+    libtune2fs \
+    $(tune2fs_static_libraries)
 
-# Each library in TARGET_RECOVERY_UPDATER_LIBS should have a function
-# named "Register_<libname>()".  Here we emit a little C function that
-# gets #included by updater.c.  It calls all those registration
-# functions.
+LOCAL_MODULE_CLASS := EXECUTABLES
+inc := $(call local-generated-sources-dir)/register.inc
 
 # Devices can also add libraries to TARGET_RECOVERY_UPDATER_EXTRA_LIBS.
 # These libs are also linked in with updater, but we don't try to call
 # any sort of registration function for these.  Use this variable for
 # any subsidiary static libraries required for your registered
 # extension libs.
-
-LOCAL_MODULE_CLASS := EXECUTABLES
-inc := $(call local-generated-sources-dir)/register.inc
-
 $(inc) : libs := $(TARGET_RECOVERY_UPDATER_LIBS)
 $(inc) :
-	$(hide) mkdir -p $(dir $@)
-	$(hide) echo "" > $@
-	$(hide) $(foreach lib,$(libs),echo "extern void Register_$(lib)(void);" >> $@;)
-	$(hide) echo "void RegisterDeviceExtensions() {" >> $@
-	$(hide) $(foreach lib,$(libs),echo "  Register_$(lib)();" >> $@;)
-	$(hide) echo "}" >> $@
+	$(call generate-register-inc,$@,$(libs))
 
 LOCAL_GENERATED_SOURCES := $(inc)
 

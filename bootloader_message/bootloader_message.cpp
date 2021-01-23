@@ -20,6 +20,7 @@
 #include <fcntl.h>
 #include <string.h>
 
+#include <optional>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -30,19 +31,23 @@
 #include <android-base/unique_fd.h>
 #include <fstab/fstab.h>
 
+#ifndef __ANDROID__
+#include <cutils/memory.h>  // for strlcpy
+#endif
+
 using android::fs_mgr::Fstab;
 using android::fs_mgr::ReadDefaultFstab;
 
-static std::string g_misc_device_for_test;
+static std::optional<std::string> g_misc_device_for_test;
 
 // Exposed for test purpose.
 void SetMiscBlockDeviceForTest(std::string_view misc_device) {
   g_misc_device_for_test = misc_device;
 }
 
-static std::string get_misc_blk_device(std::string* err) {
-  if (!g_misc_device_for_test.empty()) {
-    return g_misc_device_for_test;
+std::string get_misc_blk_device(std::string* err) {
+  if (g_misc_device_for_test.has_value() && !g_misc_device_for_test->empty()) {
+    return *g_misc_device_for_test;
   }
   Fstab fstab;
   if (!ReadDefaultFstab(&fstab)) {
@@ -106,8 +111,8 @@ static bool read_misc_partition(void* p, size_t size, const std::string& misc_bl
   return true;
 }
 
-static bool write_misc_partition(const void* p, size_t size, const std::string& misc_blk_device,
-                                 size_t offset, std::string* err) {
+bool write_misc_partition(const void* p, size_t size, const std::string& misc_blk_device,
+                          size_t offset, std::string* err) {
   android::base::unique_fd fd(open(misc_blk_device.c_str(), O_WRONLY));
   if (fd == -1) {
     *err = android::base::StringPrintf("failed to open %s: %s", misc_blk_device.c_str(),
@@ -179,6 +184,14 @@ bool write_bootloader_message(const std::vector<std::string>& options, std::stri
   return write_bootloader_message(boot, err);
 }
 
+bool write_bootloader_message_to(const std::vector<std::string>& options,
+                                 const std::string& misc_blk_device, std::string* err) {
+  bootloader_message boot = {};
+  update_bootloader_message_in_struct(&boot, options);
+
+  return write_bootloader_message_to(boot, misc_blk_device, err);
+}
+
 bool update_bootloader_message(const std::vector<std::string>& options, std::string* err) {
   bootloader_message boot;
   if (!read_bootloader_message(&boot, err)) {
@@ -197,13 +210,15 @@ bool update_bootloader_message_in_struct(bootloader_message* boot,
   memset(boot->recovery, 0, sizeof(boot->recovery));
 
   strlcpy(boot->command, "boot-recovery", sizeof(boot->command));
-  strlcpy(boot->recovery, "recovery\n", sizeof(boot->recovery));
+
+  std::string recovery = "recovery\n";
   for (const auto& s : options) {
-    strlcat(boot->recovery, s.c_str(), sizeof(boot->recovery));
+    recovery += s;
     if (s.back() != '\n') {
-      strlcat(boot->recovery, "\n", sizeof(boot->recovery));
+      recovery += '\n';
     }
   }
+  strlcpy(boot->recovery, recovery.c_str(), sizeof(boot->recovery));
   return true;
 }
 
@@ -235,39 +250,58 @@ bool write_wipe_package(const std::string& package_data, std::string* err) {
   if (misc_blk_device.empty()) {
     return false;
   }
+  static constexpr size_t kMaximumWipePackageSize =
+      SYSTEM_SPACE_OFFSET_IN_MISC - WIPE_PACKAGE_OFFSET_IN_MISC;
+  if (package_data.size() > kMaximumWipePackageSize) {
+    *err = "Wipe package size " + std::to_string(package_data.size()) + " exceeds " +
+           std::to_string(kMaximumWipePackageSize) + " bytes";
+    return false;
+  }
   return write_misc_partition(package_data.data(), package_data.size(), misc_blk_device,
                               WIPE_PACKAGE_OFFSET_IN_MISC, err);
 }
 
-static bool OffsetAndSizeInVendorSpace(size_t offset, size_t size) {
-  auto total_size = WIPE_PACKAGE_OFFSET_IN_MISC - VENDOR_SPACE_OFFSET_IN_MISC;
-  return size <= total_size && offset <= total_size - size;
+static bool ValidateSystemSpaceRegion(size_t offset, size_t size, std::string* err) {
+  if (size <= SYSTEM_SPACE_SIZE_IN_MISC && offset <= (SYSTEM_SPACE_SIZE_IN_MISC - size)) {
+    return true;
+  }
+  *err = android::base::StringPrintf("Out of bound access (offset %zu size %zu)", offset, size);
+  return false;
 }
 
-bool ReadMiscPartitionVendorSpace(void* data, size_t size, size_t offset, std::string* err) {
-  if (!OffsetAndSizeInVendorSpace(offset, size)) {
-    *err = android::base::StringPrintf("Out of bound read (offset %zu size %zu)", offset, size);
+static bool ReadMiscPartitionSystemSpace(void* data, size_t size, size_t offset, std::string* err) {
+  if (!ValidateSystemSpaceRegion(offset, size, err)) {
     return false;
   }
   auto misc_blk_device = get_misc_blk_device(err);
   if (misc_blk_device.empty()) {
     return false;
   }
-  return read_misc_partition(data, size, misc_blk_device, VENDOR_SPACE_OFFSET_IN_MISC + offset,
+  return read_misc_partition(data, size, misc_blk_device, SYSTEM_SPACE_OFFSET_IN_MISC + offset,
                              err);
 }
 
-bool WriteMiscPartitionVendorSpace(const void* data, size_t size, size_t offset, std::string* err) {
-  if (!OffsetAndSizeInVendorSpace(offset, size)) {
-    *err = android::base::StringPrintf("Out of bound write (offset %zu size %zu)", offset, size);
+static bool WriteMiscPartitionSystemSpace(const void* data, size_t size, size_t offset,
+                                          std::string* err) {
+  if (!ValidateSystemSpaceRegion(offset, size, err)) {
     return false;
   }
   auto misc_blk_device = get_misc_blk_device(err);
   if (misc_blk_device.empty()) {
     return false;
   }
-  return write_misc_partition(data, size, misc_blk_device, VENDOR_SPACE_OFFSET_IN_MISC + offset,
+  return write_misc_partition(data, size, misc_blk_device, SYSTEM_SPACE_OFFSET_IN_MISC + offset,
                               err);
+}
+
+bool ReadMiscVirtualAbMessage(misc_virtual_ab_message* message, std::string* err) {
+  return ReadMiscPartitionSystemSpace(message, sizeof(*message),
+                                      offsetof(misc_system_space_layout, virtual_ab_message), err);
+}
+
+bool WriteMiscVirtualAbMessage(const misc_virtual_ab_message& message, std::string* err) {
+  return WriteMiscPartitionSystemSpace(&message, sizeof(message),
+                                       offsetof(misc_system_space_layout, virtual_ab_message), err);
 }
 
 extern "C" bool write_reboot_bootloader(void) {

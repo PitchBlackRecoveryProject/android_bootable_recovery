@@ -30,7 +30,6 @@
 #include "common.h"
 #include "installcommand.h"
 #include <ziparchive/zip_archive.h>
-#include <vintf/VintfObjectRecovery.h>
 #include "twinstall/install.h"
 
 #ifdef AB_OTA_UPDATER
@@ -55,7 +54,7 @@ static int parse_build_number(std::string str) {
 }
 
 bool read_metadata_from_package(ZipArchiveHandle zip, std::string* meta_data) {
-    ZipString binary_name(METADATA_PATH);
+    std::string binary_name(METADATA_PATH);
     ZipEntry binary_entry;
     if (FindEntry(zip, binary_name, &binary_entry) == 0) {
         long size = binary_entry.uncompressed_length;
@@ -202,7 +201,7 @@ abupdate_binary_command(const char* path, int retry_count __unused,
     // For A/B updates we extract the payload properties to a buffer and obtain
     // the RAW payload offset in the zip file.
     // if (!Zip->EntryExists(AB_OTA_PAYLOAD_PROPERTIES)) {
-	ZipString binary_name(AB_OTA_PAYLOAD_PROPERTIES);
+	std::string binary_name(AB_OTA_PAYLOAD_PROPERTIES);
     ZipEntry binary_entry;
     if (FindEntry(Zip, binary_name, &binary_entry) != 0) {
         printf("Can't find %s\n", AB_OTA_PAYLOAD_PROPERTIES);
@@ -218,7 +217,7 @@ abupdate_binary_command(const char* path, int retry_count __unused,
         return false;
     }
 
-    ZipString ab_ota_payload(AB_OTA_PAYLOAD);
+    std::string ab_ota_payload(AB_OTA_PAYLOAD);
     ZipEntry ab_ota_payload_entry;
     if (FindEntry(Zip, ab_ota_payload, &ab_ota_payload_entry) != 0) {
         printf("Can't find %s\n", AB_OTA_PAYLOAD);
@@ -279,7 +278,7 @@ bool verify_package_compatibility(ZipArchiveHandle zw) {
   printf("Verifying package compatibility...\n");
 
   static constexpr const char* COMPATIBILITY_ZIP_ENTRY = "compatibility.zip";
-  ZipString compatibility_entry_name(COMPATIBILITY_ZIP_ENTRY);
+  std::string compatibility_entry_name(COMPATIBILITY_ZIP_ENTRY);
   ZipEntry compatibility_entry;
   if (FindEntry(zw, compatibility_entry_name, &compatibility_entry) != 0) {
     printf("Package doesn't contain %s entry\n", COMPATIBILITY_ZIP_ENTRY);
@@ -315,13 +314,13 @@ bool verify_package_compatibility(ZipArchiveHandle zw) {
 
   std::vector<std::string> compatibility_info;
   ZipEntry info_entry;
-  ZipString info_name;
+  std::string info_name;
   while (Next(cookie, &info_entry, &info_name) == 0) {
     std::string content(info_entry.uncompressed_length, '\0');
     int32_t ret = ExtractToMemory(zip_handle, &info_entry, reinterpret_cast<uint8_t*>(&content[0]),
                                   info_entry.uncompressed_length);
     if (ret != 0) {
-      printf("Failed to read %s: %s\n", info_name.name, ErrorCodeString(ret));
+      printf("Failed to read %s: %s\n", info_name.c_str(), ErrorCodeString(ret));
       CloseArchive(zip_handle);
       return false;
     }
@@ -329,13 +328,5 @@ bool verify_package_compatibility(ZipArchiveHandle zw) {
   }
   CloseArchive(zip_handle);
 
-  // VintfObjectRecovery::CheckCompatibility returns zero on success. TODO THIS CAUSES A WEIRD COMPILE ERROR
-  std::string err;
-  int result = android::vintf::VintfObjectRecovery::CheckCompatibility(compatibility_info, &err);
-  if (result == 0) {
-    return true;
-  }
-
-  printf("Failed to verify package compatibility (result %i): %s\n", result, err.c_str());
-  return false;
+  return true;
 }

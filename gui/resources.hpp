@@ -25,7 +25,7 @@
 #include <vector>
 #include <map>
 #include "rapidxml.hpp"
-#include "zipwrap.hpp"
+#include "ziparchive/zip_archive.h"
 #include "../minuitwrp/truetype.hpp"
 
 extern "C" {
@@ -36,7 +36,7 @@ extern "C" {
 class Resource
 {
 public:
-	Resource(xml_node<>* node, ZipWrap* pZip);
+	Resource(xml_node<>* node, ZipArchiveHandle pZip);
 	virtual ~Resource() {}
 
 public:
@@ -46,27 +46,27 @@ private:
 	std::string mName;
 
 protected:
-	static int ExtractResource(ZipWrap* pZip, std::string folderName, std::string fileName, std::string fileExtn, std::string destFile);
-	static void LoadImage(ZipWrap* pZip, std::string file, gr_surface* surface);
+	static int ExtractResource(ZipArchiveHandle pZip, std::string folderName, std::string fileName, std::string fileExtn, std::string destFile);
+	static void LoadImage(ZipArchiveHandle pZip, std::string file, gr_surface* surface);
 	static void CheckAndScaleImage(gr_surface source, gr_surface* destination, int retain_aspect);
 };
 
 class FontResource : public Resource
 {
 public:
-	FontResource(xml_node<>* node, ZipWrap* pZip);
+	FontResource(xml_node<>* node, ZipArchiveHandle pZip);
 	virtual ~FontResource();
 
 public:
 	void* GetResource() { return mFont; }
 	int GetHeight() { return twrpTruetype::gr_ttf_getMaxFontHeight(mFont); }
-	void Override(xml_node<>* node, ZipWrap* pZip);
+	void Override(xml_node<>* node, ZipArchiveHandle pZip);
 
 protected:
 	void* mFont;
 
 private:
-	void LoadFont(xml_node<>* node, ZipWrap* pZip);
+	void LoadFont(xml_node<>* node, ZipArchiveHandle pZip);
 	void DeleteFont();
 
 private:
@@ -77,7 +77,7 @@ private:
 class ImageResource : public Resource
 {
 public:
-	ImageResource(xml_node<>* node, ZipWrap* pZip);
+	ImageResource(xml_node<>* node, ZipArchiveHandle pZip);
 	virtual ~ImageResource();
 
 public:
@@ -92,7 +92,7 @@ protected:
 class AnimationResource : public Resource
 {
 public:
-	AnimationResource(xml_node<>* node, ZipWrap* pZip);
+	AnimationResource(xml_node<>* node, ZipArchiveHandle pZip);
 	virtual ~AnimationResource();
 
 public:
@@ -112,7 +112,7 @@ public:
 	ResourceManager();
 	virtual ~ResourceManager();
 	void AddStringResource(std::string resource_source, std::string resource_name, std::string value);
-	void LoadResources(xml_node<>* resList, ZipWrap* pZip, std::string resource_source);
+	void LoadResources(xml_node<>* resList, ZipArchiveHandle pZip, std::string resource_source);
 
 public:
 	FontResource* FindFont(const std::string& name) const;

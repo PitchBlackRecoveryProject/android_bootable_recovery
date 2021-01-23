@@ -38,7 +38,7 @@
 BlockMapData BlockMapData::ParseBlockMapFile(const std::string& block_map_path) {
   std::string content;
   if (!android::base::ReadFileToString(block_map_path, &content)) {
-    LOG(ERROR) << "Failed to read " << block_map_path;
+    PLOG(ERROR) << "Failed to read " << block_map_path;
     return {};
   }
 
@@ -92,6 +92,11 @@ BlockMapData BlockMapData::ParseBlockMapFile(const std::string& block_map_path) 
     }
     ranges.PushBack({ start, end });
     remaining_blocks -= range_blocks;
+  }
+
+  if (remaining_blocks != 0) {
+    LOG(ERROR) << "Invalid ranges: remaining blocks " << remaining_blocks;
+    return {};
   }
 
   return BlockMapData(block_dev, file_size, blksize, std::move(ranges));
@@ -214,11 +219,22 @@ MemMapping::~MemMapping() {
   ranges_.clear();
 }
 
-bool reboot(const std::string& command) {
-  std::string cmd = command;
-  if (android::base::GetBoolProperty("ro.boot.quiescent", false)) {
+void Reboot(std::string_view target) {
+  std::string cmd = "reboot," + std::string(target);
+  // Honor the quiescent mode if applicable.
+  if (target != "bootloader" && target != "fastboot" &&
+      android::base::GetBoolProperty("ro.boot.quiescent", false)) {
     cmd += ",quiescent";
   }
+  if (!android::base::SetProperty(ANDROID_RB_PROPERTY, cmd)) {
+    LOG(FATAL) << "Reboot failed";
+  }
+
+  while (true) pause();
+}
+
+bool Shutdown(std::string_view target) {
+  std::string cmd = "shutdown," + std::string(target);
   return android::base::SetProperty(ANDROID_RB_PROPERTY, cmd);
 }
 

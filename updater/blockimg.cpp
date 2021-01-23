@@ -42,17 +42,18 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/parseint.h>
+#include <android-base/stringprintf.h>
 #include <android-base/strings.h>
 #include <android-base/unique_fd.h>
 #include <applypatch/applypatch.h>
 #include <brotli/decode.h>
 #include <fec/io.h>
 #include <openssl/sha.h>
-#include <private/android_filesystem_config.h>
 #include <verity/hash_tree_builder.h>
 #include <ziparchive/zip_archive.h>
 
 #include "edify/expr.h"
+#include "edify/updater_interface.h"
 #include "otautil/dirutil.h"
 #include "otautil/error_code.h"
 #include "otautil/paths.h"
@@ -60,12 +61,16 @@
 #include "otautil/rangeset.h"
 #include "private/commands.h"
 #include "updater/install.h"
-#include "updater/updater.h"
 
-// Set this to 0 to interpret 'erase' transfers to mean do a
-// BLKDISCARD ioctl (the normal behavior).  Set to 1 to interpret
-// erase to mean fill the region with zeroes.
+#ifdef __ANDROID__
+#include <private/android_filesystem_config.h>
+// Set this to 0 to interpret 'erase' transfers to mean do a BLKDISCARD ioctl (the normal behavior).
+// Set to 1 to interpret erase to mean fill the region with zeroes.
 #define DEBUG_ERASE  0
+#else
+#define DEBUG_ERASE 1
+#define AID_SYSTEM -1
+#endif  // __ANDROID__
 
 static constexpr size_t BLOCKSIZE = 4096;
 static constexpr mode_t STASH_DIRECTORY_MODE = 0700;
@@ -1669,42 +1674,43 @@ static Value* PerformBlockImageUpdate(const char* name, State* state,
     return StringValue("");
   }
 
-  UpdaterInfo* ui = static_cast<UpdaterInfo*>(state->cookie);
-  if (ui == nullptr) {
+  auto updater = state->updater;
+  auto block_device_path = updater->FindBlockDeviceName(blockdev_filename->data);
+  if (block_device_path.empty()) {
+    LOG(ERROR) << "Block device path for " << blockdev_filename->data << " not found. " << name
+               << " failed.";
     return StringValue("");
   }
 
-  FILE* cmd_pipe = ui->cmd_pipe;
-  ZipArchiveHandle za = ui->package_zip;
-
-  if (cmd_pipe == nullptr || za == nullptr) {
+  ZipArchiveHandle za = updater->GetPackageHandle();
+  if (za == nullptr) {
     return StringValue("");
   }
 
-  ZipString path_data(patch_data_fn->data.c_str());
+  std::string_view path_data(patch_data_fn->data);
   ZipEntry patch_entry;
   if (FindEntry(za, path_data, &patch_entry) != 0) {
     LOG(ERROR) << name << "(): no file \"" << patch_data_fn->data << "\" in package";
     return StringValue("");
   }
+  params.patch_start = updater->GetMappedPackageAddress() + patch_entry.offset;
 
-  params.patch_start = ui->package_zip_addr + patch_entry.offset;
-  ZipString new_data(new_data_fn->data.c_str());
+  std::string_view new_data(new_data_fn->data);
   ZipEntry new_entry;
   if (FindEntry(za, new_data, &new_entry) != 0) {
     LOG(ERROR) << name << "(): no file \"" << new_data_fn->data << "\" in package";
     return StringValue("");
   }
 
-  params.fd.reset(TEMP_FAILURE_RETRY(open(blockdev_filename->data.c_str(), O_RDWR)));
+  params.fd.reset(TEMP_FAILURE_RETRY(open(block_device_path.c_str(), O_RDWR)));
   if (params.fd == -1) {
     failure_type = errno == EIO ? kEioFailure : kFileOpenFailure;
-    PLOG(ERROR) << "open \"" << blockdev_filename->data << "\" failed";
+    PLOG(ERROR) << "open \"" << block_device_path << "\" failed";
     return StringValue("");
   }
 
   uint8_t digest[SHA_DIGEST_LENGTH];
-  if (!Sha1DevicePath(blockdev_filename->data, digest)) {
+  if (!Sha1DevicePath(block_device_path, digest)) {
     return StringValue("");
   }
   params.stashbase = print_sha1(digest);
@@ -1717,8 +1723,7 @@ static Value* PerformBlockImageUpdate(const char* name, State* state,
     struct stat sb;
     int result = stat(updated_marker.c_str(), &sb);
     if (result == 0) {
-      LOG(INFO) << "Skipping already updated partition " << blockdev_filename->data
-                << " based on marker";
+      LOG(INFO) << "Skipping already updated partition " << block_device_path << " based on marker";
       return StringValue("t");
     }
   } else {
@@ -1888,8 +1893,10 @@ static Value* PerformBlockImageUpdate(const char* name, State* state,
         LOG(WARNING) << "Failed to update the last command file.";
       }
 
-      fprintf(cmd_pipe, "set_progress %.4f\n", static_cast<double>(params.written) / total_blocks);
-      fflush(cmd_pipe);
+      updater->WriteToCommandPipe(
+          android::base::StringPrintf("set_progress %.4f",
+                                      static_cast<double>(params.written) / total_blocks),
+          true);
     }
   }
 
@@ -1914,13 +1921,15 @@ pbiudone:
       LOG(INFO) << "stashed " << params.stashed << " blocks";
       LOG(INFO) << "max alloc needed was " << params.buffer.size();
 
-      const char* partition = strrchr(blockdev_filename->data.c_str(), '/');
+      const char* partition = strrchr(block_device_path.c_str(), '/');
       if (partition != nullptr && *(partition + 1) != 0) {
-        fprintf(cmd_pipe, "log bytes_written_%s: %" PRIu64 "\n", partition + 1,
-                static_cast<uint64_t>(params.written) * BLOCKSIZE);
-        fprintf(cmd_pipe, "log bytes_stashed_%s: %" PRIu64 "\n", partition + 1,
-                static_cast<uint64_t>(params.stashed) * BLOCKSIZE);
-        fflush(cmd_pipe);
+        updater->WriteToCommandPipe(
+            android::base::StringPrintf("log bytes_written_%s: %" PRIu64, partition + 1,
+                                        static_cast<uint64_t>(params.written) * BLOCKSIZE));
+        updater->WriteToCommandPipe(
+            android::base::StringPrintf("log bytes_stashed_%s: %" PRIu64, partition + 1,
+                                        static_cast<uint64_t>(params.stashed) * BLOCKSIZE),
+            true);
       }
       // Delete stash only after successfully completing the update, as it may contain blocks needed
       // to complete the update later.
@@ -2020,7 +2029,7 @@ Value* BlockImageVerifyFn(const char* name, State* state,
     // clang-format off
     { Command::Type::ABORT,             PerformCommandAbort },
     { Command::Type::BSDIFF,            PerformCommandDiff },
-    { Command::Type::COMPUTE_HASH_TREE, PerformCommandComputeHashTree },
+    { Command::Type::COMPUTE_HASH_TREE, nullptr },
     { Command::Type::ERASE,             nullptr },
     { Command::Type::FREE,              PerformCommandFree },
     { Command::Type::IMGDIFF,           PerformCommandDiff },
@@ -2080,10 +2089,17 @@ Value* RangeSha1Fn(const char* name, State* state, const std::vector<std::unique
     return StringValue("");
   }
 
-  android::base::unique_fd fd(open(blockdev_filename->data.c_str(), O_RDWR));
+  auto block_device_path = state->updater->FindBlockDeviceName(blockdev_filename->data);
+  if (block_device_path.empty()) {
+    LOG(ERROR) << "Block device path for " << blockdev_filename->data << " not found. " << name
+               << " failed.";
+    return StringValue("");
+  }
+
+  android::base::unique_fd fd(open(block_device_path.c_str(), O_RDWR));
   if (fd == -1) {
     CauseCode cause_code = errno == EIO ? kEioFailure : kFileOpenFailure;
-    ErrorAbort(state, cause_code, "open \"%s\" failed: %s", blockdev_filename->data.c_str(),
+    ErrorAbort(state, cause_code, "open \"%s\" failed: %s", block_device_path.c_str(),
                strerror(errno));
     return StringValue("");
   }
@@ -2097,7 +2113,7 @@ Value* RangeSha1Fn(const char* name, State* state, const std::vector<std::unique
   std::vector<uint8_t> buffer(BLOCKSIZE);
   for (const auto& [begin, end] : rs) {
     if (!check_lseek(fd, static_cast<off64_t>(begin) * BLOCKSIZE, SEEK_SET)) {
-      ErrorAbort(state, kLseekFailure, "failed to seek %s: %s", blockdev_filename->data.c_str(),
+      ErrorAbort(state, kLseekFailure, "failed to seek %s: %s", block_device_path.c_str(),
                  strerror(errno));
       return StringValue("");
     }
@@ -2105,7 +2121,7 @@ Value* RangeSha1Fn(const char* name, State* state, const std::vector<std::unique
     for (size_t j = begin; j < end; ++j) {
       if (!android::base::ReadFully(fd, buffer.data(), BLOCKSIZE)) {
         CauseCode cause_code = errno == EIO ? kEioFailure : kFreadFailure;
-        ErrorAbort(state, cause_code, "failed to read %s: %s", blockdev_filename->data.c_str(),
+        ErrorAbort(state, cause_code, "failed to read %s: %s", block_device_path.c_str(),
                    strerror(errno));
         return StringValue("");
       }
@@ -2144,10 +2160,17 @@ Value* CheckFirstBlockFn(const char* name, State* state,
     return StringValue("");
   }
 
-  android::base::unique_fd fd(open(arg_filename->data.c_str(), O_RDONLY));
+  auto block_device_path = state->updater->FindBlockDeviceName(arg_filename->data);
+  if (block_device_path.empty()) {
+    LOG(ERROR) << "Block device path for " << arg_filename->data << " not found. " << name
+               << " failed.";
+    return StringValue("");
+  }
+
+  android::base::unique_fd fd(open(block_device_path.c_str(), O_RDONLY));
   if (fd == -1) {
     CauseCode cause_code = errno == EIO ? kEioFailure : kFileOpenFailure;
-    ErrorAbort(state, cause_code, "open \"%s\" failed: %s", arg_filename->data.c_str(),
+    ErrorAbort(state, cause_code, "open \"%s\" failed: %s", block_device_path.c_str(),
                strerror(errno));
     return StringValue("");
   }
@@ -2157,7 +2180,7 @@ Value* CheckFirstBlockFn(const char* name, State* state,
 
   if (ReadBlocks(blk0, &block0_buffer, fd) == -1) {
     CauseCode cause_code = errno == EIO ? kEioFailure : kFreadFailure;
-    ErrorAbort(state, cause_code, "failed to read %s: %s", arg_filename->data.c_str(),
+    ErrorAbort(state, cause_code, "failed to read %s: %s", block_device_path.c_str(),
                strerror(errno));
     return StringValue("");
   }
@@ -2173,8 +2196,10 @@ Value* CheckFirstBlockFn(const char* name, State* state,
   uint16_t mount_count = *reinterpret_cast<uint16_t*>(&block0_buffer[0x400 + 0x34]);
 
   if (mount_count > 0) {
-    uiPrintf(state, "Device was remounted R/W %" PRIu16 " times", mount_count);
-    uiPrintf(state, "Last remount happened on %s", ctime(&mount_time));
+    state->updater->UiPrint(
+        android::base::StringPrintf("Device was remounted R/W %" PRIu16 " times", mount_count));
+    state->updater->UiPrint(
+        android::base::StringPrintf("Last remount happened on %s", ctime(&mount_time)));
   }
 
   return StringValue("t");
@@ -2210,14 +2235,21 @@ Value* BlockImageRecoverFn(const char* name, State* state,
     return StringValue("");
   }
 
+  auto block_device_path = state->updater->FindBlockDeviceName(filename->data);
+  if (block_device_path.empty()) {
+    LOG(ERROR) << "Block device path for " << filename->data << " not found. " << name
+               << " failed.";
+    return StringValue("");
+  }
+
   // Output notice to log when recover is attempted
-  LOG(INFO) << filename->data << " image corrupted, attempting to recover...";
+  LOG(INFO) << block_device_path << " image corrupted, attempting to recover...";
 
   // When opened with O_RDWR, libfec rewrites corrupted blocks when they are read
-  fec::io fh(filename->data, O_RDWR);
+  fec::io fh(block_device_path, O_RDWR);
 
   if (!fh) {
-    ErrorAbort(state, kLibfecFailure, "fec_open \"%s\" failed: %s", filename->data.c_str(),
+    ErrorAbort(state, kLibfecFailure, "fec_open \"%s\" failed: %s", block_device_path.c_str(),
                strerror(errno));
     return StringValue("");
   }
@@ -2243,7 +2275,7 @@ Value* BlockImageRecoverFn(const char* name, State* state,
 
       if (fh.pread(buffer, BLOCKSIZE, static_cast<off64_t>(j) * BLOCKSIZE) != BLOCKSIZE) {
         ErrorAbort(state, kLibfecFailure, "failed to recover %s (block %zu): %s",
-                   filename->data.c_str(), j, strerror(errno));
+                   block_device_path.c_str(), j, strerror(errno));
         return StringValue("");
       }
 
@@ -2259,7 +2291,7 @@ Value* BlockImageRecoverFn(const char* name, State* state,
       //     read and check if the errors field value has increased.
     }
   }
-  LOG(INFO) << "..." << filename->data << " image recovered successfully.";
+  LOG(INFO) << "..." << block_device_path << " image recovered successfully.";
   return StringValue("t");
 }
 

@@ -44,16 +44,15 @@
 #include <android-base/stringprintf.h>
 #include <android-base/strings.h>
 #include <android-base/unique_fd.h>
-#include <vintf/VintfObjectRecovery.h>
 
 #include "twinstall/package.h"
 #include "twinstall/verifier.h"
 #include "twinstall/wipe_data.h"
 #include "otautil/error_code.h"
 #include "otautil/paths.h"
-#include "otautil/roots.h"
+#include "recovery_utils/roots.h"
 #include "otautil/sysutil.h"
-#include "otautil/thermalutil.h"
+#include "recovery_utils/thermalutil.h"
 #include "private/setup_commands.h"
 
 using namespace std::chrono_literals;
@@ -72,7 +71,7 @@ bool ReadMetadataFromPackage(ZipArchiveHandle zip, std::map<std::string, std::st
   CHECK(metadata != nullptr);
 
   static constexpr const char* METADATA_PATH = "META-INF/com/android/metadata";
-  ZipString path(METADATA_PATH);
+  std::string path(METADATA_PATH);
   ZipEntry entry;
   if (FindEntry(zip, path, &entry) != 0) {
     LOG(ERROR) << "Failed to find " << METADATA_PATH;
@@ -235,7 +234,7 @@ int SetUpAbUpdateCommands(const std::string& package, ZipArchiveHandle zip, int 
   // For A/B updates we extract the payload properties to a buffer and obtain the RAW payload offset
   // in the zip file.
   static constexpr const char* AB_OTA_PAYLOAD_PROPERTIES = "payload_properties.txt";
-  ZipString property_name(AB_OTA_PAYLOAD_PROPERTIES);
+  std::string property_name(AB_OTA_PAYLOAD_PROPERTIES);
   ZipEntry properties_entry;
   if (FindEntry(zip, property_name, &properties_entry) != 0) {
     LOG(ERROR) << "Failed to find " << AB_OTA_PAYLOAD_PROPERTIES;
@@ -251,7 +250,7 @@ int SetUpAbUpdateCommands(const std::string& package, ZipArchiveHandle zip, int 
   }
 
   static constexpr const char* AB_OTA_PAYLOAD = "payload.bin";
-  ZipString payload_name(AB_OTA_PAYLOAD);
+  std::string payload_name(AB_OTA_PAYLOAD);
   ZipEntry payload_entry;
   if (FindEntry(zip, payload_name, &payload_entry) != 0) {
     LOG(ERROR) << "Failed to find " << AB_OTA_PAYLOAD;
@@ -273,7 +272,7 @@ int SetUpNonAbUpdateCommands(const std::string& package, ZipArchiveHandle zip, i
   CHECK(cmd != nullptr);
 
   // In non-A/B updates we extract the update binary from the package.
-  ZipString binary_name(UPDATE_BINARY_NAME);
+  std::string binary_name(UPDATE_BINARY_NAME);
   ZipEntry binary_entry;
   if (FindEntry(zip, binary_name, &binary_entry) != 0) {
     LOG(ERROR) << "Failed to find update binary " << UPDATE_BINARY_NAME;
@@ -390,7 +389,7 @@ static int try_update_binary(const std::string& package, ZipArchiveHandle zip, b
   std::vector<std::string> args;
 
   is_ab = false;
-  ZipString binary_name(UPDATE_BINARY_NAME);
+  std::string binary_name(UPDATE_BINARY_NAME);
   ZipEntry binary_entry;
   if (FindEntry(zip, binary_name, &binary_entry) != 0) {
     LOG(ERROR) << "Failed to find update binary " << UPDATE_BINARY_NAME;

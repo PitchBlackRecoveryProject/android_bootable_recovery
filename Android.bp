@@ -1,10 +1,5 @@
 subdirs = [
-//    "applypatch",
     "bootloader_message",
-//    "edify",
-//    "otafault",
-//    "otautil",
-//    "uncrypt",
 ]
 
 cc_defaults {
@@ -18,3 +13,78 @@ cc_defaults {
     ],
     cpp_std: "c++17",
 }
+
+bootstrap_go_package {
+    name: "soong-libaosprecovery_defaults",
+    pkgPath: "bootable/recovery/libaosprecovery",
+    deps: [
+        "soong",
+        "soong-android",
+        "soong-cc"
+    ],
+    srcs: [
+        "libaosprecovery_defaults.go"
+    ],
+    pluginFor: ["soong_build"]
+}
+
+libaosprecovery_defaults {
+    name: "libaosprecovery_defaults"
+}
+
+cc_library_shared {
+    name: "libaosprecovery",
+    defaults: ["libaosprecovery_defaults"],
+    cflags: [
+        "-std=gnu++2a",
+        "-DRECOVERY_API_VERSION=3"
+    ],
+    include_dirs: [
+        "bootable/recovery/install/include",
+        "bootable/recovery/recovery_ui/include",
+        "bootable/recovery/recovery_utils/include",
+        "bootable/recovery/otautil/include",
+        "bootable/recovery/minadbd",
+        "bootable/recovery/minadbd/include",
+        "bootable/recovery/minzip",
+        "bootable/recovery/twrpinstall/include",
+        "system/libvintf/include"
+    ],
+    srcs: [
+        "install/adb_install.cpp",
+        "install/asn1_decoder.cpp",
+        "install/get_args.cpp", 
+        "install/install.cpp",
+        "install/package.cpp",
+        "install/verifier.cpp",
+        "install/wipe_data.cpp",
+        "install/set_metadata.cpp",
+        "install/ZipUtil.cpp"
+    ],
+    shared_libs: [
+        "libbase",
+        "libbootloader_message",
+        "libcrypto",
+        "libext4_utils",
+        "libfs_mgr", 
+        "libfusesideload", 
+        "libhidl-gen-utils",
+        "libhidlbase",
+        "liblog",
+        "libselinux",
+        "libtinyxml2",
+        "libutils",
+        "libz",
+        "libziparchive",
+        "libcutils",
+        "libc++"
+    ],
+    static_libs: [
+        "libotautil",
+        "libvintf", 
+        "libhidl-gen-utils",
+        "librecovery_utils",
+        "libc++fs"
+    ]
+}
+

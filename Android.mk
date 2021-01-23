@@ -107,8 +107,8 @@ LOCAL_SRC_FILES := \
     twrpRepacker.cpp \
     pbfun.cpp
 
-LOCAL_STATIC_LIBRARIES += libavb libtwrpinstall
-LOCAL_SHARED_LIBRARIES += libfs_mgr libinit
+LOCAL_STATIC_LIBRARIES += libavb libtwrpinstall libminadbd_services libinit
+LOCAL_SHARED_LIBRARIES += libfs_mgr
 LOCAL_C_INCLUDES += \
     system/core/fs_mgr/libfs_avb/include/ \
     system/core/fs_mgr/include_fstab/ \
@@ -150,11 +150,13 @@ LOCAL_C_INCLUDES += \
     $(LOCAL_PATH)/install/include \
     $(LOCAL_PATH)/fuse_sideload/include \
     $(LOCAL_PATH)/install/include \
-    $(LOCAL_PATH)/twrpinstall/include
+    $(LOCAL_PATH)/twrpinstall/include \
+    $(LOCAL_PATH)/recovery_utils/include
 
 LOCAL_STATIC_LIBRARIES += libguitwrp
-LOCAL_SHARED_LIBRARIES += libz libc libcutils libstdc++ libtar libblkid libminuitwrp libminadbd libmtdutils libtwadbbu libbootloader_message
-LOCAL_SHARED_LIBRARIES += libcrecovery libtwrpdigest libc++ libaosprecovery libinit libcrypto libbase libziparchive libselinux
+LOCAL_SHARED_LIBRARIES += libz libc libcutils libstdc++ libtar libblkid libminuitwrp libmtdutils libtwadbbu 
+LOCAL_SHARED_LIBRARIES += libbootloader_message libcrecovery libtwrpdigest libc++ libaosprecovery libcrypto libbase 
+LOCAL_SHARED_LIBRARIES += libziparchive libselinux
 
 ifneq ($(wildcard system/core/libsparse/Android.mk),)
 LOCAL_SHARED_LIBRARIES += libsparse
@@ -310,7 +312,8 @@ ifeq ($(TW_INCLUDE_L_CRYPTO), true)
 endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO -DUSE_FSCRYPT -Wno-macro-redefined
-    LOCAL_SHARED_LIBRARIES += libcryptfsfde libgpt_twrp
+    # LOCAL_SHARED_LIBRARIES += libcryptfsfde
+    LOCAL_SHARED_LIBRARIES += libgpt_twrp
     LOCAL_C_INCLUDES += external/boringssl/src/include bootable/recovery/crypto/fscrypt \
         bootable/recovery/crypto
     TW_INCLUDE_CRYPTO_FBE := true
@@ -567,11 +570,11 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
     recovery-persist.cpp 
 LOCAL_MODULE := recovery-persist
-LOCAL_SHARED_LIBRARIES := liblog libbase libmetricslogger
-LOCAL_STATIC_LIBRARIES := libotautil
+LOCAL_SHARED_LIBRARIES := liblog libbase 
+LOCAL_STATIC_LIBRARIES := libotautil librecovery_utils
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/otautil/include
-LOCAL_C_INCLUDES += system/core/libmetricslogger/include \
-    system/core/libstats/include
+LOCAL_C_INCLUDES += system/core/libstats/include
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/recovery_utils/include
 LOCAL_CFLAGS := -Werror
 LOCAL_INIT_RC := recovery-persist.rc
 include $(BUILD_EXECUTABLE)
@@ -584,8 +587,9 @@ LOCAL_SRC_FILES := \
     recovery-refresh.cpp
 LOCAL_MODULE := recovery-refresh
 LOCAL_SHARED_LIBRARIES := liblog libbase
-LOCAL_STATIC_LIBRARIES := libotautil
+LOCAL_STATIC_LIBRARIES := libotautil librecovery_utils
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/otautil/include
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/recovery_utils/include
 LOCAL_CFLAGS := -Werror
 LOCAL_INIT_RC := recovery-refresh.rc
 include $(BUILD_EXECUTABLE)
@@ -625,51 +629,16 @@ LOCAL_STATIC_LIBRARIES := \
 
 include $(BUILD_STATIC_LIBRARY)
 
-# shared libaosprecovery for Apache code
-# ===============================
-include $(CLEAR_VARS)
-
-
-LOCAL_MODULE := libaosprecovery
-LOCAL_MODULE_TAGS := optional
-LOCAL_SRC_FILES := install/adb_install.cpp install/asn1_decoder.cpp install/fuse_sdcard_install.cpp \
-    install/get_args.cpp install/install.cpp install/legacy_property_service.cpp \
-    install/package.cpp install/verifier.cpp install/wipe_data.cpp \
-    install/set_metadata.cpp install/zipwrap.cpp install/ZipUtil.cpp
-LOCAL_SHARED_LIBRARIES += libbase libbootloader_message libcrypto libext4_utils \
-    libfs_mgr libfusesideload libhidl-gen-utils libhidlbase \
-    liblog libselinux libtinyxml2 libutils libz libziparchive libcutils
-LOCAL_CFLAGS += -DRECOVERY_API_VERSION=$(RECOVERY_API_VERSION)
-LOCAL_SHARED_LIBRARIES += libc++
-LOCAL_CFLAGS := -std=gnu++2a
-LOCAL_C_INCLUDES += $(commands_TWRP_local_path)/install/include \
-                    $(commands_TWRP_local_path)/recovery_ui/include \
-                    $(commands_TWRP_local_path)/otautil/include \
-                    $(commands_TWRP_local_path)/minadbd \
-                    $(commands_TWRP_local_path)/minzip \
-                    $(commands_TWRP_local_path)/twrpinstall/include \
-                    system/libvintf/include
-LOCAL_STATIC_LIBRARIES += libotautil libvintf_recovery libvintf libhidl-gen-utils
-LOCAL_CFLAGS += -DRECOVERY_API_VERSION=$(RECOVERY_API_VERSION)
-
-ifeq ($(AB_OTA_UPDATER),true)
-    LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
-endif
-
-include $(BUILD_SHARED_LIBRARY)
-
 commands_recovery_local_path := $(LOCAL_PATH)
 
 include \
     $(commands_TWRP_local_path)/updater/Android.mk
 
 include $(commands_TWRP_local_path)/mtp/ffs/Android.mk \
-    $(commands_TWRP_local_path)/minadbd/Android.mk \
     $(commands_TWRP_local_path)/minui/Android.mk
 
 #includes for TWRP
 include $(commands_TWRP_local_path)/htcdumlock/Android.mk \
-    $(commands_TWRP_local_path)/gui/Android.mk \
     $(commands_TWRP_local_path)/mmcutils/Android.mk \
     $(commands_TWRP_local_path)/bmlutils/Android.mk \
     $(commands_TWRP_local_path)/prebuilt/Android.mk \
@@ -679,7 +648,6 @@ include $(commands_TWRP_local_path)/htcdumlock/Android.mk \
     $(commands_TWRP_local_path)/libtar/Android.mk \
     $(commands_TWRP_local_path)/libcrecovery/Android.mk \
     $(commands_TWRP_local_path)/libblkid/Android.mk \
-    $(commands_TWRP_local_path)/minuitwrp/Android.mk \
     $(commands_TWRP_local_path)/openaes/Android.mk \
     $(commands_TWRP_local_path)/twrpTarMain/Android.mk \
     $(commands_TWRP_local_path)/minzip/Android.mk \
@@ -687,7 +655,6 @@ include $(commands_TWRP_local_path)/htcdumlock/Android.mk \
     $(commands_TWRP_local_path)/etc/Android.mk \
     $(commands_TWRP_local_path)/simg2img/Android.mk \
     $(commands_TWRP_local_path)/adbbu/Android.mk \
-    $(commands_TWRP_local_path)/libpixelflinger/Android.mk \
     $(commands_TWRP_local_path)/twrpDigest/Android.mk \
     $(commands_TWRP_local_path)/attr/Android.mk
 
@@ -696,7 +663,7 @@ ifneq ($(TW_OZIP_DECRYPT_KEY),)
 endif
 
 ifeq ($(TW_INCLUDE_CRYPTO), true)
-    include $(commands_TWRP_local_path)/crypto/fde/Android.mk
+    # include $(commands_TWRP_local_path)/crypto/fde/Android.mk
     include $(commands_TWRP_local_path)/crypto/scrypt/Android.mk
         include $(commands_TWRP_local_path)/crypto/fscrypt/Android.mk
     ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),)

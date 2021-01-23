@@ -673,6 +673,19 @@ void ScreenRecoveryUI::SetTitle(const std::vector<std::string>& lines) {
   title_lines_ = lines;
 }
 
+std::vector<std::string> ScreenRecoveryUI::GetMenuHelpMessage() const {
+  // clang-format off
+  static std::vector<std::string> REGULAR_HELP{
+    "Use volume up/down and power.",
+  };
+  static std::vector<std::string> LONG_PRESS_HELP{
+    "Any button cycles highlight.",
+    "Long-press activates.",
+  };
+  // clang-format on
+  return HasThreeButtons() ? REGULAR_HELP : LONG_PRESS_HELP;
+}
+
 // Redraws everything on the screen. Does not flip pages. Should only be called with updateMutex
 // locked.
 void ScreenRecoveryUI::draw_screen_locked() {
@@ -685,16 +698,7 @@ void ScreenRecoveryUI::draw_screen_locked() {
   gr_color(0, 0, 0, 255);
   gr_clear();
 
-  // clang-format off
-  static std::vector<std::string> REGULAR_HELP{
-    "Use volume up/down and power.",
-  };
-  static std::vector<std::string> LONG_PRESS_HELP{
-    "Any button cycles highlight.",
-    "Long-press activates.",
-  };
-  // clang-format on
-  draw_menu_and_text_buffer_locked(HasThreeButtons() ? REGULAR_HELP : LONG_PRESS_HELP);
+  draw_menu_and_text_buffer_locked(GetMenuHelpMessage());
 }
 
 // Draws the menu and text buffer on the screen. Should only be called with updateMutex locked.
@@ -817,12 +821,22 @@ std::unique_ptr<GRSurface> ScreenRecoveryUI::LoadBitmap(const std::string& filen
 
 std::unique_ptr<GRSurface> ScreenRecoveryUI::LoadLocalizedBitmap(const std::string& filename) {
   GRSurface* surface;
-  if (auto result = res_create_localized_alpha_surface(filename.c_str(), locale_.c_str(), &surface);
-      result < 0) {
-    LOG(ERROR) << "Failed to load bitmap " << filename << " (error " << result << ")";
-    return nullptr;
+  auto result = res_create_localized_alpha_surface(filename.c_str(), locale_.c_str(), &surface);
+  if (result == 0) {
+    return std::unique_ptr<GRSurface>(surface);
   }
-  return std::unique_ptr<GRSurface>(surface);
+  // TODO(xunchang) create a error code enum to refine the retry condition.
+  LOG(WARNING) << "Failed to load bitmap " << filename << " for locale " << locale_ << " (error "
+               << result << "). Falling back to use default locale.";
+
+  result = res_create_localized_alpha_surface(filename.c_str(), DEFAULT_LOCALE, &surface);
+  if (result == 0) {
+    return std::unique_ptr<GRSurface>(surface);
+  }
+
+  LOG(ERROR) << "Failed to load bitmap " << filename << " for locale " << DEFAULT_LOCALE
+             << " (error " << result << ")";
+  return nullptr;
 }
 
 static char** Alloc2d(size_t rows, size_t cols) {
@@ -1253,7 +1267,7 @@ size_t ScreenRecoveryUI::ShowMenu(const std::vector<std::string>& headers,
     return initial_selection;
   }
 
-  return ShowMenu(CreateMenu(headers, items, initial_selection), menu_only, key_handler);
+  return ShowMenu(std::move(menu), menu_only, key_handler);
 }
 
 size_t ScreenRecoveryUI::ShowPromptWipeDataMenu(const std::vector<std::string>& backup_headers,

@@ -44,14 +44,12 @@ enum class OtaType {
   BRICK,
 };
 
-static constexpr const char* UPDATE_BINARY_NAME = "META-INF/com/google/android/update-binary";
-static constexpr float VERIFICATION_PROGRESS_FRACTION = 0.25;
-
-// Installs the given update package. This function should also wipe the cache partition after a
-// successful installation if |should_wipe_cache| is true or an updater command asks to wipe the
-// cache.
-int install_package(const std::string& package, bool should_wipe_cache, bool needs_mount,
-                    int retry_count);
+// Installs the given update package. The package_id is a string provided by the caller (e.g. the
+// package path) to identify the package and log to last_install. This function should also wipe the
+// cache partition after a successful installation if |should_wipe_cache| is true or an updater
+// command asks to wipe the cache.
+InstallResult InstallPackage(Package* package, const std::string_view package_id,
+                             bool should_wipe_cache, int retry_count);
 
 // Verifies the package by ota keys. Returns true if the package is verified successfully,
 // otherwise returns false.
@@ -61,14 +59,11 @@ bool verify_package(Package* package);
 // result to |metadata|. Return true if succeed, otherwise return false.
 bool ReadMetadataFromPackage(ZipArchiveHandle zip, std::map<std::string, std::string>* metadata);
 
-// Reads the "recovery.wipe" entry in the zip archive returns a list of partitions to wipe.
-std::vector<std::string> GetWipePartitionList(Package* wipe_package);
+// Checks if the metadata in the OTA package has expected values. Mandatory checks: ota-type,
+// pre-device and serial number (if presents). A/B OTA specific checks: pre-build version,
+// fingerprint, timestamp.
+bool CheckPackageMetadata(const std::map<std::string, std::string>& metadata, OtaType ota_type);
 
-// Verifies the compatibility info in a Treble-compatible package. Returns true directly if the
-// entry doesn't exist.
-bool verify_package_compatibility(ZipArchiveHandle package_zip);
-
-// Checks if the the metadata in the OTA package has expected values. Returns 0 on success.
-// Mandatory checks: ota-type, pre-device and serial number(if presents)
-// AB OTA specific checks: pre-build version, fingerprint, timestamp.
-int CheckPackageMetadata(const std::map<std::string, std::string>& metadata, OtaType ota_type);
+// Ensures the path to the update package is mounted. Also set the |should_use_fuse| to true if the
+// package stays on a removable media.
+bool SetupPackageMount(const std::string& package_path, bool* should_use_fuse);

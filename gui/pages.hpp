@@ -21,10 +21,10 @@
 #ifndef _PAGES_HEADER_HPP
 #define _PAGES_HEADER_HPP
 
-#include "zipwrap.hpp"
 #include <vector>
 #include <map>
 #include <string>
+#include "ziparchive/zip_archive.h"
 #include "rapidxml.hpp"
 #include "gui.hpp"
 using namespace rapidxml;
@@ -117,7 +117,7 @@ public:
 
 public:
 	int Load(LoadingContext& ctx, const std::string& filename);
-	int LoadLanguage(char* languageFile, ZipWrap* package);
+	int LoadLanguage(char* languageFile, ZipArchiveHandle package);
 	void MakeEmergencyConsoleIfNeeded();
 
 	Page* FindPage(std::string name);
@@ -156,8 +156,8 @@ class PageManager
 {
 public:
 	// Used by GUI
-	static char* LoadFileToBuffer(std::string filename, ZipWrap* package);
-	static void LoadLanguageList(ZipWrap* package);
+	static char* LoadFileToBuffer(std::string filename, ZipArchiveHandle package);
+	static void LoadLanguageList(ZipArchiveHandle package);
 	static void LoadLanguage(std::string filename);
 	static int LoadPackage(std::string name, std::string package, std::string startpage);
 	static PageSet* SelectPackage(std::string name);

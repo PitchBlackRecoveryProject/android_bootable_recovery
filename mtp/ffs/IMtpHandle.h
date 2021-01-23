@@ -16,7 +16,7 @@
 #ifndef _IMTP_HANDLE_H
 #define _IMTP_HANDLE_H
 
-#include <linux/usb/f_mtp.h>
+#include "f_mtp.h"
 
 class IMtpHandle {
 public:

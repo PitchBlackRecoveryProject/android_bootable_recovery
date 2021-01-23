@@ -675,7 +675,7 @@ bool ZipModeImage::Initialize(const std::string& filename) {
 // Iterate the zip entries and compose the image chunks accordingly.
 bool ZipModeImage::InitializeChunks(const std::string& filename, ZipArchiveHandle handle) {
   void* cookie;
-  int ret = StartIteration(handle, &cookie, nullptr, nullptr);
+  int ret = StartIteration(handle, &cookie);
   if (ret != 0) {
     LOG(ERROR) << "Failed to iterate over entries in " << filename << ": " << ErrorCodeString(ret);
     return false;
@@ -683,12 +683,11 @@ bool ZipModeImage::InitializeChunks(const std::string& filename, ZipArchiveHandl
 
   // Create a list of deflated zip entries, sorted by offset.
   std::vector<std::pair<std::string, ZipEntry>> temp_entries;
-  ZipString name;
+  std::string name;
   ZipEntry entry;
   while ((ret = Next(cookie, &entry, &name)) == 0) {
     if (entry.method == kCompressDeflated || limit_ > 0) {
-      std::string entry_name(name.name, name.name + name.name_length);
-      temp_entries.emplace_back(entry_name, entry);
+      temp_entries.emplace_back(name, entry);
     }
   }
 

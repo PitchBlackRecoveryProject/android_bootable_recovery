@@ -68,7 +68,7 @@
 #include <keystore/keystore_promises.h>
 #include <keystore/keystore_return_types.h>
 #include <keystore/keymaster_types.h>
-#include <keymasterV4_0/Keymaster.h>
+#include <keymasterV4_1/Keymaster.h>
 #include <keystore/OperationResult.h>
 #include "keystore_client.pb.h"
 
@@ -87,6 +87,7 @@ using android::security::keystore::IKeystoreService;
 using keystore::KeystoreResponsePromise;
 using keystore::OperationResultPromise;
 using android::security::keymaster::OperationResult;
+using android::hardware::keymaster::V4_0::support::blob2hidlVec;
 
 // Store main DE raw ref / policy
 extern std::string de_raw_ref;
@@ -716,8 +717,11 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
 		future = {};
 		promise = new OperationResultPromise();
 		future = promise->get_future();
+		std::tie(rc, keyBlob, charBlob, lockedEntry) = mKeyStore->getKeyForName(name8, callingUid, TYPE_KEYMASTER_10);
+		
+		auto hidlInput = blob2hidlVec(input_data);
 		::keystore::hidl_vec<uint8_t> signature;
-		binder_result = service->finish(promise, handle, empty_params, signature, entropy, &error_code);
+		binder_result = service->finish(promise, handle, empty_params, hidlInput, signature, entropy, &error_code);
 		if (!binder_result.isOk()) {
 			printf("communication error while calling keystore\n");
 			free(keystore_result);

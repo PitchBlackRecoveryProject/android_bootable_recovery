@@ -1,0 +1,6 @@
+build = ["sources.bp"]
+
+cc_library_static {
+    name: "libscrypttwrp_static",
+    include_dirs: ["bootable/recovery/crypto/scrypt/lib/util"]
+}

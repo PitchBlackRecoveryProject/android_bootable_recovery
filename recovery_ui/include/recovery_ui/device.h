@@ -20,11 +20,14 @@
 #include <stddef.h>
 
 #include <memory>
+#include <optional>
 #include <string>
 #include <vector>
 #include "ui.h"
 // Forward declaration to avoid including "ui.h".
 // class RecoveryUI;
+
+class BootState;
 
 class Device {
  public:
@@ -58,6 +61,8 @@ class Device {
     REBOOT_FASTBOOT = 17,
     REBOOT_RECOVERY = 18,
     REBOOT_RESCUE = 19,
+    REBOOT_FROM_FASTBOOT = 20,
+    SHUTDOWN_FROM_FASTBOOT = 21,
   };
 
   explicit Device(RecoveryUI* ui);
@@ -74,9 +79,21 @@ class Device {
     ui_.reset(ui);
   }
 
+  // Called before recovery mode started up, to perform whatever device-specific recovery mode
+  // preparation as needed.
+  virtual void PreRecovery() {}
+
   // Called when recovery starts up (after the UI has been obtained and initialized and after the
   // arguments have been parsed, but before anything else).
   virtual void StartRecovery() {}
+
+  // Called before fastboot mode is started up, to perform whatever device-specific fastboot mode
+  // preparation as needed.
+  virtual void PreFastboot() {}
+
+  // Called when fastboot starts up (after the UI has been obtained and initialized and after the
+  // arguments have been parsed, but before anything else).
+  virtual void StartFastboot() {}
 
   // Called from the main thread when recovery is at the main menu and waiting for input, and a key
   // is pressed. (Note that "at" the main menu does not necessarily mean the menu is visible;
@@ -124,9 +141,16 @@ class Device {
     return true;
   }
 
+  void SetBootState(const BootState* state);
+  // The getters for reason and stage may return std::nullopt until StartRecovery() is called. It's
+  // the caller's responsibility to perform the check and handle the exception.
+  std::optional<std::string> GetReason() const;
+  std::optional<std::string> GetStage() const;
+
  private:
   // The RecoveryUI object that should be used to display the user interface for this device.
   std::unique_ptr<RecoveryUI> ui_;
+  const BootState* boot_state_{ nullptr };
 };
 
 // Disable name mangling, as this function will be loaded via dlsym(3).

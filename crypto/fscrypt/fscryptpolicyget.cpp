@@ -19,8 +19,6 @@
 #include <string.h>
 #include "fscrypt_policy.h"
 
-#define FS_KEY_DESCRIPTOR_SIZE 8
-
 int main(int argc, char *argv[]) {
 	if (argc != 2) {
 		printf("Must specify a path\n");

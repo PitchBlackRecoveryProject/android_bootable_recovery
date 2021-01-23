@@ -54,9 +54,9 @@ bool ExtractPackageRecursive(ZipArchiveHandle zip, const std::string& zip_path,
     if (!zip_path.empty() && zip_path.back() != '/') {
         prefix_path += '/';
     }
-    const ZipString zip_prefix(prefix_path.c_str());
+    const std::string zip_prefix(prefix_path.c_str());
 
-    int ret = StartIteration(zip, &cookie, &zip_prefix, nullptr);
+    int ret = StartIteration(zip, &cookie, zip_prefix, nullptr);
     if (ret != 0) {
         LOG(ERROR) << "failed to start iterating zip entries.";
         return false;
@@ -64,10 +64,10 @@ bool ExtractPackageRecursive(ZipArchiveHandle zip, const std::string& zip_path,
 
     std::unique_ptr<void, decltype(&EndIteration)> guard(cookie, EndIteration);
     ZipEntry entry;
-    ZipString name;
+    std::string name;
     int extractCount = 0;
     while (Next(cookie, &entry, &name) == 0) {
-        std::string entry_name(name.name, name.name + name.name_length);
+        std::string entry_name(name.c_str(), name.c_str() + name.size());
         CHECK_LE(prefix_path.size(), entry_name.size());
         std::string path = target_dir + entry_name.substr(prefix_path.size());
         // Skip dir.

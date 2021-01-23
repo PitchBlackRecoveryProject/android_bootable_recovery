@@ -27,6 +27,8 @@
 #include <thread>
 #include <vector>
 
+static constexpr const char* DEFAULT_LOCALE = "en-US";
+
 // Abstract class for controlling the user interface during recovery.
 class RecoveryUI {
  public:
@@ -116,7 +118,7 @@ class RecoveryUI {
 
   // Returns true if you have the volume up/down and power trio typical of phones and tablets, false
   // otherwise.
-  virtual bool HasThreeButtons();
+  virtual bool HasThreeButtons() const;
 
   // Returns true if it has a power key.
   virtual bool HasPowerKey() const;
@@ -228,20 +230,23 @@ class RecoveryUI {
 
   bool InitScreensaver();
   void SetScreensaverState(ScreensaverState state);
+
   // Key event input queue
   std::mutex key_queue_mutex;
   std::condition_variable key_queue_cond;
   bool key_interrupted_;
   int key_queue[256], key_queue_len;
-  char key_pressed[KEY_MAX + 1];  // under key_queue_mutex
-  int key_last_down;              // under key_queue_mutex
-  bool key_long_press;            // under key_queue_mutex
-  int key_down_count;             // under key_queue_mutex
-  bool enable_reboot;             // under key_queue_mutex
-  int rel_sum;
 
+  // key press events
+  std::mutex key_press_mutex;
+  char key_pressed[KEY_MAX + 1];
+  int key_last_down;
+  bool key_long_press;
+  int key_down_count;
+  bool enable_reboot;
+
+  int rel_sum;
   int consecutive_power_keys;
-  int last_key;
 
   bool has_power_key;
   bool has_up_key;

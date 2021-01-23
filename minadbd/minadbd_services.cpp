@@ -41,10 +41,10 @@
 #include "adb.h"
 #include "adb_unique_fd.h"
 #include "adb_utils.h"
-#include "fdevent.h"
 #include "fuse_adb_provider.h"
 #include "fuse_sideload.h"
-#include "minadbd_types.h"
+#include "minadbd/types.h"
+#include "recovery_utils/battery_utils.h"
 #include "services.h"
 #include "sysdeps.h"
 
@@ -161,7 +161,10 @@ static void RescueInstallHostService(unique_fd sfd, const std::string& args) {
 // If given an empty string, dumps all the supported properties (analogous to `adb shell getprop`)
 // in lines, e.g. "[prop]: [value]".
 static void RescueGetpropHostService(unique_fd sfd, const std::string& prop) {
+  constexpr const char* kRescueBatteryLevelProp = "rescue.battery_level";
   static const std::set<std::string> kGetpropAllowedProps = {
+    // clang-format off
+    kRescueBatteryLevelProp,
     "ro.build.date.utc",
     "ro.build.fingerprint",
     "ro.build.flavor",
@@ -171,18 +174,28 @@ static void RescueGetpropHostService(unique_fd sfd, const std::string& prop) {
     "ro.build.version.incremental",
     "ro.product.device",
     "ro.product.vendor.device",
+    // clang-format on
   };
+
+  auto query_prop = [](const std::string& key) {
+    if (key == kRescueBatteryLevelProp) {
+      auto battery_info = GetBatteryInfo();
+      return std::to_string(battery_info.capacity);
+    }
+    return android::base::GetProperty(key, "");
+  };
+
   std::string result;
   if (prop.empty()) {
     for (const auto& key : kGetpropAllowedProps) {
-      auto value = android::base::GetProperty(key, "");
+      auto value = query_prop(key);
       if (value.empty()) {
         continue;
       }
       result += "[" + key + "]: [" + value + "]\n";
     }
   } else if (kGetpropAllowedProps.find(prop) != kGetpropAllowedProps.end()) {
-    result = android::base::GetProperty(prop, "") + "\n";
+    result = query_prop(prop) + "\n";
   }
   if (result.empty()) {
     result = "\n";
@@ -253,9 +266,13 @@ static void WipeDeviceService(unique_fd fd, const std::string& args) {
   }
 }
 
+asocket* daemon_service_to_socket(std::string_view) {
+  return nullptr;
+}
+
 unique_fd daemon_service_to_fd(std::string_view name, atransport* /* transport */) {
   // Common services that are supported both in sideload and rescue modes.
-  if (ConsumePrefix(&name, "reboot:")) {
+  if (android::base::ConsumePrefix(&name, "reboot:")) {
     // "reboot:<target>", where target must be one of the following.
     std::string args(name);
     if (args.empty() || args == "bootloader" || args == "rescue" || args == "recovery" ||
@@ -268,17 +285,17 @@ unique_fd daemon_service_to_fd(std::string_view name, atransport* /* transport *
 
   // Rescue-specific services.
   if (rescue_mode) {
-    if (ConsumePrefix(&name, "rescue-install:")) {
+    if (android::base::ConsumePrefix(&name, "rescue-install:")) {
       // rescue-install:<file-size>:<block-size>
       std::string args(name);
       return create_service_thread(
           "rescue-install", std::bind(RescueInstallHostService, std::placeholders::_1, args));
-    } else if (ConsumePrefix(&name, "rescue-getprop:")) {
+    } else if (android::base::ConsumePrefix(&name, "rescue-getprop:")) {
       // rescue-getprop:<prop>
       std::string args(name);
       return create_service_thread(
           "rescue-getprop", std::bind(RescueGetpropHostService, std::placeholders::_1, args));
-    } else if (ConsumePrefix(&name, "rescue-wipe:")) {
+    } else if (android::base::ConsumePrefix(&name, "rescue-wipe:")) {
       // rescue-wipe:target:<message-size>
       std::string args(name);
       return create_service_thread("rescue-wipe",
@@ -293,7 +310,7 @@ unique_fd daemon_service_to_fd(std::string_view name, atransport* /* transport *
     // This exit status causes recovery to print a special error message saying to use a newer adb
     // (that supports sideload-host).
     exit(kMinadbdAdbVersionError);
-  } else if (ConsumePrefix(&name, "sideload-host:")) {
+  } else if (android::base::ConsumePrefix(&name, "sideload-host:")) {
     // sideload-host:<file-size>:<block-size>
     std::string args(name);
     return create_service_thread("sideload-host",

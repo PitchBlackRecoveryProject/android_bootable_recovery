@@ -46,7 +46,7 @@ std::string twrpApex::unzipImage(std::string file) {
 	}
 
 	ZipEntry entry;
-	ZipString zip_string(APEX_PAYLOAD);
+	std::string zip_string(APEX_PAYLOAD);
 	ret = FindEntry(handle, zip_string, &entry);
 	if (ret != 0) {
 		LOGERR("unable to find %s in zip\n", APEX_PAYLOAD);

@@ -30,10 +30,10 @@
 #include "recovery_ui/ui.h"
 
 static const std::vector<std::pair<std::string, Device::BuiltinAction>> kFastbootMenuActions{
-  { "Reboot system now", Device::REBOOT },
+  { "Reboot system now", Device::REBOOT_FROM_FASTBOOT },
   { "Enter recovery", Device::ENTER_RECOVERY },
   { "Reboot to bootloader", Device::REBOOT_BOOTLOADER },
-  { "Power off", Device::SHUTDOWN },
+  { "Power off", Device::SHUTDOWN_FROM_FASTBOOT },
 };
 
 Device::BuiltinAction StartFastboot(Device* device, const std::vector<std::string>& /* args */) {
@@ -52,6 +52,7 @@ Device::BuiltinAction StartFastboot(Device* device, const std::vector<std::strin
   ui->ResetKeyInterruptStatus();
   ui->SetTitle(title_lines);
   ui->ShowText(true);
+  device->StartFastboot();
 
   // Reset to normal system boot so recovery won't cycle indefinitely.
   // TODO(b/112277594) Clear only if 'recovery' field of BCB is empty. If not,

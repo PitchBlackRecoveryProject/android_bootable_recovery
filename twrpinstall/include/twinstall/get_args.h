@@ -5,7 +5,7 @@
 #include <android-base/logging.h>
 #include <android-base/strings.h>
 
-#include "otautil/roots.h"
+#include "recovery_utils/roots.h"
 
 #include "bootloader_message/include/bootloader_message/bootloader_message.h"
 
