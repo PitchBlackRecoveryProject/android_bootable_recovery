@@ -113,7 +113,8 @@ int main(int argc, char **argv) {
 	snprintf(crash_prop_val, sizeof(crash_prop_val), "%d", crash_counter);
 	property_set("twrp.crash_counter", crash_prop_val);
 	property_set("ro.twrp.boot", "1");
-	property_set("ro.twrp.version", TW_VERSION_STR);
+	property_set("ro.twrp.version", TW_MAIN_VERSION_STR);
+	property_set("ro.pb.version", PB_BUILD);
 
 	time_t StartupTime = time(NULL);
 	printf("Starting PitchBlackRecovery %s (pid %s)\n", PB_BUILD, ctime(&StartupTime));
