@@ -385,10 +385,11 @@ int main(int argc, char **argv) {
 #endif
 
 	property_set("ro.twrp.boot", "1");
-	property_set("ro.twrp.version", TW_VERSION_STR);
+	property_set("ro.twrp.version", TW_MAIN_VERSION_STR);
+	property_set("ro.pb.version", PB_BUILD);
 
 	time_t StartupTime = time(NULL);
-	printf("Starting TWRP %s-%s on %s (pid %d)\n", TW_VERSION_STR, TW_GIT_REVISION, ctime(&StartupTime), getpid());
+	printf("Starting PitchBlackRecovery %s (pid %s)\n", PB_BUILD, ctime(&StartupTime));
 	std::string ver = std::string(PB_BUILD);
 	DataManager::SetValue("pb_ver", ver.substr(0, ver.find("-")) );
 	DataManager::SetValue("pb_info", ver.substr(ver.find("-") + 1));

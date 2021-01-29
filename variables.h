@@ -18,11 +18,14 @@
 #ifndef _VARIABLES_HEADER_
 #define _VARIABLES_HEADER_
 
-#ifdef PB_OFFICIAL
-#define TW_DEVICE_VERSION	   "Official"
-#endif
+#define PB_MAIN_VERSION              "3.0.0"
+#define PB_BUILD PB_MAIN_VERSION PB_MAIN_BUILD
+#define PB_DEVICE               PB_DEVICE_MODEL
+
+#define TW_DEVICE_VERSION	   PB_BUILD
+
 #define TW_MAIN_VERSION_STR       "3.5.0"
-#define TW_VERSION_STR TW_MAIN_VERSION_STR TW_DEVICE_VERSION
+#define TW_VERSION_STR TW_MAIN_VERSION_STR PB_MAIN_BUILD
 
 #define TW_USE_COMPRESSION_VAR      "tw_use_compression"
 #define TW_FILENAME                 "tw_filename"
@@ -149,10 +152,6 @@
 #define TW_IS_SUPER                 "tw_is_super"
 
 // PitchBlack Variables
-#define PB_BUILD                TW_DEVICE_VERSION
-#define PB_DEVICE               PB_DEVICE_MODEL
-#define PB_VERSION              TW_MAIN_VERSION_STR
-
 #define PB_SURVIVAL_BACKUP          "OTA"
 #define PB_SURVIVAL_BACKUP_NAME       "pb_survival_backup_folder_name"
 #define PB_SURVIVAL_FOLDER      "/sdcard/PB"
