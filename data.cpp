@@ -831,8 +831,9 @@ void DataManager::SetDefaultValues()
 	mData.SetValue("pb_torch_on", "0");
 	mData.SetValue("pb_include_logs_after_flash", "0");
 	mData.SetValue("pb_include_dmesg_logging", "0");
-
-	mPersist.SetValue("pb_include_dmesg_logging", "0");
+#ifdef PB_MAX_BRIGHT_VALUE
+	mConst.SetValue("pb_torch_brightness_slider", "0");
+#endif
 	mData.SetValue("tw_install_reboot_recovery", "0");
 	mPersist.SetValue("tw_inject_after_flash", "0");
 

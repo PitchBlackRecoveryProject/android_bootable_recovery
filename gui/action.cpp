@@ -2453,13 +2453,23 @@ int GUIAction::flashlight(std::string arg __unused)
 	string str_val, file, flashp1 = "/sys/class/leds", flashp2 = "/flashlight", flashpath;
 	string bright = "/brightness";
 	string switch_path = TWFunc::Path_Exists(flashp1 + "/led:switch" + bright) ? (flashp1 + "/led:switch") : (flashp1 + "/led:switch_0");
+	DIR* d;
+	struct dirent* de __attribute__((unused));
+#ifdef PB_MAX_BRIGHT_VALUE
+	br_value = PB_MAX_BRIGHT_VALUE;
+	DataManager::SetValue("pb_torch_brightness_slider", "0");
+#endif
 #ifdef PB_TORCH_PATH
-	flashpath = PB_TORCH_PATH + bright;
+	flashpath = PB_TORCH_PATH;
 	LOGINFO("flashlight: Custom Node located at '%s'\n", flashpath.c_str());
+	if (TWFunc::Path_Exists(flashpath))
+	{
+		d = opendir(flashpath.c_str());
+		if (d != NULL)
+			flashpath += bright;
+	}
 #else
 	flashpath = flashp1 + flashp2 + bright;
-	DIR* d;
-	struct dirent* de;
 	if (!TWFunc::Path_Exists(flashpath))
 	{
 		d = opendir(flashp1.c_str());
@@ -2471,7 +2481,7 @@ int GUIAction::flashlight(std::string arg __unused)
 		while ((de = readdir(d)) != NULL)
 		{
 			file = de->d_name;
-			if(file.find("torch-") != string::npos || file.find("torch_"))
+			if(file.find("torch") != string::npos || file.find("torch_"))
 			{
 				flashpath = flashp1 + "/" + file + bright;
 				break;
@@ -2484,8 +2494,7 @@ int GUIAction::flashlight(std::string arg __unused)
 	str_val="";
 	if (TWFunc::Path_Exists(flashpath)) {
 		LOGINFO("Flashlight Node Located at '%s'\n", flashpath.c_str());
-		TWFunc::read_file(flashpath, str_val);
-		if (std::stoi(str_val) > 0)
+		if (DataManager::GetIntValue("pb_torch_on") == 1)
 		{
 			LOGINFO("Flashlight Turning Off\n");
 			if (TWFunc::Path_Exists(switch_path))
@@ -2498,11 +2507,14 @@ int GUIAction::flashlight(std::string arg __unused)
 			LOGINFO("Flashlight Turning On\n");
 			LOGINFO("Flashlight: Brightning value '%d'\n", br_value);
 			TWFunc::write_to_file(flashpath, std::to_string(br_value));
-			TWFunc::write_to_file(switch_path + bright, "1");
+			if (TWFunc::Path_Exists(switch_path))
+				TWFunc::write_to_file(switch_path + bright, "1");
 			DataManager::SetValue("pb_torch_on", "1");
 		}
-	} else
+	} else {
 		LOGINFO("Incorrect Flashlight Path\n");
+		DataManager::SetValue("pb_torch_brightness_slider", "0");
+	}
 	return 0;
 }
 

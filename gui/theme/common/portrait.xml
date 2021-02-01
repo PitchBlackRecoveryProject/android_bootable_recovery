@@ -4031,6 +4031,7 @@
 			</slidervalue>
 
 			<slidervalue>
+<condition var1="pb_torch_brightness_slider" op="!=" var2="0"/>
 				<placement x="90" y="%row16_y%" w="900"/>
 				<text>{@sel_br_val=Flashlight Brightness Value: %pb_bright_value%%}</text>
 				<data variable="pb_bright_value" min="1" max="255"/>
