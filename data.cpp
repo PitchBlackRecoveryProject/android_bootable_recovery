@@ -844,6 +844,9 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue("pb_bright_value", "255");
 	mData.SetValue("pb_torch_on", "0");
 	mPersist.SetValue("pb_enable_dmesg_logging", "0");
+#ifdef PB_MAX_BRIGHT_VALUE
+	mConst.SetValue("pb_torch_brightness_slider", "0");
+#endif
 	mPersist.SetValue("inject_twrp_chk", "0");
 
 	mPersist.SetValue(TW_HAS_INJECTTWRP, "0");

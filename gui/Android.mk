@@ -123,6 +123,9 @@ endif
 ifneq ($(PB_TORCH_PATH),)
         LOCAL_CFLAGS += -DPB_TORCH_PATH=\"$(PB_TORCH_PATH)\"
 endif
+ifneq ($(PB_TORCH_MAX_BRIGHTNESS),)
+	LOCAL_CFLAGS += -DPB_MAX_BRIGHT_VALUE=$(PB_TORCH_MAX_BRIGHTNESS)
+endif
 
 LOCAL_C_INCLUDES += \
     bionic \
