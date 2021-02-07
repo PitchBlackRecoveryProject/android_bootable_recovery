@@ -2105,6 +2105,7 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 		}
 		if (!dat->Mount (true))
 			return false;
+		dat->Make_Dir("/data/media", false); //hack to prevent error after multiple wipes
 		gui_msg ("wiping_datamedia=Wiping internal storage -- /data/media...");
 		Remove_MTP_Storage (dat->MTP_Storage_ID);
 		if (TWFunc::Path_Exists ("/sdcard/PBRP/tools"))
@@ -2158,7 +2159,7 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 			backed_up=false;
 		}
 		TWFunc::removeDir("/data/media", false);
-		dat->Recreate_Media_Folder ();
+		dat->Recreate_Media_Folder (true);
 		Add_MTP_Storage (dat->MTP_Storage_ID);
 
 		if (!TWFunc::Path_Exists (src_t) && backed_up)

@@ -3100,11 +3100,11 @@ void TWPartition::Find_Actual_Block_Device(void) {
 	}
 }
 
-void TWPartition::Recreate_Media_Folder(void) {
+void TWPartition::Recreate_Media_Folder(bool wiped) {
 	string Command;
 	string Media_Path = Mount_Point + "/media";
 
-	if (Is_FBE) {
+	if (Is_FBE && !wiped) {
 		LOGINFO("Not recreating media folder on FBE\n");
 		return;
 	}
