@@ -544,11 +544,6 @@
 				<placement x="600" y="1160"/>
 				<text>{@advanced2_txt=Enough for you?}</text>
 			</text>
-
-			<text style="text_header">
-				<placement x="600" y="1210"/>
-				<text>{@advanced3_txt=Switch to Advanced}</text>
-			</text>
 		</page>
 
 		<page name="filter_">
