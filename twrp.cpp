@@ -443,6 +443,8 @@ int main(int argc, char **argv) {
 	// Disable flashing of stock recovery
 	TWFunc::Disable_Stock_Recovery_Replace();
 #endif
+	if (property_get_bool("twrp.decrypt.done", false))
+		PartitionManager.Mount_All_Storage();
 
 	// Reboot
 	TWFunc::Update_Intent_File(Send_Intent);
