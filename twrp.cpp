@@ -327,6 +327,8 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	// Disable flashing of stock recovery
 	TWFunc::Disable_Stock_Recovery_Replace();
 #endif
+	if (property_get_bool("twrp.decrypt.done", false))
+		PartitionManager.Mount_All_Storage();
 }
 
 static void reboot() {
