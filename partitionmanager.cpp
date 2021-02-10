@@ -381,7 +381,6 @@ void TWPartitionManager::Setup_Fstab_Partitions(bool Display_Error) {
 	Decrypt_Data();
 #endif
 
-	Update_System_Details();
 	if (Get_Super_Status()) Setup_Super_Partition();
 	UnMount_Main_Partitions();
 #ifdef AB_OTA_UPDATER

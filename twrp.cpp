@@ -78,6 +78,7 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
 		if (SkipDecryption) {
 			LOGINFO("Skipping decryption\n");
+			PartitionManager.Update_System_Details();
 		} else if (DataManager::GetIntValue(TW_CRYPTO_PWTYPE) != 0) {
 			LOGINFO("Is encrypted, do decrypt page first\n");
 			if (DataManager::GetIntValue(TW_IS_FBE))
@@ -279,10 +280,10 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 
 
 	Decrypt_Page(skip_decryption, datamedia);
+	PartitionManager.Output_Partition_Logging();
 	// Check for and load custom theme if present
 	TWFunc::check_selinux_support();
 	gui_loadCustomResources();
-	PartitionManager.Output_Partition_Logging();
 
 	// Fixup the RTC clock on devices which require it
 	if (crash_counter == 0)
