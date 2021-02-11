@@ -40,9 +40,6 @@ on init
     symlink /system/bin /bin
     symlink /system/etc /etc
 
-    mount cgroup none /acct cpuacct
-    mkdir /acct/uid
-
     mkdir /system
     mkdir /data
     symlink /data/cache /cache
