@@ -166,6 +166,7 @@ ifeq ($(TW_OEM_BUILD),true)
     TW_USE_TOOLBOX := true
     TW_EXCLUDE_MTP := true
     TW_EXCLUDE_TZDATA := true
+    TW_EXCLUDE_NANO := true
 endif
 
 ifeq ($(AB_OTA_UPDATER),true)
@@ -525,6 +526,11 @@ ifeq ($(TWRP_INCLUDE_LOGCAT), true)
     ifeq ($(TARGET_USES_LOGD), true)
         TWRP_REQUIRED_MODULES += logd libsysutils libnl init.recovery.logd.rc
     endif
+endif
+ifneq ($(TW_EXCLUDE_NANO), true)
+    TWRP_REQUIRED_MODULES += \
+        nano_twrp \
+        init.recovery.nano.rc
 endif
 # Allow devices to specify device-specific recovery dependencies
 ifneq ($(TARGET_RECOVERY_DEVICE_MODULES),)
