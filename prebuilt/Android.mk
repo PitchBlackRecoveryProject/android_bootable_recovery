@@ -412,6 +412,12 @@ TW_BB_SYMLINKS :=
 ifneq ($(TW_USE_TOOLBOX), true)
     TW_BB_SYMLINKS := busybox_symlinks
 endif
+ifneq ($(TW_EXCLUDE_NANO), true)
+    RELINK_SOURCE_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/nano
+    RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libncurses.so
+    RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libssh.so
+    RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libssl.so
+endif
 
 TWRP_AUTOGEN := $(intermediates)/teamwin
 GEN := $(intermediates)/teamwin
@@ -642,3 +648,16 @@ ifneq ($(TW_EXCLUDE_TZDATA), true)
     endif
     include $(BUILD_PHONY_PACKAGE)
 endif
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := nano_twrp
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)/sbin
+LOCAL_REQUIRED_MODULES := nano libncurses
+LOCAL_POST_INSTALL_CMD += \
+    cp -rf $(TARGET_OUT_OPTIONAL_EXECUTABLES)/nano $(TARGET_RECOVERY_ROOT_OUT)/sbin/nano; \
+    mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/etc/nano; \
+    cp -rf external/nano/etc/* external/nano/syntax/*.nanorc $(TARGET_RECOVERY_ROOT_OUT)/etc/nano/; \
+    cp -rf external/libncurses/lib/terminfo $(TARGET_RECOVERY_ROOT_OUT)/etc/;
+include $(BUILD_PHONY_PACKAGE)
