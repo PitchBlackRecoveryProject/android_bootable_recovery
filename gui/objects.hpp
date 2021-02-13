@@ -385,6 +385,10 @@ protected:
 	int change_terminal(std::string arg);
 	int enableadb(std::string arg);
 	int enablefastboot(std::string arg);
+#ifndef TW_EXCLUDE_NANO
+	int editfile(std::string arg);
+#endif
+
 	int simulate;
 };
 

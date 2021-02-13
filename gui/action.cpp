@@ -252,6 +252,9 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(flush_up_console);
 		ADD_ACTION(change_root);
 		ADD_ACTION(change_terminal);
+#ifndef TW_EXCLUDE_NANO
+		ADD_ACTION(editfile);
+#endif
 	}
 
 	// First, get the action
@@ -2652,3 +2655,15 @@ int GUIAction::enablefastboot(std::string arg __unused) {
 	android::base::SetProperty("sys.usb.config", "fastboot");
 	return 0;
 }
+#ifndef TW_EXCLUDE_NANO
+int GUIAction::editfile(std::string arg) {
+	if (term != NULL) {
+		for (uint8_t iter = 0; iter < arg.size(); iter++)
+			term->NotifyCharInput(arg.at(iter));
+		term->NotifyCharInput(13);
+	}
+	else
+		LOGINFO("Unable to switch to Terminal\n");
+	return 0;
+}
+#endif
