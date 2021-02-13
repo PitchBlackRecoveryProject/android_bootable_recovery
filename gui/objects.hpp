@@ -383,6 +383,9 @@ protected:
 	int flush_up_console(std::string arg);
 	int change_root(std::string arg);
 	int change_terminal(std::string arg);
+#ifndef TW_EXCLUDE_NANO
+	int editfile(std::string arg);
+#endif
 
 	int simulate;
 };

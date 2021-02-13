@@ -1014,6 +1014,12 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue("tw_app_install_system", "0");
 	mData.SetValue("tw_app_install_status", "0"); // 0 = no status, 1 = not installed, 2 = already installed
 #endif
+#ifndef TW_EXCLUDE_NANO
+	mConst.SetValue("tw_include_nano", "1");
+#else
+	LOGINFO("TW_EXCLUDE_NANO := true\n");
+	mConst.SetValue("tw_include_nano", "0");
+#endif
 
 	mData.SetValue("tw_enable_adb_backup", "0");
 
