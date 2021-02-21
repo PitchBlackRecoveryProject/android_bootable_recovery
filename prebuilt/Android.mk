@@ -418,6 +418,9 @@ ifneq ($(TW_EXCLUDE_NANO), true)
     RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libssh.so
     RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libssl.so
 endif
+ifneq ($(TW_EXCLUDE_BASH), true)
+    RELINK_SOURCE_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/bash
+endif
 
 TWRP_AUTOGEN := $(intermediates)/teamwin
 GEN := $(intermediates)/teamwin
@@ -661,3 +664,21 @@ LOCAL_POST_INSTALL_CMD += \
     cp -rf external/nano/etc/* external/nano/syntax/*.nanorc $(TARGET_RECOVERY_ROOT_OUT)/etc/nano/; \
     cp -rf external/libncurses/lib/terminfo $(TARGET_RECOVERY_ROOT_OUT)/etc/;
 include $(BUILD_PHONY_PACKAGE)
+
+ifneq ($(TW_EXCLUDE_BASH), true)
+include $(CLEAR_VARS)
+LOCAL_MODULE := bash_twrp
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)/sbin
+LOCAL_REQUIRED_MODULES := bash
+LOCAL_POST_INSTALL_CMD += \
+	cp -rf $(TARGET_OUT_OPTIONAL_EXECUTABLES)/bash $(TARGET_RECOVERY_ROOT_OUT)/sbin/bash; \
+	mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/etc/bash; \
+	cp -rf external/bash/etc/* $(TARGET_RECOVERY_ROOT_OUT)/etc/bash/; \
+	sed -i 's/ro.cm.device/ro.product.device/' $(TARGET_RECOVERY_ROOT_OUT)/etc/bash/bashrc; \
+	sed -i 's/ro.lineage.device/ro.product.device/' $(TARGET_RECOVERY_ROOT_OUT)/etc/bash/bashrc; \
+	sed -i 's/ro.omni.device/ro.product.device/' $(TARGET_RECOVERY_ROOT_OUT)/etc/bash/bashrc; \
+	sed -i '/export TERM/d' $(TARGET_RECOVERY_ROOT_OUT)/etc/bash/bashrc;
+include $(BUILD_PHONY_PACKAGE)
+endif
