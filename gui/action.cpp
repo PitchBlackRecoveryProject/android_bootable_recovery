@@ -2019,6 +2019,7 @@ int GUIAction::flashimage(std::string arg __unused)
 {
 	DataManager::SetValue("ui_progress", 0);
 	int op_status = 0;
+	bool flag = true;
 
 	operation_start("Flash Image");
 	string path, filename, partition;
@@ -2026,11 +2027,33 @@ int GUIAction::flashimage(std::string arg __unused)
 	DataManager::GetValue("tw_file", filename);
 	if (simulate) {
 		simulate_progress_bar();
-	} else {
-	if (PartitionManager.Flash_Image(path, filename))
-		op_status = 0; // success
-	else
-		op_status = 1; // fail
+	}
+#ifdef AB_OTA_UPDATER
+	string target = DataManager::GetStrValue("tw_flash_partition");
+	unsigned int pos = target.find_last_of(';');
+	string mount_point = pos != string::npos ? target.substr(0, pos) : "";
+	TWPartition* t_part = PartitionManager.Find_Partition_By_Path(mount_point);
+	bool flash_in_both_slots = DataManager::GetIntValue("tw_flash_both_slots") ? true : false;
+
+	if (t_part != NULL && (flash_in_both_slots && t_part->SlotSelect)) 
+	{
+		string current_slot = PartitionManager.Get_Active_Slot_Display();
+		bool pre_op_status = PartitionManager.Flash_Image(path, filename);
+
+		PartitionManager.Set_Active_Slot(current_slot == "A" ? "B" : "A");
+		op_status = (int) !(pre_op_status && PartitionManager.Flash_Image(path, filename));
+		PartitionManager.Set_Active_Slot(current_slot);
+
+		DataManager::SetValue("tw_flash_both_slots", 0);
+		flag = false;
+	}
+#endif
+	if (flag)
+	{
+		if (PartitionManager.Flash_Image(path, filename))
+			op_status = 0; // success
+		else
+			op_status = 1; // fail
 	}
 	// Start Deactivation on flashing either boot.img, system.img or vendor.img
 	if (DataManager::GetIntValue(PB_CALL_DEACTIVATION) != 0)

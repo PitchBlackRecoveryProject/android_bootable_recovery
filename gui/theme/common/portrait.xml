@@ -671,7 +671,10 @@
 					<condition var1="pb_file_extn" var2="img"/>
 					<condition var1="tw_filename" op="modified"/>
 				</conditions>
-				<action function="page">flashimage_confirm</action>
+				<actions>
+					<action function="set">tw_is_slot_part=0</action>
+					<action function="page">flashimage_confirm</action>
+				</actions>
 			</action>
 
 			<action>
@@ -1074,6 +1077,30 @@
 				<placement x="90" y="%row7_y%"/>
 				<text>{@flash_image_select=Select Partition to Flash Image:}</text>
 			</text>
+
+			<button style="checkbox">
+				<conditions>
+					<condition var1="tw_is_slot_part" op="=" var2="1"/>
+					<condition var1="tw_flash_both_slots" op="=" var2="0"/>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+				</conditions>
+				<placement x="%indent%" y="%row19a_y%" textplacement="6"/>
+				<text>{@flash_ab_both_slots=Flash to both slots}</text>
+				<image resource="checkbox_false"/>
+				<action function="set">tw_flash_both_slots=1</action>
+			</button>
+
+			<button style="checkbox">
+				<conditions>
+					<condition var1="tw_is_slot_part" op="=" var2="1"/>
+					<condition var1="tw_flash_both_slots" op="=" var2="1"/>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+				</conditions>
+				<placement x="%indent%" y="%row19a_y%" textplacement="6"/>
+				<text>{@flash_ab_both_slots=Flash to both slots}</text>
+				<image resource="checkbox_true"/>
+				<action function="set">tw_flash_both_slots=0</action>
+			</button>
 
 			<slider>
 				<text>{@swipe_flash=Swipe to Flash}</text>
