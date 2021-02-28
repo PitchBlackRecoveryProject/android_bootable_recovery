@@ -606,6 +606,7 @@
 			<fileselector>
 				<placement x="%indent%" y="%row1a_y%" w="%content_width%" h="%fileselector_install_height%"/>
 				<filter extn=".zip,.ozip,.ZIP,.OZIP,.img,.IMG" folders="1" files="1"/>
+				<prfxfilter prfx="Magisk-;Magisk.apk;app-release.apk;app-debug.apk" folders="1" files="1"/>
 				<path name="tw_zip_location" default="/sdcard"/>
 				<data name="tw_filename"/>
 				<selection name="tw_file"/>
@@ -628,6 +629,17 @@
 			<action>
 				<conditions>
 					<condition var1="pb_file_extn" var2="zip"/>
+					<condition var1="tw_filename" op="modified"/>
+				</conditions>
+				<actions>
+					<action function="queuezip"/>
+					<action function="page">flash_confirm</action>
+				</actions>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="pb_file_extn" var2="apk"/>
 					<condition var1="tw_filename" op="modified"/>
 				</conditions>
 				<actions>
