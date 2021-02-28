@@ -62,6 +62,12 @@ GUIFileSelector::GUIFileSelector(xml_node<>* node) : GUIScrollList(node)
 		if (attr)
 			mShowNavFolders = atoi(attr->value());
 	}
+	child = FindNode(node, "prfxfilter");
+	if (child) {
+		attr = child->first_attribute("prfx");
+		if (attr)
+			mPrfx = attr->value();
+	}
 
 	// Handle the path variable
 	child = FindNode(node, "path");
@@ -235,12 +241,21 @@ int GUIFileSelector::GetFileList(const std::string folder)
 	struct stat st;
 	size_t start_pos = 0, end_pos = 0;
 	vector<string> XTN;
-	string mExtns = mExtn + ",";
-	end_pos = mExtns.find(",", start_pos);
-	while (end_pos != string::npos && start_pos < mExtns.size()) {
-		XTN.push_back(mExtns.substr(start_pos, end_pos - start_pos));
+	vector<string> PRFX;
+	string mEpnds = mExtn + ",";
+	end_pos = mEpnds.find(",", start_pos);
+	while (end_pos != string::npos && start_pos < mEpnds.size()) {
+		XTN.push_back(mEpnds.substr(start_pos, end_pos - start_pos));
 		start_pos = end_pos + 1;
-		end_pos = mExtns.find(",", start_pos);
+		end_pos = mEpnds.find(",", start_pos);
+	}
+	start_pos = end_pos = 0;
+	mEpnds = mPrfx + ";";
+	end_pos = mEpnds.find(";", start_pos);
+	while (end_pos != string::npos && start_pos < mEpnds.size()) {
+		PRFX.push_back(mEpnds.substr(start_pos, end_pos - start_pos));
+		start_pos = end_pos + 1;
+		end_pos = mEpnds.find(";", start_pos);
 	}
 
 	// Clear all data
@@ -266,6 +281,7 @@ int GUIFileSelector::GetFileList(const std::string folder)
 
 	while ((de = readdir(d)) != NULL) {
 		FileData data;
+		bool match = false;
 
 		data.fileName = de->d_name;
 		if (data.fileName == ".")
@@ -294,11 +310,20 @@ int GUIFileSelector::GetFileList(const std::string folder)
 		} else if (data.fileType == DT_REG || data.fileType == DT_LNK || data.fileType == DT_BLK) {
 			for (size_t i = 0; i < XTN.size(); i++)
 			{
-				if (XTN[i].empty() || (data.fileName.length() > XTN[i].length() && data.fileName.substr(data.fileName.length() - XTN[i].length()) == XTN[i])) {
+				if (XTN[i].empty() || (data.fileName.length() >= XTN[i].length() && data.fileName.substr(data.fileName.length() - XTN[i].length()) == XTN[i])) {
 					if (XTN[i] == ".ab" && twadbbu::Check_ADB_Backup_File(path))
 						mFolderList.push_back(data);
 					else
 						mFileList.push_back(data);
+					match = true;
+				}
+			}
+			if (!match) {
+				for (const std::string& mPrfxElement : PRFX)
+				{
+					if (!mPrfxElement.empty() && data.fileName.length() >= mPrfxElement.length() && data.fileName.substr(0, mPrfxElement.length()) == mPrfxElement) {
+						mFileList.push_back(data);
+					}
 				}
 			}
 		}
