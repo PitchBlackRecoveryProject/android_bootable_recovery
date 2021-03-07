@@ -51,9 +51,7 @@
 #include "adbbu/libtwadbbu.hpp"
 #ifdef TW_INCLUDE_CRYPTO
 	#include "crypto/fde/cryptfs.h"
-	#ifdef TW_INCLUDE_FBE
-		#include "crypto/ext4crypt/Decrypt.h"
-	#endif
+	#include "Decrypt.h"
 #else
 	#define CRYPT_FOOTER_OFFSET 0x4000
 #endif
@@ -788,10 +786,11 @@ bool TWPartition::Decrypt_FBE_DE() {
 		ExcludeAll(Mount_Point + "/misc/gatekeeper");
 		ExcludeAll(Mount_Point + "/misc/keystore");
 		ExcludeAll(Mount_Point + "/drm/kek.dat");
-		ExcludeAll(Mount_Point + "/system_de/0/spblob");  // contains data needed to decrypt pixel 2
-		ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.password.key");
-		ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.pattern.key");
+		ExcludeAll(Mount_Point + "/system_de/0/spblob");  // contains data needed to decrypt synthenic password
+		//ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.password.key");
+		//ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.pattern.key");
 		ExcludeAll(Mount_Point + "/cache");
+		ExcludeAll(Mount_Point + "/system/users/0");
 		ExcludeAll(Mount_Point + "/per_boot"); // removed each boot by init
 		int retry_count = 3;
 		while (!Decrypt_DE() && --retry_count)
@@ -1043,6 +1042,7 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 			break;
 		case TWFLAG_KEYDIRECTORY:
 			Key_Directory = str;
+			LOGINFO("setting Key_Directory to: %s\n", Key_Directory.c_str());
 			break;
 		case TWFLAG_DM_USE_ORIGINAL_PATH:
 			Use_Original_Path = true;

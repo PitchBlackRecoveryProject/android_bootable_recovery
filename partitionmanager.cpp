@@ -99,13 +99,11 @@ extern "C"
 #include "gui/rapidxml.hpp"
 #include "gui/pages.hpp"
 #ifdef TW_INCLUDE_FBE
-#include "crypto/ext4crypt/Decrypt.h"
+#include "Decrypt.h"
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
-#ifdef USE_FSCRYPT
-#include "crypto/fscrypt/MetadataCrypt.h"
-#else
-#include "crypto/ext4crypt/MetadataCrypt.h"
-#endif
+	#ifdef USE_FSCRYPT
+	#include "MetadataCrypt.h"
+	#endif
 #endif
 #endif
 #ifdef TW_CRYPTO_USE_SYSTEM_VOLD
@@ -464,13 +462,9 @@ void TWPartitionManager::Decrypt_Data() {
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
 #ifdef USE_FSCRYPT
 			if (fscrypt_mount_metadata_encrypted(Decrypt_Data->Actual_Block_Device, Decrypt_Data->Mount_Point, false)) {
-				std::string crypto_blkdev =android::base::GetProperty("ro.crypto.fs_crypto_blkdev", "error");
+				std::string crypto_blkdev = android::base::GetProperty("ro.crypto.fs_crypto_blkdev", "error");
 				Decrypt_Data->Decrypted_Block_Device = crypto_blkdev;
 				LOGINFO("Successfully decrypted metadata encrypted data partition with new block device: '%s'\n", crypto_blkdev.c_str());
-#else
-			if (e4crypt_mount_metadata_encrypted(Decrypt_Data->Mount_Point, false, Decrypt_Data->Key_Directory, Decrypt_Data->Actual_Block_Device, &Decrypt_Data->Decrypted_Block_Device)) {
-				LOGINFO("Successfully decrypted metadata encrypted data partition with new block device: '%s'\n",
-						Decrypt_Data->Decrypted_Block_Device.c_str());
 #endif
 				Decrypt_Data->Is_Decrypted = true; // Needed to make the mount function work correctly
 				int retry_count = 10;
@@ -2466,11 +2460,9 @@ TWPartitionManager::Post_Decrypt (const string & Block_Device)
 			dat->Symlink_Path = dat->Storage_Path;
 			DataManager::SetValue ("tw_storage_path", "/data/media/0");
 			DataManager::SetValue ("tw_settings_path", "/data/media/0");
-			dat->UnMount (false);
 		}
 		Update_System_Details ();
 		Output_Partition (dat);
-		UnMount_Main_Partitions ();
 	}
 	else
 		LOGERR ("Unable to locate data partition.\n");
@@ -2492,8 +2484,9 @@ void TWPartitionManager::Parse_Users() {
 
 			// Attempt to get name of user. Fallback to user ID if this fails.
 			char* userFile = PageManager::LoadFileToBuffer("/data/system/users/" + to_string(userId) + ".xml", NULL);
-			if (userFile == NULL) 
+			if (userFile == NULL) {
 				user.userName = to_string(userId);
+			}
 			else {
 				xml_document<> *userXml = new xml_document<>();
 				userXml->parse<0>(userFile);
