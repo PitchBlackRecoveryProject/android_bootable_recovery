@@ -560,7 +560,7 @@ static int Run_Update_Binary(const char *path, int* wipe_cache, zip_type ztype) 
 	return INSTALL_SUCCESS;
 }
 
-int TWinstall_zip(const char* path, int* wipe_cache) {
+int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 	int ret_val, zip_verify = 1;
 
 	if (strcmp(path, "error") == 0) {
@@ -583,12 +583,14 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 		string digest_str;
 		string Full_Filename = path;
 
-		gui_msg("check_for_digest=Checking for Digest file...");
+		if (check_for_digest) {
+			gui_msg("check_for_digest=Checking for Digest file...");
 
-		if (*path != '@' && !twrpDigestDriver::Check_File_Digest(Full_Filename)) {
-			LOGERR("Aborting zip install: Digest verification failed\n");
-			Write_MIUI_Install_Status(OTA_CORRUPT, true);
-			return INSTALL_CORRUPT;
+			if (*path != '@' && !twrpDigestDriver::Check_File_Digest(Full_Filename)) {
+				LOGERR("Aborting zip install: Digest verification failed\n");
+				Write_MIUI_Install_Status(OTA_CORRUPT, true);
+				return INSTALL_CORRUPT;
+			}
 		}
 	}
 	}
