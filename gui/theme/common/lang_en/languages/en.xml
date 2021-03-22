@@ -917,7 +917,8 @@
 		<string name="pb_wipe_magisk_modules">Magisk Modules</string>
 		<string name="magisk_done">-- Magisk Modules Wipe Complete!</string>
 		<string name="pb_saving_log">Preserving Logs...</string>
-		<string name="pb_enable_dmesg_logging">Enable dmesg logging after flash</string>
+		<string name="pb_enable_logging">Copy Logs After Flash</string>
+		<string name="pb_enable_dmesg_logging">Include DMESG in Logs</string>
 		<string name="pb_copy_log_cache">Copying Logs to Cache as well.</string>
 		<string name="pb_dev_name_change">Wanna Change Your device Codename?</string>
 		<string name="open_terminal_btn">Open Terminal Here</string>
