@@ -843,13 +843,15 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue(PB_ADVANCED_STOCK_REPLACE, "1");
 	mPersist.SetValue("pb_bright_value", "255");
 	mData.SetValue("pb_torch_on", "0");
-	mPersist.SetValue("pb_enable_dmesg_logging", "0");
 #ifdef PB_MAX_BRIGHT_VALUE
 	mConst.SetValue("pb_torch_brightness_slider", "0");
 #endif
-	mPersist.SetValue("inject_twrp_chk", "0");
+	mData.SetValue("pb_include_logs_after_flash", "0");
+	mData.SetValue("pb_include_dmesg_logging", "0");
 
-	mPersist.SetValue(TW_HAS_INJECTTWRP, "0");
+	mData.SetValue("tw_install_reboot_recovery", "0");
+	mPersist.SetValue("tw_inject_after_flash", "0");
+
 	mPersist.SetValue(TW_INSTALL_REBOOT_VAR, "0");
 	mPersist.SetValue(TW_SIGNED_ZIP_VERIFY_VAR, "0");
 	mPersist.SetValue(TW_DISABLE_FREE_SPACE_VAR, "0");

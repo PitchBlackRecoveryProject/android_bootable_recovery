@@ -733,10 +733,14 @@
 				</listitem>
 				<listitem name="{@inject_twrp_chk=Flash PBRP after install}">
 					<condition var1="tw_has_injecttwrp" var2="1"/>
-					<data variable="tw_inject_after_zip"/>
+					<data variable="tw_inject_after_flash"/>
 				</listitem>
-				<listitem name="{@pb_enable_dmesg_logging=Enable Dmesg logging after Flash}">
-					<data variable="pb_inlclude_dmesg_logging"/>
+				<listitem name="{@pb_enable_logging=Copy Logs After Flash}">
+					<data variable="pb_include_logs_after_flash"/>
+				</listitem>
+				<listitem name="{@pb_enable_dmesg_logging=Include DMESG in Logs}">
+					<condition var1="pb_include_logs_after_flash" var2="1" />
+					<data variable="pb_include_dmesg_logging"/>
 				</listitem>
 				<listitem name="{@pb_dmverity_chk=Deactivation (Patch DM-Verity)}">
 					<data variable="pb_dm_verity_check"/>
