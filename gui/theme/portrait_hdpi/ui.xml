@@ -124,17 +124,19 @@
 		<image name="main_button_terminal" filename="main_button_terminal" retainaspect="1"/>
 		<image name="main_button_explorer" filename="main_button_explorer" retainaspect="1"/>
 		<image name="main_button_special" filename="main_button_special" retainaspect="1"/>
+		<image name="main_button_back" filename="main_button_back" retainaspect="1"/>
+		<image name="main_button_back2" filename="main_button_back2" retainaspect="1"/>
 		<image name="main_button_themes" filename="main_button_themes" retainaspect="1"/>
 		<image name="button_torch_on" filename="button_torch_on" retainaspect="1"/>
 		<image name="button_torch_off" filename="button_torch_off" retainaspect="1"/>
 		<image name="main_button_pbrp_about" filename="main_button_pbrp_about" retainaspect="1"/>
 		<image name="main_button_pbrp_custom" filename="main_button_pbrp_custom" retainaspect="1"/>
-		<image name="main_button_pbrp_special_settings" filename="main_button_pbrp_special_settings" retainaspect="1"/>
 		<image name="main_button_pbrp_tools" filename="main_button_pbrp_tools" retainaspect="1"/>
 		<image name="main_button_reloadtheme" filename="main_button_reloadtheme" retainaspect="1"/>
 		<image name="sec_reboot_dialog" filename="sec_reboot_dialog" />
 		<image name="sec_reboot_adv" filename="sec_reboot_adv" />
 		<image name="flash" filename="flash" retainaspect="1" />
+		<image name="brush" filename="brush" retainaspect="1" />
 		<image name="reboot_icon" filename="reboot_icon" retainaspect="1" />
 		<image name="screenshot_icon" filename="screenshot_icon" retainaspect="1" />
 		<image name="selected_tab" filename="selected_tab" retainaspect="1" />
@@ -187,6 +189,7 @@
 		<variable name="col1_x_header" value="198"/>
 		<variable name="center_x" value="540"/>
 		<variable name="col1_x_right" value="576"/>
+		<variable name="margin_button" value="738"/>
 		<variable name="indent_right" value="1044"/>
 		<variable name="tab_height" value="96"/>
 		<variable name="tab_indicator_height" value="6"/>
@@ -327,7 +330,7 @@
 		<variable name="slidervalue_padding" value="0"/>
 		<variable name="slidervalue_sliderw" value="72"/>
 		<variable name="slidervalue_sliderh" value="108"/>
-		<variable name="slideout_height" value="1686"/>
+		<variable name="slideout_height" value="1550"/>
 		<variable name="slideout_bg_height" value="1720"/>
 		<variable name="input_height" value="64"/>
 		<variable name="input_line_width" value="3"/>
@@ -539,19 +542,43 @@
 				<placement x="%indent_right%" y="%row1_header_y%" placement="1"/>
 				<text>%tw_battery%</text>
 			</text>
-			<button>
-				<placement x="%indent%" y="%row24_y%"/>
-				<image resource="main_button_black3"/>
+			<button style="main_button_back">
+			<placement x="751" y="%row24_y%"/>
 				<highlight color="%highlight_color%"/>
-				<font resource="font_about" color="%text_color%"/>
-				<text>{@logs_btn=OPEN CONSOLE}</text>
+				<font resource="font_l" color="%text_color%"/>
+				<text>{@terminal_btn=Terminal}</text>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="page">terminalcommand</action>
+			</button>
+
+			<button style="main_button_back2">
+				<placement x="380" y="%row24_y%"/>
+				<highlight color="%highlight_color%"/>
+				<icon resource="flash"/>
+				<actions>
+				<action function="flashlight" />
+				</actions>
+			</button>
+
+			<button style="main_button_back2">
+				<placement x="570" y="%row24_y%"/>
+				<condition var1="tw_busy" var2="0"/>
+				<icon resource="brush"/>
+				<highlight color="%highlight_color%"/>
+				<actions>
+					<action function="set">tw_back=main</action>
+					<action function="page">customizations</action>
+				</actions>
+			</button>
+
+			<button style="main_button_back">
+				<placement x="%indent%" y="%row24_y%"/>
+				<highlight color="%highlight_color%"/>
+				<font resource="font_l" color="%text_color%"/>
+				<text>{@console_btn=Console}</text>
 				<condition var1="tw_busy" var2="0"/>
 				<action function="overlay">slideout</action>
 			</button>
-			<image>
-				<placement x="690" y="1770"/>
-				<image resource="console"/>
-			</image>
 			<fill color="%background_color%">
 				<condition var1="tw_busy" var2="1"/>
 				<placement x="0" y="%navbar_y%" w="%screen_width%" h="%navbar_height%"/>

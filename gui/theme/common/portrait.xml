@@ -132,10 +132,16 @@
 			<background color="%background_color%"/>
 		</style>
 
-		<style name="main_button_themes_features">
+		<style name="main_button_back">
 			<highlight color="%highlight_color_subbutton%"/>
-			<font resource="font_slider" color="%sub_header_color%" />
-			<image resource="main_button_themes_features"/>
+			<font resource="font_l" color="%text_main_button_color%" />
+			<image resource="main_button_back"/>
+		</style>
+		
+		<style name="main_button_back2">
+			<highlight color="%highlight_color_subbutton%"/>
+			<font resource="font_pb" color="%text_main_button_color%" />
+			<image resource="main_button_back2"/>
 		</style>
 
 		<style name="main_button_specials_icon">
@@ -210,11 +216,6 @@
 		<style name="main_button_pbrp_custom">
 			<highlight color="%highlight_color%"/>
 			<image resource="main_button_pbrp_custom"/>
-		</style>
-
-		<style name="main_button_pbrp_special_settings">
-			<highlight color="%highlight_color%"/>
-			<image resource="main_button_pbrp_special_settings"/>
 		</style>
 
 		<style name="main_button_pbrp_tools">
@@ -338,7 +339,7 @@
 			<background color="%background_color%"/>
 			<separator color="#8C8C8C" height="2"/>
 			<description font="font_sub_header" color="%sub_header_color%" spacing="50"/>
-			<font resource="font_pb" spacing="80" color="%text_color%" highlightcolor="%mid_transparent%"/>
+			<font resource="font_pb" spacing="110" color="%text_color%" highlightcolor="%mid_transparent%"/>
 		</style>
 
 		<style name="slider">
@@ -393,7 +394,7 @@
 			</button>
 
 			<button style="main_button_black">
-				<placement x="%indent_button%" y="%row2a_y%" textplacementmain="1"/>
+				<placement x="%indent_button%" y="%row2_y%" textplacementmain="1"/>
 				<icon resource="main_button_install"/>
 				<text>{@install_btn=Install}</text>
 				<actions>
@@ -404,7 +405,7 @@
 			</button>
 
 			<button style="main_button_black">
-				<placement x="%main_button_space%" y="%row2a_y%" textplacementmain="1"/>
+				<placement x="%main_button_space%" y="%row2_y%" textplacementmain="1"/>
 				<icon resource="main_button_wipe"/>
 				<text>{@wipe_btn=Wipe}</text>
 				<action function="page">wipe</action>
@@ -425,81 +426,89 @@
 			</button>
 
 			<button style="main_button_black">
-				<placement x="%indent_button%" y="%row12a_y%" textplacementmain="1"/>
+				<placement x="%indent_button%" y="%row13_y%" textplacementmain="1"/>
 				<icon resource="main_button_mount"/>
 				<text>{@mount_btn=Mount}</text>
 				<action function="page">mount</action>
 			</button>
 
 			<button style="main_button_black">
-				<placement x="%main_button_space%" y="%row12a_y%" textplacementmain="1"/>
+				<placement x="%main_button_space%" y="%row13_y%" textplacementmain="1"/>
 				<icon resource="main_button_advanced"/>
 				<text>{@advanced_btn=Advanced}</text>
 				<action function="page">advanced</action>
 			</button>
+			
+			<!--specialdetails-->
+			<image>
+				<image resource="main_button_special"/>
+				<placement x="76" y="%row19_y%"/>
+			</image>
 
-			<button style="main_button_black2">
-				<placement x="%indent_button%" y="%row17a_y%" textplacementmain="1" large="1"/>
-				<icon resource="main_button_special"/>
+			<text style="text_pb">
+				<placement x="158" y="%row19_y%"/>
 				<text>{@pbrpspecial_btn=PBRP Special}</text>
-				<action function="page">pbrp_special</action>
-			</button>
-
-			<text style="text_header">
-				<placement x="90" y="%row19a_y%"/>
-				<text>{@settings_txt=Customize PBRP with themes, icons, more}</text>
 			</text>
 
-			<button style="main_button_themes_features">
-				<placement x="90" y="%row21_y%" textplacementmain="3"/>
-				<icon resource="main_button_specials_icon" />
-				<text>{@themes_txt=Themes}</text>
+			<text style="text_header">
+				<placement x="90" y="%row20a_y%"/>
+				<text>{@custom=Customize}</text>
+			</text>
+			
+			<text style="text_header">
+				<placement x="90" y="%row21a_y%"/>
+				<text>{@settings_txt=PitchBlack Recovery!}</text>
+			</text>
+
+			<button style="main_button_back">
+				<placement x="%col1_x_right%" y="%row18a_y%"/>
+				<text>{@settings_btn=Settings}</text>
 				<actions>
-					<action function="set">tw_back=main2</action>
-					<action function="page">customizations</action>
+					<action function="set">tw_back=main</action>
+					<action function="page">special_setting</action>
 				</actions>
 			</button>
 
-			<button style="main_button_themes_features">
-				<placement x="400" y="%row21_y%" textplacementmain="3"/>
-				<icon resource="main_button_specials_icon" />
+			<button style="main_button_back2">
+				<placement x="891" y="%row18a_y%" w="119" h="119"/>
+				<icon resource="main_button_reboot"/>
+				<action function="page">reboot</action>
+			</button>
+
+			<button style="main_button_back2">
+				<placement x="%col1_x_right%" y="%row21_y%" w="119" h="119"/>
+				<icon resource="main_button_specials_info" />
+				<action function="page">about</action>
+			</button>
+
+			<button style="main_button_back">
+				<placement x="%margin_button%" y="%row21_y%"/>
 				<text>{@tools1=Tools}</text>
 				<actions>
 					<action function="set">tw_back=main2</action>
 					<action function="page">tools</action>
 				</actions>
 			</button>
-
-			<button style="main_button_specials_info">
-				<placement x="%row11_y%" y="%row18a_y%" w="100" h="100"/>
-				<image resource="main_button_specials_info" />
-				<action function="page">about</action>
-			</button>
-
-			<button style="main_button_specials_info">
-				<placement x="%row11_y%" y="1557" w="100" h="100"/>
-				<image resource="main_button_reboot"/>
-				<action function="page">reboot</action>
-			</button>
+			<!--END-->
 
 			<!-- Button's Description-->
 			<text style="text_header">
-				<placement x="80" y="470"/>
+				<placement x="80" y="438"/>
 				<text>{@install_txt=Wanna Add changes}</text>
 			</text>
 
 			<text style="text_header">
-				<placement x="80" y="520"/>
+				<placement x="80" y="488"/>
 				<text>{@install2_txt=in form of Zips or Img}</text>
 			</text>
 
 			<text style="text_header">
-				<placement x="600" y="470"/>
+				<placement x="600" y="438"/>
 				<text>{@wipe_txt=Release your device's}</text>
 			</text>
 
 			<text style="text_header">
-				<placement x="600" y="520"/>
+				<placement x="600" y="488"/>
 				<text>{@wipe2_txt=Stress}</text>
 			</text>
 
@@ -524,23 +533,23 @@
 			</text>
 
 			<text style="text_header">
-				<placement x="80" y="1110"/>
+				<placement x="80" y="1142"/>
 				<text>{@mount_txt=Get your device's}</text>
 			</text>
 
 			<text style="text_header">
-				<placement x="80" y="1160"/>
+				<placement x="80" y="1192"/>
 				<text>{@mount2_txt=Partitions Mounted}</text>
 			</text>
 
 			<text style="text_header">
-				<placement x="600" y="1110"/>
-				<text>{@advanced_txt=This page is not}</text>
+				<placement x="600" y="1142"/>
+				<text>{@advanced_txt=Get More Usable}</text>
 			</text>
 
 			<text style="text_header">
-				<placement x="600" y="1160"/>
-				<text>{@advanced2_txt=Enough for you?}</text>
+				<placement x="600" y="1192"/>
+				<text>{@advanced2_txt=Advanced Stuff}</text>
 			</text>
 		</page>
 
@@ -4512,11 +4521,6 @@
 						<action function="page">confirm_action</action>
 					</actions>
 				</listitem>
-				<listitem name="{@terminal_btn=Terminal}">
-					<text>{@terminal_btn1=Launches elevated terminal console}</text>
-					<icon icon="main_button_terminal"/>
-					<action function="page">terminalcommand</action>
-				</listitem>
 				<listitem name="{@adb_sideload_btn=ADB Sideload}">
 					<text>{@adb_sideload_btn1=Install your packages via ADB}</text>
 					<icon icon="main_button_adb"/>
@@ -6760,141 +6764,5 @@
 				<action function="page">advanced</action>
 			</action>
 		</page>
-
-		<page name="pbrp_special">
-			<template name="page_without_logo"/>
-
-			<image>
-				<image resource="ellipse"/>
-				<placement x="45" y="%row3_header_y%"/>
-			</image>
-			<image>
-				<image resource="main_button_additional"/>
-				<placement x="75" y="140"/>
-			</image>
-
-			<text style="text_l">
-				<placement x="%col1_x_header%" y="%row3_header_y%"/>
-				<text>{@pbrpspecial_btn=PBRP Special}</text>
-			</text>
-
-			<text style="text_sub_header">
-				<condition var1="tw_no_cpu_temp" var2="0"/>
-				<placement x="%col1_x_header%" y="%row4_header_y%"/>
-				<text>%tw_version%</text>
-			</text>
-
-			<button style="main_button_pbrp_about">
-				<placement x="0" y="240"/>
-				<actions>
-					<action function="set">tw_back=pbrp_special</action>
-					<action function="page">about</action>
-				</actions>
-			</button>
-
-			<text style="text_pb">
-				<placement x="350" y="350"/>
-				<text>{@about_pbrp=About PBRP}</text>
-			</text>
-
-			<text style="text_header">
-				<placement x="350" y="425"/>
-				<text>{@device_info=Device Info}</text>
-			</text>
-
-			<text style="text_header">
-				<placement x="350" y="475"/>
-				<text>{@device_maintainer=Device Maintainer}</text>
-			</text>
-
-			<text style="text_header">
-				<placement x="350" y="525"/>
-				<text>{@contributors=Contributors}</text>
-			</text>
-
-			<button style="main_button_pbrp_custom">
-				<placement x="0" y="600"/>
-				<actions>
-					<action function="set">tw_back=pbrp_special</action>
-					<action function="page">customizations</action>
-				</actions>
-			</button>
-
-			<text style="text_pb">
-				<placement x="350" y="710"/>
-				<text>{@customizations=Customizations}</text>
-			</text>
-
-			<text style="text_header">
-				<placement x="350" y="785"/>
-				<text>{@pb_coming_soon=Coming Soon....!}</text>
-			</text>
-
-			<button style="main_button_pbrp_tools">
-				<placement x="0" y="960"/>
-				<actions>
-					<action function="set">tw_back=pbrp_special</action>
-					<action function="page">tools</action>
-				</actions>
-			</button>
-
-			<text style="text_pb">
-				<placement x="350" y="1070"/>
-				<text>{@tools1=Tools}</text>
-			</text>
-
-			<text style="text_header">
-				<placement x="350" y="1145"/>
-				<text>{@codename_changer=Codename Changer}</text>
-			</text>
-
-			<text style="text_header">
-				<placement x="350" y="1195"/>
-				<text>{@Magisk_btn=Magisk}</text>
-			</text>
-
-			<text style="text_header">
-				<placement x="350" y="1245"/>
-				<text>{@Pin/Pass_Remover_btn=Pin/Pass Remover}</text>
-			</text>
-
-			<button style="main_button_pbrp_special_settings">
-				<placement x="0" y="1320"/>
-				<actions>
-					<action function="set">tw_back=pbrp_special</action>
-					<action function="page">special_setting</action>
-				</actions>
-			</button>
-
-			<text style="text_pb">
-				<placement x="350" y="1430"/>
-				<text>{@SETTING=Special Setting}</text>
-			</text>
-
-			<text style="text_header">
-				<placement x="350" y="1505"/>
-				<text>{@SETTINGOTA=OTA Setting}</text>
-			</text>
-
-			<text style="text_header">
-				<placement x="350" y="1555"/>
-				<text>{@device_ab=A/B Device Settings}</text>
-			</text>
-
-			<text style="text_header">
-				<placement x="350" y="1605"/>
-				<text>{@tools_hdr=Tools Options}</text>
-			</text>
-
-			<action>
-				<touch key="home"/>
-				<action function="page">main</action>
-			</action>
-
-			<action>
-				<touch key="back"/>
-				<action function="page">main</action>
-			</action>
-		</pages>
 	</pages>
 </recovery>

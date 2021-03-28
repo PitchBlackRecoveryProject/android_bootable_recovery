@@ -384,7 +384,7 @@
 			</action>
 			<action>
 				<touch key="back"/>
-				<action function="page">pbrp_special</action>
+				<action function="page">main</action>
 			</action>
 		</page>
 		<page name="about">
@@ -491,7 +491,7 @@
 			</action>
 			<action>
 				<touch key="back"/>
-				<action function="page">pbrp_special</action>
+				<action function="page">main</action>
 			</action>
 			</page>
 		<page name="customizations">

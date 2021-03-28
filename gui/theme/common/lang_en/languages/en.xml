@@ -855,15 +855,17 @@
 		<string name="restore2_txt">previous backups</string>
 		<string name="mount_txt">Mount your device's</string>
 		<string name="mount2_txt">partitions</string>
-		<string name="advanced_txt">More options for</string>
-		<string name="advanced2_txt">advanced users</string>
-		<string name="settings_txt">Customize PitchBlack Recovery</string>
+		<string name="advanced_txt">Get More Usable</string>
+		<string name="advanced2_txt">Advanced Stuff</string>
+		<string name="custom">Customize</string>
+		<string name="settings_txt">PitchBlack Recovery!</string>
 		<string name="customizations">Customizations</string>
 		<string name="themes_txt">Themes</string>
 		<string name="bg_color">Background Color</string>
 		<string name="font_options">Font options</string>
 		<string name="features_txt">Features</string>
-		<string name="logs_btn">OPEN CONSOLE</string>
+		<string name="logs_btn">Logs</string>
+		<string name="console_btn">Console</string>
 
 		<!-- Settings -->
 		<string name="pb_support_miui_ota_chk">Support MIUI Incremental OTA</string>
