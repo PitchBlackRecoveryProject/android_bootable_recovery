@@ -186,6 +186,7 @@
 #define PB_TREBLE_COMP "pb_error_treble"
 #define PB_PROP_VALUE "pb_prop_value"
 #define PB_PROP_DEVICE "ro.product.device"
+#define PB_PATCH_AVB2 "pb_req_patch_avb2"
 
 // Also used:
 //   tw_boot_is_mountable

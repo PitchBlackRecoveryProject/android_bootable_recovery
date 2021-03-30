@@ -852,6 +852,12 @@ void DataManager::SetDefaultValues()
 	mData.SetValue("tw_install_reboot_recovery", "0");
 	mPersist.SetValue("tw_inject_after_flash", "0");
 
+#ifdef PB_ENABLE_PATCH_AVB2_CHECK
+	mPersist.SetValue(PB_PATCH_AVB2, "1");
+#else
+	mPersist.SetValue(PB_PATCH_AVB2, "0");
+#endif
+
 	mPersist.SetValue(TW_INSTALL_REBOOT_VAR, "0");
 	mPersist.SetValue(TW_SIGNED_ZIP_VERIFY_VAR, "0");
 	mPersist.SetValue(TW_DISABLE_FREE_SPACE_VAR, "0");
