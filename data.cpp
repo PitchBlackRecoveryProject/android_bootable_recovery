@@ -835,6 +835,7 @@ void DataManager::SetDefaultValues()
 	mData.SetValue("pb_torch_on", "0");
 	mData.SetValue("pb_include_logs_after_flash", "0");
 	mData.SetValue("pb_include_dmesg_logging", "0");
+	mData.SetValue("pb_torch_theme_support", "0");
 #ifdef PB_MAX_BRIGHT_VALUE
 	mConst.SetValue("pb_torch_brightness_slider", "0");
 #endif

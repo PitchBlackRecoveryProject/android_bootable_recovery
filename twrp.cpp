@@ -24,6 +24,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <signal.h>
+#include <dirent.h>
 #include "gui/twmsg.h"
 
 #include "cutils/properties.h"
@@ -70,6 +71,10 @@ extern "C" {
 TWPartitionManager PartitionManager;
 int Log_Offset;
 bool datamedia;
+
+// PB Flashlight Paths
+std::string pb_torch_flashpath;
+std::string pb_torch_switchpath;
 
 static void Print_Prop(const char *key, const char *name, void *cookie) {
 	printf("%s=%s\n", key, name);
@@ -434,6 +439,59 @@ int main(int argc, char **argv) {
 	if (PartitionManager.Get_Android_Root_Path() == "/system_root" && !DataManager::GetIntValue(PB_MOUNT_SYSTEM_AS_ROOT))
 	{
 		PartitionManager.Change_System_Root(false);
+	}
+
+	// Find and Set Flashlight path
+	string bright = "/brightness";
+	DIR* d;
+	struct dirent* de __attribute__((unused));
+	string file, flashp1 = "/sys/class/leds", flashp2 = "/flashlight", flashpath;
+	string switch_path = TWFunc::Path_Exists(flashp1 + "/led:switch" + bright) ? (flashp1 + "/led:switch") : (flashp1 + "/led:switch_0");
+	pb_torch_switchpath = switch_path;
+
+#ifdef PB_TORCH_PATH
+	flashpath = PB_TORCH_PATH;
+	LOGINFO("Flashlight: Custom Node located at '%s'\n", flashpath.c_str());
+	if (TWFunc::Path_Exists(flashpath))
+	{
+		d = opendir(flashpath.c_str());
+		if (d != NULL) {
+			flashpath += bright;
+			DataManager::SetValue("pb_torch_theme_support", "1");
+		}
+		closedir(d);
+	}
+#else
+	flashpath = flashp1 + flashp2 + bright;
+
+	if (!TWFunc::Path_Exists(flashpath))
+	{
+		d = opendir(flashp1.c_str());
+		if (d == NULL)
+		{
+			LOGINFO("Unable to open '%s'\n", flashp1.c_str());
+			DataManager::SetValue("pb_torch_theme_support", "0");
+		}
+		while ((de = readdir(d)) != NULL)
+		{
+			file = de->d_name;
+			if(file.find("torch") != string::npos || file.find("torch_"))
+			{
+				flashpath = flashp1 + "/" + file + bright;
+				break;
+			}
+		}
+		closedir (d);
+		LOGINFO("Detected Node located at  '%s'\n", flashpath.c_str());
+	}
+#endif
+	if(TWFunc::Path_Exists(flashpath)) {
+		LOGINFO("Flashlight Node Located at '%s'\n", flashpath.c_str());
+		DataManager::SetValue("pb_torch_theme_support", "1");
+		pb_torch_flashpath = flashpath;
+	} else {
+		LOGINFO("Incorrect Flashlight Path\n");
+		DataManager::SetValue("pb_torch_brightness_slider", "0");
 	}
 
 	// Launch the main GUI
