@@ -6,3 +6,4 @@ tags
 *.img
 *.zip
 .vscode
+.venv
