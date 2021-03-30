@@ -1,6 +1,16 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
+ifneq ($(TARGET_ARCH), arm64)
+    ifneq ($(TARGET_ARCH), x86_64)
+        LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker
+    else
+        LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker64
+    endif
+else
+    LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker64
+endif
+
 LOCAL_MODULE := fsckexfat
 LOCAL_MODULE_STEM := fsck.exfat
 LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
