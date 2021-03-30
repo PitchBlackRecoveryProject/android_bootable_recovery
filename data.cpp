@@ -815,10 +815,10 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue(PB_INCREMENTAL_PACKAGE, "0");
 	mPersist.SetValue(PB_DISABLE_FORCED_ENCRYPTION, "0");
 	mPersist.SetValue(PB_ENABLE_ADVANCE_ENCRY, "0");
-#ifdef PB_DISABLE_DEFAULT_DM_VERITY
-	mPersist.SetValue(PB_DISABLE_DM_VERITY, "0");
-#else
+#ifdef PB_ENABLE_DM_VERITY_CHECK
 	mPersist.SetValue(PB_DISABLE_DM_VERITY, "1");
+#else
+	mPersist.SetValue(PB_DISABLE_DM_VERITY, "0");
 #endif
 #ifdef PB_DISABLE_DEFAULT_TREBLE_COMP
 	mPersist.SetValue(PB_TREBLE_COMP, "1");
