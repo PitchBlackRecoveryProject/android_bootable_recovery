@@ -820,7 +820,7 @@ void DataManager::SetDefaultValues()
 #else
 	mPersist.SetValue(PB_DISABLE_DM_VERITY, "0");
 #endif
-#ifdef PB_DISABLE_DEFAULT_TREBLE_COMP
+#ifdef PB_ENABLE_SKIP_TREBLE_COMP_CHECK
 	mPersist.SetValue(PB_TREBLE_COMP, "1");
 #else
 	mPersist.SetValue(PB_TREBLE_COMP, "0");
