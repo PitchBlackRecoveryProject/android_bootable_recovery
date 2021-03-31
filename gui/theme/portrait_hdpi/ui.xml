@@ -479,7 +479,6 @@
 				<action function="screenshot"/>
 			</action>
 			<action>
-				<condition var1="pb_flashlight_theme_support" var2="1"/>
 			    <touch hkey="volup" />
 			    <action function="flashlight" />
 			</action>
@@ -553,7 +552,6 @@
 			</button>
 
 			<button style="main_button_back2">
-				<condition var1="pb_flashlight_theme_support" var2="1"/>
 				<placement x="380" y="%row24_y%"/>
 				<highlight color="%highlight_color%"/>
 				<icon resource="flash"/>
@@ -598,7 +596,6 @@
 				<action function="screenshot"/>
 			</action>
 			<action>
-				<condition var1="pb_flashlight_theme_support" var2="1"/>
 			    <touch hkey="volup" />
 			    <action function="flashlight" />
 			</action>
@@ -679,7 +676,6 @@
 				<action function="screenshot"/>
 			</action>
 			<action>
-				<condition var1="pb_flashlight_theme_support" var2="1"/>
 			    <touch hkey="volup" />
 			    <action function="flashlight" />
 		        </action>
@@ -783,7 +779,6 @@
 				<action function="screenshot"/>
 			</action>
 			<action>
-				<condition var1="pb_flashlight_theme_support" var2="1"/>
 			    <touch hkey="volup" />
 			    <action function="flashlight" />
 			</action>
@@ -852,7 +847,6 @@
 				<action function="screenshot"/>
 			</action>
 			<action>
-				<condition var1="pb_flashlight_theme_support" var2="1"/>
 			    <touch hkey="volup" />
 			    <action function="flashlight" />
 			</action>
@@ -962,7 +956,6 @@
 				<action function="screenshot"/>
 			</action>
 			<action>
-				<condition var1="pb_flashlight_theme_support" var2="1"/>
 			    <touch hkey="volup" />
 			    <action function="flashlight" />
 	        </action>
@@ -1174,7 +1167,6 @@
 				<action function="screenshot"/>
 			</action>
 			<action>
-				<condition var1="pb_flashlight_theme_support" var2="1"/>
 			    <touch hkey="volup" />
 			    <action function="flashlight" />
 			</action>
@@ -1254,7 +1246,6 @@
 				<action function="screenshot"/>
 			</action>
 			<action>
-				<condition var1="pb_flashlight_theme_support" var2="1"/>
 			    <touch hkey="volup" />
 			    <action function="flashlight" />
 			</action>
@@ -1356,7 +1347,6 @@
 				<action function="screenshot"/>
 			</action>
 			<action>
-				<condition var1="pb_flashlight_theme_support" var2="1"/>
 			    <touch hkey="volup" />
 			    <action function="flashlight" />
 			</action>
