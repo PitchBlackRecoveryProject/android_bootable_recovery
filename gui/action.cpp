@@ -2453,10 +2453,8 @@ int GUIAction::flashlight(std::string arg __unused)
 	if (TWFunc::Path_Exists(flashpath))
 	{
 		d = opendir(flashpath.c_str());
-		if (d != NULL) {
+		if (d != NULL)
 			flashpath += bright;
-			DataManager::SetValue("pb_flashlight_theme_support", "1");
-		}
 	}
 #else
 	flashpath = flashp1 + flashp2 + bright;
@@ -2479,7 +2477,6 @@ int GUIAction::flashlight(std::string arg __unused)
 		}
 		closedir (d);
 		LOGINFO("Detected Node located at  '%s'\n", flashpath.c_str());
-		DataManager::SetValue("pb_flashlight_theme_support", "1");
 	}
 #endif
 	str_val="";

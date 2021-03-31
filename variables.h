@@ -179,7 +179,6 @@
 #define PB_ADVANCED_STOCK_REPLACE           "pb_reboot_advanced_stock_recovery_check"
 #define PB_DISABLE_REBOOT_OTA	"pb_disable_reboot_ota"
 #define PB_MOUNT_SYSTEM_AS_ROOT "pb_mount_system_as_root"
-#define PB_FLASHLIGHT_THEME_SUPPORT   "pb_flashlight_theme_support"
 #define TRB_EN "0"
 #define STD "0"
 #define NON_STD "0"
