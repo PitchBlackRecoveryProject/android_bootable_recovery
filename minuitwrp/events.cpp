@@ -32,6 +32,13 @@
 #include <android/hardware/vibrator/1.2/IVibrator.h>
 #endif
 
+#ifdef USE_QTI_AIDL_HAPTICS
+#include <aidl/android/hardware/vibrator/IVibrator.h>
+#include <android/binder_manager.h>
+using ::aidl::android::hardware::vibrator::IVibrator;
+static const std::string kVibratorInstance = std::string(IVibrator::descriptor) + "/default";
+#endif
+
 #include "common.h"
 
 #include "minuitwrp/minui.h"
@@ -141,6 +148,11 @@ int vibrate(int timeout_ms)
         write_to_file(LEDS_HAPTICS_ACTIVATE_FILE, "1");
     } else
         write_to_file(VIBRATOR_TIMEOUT_FILE, std::to_string(timeout_ms));
+#elif defined(USE_QTI_AIDL_HAPTICS)
+    std::shared_ptr<IVibrator> vib = IVibrator::fromBinder(ndk::SpAIBinder(AServiceManager_getService(kVibratorInstance.c_str())));
+    if (vib != nullptr) {
+        vib->on((uint32_t)timeout_ms, nullptr);
+    }
 #else
     android::sp<android::hardware::vibrator::V1_2::IVibrator> vib = android::hardware::vibrator::V1_2::IVibrator::getService();
     if (vib != nullptr) {
