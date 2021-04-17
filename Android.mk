@@ -194,7 +194,7 @@ ifneq ($(BOARD_DYNAMIC_PARTITIONS_PARTITION_LIST),)
 	LOCAL_CFLAGS += "-DBOARD_DYNAMIC_PARTITIONS_PARTITION_LIST=\"$(shell echo $(BOARD_DYNAMIC_PARTITIONS_PARTITION_LIST) | sed -r 's/\b(.)/\u\1/g' | sed -e 's/ \+/, /g')\""
 endif
 
-LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
+LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/bin
 
 ifeq ($(TARGET_RECOVERY_TWRP_LIB),)
     LOCAL_SRC_FILES += BasePartition.cpp
@@ -466,16 +466,6 @@ TWRP_REQUIRED_MODULES += \
 ifneq ($(TW_OZIP_DECRYPT_KEY),)
 TWRP_REQUIRED_MODULES += \
     ozip_decrypt
-endif
-
-ifneq ($(TARGET_ARCH), arm64)
-    ifneq ($(TARGET_ARCH), x86_64)
-        LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker
-    else
-        LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker64
-    endif
-else
-    LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker64
 endif
 
 ifneq ($(wildcard external/zip/Android.mk),)

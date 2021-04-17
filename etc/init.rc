@@ -79,11 +79,11 @@ on late-init
     trigger early-boot
     trigger boot
 
-service ueventd /sbin/ueventd
+service ueventd /system/bin/ueventd
     critical
     seclabel u:r:ueventd:s0
 
-service adbd /sbin/adbd --root_seclabel=u:r:su:s0 --device_banner=recovery
+service adbd /system/bin/adbd --root_seclabel=u:r:su:s0 --device_banner=recovery
     disabled
     socket adbd stream 660 system system
     seclabel u:r:adbd:s0
@@ -98,7 +98,7 @@ on property:ro.debuggable=1
 on fs && property:ro.debuggable=1
     setprop sys.usb.config adb
 
-service fastbootd /sbin/fastbootd
+service fastbootd /system/bin/fastbootd
     disabled
     group system
     seclabel u:r:fastbootd:s0

@@ -1,7 +1,7 @@
 on init
     start vndservicemanager
 
-service vndservicemanager /sbin/vndservicemanager /dev/vndbinder
+service vndservicemanager /system/bin/vndservicemanager /dev/vndbinder
     disabled
     user root
     group root readproc

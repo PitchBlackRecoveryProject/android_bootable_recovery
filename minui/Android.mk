@@ -148,13 +148,4 @@ LOCAL_PATH := $(call my-dir)
 # LOCAL_SRC_FILES := main.cpp
 # LOCAL_SHARED_LIBRARIES := libbinder libminui libpng libz libutils libstdc++ libcutils liblog libm libc
 # LOCAL_C_INCLUDES := external/libcxx/include external/libpng
-# ifneq ($(TARGET_ARCH), arm64)
-#     ifneq ($(TARGET_ARCH), x86_64)
-#         LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker
-#     else
-#         LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker64
-#     endif
-# else
-#     LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker64
-# endif
 # include $(BUILD_EXECUTABLE)

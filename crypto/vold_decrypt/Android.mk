@@ -134,15 +134,6 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
             ifeq ($(TWRP_INCLUDE_LOGCAT), true)
                 LOCAL_CFLAGS += -DTWRP_INCLUDE_LOGCAT
             endif
-            ifneq ($(TARGET_ARCH), arm64)
-                ifneq ($(TARGET_ARCH), x86_64)
-                    LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker
-                else
-                    LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker64
-                endif
-            else
-                LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker64
-            endif
 
             include $(BUILD_EXECUTABLE)
         endif

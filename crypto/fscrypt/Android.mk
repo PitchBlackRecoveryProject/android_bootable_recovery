@@ -66,7 +66,6 @@ LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
 LOCAL_SRC_FILES := fscryptpolicyget.cpp
 LOCAL_SHARED_LIBRARIES := libtwrpfscrypt
-LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker64
 
 include $(BUILD_EXECUTABLE)
 
@@ -79,7 +78,6 @@ LOCAL_SRC_FILES := keystore_auth.cpp
 LOCAL_SHARED_LIBRARIES := libc libkeystore_binder libutils libbinder liblog
 LOCAL_CFLAGS += -DUSE_SECURITY_NAMESPACE
 LOCAL_SHARED_LIBRARIES += libkeystore_aidl
-LOCAL_LDFLAGS += -Wl,-dynamic-linker,/sbin/linker64
 
 include $(BUILD_EXECUTABLE)
 
