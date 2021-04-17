@@ -439,12 +439,14 @@ TWRP_REQUIRED_MODULES += \
     tzdata_twrp
 endif
 
-ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
     hwservicemanager \
     hwservicemanager.rc \
     vndservicemanager \
-    vndservicemanager.rc \
+    vndservicemanager.rc
+
+ifneq ($(TW_INCLUDE_CRYPTO),)
+TWRP_REQUIRED_MODULES += \
     vold_prepare_subdirs \
     task_recovery_profiles.json \
     fscryptpolicyget
