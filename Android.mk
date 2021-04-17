@@ -174,7 +174,10 @@ ifeq ($(AB_OTA_UPDATER),true)
     LOCAL_CFLAGS += -DTW_INCLUDE_INJECTTWRP
     LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
     LOCAL_SHARED_LIBRARIES += libhardware android.hardware.boot@1.0
-    TWRP_REQUIRED_MODULES += libhardware android.hardware.boot@1.0-service android.hardware.boot@1.0-service.rc
+    TWRP_REQUIRED_MODULES += libhardware android.hardware.boot@1.0-service \
+        android.hardware.boot@1.0-service.rc \
+        hwservicemanager.rc \
+        vndservicemanager.rc
 endif
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
