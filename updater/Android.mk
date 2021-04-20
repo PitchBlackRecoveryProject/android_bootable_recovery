@@ -39,7 +39,6 @@ updater_common_static_libraries := \
     libfec_rs \
     libavb \
     libverity_tree \
-    libgtest_prod \
     liblog \
     liblp \
     libselinux \
@@ -100,6 +99,8 @@ LOCAL_STATIC_LIBRARIES := \
     libfs_mgr \
     libtune2fs \
     $(tune2fs_static_libraries)
+
+LOCAL_HEADER_LIBRARIES := libgtest_prod_headers
 
 LOCAL_MODULE_CLASS := EXECUTABLES
 inc := $(call local-generated-sources-dir)/register.inc
