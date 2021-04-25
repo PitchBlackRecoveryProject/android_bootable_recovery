@@ -420,6 +420,7 @@ ifneq ($(TW_EXCLUDE_NANO), true)
 endif
 ifneq ($(TW_EXCLUDE_BASH), true)
     RELINK_SOURCE_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/bash
+    RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libncurses.so
 endif
 
 TWRP_AUTOGEN := $(intermediates)/teamwin
