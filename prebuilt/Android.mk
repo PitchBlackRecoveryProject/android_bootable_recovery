@@ -355,6 +355,7 @@ ifneq ($(TW_EXCLUDE_NANO), true)
 endif
 ifneq ($(TW_EXCLUDE_BASH), true)
     RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/bash
+    RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libncurses.so
 endif
 
 #relink recovery executables linker to /sbin and move symlinks
