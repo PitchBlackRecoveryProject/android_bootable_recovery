@@ -904,8 +904,6 @@
 		<string name="pb_dev_reboot">Es obligatorio reiniciar después de cambiar de nombre en clave</string>
 		<string name="pb_dev_name">Cambiador de nombre en clave de dispositivo PBRP</string>
 		<string name="codename_changer">Cambiador de nombre en clave</string>
-		<string name="pb_wipe_fbe_cache">Caché de FBE</string>
-		<string name="fbe_done">- ¡Borrado de caché de FBE completo!</string>
 		<string name="sel_br_val">Valor de brillo de la linterna: %pb_bright_value%%</string>
 		<string name="unmount_sys_install">Desmontar el sistema antes de instalar un ZIP</string>
 		<string name="unmount_system">Desmontaje del sistema ...</string>

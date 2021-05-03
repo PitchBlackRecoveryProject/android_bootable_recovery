@@ -906,8 +906,6 @@
 		<string name="pb_dev_reboot">Po přepnutí Codenames je nutné restartovat počítač</string>
 		<string name="pb_dev_name">Změna názvu zařízení PBRP</string>
 		<string name="codename_changer">Codename Changer</string>
-		<string name="pb_wipe_fbe_cache">Mezipaměť FBE</string>
-		<string name="fbe_done">- Vymazání mezipaměti FBE bylo dokončeno!</string>
 		<string name="sel_br_val">Hodnota jasu svítilny: %pb_bright_value%%</string>
 		<string name="unmount_sys_install">Před instalací ZIP odpojte systém</string>
 		<string name="unmount_system">Odpojení systému ...</string>

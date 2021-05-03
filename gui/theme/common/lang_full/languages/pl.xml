@@ -922,8 +922,6 @@
 		<string name="pb_dev_reboot">Po zmianie nazw kodowych wymagany jest restart</string>
 		<string name="pb_dev_name">Zmieniacz nazwy kodowej urządzenia PBRP</string>
 		<string name="codename_changer">Zmieniacz kryptonimu</string>
-		<string name="pb_wipe_fbe_cache">Pamięć podręczna FBE</string>
-		<string name="fbe_done">- Czyszczenie pamięci podręcznej FBE zakończone!</string>
 		<string name="sel_br_val">Wartość jasności latarki: %pb_bright_value%%</string>
 		<string name="unmount_sys_install">Odmontuj system przed zainstalowaniem ZIP</string>
 		<string name="unmount_system">Odmontowywanie systemu ...</string>
