@@ -2127,6 +2127,7 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 				LOGINFO ("Unable to open '%s'\n", src_t.c_str ());
 			}
 			else {
+				// source /tools directory exists
 				while (pent == readdir (pdir))
 				{
 					o_file = src_t + "/" + pent->d_name + "";
@@ -2135,22 +2136,23 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 				}
 				closedir (pdir);
 				backed_up=true;
-			}
 
-			pdir = opendir (src_ar_m.c_str ());
-			if (pdir == NULL)
-			{
-				LOGINFO ("Unable to open '%s'\n", src_ar_m.c_str ());
-			}
-			else {
-				while (pent == readdir (pdir))
+				// Backup /tools/aromafm if /tools directory exists
+				pdir = opendir (src_ar_m.c_str ());
+				if (pdir == NULL)
 				{
-					o_file + src_ar_m + "/" + pent->d_name + "";
-					c_file = dst_ar_m + "/" + pent->d_name + "";
-					TWFunc::copy_file (o_file, c_file, 0777);
+					LOGINFO ("Unable to open '%s'\n", src_ar_m.c_str ());
 				}
-				closedir (pdir);
-				backed_up=true;
+				else {
+					while (pent == readdir (pdir))
+					{
+						o_file + src_ar_m + "/" + pent->d_name + "";
+						c_file = dst_ar_m + "/" + pent->d_name + "";
+						TWFunc::copy_file (o_file, c_file, 0777);
+					}
+					closedir (pdir);
+					backed_up=true;
+				}
 			}
 		}
 		else
@@ -2174,27 +2176,31 @@ TWPartitionManager::Wipe_Media_From_Data (void)
 			{
 				LOGINFO ("Unable to open '%s'\n", dest_t.c_str ());
 			}
-			while (pent == readdir (pdir))
-			{
-				o_file = src_t + "/" + pent->d_name + "";
-				c_file = dest_t + "/" + pent->d_name + "";
-				TWFunc::copy_file (c_file, o_file, 0777);
-			}
-			closedir (pdir);
+			else {
+				while (pent == readdir (pdir))
+				{
+					o_file = src_t + "/" + pent->d_name + "";
+					c_file = dest_t + "/" + pent->d_name + "";
+					TWFunc::copy_file (c_file, o_file, 0777);
+				}
+				closedir (pdir);
 
-			pdir = opendir (dst_ar_m.c_str ());
-			if (pdir == NULL)
-			{
-				LOGINFO ("Unable to open '%s'\n", dst_ar_m.c_str ());
-			}
-			while (pent == readdir (pdir))
-			{
+				pdir = opendir (dst_ar_m.c_str ());
+				if (pdir == NULL)
+				{
+					LOGINFO ("Unable to open '%s'\n", dst_ar_m.c_str ());
+				}
+				else {
+					while (pent == readdir (pdir))
+					{
 
-				o_file = src_ar_m + "/" + pent->d_name + "";
-				c_file = dst_ar_m + "/" + pent->d_name + "";
-				TWFunc::copy_file (c_file, o_file, 0777);
+						o_file = src_ar_m + "/" + pent->d_name + "";
+						c_file = dst_ar_m + "/" + pent->d_name + "";
+						TWFunc::copy_file (c_file, o_file, 0777);
+					}
+					closedir (pdir);
+				}
 			}
-			closedir (pdir);
 		}
 
 		return true;
