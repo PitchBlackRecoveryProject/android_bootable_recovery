@@ -377,6 +377,7 @@ protected:
 	int unpack(std::string arg);
         int repack(std::string arg);
 	int repackimage(std::string arg);
+	int reflashtwrp(std::string arg);
 	int fixabrecoverybootloop(std::string arg);
 	int change_codename(std::string arg);
 	int getprop(std::string arg);
