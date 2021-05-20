@@ -149,6 +149,7 @@
 #define TW_MILITARY_TIME            "tw_military_time"
 #define TW_USE_SHA2                 "tw_use_sha2"
 #define TW_NO_SHA2                  "tw_no_sha2"
+#define TW_AUTO_REFLASHTWRP_VAR     "tw_auto_reflashtwrp"
 
 // PitchBlack Variables
 #define PB_SURVIVAL_BACKUP          "OTA"

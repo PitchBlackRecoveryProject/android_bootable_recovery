@@ -242,6 +242,7 @@ GUIAction::GUIAction(xml_node<>* node)
                 ADD_ACTION(unpack);
                 ADD_ACTION(repack);
 		ADD_ACTION(repackimage);
+		ADD_ACTION(reflashtwrp);
 		ADD_ACTION(fixabrecoverybootloop);
 		ADD_ACTION(change_codename);
 		ADD_ACTION(getprop);
@@ -2551,6 +2552,23 @@ exit:
 	return 0;
 }
 
+int GUIAction::reflashtwrp(std::string arg __unused)
+{
+	int op_status = 1;
+	twrpRepacker repacker;
+
+	operation_start("Repack Image");
+	if (!simulate)
+	{
+		if (!repacker.Flash_Current_Twrp())
+		goto exit;
+	} else
+		simulate_progress_bar();
+	op_status = 0;
+exit:
+	operation_end(op_status);
+	return 0;
+}
 int GUIAction::fixabrecoverybootloop(std::string arg __unused)
 {
 	int op_status = 1;

@@ -72,6 +72,7 @@
 #include "legacy_property_service.h"
 #include "twinstall.h"
 #include "installcommand.h"
+#include "twrpRepacker.hpp"
 extern "C" {
 	#include "gui/gui.h"
 }
@@ -544,7 +545,7 @@ static int Run_Update_Binary(const char *path, ZipWrap *Zip, int* wipe_cache, zi
 }
 
 int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
-	int ret_val, zip_verify = 1;
+	int ret_val, zip_verify = 1, reflashtwrp = 0;
 
 	if (strcmp(path, "error") == 0) {
 		LOGERR("Failed to get adb sideload file: '%s'\n", path);
@@ -672,6 +673,11 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 			if (!system_mount_state)
 				PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), true);
 			gui_warn("flash_ab_reboot=To flash additional zips, please reboot recovery to switch to the updated slot.");
+			DataManager::GetValue(TW_AUTO_REFLASHTWRP_VAR, reflashtwrp);
+			if (reflashtwrp) {
+			twrpRepacker repacker;
+			repacker.Flash_Current_Twrp();
+			}
 		} else {
 			if (Zip.EntryExists("ui.xml")) {
 				LOGINFO("PBRP theme zip\n");
