@@ -453,6 +453,16 @@ TWRP_REQUIRED_MODULES += \
     tzdata_twrp
 endif
 
+ifeq ($(TW_INCLUDE_REPACKTOOLS), true)
+TWRP_REQUIRED_MODULES += \
+    magiskboot
+endif
+
+ifeq ($(TW_INCLUDE_RESETPROP), true)
+TWRP_REQUIRED_MODULES += \
+    resetprop
+endif
+
 TWRP_REQUIRED_MODULES += \
     hwservicemanager \
     hwservicemanager.rc \
