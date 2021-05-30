@@ -166,6 +166,8 @@ ifeq ($(TW_OEM_BUILD),true)
     TW_USE_TOOLBOX := true
     TW_EXCLUDE_MTP := true
     TW_EXCLUDE_TZDATA := true
+    TW_EXCLUDE_NANO := true
+    TW_EXCLUDE_BASH := true
 endif
 
 ifeq ($(AB_OTA_UPDATER),true)
@@ -399,6 +401,9 @@ ifneq ($(TW_INCLUDE_LIBRESETPROP),)
     LOCAL_C_INCLUDES += external/magisk-prebuilt/include
     LOCAL_CFLAGS += -DTW_INCLUDE_LIBRESETPROP
 endif
+ifeq ($(TW_EXCLUDE_NANO), true)
+    LOCAL_CFLAGS += -DTW_EXCLUDE_NANO
+endif
 
 TWRP_REQUIRED_MODULES += \
     relink_libraries \
@@ -524,6 +529,17 @@ ifeq ($(TWRP_INCLUDE_LOGCAT), true)
     TWRP_REQUIRED_MODULES += logcat event-log-tags
     ifeq ($(TARGET_USES_LOGD), true)
         TWRP_REQUIRED_MODULES += logd libsysutils libnl init.recovery.logd.rc
+    endif
+endif
+ifneq ($(TW_EXCLUDE_NANO), true)
+    TWRP_REQUIRED_MODULES += \
+        nano_twrp \
+        init.recovery.nano.rc
+endif
+ifneq ($(TW_EXCLUDE_BASH), true)
+    ifneq ($(wildcard external/bash/.),)
+        TWRP_REQUIRED_MODULES += \
+            bash_twrp
     endif
 endif
 # Allow devices to specify device-specific recovery dependencies
