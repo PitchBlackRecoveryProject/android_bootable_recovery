@@ -514,9 +514,8 @@ void TWPartitionManager::Decrypt_Data() {
 					gui_err("unable_to_decrypt=Unable to decrypt with default password.");
 				}
 			}
-		}
-		else
-		{
+		} else {
+			LOGINFO("FBE setup failed. Trying FDE...");
 			Set_FDE_Encrypt_Status();
 			int password_type = cryptfs_get_password_type ();
 			if (password_type == CRYPT_TYPE_DEFAULT)
