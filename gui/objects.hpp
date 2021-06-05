@@ -370,7 +370,9 @@ protected:
 	int setlanguage(std::string arg);
 	int togglebacklight(std::string arg);
 	int twcmd(std::string arg);
+#ifndef PB_EXCLUDE_TORCH
 	int flashlight(std::string arg);
+#endif
 	int setbootslot(std::string arg);
 	int readfile(std::string arg);
 	int installapp(std::string arg);

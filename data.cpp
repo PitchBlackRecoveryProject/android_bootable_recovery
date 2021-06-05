@@ -1020,6 +1020,12 @@ void DataManager::SetDefaultValues()
 	LOGINFO("TW_EXCLUDE_NANO := true\n");
 	mConst.SetValue("tw_include_nano", "0");
 #endif
+#ifndef PB_EXCLUDE_TORCH
+	mConst.SetValue("pb_torch_support", "1");
+#else
+	LOGINFO("PB_EXCLUDE_TORCH := true\n");
+	mConst.SetValue("pb_torch_support", "0");
+#endif
 
 	mData.SetValue("tw_enable_adb_backup", "0");
 

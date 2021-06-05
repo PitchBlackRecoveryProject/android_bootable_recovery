@@ -4052,7 +4052,10 @@
 			</slidervalue>
 
 			<slidervalue>
-<condition var1="pb_torch_brightness_slider" op="!=" var2="0"/>
+				<conditions>
+					<condition var1="pb_torch_brightness_slider" op="!=" var2="0"/>
+					<condition var1="pb_torch_support" var2="1"/>
+				</conditions>
 				<placement x="90" y="%row16_y%" w="900"/>
 				<text>{@sel_br_val=Flashlight Brightness Value: %pb_bright_value%%}</text>
 				<data variable="pb_bright_value" min="1" max="255"/>
@@ -4820,7 +4823,10 @@
 			</image>
 
 			<button>
-				<condition var1="pb_torch_on" var2="0"/>
+				<conditions>
+					<condition var1="pb_torch_on" var2="0"/>
+					<condition var1="pb_torch_support" var2="1"/>
+				</conditions>
 				<placement x="%row4_header_y%" y="%row11_y%" />
 				<!--<highlight color="#1E1E1E30" />-->
 				<image resource="button_torch_off"/>
@@ -4828,7 +4834,10 @@
 			</button>
 
 			<button>
-				<condition var1="pb_torch_on" var2="1"/>
+				<conditions>
+					<condition var1="pb_torch_on" var2="1"/>
+					<condition var1="pb_torch_support" var2="1"/>
+				</conditions>
 				<placement x="%row4_header_y%" y="%row11_y%" />
 				<!--<highlight color="#1E1E1E30" />-->
 				<image resource="button_torch_on"/>

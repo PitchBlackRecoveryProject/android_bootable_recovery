@@ -465,6 +465,9 @@ endif
 ifeq ($(TW_EXCLUDE_NANO), true)
     LOCAL_CFLAGS += -DTW_EXCLUDE_NANO
 endif
+ifeq ($(PB_EXCLUDE_TORCH), true)
+    LOCAL_CFLAGS += -DPB_EXCLUDE_TORCH
+endif
 
 TWRP_REQUIRED_MODULES += \
     dump_image \

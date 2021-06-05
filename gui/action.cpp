@@ -192,7 +192,9 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(getpartitiondetails);
 		ADD_ACTION(screenshot);
 		ADD_ACTION(setbrightness);
+#ifndef PB_EXCLUDE_TORCH
 		ADD_ACTION(flashlight);
+#endif
 		ADD_ACTION(fileexists);
 		ADD_ACTION(killterminal);
 		ADD_ACTION(checkbackupname);
@@ -2450,6 +2452,7 @@ int GUIAction::repack(std::string arg __unused)
 	return 0;
 }
 
+#ifndef PB_EXCLUDE_TORCH
 int GUIAction::flashlight(std::string arg __unused)
 {
 	int br_value = DataManager::GetIntValue("pb_bright_value");
@@ -2520,6 +2523,7 @@ int GUIAction::flashlight(std::string arg __unused)
 	}
 	return 0;
 }
+#endif
 
 int GUIAction::repackimage(std::string arg __unused)
 {

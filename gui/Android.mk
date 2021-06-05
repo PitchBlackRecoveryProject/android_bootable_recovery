@@ -113,6 +113,9 @@ endif
 ifeq ($(TW_EXCLUDE_NANO), true)
     LOCAL_CFLAGS += -DTW_EXCLUDE_NANO
 endif
+ifeq ($(PB_EXCLUDE_TORCH), true)
+    LOCAL_CFLAGS += -DPB_EXCLUDE_TORCH
+endif
 
 LOCAL_C_INCLUDES += \
     bionic \
