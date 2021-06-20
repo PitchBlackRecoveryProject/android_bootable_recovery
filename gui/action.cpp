@@ -211,6 +211,8 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(togglebacklight);
 		ADD_ACTION(enableadb);
 		ADD_ACTION(enablefastboot);
+		ADD_ACTION(changeterminal);
+		ADD_ACTION(unmapsuperdevices);
 
 		// remember actions that run in the caller thread
 		for (mapFunc::const_iterator it = mf.begin(); it != mf.end(); ++it)
@@ -2637,5 +2639,21 @@ int GUIAction::enableadb(std::string arg __unused) {
 int GUIAction::enablefastboot(std::string arg __unused) {
 	android::base::SetProperty("sys.usb.config", "none");
 	android::base::SetProperty("sys.usb.config", "fastboot");
+	return 0;
+}
+
+int GUIAction::unmapsuperdevices(std::string arg __unused) {
+	int op_status = 1;
+
+	operation_start("Remove Super Devices");
+	if (simulate) {
+		simulate_progress_bar();
+	} else {
+		if (PartitionManager.Unmap_Super_Devices()) {
+			op_status = 0;
+		}
+	}
+
+	operation_end(op_status);
 	return 0;
 }

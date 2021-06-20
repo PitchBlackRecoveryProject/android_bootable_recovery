@@ -896,6 +896,7 @@ void DataManager::SetDefaultValues()
 #endif
         mPersist.SetValue(TRB_EN, "0");
         mPersist.SetValue(STD, "0");
+
 #ifdef TW_NO_SCREEN_TIMEOUT
 	mConst.SetValue("tw_screen_timeout_secs", "0");
 	mConst.SetValue("tw_no_screen_timeout", "1");
