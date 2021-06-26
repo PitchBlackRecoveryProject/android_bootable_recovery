@@ -339,6 +339,9 @@ TWPartitionManager::Process_Fstab (string Fstab_Filename, bool Display_Error, bo
 			if (ven) {
 				ven->Mount(true);
 			}
+#ifdef TW_EXCLUDE_APEX
+			LOGINFO("Apex is disabled in this build\n");
+#else
 			twrpApex apex;
 			if (!apex.loadApexImages()) {
 				LOGERR("Unable to load apex images from %s\n", APEX_DIR);
@@ -347,6 +350,7 @@ TWPartitionManager::Process_Fstab (string Fstab_Filename, bool Display_Error, bo
 				property_set("twrp.apex.loaded", "true");
 			}
 			TWFunc::check_and_run_script("/sbin/resyncapex.sh", "apex");
+#endif
 		}
 	}
 	if (ven)

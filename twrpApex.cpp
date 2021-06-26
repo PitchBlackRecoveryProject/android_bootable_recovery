@@ -1,20 +1,44 @@
 #include "twrpApex.hpp"
+#include "common.h"
 
 namespace fs = std::filesystem;
 
 bool twrpApex::loadApexImages() {
 	std::vector<std::string> apexFiles;
+	std::vector<std::string> checkApexFlatFiles;
+#ifdef TW_ADDITIONAL_APEX_FILES
+	char* additionalFiles = strdup(EXPAND(TW_ADDITIONAL_APEX_FILES));
+	char* additionalApexFiles = std::strtok(additionalFiles, " ");
+#endif
+
+	apexFiles.push_back(APEX_DIR "/com.android.apex.cts.shim.apex");
+	apexFiles.push_back(APEX_DIR "/com.google.android.tzdata2.apex");
+	apexFiles.push_back(APEX_DIR "/com.android.tzdata.apex");
+	apexFiles.push_back(APEX_DIR "/com.android.art.release.apex");
+	apexFiles.push_back(APEX_DIR "/com.google.android.media.swcodec.apex");
+	apexFiles.push_back(APEX_DIR "/com.android.media.swcodec.apex");
+
+#ifdef TW_ADDITIONAL_APEX_FILES
+	while(additionalApexFiles) {
+		std::stringstream apexFile;
+		apexFile << APEX_DIR << "/" << additionalApexFiles;
+		apexFiles.push_back(apexFile.str());
+		additionalApexFiles = std::strtok(nullptr, " ");
+	}
+#endif
+
 	if (access(APEX_DIR, F_OK) != 0) {
 		LOGERR("Unable to open %s\n", APEX_DIR);
 		return false;
 	}
 	for (const auto& entry : fs::directory_iterator(APEX_DIR)) {
 	   if (entry.is_regular_file()) {
-		   apexFiles.push_back(entry.path().string());
+		   checkApexFlatFiles.push_back(entry.path().string());
+
 	   }
 	}
 
-	if (apexFiles.size() == 0) {
+	if (checkApexFlatFiles.size() == 0) {
 		// flattened apex directory
 		LOGINFO("Bind mounting flattened apex directory\n");
 		if (mount(APEX_DIR, APEX_BASE, "", MS_BIND, NULL) < 0) {
@@ -31,6 +55,10 @@ bool twrpApex::loadApexImages() {
 	size_t apexFileCount = 0;
 	for (auto&& apexFile : apexFiles) {
 		std::string fileToMount = unzipImage(apexFile);
+		if (fileToMount.empty()) {
+			LOGINFO("Skipping non-existent apex file: %s\n", apexFile.c_str());
+			continue;
+		}
 		loadApexImage(fileToMount, apexFileCount++);
 	}
 	return true;
@@ -39,10 +67,9 @@ bool twrpApex::loadApexImages() {
 std::string twrpApex::unzipImage(std::string file) {
 	ZipArchiveHandle handle;
 	int32_t ret = OpenArchive(file.c_str(), &handle);
-	if (ret != 0) {
-		LOGERR("unable to open zip archive %s\n", file.c_str());
-		CloseArchive(handle);
-		return nullptr;
+	if (ret != 0){
+		LOGINFO("unable to open zip archive %s. Reason: %s\n", file.c_str(), strerror(errno));
+		return std::string();
 	}
 
 	ZipEntry entry;
@@ -51,7 +78,7 @@ std::string twrpApex::unzipImage(std::string file) {
 	if (ret != 0) {
 		LOGERR("unable to find %s in zip\n", APEX_PAYLOAD);
 		CloseArchive(handle);
-		return nullptr;
+		return std::string();
 	}
 
 	std::string baseFile = basename(file.c_str());
@@ -63,7 +90,7 @@ std::string twrpApex::unzipImage(std::string file) {
 		LOGERR("unable to extract %s\n", path.c_str());
 		close(fd);
 		CloseArchive(handle);
-		return nullptr;
+		return std::string();
 	}
 
 	close(fd);
@@ -113,7 +140,8 @@ bool twrpApex::loadApexImage(std::string fileToMount, size_t loop_device_number)
 	}
 
 	if (ioctl(loop_fd, LOOP_SET_FD, fd) < 0) {
-		LOGERR("failed to mount %s to loop device %s\n", fileToMount.c_str(), loop_device.c_str());
+		LOGERR("failed to mount %s to loop device %s. Reason: %s\n", fileToMount.c_str(), loop_device.c_str(), 
+			strerror(errno));
 		close(fd);
 		close(loop_fd);
 		return false;
