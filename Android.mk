@@ -100,9 +100,14 @@ LOCAL_SRC_FILES := \
     openrecoveryscript.cpp \
     tarWrite.c \
     twrpAdbBuFifo.cpp \
-    twrpApex.cpp \
     twrpRepacker.cpp \
     pbfun.cpp
+
+ifeq ($(TW_EXCLUDE_APEX),)
+    LOCAL_SRC_FILES += twrpApex.cpp
+else
+    LOCAL_CFLAGS += -DTW_EXCLUDE_APEX
+endif
 
 LOCAL_STATIC_LIBRARIES += libavb libtwrpinstall libminadbd_services libinit
 LOCAL_SHARED_LIBRARIES += libfs_mgr
@@ -308,6 +313,9 @@ ifeq ($(TW_INCLUDE_JB_CRYPTO), true)
 endif
 ifeq ($(TW_INCLUDE_L_CRYPTO), true)
     TW_INCLUDE_CRYPTO := true
+endif
+ifneq ($(TW_ADDITIONAL_APEX_FILES),)
+    LOCAL_CFLAGS += -DTW_ADDITIONAL_APEX_FILES=$(TW_ADDITIONAL_APEX_FILES)
 endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO -DUSE_FSCRYPT -Wno-macro-redefined
