@@ -423,12 +423,12 @@ int GUIAction::flash_zip(std::string filename, int* wipe_cache)
 		PartitionManager.Unlock_Block_Partitions();
 		// Now, check if we need to ensure TWRP remains installed...
 		struct stat st;
-		if (stat("/sbin/installTwrp", &st) == 0)
+		if (stat("/system/bin/installTwrp", &st) == 0)
 		{
 			DataManager::SetValue("tw_operation", "Configuring TWRP");
 			DataManager::SetValue("tw_partition", "");
 			gui_msg("config_twrp=Configuring TWRP...");
-			if (TWFunc::Exec_Cmd("/sbin/installTwrp reinstall") < 0)
+			if (TWFunc::Exec_Cmd("/system/bin/installTwrp reinstall") < 0)
 			{
 				gui_msg("config_twrp_err=Unable to configure TWRP with this kernel.");
 			}
@@ -740,7 +740,7 @@ int GUIAction::copylog(std::string arg __unused)
                 if (copy_logcat_log || DataManager::GetIntValue("pb_inlclude_logcat_logging")) {
                         std::string logcatDst = path;
                         logcatDst.replace(logcatDst.find_last_of("/")+1,8,"logcat");
-                        std::string logcatCmd = "/sbin/logcat -d";
+                        std::string logcatCmd = "/system/bin/logcat -d";
                         std::string result;
                         TWFunc::Exec_Cmd(logcatCmd, result);
                         TWFunc::write_to_file(logcatDst, result);
@@ -754,7 +754,7 @@ int GUIAction::copylog(std::string arg __unused)
 		if (copy_kernel_log || DataManager::GetIntValue("pb_inlclude_dmesg_logging")) {
 			std::string dmesgDst = path;
 			dmesgDst.replace(dmesgDst.find_last_of("/")+1,8,"dmesg");
-			std::string dmesgCmd = "/sbin/dmesg";
+			std::string dmesgCmd = "/system/bin/dmesg";
 			std::string result;
 			TWFunc::Exec_Cmd(dmesgCmd, result);
 			TWFunc::write_to_file(dmesgDst, result);
@@ -1016,19 +1016,19 @@ int GUIAction::getpartitiondetails(std::string arg)
 					DataManager::SetValue("tw_partition_can_resize", 1);
 				else
 					DataManager::SetValue("tw_partition_can_resize", 0);
-				if (TWFunc::Path_Exists("/sbin/mkfs.fat"))
+				if (TWFunc::Path_Exists("/system/bin/mkfs.fat"))
 					DataManager::SetValue("tw_partition_vfat", 1);
 				else
 					DataManager::SetValue("tw_partition_vfat", 0);
-				if (TWFunc::Path_Exists("/sbin/mkexfatfs"))
+				if (TWFunc::Path_Exists("/system/bin/mkexfatfs"))
 					DataManager::SetValue("tw_partition_exfat", 1);
 				else
 					DataManager::SetValue("tw_partition_exfat", 0);
-				if (TWFunc::Path_Exists("/sbin/mkfs.f2fs") || TWFunc::Path_Exists("/sbin/make_f2fs"))
+				if (TWFunc::Path_Exists("/system/bin/mkfs.f2fs") || TWFunc::Path_Exists("/system/bin/make_f2fs"))
 					DataManager::SetValue("tw_partition_f2fs", 1);
 				else
 					DataManager::SetValue("tw_partition_f2fs", 0);
-				if (TWFunc::Path_Exists("/sbin/mke2fs"))
+				if (TWFunc::Path_Exists("/system/bin/mke2fs"))
 					DataManager::SetValue("tw_partition_ext", 1);
 				else
 					DataManager::SetValue("tw_partition_ext", 0);
@@ -1185,7 +1185,7 @@ int GUIAction::reinject_after_flash()
 
 int GUIAction::ozip_decrypt(string zip_path)
 {
-	if (!TWFunc::Path_Exists("/sbin/ozip_decrypt")) {            
+	if (!TWFunc::Path_Exists("/system/bin/ozip_decrypt")) {            
             return 1;
         }
 	gui_msg("ozip_decrypt_decryption=Starting Ozip Decryption...");
@@ -1196,7 +1196,7 @@ int GUIAction::ozip_decrypt(string zip_path)
 
 int GUIAction::keypressed()
 {
-	return TWFunc::Exec_Cmd("/sbin/keycheck", false, true);
+	return TWFunc::Exec_Cmd("/system/bin/keycheck", false, true);
 }
 
 int GUIAction::keycheck(std::string zip, int w __unused)
@@ -1215,7 +1215,7 @@ int GUIAction::keycheck(std::string zip, int w __unused)
 	ramdisk_patched[1] = zip != "recovery.img" ? atoi(TWFunc::File_Property_Get(insf, "boot_b").c_str()) : 1;
 #endif
 	pbRet = atoi(pb_installed.c_str());
-	if (pbRet && TWFunc::Path_Exists("/sbin/keycheck"))
+	if (pbRet && TWFunc::Path_Exists("/system/bin/keycheck"))
 	{
 #ifdef AB_OTA_UPDATER
 		if (ramdisk_patched[slot])
@@ -2300,7 +2300,7 @@ int GUIAction::installapp(std::string arg __unused)
 					goto exit;
 				}
 				install_path += "/base.apk";
-				if (TWFunc::copy_file("/sbin/me.twrp.twrpapp.apk", install_path, 0644)) {
+				if (TWFunc::copy_file("/system/bin/me.twrp.twrpapp.apk", install_path, 0644)) {
 					LOGERR("Error copying apk file\n");
 					goto exit;
 				}
@@ -2333,7 +2333,7 @@ int GUIAction::installapp(std::string arg __unused)
 							goto exit;
 						}
 						install_path += "/me.twrp.twrpapp.apk";
-						if (TWFunc::copy_file("/sbin/me.twrp.twrpapp.apk", install_path, 0644)) {
+						if (TWFunc::copy_file("/system/bin/me.twrp.twrpapp.apk", install_path, 0644)) {
 							LOGERR("Error copying apk file\n");
 							goto exit;
 						}
@@ -2505,7 +2505,7 @@ int GUIAction::fixabrecoverybootloop(std::string arg __unused)
 	operation_start("Repack Image");
 	if (!simulate)
 	{
-		if (!TWFunc::Path_Exists("/sbin/magiskboot")) {
+		if (!TWFunc::Path_Exists("/system/bin/magiskboot")) {
 			LOGERR("Image repacking tool not present in this TWRP build!");
 			goto exit;
 		}
@@ -2521,7 +2521,7 @@ int GUIAction::fixabrecoverybootloop(std::string arg __unused)
 			goto exit;
 		DataManager::SetProgress(.25);
 		gui_msg("fixing_recovery_loop_patch=Patching kernel...");
-		std::string command = "cd " REPACK_ORIG_DIR " && /sbin/magiskboot hexpatch kernel 77616E745F696E697472616D667300 736B69705F696E697472616D667300";
+		std::string command = "cd " REPACK_ORIG_DIR " && /system/bin/magiskboot hexpatch kernel 77616E745F696E697472616D667300 736B69705F696E697472616D667300";
 		if (TWFunc::Exec_Cmd(command) != 0) {
 			gui_msg(Msg(msg::kError, "fix_recovery_loop_patch_error=Error patching kernel."));
 			goto exit;
@@ -2537,7 +2537,7 @@ int GUIAction::fixabrecoverybootloop(std::string arg __unused)
 		}
 		DataManager::SetProgress(.5);
 		gui_msg(Msg("repacking_image=Repacking {1}...")(part->Display_Name));
-		command = "cd " REPACK_ORIG_DIR " && /sbin/magiskboot repack " REPACK_ORIG_DIR "boot.img";
+		command = "cd " REPACK_ORIG_DIR " && /system/bin/magiskboot repack " REPACK_ORIG_DIR "boot.img";
 		if (TWFunc::Exec_Cmd(command) != 0) {
 			gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
 			goto exit;

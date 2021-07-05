@@ -123,7 +123,7 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
             LOCAL_SRC_FILES := vdc_pie.cpp
             LOCAL_MODULE_TAGS := optional
             LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
-            LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
+            LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/bin
             LOCAL_CLANG := true
             LOCAL_TIDY := true
             LOCAL_TIDY_FLAGS := -warnings-as-errors=clang-analyzer-security*,cert-*

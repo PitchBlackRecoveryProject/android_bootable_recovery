@@ -295,7 +295,7 @@ static void CreateMinadbdServiceAndExecuteCommands(
   if (child == 0) {
     recovery_socket.reset();
     std::vector<std::string> minadbd_commands = {
-      "/sbin/minadbd",
+      "/system/bin/minadbd",
       "--socket_fd",
       std::to_string(minadbd_socket.release()),
     };

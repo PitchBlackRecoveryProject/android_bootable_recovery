@@ -101,7 +101,7 @@ int TWFunc::Exec_Cmd(const string& cmd, bool Show_Errors, bool retn) {
 			LOGERR("Exec_Cmd(): vfork failed: %d!\n", errno);
 			return -1;
 		case 0: // child
-			execl("/sbin/sh", "sh", "-c", cmd.c_str(), NULL);
+			execl("/system/bin/sh", "sh", "-c", cmd.c_str(), NULL);
 			_exit(127);
 			break;
 		default:
@@ -633,7 +633,7 @@ int TWFunc::tw_reboot(RebootCommand command)
 		case rb_system:
 			Update_Intent_File("s");
 			sync();
-			check_and_run_script("/sbin/rebootsystem.sh", "reboot system");
+			check_and_run_script("/system/bin/rebootsystem.sh", "reboot system");
 #ifdef ANDROID_RB_PROPERTY
 			return property_set(ANDROID_RB_PROPERTY, "reboot,");
 #elif defined(ANDROID_RB_RESTART)
@@ -642,13 +642,13 @@ int TWFunc::tw_reboot(RebootCommand command)
 			return reboot(RB_AUTOBOOT);
 #endif
 		case rb_recovery:
-			check_and_run_script("/sbin/rebootrecovery.sh", "reboot recovery");
+			check_and_run_script("/system/bin/rebootrecovery.sh", "reboot recovery");
 			return property_set(ANDROID_RB_PROPERTY, "reboot,recovery");
 		case rb_bootloader:
-			check_and_run_script("/sbin/rebootbootloader.sh", "reboot bootloader");
+			check_and_run_script("/system/bin/rebootbootloader.sh", "reboot bootloader");
 			return property_set(ANDROID_RB_PROPERTY, "reboot,bootloader");
 		case rb_poweroff:
-			check_and_run_script("/sbin/poweroff.sh", "power off");
+			check_and_run_script("/system/bin/poweroff.sh", "power off");
 #ifdef ANDROID_RB_PROPERTY
 			return property_set(ANDROID_RB_PROPERTY, "shutdown,");
 #elif defined(ANDROID_RB_POWEROFF)
@@ -657,10 +657,10 @@ int TWFunc::tw_reboot(RebootCommand command)
 			return reboot(RB_POWER_OFF);
 #endif
 		case rb_download:
-			check_and_run_script("/sbin/rebootdownload.sh", "reboot download");
+			check_and_run_script("/system/bin/rebootdownload.sh", "reboot download");
 			return property_set(ANDROID_RB_PROPERTY, "reboot,download");
 		case rb_edl:
-			check_and_run_script("/sbin/rebootedl.sh", "reboot edl");
+			check_and_run_script("/system/bin/rebootedl.sh", "reboot edl");
 			return property_set(ANDROID_RB_PROPERTY, "reboot,edl");
 		case rb_fastboot:
 			return property_set(ANDROID_RB_PROPERTY, "reboot,fastboot");
@@ -1339,7 +1339,7 @@ TWFunc::removeDir(tmp, false);
 //return fals
 if (!TWFunc::Recursive_Mkdir(split_img))
 return false;
-string Command = "cd " + split_img + " && /sbin/magiskboot --unpack -h ";
+string Command = "cd " + split_img + " && /system/bin/magiskboot --unpack -h ";
 if (part) {
 	TWPartition* Partition = PartitionManager.Find_Partition_By_Path(mount_point);
 	if (Partition == NULL || Partition->Current_File_System != "emmc") {
@@ -1415,7 +1415,7 @@ closedir(dir);
 if (ram.find("ramdisk") != string::npos && !Unpack_Repack_ramdisk(true)) {
 	return false;
 }
-Command = "cd " + split_img + " && /sbin/magiskboot --repack ";
+Command = "cd " + split_img + " && /system/bin/magiskboot --repack ";
 if (part) {
 	Command += "/tmp/pb/boot.img";
 }
@@ -1825,9 +1825,9 @@ void TWFunc::Deactivation_Process(void)
 		}
 
 		gui_msg(Msg("pb_patching=Patching: '{1}'")("ramdisk"));
-		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot cpio ramdisk.cpio patch", out);
+		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /system/bin/magiskboot cpio ramdisk.cpio patch", out);
 		gui_msg(Msg("pb_patching=Patching: '{1}'")("dtb"));
-		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /sbin/magiskboot dtb " + dtb + " patch", out);
+		TWFunc::Exec_Cmd("cd /tmp/pb/split_img && /system/bin/magiskboot dtb " + dtb + " patch", out);
 		unsetenv("KEEPFORCEENCRYPT");
 		unsetenv("KEEPVERITY");
 		out="";
@@ -1890,7 +1890,7 @@ void TWFunc::Read_Write_Specific_Partition(string path, string partition_name, b
 
 void TWFunc::copy_logcat_log(string curr_storage) {
 	std::string logcatDst = curr_storage + "/logcat.log";
-	std::string logcatCmd = "/sbin/logcat -d";
+	std::string logcatCmd = "/system/bin/logcat -d";
 
 	std::string result;
 	Exec_Cmd(logcatCmd, result);
@@ -1901,7 +1901,7 @@ void TWFunc::copy_logcat_log(string curr_storage) {
 
 void TWFunc::copy_kernel_log(string curr_storage) {
 	std::string dmesgDst = curr_storage + "/dmesg.log";
-	std::string dmesgCmd = "/sbin/dmesg";
+	std::string dmesgCmd = "/system/bin/dmesg";
 
 	std::string result;
 	Exec_Cmd(dmesgCmd, result);
@@ -2096,7 +2096,7 @@ bool TWFunc::isNumber(string strtocheck) {
 }
 
 int TWFunc::stream_adb_backup(string &Restore_Name) {
-	string cmd = "/sbin/bu --twrp stream " + Restore_Name;
+	string cmd = "/system/bin/bu --twrp stream " + Restore_Name;
 	LOGINFO("stream_adb_backup: %s\n", cmd.c_str());
 	int ret = TWFunc::Exec_Cmd(cmd);
 	if (ret != 0)
@@ -2147,8 +2147,8 @@ void TWFunc::check_selinux_support() {
 		if (TWFunc::Path_Exists(se_context_check)) {
 			ret = lgetfilecon(se_context_check.c_str(), &contexts);
 			if (ret < 0) {
-				LOGINFO("Could not check %s SELinux contexts, using /sbin/teamwin instead which may be inaccurate.\n", se_context_check.c_str());
-				lgetfilecon("/sbin/teamwin", &contexts);
+				LOGINFO("Could not check %s SELinux contexts, using /system/bin/teamwin instead which may be inaccurate.\n", se_context_check.c_str());
+				lgetfilecon("/system/bin/teamwin", &contexts);
 			}
 		}
 		if (ret < 0) {

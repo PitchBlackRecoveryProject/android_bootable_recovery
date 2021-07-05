@@ -186,7 +186,7 @@ void fuse_unmount_compat22(const char *mountpoint)
 	if (rv)
 		return;
 
-	if (asprintf(&umount_cmd, "/sbin/umount %s", dev) == -1)
+	if (asprintf(&umount_cmd, "/system/bin/umount %s", dev) == -1)
 		return;
 	system(umount_cmd);
 	free(umount_cmd);
@@ -196,7 +196,7 @@ static void do_unmount(char *dev, int fd)
 {
 	char device_path[SPECNAMELEN + 12];
 	const char *argv[4];
-	const char umount_cmd[] = "/sbin/umount";
+	const char umount_cmd[] = "/system/bin/umount";
 	pid_t pid;
 
 	snprintf(device_path, SPECNAMELEN + 12, _PATH_DEV "%s", dev);

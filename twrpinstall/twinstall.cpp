@@ -558,7 +558,7 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 			bool vendor_mount_state = PartitionManager.Is_Mounted_By_Path("/vendor");
 			PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), true);
 			PartitionManager.Mount_By_Path("/vendor", true);
-			TWFunc::copy_file("/sbin/sh", "/tmp/sh", 0755);
+			TWFunc::copy_file("/system/bin/sh", "/tmp/sh", 0755);
 			mount("/tmp/sh", "/system/bin/sh", "auto", MS_BIND, NULL);
 			gui_msg(Msg(msg::kHighlight, "flash_ab_inactive=Flashing A/B zip to inactive slot: {1}")(PartitionManager.Get_Active_Slot_Display()=="A"?"B":"A"));
 			ret_val = Run_Update_Binary(path, wipe_cache, AB_OTA_ZIP_TYPE);

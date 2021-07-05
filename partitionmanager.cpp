@@ -1796,9 +1796,9 @@ int TWPartitionManager::Wipe_Substratum_Overlays(void)
 	string theme_dir = data_system + "/theme";
 	string subs_dir = "/data/media/0/substratum";
 	string subs_dir2 = "/data/media/0/.substratum";
-	string subs_module1 = "/sbin/.magisk/mirror/system/app";
-	string subs_module2 = "/sbin/.core/mirror/system/app";
-	string subs_module3 = "/sbin/.magisk/img/substratum/system/app";
+	string subs_module1 = "/system/bin/.magisk/mirror/system/app";
+	string subs_module2 = "/system/bin/.core/mirror/system/app";
+	string subs_module3 = "/system/bin/.magisk/img/substratum/system/app";
 
 	if (!Mount_By_Path("/data", true))
 		return false;
@@ -1951,7 +1951,7 @@ TWPartitionManager::Factory_Reset (void)
 				ret = false;
 		}
 	}
-	TWFunc::check_and_run_script ("/sbin/factoryreset.sh",
+	TWFunc::check_and_run_script ("/system/bin/factoryreset.sh",
 								  "Factory Reset Script");
 	return ret;
 }

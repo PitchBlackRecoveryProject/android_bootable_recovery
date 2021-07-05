@@ -88,7 +88,7 @@ std::string twrpRepacker::Unpack_Image(const std::string& Source_Path, const std
 		if (TWFunc::copy_file(Source_Path, destination, 0644))
 			return std::string();
 	}
-	std::string command = "cd " + Temp_Folder_Destination + " && /sbin/magiskboot unpack -h ";
+	std::string command = "cd " + Temp_Folder_Destination + " && /system/bin/magiskboot unpack -h ";
 	command = command + "'" + Source_Path +"'";
 
 	std::string magisk_unpack_output;
@@ -110,7 +110,7 @@ std::string twrpRepacker::Unpack_Image(const std::string& Source_Path, const std
 bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const struct Repack_Options_struct& Repack_Options) {
 	bool recompress = false;
 
-	if (!TWFunc::Path_Exists("/sbin/magiskboot")) {
+	if (!TWFunc::Path_Exists("/system/bin/magiskboot")) {
 		LOGERR("Image repacking tool not present in this TWRP build!");
 		return false;
 	}
@@ -153,7 +153,7 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 		LOGERR("Disabling verity is not implemented yet\n");
 	if (Repack_Options.Disable_Force_Encrypt)
 		LOGERR("Disabling force encrypt is not implemented yet\n");
-	std::string command = "cd " + path + " && /sbin/magiskboot repack ";
+	std::string command = "cd " + path + " && /system/bin/magiskboot repack ";
 	if (original_ramdisk_format != image_ramdisk_format) {
 		command = command + "-n ";
 		recompress = true;
@@ -167,7 +167,7 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 	copy_compressed_image += "ramdisk-1.cpio";
 
 	if (recompress) {
-		std::string compress_cmd = "/sbin/magiskboot compress=" + image_ramdisk_format + " " + orig_compressed_image + " " + copy_compressed_image;
+		std::string compress_cmd = "/system/bin/magiskboot compress=" + image_ramdisk_format + " " + orig_compressed_image + " " + copy_compressed_image;
 		if (TWFunc::Exec_Cmd(compress_cmd) != 0) {
 			gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
 			return false;
@@ -204,7 +204,7 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 			return false;
 		}
 		path = REPACK_ORIG_DIR;
-		std::string command = "cd " + path + " && /sbin/magiskboot repack ";
+		std::string command = "cd " + path + " && /system/bin/magiskboot repack ";
 
 		if (original_ramdisk_format != image_ramdisk_format) {
 			command = command + "-n ";
@@ -213,7 +213,7 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 		command += path + "boot.img";
 
 		if (recompress) {
-			std::string compress_cmd = "/sbin/magiskboot compress=" + image_ramdisk_format + " " + orig_compressed_image + " " + copy_compressed_image;
+			std::string compress_cmd = "/system/bin/magiskboot compress=" + image_ramdisk_format + " " + orig_compressed_image + " " + copy_compressed_image;
 			if (TWFunc::Exec_Cmd(compress_cmd) != 0) {
 				gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
 				return false;
