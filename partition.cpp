@@ -663,6 +663,11 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 	if (datamedia)
 		Setup_Data_Media();
 	Can_Be_Encrypted = true;
+	if (Mount(false) && TWFunc::Path_Exists("/data/unencrypted/key/version")) {
+		DataManager::SetValue(TW_IS_FBE, 1);
+		Is_FBE = true;
+		UnMount(false);
+	}
 	char crypto_blkdev[255];
 	property_get("ro.crypto.fs_crypto_blkdev", crypto_blkdev, "error");
 	if (strcmp(crypto_blkdev, "error") != 0) {
