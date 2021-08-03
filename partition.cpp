@@ -1,5 +1,5 @@
 /*
-	Copyright 2013 to 2020 TeamWin
+	Copyright 2013 to 2021 TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
 	
 	Copyright 2018 ATG Droid  
@@ -1822,6 +1822,14 @@ bool TWPartition::Wipe_AndSec(void) {
 
 	gui_msg(Msg("wiping=Wiping {1}")(Backup_Display_Name));
 	TWFunc::removeDir(Mount_Point + "/.android_secure/", true);
+	return true;
+}
+
+bool TWPartition::Wipe_Data_Cache(void) {
+	if (!Mount(true))
+		return false;
+	gui_msg(Msg("wiping=Wiping {1}")(Mount_Point + "/cache/"));
+	TWFunc::removeDir(Mount_Point + "/cache/", true);
 	return true;
 }
 

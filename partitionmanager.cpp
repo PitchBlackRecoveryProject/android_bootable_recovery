@@ -1,5 +1,5 @@
 /*
-	Copyright 2014 to 2020 TeamWin
+	Copyright 2014 to 2021 TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
 
 	Copyright 2018 ATG Droid
@@ -69,6 +69,7 @@
 #include "twcommon.h"
 #include "partitions.hpp"
 #include "data.hpp"
+#include "startupArgs.hpp"
 #include "twrp-functions.hpp"
 #include "fixContexts.hpp"
 #include "exclude.hpp"
@@ -1750,7 +1751,17 @@ TWPartitionManager::Wipe_By_Path (string Path)
 	bool found = false;
 	string Local_Path = TWFunc::Get_Root_Path (Path);
 
-// Iterate through all partitions
+	if (Path == "/cache") {
+		TWPartition* cache = Find_Partition_By_Path("/cache");
+		if (cache == nullptr) {
+			TWPartition* dat = Find_Partition_By_Path("/data");
+			if (dat) {
+				dat->Wipe_Data_Cache();
+				found = true;
+			}
+		}
+	}
+	// Iterate through all partitions
 	for (iter = Partitions.begin (); iter != Partitions.end (); iter++)
 	{
 		if ((*iter)->Mount_Point == Local_Path
@@ -2444,13 +2455,21 @@ TWPartitionManager::Update_System_Details (void)
 	return;
 }
 
-void
-TWPartitionManager::Post_Decrypt (const string & Block_Device)
-{
-	TWPartition *dat = Find_Partition_By_Path ("/data");
-	if (dat != NULL)
-	{
-		DataManager::SetValue (TW_IS_DECRYPTED, 1);
+void TWPartitionManager::Post_Decrypt(const string& Block_Device) {
+	TWPartition* dat = Find_Partition_By_Path("/data");
+
+	if (dat != NULL) {
+		// reparse for /cache/recovery/command
+		static constexpr const char* COMMAND_FILE = "/data/cache/command";
+		if (TWFunc::Path_Exists(COMMAND_FILE)) {
+			startupArgs startup;
+			std::string content;
+			TWFunc::read_file(COMMAND_FILE, content);
+			std::vector<std::string> args = {content};
+			startup.processRecoveryArgs(args, 0);
+		}
+
+		DataManager::SetValue(TW_IS_DECRYPTED, 1);
 		dat->Is_Decrypted = true;
 		if (!Block_Device.empty ())
 		{
