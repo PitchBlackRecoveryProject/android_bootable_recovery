@@ -183,23 +183,11 @@ endif
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
     LOCAL_CFLAGS += -DPRODUCT_USE_DYNAMIC_PARTITIONS=1
-    ifneq ($(TW_INCLUDE_LOGICAL),)
-        LOCAL_CFLAGS += -DMORE_LOGICAL='"$(TW_INCLUDE_LOGICAL)"'
-    endif
     TWRP_REQUIRED_MODULES += android.hardware.health@2.1-service android.hardware.health@2.1-impl.recovery android.hardware.health@2.1-service.rc android.hardware.health@2.1.xml
     TWRP_REQUIRED_MODULES += android.hardware.health@2.0-service android.hardware.health@2.0-impl.recovery android.hardware.health@2.0-service.rc 
     ifeq ($(TW_EXCLUDE_LPDUMP),)
         TWRP_REQUIRED_MODULES += lpdump lpdumpd.rc
     endif
-endif
-
-ifneq ($(BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST),)
-	BOARD_DYNAMIC_PARTITIONS_PARTITION_LIST := $(BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST)
-else ifneq ($(BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST),)
-	BOARD_DYNAMIC_PARTITIONS_PARTITION_LIST := $(BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST)
-endif
-ifneq ($(BOARD_DYNAMIC_PARTITIONS_PARTITION_LIST),)
-	LOCAL_CFLAGS += "-DBOARD_DYNAMIC_PARTITIONS_PARTITION_LIST=\"$(shell echo $(BOARD_DYNAMIC_PARTITIONS_PARTITION_LIST) | sed -r 's/\b(.)/\u\1/g' | sed -e 's/ \+/, /g')\""
 endif
 
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/bin

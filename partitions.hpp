@@ -384,7 +384,6 @@ public:
 	bool Decrypt_Adopted();                                                   // Attempt to identy and decrypt any adopted storage partitions
 	void Remove_Partition_By_Path(string Path);                               // Removes / erases a partition entry from the partition list
 	bool Prepare_All_Super_Volumes();										  // Prepare all known super volumes from super partition
-	bool Is_Super_Partition(const char* fstab_line);						  // Checks if partition entry is a super partition
 	bool Flash_Image(string& path, string& filename);                         // Flashes an image to a selected partition from the partition list
 	bool Flash_Repacked_Image(string& path, string& filename, bool recovery); // Reflash repacked image...
 	
@@ -445,6 +444,7 @@ private:
 	std::vector<TWPartition*> Partitions;                                     // Vector list of all partitions
 	string Active_Slot_Display;                                               // Current Active Slot (A or B) for display purposes
 	std::vector<users_struct> Users_List;                                     // List of FBE users
+	std::vector<std::string> Super_Partition_List;                            // Display value for super partitions
 };
 
 extern TWPartitionManager PartitionManager;
