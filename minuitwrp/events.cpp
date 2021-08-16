@@ -153,6 +153,13 @@ int vibrate(int timeout_ms)
     if (vib != nullptr) {
         vib->on((uint32_t)timeout_ms, nullptr);
     }
+#elif defined(USE_SAMSUNG_HAPTICS)
+    /* Newer Samsung devices have duration file only
+     0 in VIBRATOR_TIMEOUT_FILE means no vibration
+     Anything else is the vibration running for X milliseconds */
+    if (std::ifstream(VIBRATOR_TIMEOUT_FILE).good()) {
+        write_to_file(VIBRATOR_TIMEOUT_FILE, tout);
+    }
 #else
     android::sp<android::hardware::vibrator::V1_2::IVibrator> vib = android::hardware::vibrator::V1_2::IVibrator::getService();
     if (vib != nullptr) {
