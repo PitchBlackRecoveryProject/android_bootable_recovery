@@ -159,7 +159,8 @@ TWPartitionManager::Process_Fstab (string Fstab_Filename, bool Display_Error, bo
 	unsigned int storageid = 1 << 16;	// upper 16 bits are for physical storage device, we pretend to have only one
 	std::map < string, Flags_Map > twrp_flags;
 
-	fstabFile = fopen ("/etc/twrp.flags", "rt");
+	fstabFile = fopen ("/system/etc/twrp.flags", "rt");
+	if (fstabFile == NULL) fstabFile = fopen ("/etc/twrp.flags", "rt");
 	if (fstabFile != NULL)
 	{
 		LOGINFO ("reading /etc/twrp.flags\n");

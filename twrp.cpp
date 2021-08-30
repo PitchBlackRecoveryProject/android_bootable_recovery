@@ -118,7 +118,9 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	symlink("/proc/mounts", "/etc/mtab");
 	std::string fstab_filename = "/etc/twrp.fstab";
 	if (!TWFunc::Path_Exists(fstab_filename)) {
-		fstab_filename = "/etc/recovery.fstab";
+		fstab_filename = "/system/etc/recovery.fstab";
+		if (!TWFunc::Path_Exists(fstab_filename))
+			fstab_filename = "/etc/recovery.fstab";
 	}
 
 	// Begin SAR detection
