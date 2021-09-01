@@ -7,6 +7,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"runtime"
+	"path/filepath"
 	"strings"
 )
 
@@ -15,9 +17,10 @@ func getRecoveryAbsDir(ctx android.BaseContext) string {
 }
 
 func getBuildAbsDir(ctx android.BaseContext) string {
-	outDir := ctx.Config().Getenv("OUT")
-	absIndex := strings.Index(outDir, "out")
-	return string(outDir[0:absIndex])
+	var b string
+	_, b, _, _ = runtime.Caller(0)
+	absIndex := strings.Index(filepath.Dir(b), "bootable")
+	return string(b[0:absIndex])
 }
 
 func copyDir(src string, dest string) error {
