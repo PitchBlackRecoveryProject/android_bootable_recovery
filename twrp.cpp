@@ -107,7 +107,7 @@ static void process_fastbootd_mode() {
 			fstab_filename = "/etc/recovery.fstab";
 		}
 		printf("=> Processing %s\n", fstab_filename.c_str());
-		if (!PartitionManager.Process_Fstab(fstab_filename, 1, false)) {
+		if (!PartitionManager.Process_Fstab(fstab_filename, 1, false, false)) {
 			LOGERR("Failing out of recovery due to problem with fstab.\n");
 			return;
 		}
@@ -152,7 +152,7 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	{
 		TWPartitionManager SarPartitionManager;
 		printf("=> Processing %s for SAR-detection\n", fstab_filename.c_str());
-		if (!SarPartitionManager.Process_Fstab(fstab_filename, 1, 1)) {
+		if (!SarPartitionManager.Process_Fstab(fstab_filename, 1, 1, 1)) {
 			LOGERR("Failing out of recovery due to problem with fstab.\n");
 			return;
 		}
@@ -191,7 +191,7 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	// End SAR detection
 
 	printf("=> Processing %s\n", fstab_filename.c_str());
-	if (!PartitionManager.Process_Fstab(fstab_filename, 1, true)) {
+	if (!PartitionManager.Process_Fstab(fstab_filename, 1, true, false)) {
 		LOGERR("Failing out of recovery due to problem with fstab.\n");
 		return;
 	}

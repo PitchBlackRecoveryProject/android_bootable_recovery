@@ -165,7 +165,7 @@ int TWPartitionManager::Set_Crypto_Type(const char* crypto_type) {
 	return 0;
 }
 
-int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode) {
+int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode, bool Sar_Detect) {
 	FILE *fstabFile;
 	char fstab_line[MAX_FSTAB_LINE_LENGTH];
 	std::map<string, Flags_Map> twrp_flags;

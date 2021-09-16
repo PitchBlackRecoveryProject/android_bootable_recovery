@@ -200,13 +200,13 @@ static int Prepare_Update_Binary(ZipArchiveHandle Zip) {
 		std::string vendor_br("vendor.new.dat.br");
 		std::string vendor_("vendor.new.dat");
 		std::string bootimg("boot.img");
-		ZipEntry miui_sg_entry;
+		ZipEntry64 miui_sg_entry;
 		int update_data[] = {FindEntry(Zip, miui_sg_path, &miui_sg_entry),
-					FindEntry(Zip, system_, nullptr),
-					FindEntry(Zip, system_br, nullptr),
-					FindEntry(Zip, vendor_, nullptr),
-					FindEntry(Zip, vendor_br, nullptr),
-					FindEntry(Zip, bootimg, nullptr)
+					FindEntry(Zip, system_, &miui_sg_entry),
+					FindEntry(Zip, system_br, &miui_sg_entry),
+					FindEntry(Zip, vendor_, &miui_sg_entry),
+					FindEntry(Zip, vendor_br, &miui_sg_entry),
+					FindEntry(Zip, bootimg, &miui_sg_entry)
 				};
 		string outp = TWFunc::Get_output("grep miui.ui.version " + std::string(TMP_UPDATER_BINARY_PATH));
 		if (!update_data[3] || !update_data[4])
