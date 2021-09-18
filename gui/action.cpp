@@ -251,6 +251,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(flush_up_console);
 		ADD_ACTION(change_root);
 		ADD_ACTION(change_terminal);
+		ADD_ACTION(mergesnapshots);
 	}
 
 	// First, get the action
@@ -2653,6 +2654,15 @@ int GUIAction::unmapsuperdevices(std::string arg __unused) {
 		}
 	}
 
+	operation_end(op_status);
+	return 0;
+}
+
+int GUIAction::mergesnapshots(string arg __unused) {
+	int op_status = 1;
+	if (PartitionManager.Check_Pending_Merges()) {
+		op_status = 0;
+	}
 	operation_end(op_status);
 	return 0;
 }

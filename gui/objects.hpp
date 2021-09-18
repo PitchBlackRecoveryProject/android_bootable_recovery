@@ -387,6 +387,7 @@ protected:
 	int change_terminal(std::string arg);
 	int enableadb(std::string arg);
 	int enablefastboot(std::string arg);
+	int mergesnapshots(std::string arg);
 	int simulate;
 };
 
