@@ -211,7 +211,6 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(togglebacklight);
 		ADD_ACTION(enableadb);
 		ADD_ACTION(enablefastboot);
-		ADD_ACTION(changeterminal);
 		ADD_ACTION(unmapsuperdevices);
 
 		// remember actions that run in the caller thread
