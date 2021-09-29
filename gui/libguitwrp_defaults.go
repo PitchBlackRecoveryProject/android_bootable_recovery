@@ -227,6 +227,14 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DTW_NO_SCREEN_BLANK")
 	}
 
+	if getMakeVars(ctx, "PB_TORCH_PATH") != "" {
+		cflags = append(cflags, "-DPB_TORCH_PATH="+getMakeVars(ctx, "PB_TORCH_PATH"))
+	}
+
+	if getMakeVars(ctx, "PB_TORCH_MAX_BRIGHTNESS") != "" {
+		cflags = append(cflags, "-DPB_TORCH_MAX_BRIGHTNESS="+getMakeVars(ctx, "PB_TORCH_MAX_BRIGHTNESS"))
+	}
+
 	return cflags
 }
 
