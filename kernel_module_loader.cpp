@@ -1,5 +1,7 @@
 #include "kernel_module_loader.hpp"
 
+const std::vector<std::string> kernel_modules_requested = TWFunc::split_string(EXPAND(TW_LOAD_VENDOR_MODULES), ' ', true);
+
 bool KernelModuleLoader::Load_Vendor_Modules(BOOT_MODE mode) {
     // check /lib/modules (ramdisk vendor_boot)
     // check /lib/modules/N.N (ramdisk vendor_boot)
@@ -8,6 +10,7 @@ bool KernelModuleLoader::Load_Vendor_Modules(BOOT_MODE mode) {
     // check /vendor/lib/modules/1.1 (ramdisk prebuilt modules)
     // check /vendor/lib/modules/N.N (vendor mounted)
     // check /vendor/lib/modules/N.N-gki (vendor mounted)
+    int modules_loaded = 0;
 
     LOGINFO("Attempting to load modules\n");
     std::string vendor_base_dir(VENDOR_MODULE_DIR);
@@ -28,14 +31,17 @@ bool KernelModuleLoader::Load_Vendor_Modules(BOOT_MODE mode) {
 
     std::string rls(uts.release);
     std::vector<std::string> release = TWFunc::split_string(rls, '.', true);
+    int expected_module_count = kernel_modules_requested.size();
     module_dirs.push_back(base_dir + "/" + release[0] + "." + release[1]);
 
     for (auto&& module_dir:module_dirs) {
-        Try_And_Load_Modules(module_dir);
+        modules_loaded += Try_And_Load_Modules(module_dir);
+        if (modules_loaded >= expected_module_count) goto exit;
     }
 
     for (auto&& module_dir:vendor_module_dirs) {
-        Try_And_Load_Modules(module_dir);
+        modules_loaded += Try_And_Load_Modules(module_dir);
+        if (modules_loaded >= expected_module_count) goto exit;
     }
 
     if (ven) {
@@ -44,16 +50,18 @@ bool KernelModuleLoader::Load_Vendor_Modules(BOOT_MODE mode) {
     }
 
     for (auto&& module_dir:vendor_module_dirs) {
-        Try_And_Load_Modules(module_dir);
+        modules_loaded += Try_And_Load_Modules(module_dir);
+        if (modules_loaded >= expected_module_count) goto exit;
     }
 
+exit:
     if (ven)
         ven->UnMount(false);
 
 	return true;
 }
 
-bool KernelModuleLoader::Try_And_Load_Modules(std::string module_dir) {
+int KernelModuleLoader::Try_And_Load_Modules(std::string module_dir) {
         LOGINFO("Checking directory: %s\n", module_dir.c_str());
         std::string dest_module_dir;
         dest_module_dir = "/tmp" + module_dir;
@@ -65,14 +73,13 @@ bool KernelModuleLoader::Try_And_Load_Modules(std::string module_dir) {
         m.LoadListedModules(false);
         int modules_loaded = m.GetModuleCount();
         LOGINFO("Modules Loaded: %d\n", modules_loaded);
-        return modules_loaded > 0 ? true : false;
+        return modules_loaded;
 }
 
 bool KernelModuleLoader::Write_Module_List(std::string module_dir) {
 	DIR* d;
 	struct dirent* de;
 	std::vector<std::string> kernel_modules;
-	std::vector<std::string> kernel_modules_requested = TWFunc::split_string(EXPAND(TW_LOAD_VENDOR_MODULES), ' ', true);
 	d = opendir(module_dir.c_str());
 	if (d != nullptr) {
 		while ((de = readdir(d)) != nullptr) {
