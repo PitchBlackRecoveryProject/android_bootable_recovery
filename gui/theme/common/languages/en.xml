@@ -638,6 +638,7 @@
 		<string name="mtp_already_enabled">MTP already enabled</string>
 		<string name="mtp_fail">Failed to enable MTP</string>
 		<string name="no_mtp">MTP support not included</string>
+		<string name="mtp_base_path_missing">Media storage not found. Unable to enable MTP.</string>
 		<string name="image_flash_start">[IMAGE FLASH STARTED]</string>
 		<string name="img_to_flash">Image to flash: '{1}'</string>
 		<string name="flash_unable_locate">Unable to locate '{1}' partition for flashing.</string>
@@ -777,11 +778,11 @@
 		<string name="flash_ab_reboot">To flash additional zips, please reboot recovery to switch to the updated slot.</string>
 		<string name="ozip_decrypt_decryption">Starting Ozip Decryption...</string>
 		<string name="ozip_decrypt_finish">Ozip Decryption Finished!</string>
-		<string name="fbe_wipe_msg">WARNING: {1} wiped. FBE device should be booted into Android and not Recovery to set initial FBE policy after wipe.</string>
 		<string name="fastboot_button">Fastboot</string>
 		<string name="enable_adb">Enable ADB</string>
 		<string name="enable_fastboot">Enable Fastboot</string>
 		<string name="fastboot_console_msg">Entered Fastboot mode...</string>
+		<string name="data_media_fbe_msg">TWRP will not recreate /data/media on an FBE device. Please reboot into your rom to create /data/media</string>
 		
 		<!--mod tools-->
 		<string name="additional_hdr">Additional</string>
