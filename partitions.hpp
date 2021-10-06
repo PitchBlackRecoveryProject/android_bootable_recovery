@@ -394,7 +394,8 @@ public:
 	void Add_Partition(TWPartition* Part);                                    // Adds a new partition to the Partitions vector
 	void Change_System_Root(bool root);
 	std::vector<users_struct>* Get_Users_List();                              // Returns pointer to list of users
-	int Set_FDE_Encrypt_Status();                                             // Sets encryption state for FDE devices (ro.crypto.state and ro.crypto.type)
+	void Set_Crypto_State();                                                  // Sets encryption state for devices (ro.crypto.state)
+	int Set_Crypto_Type(const char* crypto_type);                             // Sets encryption type for FDE (block) and FBE (file) devices (ro.crypto.type)
 
 private:
 	void Setup_Settings_Storage_Partition(TWPartition* Part);                 // Sets up settings storage
