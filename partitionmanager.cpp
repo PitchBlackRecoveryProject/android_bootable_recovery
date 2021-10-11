@@ -2054,7 +2054,7 @@ int TWPartitionManager::Format_Data(void) {
 		metadata->UnMount(false);
 
 	if (dat != NULL) {
-		if (android::base::GetBoolProperty("ro.virtual_ab.enabled", true)) {
+		if (android::base::GetBoolProperty("ro.virtual_ab.enabled", false)) {
 #ifndef TW_EXCLUDE_APEX
 			twrpApex apex;
 			apex.Unmount();
