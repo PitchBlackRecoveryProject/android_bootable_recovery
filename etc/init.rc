@@ -62,6 +62,10 @@ on init
     symlink /dev/binderfs/hwbinder /dev/hwbinder
     symlink /dev/binderfs/vndbinder /dev/vndbinder
 
+    # Create location for fs_mgr to store abbreviated output from filesystem
+    # checker programs.
+    mkdir /dev/fscklogs 0770 root system
+
 on boot
     ifup lo
     hostname localhost
@@ -88,6 +92,11 @@ on late-init
 
     trigger early-boot
     trigger boot
+
+on post-fs-data
+    # Set fscklog permission
+    chown root system /dev/fscklogs/log
+    chmod 0770 /dev/fscklogs/log
 
 service ueventd /system/bin/ueventd
     critical
