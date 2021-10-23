@@ -8,4 +8,5 @@ recovery_only(`
   allow kernel tmpfs:file { read };
   allow kernel recovery:fd { use };
   allow vendor_init rootfs:dir read;
+  allow postinstall tmpfs:file { getattr read execute };
 ')
