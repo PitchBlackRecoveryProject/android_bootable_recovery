@@ -107,13 +107,6 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	snprintf(crash_prop_val, sizeof(crash_prop_val), "%d", crash_counter);
 	property_set("twrp.crash_counter", crash_prop_val);
 
-	if (crash_counter == 0) {
-		property_list(Print_Prop, NULL);
-		printf("\n");
-	} else {
-		printf("twrp.crash_counter=%d\n", crash_counter);
-	}
-
 	printf("=> Linking mtab\n");
 	symlink("/proc/mounts", "/etc/mtab");
 	std::string fstab_filename = "/etc/twrp.fstab";
@@ -208,6 +201,14 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	// Check for and run startup script if script exists
 	TWFunc::check_and_run_script("/system/bin/runatboot.sh", "boot");
 	TWFunc::check_and_run_script("/system/bin/postrecoveryboot.sh", "boot"); 
+
+	if (crash_counter == 0) {
+		property_list(Print_Prop, NULL);
+		printf("\n");
+	} else {
+		printf("twrp.crash_counter=%d\n", crash_counter);
+	}
+
 
 	Decrypt_Page(skip_decryption, datamedia);
 
