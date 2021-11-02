@@ -142,6 +142,14 @@ bool GUIObject::isConditionTrue(Condition* condition)
 		else
 			var2 = "FAILED";
 	}
+	if (var1 == "filenotexists")
+	{
+		struct stat st;
+		if (stat(var2.c_str(), &st) != 0)
+			var2 = var1;
+		else
+			var2 = "FAILED";
+	}
 	if (var1 == "mounted")
 	{
 		if (isMounted(condition->mVar2))
