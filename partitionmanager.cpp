@@ -1549,18 +1549,15 @@ TWPartitionManager::Run_Restore (const string & Restore_Name)
 	TWFunc::GUI_Operation_Text (TW_UPDATE_SYSTEM_DETAILS_TEXT,
 								gui_parse_text ("{@updating_system_details}"));
 	tw_set_default_metadata(Get_Android_Root_Path().c_str());
-	UnMount_By_Path (Get_Android_Root_Path(), false);
-	Update_System_Details ();
-	UnMount_Main_Partitions ();
-	time (&rStop);
-	gui_msg (Msg
-			 (msg::kHighlight,
-			  "restore_completed=[RESTORE COMPLETED IN {1} SECONDS]") ((int)
-					  difftime
-					  (rStop,
-					   rStart)));
-	DataManager::SetValue ("tw_file_progress", "");
-
+	UnMount_By_Path(Get_Android_Root_Path(), false);
+	Update_System_Details();
+	UnMount_Main_Partitions();
+	time(&rStop);
+	gui_msg(Msg(msg::kHighlight, "restore_completed=[RESTORE COMPLETED IN {1} SECONDS]")((int)difftime(rStop,rStart)));
+	TWPartition* Decrypt_Data = Find_Partition_By_Path("/data");
+	if (Decrypt_Data && Decrypt_Data->Is_Encrypted)
+		gui_msg(Msg(msg::kWarning, "reboot_after_restore=It is recommended to reboot Android once after first boot."));
+	DataManager::SetValue("tw_file_progress", "");
 	return true;
 }
 
