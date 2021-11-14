@@ -136,10 +136,10 @@ LOCAL_CLANG := true
 LOCAL_C_INCLUDES += \
     bionic \
     system/extras \
-    system/core/adb \
+    packages/modules/adb \
     system/core/libsparse \
     external/zlib \
-    system/core/libziparchive/include \
+    system/libziparchive/include \
     external/freetype/include \
     external/boringssl/include \
     external/libcxx/include \
