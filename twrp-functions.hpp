@@ -27,7 +27,8 @@
 
 #ifdef USE_FSCRYPT
 #include <ext4_utils/ext4_crypt.h>
-#else
+#endif
+#ifdef USE_EXT4
 #include "ext4crypt_tar.h"
 #endif
 
@@ -141,8 +142,10 @@ public:
 	static bool check_system_root(); // return whether device is system-as-root or not
 	static int check_encrypt_status(); // return 1,2,3,0 on FDE, FBE, On some confusion & unencryptred respectively
 	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
+#ifdef USE_EXT4
 	static bool Get_Encryption_Policy(ext4_encryption_policy &policy, std::string path); // return encryption policy for path
 	static bool Set_Encryption_Policy(std::string path, const ext4_encryption_policy &policy); // set encryption policy for path
+#endif
 	static std::string getprop(std::string arg); //set the arg value to PB_PROP_VALUE
 	static bool Check_Xml_Format(const std::string filename); // Return whether a xml is in plain xml or ABX format
 
