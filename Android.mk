@@ -190,6 +190,9 @@ ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
     ifeq ($(TW_EXCLUDE_LPDUMP),)
         TWRP_REQUIRED_MODULES += lpdump lpdumpd.rc
     endif
+    ifeq ($(TW_EXCLUDE_LPTOOLS),)
+        TWRP_REQUIRED_MODULES += lptools
+    endif
 endif
 
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/bin
