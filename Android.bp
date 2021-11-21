@@ -120,6 +120,7 @@ cc_library_shared {
         "libhidl-gen-utils",
         "librecovery_utils",
         "libc++fs",
+        "ota_metadata_proto_cc",
         "update_metadata-protos"
     ],
     required: [

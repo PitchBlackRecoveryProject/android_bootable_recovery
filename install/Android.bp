@@ -55,6 +55,7 @@ cc_defaults {
         "libotautil",
         "libsnapshot_nobinder",
         "ota_metadata_proto_cc",
+	"update_metadata-protos",
 
         // external dependencies
         "libvintf",
@@ -83,6 +84,7 @@ cc_defaults {
         "libziparchive",
         "libz",
         "libprotobuf-cpp-lite",
+	"update_metadata-protos",
     ],
 }
 
