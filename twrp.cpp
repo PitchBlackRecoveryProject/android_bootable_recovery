@@ -442,6 +442,10 @@ int main(int argc, char **argv) {
 	property_set("ro.twrp.version", TW_MAIN_VERSION_STR);
 	property_set("ro.pb.version", PB_BUILD);
 
+#ifdef TARGET_OTA_ASSERT_DEVICE
+	property_set("ro.twrp.target.devices", TARGET_OTA_ASSERT_DEVICE);
+#endif
+
 	time_t StartupTime = time(NULL);
 	printf("Starting PitchBlackRecovery %s (pid %s)\n", PB_BUILD, ctime(&StartupTime));
 	std::string ver = std::string(PB_BUILD);
