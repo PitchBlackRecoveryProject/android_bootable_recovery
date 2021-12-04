@@ -66,7 +66,6 @@ bool read_metadata_from_package(ZipArchiveHandle zip, std::string* meta_data) {
                                   size);
         if (ret != 0) {
             printf("Failed to read metadata in update package.\n");
-            CloseArchive(zip);
             return false;
         }
         return true;
@@ -213,7 +212,6 @@ abupdate_binary_command(const char* path, int retry_count __unused,
                                   binary_entry.uncompressed_length);
     if (extract_ret != 0) {
         printf("Can't extract %s\n", AB_OTA_PAYLOAD_PROPERTIES);
-        CloseArchive(Zip);
         return false;
     }
 

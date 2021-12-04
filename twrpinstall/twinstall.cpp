@@ -85,13 +85,11 @@ enum zip_type {
 
 static int Install_Theme(const char* path, ZipArchiveHandle Zip) {
 #ifdef TW_OEM_BUILD // We don't do custom themes in OEM builds
-	CloseArchive(Zip);
 	return INSTALL_CORRUPT;
 #else
 	std::string binary_name("ui.xml");
 	ZipEntry binary_entry;
 	if (FindEntry(Zip, binary_name, &binary_entry) != 0) {
-		CloseArchive(Zip);
 		return INSTALL_CORRUPT;
 	}
 	if (!PartitionManager.Mount_Settings_Storage(true))
@@ -184,7 +182,6 @@ static int Prepare_Update_Binary(ZipArchiveHandle Zip) {
 	}
 	int32_t err = ExtractEntryToFile(Zip, &binary_entry, fd);
 	if (err != 0) {
-		CloseArchive(Zip);
 		LOGERR("Could not extract '%s'\n", UPDATE_BINARY_NAME);
 		return INSTALL_ERROR;
 	}
@@ -350,7 +347,6 @@ static int Prepare_Update_Binary(ZipArchiveHandle Zip) {
 			return INSTALL_ERROR;
 		}
 		if (ExtractEntryToFile(Zip, &file_contexts_entry, fd)) {
-			CloseArchive(Zip);
 			Write_MIUI_Install_Status(OTA_CORRUPT, false);
 			LOGERR("Could not extract '%s'\n", output_filename.c_str());
 			return INSTALL_ERROR;
@@ -535,7 +531,6 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 		// Additionally verify the compatibility of the package.
 		if (!verify_package_compatibility(Zip) && DataManager::GetIntValue(PB_TREBLE_COMP) == 0) {
 			gui_err("zip_compatible_err=Zip Treble compatibility error!");
-			CloseArchive(Zip);
 			ret_val = INSTALL_CORRUPT;
 		} else {
 			ret_val = Prepare_Update_Binary(Zip);
@@ -583,7 +578,6 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 				LOGINFO("PBRP theme zip\n");
 				ret_val = Install_Theme(path, Zip);
 			} else {
-				CloseArchive(Zip);
 				ret_val = INSTALL_CORRUPT;
 			}
 		}
