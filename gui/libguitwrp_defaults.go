@@ -232,7 +232,7 @@ func globalFlags(ctx android.BaseContext) []string {
 	}
 
 	if getMakeVars(ctx, "PB_TORCH_MAX_BRIGHTNESS") != "" {
-		cflags = append(cflags, "-DPB_TORCH_MAX_BRIGHTNESS="+getMakeVars(ctx, "PB_TORCH_MAX_BRIGHTNESS"))
+		cflags = append(cflags, "-DPB_MAX_BRIGHT_VALUE="+getMakeVars(ctx, "PB_TORCH_MAX_BRIGHTNESS"))
 	}
 
 	return cflags
