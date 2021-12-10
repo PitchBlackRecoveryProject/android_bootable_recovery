@@ -1638,7 +1638,7 @@ bool TWPartition::Mount(bool Display_Error) {
 	if (Removable)
 		Update_Size(Display_Error);
 
-	if (!Symlink_Mount_Point.empty()) {
+	if (!Symlink_Mount_Point.empty() && Symlink_Mount_Point != "/sdcard") {
 		if (!Bind_Mount(false))
 			return false;
 	}
