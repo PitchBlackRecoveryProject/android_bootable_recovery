@@ -239,7 +239,7 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 
 	// Check for and run startup script if script exists
 	TWFunc::check_and_run_script("/system/bin/runatboot.sh", "boot");
-	TWFunc::check_and_run_script("/system/bin/postrecoveryboot.sh", "boot"); 
+	TWFunc::check_and_run_script("/system/bin/postrecoveryboot.sh", "recovery"); 
 
 	if (crash_counter == 0) {
 		property_list(Print_Prop, NULL);
