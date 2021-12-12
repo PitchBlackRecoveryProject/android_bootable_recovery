@@ -91,7 +91,7 @@ std::vector<string> KernelModuleLoader::Skip_Loaded_Kernel_Modules() {
 	std::string kernel_module_file = "/proc/modules";
 	if (TWFunc::read_file(kernel_module_file, loaded_modules) < 0)
 		LOGINFO("failed to get loaded kernel modules\n");
-	LOGINFO("number of modules loaded by init: %lu\n", loaded_modules.size());
+	LOGINFO("number of modules loaded by init: %zu\n", loaded_modules.size());
 	if (loaded_modules.size() == 0)
 		return kernel_modules;
 	for (auto&& module_line:loaded_modules) {
