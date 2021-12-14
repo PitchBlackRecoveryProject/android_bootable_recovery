@@ -147,7 +147,7 @@ public:
 	static bool Set_Encryption_Policy(std::string path, const ext4_encryption_policy &policy); // set encryption policy for path
 #endif
 	static std::string getprop(std::string arg); //set the arg value to PB_PROP_VALUE
-	static bool Check_Xml_Format(const std::string filename); // Return whether a xml is in plain xml or ABX format
+	static bool Check_Xml_Format(const char* filename); // Return whether a xml is in plain xml or ABX format
 
 private:
 	static void Copy_Log(string Source, string Destination);

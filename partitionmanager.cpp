@@ -2467,7 +2467,7 @@ void TWPartitionManager::Parse_Users() {
 			// Attempt to get name of user. Fallback to user ID if this fails.
 			std::string path = "/data/system/users/" + to_string(userId) + ".xml";
 			if ((atoi(TWFunc::System_Property_Get("ro.build.version.sdk").c_str()) > 30) && TWFunc::Path_Exists(path)) {
-				if(!TWFunc::Check_Xml_Format(path))
+				if(!TWFunc::Check_Xml_Format(path.c_str()))
 					user.userName = to_string(userId);
 			}
 			else {
@@ -4009,7 +4009,7 @@ TWPartitionManager::Decrypt_Adopted ()
   // now it's ABX (Android Binary Xml). Sadly, rapidxml can't parse it, so check xml format firstly
   std::string path = "/data/system/storage.xml";
   if ((atoi(TWFunc::System_Property_Get("ro.build.version.sdk").c_str()) > 30) && TWFunc::Path_Exists(path))
-      if(!TWFunc::Check_Xml_Format(path)) {
+      if(!TWFunc::Check_Xml_Format(path.c_str())) {
           LOGINFO("Android 12+: storage.xml is in ABX format. Skipping adopted storage decryption\n");
           return false;
     }
