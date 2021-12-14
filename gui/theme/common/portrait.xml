@@ -4383,6 +4383,7 @@
 				</listitem>
 				<listitem name="{@fix_recovery_loop=Fix Recovery Bootloop}">
 					<condition var1="tw_has_boot_slots" var2="1"/>
+					<condition var1="tw_uses_initramfs" var2="1"/>
 					<text>{@fix_recovery_loop1=Fix Recovery Bootloop}</text>
 					<icon icon="main_button_fixcontexts"/>
 					<actions>
