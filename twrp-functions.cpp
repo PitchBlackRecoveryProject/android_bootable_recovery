@@ -64,7 +64,7 @@ extern "C" {
 	#include "libcrecovery/common.h"
 }
 #ifdef TW_INCLUDE_LIBRESETPROP
-    #include <resetprop.h>
+    #include <resetprop.hpp>
 #endif
 
 static const string tmp = "/tmp/pb/";
