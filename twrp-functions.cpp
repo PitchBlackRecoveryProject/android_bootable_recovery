@@ -68,7 +68,6 @@ static const string split_img = tmp + "split_img/";
 static string default_prop = ramdisk + "default.prop";
 static string fstab1 = PartitionManager.Get_Android_Root_Path() + "/vendor/etc";
 static string fstab2 = "/vendor/etc";
-static int trb_en = 0;
 static string dtb = "", ram = "";
 
 struct selabel_handle *selinux_handle;
@@ -1559,7 +1558,7 @@ static bool Patch_AVBDM_Verity() {
 
 	if (stat == 0)
 	{
-		if(trb_en == 1 || PartitionManager.Mount_By_Path("/vendor", false))
+		if(PartitionManager.Mount_By_Path("/vendor", false))
 		{
 			d1 = opendir(fstab2.c_str());
 			stat = 2;
@@ -1724,7 +1723,7 @@ bool TWFunc::Patch_Forced_Encryption()
 	}
 	if (stat == 0 || ram.find("ramdisk") != string::npos)
 	{
-		if(trb_en == 1 || PartitionManager.Mount_By_Path("/vendor", false))
+		if(PartitionManager.Mount_By_Path("/vendor", false))
 		{
 			//PartitionManager.Mount_By_Path("/vendor", false);
 			d1 = opendir(fstab2.c_str());
@@ -1803,7 +1802,6 @@ void TWFunc::Deactivation_Process(void)
 			return;
 		}
 		gui_msg(Msg(msg::kProcess, "pb_run_process=Starting '{1}' process")("PitchBlack"));
-		DataManager::GetValue(TRB_EN, trb_en);
 		if (TWFunc::check_encrypt_status() != 0 && DataManager::GetIntValue(PB_ENABLE_ADVANCE_ENCRY) == 0) {
 			gui_msg(Msg(msg::kHighlight, "pb_ecryption_leave=Device Encrypted Leaving Forceencrypt"));
 			setenv("KEEPFORCEENCRYPT", "true", true);

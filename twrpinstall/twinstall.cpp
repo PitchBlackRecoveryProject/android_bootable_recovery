@@ -153,7 +153,6 @@ static int Prepare_Update_Binary(ZipArchiveHandle Zip) {
 	string fingerprint_property = "ro.build.fingerprint";
 	string pre_device = pre_something + "device";
 	string pre_build = pre_something + "build";
-	int chk_sdk = 26 ;
 
 	char arches[PATH_MAX];
 	property_get("ro.product.cpu.abilist", arches, "error");
@@ -198,61 +197,21 @@ static int Prepare_Update_Binary(ZipArchiveHandle Zip) {
 
 		gui_msg("pb_install_detecting=Detecting Current Package");
 
-		std::string system_br("system.new.dat");
-		std::string system_("system.new.dat.br");
-		std::string vendor_br("vendor.new.dat.br");
-		std::string vendor_("vendor.new.dat");
-		std::string bootimg("boot.img");
 		ZipEntry miui_sg_entry;
-		int update_data[] = {FindEntry(Zip, miui_sg_path, &miui_sg_entry),
-					FindEntry(Zip, system_, nullptr),
-					FindEntry(Zip, system_br, nullptr),
-					FindEntry(Zip, vendor_, nullptr),
-					FindEntry(Zip, vendor_br, nullptr),
-					FindEntry(Zip, bootimg, nullptr)
-				};
+		int update_data = FindEntry(Zip, miui_sg_path, &miui_sg_entry);
 		string outp = TWFunc::Get_output("grep miui.ui.version " + std::string(TMP_UPDATER_BINARY_PATH));
-		if (!update_data[3] || !update_data[4])
-		{
-			chk_sdk = 27;
-			DataManager::SetValue(TRB_EN, 1);
-		}
-		else
-			chk_sdk = 26;
-		if ((outp.size() > 0 || !update_data[0]) && chk_sdk < 27) {
-			if (!update_data[1] || !update_data[2]) {
-				DataManager::SetValue(PB_MIUI_ZIP_TMP, 1);
-			}
+		if (outp.size() > 0 || !update_data) {
+			DataManager::SetValue(PB_MIUI_ZIP_TMP, 1);
 			DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
-			DataManager::SetValue(NON_STD, 1);
-			if (!update_data[0]) {
-				gui_msg("pb_install_miui_detected=- Detected Standard MIUI Update Package");
-			}
-			else
-				gui_msg("pb_install_miui_10_detected=- Detected MIUI 10 Non-Treble Update Package");
+			gui_msg("pb_install_miui_detected=- Detected MIUI Update Package");
 		} else {
-			if (outp.size() > 0 && chk_sdk >= 27) {
-				DataManager::SetValue(PB_MIUI_ZIP_TMP, 1);
-				DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
-				trb_en = true;
-				gui_msg("pb_install_miui_oreo_detected=- Detected Treble MIUI Update Package");
-			}
-			else if (!update_data[1] || !update_data[2]) {
-				DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
-				DataManager::SetValue(STD, "1");
-				gui_msg("pb_install_standard_detected=- Detected standard Package");
-			}
-			else {
-				if (!update_data[3]) {
-						DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
-				}
-				gui_msg("pb_install_patch_detected=- Detected Either a Patch or Fix Package");
-			}
+			DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
+			gui_msg("pb_install_standard_detected=- Detected standard Package");
 		}
 
 		if (DataManager::GetIntValue(PB_INCREMENTAL_PACKAGE) != 0) {
 			gui_msg("pb_incremental_ota_status_enabled=Support MIUI Incremental package status: Enabled");
-			if (!update_data[0]) {
+			if (!update_data) {
 				android::base::unique_fd take_out_metadata(
 							open("/tmp/build.prop", O_CREAT | O_WRONLY | O_TRUNC | O_CLOEXEC, 0644));
 				if (ExtractEntryToFile(Zip, &miui_sg_entry, take_out_metadata)) {
