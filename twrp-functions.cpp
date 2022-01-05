@@ -887,7 +887,7 @@ string TWFunc::Get_Current_Date() {
 }
 
 string TWFunc::System_Property_Get(string Prop_Name) {
-	return System_Property_Get(Prop_Name, PartitionManager, PartitionManager.Get_Android_Root_Path(), "");
+	return System_Property_Get(Prop_Name, PartitionManager, PartitionManager.Get_Android_Root_Path(), "build.prop");
 }
 
 string TWFunc::System_Property_Get(string Prop_Name, TWPartitionManager &PartitionManager, string Mount_Point, string prop_file_name) {
