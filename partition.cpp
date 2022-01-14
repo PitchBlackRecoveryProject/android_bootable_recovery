@@ -1239,6 +1239,7 @@ void TWPartition::Setup_Data_Media() {
 		backup_exclusions.add_absolute_dir("/data/user/10");
 		backup_exclusions.add_absolute_dir("/data/user/999");
 		backup_exclusions.add_absolute_dir("/data/cache");
+        backup_exclusions.add_absolute_dir("/data/misc/apexdata/com.android.art"); // exclude this dir to prevent "error 255" on AOSP Android 12
 		wipe_exclusions.add_absolute_dir(Mount_Point + "/misc/vold"); // adopted storage keys
 		ExcludeAll(Mount_Point + "/system/storage.xml");
 	} else {
