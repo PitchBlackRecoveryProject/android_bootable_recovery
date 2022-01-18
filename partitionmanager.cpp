@@ -99,13 +99,15 @@ extern "C" {
 }
 
 #ifdef TW_INCLUDE_CRYPTO
-#include "crypto/fde/cryptfs.h"
+// #include "crypto/fde/cryptfs.h"
 #include "gui/rapidxml.hpp"
 #include "gui/pages.hpp"
 #ifdef TW_INCLUDE_FBE
 #include "Decrypt.h"
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
 	#ifdef USE_FSCRYPT
+	#include "cryptfs.h"
+	#include "fscrypt-common.h"
 	#include "MetadataCrypt.h"
 	#endif
 #endif
@@ -431,8 +433,7 @@ void TWPartitionManager::Decrypt_Data() {
 			Set_Crypto_Type("file");
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
 #ifdef USE_FSCRYPT
-			if (fscrypt_mount_metadata_encrypted(Decrypt_Data->Actual_Block_Device,
-																					 Decrypt_Data->Mount_Point, false)) {
+			if (android::vold::fscrypt_mount_metadata_encrypted(Decrypt_Data->Actual_Block_Device, Decrypt_Data->Mount_Point, false, false, Decrypt_Data->Current_File_System)) {
 				std::string crypto_blkdev =
 						android::base::GetProperty("ro.crypto.fs_crypto_blkdev", "error");
 				Decrypt_Data->Decrypted_Block_Device = crypto_blkdev;
@@ -2022,7 +2023,7 @@ void TWPartitionManager::Parse_Users() {
 			}
 
 			string filename;
-			user.type = Get_Password_Type(userId, filename);
+			user.type = android::keystore::Get_Password_Type(userId, filename);
 
 			user.isDecrypted = false;
 			if (strcmp(user_check_result, "1") == 0) user.isDecrypted = true;
@@ -2110,7 +2111,7 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 			usleep(2000);	// A small sleep is needed after mounting /data to ensure reliable decrypt...
 										 // maybe because of DE?
 		gui_msg(Msg("decrypting_user_fbe=Attempting to decrypt FBE for user {1}...")(user_id));
-		if (Decrypt_User(user_id, Password)) {
+		if (android::keystore::Decrypt_User(user_id, Password)) {
 			gui_msg(Msg("decrypt_user_success_fbe=User {1} Decrypted Successfully")(user_id));
 			Mark_User_Decrypted(user_id);
 			if (user_id == 0) {
@@ -2120,10 +2121,9 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 					if ((*iter).userId == "0" || (*iter).isDecrypted) continue;
 
 					int tmp_user_id = atoi((*iter).userId.c_str());
-					gui_msg(
-							Msg("decrypting_user_fbe=Attempting to decrypt FBE for user {1}...")(tmp_user_id));
-					if (Decrypt_User(tmp_user_id, Password) ||
-							(Password != "!" && Decrypt_User(tmp_user_id, "!"))) {	// "!" means default password
+					gui_msg(Msg("decrypting_user_fbe=Attempting to decrypt FBE for user {1}...")(tmp_user_id));
+					if (android::keystore::Decrypt_User(tmp_user_id, Password) ||
+					(Password != "!" && android::keystore::Decrypt_User(tmp_user_id, "!"))) { // "!" means default password
 						gui_msg(Msg("decrypt_user_success_fbe=User {1} Decrypted Successfully")(tmp_user_id));
 						Mark_User_Decrypted(tmp_user_id);
 					} else {

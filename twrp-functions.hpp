@@ -139,15 +139,6 @@ public:
 	static int check_encrypt_status(); // return 1,2,3,0 on FDE, FBE, On some confusion & unencryptred respectively
 	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
 	static std::string getprop(std::string arg); //set the arg value to PB_PROP_VALUE
-#ifdef TW_INCLUDE_CRYPTO
-#ifdef USE_FSCRYPT_POLICY_V1
-	static bool Get_Encryption_Policy(struct fscrypt_policy_v1 &policy, std::string path); // return encryption policy for path
-	static bool Set_Encryption_Policy(std::string path, struct fscrypt_policy_v1 &policy); // set encryption policy for path
-#else
-	static bool Get_Encryption_Policy(struct fscrypt_policy_v2 &policy, std::string path); // return encryption policy for path
-	static bool Set_Encryption_Policy(std::string path, struct fscrypt_policy_v2 &policy); // set encryption policy for path
-#endif
-#endif
 	static void List_Mounts(); // List current mounts by the kernel
 	static void Clear_Bootloader_Message(); // Removes the bootloader message from misc for next boot
 	static string Check_For_TwrpFolder(); // Gets user defined path on storage where backups should be stored
