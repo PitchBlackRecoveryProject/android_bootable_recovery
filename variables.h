@@ -152,6 +152,12 @@
 #define TW_IS_SUPER                 "tw_is_super"
 #define TW_AUTO_REFLASHTWRP_VAR     "tw_auto_reflashtwrp"
 
+// Theme versioning
+// version 2 requires theme to handle power button as action togglebacklight
+// version 4 adds listbox support to reboot page
+// version 5 adds File Manager options, nano & Flash Current TWRP
+#define TW_THEME_VERSION 5
+
 // PitchBlack Variables
 #define PB_SURVIVAL_BACKUP          "OTA"
 #define PB_SURVIVAL_BACKUP_NAME       "pb_survival_backup_folder_name"
