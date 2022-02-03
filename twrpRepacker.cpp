@@ -205,56 +205,53 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 	}
 	DataManager::SetProgress(1);
 	TWFunc::removeDir(REPACK_ORIG_DIR, false);
-	if (part->Is_SlotSelect()) { if (Repack_Options.Type == REPLACE_RAMDISK || Repack_Options.Type == REPLACE_RAMDISK_UNPACKED) {
-		LOGINFO("Switching slots to flash ramdisk to both partitions\n");
-		string Current_Slot = PartitionManager.Get_Active_Slot_Display();
-		if (Current_Slot == "A")
-			PartitionManager.Override_Active_Slot("B");
-		else
-			PartitionManager.Override_Active_Slot("A");
-		DataManager::SetProgress(.25);
-		if (!Backup_Image_For_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack")))
-			return false;
-		if (TWFunc::copy_file(REPACK_NEW_DIR "ramdisk.cpio", REPACK_ORIG_DIR "ramdisk.cpio", 0644)) {
-			LOGERR("Failed to copy ramdisk\n");
-			return false;
-		}
-		path = REPACK_ORIG_DIR;
-		std::string command = "cd " + path + " && /system/bin/magiskboot repack ";
+	if (part->Is_SlotSelect()) {
+		if (Repack_Options.Type == REPLACE_RAMDISK || Repack_Options.Type == REPLACE_RAMDISK_UNPACKED) {
+			LOGINFO("Switching slots to flash ramdisk to both partitions\n");
+			string Current_Slot = PartitionManager.Get_Active_Slot_Display();
+			if (Current_Slot == "A")
+				PartitionManager.Override_Active_Slot("B");
+			else
+				PartitionManager.Override_Active_Slot("A");
+			DataManager::SetProgress(.25);
+			if (!Backup_Image_For_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack")))
+				return false;
+			if (TWFunc::copy_file(REPACK_NEW_DIR "ramdisk.cpio", REPACK_ORIG_DIR "ramdisk.cpio", 0644)) {
+				LOGERR("Failed to copy ramdisk\n");
+				return false;
+			}
+			path = REPACK_ORIG_DIR;
+			std::string command = "cd " + path + " && /system/bin/magiskboot repack ";
 
-		if (original_ramdisk_format != image_ramdisk_format) {
-			recompress = true;
-		}
-		command += path + "boot.img";
+			if (original_ramdisk_format != image_ramdisk_format) {
+				recompress = true;
+			}
+			command += path + "boot.img";
 
-		if (recompress) {
-			std::string decompress_cmd = "/system/bin/magiskboot decompress " + orig_compressed_image + " " + copy_compressed_image;
-			if (TWFunc::Exec_Cmd(decompress_cmd) != 0) {
+			if (recompress) {
+				std::string decompress_cmd = "/system/bin/magiskboot decompress " + orig_compressed_image + " " + copy_compressed_image;
+				if (TWFunc::Exec_Cmd(decompress_cmd) != 0) {
+					gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
+					return false;
+				}
+				std::rename(copy_compressed_image.c_str(), orig_compressed_image.c_str());
+			}
+
+			if (TWFunc::Exec_Cmd(command) != 0) {
 				gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
 				return false;
 			}
-			std::rename(copy_compressed_image.c_str(), orig_compressed_image.c_str());
+			DataManager::SetProgress(.75);
+			std::string file = "new-boot.img";
+			DataManager::SetValue("tw_flash_partition", "/boot;");
+			if (!PartitionManager.Flash_Image(path, file)) {
+				LOGINFO("Error flashing new image\n");
+				return false;
+			}
+			DataManager::SetProgress(1);
+			TWFunc::removeDir(REPACK_ORIG_DIR, false);
 		}
-
-		if (TWFunc::Exec_Cmd(command) != 0) {
-			gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
-			return false;
-		}
-
-		if (TWFunc::Exec_Cmd(command) != 0) {
-			gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
-			return false;
-		}
-		DataManager::SetProgress(.75);
-		std::string file = "new-boot.img";
-		DataManager::SetValue("tw_flash_partition", "/boot;");
-		if (!PartitionManager.Flash_Image(path, file)) {
-			LOGINFO("Error flashing new image\n");
-			return false;
-		}
-		DataManager::SetProgress(1);
-		TWFunc::removeDir(REPACK_ORIG_DIR, false);
-	}}
+	}
 	TWFunc::removeDir(REPACK_NEW_DIR, false);
 	gui_msg(Msg(msg::kWarning, "repack_overwrite_warning=If device was previously rooted, then root has been overwritten and will need to be reinstalled."));
 	string Current_Slot = PartitionManager.Get_Active_Slot_Display();
