@@ -462,7 +462,8 @@ TWRP_REQUIRED_MODULES += \
     minadbd \
     twrpbu \
     adbd_system_api_recovery \
-    libsync.recovery
+    libsync.recovery \
+    libandroidicu.recovery \
 
 ifneq ($(TW_EXCLUDE_TZDATA), true)
 TWRP_REQUIRED_MODULES += \
