@@ -137,6 +137,7 @@ enum TW_FSTAB_FLAGS {
 	TWFLAG_DISPLAY,
 	TWFLAG_ENCRYPTABLE,
 	TWFLAG_FILEENCRYPTION,
+	TWFLAG_METADATA_ENCRYPTION,
 	TWFLAG_FLASHIMG,
 	TWFLAG_FORCEENCRYPT,
 	TWFLAG_FSFLAGS,
@@ -184,6 +185,7 @@ const struct flag_list tw_flags[] = {
 	{ "display=",               TWFLAG_DISPLAY },
 	{ "encryptable=",           TWFLAG_ENCRYPTABLE },
 	{ "fileencryption=",        TWFLAG_FILEENCRYPTION },
+	{ "metadata_encryption=",   TWFLAG_METADATA_ENCRYPTION },
 	{ "flashimg",               TWFLAG_FLASHIMG },
 	{ "forceencrypt=",          TWFLAG_FORCEENCRYPT },
 	{ "fsflags=",               TWFLAG_FSFLAGS },
@@ -952,6 +954,26 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 				property_set("fbe.contents", FBE_contents.c_str());
 				property_set("fbe.filenames", FBE_filenames.c_str());
 				LOGINFO("FBE contents '%s', filenames '%s'\n", FBE_contents.c_str(), FBE_filenames.c_str());
+			}
+			break;
+		case TWFLAG_METADATA_ENCRYPTION:
+			// This flag isn't used by TWRP but is needed for FBEv2 metadata decryption
+			// metadata_encryption=aes-256-xts:wrappedkey_v0
+			{
+				std::string META = str;
+				size_t colon_loc = META.find(":");
+				if (colon_loc == std::string::npos) {
+					property_set("metadata.contents", META.c_str());
+					property_set("metadata.filenames", "");
+					LOGINFO("Metadata contents '%s', filenames ''\n", META.c_str());
+					break;
+				}
+				std::string META_contents, META_filenames;
+				META_contents = META.substr(0, colon_loc);
+				META_filenames = META.substr(colon_loc + 1);
+				property_set("metadata.contents", META_contents.c_str());
+				property_set("metadata.filenames", META_filenames.c_str());
+				LOGINFO("Metadata contents '%s', filenames '%s'\n", META_contents.c_str(), META_filenames.c_str());
 			}
 			break;
 		case TWFLAG_WRAPPEDKEY:
