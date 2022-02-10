@@ -718,6 +718,8 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 			} else {
 				Is_Encrypted = true;
 				Is_Decrypted = false;
+				if (datamedia)
+					Setup_Data_Media();
 			}
 		} else if (Key_Directory.empty()) {
 			LOGERR("Primary block device '%s' for mount point '%s' is not present!\n",
