@@ -695,6 +695,8 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 		Set_FBE_Status();
 		Decrypted_Block_Device = crypto_blkdev;
 		LOGINFO("Data already decrypted, new block device: '%s'\n", crypto_blkdev);
+		if (datamedia)
+			Setup_Data_Media();
 		DataManager::SetValue(TW_IS_ENCRYPTED, 0);
 	} else if (!Mount(false)) {
 		if (Is_Present) {
@@ -711,6 +713,8 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 					DataManager::SetValue("tw_crypto_pwtype_0", cryptfs_get_password_type());
 					DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
 					DataManager::SetValue("tw_crypto_display", "");
+					if (datamedia)
+						Setup_Data_Media();
 				} else {
 					gui_err("mount_data_footer=Could not mount /data and unable to find crypto footer.");
 				}
@@ -741,6 +745,9 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 			}
 		}
 		DataManager::SetValue(TW_IS_ENCRYPTED, 0);
+		if (datamedia)
+				Setup_Data_Media();
+			
 	}
 	if (datamedia && (!Is_Encrypted || (Is_Encrypted && Is_Decrypted))) {
 		Setup_Data_Media();
@@ -1237,7 +1244,8 @@ void TWPartition::Setup_Data_Media() {
 			Make_Dir("/sdcard", false);
 			Symlink_Mount_Point = "/sdcard";
 		}
-		if (Mount(false) && TWFunc::Path_Exists(Mount_Point + "/media/0")) {
+		Mount(false);
+		if (TWFunc::Path_Exists(Mount_Point + "/media/0")) {
 			Storage_Path = Mount_Point + "/media/0";
 			Symlink_Path = Storage_Path;
 			DataManager::SetValue(TW_INTERNAL_PATH, Mount_Point + "/media/0");
