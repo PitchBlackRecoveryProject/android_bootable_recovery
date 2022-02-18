@@ -42,6 +42,7 @@ func printCustomThemeWarning(theme string, location string) {
 func copyThemeResources(ctx android.BaseContext, dirs []string, files []string) {
 	outDir := ctx.Config().Getenv("OUT")
 	twRes := outDir + "/recovery/root/twres/"
+	os.MkdirAll(twRes, os.ModePerm)
 	recoveryDir := getRecoveryAbsDir(ctx)
 	theme := determineTheme(ctx)
 	for idx, dir := range dirs {
@@ -68,6 +69,7 @@ func copyThemeResources(ctx android.BaseContext, dirs []string, files []string) 
 func copyCustomTheme(ctx android.BaseContext, customTheme string) {
 	outDir := ctx.Config().Getenv("OUT")
 	twRes := outDir + "/recovery/root/twres/"
+	os.MkdirAll(twRes, os.ModePerm)
 	fileDest := twRes + path.Base(customTheme)
 	fileToCopy := fmt.Sprintf("%s%s", getBuildAbsDir(ctx), customTheme)
 	copyFile(fileToCopy, fileDest)
