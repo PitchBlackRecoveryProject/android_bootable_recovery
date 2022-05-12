@@ -17,6 +17,10 @@ on early-init
     copy /system/etc/ld.config.txt /linkerconfig/ld.config.txt
     chmod 444 /linkerconfig/ld.config.txt
 
+    # Create location for fs_mgr to store abbreviated output from filesystem
+    # checker programs.
+    mkdir /dev/fscklogs 0770
+
     start ueventd
 
     setprop sys.usb.configfs 0

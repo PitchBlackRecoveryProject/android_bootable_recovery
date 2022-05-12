@@ -17,6 +17,10 @@ on early-init
     # Set the security context of /postinstall if present.
     restorecon /postinstall
 
+    # Create location for fs_mgr to store abbreviated output from filesystem
+    # checker programs.
+    mkdir /dev/fscklogs 0770
+
     start ueventd
 
 service set_permissive /sbin/permissive.sh
