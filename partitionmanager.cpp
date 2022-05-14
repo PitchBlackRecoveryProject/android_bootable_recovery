@@ -162,8 +162,7 @@ int TWPartitionManager::Set_Crypto_Type(const char* crypto_type) {
 	return 0;
 }
 
-int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode,
-																			bool Sar_Detect) {
+int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode) {
 	FILE* fstabFile;
 	char fstab_line[MAX_FSTAB_LINE_LENGTH];
 	std::map<string, Flags_Map> twrp_flags;
@@ -239,7 +238,7 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 		if (fstab_line[line_size - 1] != '\n') fstab_line[line_size] = '\n';
 
 		TWPartition* partition = new TWPartition();
-		if (partition->Process_Fstab_Line(fstab_line, Display_Error, &twrp_flags, Sar_Detect))
+		if (partition->Process_Fstab_Line(fstab_line, Display_Error, &twrp_flags))
 			Partitions.push_back(partition);
 		else
 			delete partition;
@@ -255,8 +254,7 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 				 mapit != twrp_flags.end(); mapit++) {
 			if (Find_Partition_By_Path(mapit->first) == NULL) {
 				TWPartition* partition = new TWPartition();
-				if (partition->Process_Fstab_Line(mapit->second.fstab_line, Display_Error, NULL,
-																					Sar_Detect))
+				if (partition->Process_Fstab_Line(mapit->second.fstab_line, Display_Error, NULL))
 					Partitions.push_back(partition);
 				else
 					delete partition;
@@ -3363,8 +3361,7 @@ string TWPartitionManager::Get_Active_Slot_Display() {
 }
 
 string TWPartitionManager::Get_Android_Root_Path() {
-	if (property_get_bool("ro.twrp.sar", false)) return "/system_root";
-	return "/system";
+	return "/system_root";
 }
 
 void TWPartitionManager::Remove_Uevent_Devices(const string& Mount_Point) {

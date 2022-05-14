@@ -181,7 +181,7 @@ protected:
 	void Set_Block_Device(std::string block_device);                          // Allow super partition setup to change block device
 
 private:
-	bool Process_Fstab_Line(const char *fstab_line, bool Display_Error, std::map<string, Flags_Map> *twrp_flags, bool Sar_Detect); // Processes a fstab line
+	bool Process_Fstab_Line(const char *fstab_line, bool Display_Error, std::map<string, Flags_Map> *twrp_flags); // Processes a fstab line
 	void Setup_Data_Partition(bool Display_Error);                            // Setup data partition after fstab processed
 	void Set_FBE_Status();													  // Set FBE status of partition
 	void Setup_Cache_Partition(bool Display_Error);                           // Setup cache partition after fstab processed
@@ -317,7 +317,7 @@ public:
 	~TWPartitionManager() {}
 
 public:
-	int Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode, bool Sar_Detect); // Parses the fstab files
+	int Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode); // Parses the fstab files
 	void Setup_Fstab_Partitions(bool Display_Error);                          // Populates the partitions
 	int Write_Fstab();                                                        // Creates /etc/fstab file that's used by the command line for mount commands
 	void Decrypt_Data();													  // Decrypt Data if enabled
