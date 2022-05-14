@@ -162,7 +162,6 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	else
 		KernelModuleLoader::Load_Vendor_Modules();
 #endif
-	PartitionManager.Output_Partition_Logging();
 
 // We are doing this here to allow super partition to be set up prior to overriding properties
 #if defined(TW_INCLUDE_LIBRESETPROP) && defined(TW_OVERRIDE_SYSTEM_PROPS)
