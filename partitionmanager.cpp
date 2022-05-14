@@ -4067,7 +4067,7 @@ bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
 
 	fstab.emplace_back(fstabEntry);
 	if (!fs_mgr_update_logical_partition(&fstabEntry)) {
-		LOGERR("unable to update logical partition: %s\n", twrpPart->Get_Mount_Point().c_str());
+		LOGINFO("unable to update logical partition: %s\n", twrpPart->Get_Mount_Point().c_str());
 		return false;
 	}
 
@@ -4148,7 +4148,6 @@ void TWPartitionManager::Setup_Super_Partition() {
 	superPartition->Setup_Image();
 	Add_Partition(superPartition);
 	PartitionManager.Output_Partition(superPartition);
-	Update_System_Details();
 }
 
 bool TWPartitionManager::Get_Super_Status() {
