@@ -27,6 +27,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include <android-base/chrono_utils.h>
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/properties.h>
@@ -35,6 +36,7 @@
 #include <cutils/fs.h>
 #include <fs_mgr.h>
 #include <libdm/dm.h>
+#include <sys/mount.h>
 
 #include "Checkpoint.h"
 #include "CryptoType.h"
@@ -116,6 +118,61 @@ static bool mount_via_fs_mgr(const char* mount_point, const char* blk_device) {
     }
     LOG(INFO) << "mount_via_fs_mgr::Mounted " << mount_point;
     return true;
+}
+
+static std::chrono::milliseconds GetMillisProperty(const std::string& name,
+                                                   std::chrono::milliseconds default_value) {
+    auto value = android::base::GetUintProperty(name, static_cast<uint64_t>(default_value.count()));
+    return std::chrono::milliseconds(std::move(value));
+}
+
+static bool fs_mgr_unmount_all_data_mounts(const std::string& data_block_device) {
+    LOG(INFO) << "(): about to umount everything on top of " << data_block_device;
+    android::base::Timer t;
+    auto timeout = GetMillisProperty("init.userspace_reboot.userdata_remount.timeoutmillis", 5s);
+    while (true) {
+        bool umount_done = true;
+        android::fs_mgr::Fstab proc_mounts;
+        if (!android::fs_mgr::ReadFstabFromFile("/proc/mounts", &proc_mounts)) {
+            LOG(ERROR) << "(): Can't read /proc/mounts";
+            return false;
+        }
+        // Now proceed with other bind mounts on top of /data.
+        for (const auto& entry : proc_mounts) {
+            std::string block_device;
+            if (android::base::StartsWith(entry.blk_device, "/dev/block") &&
+                !android::base::Realpath(entry.blk_device, &block_device)) {
+                PLOG(INFO) << "(): failed to realpath " << entry.blk_device;
+                block_device = entry.blk_device;
+            }
+            if (data_block_device == block_device) {
+                if (umount2(entry.mount_point.c_str(), 0) != 0) {
+                    PLOG(ERROR) << "(): Failed to umount " << entry.mount_point;
+                    umount_done = false;
+                }
+            }
+        }
+        if (umount_done) {
+            LOG(INFO) << "(): Unmounting /data took " << t;
+            return true;
+        }
+        if (t.duration() > timeout) {
+            LOG(ERROR) << "(): Timed out unmounting all mounts on "
+                   << data_block_device;
+            android::fs_mgr::Fstab remaining_mounts;
+            if (!android::fs_mgr::ReadFstabFromFile("/proc/mounts", &remaining_mounts)) {
+                LOG(ERROR) << "(): Can't read /proc/mounts";
+            } else {
+                LOG(ERROR) << "(): Following mounts remaining";
+                for (const auto& e : remaining_mounts) {
+                    LOG(ERROR) << "(): mount point: " << e.mount_point
+                           << " block device: " << e.blk_device;
+                }
+            }
+            return false;
+        }
+        std::this_thread::sleep_for(50ms);
+    }
 }
 
 // Note: It is possible to orphan a key if it is removed before deleting
@@ -356,6 +413,7 @@ bool fscrypt_mount_metadata_encrypted(const std::string& blk_device, const std::
     LOG(INFO) << "Mounting metadata-encrypted filesystem:" << mount_point;
     mount_via_fs_mgr(mount_point.c_str(), crypto_blkdev.c_str());
     android::base::SetProperty("ro.crypto.fs_crypto_blkdev", crypto_blkdev);
+    fs_mgr_unmount_all_data_mounts(crypto_blkdev); // Unmount after successfull checking mounting this may cause the post decryption not work correctly
 
     // Record that there's at least one fstab entry with metadata encryption
     if (!android::base::SetProperty("ro.crypto.metadata.enabled", "true")) {
