@@ -112,7 +112,7 @@ static void process_fastbootd_mode() {
 			fstab_filename = "/etc/recovery.fstab";
 		}
 		printf("=> Processing %s\n", fstab_filename.c_str());
-		if (!PartitionManager.Process_Fstab(fstab_filename, 1, false, false)) {
+		if (!PartitionManager.Process_Fstab(fstab_filename, 1, false)) {
 			LOGERR("Failing out of recovery due to problem with fstab.\n");
 			return;
 		}
