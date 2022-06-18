@@ -1367,7 +1367,7 @@ int GUIAction::wipe(std::string arg)
 			if (has_datamedia) {
 				ret_val = PartitionManager.Wipe_Media_From_Data();
 			} else {
-				ret_val = PartitionManager.Wipe_By_Path(DataManager::GetSettingsStoragePath());
+				ret_val = PartitionManager.Wipe_By_Path(DataManager::GetCurrentStoragePath());
 			}
 		} else if (arg == "EXTERNAL") {
 			string External_Path;
@@ -1441,7 +1441,7 @@ int GUIAction::wipe(std::string arg)
 							gui_msg(Msg(msg::kError, "unable_to_wipe=Unable to wipe {1}.")(wipe_path));
 							ret_val = false;
 							break;
-						} else if (wipe_path == DataManager::GetSettingsStoragePath()) {
+						} else if (wipe_path == DataManager::GetCurrentStoragePath()) {
 							arg = wipe_path;
 						}
 					} else {

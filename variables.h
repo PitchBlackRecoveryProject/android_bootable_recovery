@@ -27,6 +27,7 @@
 #define TW_MAIN_VERSION_STR       "3.7.0_12"
 #define TW_VERSION_STR TW_MAIN_VERSION_STR PB_MAIN_BUILD
 
+#define TW_STORAGE_PATH             "/data/recovery/"
 #define TW_USE_COMPRESSION_VAR      "tw_use_compression"
 #define TW_FILENAME                 "tw_filename"
 #define TW_ZIP_INDEX                "tw_zip_index"
