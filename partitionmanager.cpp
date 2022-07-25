@@ -4071,7 +4071,6 @@ bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
 	}
 
 	twrpPart->Set_Block_Device(fstabEntry.blk_device);
-	twrpPart->Change_Mount_Read_Only(true);
 	twrpPart->Set_Can_Be_Backed_Up(false);
 	twrpPart->Set_Can_Be_Wiped(false);
 	twrpPart->Update_Size(true);
