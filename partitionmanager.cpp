@@ -302,9 +302,9 @@ void TWPartitionManager::Setup_Fstab_Partitions(bool Display_Error) {
 		if ((*iter)->Is_Super) Prepare_Super_Volume((*iter));
 	}
 
+	Unlock_Block_Partitions();
 	// Setup Apex before decryption
-	TWPartition* sys =
-			PartitionManager.Find_Partition_By_Path(PartitionManager.Get_Android_Root_Path());
+	TWPartition* sys = PartitionManager.Find_Partition_By_Path(PartitionManager.Get_Android_Root_Path());
 	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
 	if (sys) {
 		if (sys->Get_Super_Status()) {
@@ -2999,8 +2999,6 @@ bool TWPartitionManager::Flash_Image(string& path, string& filename) {
 
 	full_filename = path + "/" + filename;
 
-	Unlock_Block_Partitions();
-
 	gui_msg("image_flash_start=[IMAGE FLASH STARTED]");
 	gui_msg(Msg("img_to_flash=Image to flash: '{1}'")(full_filename));
 
@@ -4237,7 +4235,7 @@ void TWPartitionManager::Unlock_Block_Partitions() {
 					continue;
 				}
 				if (ioctl(fd, BLKROSET, &OFF) == -1) {
-					LOGERR("Unable to unlock %s for flashing: %s\n", block_device.c_str());
+					LOGERR("Unable to unlock %s: %s\n", block_device.c_str());
 					continue;
 				}
 				close(fd);
