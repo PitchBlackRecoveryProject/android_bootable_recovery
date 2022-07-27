@@ -3023,36 +3023,39 @@ bool TWPartition::Restore_Image(PartitionSettings *part_settings) {
 }
 
 bool TWPartition::Update_Size(bool Display_Error) {
-	bool ret = false, Was_Already_Mounted = false;
+	bool ret = false, Was_Already_Mounted = false, ro = false;
 
 	Find_Actual_Block_Device();
 
 	if (Actual_Block_Device.empty())
 		return false;
 
+	ro = Mount_Read_Only;
+	Mount_Read_Only = true;
+
 	if (!Can_Be_Mounted && !Is_Encrypted) {
 		if (TWFunc::Path_Exists(Actual_Block_Device) && Find_Partition_Size()) {
 			Used = Size;
 			Backup_Size = Size;
-			return true;
+			goto success;
 		}
-		return false;
+		goto fail;
 	}
 
 	Was_Already_Mounted = Is_Mounted();
 
 	if (Removable || Is_Encrypted) {
 		if (!Mount(false))
-			return true;
+			goto success;
 	} else if (!Mount(Display_Error))
-		return false;
+		goto fail;
 
 	ret = Get_Size_Via_statfs(Display_Error);
 	if (!ret || Size == 0) {
 		if (!Get_Size_Via_df(Display_Error)) {
 			if (!Was_Already_Mounted)
 				UnMount(false);
-			return false;
+			goto fail;
 		}
 	}
 
@@ -3066,7 +3069,7 @@ bool TWPartition::Update_Size(bool Display_Error) {
 		} else {
 			if (!Was_Already_Mounted)
 				UnMount(false);
-			return false;
+			goto fail;
 		}
 	} else if (Has_Android_Secure) {
 		if (Mount(Display_Error))
@@ -3074,12 +3077,17 @@ bool TWPartition::Update_Size(bool Display_Error) {
 		else {
 			if (!Was_Already_Mounted)
 				UnMount(false);
-			return false;
+			goto fail;
 		}
 	}
 	if (!Was_Already_Mounted)
 		UnMount(false);
+success:
+	Mount_Read_Only = ro;
 	return true;
+fail:
+	Mount_Read_Only = ro;
+	return false;
 }
 
 bool TWPartition::Find_Wildcard_Block_Devices(const string& Device) {
