@@ -172,7 +172,6 @@ ifeq ($(TW_OEM_BUILD),true)
     TW_USE_TOOLBOX := true
     TW_EXCLUDE_MTP := true
     TW_EXCLUDE_TZDATA := true
-    TW_EXCLUDE_PYTHON := true
 endif
 
 ifeq ($(AB_OTA_UPDATER),true)
@@ -591,7 +590,7 @@ endif
 ifneq ($(TW_LOAD_VENDOR_MODULES),)
     TWRP_REQUIRED_MODULES += libmodprobe
 endif
-ifneq ($(TW_EXCLUDE_PYTHON),true)
+ifeq ($(TW_INCLUDE_PYTHON),true)
     TWRP_REQUIRED_MODULES += python3_twrp
 endif
 
