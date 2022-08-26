@@ -267,6 +267,7 @@ if (!TWFunc::Path_Exists("/ramdisk-files.txt")) {
 			LOGERR("can not find ramdisk-files.txt");
 			return false;
 		}
+		PartitionManager.Unlock_Block_Partitions();
 		Repack_Options_struct Repack_Options;
 		Repack_Options.Disable_Verity = false;
 		Repack_Options.Disable_Force_Encrypt = false;
