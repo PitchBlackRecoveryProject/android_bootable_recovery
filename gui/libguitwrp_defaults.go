@@ -252,7 +252,7 @@ func globalFlags(ctx android.BaseContext) []string {
 	}
 
 	if getMakeVars(ctx, "TW_SCREEN_BLANK_ON_BOOT") == "true" {
-		cflags = append(cflags, "-DTW_NO_SCREEN_BLANK")
+		cflags = append(cflags, "-DTW_SCREEN_BLANK_ON_BOOT")
 	}
 
 	if getMakeVars(ctx, "PB_TORCH_PATH") != "" {
