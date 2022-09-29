@@ -107,6 +107,7 @@
 		<image name="main_button_specials_icon" filename="main_button_specials_icon" retainaspect="1"/>
 		<image name="main_button_specials_icon_clear" filename="main_button_specials_icon_clear" retainaspect="1"/>
 		<image name="main_button_install" filename="main_button_install" retainaspect="1"/>
+		<image name="main_button_install_alt" filename="main_button_install_alt" retainaspect="1"/>
 		<image name="main_button_install_page" filename="main_button_install_page" retainaspect="1"/>
 		<image name="main_button_install_done" filename="main_button_install_done" retainaspect="1"/>
 		<image name="main_button_wipe" filename="main_button_wipe" retainaspect="1"/>
@@ -121,7 +122,8 @@
 		<image name="main_button_fixcontexts" filename="main_button_fixcontexts" retainaspect="1"/>
 		<image name="main_button_partitionsd" filename="main_button_partitionsd" retainaspect="1"/>
 		<image name="main_button_adb" filename="main_button_adb" retainaspect="1"/>
-		<image name="main_button_terminal" filename="main_button_terminal" retainaspect="1"/>
+		<image name="main_button_unmap" filename="main_button_unmap" retainaspect="1"/>
+		<image name="main_button_snapshot" filename="main_button_snapshot" retainaspect="1"/>
 		<image name="main_button_explorer" filename="main_button_explorer" retainaspect="1"/>
 		<image name="main_button_special" filename="main_button_special" retainaspect="1"/>
 		<image name="main_button_back" filename="main_button_back" retainaspect="1"/>

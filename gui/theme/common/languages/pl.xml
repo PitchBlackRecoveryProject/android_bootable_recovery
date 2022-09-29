@@ -513,10 +513,11 @@
 		<string name="repacking_image">Przepakowywanie {1}...</string>
 		<string name="repack_image_hdr">Wybierz obraz</string>
 		<string name="repack_overwrite_warning">Jeśli urządzenie zostało przedtem zrootowane, root zniknie i trzeba będzie zainstalować go ponownie.</string>
-		<string name="reflash_twrp">Wgraj Obecne TWRP</string>
-		<string name="reflash_twrp_confirm">Wgrać obecne TWRP?</string>
-		<string name="reflashing_twrp">Wgrywanie TWRP...</string>
-		<string name="reflash_twrp_complete">Ukończono wgrywanie TWRP</string>
+		<string name="reflash_current">Wgraj Obecne</string>
+		<string name="reflash_current_pbrp">Wgraj Obecne PBRP</string>
+		<string name="reflash_twrp_confirm">Wgrać obecne PBRP?</string>
+		<string name="reflashing_pbrp">Wgrywanie PBRP...</string>
+		<string name="reflash_pbrp_complete">Ukończono wgrywanie PBRP</string>
 		<string name="fix_recovery_loop">Napraw Bootloop Recovery</string>
 		<string name="fix_recovery_loop_confirm">Naprawić bootloop recovery?</string>
 		<string name="fixing_recovery_loop">Naprawianie bootloopa Recovery...</string>

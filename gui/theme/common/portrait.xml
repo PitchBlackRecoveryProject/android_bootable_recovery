@@ -4685,18 +4685,20 @@
 						<action function="page">repackselect</action>
 					</actions>
 				</listitem>
-				<listitem name="{@reflash_twrp=Flash Current TWRP}">
+				<listitem name="{@reflash_current=Flash Current}">
 					<conditions>
 						<condition var1="tw_has_boot_slots" var2="1"/>
 						<condition var1="tw_has_repack_tools" var2="1"/>
 					</conditions>
+					<text>{@reflash_current_pbrp=Flash Current PBRP}</text>
+					<icon icon="main_button_install_alt"/>
 					<actions>
 						<action function="set">tw_repack_kernel=0</action>
 						<action function="set">tw_back=advanced</action>
 						<action function="set">tw_action=reflashtwrp</action>
-						<action function="set">tw_text1={@reflash_twrp_confirm=Flash Current TWRP?}</action>
-						<action function="set">tw_action_text1={@reflashing_twrp=Flashing TWRP...}</action>
-						<action function="set">tw_complete_text1={@reflash_twrp_complete=Done Flashing TWRP}</action>
+						<action function="set">tw_text1={@reflash_pbrp_confirm=Flash Current PBRP?}</action>
+						<action function="set">tw_action_text1={@reflashing_pbrp=Flashing PBRP...}</action>
+						<action function="set">tw_complete_text1={@reflash_pbrp_complete=Done Flashing PBRP}</action>
 						<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
 						<action function="page">confirm_action</action>
 						</actions>
@@ -4728,7 +4730,9 @@
 					</actions>
 				</listitem>
 				<listitem name="{@unmap_super_devices=Unmap Super Devices}">
-					<condition var1="tw_virtual_ab.enabled" op="=" var2="1"/>
+					<condition var1="tw_is_super" op="=" var2="1"/>
+					<text>{@unmap_super_devices_dynamic=Unmap Super Devices(Dynamic only)}</text>
+					<icon icon="main_button_unmap"/>
 					<actions>
 						<action function="set">tw_back=advanced</action>
 						<action function="set">tw_action=unmapsuperdevices</action>
@@ -4741,6 +4745,8 @@
 				</listitem>
 				<listitem name="{@merges_snapshots=Merge Snapshots}">
 					<condition var1="tw_virtual_ab.enabled" op="=" var2="1"/>
+					<text>{@merges_snapshots_vab=Merge Snapshots(VAB only)}</text>
+					<icon icon="main_button_snapshot"/>
 					<actions>
 						<action function="set">tw_back=advanced</action>
 						<action function="set">tw_action=mergesnapshots</action>

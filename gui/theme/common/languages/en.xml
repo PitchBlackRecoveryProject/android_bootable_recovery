@@ -535,10 +535,11 @@
 		<string name="repacking_image">Repacking {1}...</string>
 		<string name="repack_image_hdr">Select Image</string>
 		<string name="repack_overwrite_warning">If device was previously rooted, then root has been overwritten and will need to be reinstalled.</string>
-		<string name="reflash_twrp">Flash Current TWRP</string>
-		<string name="reflash_twrp_confirm">Flash Current TWRP?</string>
-		<string name="reflashing_twrp">Flashing TWRP...</string>
-		<string name="reflash_twrp_complete">Done flashing TWRP</string>
+		<string name="reflash_current">Flash Current</string>
+		<string name="reflash_current_pbrp">Flash Current PBRP</string>
+		<string name="reflash_pbrp_confirm">Flash Current PBRP?</string>
+		<string name="reflashing_pbrp">Flashing PBRP...</string>
+		<string name="reflash_pbrp_complete">Done flashing PBRP</string>
 		<string name="fix_recovery_loop">Fix Recovery Bootloop</string>
 		<string name="fix_recovery_loop1">Workaround for fixing recovery after reboot</string>
 		<string name="fix_recovery_loop_confirm">Fix Recovery Bootloop?</string>
@@ -966,6 +967,7 @@
 		<string name="pb_coming_soon">Coming Soon....!</string>
 		<string name="restore_system_context">Unable to get default context for {1} -- Android may not boot.</string>
 		<string name="unmap_super_devices">Unmap Super Devices</strings>
+		<string name="unmap_super_devices_dynamic">Unmap Super Devices (Dynamic only)</strings>
 		<string name="unmap_super_devices_confirm">Unmap all Super Devices?</string>
 		<string name="unmapping_super_devices">Unmapping Super Devices...</string>
 		<string name="unmap_super_devices_complete">Unmapped all Super Devices</string>
@@ -974,6 +976,7 @@
 		<string name="remove_dynamic_groups_complete">Unmapped all Super Devices</string>
 		<string name="mount_vab_partitions">Devices on super may not mount until rebooting recovery.</string>
 		<string name="merges_snapshots">Merge Snapshots</string>
+		<string name="merges_snapshots_vab">Merge Snapshots (VAB only)</string>
 		<string name="merge_snapshots_confirm">Merge Snapshots?</string>
 		<string name="merging_snapshots">Merging Snapshots...</string>
 		<string name="merging_snapshots_complete">Merged Snapshots</string>
