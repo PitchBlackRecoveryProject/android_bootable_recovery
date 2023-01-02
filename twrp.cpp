@@ -108,28 +108,10 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 
 static void process_fastbootd_mode() {
 		LOGINFO("starting fastboot\n");
-
 #ifdef TW_LOAD_VENDOR_MODULES
-		printf("=> Linking mtab\n");
-		symlink("/proc/mounts", "/etc/mtab");
-		std::string fstab_filename = "/etc/twrp.fstab";
-		if (!TWFunc::Path_Exists(fstab_filename)) {
-			fstab_filename = "/etc/recovery.fstab";
-		}
-		printf("=> Processing %s\n", fstab_filename.c_str());
-		if (!PartitionManager.Process_Fstab(fstab_filename, 1, false)) {
-			LOGERR("Failing out of recovery due to problem with fstab.\n");
-			return;
-		}
-		TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
-		PartitionManager.Setup_Super_Devices();
-		PartitionManager.Prepare_Super_Volume(ven);
-		KernelModuleLoader::Load_Vendor_Modules();
-		if (android::base::GetBoolProperty("ro.virtual_ab.enabled", false)) {
+		if (android::base::GetBoolProperty("ro.virtual_ab.enabled", false))
 			PartitionManager.Unmap_Super_Devices();
-		}
 #endif
-
 		gui_msg(Msg("fastboot_console_msg=Entered Fastboot mode..."));
 		// Check for and run startup script if script exists
 		TWFunc::check_and_run_script("/system/bin/runatboot.sh", "boot");
@@ -142,38 +124,11 @@ static void process_fastbootd_mode() {
 static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decryption) {
 	char crash_prop_val[PROPERTY_VALUE_MAX];
 	int crash_counter;
-	std::string cmdline;
-	if (TWFunc::read_file("/proc/cmdline", cmdline) != 0) {
-		LOGINFO("Unable to read cmdline for fastboot mode\n");
-	}
 
 	property_get("twrp.crash_counter", crash_prop_val, "-1");
 	crash_counter = atoi(crash_prop_val) + 1;
 	snprintf(crash_prop_val, sizeof(crash_prop_val), "%d", crash_counter);
 	property_set("twrp.crash_counter", crash_prop_val);
-
-	printf("=> Linking mtab\n");
-	symlink("/proc/mounts", "/etc/mtab");
-	std::string fstab_filename = "/etc/twrp.fstab";
-	if (!TWFunc::Path_Exists(fstab_filename)) {
-		fstab_filename = "/system/etc/recovery.fstab";
-		if (!TWFunc::Path_Exists(fstab_filename))
-			fstab_filename = "/etc/recovery.fstab";
-	}
-	property_set("ro.twrp.sar", "1");
-	printf("=> Processing %s\n", fstab_filename.c_str());
-	if (!PartitionManager.Process_Fstab(fstab_filename, 1, true)) {
-		LOGERR("Failing out of recovery due to problem with fstab.\n");
-		return;
-	}
-
-#ifdef TW_LOAD_VENDOR_MODULES
-	bool fastboot_mode = cmdline.find("twrpfastboot=1") != std::string::npos;
-	if (fastboot_mode)
-		KernelModuleLoader::Load_Vendor_Modules();
-	else
-		KernelModuleLoader::Load_Vendor_Modules();
-#endif
 
 // We are doing this here to allow super partition to be set up prior to overriding properties
 #if defined(TW_INCLUDE_LIBRESETPROP) && defined(TW_OVERRIDE_SYSTEM_PROPS)
@@ -446,8 +401,31 @@ int main(int argc, char **argv) {
 #ifdef MTAINER
 	DataManager::SetValue("pb_maintainer", std::string(MTAINER));
 #endif
+
+	startupArgs startup;
+	startup.parse(&argc, &argv);
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+	printf("=> Linking mtab\n");
+	symlink("/proc/mounts", "/etc/mtab");
+	std::string fstab_filename = "/etc/twrp.fstab";
+	if (!TWFunc::Path_Exists(fstab_filename)) {
+		fstab_filename = "/system/etc/recovery.fstab";
+		if (!TWFunc::Path_Exists(fstab_filename))
+			fstab_filename = "/etc/recovery.fstab";
+	}
+	property_set("ro.twrp.sar", "1");
+	printf("=> Processing %s\n", fstab_filename.c_str());
+	if (!PartitionManager.Process_Fstab(fstab_filename, 1, !startup.Get_Fastboot_Mode())) {
+		LOGERR("Failing out of recovery due to problem with fstab.\n");
+		return -1;
+	}
+
+#ifdef TW_LOAD_VENDOR_MODULES
+	if (startup.Get_Fastboot_Mode())
+		PartitionManager.Prepare_Super_Volume(PartitionManager.Find_Partition_By_Path("/vendor"));
+	KernelModuleLoader::Load_Vendor_Modules();
+#endif
 	printf("Starting the UI...\n");
 	gui_init();
 
@@ -463,8 +441,6 @@ int main(int argc, char **argv) {
 	if(!null.empty())
 		LOGERR("Failed To Copy prop.info\n");
 
-	startupArgs startup;
-	startup.parse(&argc, &argv);
 	twrpAdbBuFifo *adb_bu_fifo = new twrpAdbBuFifo();
 	TWFunc::Clear_Bootloader_Message();
 
