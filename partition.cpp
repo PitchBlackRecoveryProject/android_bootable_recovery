@@ -2111,6 +2111,7 @@ bool TWPartition::Wipe_Encryption() {
 #ifdef TW_INCLUDE_CRYPTO
 	if (!UnMount(true))
 		return false;
+	umount("/sdcard"); // Hack
 	if (Is_Decrypted && !Decrypted_Block_Device.empty()) {
 		if (delete_crypto_blk_dev((char*)("userdata")) != 0) {
 			LOGERR("Error deleting crypto block device, continuing anyway.\n");
