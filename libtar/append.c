@@ -84,7 +84,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	char path[MAXPATHLEN];
 
 #ifdef DEBUG
-	printf("==> tar_append_file(TAR=0x%p (\"%s\"), realname=\"%s\", "
+	LOG("==> tar_append_file(TAR=0x%p (\"%s\"), realname=\"%s\", "
 	       "savename=\"%s\")\n", (void*) t, t->pathname, realname,
 	       (savename ? savename : "[NULL]"));
 #endif
@@ -99,14 +99,14 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 
 	/* set header block */
 #ifdef DEBUG
-	puts("tar_append_file(): setting header block...");
+	LOG("tar_append_file(): setting header block...");
 #endif
 	memset(&(t->th_buf), 0, sizeof(struct tar_header));
 	th_set_from_stat(t, &s);
 
 	/* set the header path */
 #ifdef DEBUG
-	puts("tar_append_file(): setting header path...");
+	LOG("tar_append_file(): setting header path...");
 #endif
 	th_set_path(t, (savename ? savename : realname));
 
@@ -123,7 +123,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 		if (lgetfilecon(realname, &selinux_context) >= 0)
 		{
 			t->th_buf.selinux_context = strdup(selinux_context);
-			printf("  ==> set selinux context: %s\n", selinux_context);
+			LOG("  ==> set selinux context: %s\n", selinux_context);
 			freecon(selinux_context);
 		}
 		else
@@ -148,7 +148,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 		t->th_buf.fep = (struct fscrypt_policy_v2 *)malloc(sizeof(struct fscrypt_policy_v2));
 #endif
 		if (!t->th_buf.fep) {
-			printf("malloc fs_encryption_policy\n");
+			LOG("malloc fs_encryption_policy\n");
 			return -1;
 		}
 
@@ -172,18 +172,18 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 				|| strncmp((char *) tar_policy, SYSTEM_DE_FSCRYPT_POLICY, sizeof(SYSTEM_DE_FSCRYPT_POLICY)) == 0) {
 #ifdef USE_FSCRYPT_POLICY_V1
 					memcpy(t->th_buf.fep->master_key_descriptor, tar_policy, FS_KEY_DESCRIPTOR_SIZE);
-					printf("found fscrypt policy '%s' - '%s' - '%s'\n", realname, t->th_buf.fep->master_key_descriptor, policy_hex);
+					LOG("found fscrypt policy '%s' - '%s' - '%s'\n", realname, t->th_buf.fep->master_key_descriptor, policy_hex);
 #else
 					memcpy(t->th_buf.fep->master_key_identifier, tar_policy, FSCRYPT_KEY_IDENTIFIER_SIZE);
-					printf("found fscrypt policy '%s' - '%s' - '%s'\n", realname, t->th_buf.fep->master_key_identifier, policy_hex);
+					LOG("found fscrypt policy '%s' - '%s' - '%s'\n", realname, t->th_buf.fep->master_key_identifier, policy_hex);
 #endif
 				} else {
-					printf("failed to match fscrypt tar policy for '%s' - '%s'\n", realname, policy_hex);
+					LOG("failed to match fscrypt tar policy for '%s' - '%s'\n", realname, policy_hex);
 					free(t->th_buf.fep);
 					t->th_buf.fep = NULL;
 				}
 			} else {
-				printf("failed to lookup fscrypt tar policy for '%s' - '%s'\n", realname, policy_hex);
+				LOG("failed to lookup fscrypt tar policy for '%s' - '%s'\n", realname, policy_hex);
 				free(t->th_buf.fep);
 				t->th_buf.fep = NULL;
 			}
@@ -221,28 +221,28 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 		{
 			t->th_buf.has_user_default = 1;
 #if 1 //def DEBUG
-			printf("storing xattr user.default\n");
+			LOG("storing xattr user.default\n");
 #endif
 		}
 		if (getxattr(realname, "user.inode_cache", NULL, 0) >= 0)
 		{
 			t->th_buf.has_user_cache = 1;
 #if 1 //def DEBUG
-			printf("storing xattr user.inode_cache\n");
+			LOG("storing xattr user.inode_cache\n");
 #endif
 		}
 		if (getxattr(realname, "user.inode_code_cache", NULL, 0) >= 0)
 		{
 			t->th_buf.has_user_code_cache = 1;
 #if 1 //def DEBUG
-			printf("storing xattr user.inode_code_cache\n");
+			LOG("storing xattr user.inode_code_cache\n");
 #endif
 		}
 	}
 
 	/* check if it's a hardlink */
 #ifdef DEBUG
-	puts("tar_append_file(): checking inode cache for hardlink...");
+	LOG("tar_append_file(): checking inode cache for hardlink...");
 #endif
 	libtar_hashptr_reset(&hp);
 	if (libtar_hash_getkey(t->h, &hp, &(s.st_dev),
@@ -251,7 +251,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	else
 	{
 #ifdef DEBUG
-		printf("+++ adding hash for device (0x%x, 0x%x)...\n",
+		LOG("+++ adding hash for device (0x%x, 0x%x)...\n",
 		       major(s.st_dev), minor(s.st_dev));
 #endif
 		td = (tar_dev_t *)calloc(1, sizeof(tar_dev_t));
@@ -268,7 +268,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	{
 		ti = (tar_ino_t *)libtar_hashptr_data(&hp);
 #ifdef DEBUG
-		printf("    tar_append_file(): encoding hard link \"%s\" "
+		LOG("    tar_append_file(): encoding hard link \"%s\" "
 		       "to \"%s\"...\n", realname, ti->ti_name);
 #endif
 		t->th_buf.typeflag = LNKTYPE;
@@ -277,7 +277,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	else
 	{
 #ifdef DEBUG
-		printf("+++ adding entry: device (0x%d,0x%x), inode %lu"
+		LOG("+++ adding entry: device (0x%d,0x%x), inode %lu"
 		       "(\"%s\")...\n", major(s.st_dev), minor(s.st_dev),
 		       (unsigned long) s.st_ino, realname);
 #endif
@@ -300,7 +300,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 			i = MAXPATHLEN - 1;
 		path[i] = '\0';
 #ifdef DEBUG
-		printf("tar_append_file(): encoding symlink \"%s\" -> "
+		LOG("tar_append_file(): encoding symlink \"%s\" -> "
 		       "\"%s\"...\n", realname, path);
 #endif
 		th_set_link(t, path);
@@ -308,21 +308,21 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 
 	/* print file info */
 	if (t->options & TAR_VERBOSE)
-		printf("%s\n", th_get_pathname(t));
+		LOG("%s\n", th_get_pathname(t));
 
 #ifdef DEBUG
-	puts("tar_append_file(): writing header");
+	LOG("tar_append_file(): writing header");
 #endif
 	/* write header */
 	if (th_write(t) != 0)
 	{
 #ifdef DEBUG
-		printf("t->fd = %ld\n", t->fd);
+		LOG("t->fd = %ld\n", t->fd);
 #endif
 		return -1;
 	}
 #ifdef DEBUG
-	puts("tar_append_file(): back from th_write()");
+	LOG("tar_append_file(): back from th_write()");
 #endif
 
 	/* if it's a regular file, write the contents as well */
