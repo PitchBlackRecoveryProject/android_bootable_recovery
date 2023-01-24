@@ -139,10 +139,14 @@ public:
 	static int check_encrypt_status(); // return 1,2,3,0 on FDE, FBE, On some confusion & unencryptred respectively
 	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
 	static std::string getprop(std::string arg); //set the arg value to PB_PROP_VALUE
+	static int Delete_Property(string Prop_Name); // Delete properties (non-persistent properties only)
 	static void List_Mounts(); // List current mounts by the kernel
 	static void Clear_Bootloader_Message(); // Removes the bootloader message from misc for next boot
 	static string Check_For_TwrpFolder(); // Gets user defined path on storage where backups should be stored
 	static bool Check_Xml_Format(const std::string filename); // Return whether a xml is in plain xml or ABX format
+	static bool Find_Fstab(string &fstab);
+	static bool Get_Service_From(TWPartition *Partition, std::string Service, std::string &Ret);
+	static std::string Get_Version_From_Service(std::string name);
 
 private:
 	static void Copy_Log(string Source, string Destination);
