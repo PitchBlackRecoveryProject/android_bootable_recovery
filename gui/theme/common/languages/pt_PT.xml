@@ -917,8 +917,6 @@
 		<string name="pb_dev_reboot">A reinicialização é obrigatória após a troca de codinomes</string>
 		<string name="pb_dev_name">Trocador de nome de código do dispositivo PBRP</string>
 		<string name="codename_changer">Codename Changer</string>
-		<string name="pb_wipe_fbe_cache">FBE Cache</string>
-		<string name="fbe_done">- FBE Cache Wipe Complete!</string>
 		<string name="sel_br_val">Valor de brilho da lanterna: %pb_bright_value%%</string>
 		<string name="unmount_sys_install">Desmonte o sistema antes de instalar um ZIP</string>
 		<string name="unmount_system">Desmontando sistema ...</string>

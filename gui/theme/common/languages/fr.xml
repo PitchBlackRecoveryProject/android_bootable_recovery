@@ -923,8 +923,6 @@
 		<string name="pb_dev_reboot">Un redémarrage est obligatoire après le changement de nom de code</string>
 		<string name="pb_dev_name">PBRP Device Codename Changer</string>
 		<string name="codename_changer">Codename Changer</string>
-		<string name="pb_wipe_fbe_cache">FBE Cache</string>
-		<string name="fbe_done">-- FBE Cache Wipe Complete!</string>
 		<string name="sel_br_val">Valeur de luminosité de la lampe de poche: %pb_bright_value%%</string>
 		<string name="unmount_sys_install">Démonter le système avant d'installer un ZIP</string>
 		<string name="unmount_system">Démontage du système ...</string>

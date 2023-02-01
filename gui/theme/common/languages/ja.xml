@@ -957,8 +957,6 @@
 		<string name="pb_dev_reboot">コードネームを切り替えた後の再起動は必須です</string>
 		<string name="pb_dev_name">PBRPデバイスコードネームチェンジャー</string>
 		<string name="codename_changer">コードネームチェンジャー</string>
-		<string name="pb_wipe_fbe_cache">FBEキャッシュ</string>
-		<string name="fbe_done">-FBEキャッシュワイプの完了！</string>
 		<string name="sel_br_val">懐中電灯の明るさの値：％pb_bright_value %%</string>
 		<string name="unmount_sys_install">ZIPをインストールする前にシステムをアンマウントする</string>
 		<string name="unmount_system">システムのマウントを解除しています...</string>

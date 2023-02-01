@@ -916,8 +916,6 @@
 		<string name="pb_dev_reboot">Kod adlarını değiştirdikten sonra Yeniden Başlatma zorunludur</string>
 		<string name="pb_dev_name">PBRP Cihazı Kod Adı Değiştirici</string>
 		<string name="codename_changer">Kod Adı Değiştirici</string>
-		<string name="pb_wipe_fbe_cache">FBE Önbelleği</string>
-		<string name="fbe_done">- FBE Önbellek Temizleme Tamamlandı!</string>
 		<string name="sel_br_val">El Feneri Parlaklık Değeri: %pb_bright_value%%</string>
 		<string name="unmount_sys_install">Bir ZIP kurmadan önce Sistemin Bağlantısını Kes</string>
 		<string name="unmount_system">Sistemin Sökülmesi ...</string>

@@ -939,8 +939,6 @@
 		<string name="pb_dev_reboot">切換代號後必須重新啟動</string>
 		<string name="pb_dev_name">PBRP設備代號更改</string>
 		<string name="codename_changer">代號換</string>
-		<string name="pb_wipe_fbe_cache">FBE快取</string>
-		<string name="fbe_done">-FBE緩存擦除完成！</string>
 		<string name="sel_br_val">手電筒亮度值：％pb_bright_value %%</string>
 		<string name="unmount_sys_install">安裝ZIP之前先卸載系統</string>
 		<string name="unmount_system">卸載系統...</string>
