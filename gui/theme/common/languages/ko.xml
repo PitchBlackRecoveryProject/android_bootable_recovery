@@ -939,8 +939,6 @@
 		<string name="pb_dev_name">PBRP 기기 코드명 변경</string>
 		<string name="codename_changer">코드명 변경</string>
 		<string name="magisk_done">-- Magisk 모듈이 삭제되었습니다!</string>
-		<string name="pb_wipe_fbe_cache">파일 기반 암호화 캐시</string>
-		<string name="fbe_done">-- 파일 기반 암호화 캐시가 삭제되었습니다!</string>
 		<string name="sel_br_val">플래시 밝기 값: %pb_bright_value%%</string>
 		<string name="patch_avb2">AVB 2.0 검증</string>
 		<string name="pb_patch_avb2">AVB 2.0 패치됨</string>

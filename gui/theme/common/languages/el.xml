@@ -896,8 +896,6 @@
 		<string name="pb_dev_reboot">Η επανεκκίνηση είναι υποχρεωτική Μετά την αλλαγή κωδικών</string>
 		<string name="pb_dev_name">Αλλαγή κωδικού ονόματος συσκευής PBRP</string>
 		<string name="codename_changer">Κωδικός Changer</string>
-		<string name="pb_wipe_fbe_cache">Προσωρινή μνήμη FBE</string>
-		<string name="fbe_done">- Ολοκληρώθηκε η διαγραφή FBE Cache!</string>
 		<string name="sel_br_val">Τιμή φωτεινότητας φακού: %pb_bright_value%%</string>
 		<string name="unmount_sys_install">Αποσύνδεση συστήματος πριν εγκαταστήσετε ένα ZIP</string>
 		<string name="unmount_system">Αποσύνδεση συστήματος ...</string>

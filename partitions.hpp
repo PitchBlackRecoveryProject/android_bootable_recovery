@@ -347,7 +347,6 @@ public:
 	int Wipe_Dalvik_Cache();                                                  // Wipes dalvik cache
 	int Wipe_Substratum_Overlays();                                           // Wipe substratum overlays
 	int Wipe_Magisk_Modules();                                                // Wipe magisk modules
-	int Wipe_FBE_Cache();                                                     // Wipe fbe cache
         int Wipe_Rotate_Data();                                                   // Wipes rotation data --
 	int Wipe_Battery_Stats();                                                 // Wipe battery stats -- /data/system/batterystats.bin
 	int Wipe_Android_Secure();                                                // Wipes android secure

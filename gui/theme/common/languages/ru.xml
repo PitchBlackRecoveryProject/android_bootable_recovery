@@ -889,8 +889,6 @@
 		<string name="pb_dev_reboot">Перезагрузка обязательна после переключения кодовых имен</string>
 		<string name="pb_dev_name">Смена имени</string>
 		<string name="codename_changer">Смена имени</string>
-		<string name="pb_wipe_fbe_cache">Кэш FBE</string>
-		<string name="fbe_done">- Очистка кэша FBE завершена!</string>
 		<string name="sel_br_val">Значение яркости фонарика:%pb_bright_value%%</string>
 		<string name="pb_ota_instruction">Пожалуйста, посмотрите инструкцию для включений обновлений по OTA на</string>
 		<string name="battery_pct">Батарея: %tw_battery%</string>

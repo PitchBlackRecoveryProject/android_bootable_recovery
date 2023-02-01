@@ -917,8 +917,6 @@
 		<string name="pb_dev_reboot">Un riavvio è obbligatorio dopo aver cambiato i nomi in codice</string>
 		<string name="pb_dev_name">Cambia nome in codice dispositivo PBRP</string>
 		<string name="codename_changer">Cambia nome in codice</string>
-		<string name="pb_wipe_fbe_cache">Cache FBE</string>
-		<string name="fbe_done">- Cancellazione cache FBE completata!</string>
 		<string name="sel_br_val">Valore di luminosità della torcia: %pb_bright_value%%</string>
 		<string name="unmount_sys_install">Smonta il sistema prima di installare un file ZIP</string>
 		<string name="unmount_system">Sistema di smontaggio ...</string>

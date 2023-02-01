@@ -920,8 +920,6 @@
 		<string name="pb_dev_reboot">Після переключення кодових імен обов'язкове перезавантаження</string>
 		<string name="pb_dev_name">Зміна кодової назви пристрою PBRP</string>
 		<string name="codename_changer">Changer Changer</string>
-		<string name="pb_wipe_fbe_cache">Кеш FBE</string>
-		<string name="fbe_done">- Завантажити кеш-пам'ять FBE!</string>
 		<string name="sel_br_val">Значення яскравості ліхтарика: %pb_bright_value%%</string>
 		<string name="unmount_sys_install">Відключіть систему перед встановленням ZIP</string>
 		<string name="unmount_system">Демонтаж системи ...</string>

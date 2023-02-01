@@ -903,8 +903,6 @@
 		<string name="pb_dev_reboot">Po zamenjavi kodnih imen je obvezen ponovni zagon</string>
 		<string name="pb_dev_name">Izmenjevalnik kodnega imena naprave PBRP</string>
 		<string name="codename_changer">Changer Changer</string>
-		<string name="pb_wipe_fbe_cache">FBE predpomnilnik</string>
-		<string name="fbe_done">- FBE predpomnilnik obrišite popolno!</string>
 		<string name="sel_br_val">Vrednost svetlosti svetilke: %pb_bright_value%%</string>
 		<string name="unmount_sys_install">Pred namestitvijo ZIP-ja izklopite sistem</string>
 		<string name="unmount_system">Odstranjevanje sistema ...</string>
