@@ -593,19 +593,6 @@ LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/bin
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
-ifeq ($(TW_INCLUDE_CRYPTO), true)
-	ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),)
-		# Prebuilt vdc_pie for pre-Pie SDK Platforms
-		include $(CLEAR_VARS)
-		LOCAL_MODULE := vdc_pie
-		LOCAL_MODULE_TAGS := optional
-		LOCAL_MODULE_CLASS := EXECUTABLES
-		LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/bin
-		LOCAL_SRC_FILES := vdc_pie-$(TARGET_ARCH)
-		include $(BUILD_PREBUILT)
-	endif
-endif
-
 ifeq ($(wildcard external/magisk-prebuilt/Android.*),)
 	$(warning Magisk prebuilt tools not found!)
 	$(warning Please place https://github.com/PitchBlackRecoveryProject/external_magisk-prebuilt)

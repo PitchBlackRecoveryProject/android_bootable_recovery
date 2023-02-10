@@ -112,9 +112,6 @@ extern "C" {
 	#endif
 #endif
 #endif
-#ifdef TW_CRYPTO_USE_SYSTEM_VOLD
-#include "crypto/vold_decrypt/vold_decrypt.h"
-#endif
 #endif
 
 #ifdef AB_OTA_UPDATER
@@ -2147,26 +2144,6 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 		else
 			pwret = WEXITSTATUS(status) ? -1 : 0;
 	}
-
-#ifdef TW_CRYPTO_USE_SYSTEM_VOLD
-	if (pwret != 0) {
-		pwret = vold_decrypt(Password);
-		switch (pwret) {
-			case VD_SUCCESS:
-				break;
-			case VD_ERR_MISSING_VDC:
-				gui_msg(Msg(msg::kError,
-										"decrypt_data_vold_os_missing=Missing files needed for vold decrypt: {1}")(
-						"/system/bin/vdc"));
-				break;
-			case VD_ERR_MISSING_VOLD:
-				gui_msg(Msg(msg::kError,
-										"decrypt_data_vold_os_missing=Missing files needed for vold decrypt: {1}")(
-						"/system/bin/vold"));
-				break;
-		}
-	}
-#endif	// TW_CRYPTO_USE_SYSTEM_VOLD
 
 	// Unmount any partitions that were needed for decrypt
 	for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {

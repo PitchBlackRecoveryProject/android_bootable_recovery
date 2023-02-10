@@ -353,13 +353,6 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_STATIC_LIBRARIES += libkeymint_support
 
     LOCAL_CFLAGS += -DTW_INCLUDE_FBE_METADATA_DECRYPT
-    ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),)
-    ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),false)
-		TW_INCLUDE_LIBRESETPROP := true
-        LOCAL_CFLAGS += -DTW_CRYPTO_USE_SYSTEM_VOLD
-        LOCAL_STATIC_LIBRARIES += libvolddecrypt
-    endif
-    endif
 
     ifeq ($(TARGET_HW_DISK_ENCRYPTION),true)
         ifeq ($(TARGET_CRYPTFS_HW_PATH),)
@@ -745,13 +738,7 @@ ifneq ($(TW_OZIP_DECRYPT_KEY),)
 endif
 
 ifeq ($(TW_INCLUDE_CRYPTO), true)
-    # include $(commands_TWRP_local_path)/crypto/fde/Android.mk
     include $(commands_TWRP_local_path)/crypto/scrypt/Android.mk
-    ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),)
-    ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),false)
-        include $(commands_TWRP_local_path)/crypto/vold_decrypt/Android.mk
-    endif
-    endif
     include $(commands_TWRP_local_path)/gpt/Android.mk
 endif
 ifeq ($(BUILD_ID), GINGERBREAD)
