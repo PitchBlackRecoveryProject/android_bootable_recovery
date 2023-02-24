@@ -166,7 +166,129 @@
 		<image name="unroot" filename="unroot" retainaspect="1" />
 		<image name="pb" filename="pb" retainaspect="1" />
 	</resources>
+
 	<variables>
+		<!-- Coordinates -->
+		<variable name="x" value="0"/>
+		<variable name="y" value="0"/>
+
+		<variable name="alert_circle_x" value="340"/>
+		<variable name="pb_x" value="45"/>
+		<variable name="text_header_x" value="90"/>
+		<variable name="text_sub_header_x" value="90"/>
+		<variable name="main_button_mount_x" value="85"/>
+		<variable name="main_button_x" value="75"/>
+		<variable name="main_button_y" value="135"/>
+		<variable name="main_button_explorer_x" value="45"/>
+		<variable name="text_pb_x" value="90"/>
+		<variable name="partitionlist_x" value="90"/>
+		<variable name="filter_button_x" value="800"/>
+		<variable name="filter_button_y" value="1500"/>
+		<variable name="font_slider_x" value="90"/>
+		<variable name="font_slider_y" value="340"/>	
+		<variable name="flash_x" value="75"/>	
+		<variable name="flash_y" value="135"/>	
+		<variable name="background_color_x" value="0"/>	
+		<variable name="checkbox_x" value="90"/>	
+		<variable name="slidervalue_x" value="90"/>	
+		<variable name="listbox_x" value="90"/>	
+
+		<variable name="s_list_x" value="125"/>
+		<variable name="main2_button_x" value="927"/>
+		<variable name="main2_button_special_x" value="76"/>
+		<variable name="main2_text_pb_x" value="158"/>
+		<variable name="main2_text_header_x" value="90"/>
+		<variable name="main2_text_header_x_80" value="80"/>
+		<variable name="main2_text_header_x_600" value="600"/>
+		<variable name="main2_text_header_y_438" value="438"/>
+		<variable name="main2_text_header_y_488" value="488"/>
+		<variable name="main2_text_header_y_790" value="790"/>
+		<variable name="main2_text_header_y_840" value="840"/>
+		<variable name="main2_text_header_y_1142" value="1142"/>
+		<variable name="main2_text_header_y_1192" value="1192"/>
+		<variable name="main2_button_back_2_x" value="891"/>
+
+		<variable name="filter_test_1_x" value="150"/>
+		<variable name="filter_new_s_list_y" value="820"/>
+
+		<variable name="flash_confirm_installoption_w" value="964"/>
+		<variable name="flash_confirm_installoption_h" value="400"/>
+
+		<variable name="flash_done_install_page_x_80" value="80"/>
+		<variable name="flash_done_install_page_x_630" value="630"/>
+		<variable name="flash_done_install_page_x_920" value="920"/>
+		<variable name="flash_done_screenshhot_y" value="135"/>
+
+		<variable name="action_complete_logo_x" value="45"/>
+
+		<variable name="wipe_selected_tab_x" value="425"/>
+
+		<variable name="advancedwipe_selected_tab_x" value="120"/>
+		<variable name="advancedwipe_main_button_half_height_x" value="90"/>
+
+		<variable name="formatdata_selected_tab_x" value="740"/>
+
+		<variable name="partitionoptions_text_pb_x" value="100"/>
+		<variable name="partitionoptions_text_install_x" value="100"/>
+		<variable name="partitionoptions_text_pb_partition_x" value="680"/>
+		<variable name="partitionoptions_text_install_subheader_x" value="680"/>
+		<variable name="partitionoptions_text_pb_x_680" value="680"/>
+		
+		<variable name="restore_checkbox_x" value="100"/>
+
+		<variable name="renamebackup_input_x" value="90"/>
+		<variable name="renamebackup_text_reboto_x" value="120"/>
+		
+		<variable name="usb_mount_usb_mounted_x" value="320"/>
+
+		<variable name="reboot_secondary_button_x" value="775"/>
+		<variable name="reboot_secondary_sec_reboot_x" value="690"/>
+
+		<variable name="reboot_power_logo_x" value="90"/>
+		<variable name="reboot_main_button_half_height_new_x_20" value="20"/>
+		<variable name="reboot_main_button_half_height_new_x_520" value="520"/>
+		<variable name="reboot_main_button_highlight_x_130" value="130"/>
+		<variable name="reboot_main_button_highlight_x_680" value="680"/>
+		<variable name="reboot_text_sub_header_x_200" value="200"/>
+		<variable name="reboot_text_sub_header_x_300" value="300"/>
+
+		<variable name="settings_selected_bar_x" value="50"/>
+		<variable name="settings_scrolllist_x" value="90"/>
+		
+		<variable name="settings_timezone_selected_bar_x" value="260"/>
+		
+		<variable name="settings_screen_selected_bar_x" value="450"/>
+		<variable name="settings_screen_button_x" value="90"/>
+		
+		<variable name="settings_vibration_selected_bar_x" value="660"/>
+		
+		<variable name="copylog_main_button_log_x" value="45"/>
+		
+		<variable name="advanced_text_1_x" value="220"/>
+		<variable name="advanced_text_1_y" value="135"/>
+		<variable name="advanced_main_button_special_x" value="927"/>
+		<variable name="advanced_main_button_special_y" value="135"/>
+		<variable name="advanced_listbox_h" value="1400"/>
+		
+		<variable name="partsdcardsel_main_button_partitionsd_x" value="45"/>
+		
+		<variable name="htcdumlock_pb" value="45"/>
+		<variable name="htcdumlock_main_button_half_height_full_width_pb_x" value="180"/>
+		
+		<variable name="repackconfirm_main_button_half_height_new_x" value="30"/>
+		
+		<variable name="lock_splashlogo_x" value="540"/>
+		<variable name="lock_splashlogo_y" value="750"/>
+		<variable name="lock_lock_screen_gfx_x" value="535"/>
+		<variable name="lock_lock_screen_gfx_y" value="780"/>
+		<variable name="lock_font_pb_small_x" value="160"/>
+		<variable name="lock_font_pb_small_y" value="400"/>
+		<variable name="lock_font_pb_small_battery_x" value="1005"/>
+		<variable name="lock_font_pb_small_battery_y" value="980"/>
+		
+		<variable name="choosedestinationfolder_font_slider" value="980"/>
+		<!-- Coordinates end -->
+
 		<variable name="tw_samsung_navbar" value="0" persist="1"/>
 		<variable name="aromafm" value="1" persist="1"/>
 		<variable name="tw_hide_kb" value="0"/>
@@ -288,7 +410,7 @@
 		<variable name="theme_color" value="#010100"/>
 		<variable name="front_color" value="#010100"/>
 		<variable name="accent_color" value="#7F000000"/>
-	        <variable name="accent_color2" value="#555555"/>
+	    <variable name="accent_color2" value="#555555"/>
 		<variable name="accent_color_semitransparent" value="#0090CA30"/>
 		<variable name="text_color" value="#FFFFFF"/>
 		<variable name="sub_header_color" value="#A3A3A3" />
