@@ -126,6 +126,7 @@ using android::fs_mgr::FstabEntry;
 using android::fs_mgr::MetadataBuilder;
 
 extern bool datamedia;
+extern int fbeVersion;
 
 std::vector<users_struct> Users_List;
 
@@ -166,6 +167,7 @@ int TWPartitionManager::Set_Crypto_Type(const char* crypto_type) {
 void inline Reset_Prop_From_Partition(std::string prop, std::string def, TWPartition *ven, TWPartition *odm) {
 	bool prop_on_odm = false, prop_on_vendor = false;
 	string prop_value;
+	if (fbeVersion == 2) {
 	if (odm) {
 		string odm_prop = TWFunc::Partition_Property_Get(prop, PartitionManager, "/odm", "etc/build.prop");
 		if (!odm_prop.empty()) {
@@ -189,6 +191,7 @@ void inline Reset_Prop_From_Partition(std::string prop, std::string def, TWParti
 				LOGINFO("Setting '%s' to '%s' from /vendor/build.prop\n", prop.c_str(), prop_value.c_str());
 			}
 		}
+	}
 	}
 	if (!prop_on_odm && !prop_on_vendor && !def.empty()) {
 		if (TWFunc::Property_Override(prop, def) == NOT_AVAILABLE) {
@@ -353,16 +356,18 @@ clear:
 			LOGINFO("Keymaster version: '%s' \n", TWFunc::Get_Version_From_Service(service).c_str());
 			property_set("keymaster_ver", TWFunc::Get_Version_From_Service(service).c_str());
 			parse_userdata = true;
-			Reset_Prop_From_Partition("ro.crypto.dm_default_key.options_format.version", "", ven, odm);
-			Reset_Prop_From_Partition("ro.crypto.volume.metadata.method", "", ven, odm);
-			Reset_Prop_From_Partition("ro.crypto.volume.options", "", ven, odm);
-			Reset_Prop_From_Partition("external_storage.projid.enabled", "", ven, odm);
-			Reset_Prop_From_Partition("external_storage.casefold.enabled", "", ven, odm);
-			Reset_Prop_From_Partition("external_storage.sdcardfs.enabled", "", ven, odm);
 			goto parse;
 		} else {
 			LOGINFO("Unable to parse vendor fstab\n");
 		}
+	}
+	if (parse_userdata) {
+		Reset_Prop_From_Partition("ro.crypto.dm_default_key.options_format.version", "", ven, odm);
+		Reset_Prop_From_Partition("ro.crypto.volume.metadata.method", "", ven, odm);
+		Reset_Prop_From_Partition("ro.crypto.volume.options", "", ven, odm);
+		Reset_Prop_From_Partition("external_storage.projid.enabled", "", ven, odm);
+		Reset_Prop_From_Partition("external_storage.casefold.enabled", "", ven, odm);
+		Reset_Prop_From_Partition("external_storage.sdcardfs.enabled", "", ven, odm);
 	}
 	if (ven) ven->UnMount(true);
 	if (odm) odm->UnMount(true);

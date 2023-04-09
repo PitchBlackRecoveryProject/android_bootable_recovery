@@ -225,6 +225,8 @@ const struct flag_list tw_flags[] = {
 	{ 0,                        0 },
 };
 
+int fbeVersion = 1;
+
 TWPartition::TWPartition() {
 	Can_Be_Mounted = false;
 	Can_Be_Wiped = false;
@@ -956,6 +958,8 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 				property_set("fbe.contents", FBE_contents.c_str());
 				property_set("fbe.filenames", FBE_filenames.c_str());
 				LOGINFO("FBE contents '%s', filenames '%s'\n", FBE_contents.c_str(), FBE_filenames.c_str());
+				if (FBE.find("v2") != std::string::npos) fbeVersion = 2;
+				LOGINFO("FBE Version '%d'\n", fbeVersion);
 			}
 			break;
 		case TWFLAG_METADATA_ENCRYPTION:
