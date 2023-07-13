@@ -110,6 +110,11 @@ struct misc_memtag_message {
 #define MISC_MEMTAG_MODE_MEMTAG_KERNEL 0x4
 #define MISC_MEMTAG_MODE_MEMTAG_KERNEL_ONCE 0x8
 #define MISC_MEMTAG_MODE_MEMTAG_OFF 0x10
+// This is set when the state was overridden forcibly. This does not need to be
+// interpreted by the bootloader but is only for bookkeeping purposes so
+// userspace knows what to do when the override is undone.
+// See system/extras/mtectrl in AOSP for more information.
+#define MISC_MEMTAG_MODE_FORCED 0x20
 
 #if (__STDC_VERSION__ >= 201112L) || defined(__cplusplus)
 static_assert(sizeof(struct misc_virtual_ab_message) == 64,
