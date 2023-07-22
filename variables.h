@@ -153,7 +153,8 @@
 #define TW_VIRTUAL_AB_ENABLED       "tw_virtual_ab.enabled"
 #define TW_AUTO_REFLASHTWRP_VAR     "tw_auto_reflashtwrp"
 
-// Custome Props
+// BUILD PROPS
+#define TW_READ_ADDITIONAL_FSTAB_PROP "ro.tw.addition_fstab"
 #define TW_FASTBOOT_MODE_PROP       "ro.twrp.fastbootd"
 #define TW_MODULES_MOUNTED_PROP     "twrp.modules.loaded"     // property for successfully mounted modules
 // Theme versioning
