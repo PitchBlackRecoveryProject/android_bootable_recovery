@@ -1904,7 +1904,7 @@ void TWFunc::Deactivation_Process(void)
 			return;
 		}
 
-		if (DataManager::GetIntValue("pb_req_patch_avb2") == 1) {
+		if (DataManager::GetIntValue(PB_PATCH_AVB2) == 1) {
 			TWPartition* Partition = PartitionManager.Find_Partition_By_Path("/boot");
 			if(PBFunc::patchAVB(Partition->Actual_Block_Device.c_str()) == 0) {
 				gui_msg(Msg("pb_patch_avb2=Patched AVB2.0"));

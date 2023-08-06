@@ -826,6 +826,11 @@ void DataManager::SetDefaultValues()
 #else
 	mPersist.SetValue(PB_DISABLE_DM_VERITY, "1");
 #endif
+#ifdef PB_DISABLE_DEFAULT_PATCH_AVB2
+	mPersist.SetValue(PB_PATCH_AVB2, "0");
+#else
+	mPersist.SetValue(PB_PATCH_AVB2, "1");
+#endif
 #ifdef PB_DISABLE_DEFAULT_TREBLE_COMP
 	mPersist.SetValue(PB_TREBLE_COMP, "1");
 #else
