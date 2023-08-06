@@ -402,10 +402,10 @@ int main(int argc, char **argv) {
 	DataManager::SetValue("pb_maintainer", std::string(MTAINER));
 #endif
 
-	startupArgs startup;
-	startup.parse(&argc, &argv);
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+        startupArgs startup;
+        startup.parse(&argc, &argv);
 	printf("=> Linking mtab\n");
 	symlink("/proc/mounts", "/etc/mtab");
 	std::string fstab_filename = "/etc/twrp.fstab";
