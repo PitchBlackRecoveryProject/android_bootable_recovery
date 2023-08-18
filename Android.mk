@@ -330,6 +330,9 @@ ifneq ($(TW_LOAD_VENDOR_MODULES),)
     LOCAL_C_INCLUDES += system/core/libmodprobe/include
     LOCAL_STATIC_LIBRARIES += libmodprobe
     LOCAL_CFLAGS += -DTW_LOAD_VENDOR_MODULES=$(TW_LOAD_VENDOR_MODULES)
+    ifeq ($(TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI),true)
+        LOCAL_CFLAGS += -DTW_LOAD_VENDOR_MODULES_EXCLUDE_GKI
+    endif
 endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO -DUSE_FSCRYPT -Wno-macro-redefined
