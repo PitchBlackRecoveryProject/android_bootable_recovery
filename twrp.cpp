@@ -400,6 +400,11 @@ int main(int argc, char **argv) {
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+
+	// Show PBRP splash here
+	printf("Starting the UI...\n");
+	gui_init();
+
         startupArgs startup;
         startup.parse(&argc, &argv);
 	android::base::SetProperty(TW_FASTBOOT_MODE_PROP, startup.Get_Fastboot_Mode() ? "1" : "0");
@@ -427,8 +432,6 @@ int main(int argc, char **argv) {
 		}
 	}
 #endif
-	printf("Starting the UI...\n");
-	gui_init();
 
 	// Load up all the resources
 	gui_loadResources();
