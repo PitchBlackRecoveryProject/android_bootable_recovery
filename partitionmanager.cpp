@@ -363,7 +363,7 @@ clear:
 			Fstab_Filename = additional_fstab;
 			property_set("fstab.additional", "1");
 			TWFunc::Get_Service_From(ven, "keymaster", service);
-			LOGINFO("Keymaster version: '%s' \n", TWFunc::Get_Version_From_Service(service).c_str());
+			LOGINFO("Keymaster version: '%s'\n", TWFunc::Get_Version_From_Service(service).c_str());
 			property_set("keymaster_ver", TWFunc::Get_Version_From_Service(service).c_str());
 			parse_userdata = true;
 			Reset_Prop_From_Partition("ro.crypto.dm_default_key.options_format.version", "", ven, odm);
@@ -578,7 +578,7 @@ void TWPartitionManager::Decrypt_Data() {
 				}
 			}
 		} else {
-			LOGINFO("FBE setup failed. Trying FDE...");
+			LOGINFO("FBE setup failed. Trying FDE...\n");
 			Set_Crypto_State();
 			Set_Crypto_Type("block");
 			int password_type = cryptfs_get_password_type();
