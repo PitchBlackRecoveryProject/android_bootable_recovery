@@ -79,7 +79,6 @@ public:
 	static timespec timespec_diff(timespec& start, timespec& end);	            // Return a diff for 2 times
 	static int32_t timespec_diff_ms(timespec& start, timespec& end);            // Returns diff in ms
 	static bool Wait_For_File(const string& path, std::chrono::nanoseconds timeout); // Wait For File, True is success, False is timeout;
-	static bool Wait_For_Battery(std::chrono::nanoseconds timeout);             // Wait For /sys/class/power_supply/battery or TW_CUSTOM_BATTERY_PATH, True is success, False is timeout;
 
 #ifndef BUILD_TWRPTAR_MAIN
 	static void Replace_Word_In_File(string file_path, string search); // Remove string from file
