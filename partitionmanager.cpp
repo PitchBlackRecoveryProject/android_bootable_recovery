@@ -352,7 +352,7 @@ clear:
 #endif
 	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
 	TWPartition* odm = PartitionManager.Find_Partition_By_Path("/odm");
-	if (!parse_userdata) {
+	if (recovery_mode && !parse_userdata) {
 		if (ven) ven->Mount(Display_Error);
 		if (odm) odm->Mount(Display_Error);
 		if (TWFunc::Find_Fstab(Fstab_Filename)) {
