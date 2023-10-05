@@ -916,8 +916,8 @@
 		<string name="substratum_done">-- Substratum Overlays Wipe Complete!</string>
 		<string name="show_free_sdmb">Show free SD card space in MB</string>
 		<string name="assert_failed_hint">An assert failed. Please check the output above for more details.</string>
-		<string name="pb_wipe_magisk_modules">Magisk Modules</string>
-		<string name="magisk_done">-- Magisk Modules Wipe Complete!</string>
+		<string name="pb_wipe_module">Module magisk-ksu</string>
+		<string name="module_done">-- Module Wipe Complete!</string>
 		<string name="pb_saving_log">Preserving Logs...</string>
 		<string name="pb_enable_logging">Copy Logs After Flash</string>
 		<string name="pb_enable_dmesg_logging">Include DMESG in Logs</string>
