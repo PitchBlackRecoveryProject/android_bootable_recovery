@@ -552,6 +552,9 @@
 			</button>
 
 			<button style="main_button_back2">
+				<conditions>
+					<condition var1="pb_torch_support" var2="1"/>
+				</conditions>
 				<placement x="380" y="%row24_y%"/>
 				<highlight color="%highlight_color%"/>
 				<icon resource="flash"/>
