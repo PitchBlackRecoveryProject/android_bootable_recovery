@@ -622,10 +622,6 @@ ifeq ($(TW_INCLUDE_PYTHON),true)
     TWRP_REQUIRED_MODULES += python3_twrp
 endif
 
-LOCAL_POST_INSTALL_CMD += \
-    sed 's/\(namespace.default.search.paths\)\s\{1,\}=/namespace.default.search.paths  = \/sbin\n\1 +=/' \
-    $(TARGET_RECOVERY_ROOT_OUT)/system/etc/ld.config.txt > $(TARGET_RECOVERY_ROOT_OUT)/sbin/ld.config.txt
-
 TWRP_REQUIRED_MODULES += file_contexts_text
 
 ifeq ($(BOARD_CACHEIMAGE_PARTITION_SIZE),)
