@@ -56,10 +56,8 @@
 #include "cutils/properties.h"
 #include "cutils/android_reboot.h"
 #include <sys/reboot.h>
-#ifdef TW_INCLUDE_CRYPTO
 #include "gui/rapidxml.hpp"
 #include "gui/pages.hpp"
-#endif
 #endif // ndef BUILD_TWRPTAR_MAIN
 #ifndef TW_EXCLUDE_ENCRYPTED_BACKUPS
 	#include "openaes/inc/oaes_lib.h"
