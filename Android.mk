@@ -56,7 +56,7 @@ else
     LOCAL_CFLAGS += -DPB_MAIN_BUILD='"-UNOFFICIAL"'
 endif
 
-DEVICE := $(subst omni_,,$(TARGET_PRODUCT))
+DEVICE := $(subst pb_,,$(TARGET_PRODUCT))
 
 ifeq ($(PB_DEVICE_MODEL),)
     LOCAL_CFLAGS += -DPB_DEVICE_MODEL='"$(DEVICE)"'

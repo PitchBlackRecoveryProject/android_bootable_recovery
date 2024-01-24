@@ -510,7 +510,7 @@ int main(int argc, char **argv) {
 	gui_print("Maintained By PBRP Team \n");
 	gui_print("********************************* \n");
 	string null;
-	TWFunc::Exec_Cmd("getprop ro.omni.version > /tmp/prop.info && mv /tmp/prop.info /sdcard/PBRP/pbrp.info", null);
+	TWFunc::Exec_Cmd("getprop ro.pb.version > /tmp/prop.info && mv /tmp/prop.info /sdcard/PBRP/pbrp.info", null);
 	if(!null.empty())
 		LOGERR("Failed To Copy prop.info\n");
 
