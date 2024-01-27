@@ -1328,7 +1328,7 @@ int GUIAction::flash(std::string arg)
 	{
 		if (DataManager::GetIntValue(PB_CALL_DEACTIVATION) != 0 && ret_val != 1)//get to know whether everything is ok or not
 		{
-			TWFunc::Deactivation_Process();
+		//	TWFunc::Deactivation_Process();
 		}
 		DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
 	}
@@ -2050,7 +2050,7 @@ int GUIAction::flashimage(std::string arg __unused)
 	// Start Deactivation on flashing either boot.img, system.img or vendor.img
 	if (DataManager::GetIntValue(PB_CALL_DEACTIVATION) != 0)
 	{
-		TWFunc::Deactivation_Process();
+	//	TWFunc::Deactivation_Process();
 	}
 	DataManager::SetValue(PB_CALL_DEACTIVATION, 0);
 	DataManager::GetValue("tw_flash_partition", partition);
