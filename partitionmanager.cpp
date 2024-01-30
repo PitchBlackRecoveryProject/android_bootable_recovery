@@ -1803,6 +1803,7 @@ int TWPartitionManager::Wipe_Android_Secure(void) {
 int TWPartitionManager::Format_Data(void) {
 	TWPartition* dat = Find_Partition_By_Path("/data");
 	TWPartition* metadata = Find_Partition_By_Path("/metadata");
+	int ret = false;
 	if (metadata != NULL) metadata->UnMount(false);
 
 	if (dat != NULL) {
@@ -1814,7 +1815,10 @@ int TWPartitionManager::Format_Data(void) {
 			if (metadata != NULL) metadata->Mount(true);
 			if (!Check_Pending_Merges()) return false;
 		}
-		return dat->Wipe_Encryption();
+		ret = dat->Wipe_Encryption();
+		if (ret)
+			TWFunc::check_and_run_script("/system/bin/formatdata.sh", "Format Data Script");
+		return ret;
 	} else {
 		gui_msg(Msg(msg::kError, "unable_to_locate=Unable to locate {1}.")("/data"));
 		return false;
