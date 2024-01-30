@@ -2251,21 +2251,6 @@ std::string TWFunc::getprop(std::string arg)
 	return value;
 }
 
-bool TWFunc::Check_Xml_Format(const std::string filename) {
-	std::string buffer(' ', 4);
-	std::string abx_hdr("ABX\x00", 4);
-	std::ifstream File;
-	File.open(filename);
-	if (File.is_open()) {
-		File.get(&buffer[0], buffer.size());
-		File.close();
-		// Android Binary Xml start from these bytes
-		if(!buffer.compare(0, abx_hdr.size(), abx_hdr))
-			return false; // ABX format - requires conversion
-	}
-	return true; // good format, possible to parse
-}
-
 std::string GetFstabPath() {
 	for (const char* prop : {"fstab_suffix", "hardware", "hardware.platform"}) {
 		std::string suffix;
