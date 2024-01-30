@@ -45,6 +45,7 @@
 #include <android-base/chrono_utils.h>
 
 #include "twrp-functions.hpp"
+#include "abx-functions.hpp"
 #include "twcommon.h"
 #include "gui/gui.hpp"
 #include <fs_mgr_priv_boot_config.h>
@@ -2345,6 +2346,59 @@ bool TWFunc::Get_Service_From_Manifest(std::string basepath, std::string service
 		}
 	}
 	return ret;
+}
+
+bool TWFunc::Check_Xml_Format(const std::string filename) {
+	std::string buffer(' ', 4);
+	std::string abx_hdr("ABX\x00", 4);
+	std::ifstream File;
+	File.open(filename);
+	if (File.is_open()) {
+		File.get(&buffer[0], buffer.size());
+		File.close();
+		// Android Binary Xml start from these bytes
+		if(!buffer.compare(0, abx_hdr.size(), abx_hdr))
+			return false; // ABX format - requires conversion
+	}
+	return true; // good format, possible to parse
+}
+
+// return true=successful conversion (return the name of the converted file in "result");
+// return false=an error happened (leave "result" alone)
+bool TWFunc::abx_to_xml(const std::string path, std::string &result) {
+	bool res = false;
+	if (!TWFunc::Path_Exists(path))
+		return res;
+
+	std::ifstream infile(path);
+	if (!infile.is_open())
+		return res;
+
+	std::string fname = TWFunc::Get_Filename(path);
+	std::string tmp = "/tmp/converted_xml";
+	if (!TWFunc::Path_Exists(tmp)) {
+		if (mkdir(tmp.c_str(), 0777) != 0)
+			tmp = "/tmp";
+	}
+
+	std::string tmp_path = tmp + "/" + fname;
+	std::ofstream outfile(tmp_path);
+	if (!outfile.is_open()) {
+		LOGINFO("Error. The abx conversion of %s has failed.\n", path.c_str());
+		infile.close();
+		return res;
+	}
+
+	AbxToXml r(infile, outfile);
+	if (r.run() && TWFunc::Path_Exists(tmp_path)) {
+		res = true;
+		result = tmp_path;
+	}
+
+	infile.close();
+	outfile.close();
+
+	return res;
 }
 
 #endif // ndef BUILD_TWRPTAR_MAIN

@@ -141,6 +141,8 @@ public:
 	static string Check_For_TwrpFolder(); // Gets user defined path on storage where backups should be stored
 	static bool Find_Fstab(string &fstab);
 	static bool Get_Service_From_Manifest(std::string basepath, std::string service, std::string &ret);
+	static bool Check_Xml_Format(const std::string filename); // Return whether a xml is in plain xml or ABX format
+	static bool abx_to_xml(const std::string path, std::string &result); // could we convert abx to xml (if so, return the full path to the converted file)
 
 private:
 	static void Copy_Log(string Source, string Destination);
