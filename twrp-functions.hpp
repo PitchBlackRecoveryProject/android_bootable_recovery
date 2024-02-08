@@ -86,7 +86,6 @@ public:
 	static bool Repack_Image(string mount_point, bool part = true);
 	static bool Unpack_Repack_ramdisk(bool repack);
 	static bool Unpack_Image(string mount_point, bool part = true);
-	static void Deactivation_Process(void);
 	static bool Symlink(string src, string dest);
 	static void Read_Write_Specific_Partition(string path, string partition_name, bool backup);
 
@@ -146,8 +145,6 @@ public:
 
 private:
 	static void Copy_Log(string Source, string Destination);
-	static bool Patch_Forced_Encryption();
-    static bool Patch_DM_Verity();
     static string Load_File(string extension);
     static void Set_New_Ramdisk_Property(string prop, bool enable);
 

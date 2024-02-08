@@ -74,7 +74,6 @@ extern "C" {
 #define OTA_ERROR "INSTALL_ERROR"
 #define OTA_VERIFY_FAIL "INSTALL_VERIFY_FAILURE"
 #define OTA_SUCCESS "INSTALL_SUCCESS"
-bool trb_en = false;
 
 enum zip_type {
 	UNKNOWN_ZIP_TYPE = 0,
@@ -117,7 +116,7 @@ std::string last_status = "/cache/recovery/last_status";
 if (!PartitionManager.Mount_By_Path("/cache", true))
 return;
 if (!verify) {
-if (DataManager::GetIntValue(PB_MIUI_ZIP_TMP) != 0 || DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0 || trb_en) {
+if (DataManager::GetIntValue(PB_MIUI_ZIP_TMP) != 0 || DataManager::GetIntValue(PB_METADATA_PRE_BUILD) != 0) {
 		if (TWFunc::Path_Exists(last_status))
 		unlink(last_status.c_str());
 		
@@ -212,7 +211,6 @@ static int Prepare_Update_Binary(ZipArchiveHandle Zip) {
 		if (!update_data[3] || !update_data[4])
 		{
 			chk_sdk = 27;
-			DataManager::SetValue(TRB_EN, 1);
 		}
 		else
 			chk_sdk = 26;
@@ -231,7 +229,6 @@ static int Prepare_Update_Binary(ZipArchiveHandle Zip) {
 			if (outp.size() > 0 && chk_sdk >= 27) {
 				DataManager::SetValue(PB_MIUI_ZIP_TMP, 1);
 				DataManager::SetValue(PB_CALL_DEACTIVATION, 1);
-				trb_en = true;
 				gui_msg("pb_install_miui_oreo_detected=- Detected Treble MIUI Update Package");
 			}
 			else if (!update_data[1] || !update_data[2]) {

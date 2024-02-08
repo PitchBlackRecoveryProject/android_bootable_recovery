@@ -656,7 +656,6 @@ int OpenRecoveryScript::Run_OpenRecoveryScript_Action() {
 	if (reboot || ret == 24) {
 		// Disable stock recovery reflashing
 		TWFunc::Disable_Stock_Recovery_Replace();
-		TWFunc::Deactivation_Process();
 		if (ret == 24)
 		{
 			gui_process("pb_disable_reboot_ota_check=Disable Rebooting after OTA");
