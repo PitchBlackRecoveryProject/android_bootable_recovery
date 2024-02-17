@@ -806,6 +806,8 @@
 		<string name="MMR_btn">Magisk Manager</string>
 		<string name="MMR_text">Magisk Manager Recovery will be installed.</string>
 		<string name="MMR_confirm">Try to install it?</string>
+		<string name="MMRC_btn">Magisk Manager CLI</string>
+		<string name="MMRC_text">Magisk Manager Recovery CLI will be installed.</string>
 		<string name="Dm_Verity_btn">Dm Verity</string>
 		<string name="Dm_Verity_text">Dm Verity will be installed.</string>
 		<string name="Dm_Verity_confirm">Try to install it?</string>
