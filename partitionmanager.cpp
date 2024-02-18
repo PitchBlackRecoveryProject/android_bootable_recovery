@@ -4246,7 +4246,7 @@ void TWPartitionManager::Setup_Super_Partition() {
 	// for the Super partition
 	int list_size = Super_Partition_List.size();
 	int orig_list_size = list_size;
-	int max_display_size = 3;	// total of 4 items since we start at 0
+	int max_display_size = 4;	// total of 5 items since we start at 0
 
 	for (auto partition : Super_Partition_List) {
 		superPartition->Backup_Display_Name = superPartition->Backup_Display_Name + partition;
