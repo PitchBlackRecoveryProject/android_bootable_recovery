@@ -613,7 +613,7 @@
 			<fileselector>
 				<placement x="%indent%" y="%row1a_y%" w="%content_width%" h="%fileselector_install_height%"/>
 				<filter extn=".zip,.ozip,.ZIP,.OZIP,.img,.IMG" folders="1" files="1"/>
-				<prfxfilter prfx="Magisk-;Magisk.apk;app-release.apk;app-debug.apk" folders="1" files="1"/>
+				<prfxfilter prfx="Magisk-;Magisk.apk;MagiskAlpha.apk;MagiskDelta.apk;app-release.apk;app-debug.apk" folders="1" files="1"/>
 				<path name="tw_zip_location" default="/sdcard"/>
 				<data name="tw_filename"/>
 				<selection name="tw_file"/>
