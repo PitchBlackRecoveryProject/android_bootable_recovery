@@ -980,5 +980,6 @@
 		<string name="restore_with_pattern1">Pattern is enabled</string>
 		<string name="restore_with_pattern2">Pattern should be disabled before restore</string>
 		<string name="reboot_after_restore">It is recommended to reboot Android once after first boot.</string>
+		<string name="install_took_seconds_msg">Install took {1} second(s).</string>
 	</resources>
 </language>
