@@ -5210,8 +5210,8 @@
 				<placement x="%filter_button_x%" y="%filter_button_y%"/>
 				<image resource="filter"/>
 				<actions>
-				<action function="set">pb_back=filemanagerlist</action>
-				<action function="page">filter_</action>
+					<action function="set">pb_back=filemanagerlist</action>
+					<action function="overlay">filter_</action>
 				</actions>
 			</button>
 
