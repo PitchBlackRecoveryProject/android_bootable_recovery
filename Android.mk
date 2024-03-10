@@ -125,6 +125,7 @@ LOCAL_SHARED_LIBRARIES += android.hardware.boot@1.0 \
                           android.hardware.health-translate-ndk \
                           libbinder \
                           libbinder_ndk \
+                          libboot_control_client \
                           libfs_mgr \
                           libhardware \
                           libhidlbase \
