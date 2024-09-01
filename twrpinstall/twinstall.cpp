@@ -610,16 +610,18 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 									}
 			 }
 		 }
-				if (ret_val == INSTALL_SUCCESS)
-			Write_MIUI_Install_Status(OTA_SUCCESS, false);
-			if (ret_val == INSTALL_ERROR)
+			if (ret_val == INSTALL_SUCCESS) {
+				Write_MIUI_Install_Status(OTA_SUCCESS, false);
+			}
+			if (ret_val == INSTALL_ERROR) {
 				Write_MIUI_Install_Status(OTA_ERROR, false);
-				DataManager::SetValue(PB_METADATA_PRE_BUILD, 0);
-					DataManager::SetValue(PB_MIUI_ZIP_TMP, 0);					
-					DataManager::SetValue(PB_RUN_SURVIVAL_BACKUP, 0);
-					DataManager::SetValue(PB_INCREMENTAL_OTA_FAIL, 0);
-					DataManager::SetValue(PB_LOADED_FINGERPRINT, 0);
-				LOGINFO("Install took %i second(s).\n", total_time);
+			}
+			DataManager::SetValue(PB_METADATA_PRE_BUILD, 0);
+			DataManager::SetValue(PB_MIUI_ZIP_TMP, 0);					
+			DataManager::SetValue(PB_RUN_SURVIVAL_BACKUP, 0);
+			DataManager::SetValue(PB_INCREMENTAL_OTA_FAIL, 0);
+			DataManager::SetValue(PB_LOADED_FINGERPRINT, 0);
+			LOGINFO("Install took %i second(s).\n", total_time);
 	}
 
 	if (ret_val == INSTALL_SUCCESS) gui_msg(Msg(msg::kHighlight, "install_took_seconds_msg=Install took {1} second(s).")(total_time));

@@ -1713,75 +1713,78 @@ if (!fingerprint.empty() && fingerprint.size() > PB_MIN_EXPECTED_FP_SIZE) {
         }
 	}
 	if (!metadatafp.empty() && metadatafp.size() > PB_MIN_EXPECTED_FP_SIZE) {
-   if (!buildpropbrand.empty() && buildpropbrand.size() >= 3) {
-   if (metadatafp.find(buildpropbrand) == std::string::npos)
-        buildpropbrand[0] = toupper(buildpropbrand[0]);
-        if (metadatafp.find(buildpropbrand) == std::string::npos)
-        buildpropbrand[0] = tolower(buildpropbrand[0]);
-        if (metadatafp.find(buildpropbrand) == std::string::npos) {
-        LOGINFO("OTA_ERROR: %s\n", buildpropbrand.c_str());
-        LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
-        return false;
-        }
+		if (!buildpropbrand.empty() && buildpropbrand.size() >= 3) {
+			if (metadatafp.find(buildpropbrand) == std::string::npos) {
+				buildpropbrand[0] = toupper(buildpropbrand[0]);
+			}
+        	if (metadatafp.find(buildpropbrand) == std::string::npos){
+        		buildpropbrand[0] = tolower(buildpropbrand[0]);
+			}
+        	if (metadatafp.find(buildpropbrand) == std::string::npos) {
+        		LOGINFO("OTA_ERROR: %s\n", buildpropbrand.c_str());
+        		LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
+        		return false;
+        	}
 		} else {
-        char brandvalue[PROPERTY_VALUE_MAX];
-        property_get(brand_property.c_str(), brandvalue, "");
-        std::string brandstrtwo = brandvalue;
-        if (!brandstrtwo.empty() && brandstrtwo.size() >= 3 && metadatafp.find(brandstrtwo) == std::string::npos) {
-        brandstrtwo[0] = toupper(brandstrtwo[0]);
-        if (!brandstrtwo.empty() && brandstrtwo.size() >= 3 && metadatafp.find(brandstrtwo) == std::string::npos)
-        brandstrtwo[0] = tolower(brandstrtwo[0]);
-        if (!brandstrtwo.empty() && brandstrtwo.size() >= 3 && metadatafp.find(brandstrtwo) == std::string::npos) {
-        LOGINFO("OTA_ERROR: %s\n", brandstrtwo.c_str());
-        LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
-        return false;
-        }
-		}
-	   }
-	if (!androidversion.empty() && androidversion.size() >= 3) {
-	if (metadatafp.find(androidversion) == std::string::npos) {
-		LOGINFO("OTA_ERROR: %s\n", androidversion.c_str());
-        LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
-        return false;
-        }
+			char brandvalue[PROPERTY_VALUE_MAX];
+			property_get(brand_property.c_str(), brandvalue, "");
+			std::string brandstrtwo = brandvalue;
+			if (!brandstrtwo.empty() && brandstrtwo.size() >= 3 && metadatafp.find(brandstrtwo) == std::string::npos) {
+				brandstrtwo[0] = toupper(brandstrtwo[0]);
+				if (!brandstrtwo.empty() && brandstrtwo.size() >= 3 && metadatafp.find(brandstrtwo) == std::string::npos) {
+					brandstrtwo[0] = tolower(brandstrtwo[0]);
+				}
+				if (!brandstrtwo.empty() && brandstrtwo.size() >= 3 && metadatafp.find(brandstrtwo) == std::string::npos) {
+					LOGINFO("OTA_ERROR: %s\n", brandstrtwo.c_str());
+					LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
+					return false;
+        		}
+			}
+	   	}
+		if (!androidversion.empty() && androidversion.size() >= 3) {
+			if (metadatafp.find(androidversion) == std::string::npos) {
+				LOGINFO("OTA_ERROR: %s\n", androidversion.c_str());
+        		LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
+        		return false;
+        	}
         }
         if (!buildid.empty() && buildid.size() >= 3) {
-	    if (metadatafp.find(buildid) == std::string::npos) {
-		LOGINFO("OTA_ERROR: %s\n", buildid.c_str());
-        LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
-        return false;
-        }
+	    	if (metadatafp.find(buildid) == std::string::npos) {
+				LOGINFO("OTA_ERROR: %s\n", buildid.c_str());
+    		    LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
+        	return false;
+        	}
         }
         if (!buildincremental.empty() && buildincremental.size() >= 3) {
-	    if (metadatafp.find(buildincremental) == std::string::npos) {
-		LOGINFO("OTA_ERROR: %s\n", buildincremental.c_str());
-        LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
-        return false;
-        }
+		    if (metadatafp.find(buildincremental) == std::string::npos) {
+				LOGINFO("OTA_ERROR: %s\n", buildincremental.c_str());
+        		LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
+        		return false;
+        	}
         }
         if (!buildtags.empty() && buildtags.size() >= 5) {
-	    if (metadatafp.find(buildtags) == std::string::npos) {
-		LOGINFO("OTA_ERROR: %s\n", buildtags.c_str());
-        LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
-        return false;
-        }
+	   		if (metadatafp.find(buildtags) == std::string::npos) {
+				LOGINFO("OTA_ERROR: %s\n", buildtags.c_str());
+        		LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
+        		return false;
+        	}
         }
         if (!buildtype.empty() && buildtype.size() >= 4) {
-        if (metadatafp.find(buildtype) == std::string::npos) {
-		LOGINFO("OTA_ERROR: %s\n", buildtype.c_str());
-        LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
-        return false;
-        }
+        	if (metadatafp.find(buildtype) == std::string::npos) {
+				LOGINFO("OTA_ERROR: %s\n", buildtype.c_str());
+        		LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
+        		return false;
+        	}
         }
 	}
 	
 	if (!metadatafp.empty() && metadatafp.size() > PB_MIN_EXPECTED_FP_SIZE && !fingerprint.empty() && fingerprint.size() > PB_MIN_EXPECTED_FP_SIZE && metadatafp != fingerprint) {
-	LOGINFO("OTA_ERROR: %s\n", fingerprint.c_str());
-    LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
-    return false;
+		LOGINFO("OTA_ERROR: %s\n", fingerprint.c_str());
+    	LOGINFO("OTA_ERROR: %s\n", metadatafp.c_str());
+    	return false;
 	}
 	return true;
-	}
+}
 	
 bool TWFunc::Verify_Loaded_OTA_Signature(std::string loadedfp, std::string ota_folder) {
 	    std::string datafp;
