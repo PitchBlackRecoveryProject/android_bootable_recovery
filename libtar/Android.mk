@@ -14,9 +14,10 @@ LOCAL_C_INCLUDES += external/libselinux/include
 LOCAL_SHARED_LIBRARIES += libselinux
 
 ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
-    LOCAL_STATIC_LIBRARIES += libvold libscrypt_static
+    LOCAL_STATIC_LIBRARIES += libasync_safe libvold libscrypt_static
     LOCAL_SHARED_LIBRARIES +=  \
         android.hardware.boot@1.0 \
+        android.hardware.boot-V1-ndk \
         android.hardware.confirmationui@1.0 \
         android.hardware.gatekeeper@1.0 \
         android.hardware.keymaster@3.0 \
@@ -27,7 +28,9 @@ ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
         android.system.keystore2-V1-ndk \
         android.security.authorization-ndk \
         android.security.maintenance-ndk \
+        libboot_control_client \
         libselinux \
+        libsysutils \
         libbinder_ndk \
         libext4_utils \
         libbase \
