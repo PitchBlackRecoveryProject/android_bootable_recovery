@@ -598,7 +598,7 @@ void TWPartitionManager::Decrypt_Data() {
 			Set_Crypto_Type("file");
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
 #ifdef USE_FSCRYPT
-			if (android::vold::fscrypt_mount_metadata_encrypted(Decrypt_Data->Actual_Block_Device, Decrypt_Data->Mount_Point, false, false, Decrypt_Data->Current_File_System, TWFunc::Path_Exists(additional_fstab) ? additional_fstab : "")) {
+			if (android::vold::fscrypt_mount_metadata_encrypted(Decrypt_Data->Actual_Block_Device, Decrypt_Data->Mount_Point, false, false, Decrypt_Data->Current_File_System, "", TWFunc::Path_Exists(additional_fstab) ? additional_fstab : "")) {
 				std::string crypto_blkdev = android::base::GetProperty("ro.crypto.fs_crypto_blkdev", "error");
 				Decrypt_Data->Decrypted_Block_Device = crypto_blkdev;
 				LOGINFO(
@@ -624,31 +624,12 @@ void TWPartitionManager::Decrypt_Data() {
 			LOGERR("Metadata FBE decrypt support not present in this TWRP\n");
 #endif
 		}
-		if (Decrypt_Data->Is_FBE) {
-			if (DataManager::GetIntValue(TW_CRYPTO_PWTYPE) == 0) {
-				if (Decrypt_Device("!") == 0) {
-					gui_msg("decrypt_success=Successfully decrypted with default password.");
-					DataManager::SetValue(TW_IS_ENCRYPTED, 0);
-				} else {
-					gui_err("unable_to_decrypt=Unable to decrypt with default password.");
-				}
-			}
-		} else {
-			LOGINFO("FBE setup failed. Trying FDE...\n");
-			Set_Crypto_State();
-			Set_Crypto_Type("block");
-			int password_type = cryptfs_get_password_type();
-			if (password_type == CRYPT_TYPE_DEFAULT) {
-				LOGINFO("Device is encrypted with the default password, attempting to decrypt.\n");
-				if (Decrypt_Device("default_password") == 0) {
-					gui_msg("decrypt_success=Successfully decrypted with default password.");
-					DataManager::SetValue(TW_IS_ENCRYPTED, 0);
-				} else {
-					gui_err("unable_to_decrypt=Unable to decrypt with default password.");
-				}
+		if (DataManager::GetIntValue(TW_CRYPTO_PWTYPE) == 0) {
+			if (Decrypt_Device("!") == 0) {
+				gui_msg("decrypt_success=Successfully decrypted with default password.");
+				DataManager::SetValue(TW_IS_ENCRYPTED, 0);
 			} else {
-				DataManager::SetValue("TW_CRYPTO_TYPE", password_type);
-				DataManager::SetValue("tw_crypto_pwtype_0", password_type);
+				gui_err("unable_to_decrypt=Unable to decrypt with default password.");
 			}
 		}
 	}
@@ -2300,8 +2281,7 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 		// Child process
 		char cPassword[255];
 		strcpy(cPassword, Password.c_str());
-		int ret = cryptfs_check_passwd(cPassword);
-		exit(ret);
+		exit(0);
 	} else {
 		// Parent
 		int status;
