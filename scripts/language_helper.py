@@ -37,13 +37,13 @@ outfile = "new.xml"
 try:
 	opts, args = getopt.getopt(sys.argv[1:], "hfo:koz", ["device="])
 except getopt.GetoptEror:
-	print HELP
+	print(HELP)
 	sys.stdout.flush()
 	sys.exit(2)
 
 for opt, arg in opts:
 	if opt == "-h":
-		print HELP
+		print(HELP)
 		sys.stdout.flush()
 		sys.exit()
 	elif opt == "-o":
@@ -52,11 +52,11 @@ for opt, arg in opts:
 		outfile = arg
 
 if otherfile == "":
-	print HELP
+	print(HELP)
 	exit()
 
-print "Comparing %s and %s" % (enfile, otherfile)
-print ""
+print("Comparing %s and %s" % (enfile, otherfile))
+print("")
 
 # Open English
 endoc = minidom.parse(enfile)
@@ -79,7 +79,7 @@ for disnode in otherdisplay:
 	if disnode.nodeType == disnode.ELEMENT_NODE:
 		language.appendChild(disnode)
 		otherlang = disnode.firstChild.data.encode("utf-8")
-		print otherlang
+		print(otherlang)
 
 # resources
 resources = doc.createElement('resources')
@@ -105,7 +105,7 @@ for resnode in enres:
 					if found == True:
 						break
 				if found == False:
-					print "Failed to find %s in %s, using what we got from English" % (child.toxml(), otherlang)
+					print("Failed to find %s in %s, using what we got from English" % (child.toxml(), otherlang))
 					resources.appendChild(child)
 			else:
 				found = False
@@ -120,7 +120,7 @@ for resnode in enres:
 							otherver = others.attributes['version'].value
 						if enver != otherver:
 							ver_err = "English has version " + enver + " but " + otherlang + " has version " + otherver + " for '" + child.attributes['name'].value + "'"
-							print ver_err
+							print(ver_err)
 							version_comment = doc.createComment(ver_err)
 							resources.appendChild(version_comment)
 							resources.appendChild(others)
@@ -128,8 +128,8 @@ for resnode in enres:
 							resources.appendChild(others)
 						break
 				if found == False:
-					print "'%s' present in English and not in %s" % (child.attributes['name'].value.encode("utf-8"), otherlang)
-					notfound_err = "NOT FOUND " + child.toxml().replace('--', '\-\-')
+					print("'%s' present in English and not in %s" % (child.attributes['name'].value.encode("utf-8"), otherlang))
+					notfound_err = "NOT FOUND " + child.toxml().replace('--', '\\-\\-')
 					notfound_comment = doc.createComment(notfound_err)
 					resources.appendChild(notfound_comment)
 		elif child.nodeType == child.COMMENT_NODE:
