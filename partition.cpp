@@ -1559,7 +1559,8 @@ bool TWPartition::Is_Mounted(void) {
 	if (stat(test_path.c_str(), &st2) != 0)  return false;
 
         // Check to see if a symlink mount point exists and is mounted
-        if (!Symlink_Mount_Point.empty()) {
+        // Only apply this check to the main data partition that's not using data/media
+        if (!Symlink_Mount_Point.empty() && Mount_Point == "/data" && !Has_Data_Media) {
             scan_mounted_volumes();
             const MountedVolume * sml = find_mounted_volume_by_mount_point(Symlink_Mount_Point.c_str());
             if (sml != nullptr) {
