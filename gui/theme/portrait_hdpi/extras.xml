@@ -174,6 +174,23 @@
 				</actions>
 			</button>
 			<button style="main_button_tools">
+				<placement x="56" y="1314" textplacementmain="3"/>
+				<icon resource="magisk"/>
+				<text>{@MMRC_btn=Magisk Manager CLI}</text>
+				<actions>
+					<action function="set">tw_back=tools</action>
+					<action function="set">tw_filename=/sdcard/PBRP/tools/magiskmanagerrecoverycli.zip</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@MMRC_text=Magisk Manager Recovery CLI will be installed.}</action>
+					<action function="set">tw_text2={@MMR_confirm=Try to install it?}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			<button style="main_button_tools">
 				<placement x="557" y="489" textplacementmain="3"/>
 				<icon resource="fingerprint"/>
 				<text>{@FP_Scanner_btn=FP Scanner}</text>
