@@ -30,6 +30,7 @@
 		<string name="sdext">SD-EXT</string>
 		<string name="adopted_data">Adoptált adatok</string>
 		<string name="adopted_storage">Adoptált tároló</string>
+		<string name="autostorage">Tároló</string>
 
 		<!-- GUI XML strings -->
 		<string name="twrp_header">PitchBlack Recovery Project</string>
@@ -60,15 +61,17 @@
 		<string name="reboot_btn">Újraindítás</string>
 		<string name="files_btn">Fájlok</string>
 		<string name="copy_log_btn">Napló másolása</string>
+		<string name="copy_log_btn1">Naplóbejegyzések létrehozása az SC kártyán</string>
 		<string name="select_type_hdr">Válasszon típust</string>
 		<string name="install_zip_hdr">Zip telepítése</string>
 		<string name="install_zip_btn">Zip telepítése</string>
 		<string name="install_image_hdr">Képfájl telepítése</string>
 		<string name="install_image_btn">Képfájl telepítése</string>
 		<string name="install_select_file_hdr">Fájl kiválasztása</string>
-		<string name="file_selector_folders_hdr">Mappák</string>
+		<string name="file_selector_folders_hdr">Könyvtárak</string>
 		<string name="select_file_from_storage">Fájl kiválasztása innen: %tw_storage_display_name% (%tw_storage_free_size% MB)</string>
 		<string name="adb_sideload_btn">ADB Sideload</string>
+		<string name="adb_sideload_btn1">Az Ön szoftvercsomagjainak a feltelepítése ADB segítségével</string>
 		<string name="install_hdr">Telepítés</string>
 		<string name="select_storage_hdr">Válasszon tárolót</string>
 		<string name="select_storage_btn">Válasszon tárolót</string>
@@ -79,11 +82,12 @@
 		<string name="zip_warn2">és a készüléket használhatatlanná teheti.</string>
 		<string name="zip_back_cancel">Nyomja meg a vissza gombot a zip hozzáadásának visszavonásához.</string>
 		<string name="zip_back_clear">Nyomja meg a vissza gombot a várólista törléséhez.</string>
-		<string name="folder">Mappa:</string>
+		<string name="zip_compatible_err">Zip Treble kompatibilitási hiba!</string>
+		<string name="folder">Könyvtár:</string>
 		<string name="file">Fájl:</string>
 		<string name="zip_sig_chk">Zip aláírás ellenőrzése</string>
 		<string name="inject_twrp_chk">TWRP injektálása telepítés után</string>
-		<string name="install_reboot_chk">Újraindítás telepítés vége után</string>
+		<string name="install_reboot_chk">Készülék újraindítása a telepítés befejezését követően</string>
 		<string name="options_hdr">Beállítások</string>
 		<string name="confirm_flash_hdr">Flashelés megerősítése</string>
 		<string name="zip_queue">Várólista:</string>
@@ -98,22 +102,27 @@
 		<string name="install_failed">A telepítés sikertelen</string>
 		<string name="install_successful">A telepítés sikeres</string>
 		<string name="wipe_cache_dalvik_btn">Gyorsítótár/dalvik törlése</string>
+		<string name="wipe_dalvik_btn">Dalvik törlése</string>
 		<string name="reboot_system_btn">Rendszer újraindítása</string>
+		<string name="reboot_recovery_btn">Recovery újraindítása</string>
 		<string name="install_sel_target">Válassza ki a célpartíciót</string>
-		<string name="flash_image_select">Kép flasheléséhez vállaszon partíciót:</string>
+		<string name="flash_image_select">Képfájl flasheléséhez vállaszon partíciót:</string>
 		<string name="target_partition">Célpartíció:</string>
-		<string name="flashing_image">Kép flashelése...</string>
-		<string name="image_flashed">Kép flashelve</string>
+		<string name="flashing_image">Képfájl flashelése...</string>
+		<string name="image_flashed">Képfájl flashelve</string>
 		<string name="wipe_cache_dalvik_confirm">Gyorsítótár &amp; Dalvik törlése?</string>
+		<string name="wipe_dalvik_confirm">Tényleg törölni szeretné a Dalvik gyorsítótárat?</string>
 		<string name="wiping_cache_dalvik">Gyorsítótár &amp; Dalvik törlése...</string>
+		<string name="wiping_dalvik">Dalvik könyvtár törlése...</string>
 		<string name="wipe_cache_dalvik_complete">Gyorsítótár &amp; Dalvik törlése kész</string>
-		<string name="swipe_wipe">Csúsztasson a törléshez</string>
+		<string name="wipe_dalvik_complete">Dalvik törlése befejeződött</string>
+		<string name="swipe_wipe">Csúsztasson a törlés érdekében</string>
 		<string name="swipe_wipe_s">   Törlés</string>
-		<string name="no_os1">Nincs telepített operációs rendszer!</string>
-		<string name="no_osrb">Biztosan újra kívánja indítani?</string>
-		<string name="no_ospo">Biztosan ki szeretné kapcsolni?</string>
+		<string name="no_os1">Nincs feltelepített operációs rendszer a készüléken!</string>
+		<string name="no_osrb">Tényleg újra kívánja indítani a készüléket?</string>
+		<string name="no_ospo">Tényleg ki szeretné kapcsolni a készüléket?</string>
 		<string name="rebooting">Újraindítás...</string>
-		<string name="swipe_reboot">Csúsztasson az újraindításhoz</string>
+		<string name="swipe_reboot">Csúsztasson az újraindítás érdekében</string>
 		<string name="swipe_reboot_s">   Újraindítás</string>
 		<string name="reboot_install_app_hdr">TWRP alkalmazás telepítése?</string>
 		<string name="reboot_install_app1">Szeretné telepíteni a hivatalos TWRP alkalmazást?</string>
@@ -127,12 +136,14 @@
 		<string name="back_cancel">Megszakítás érdekében nyomja meg a vissza gombot.</string>
 		<string name="cancel_btn">Mégsem</string>
 		<string name="wipe_hdr">Törlés</string>
+		<string name="reset">Visszaállítás</string>
 		<string name="factory_reset_hdr">Gyári beállítások visszaállítása</string>
 		<string name="factory_reset_btn">Gyári beállítások visszaállítása</string>
 		<string name="factory_reset1">Törli az Adatot, Gyorsítótárat, és Dalvikot</string>
 		<string name="factory_reset2">(nem érinti a belső tárolót)</string>
 		<string name="factory_reset3">Leggyakrabban ez az</string>
 		<string name="factory_reset4">amire szüksége van.</string>
+		<string name="factory_reset5">(a felhasználókat / zár képernyőt nem számítva)</string>
 		<string name="factory_resetting">Gyári beállítások visszaállítása...</string>
 		<string name="advanced_wipe_hdr">Speciális törlés</string>
 		<string name="advanced_wipe_btn">Speciális törlés</string>
@@ -160,33 +171,35 @@
 		<string name="format_data_undo">Ezt nem lehet visszavonni.</string>
 		<string name="format_data_complete">Adatok formázása kész</string>
 		<!-- Translator note: the word "yes" must remain English! -->
-		<string name="yes_continue">Folytatáshoz gépelje be: yes. Nyomja meg a vissza gombot a megszakításhoz.</string>
+		<string name="yes_continue">Folytatáshoz gépelje be: yes. Megszakításhoz nyomja meg a vissza gombot.</string>
 		<string name="part_opt_hdr">Partíció lehetőségei: %tw_partition_name%</string>
 		<string name="sel_act_hdr">Válasszon műveletet</string>
-		<string name="file_sys_opt">Fájlrendszer beállítások</string>
+		<string name="file_sys_opt">Fájlrendszer-beállítások</string>
 		<string name="partition">Partíció: %tw_partition_name%</string>
 		<string name="part_mount_point">Csatlakoztatási pont: %tw_partition_mount_point%</string>
 		<string name="part_curr_fs">Fájlrendszer: %tw_partition_file_system%</string>
-		<string name="part_present_yes">Jelen: igen</string>
-		<string name="part_present_no">Jelen: nem</string>
-		<string name="part_removable_yes">Cserélhető: igen</string>
-		<string name="part_removable_no">Cserélhető: nem</string>
-		<string name="part_size">Méret: %tw_partition_size%MB</string>
-		<string name="part_used">Használt: %tw_partition_used%MB</string>
-		<string name="part_free">Szabad: %tw_partition_free%MB</string>
-		<string name="part_backup_size">Biztonsági mentés mérete: %tw_partition_backup_size%MB</string>
+		<string name="part_present">Jelen van-e?:</string>
+		<string name="part_present_yes">Igen</string>
+		<string name="part_present_no">Nem</string>
+		<string name="part_removable">Eltávolítható-e?:</string>
+		<string name="part_removable_yes">Igen</string>
+		<string name="part_removable_no">Nem</string>
+		<string name="part_size">Méret:</string>
+		<string name="part_used">Felhasznált:</string>
+		<string name="part_free">Szabad:</string>
+		<string name="part_backup_size">Biztonsági mentés mérete:</string>
 		<string name="resize_btn">Fájlrendszer átméretezése</string>
 		<string name="resize_btn_s">Átméretezés</string>
 		<string name="resize_confirm">Átméretezi: %tw_partition_name%?</string>
 		<string name="resizing">Átméretezés...</string>
-		<string name="resize_complete">Átméretezés kész</string>
+		<string name="resize_complete">Átméretezés befejeződött</string>
 		<string name="swipe_resize">Csúsztasson az átméretezéshez</string>
 		<string name="swipe_resize_s">   Átméretezés</string>
 		<string name="repair_btn">Fájlrendszer javítása</string>
 		<string name="repair_btn_s">Javítás</string>
 		<string name="repair_confirm">Javítja: %tw_partition_name%?</string>
 		<string name="repairing">Javítás...</string>
-		<string name="repair_complete">Javítás kész</string>
+		<string name="repair_complete">Javítás befejeződött</string>
 		<string name="swipe_repair">Csúsztasson a javításhoz</string>
 		<string name="swipe_repair_s">   Javítás</string>
 		<string name="change_fs_btn">Fájlrendszer módosítása</string>
@@ -197,16 +210,18 @@
 		<string name="change_fs_warn2">fájlrendszert. Óvatosan folytassa!</string>
 		<string name="change_fs_confirm">Módosítja: %tw_partition_name%?</string>
 		<string name="formatting">Formázás...</string>
-		<string name="format_complete">Formázás kész</string>
+		<string name="format_complete">Formázás befejeződött</string>
 		<string name="swipe_change_fs">Csúsztasson a módosításhoz</string>
 		<string name="swipe_change_s">   Módosítás</string>
 		<string name="back_btn">Vissza</string>
 		<string name="wipe_enc_btn">Titkosítás törlése</string>
 		<string name="swipe_factory_reset">Csúsztasson a gyári beállítások visszaállításához</string>
+		<string name="swipe_unlock">   Feloldás</string>
 		<string name="repair_change_btn">Fájlrendszer javítása vagy módosítása</string>
 		<string name="storage_hdr">Tároló: %tw_storage_display_name% (%tw_storage_free_size% MB)</string>
 		<string name="backup_hdr">Biztonsági mentés</string>
 		<string name="backup_confirm_hdr">Biztonsági mentés megerősítése</string>
+		<string name="destination_storage">Céladathordozó</string>
 		<string name="encryption_tab">TITKOSÍTÁS</string>
 		<string name="encryption">Titkosítás:</string>
 		<string name="name">Név:</string>
@@ -216,6 +231,7 @@
 		<string name="enc_enabled">engedélyezve</string>
 		<string name="enable_backup_comp_chk">Tömörítés engedélyezése</string>
 		<string name="skip_digest_backup_chk" version="2">Mentés közbeni Digest generálás kihagyása</string>
+		<string name="check_digest_after_backup">Digest ellenőrzése biztonsági mentés után</string>
 		<string name="disable_backup_space_chk" version="2">Szabad hely ellenőrzésének letiltása</string>
 		<string name="current_boot_slot">Jelenlegi Slot: %tw_active_slot%</string>
 		<string name="boot_slot_a">Slot A</string>
@@ -234,6 +250,7 @@
 		<string name="disabled">Letiltva</string>
 		<string name="enabled">Engedélyezve</string>
 		<string name="backup_name_hdr">Biztonsági mentés nevének beállítása</string>
+		<string name="backup_options">Biztonsági mentési lehetőségek</string>
 		<string name="progress">Folyamat:</string>
 		<string name="backup_complete">Biztonsági mentés kész</string>
 		<string name="restore_hdr">Visszaállítás</string>
@@ -253,7 +270,7 @@
 		<string name="restore_try_decrypt_s">Dekódolás megpróbálása</string>
 		<string name="restore_backup_date">Biztonsági mentés ideje: %tw_restore_file_date%</string>
 		<string name="restore_sel_part">Válassza ki a visszaállítandó partíciókat:</string>
-		<string name="restore_enable_digest_chk" version="3">A biztonsági mentési fájlok Digest ellenőrzésének engedélyezése</string>
+		<string name="restore_enable_digest_chk" version="3">Biztonságimentés-fájlokhoz tartozó ellenőrzőösszegfájlok ellenőrzésének engedélyezése</string>
 		<string name="restore_complete">Mentés helyreállítása kész</string>
 		<string name="swipe_restore">Csúsztasson a visszaállításhoz</string>
 		<string name="swipe_restore_s">   Visszaállítás</string>
@@ -265,24 +282,26 @@
 		<string name="swipe_to_rename">Csúsztasson az átnevezéshez</string>
 		<string name="swipe_rename">   Átnevezés</string>
 		<string name="confirm_hdr">Megerösítés</string>
-		<string name="mount_hdr">Csatolás</string>
+		<string name="mount_hdr">Felcsatolás</string>
 		<string name="mount_sel_part">Válassza ki a csatolandó partíciókat:</string>
 		<string name="mount_sys_ro_chk">Rendszerpartíció csatolása csak olvashatóként</string>
 		<string name="mount_sys_ro_s_chk">Rendszer csatolása RO</string>
 		<string name="decrypt_data_btn">Adat dekódolása</string>
 		<string name="disable_mtp_btn">MTP letiltása</string>
 		<string name="enable_mtp_btn">MTP engedélyezése</string>
-		<string name="mount_usb_storage_btn">USB-tár csatolása</string>
-		<string name="usb_storage_hdr">USB-tár</string>
-		<string name="usb_stor_mnt1">USB-tár csatolva</string>
-		<string name="usb_stor_mnt2">Győződjön meg róla, hogy biztonságosan távolítja el az eszközt</string>
-		<string name="usb_stor_mnt3">a számítógépről való leválasztás előtt!</string>
+		<string name="mount_usb_storage_btn">USB-adathordozó felcsatolása</string>
+		<string name="usb_storage_hdr">USB-adathordozó</string>
+		<string name="usb_stor_mnt1">USB-adathordozó felcsatolva</string>
+		<string name="usb_stor_mnt2">Győződjön meg róla, hogy biztonságosan távolítja el a készüléket</string>
+		<string name="usb_stor_mnt3">a számítógépről történő leválasztás előtt!</string>
 		<string name="unmount_btn">Leválasztás</string>
 		<string name="rb_system_btn">Rendszer</string>
 		<string name="rb_poweroff_btn">Kikapcsolás</string>
+		<string name="rb_recovery_btn1">Recovery-be</string>
 		<string name="rb_recovery_btn">Recovery</string>
 		<string name="rb_bootloader_btn">Bootloader</string>
-		<string name="rb_download_btn">Download mód</string>
+		<string name="rb_bootloader_btn1">Bootloader-be</string>
+		<string name="rb_download_btn">Download-ba</string>
 		<string name="rb_edl_btn">Edl</string>
 		<string name="turning_off">Kikapcsolás...</string>
 		<string name="swipe_power_off">Csúsztasson a kikapcsoláshoz</string>
@@ -293,11 +312,11 @@
 		<string name="sys_rop2">hogy megkönnyítse a hivatalos frissítéseket.</string>
 		<string name="sys_rop3">TWRP nem lesz képes megakadályozni a gyári ROM-ot abban,</string>
 		<string name="sys_rop4">hogy lecserélje a TWRP-t és nem ajánlja fel a rootolást eszközéhez.</string>
-		<string name="sys_rop5">Zip-ek telepítése, vagy az adb műveletek továbbra is</string>
+		<string name="sys_rop5">Zip fájlok feltelepítése, vagy az adb műveletek továbbra is</string>
 		<string name="sys_rop6">módosítják a rendszer partícióit.</string>
-		<string name="sys_rol1">TWRP a rendszerpartícióját változatlanul hagyhatja, hogy megkönnyítse a hivatalos frissítéseket.</string>
+		<string name="sys_rol1">TWRP a rendszer partícióját változatlanul hagyhatja, hogy megkönnyítse a hivatalos frissítéseket.</string>
 		<string name="sys_rol2">TWRP nem lesz képes megakadályozni a gyári ROM-ot abban, hogy lecserélje a TWRP-t és nem ajánlja fel a rootolást eszközéhez.</string>
-		<string name="sys_rol3">Zip-ek telepítése, vagy az adb műveletek továbbra is módosítják a rendszer partícióit.</string>
+		<string name="sys_rol3">Zip fájlok telepítése, vagy az adb műveletek továbbra is módosítják a rendszer partícióit.</string>
 		<string name="sys_ro_never_show_chk">Többé ne mutassa ezt a képernyőt</string>
 		<string name="sys_ro_keep_ro_btn">Csak olvasható megtartása</string>
 		<string name="swipe_allow_mod">Csúsztasson a módosítások engedélyezéséhez</string>
@@ -307,6 +326,7 @@
 		<string name="settings_gen_s_hdr">Általános</string>
 		<string name="settings_gen_btn">Általános</string>
 		<string name="use_rmrf_chk">Az rm -rf használata a formázás helyett</string>
+		<string name="auto_reflashtwrp_chk">Automatically Reflash TWRP after flashing a ROM</string>
 		<string name="use24clock_chk">24-órás idő használata</string>
 		<string name="rev_navbar_chk">Fordított navigációs sáv elrendezés</string>
 		<string name="simact_chk">Műveletek szimulálása téma teszteléséhez</string>
@@ -318,6 +338,7 @@
 		<string name="settings_tz_btn">Időzóna</string>
 		<string name="settings_screen_btn">Képernyő</string>
 		<string name="settings_screen_bright_btn">Képernyő fényereje</string>
+		<string name="vibration_disabled">A rezgés le van tiltva ezen a készüléken</string>
 		<string name="settings_vibration_btn">Rezgés</string>
 		<string name="settings_language_btn">Nyelv</string>
 		<string name="time_zone_hdr">Időzóna</string>
@@ -421,16 +442,15 @@
 		<string name="dumlock_installing">HTC Dumlock telepítése...</string>
 		<string name="dumlock_install_complete">HTC Dumlock telepítése kész</string>
 		<string name="swipe_to_unlock">Csúsztasson a feloldáshoz</string>
-		<string name="swipe_unlock">   Feloldás</string>
 		<string name="fm_hdr">Fájlkezelő</string>
 		<string name="fm_sel_file">Válasszon fájlt vagy mappát</string>
-		<string name="fm_type_folder">Mappa</string>
+		<string name="fm_type_folder">Könyvtár</string>
 		<string name="fm_type_file">Fájl</string>
 		<string name="fm_choose_act">Válasszon műveletet</string>
 		<string name="fm_selected">%tw_fm_type% kiválasztva:</string>
 		<string name="fm_copy_btn">Másolás</string>
 		<string name="fm_copy_file_btn">Fájl másolása</string>
-		<string name="fm_copy_folder_btn">Mappa másolása</string>
+		<string name="fm_copy_folder_btn">Könyvtár másolása</string>
 		<string name="fm_copying">Másolás</string>
 		<string name="fm_move_btn">Áthelyezés</string>
 		<string name="fm_moving">Áthelyezés</string>
@@ -441,7 +461,7 @@
 		<string name="fm_deleting">Törlés</string>
 		<string name="fm_rename_btn">Átnevezés</string>
 		<string name="fm_rename_file_btn">Fájl átnevezése</string>
-		<string name="fm_rename_folder_btn">Mappa átnevezése</string>
+		<string name="fm_rename_folder_btn">Könyvtár átnevezése</string>
 		<string name="fm_renaming">Átnevezés</string>
 		<string name="fm_sel_dest">Válassza ki a célmappát</string>
 		<string name="fm_sel_curr_folder">Válassza ki az aktuális mappát</string>
@@ -504,14 +524,14 @@
 		<string name="unable_locate_storage">Nem található tárolóeszköz.</string>
 		<string name="no_space">Nincs elég szabad hely a tárolón.</string>
 		<string name="backup_started">[BIZTONSÁGI MENTÉS ELINDÍTVA]</string>
-		<string name="backup_folder"> * Biztonsági mentés mappa: {1}</string>
+		<string name="backup_folder"> * Biztonsági mentés könyvtár: {1}</string>
 		<string name="fail_backup_folder">Nem sikerült biztonsági mentés mappát létrehozni.</string>
 		<string name="avg_backup_fs">Fájlrendszer átlagos mentési sebessége: {1} MB/mp</string>
 		<string name="avg_backup_img">Lemezképpel rendelkező meghajtók átlagos mentési sebessége: {1} MB/mp</string>
 		<string name="total_backed_size">[TELJES MENTÉSI MÉRET: {1} MB]</string>
 		<string name="backup_completed">[BIZTONSÁGI MENTÉS KÉSZ {1} MÁSODPERC ALATT]</string>
 		<string name="restore_started">[VISSZAÁLLÍTÁS ELINDÍTVA]</string>
-		<string name="restore_folder">Mappa visszaállítása: '{1}'</string>
+		<string name="restore_folder">Könyvtár visszaállítása: '{1}'</string>
 		<!-- {1} is the partition display name and {2} is the number of seconds -->
 		<string name="restore_part_done">[{1} kész ({2} másodperc)]</string>
 		<string name="verifying_digest" version="3">Digest ellenőrzése</string>
@@ -530,7 +550,6 @@
 		<string name="unable_find_part_path">Nem található partíció a(z) '{1}' elérési útnak</string>
 		<string name="update_part_details">Partíciós adatok frissítése...</string>
 		<string name="update_part_details_done">...kész</string>
-		<string name="wiping_dalvik">Dalvik gyorsítótár mappák törlése...</string>
 		<string name="cleaned">Törölve: {1}...</string>
 		<string name="dalvik_done">-- Dalvik gyorsítótár mappák törlése kész!</string>
 		<string name="no_andsec">Nem találhatóak android secure partíciók.</string>
@@ -570,7 +589,7 @@
 		<string name="unable_repair">{1} nem javítható.</string>
 		<string name="mount_data_footer">Nem sikerült csatolni az /adat partíciót és a titkosítási lábléc sem található.</string>
 		<!-- {1} is the folder name that we could not create, {2} is strerror output -->
-		<string name="create_folder_strerr">'{1}' mappa létrehozása sikertelen ({2}).</string>
+		<string name="create_folder_strerr">'{1}' könyvtár létrehozása sikertelen ({2}).</string>
 		<!-- {1} is the folder name that we could not mount, {2} is strerror output -->
 		<string name="fail_mount">'{1}' csatolása sikertlelen ({2})</string>
 		<!-- {1} is the folder name that we could not unmount, {2} is strerror output -->
@@ -596,7 +615,7 @@
 		<string name="datamedia_fs_restore">FIGYELMEZTETÉS: ez az /adat biztonsági mentés {1} fájlrendszerrel készült! A biztonsági mentés nem fog bootolni, hacsak nem tér vissza erre: {1}.</string>
 		<string name="restoring">{1} visszaállítása...</string>
 		<string name="restoring_hdr">Visszaállítás</string>
-		<string name="recreate_folder_err">{1} mappa újra létrehozása sikertelen.</string>
+		<string name="recreate_folder_err">{1} könyvtár újbóli létrehozása sikertelen.</string>
 		<string name="img_size_err">Kép mérete nagyobb, mint a céleszköz</string>
 		<string name="flashing">{1} flashelése...</string>
 		<string name="backup_folder_set">Biztonsági mentés mappája beállítva erre: '{1}'</string>
@@ -610,8 +629,8 @@
 		<string name="unmounted">'{1}' leválasztva</string>
 		<string name="setting">'{1}' beállítása erre: '{2}'</string>
 		<string name="setting_empty">'{1}' beállítása üres értékre</string>
-		<string name="making_dir1">Mappa létrehozása</string>
-		<string name="making_dir2">Mappa létrehozása: '{1}'</string>
+		<string name="making_dir1">Könyvtár létrehozása</string>
+		<string name="making_dir2">Könyvtár létrehozása: '{1}'</string>
 		<string name="running_command">Parancs futtatása</string>
 		<string name="sideload">ADB Sideload</string>
 		<string name="start_sideload">ADB sideload funkció indítása...</string>
@@ -625,7 +644,7 @@
 		<string name="compression_on">Tömörítés bekapcsolva</string>
 		<string name="digest_off" version="3">Digest generálás kikapcsolva</string>
 		<string name="backup_fail">Biztonsági mentés készítése sikertelen</string>
-		<string name="backup_clean">Biztonsági mentés nem sikerült. Mentési mappa tisztítása.</string>
+		<string name="backup_clean">Biztonsági mentés nem sikerült. Mentési könyvtár tisztítása.</string>
 		<string name="running_recovery_commands">Recovery parancsok futtatása</string>
 		<string name="recovery_commands_complete">Recovery parancsok készen vannak</string>
 		<string name="running_ors">OpenRecoveryScript futtatása</string>
@@ -633,20 +652,20 @@
 		<string name="invalid_zip_format">Érvénytelen zip fájlformátum!</string>
 		<string name="check_for_digest" version="2">Digest fájl ellenőrzése...</string>
 		<string name="fail_sysmap">'{1}' fájl feltérképezése sikertelen</string>
-		<string name="verify_zip_sig">Zip aláírás ellenőrzése...</string>
-		<string name="verify_zip_fail">Zip aláírás ellenőrzése nem sikerült!</string>
-		<string name="verify_zip_done">Zip aláírás ellenőrzése sikeres.</string>
-		<string name="zip_corrupt">Zip fájl sérült!</string>
-		<string name="no_digest" version="3">Digest ellenőrzés kihagyása: nem található Digest fájl</string>
-		<string name="digest_fail" version="3">Digest nem egyezik meg</string>
-		<string name="digest_match" version="3">Digest egyezik</string>
+		<string name="verify_zip_sig">Zip aláírásának ellenőrzése...</string>
+		<string name="verify_zip_fail">Zip aláírásának ellenőrzése nem sikerült!</string>
+		<string name="verify_zip_done">Zip aláírásának ellenőrzése sikeresen megtörtént.</string>
+		<string name="zip_corrupt">Sérült a zip fájl!</string>
+		<string name="no_digest" version="3">Ellenőrzőösszeget tartalmazó fájl ellenőrzésének kihagyása: Nem található ellenőrzőösszeg-fájl</string>
+		<string name="digest_fail" version="3">Nem egyezik meg az ellenőrzőösszeg</string>
+		<string name="digest_match" version="3">Egyezik az ellenőrzőösszeg</string>
 		<string name="pid_signal">{1} folyamat véget ért a következő jellel: {2}</string>
 		<string name="pid_error">{1} folyamat véget ért a következő HIBÁVAL: {2}</string>
 		<string name="install_dumlock">HTC Dumlock telepítése a rendszerbe...</string>
 		<string name="dumlock_restore">Eredeti boot visszaállítása...</string>
 		<string name="dumlock_reflash">Recovery újraflashelése a bootba...</string>
 		<string name="run_script">{1} script futtatása...</string>
-		<string name="rename_stock">Gyári recovery fájl a /rendszer partíción átnevezve, annak megakadályozására, hogy a gyári ROM lecserélje TWRP-t.</string>
+		<string name="rename_stock">Gyári recovery fájl a /rendszer partíción átnevezve, annak megakadályozására, hogy a gyári ROM lecserélje TWRP programot.</string>
 		<string name="split_backup">Biztonsági mentés fájljának tördelése több archívumba...</string>
 		<string name="backup_error">Hiba a biztonsági mentés létrehozásakor.</string>
 		<string name="restore_error">Hiba a visszaállítási folyamat közben.</string>
@@ -658,8 +677,8 @@
 		<string name="base_pkg_err">Nem sikerült betölteni az alap csomagokat.</string>
 		<string name="simulating">Műveletek szimulálása...</string>
 		<string name="backup_cancel">Biztonsági mentés megszakítva</string>
-		<string name="config_twrp">TWRP konfigurálása...</string>
-		<string name="config_twrp_err">TWRP konfigurálása ezzel a kernellel sikertelen.</string>
+		<string name="config_twrp">TWRP beállítása...</string>
+		<string name="config_twrp_err">TWRP beállítása ezzel a kernellel sikertelen.</string>
 		<string name="copy_log">Recovery napló másolva ide: {1}.</string>
 		<string name="max_queue">Elérte a Zip várólista maximumát!</string>
 		<string name="min_queue">Elérte a Zip várólista minimumát!</string>
@@ -689,25 +708,6 @@
 		
 		<!-- PBRP Auto-Translated Strings START -->
 
-		<string name="autostorage">Tárolás</string>
-		<string name="copy_log_btn1">Naplókat generál az sdcardhoz</string>
-		<string name="adb_sideload_btn1">Telepítse a csomagokat az ADB-n keresztül</string>
-		<string name="zip_compatible_err">Zip Treble kompatibilitási hiba!</string>
-		<string name="wipe_dalvik_btn">Törölje meg a Dalvik-ot</string>
-		<string name="reboot_recovery_btn">Indítsa újra a helyreállítást</string>
-		<string name="wipe_dalvik_confirm">Törli a Dalvik-t?</string>
-		<string name="wipe_dalvik_complete">Dalvik Wipe Complete</string>
-		<string name="reset">Visszaállítás</string>
-		<string name="factory_reset5">(a felhasználókat / zár képernyőt nem számítva)</string>
-		<string name="part_present">Ajándék:</string>
-		<string name="part_removable">Cserélhető:</string>
-		<string name="destination_storage">Cél tárolása</string>
-		<string name="check_digest_after_backup">Ellenőrizze a Digest-et a biztonsági mentés után</string>
-		<string name="backup_options">Biztonsági mentési lehetőségek</string>
-		<string name="restore_enable_digest_chk" version="2">Engedélyezze a biztonsági mentési fájlok áttekinthető ellenőrzését</string>
-		<string name="rb_recovery_btn1">Indítsa újra a helyreállítást</string>
-		<string name="rb_bootloader_btn1">Indítsa újra a Bootloader alkalmazást</string>
-		<string name="vibration_disabled">A rezgés le van tiltva ezen az eszközön</string>
 		<string name="fix_context_btn1">Javítsa ki a SELinux kontextusokat</string>
 		<string name="part_sd_btn1">Osztja le az SD-kártyát / a belső tárolóhelyet</string>
 		<string name="file_manager_btn1">Kezelje fájljait, mappáit a készüléken</string>
@@ -899,7 +899,7 @@
 		<string name="pb_encrypt_st">Titkosítási állapot: {1}</string>
 		<string name="pb_run_process_fail">Nem sikerült befejezni a (z) „{1}” folyamatot</string>
 		<string name="fm_pb_make">Készíts mappát</string>
-		<string name="fm_pb_mk">Mappa készítése</string>
+		<string name="fm_pb_mk">Könyvtár készítése</string>
 		<string name="pb_run_process_done">A (z) '{1}' folyamat befejeződött</string>
 		<string name="pb_encryption">A kényszer titkosítás sikeresen javítva</string>
 		<string name="pb_ecryption_leave">Eszköz titkosítva, így az Forceencrypt</string>
