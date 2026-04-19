@@ -2534,6 +2534,19 @@ bool TWPartition::Wipe_F2FS() {
 		NeedPreserveFooter = false;
 	}
 	LOGINFO("mkfs.f2fs command: %s\n", f2fs_command.c_str());
+	#ifdef TW_USE_DMCTL
+	    if (Mount_Point == "/data") {
+			LOGINFO("PBRP: bind-unmounting /sdcard before data format...\n");
+			string nul;
+			TWFunc::Exec_Cmd("umount /sdcard", nul);
+			usleep(32768);
+			if (TWFunc::Path_Exists("/dev/block/mapper/userdata")) {
+				LOGINFO("PBRP: running dmctl before formatting...\n");
+				TWFunc::Exec_Cmd("dmctl delete userdata", false);
+				usleep(32768);
+			}
+		}
+	#endif
 	if (TWFunc::Exec_Cmd(f2fs_command) == 0) {
 		if (NeedPreserveFooter)
 			Wipe_Crypto_Key();
