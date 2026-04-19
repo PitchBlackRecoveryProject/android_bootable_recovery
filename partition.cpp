@@ -1724,6 +1724,13 @@ bool TWPartition::UnMount(bool Display_Error, int flags) {
 
 		umount2(Mount_Point.c_str(), flags);
 		if (Is_Mounted()) {
+			if (Mount_Point == "/data" || Mount_Point == "/sdcard" || Mount_Point == "/data/media/0") {
+				LOGINFO("DEBUG: attempting again to unmount '%s'\n", Mount_Point.c_str());
+				TWFunc::Exec_Cmd("umount -l " + Mount_Point);
+				sleep(1);
+				if (!Is_Mounted())
+					return true;
+			}
 			if (Display_Error)
 				gui_msg(Msg(msg::kError, "fail_unmount=Failed to unmount '{1}' ({2})")(Mount_Point)(strerror(errno)));
 			else
