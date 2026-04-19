@@ -3138,11 +3138,15 @@ bool TWPartition::Update_Size(bool Display_Error) {
 
 	if (Has_Data_Media) {
 		if (Mount(Display_Error)) {
-			Used = backup_exclusions.Get_Folder_Size(Mount_Point);
-			Backup_Size = Used;
-			int bak = (int)(Used / 1048576LLU);
-			int fre = (int)(Free / 1048576LLU);
-			LOGINFO("Data backup size is %iMB, free: %iMB.\n", bak, fre);
+			// don't process this until the
+			// decryption is completed (unless the device is unencrypted)
+			if (DataManager::GetStrValue("twrp.decrypt.done") == "true" || DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0) {
+				Used = backup_exclusions.Get_Folder_Size(Mount_Point);
+				Backup_Size = Used;
+				int bak = (int)(Used / 1048576LLU);
+				int fre = (int)(Free / 1048576LLU);
+				LOGINFO("Data backup size is %iMB, free: %iMB.\n", bak, fre);
+			}
 		} else {
 			if (!Was_Already_Mounted)
 				UnMount(false);
