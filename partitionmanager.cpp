@@ -264,6 +264,9 @@ void inline Process_Keymaster_Version(TWPartition *ven, bool Display_Error) {
 		LOGINFO("Keymaster_Ver::Force Keymaster_Ver flag found.\n");
 	}
 #endif
+	if (version.empty()) // defective device tree - apply a default
+		version = "4.x";
+	
 	LOGINFO("Keymaster_Ver::Using keymaster version '%s' for decryption\n", version.c_str());
 	android::base::SetProperty(TW_KEYMASTER_VERSION_PROP, version.c_str());
 }
@@ -628,6 +631,7 @@ void TWPartitionManager::Decrypt_Data() {
 			if (Decrypt_Device("!") == 0) {
 				gui_msg("decrypt_success=Successfully decrypted with default password.");
 				DataManager::SetValue(TW_IS_ENCRYPTED, 0);
+				DataManager::SetValue("twrp.decrypt.done", "true");
 			} else {
 				gui_err("unable_to_decrypt=Unable to decrypt with default password.");
 			}
@@ -2255,6 +2259,7 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 				}
 				Post_Decrypt("");
 			}
+			DataManager::SetValue("twrp.decrypt.done", "true");
 			return 0;
 		} else {
 			gui_msg(Msg(msg::kError, "decrypt_user_fail_fbe=Failed to decrypt user {1}")(user_id));

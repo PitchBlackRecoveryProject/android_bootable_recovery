@@ -634,6 +634,8 @@ void DataManager::SetDefaultValues()
 	mConst.SetValue("true", "1");
 	mConst.SetValue("false", "0");
 
+	mPersist.SetValue("twrp.decrypt.done", "false");
+
 	mConst.SetValue(TW_VERSION_VAR, PB_BUILD);
 
 #ifndef TW_NO_HAPTICS

@@ -370,12 +370,30 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
 
     LOCAL_CFLAGS += -DTW_INCLUDE_FBE_METADATA_DECRYPT
 
+    ifeq ($(TW_INCLUDE_OMAPI), true)
+    LOCAL_CFLAGS += -DTW_INCLUDE_OMAPI
+    LOCAL_SHARED_LIBRARIES += \
+        android.hardware.secure_element-V1-ndk \
+        android.se.omapi-V1-ndk \
+        android.hardware.weaver-V2-ndk
+    TWRP_REQUIRED_MODULES += \
+        se_omapi \
+        se_omapi.rc \
+        se_omapi.xml
+    endif
+
     TW_INCLUDE_LIBRESETPROP := true
 endif
 WITH_CRYPTO_UTILS := \
     $(if $(wildcard system/core/libcrypto_utils/android_pubkey.c),true)
 ifeq ($(TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID), true)
     LOCAL_CFLAGS += -DTW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID
+endif
+ifeq ($(TW_USE_DMCTL), true)
+    LOCAL_CFLAGS += -DTW_USE_DMCTL
+    TWRP_REQUIRED_MODULES += dmctl dmuserd
+    RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/dmctl
+    RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/dmuserd
 endif
 ifeq ($(TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID), true)
     LOCAL_CFLAGS += -DTW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID

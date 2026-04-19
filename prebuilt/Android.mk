@@ -261,6 +261,12 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
 		RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libhardware_legacy.so
 		RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend@1.0.so
 		RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/fscryptpolicyget
+        ifeq ($(TW_INCLUDE_OMAPI), true)
+            RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/se_omapi
+            RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.se.omapi-V1-ndk.so
+            RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.secure_element-V1-ndk.so
+            RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.weaver-V2-ndk
+        endif
 		ifneq ($(TW_EXCLUDE_LIBXML2), true)
 		    RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libxml2.so
 		endif

@@ -1164,6 +1164,7 @@ bool TWPartition::Is_File_System(string File_System) {
 		File_System == "yaffs2" ||
 		File_System == "exfat" ||
 		File_System == "f2fs" ||
+		File_System == "mifs" ||
 		File_System == "erofs" ||
 		File_System == "squashfs" ||
 		File_System == "auto")
@@ -1724,6 +1725,13 @@ bool TWPartition::UnMount(bool Display_Error, int flags) {
 
 		umount2(Mount_Point.c_str(), flags);
 		if (Is_Mounted()) {
+			if (Mount_Point == "/data" || Mount_Point == "/sdcard" || Mount_Point == "/data/media/0") {
+				LOGINFO("DEBUG: attempting again to unmount '%s'\n", Mount_Point.c_str());
+				TWFunc::Exec_Cmd("umount -l " + Mount_Point);
+				sleep(1);
+				if (!Is_Mounted())
+					return true;
+			}
 			if (Display_Error)
 				gui_msg(Msg(msg::kError, "fail_unmount=Failed to unmount '{1}' ({2})")(Mount_Point)(strerror(errno)));
 			else
@@ -1809,7 +1817,7 @@ bool TWPartition::Wipe(string New_File_System) {
 			wiped = Wipe_NTFS();
 		else if (New_File_System == "yaffs2")
 			wiped = Wipe_MTD();
-		else if (New_File_System == "f2fs")
+		else if (New_File_System == "f2fs" || Current_File_System == "mifs")
 			wiped = Wipe_F2FS();
 		else if (New_File_System == "vfat")
 			wiped = Wipe_FAT();
@@ -1886,7 +1894,7 @@ bool TWPartition::Can_Repair() {
 		return true;
 	else if (Current_File_System == "exfat" && TWFunc::Path_Exists("/system/bin/fsck.exfat"))
 		return true;
-	else if (Current_File_System == "f2fs" && TWFunc::Path_Exists("/system/bin/fsck.f2fs"))
+	else if ((Current_File_System == "f2fs" || Current_File_System == "mifs") && TWFunc::Path_Exists("/system/bin/fsck.f2fs"))
 		return true;
 	else if ((Current_File_System == "ntfs" || Current_File_System == "tntfs") && (TWFunc::Path_Exists("/system/bin/ntfsfix") || TWFunc::Path_Exists("/system/bin/fsck.ntfs")))
 		return true;
@@ -1953,7 +1961,7 @@ bool TWPartition::Repair() {
 			return false;
 		}
 	}
-	if (Current_File_System == "f2fs") {
+	if (Current_File_System == "f2fs" || Current_File_System == "mifs") {
 		if (!TWFunc::Path_Exists("/system/bin/fsck.f2fs")) {
 			gui_msg(Msg(msg::kError, "repair_not_exist={1} does not exist! Cannot repair!")("fsck.f2fs"));
 			return false;
@@ -2534,6 +2542,19 @@ bool TWPartition::Wipe_F2FS() {
 		NeedPreserveFooter = false;
 	}
 	LOGINFO("mkfs.f2fs command: %s\n", f2fs_command.c_str());
+	#ifdef TW_USE_DMCTL
+	    if (Mount_Point == "/data") {
+			LOGINFO("PBRP: bind-unmounting /sdcard before data format...\n");
+			string nul;
+			TWFunc::Exec_Cmd("umount /sdcard", nul);
+			usleep(32768);
+			if (TWFunc::Path_Exists("/dev/block/mapper/userdata")) {
+				LOGINFO("PBRP: running dmctl before formatting...\n");
+				TWFunc::Exec_Cmd("dmctl delete userdata", false);
+				usleep(32768);
+			}
+		}
+	#endif
 	if (TWFunc::Exec_Cmd(f2fs_command) == 0) {
 		if (NeedPreserveFooter)
 			Wipe_Crypto_Key();
@@ -3079,11 +3100,15 @@ bool TWPartition::Update_Size(bool Display_Error) {
 
 	if (Has_Data_Media) {
 		if (Mount(Display_Error)) {
-			Used = backup_exclusions.Get_Folder_Size(Mount_Point);
-			Backup_Size = Used;
-			int bak = (int)(Used / 1048576LLU);
-			int fre = (int)(Free / 1048576LLU);
-			LOGINFO("Data backup size is %iMB, free: %iMB.\n", bak, fre);
+			// don't process this until the
+			// decryption is completed (unless the device is unencrypted)
+			if (DataManager::GetStrValue("twrp.decrypt.done") == "true" || DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0) {
+				Used = backup_exclusions.Get_Folder_Size(Mount_Point);
+				Backup_Size = Used;
+				int bak = (int)(Used / 1048576LLU);
+				int fre = (int)(Free / 1048576LLU);
+				LOGINFO("Data backup size is %iMB, free: %iMB.\n", bak, fre);
+			}
 		} else {
 			if (!Was_Already_Mounted)
 				UnMount(false);
@@ -3270,7 +3295,7 @@ uint64_t TWPartition::Get_Max_FileSize() {
 		maxFileSize = 16 * constPB; //16 PB
 	else if (Current_File_System == "ext3")
 		maxFileSize = 2 * constTB; //2 TB
-	else if (Current_File_System == "f2fs")
+	else if (Current_File_System == "f2fs" || Current_File_System == "mifs")
 		maxFileSize = 3.94 * constTB; //3.94 TB
 	else
 		maxFileSize = 100000000L;
