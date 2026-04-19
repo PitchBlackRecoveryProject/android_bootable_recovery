@@ -1,0 +1,9 @@
+on late-init
+    start se_omapi
+
+service se_omapi /system/bin/se_omapi
+    class hal
+    user root
+    group root
+    interface aidl android.se.omapi.ISecureElementService/default
+    seclabel u:r:recovery:s0

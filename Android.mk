@@ -373,6 +373,19 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
         endif
         LOCAL_SHARED_LIBRARIES += libcryptfs_hw
     endif
+
+    ifeq ($(TW_INCLUDE_OMAPI), true)
+    LOCAL_CFLAGS += -DTW_INCLUDE_OMAPI
+    LOCAL_SHARED_LIBRARIES += \
+        android.hardware.secure_element-V1-ndk \
+        android.se.omapi-V1-ndk \
+        android.hardware.weaver-V2-ndk
+    TWRP_REQUIRED_MODULES += \
+        se_omapi \
+        se_omapi.rc \
+        se_omapi.xml
+    endif
+
     TW_INCLUDE_LIBRESETPROP := true
 endif
 WITH_CRYPTO_UTILS := \
