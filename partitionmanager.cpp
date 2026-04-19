@@ -628,6 +628,7 @@ void TWPartitionManager::Decrypt_Data() {
 			if (Decrypt_Device("!") == 0) {
 				gui_msg("decrypt_success=Successfully decrypted with default password.");
 				DataManager::SetValue(TW_IS_ENCRYPTED, 0);
+				DataManager::SetValue("twrp.decrypt.done", "true");
 			} else {
 				gui_err("unable_to_decrypt=Unable to decrypt with default password.");
 			}
@@ -2255,6 +2256,7 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 				}
 				Post_Decrypt("");
 			}
+			DataManager::SetValue("twrp.decrypt.done", "true");
 			return 0;
 		} else {
 			gui_msg(Msg(msg::kError, "decrypt_user_fail_fbe=Failed to decrypt user {1}")(user_id));
