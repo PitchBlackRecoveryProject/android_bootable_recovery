@@ -4388,6 +4388,19 @@ bool TWPartitionManager::Unmap_Super_Devices() {
 				LOGINFO("removing cow partition: %s\n", cow_partition.c_str());
 				destroyed = DestroyLogicalPartition(cow_partition);
 			}
+			// Also unmap the inactive slot's copy (e.g. system_b) if it is mapped.
+			// libsnapshot's HandleImminentDataWipe maps both slots; a leftover
+			// mapping makes DM_DEV_CREATE fail (EBUSY) and Format Data aborts.
+			if (DataManager::GetStrValue("tw_has_boot_slots") == "1") {
+				std::string other_suffix = PartitionManager.Get_Active_Slot_Suffix() == "_a" ? "_b" : "_a";
+				std::string other_partition = bare_partition_name + other_suffix;
+				std::string other_path = "/dev/block/mapper/" + other_partition;
+				if (lstat(other_path.c_str(), &st) == 0) {
+					LOGINFO("removing inactive slot dynamic partition: %s\n", other_partition.c_str());
+					if (!DestroyLogicalPartition(other_partition))
+						LOGINFO("unable to unmap %s\n", other_partition.c_str());
+				}
+			}
 			iter = Partitions.erase(iter);
 			delete part;
 			if (!destroyed) {
